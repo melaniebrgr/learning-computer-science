@@ -1,13 +1,13 @@
-# Introduction
+# Introduction to programming
 
 > “The computer will always do exactly what you tell them to do.”
 
-There are two kinds of knowledge: declarative and imperative. **Declarative knowledge** is a statement about something that is true, e.g. a chocolate cake is bad for you. While it doesn’t tell you how to do it, but does tell you about how to test correctness. **Imperative knowledge** tells you how to do something, e.g. how to make the chocolate cake. Another example of imperative knowledge is Heron’s method of finding the square root of a number. Hero is a greek experimenter who lived in Alexandria in 50 AD.
+There are two kinds of knowledge: declarative and imperative. **Declarative knowledge** is a statement about something that is true, e.g. a chocolate cake is bad for you. While it doesn’t tell you how to do it, it does tell you about how to test correctness. **Imperative knowledge** tells you how to do something, e.g. how to make the chocolate cake. Another example of imperative knowledge is Heron’s method of finding the square root of a number. Hero is a greek experimenter who lived in Alexandria in 50 AD.
 
 An algorithm contains imperative steps on how to perform a computation until it “converges” (a fancy way to say that it’s halted). The recipe of an algorithm:
 - converges
 - has instructions
-- has a clow of control, and
+- has flow controls, and
 - a termination of control
 
 The initial computers were designed to do very specific things, like computing the square root of a number. These are called **“fixed program computers”**. An example of this is Alan Turing’s enigma code breaker. In a **“stored program computer”** the instructions are the same as data. Once that was possible the machines became infinitely flexible. An “interpreter” is a program that can execute any legal set of instructions.
@@ -23,6 +23,17 @@ A programming language **syntax** determines whether a string is legal, **static
 - never ends
 - gives an incorrect result (the worst possible outcome)
 
-###### Materials
+#### Examples
+1. [hello world](./01-hello.go) - an example first program in Go
+2. [entering and printing your name](./02-entering-and-printing-your-name.go) - an example of getting user input, assigning it to a variable and using it to form a new string
+
+Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
+- decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained and reusable.
+- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box: 
+
+### Materials
 - [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
-- [ ] https://frontendmasters.com/courses/go-for-js-devs/installing-go/ (lessons 1 - 7) - Brenna Martenson
+- [x] https://frontendmasters.com/courses/go-for-js-devs/installing-go/ (introduction & printing, lessons 1 - 9) - Brenna Martenson
+- [ ] https://frontendmasters.com/courses/go-for-js-devs/control-structures-if-else/ (basic go syntax, lessons 10 - 16) - Brenna Martenson
+- [ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/lecture-3-problem-solving/ - John Guttag
+- [ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/ - John Guttaglecture-4-machine-interpretation-of-a-program/ - John Guttag

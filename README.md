@@ -1,7 +1,8 @@
 # Learning Computer Science
 
 ## Units
-1. [Introduction](./introduction/01-introduction.md)
+0. Introduction to computers
+1. [Introduction to programming](./01-introduction-to-programming/summary.md)
 
 ### Learning path resources
 - http://blog.agupieware.com/2014/05/online-learning-bachelors-level.html
