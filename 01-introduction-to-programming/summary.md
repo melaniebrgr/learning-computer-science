@@ -1,4 +1,5 @@
 # Introduction to programming
+## (MIT 6.00SC, Front-End Masters "Go for JavaScript Developers")
 
 > “The computer will always do exactly what you tell them to do.”
 
@@ -20,11 +21,27 @@ In a fixed program computer the program and data are kept in the memory (and the
 
 Alan Turing showed that there were six primitive instructions with which you could write all programs. These instructions operated on one bit of information. A programming language provides a set of primitive instructions and control structures—that’s all. **Programming language boil down to simply that: primitive instructions, control flow structures, and how they are combined**. Interpreted languages give errors in the language of the source code (that you wrote in), whereas compiled languages give errors in the compiled object code, which is harder to debug. Compiled languages tend to be more efficient however.
 
-A programming language **syntax** determines whether a string is legal, **static semantics** determine whether the string has meaning, and **semantics** assigns a meaning to a legal sentence. 
+A programming language **syntax** determines whether a string is legal, **static semantics** determine whether the string has meaning, and **semantics** assigns a meaning to a legal sentence.
 
-#### Go program examples
-1. [hello world](./01-hello.go) - an example first program in Go
-2. [entering and printing your name](./02-entering-and-printing-your-name.go) - an example of getting user input, assigning it to a variable and using it to form a new string
+---
+
+### basic Go syntax
+- string: string
+- boolean: bool
+- numeric: int8, uint8 (byte), int16, uint16, int32 (rune), uint32, int64, uint64, int, uint, uintptr, float32, float64, complex64, complex128
+
+```go
+// variable declaration and assignment
+var name string = "Name"
+var name = "Name"
+name := "Name"
+```
+
+#### Examples
+1. [hello world](./01-hello.go)
+2. [entering and printing your name](./02-entering-and-printing-your-name.go)
+
+---
 
 Assuming no static semantic errors, there are three types of program errors:
 - a crash
@@ -45,16 +62,109 @@ Can we figure out how long an algorithm will take to run (algorithmic analysis)?
 - how big the steps are that we take through the algorithm are
 We can change both of these levers to adjust the run speed. Taking bigger steps allows us to more rapidly cut through the search space. One algorithmic technique to change the step size is called, "**bisection search**", where the step is half the search space. With algorithmic analysis we can actually know how long a computation will take to run, which permits us to decide if it's worth the time.
 
-#### Go program examples
-3. paying off credit card debt, [problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/)
-
 Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
 - decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained and reusable.
-- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box: 
+- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
+A function can be used for this purpose. It effectively provides new language primitives.
+
+When calling a function the formal paramter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
+
+---
+### Go syntax
+```go
+// if statements
+num := -1
+
+if num > 0 {
+    fmt.Println(quote.Go())
+} else {
+    fmt.Println(quote.Hello())
+}
+
+// if statements with assignment
+if err := someFunction(); err != nil {
+    fmt.Println(err.Error())
+}
+
+// switch statements
+var city string = "c"
+
+switch city {
+case "a":
+    fmt.Println("A")
+case "b", "c":
+    fmt.Println("B or C")
+default:
+    fmt.Println("Z")
+}
+
+// switch statements with conditionals
+var i int = 1
+
+switch {
+case 1 != 10:
+    fmt.Println("! 10")
+    fallthrough
+case i > 10:
+    fmt.Println("> 10")
+case i < 10:
+    fmt.Println("< 10")
+default:
+    fmt.Println("= 10")
+}
+
+// for loop
+for i := 1; i <= 10; i++ {
+    fmt.Println(i)
+}
+
+// while loop
+i := 1
+
+for i <= 100 {
+    fmt.Println(i)
+    i++
+}
+
+// looping over ranges
+sentence := "Today we are going sailing."
+
+for i, letter := range sentence {
+    fmt.Println(i, " ", string(letter))
+}
+
+// functions
+func add(a int, b int) int  {
+    return a + b
+}
+
+func printAge(age int) (ageOfSally int, ageOfBob int) {
+    ageOfBob = 21
+    ageOfSally = 16
+    return
+}
+
+func printAges(ages ...int) int {
+    return
+}
+
+```
+#### Examples
+3. paying off credit card debt, ([problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/))
+
+---
 
 ### Materials
-- [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
-- [x] https://frontendmasters.com/courses/go-for-js-devs/installing-go/ (introduction & printing, lessons 1 introduction - 9 printing) - Brenna Martenson
-- [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/lecture-3-problem-solving/ - John Guttag
-- [ ] https://frontendmasters.com/courses/go-for-js-devs/control-structures-if-else/ (basic go syntax, lessons 10 types - 19 functions) - Brenna Martenson
-- [ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/ - John Guttaglecture-4-machine-interpretation-of-a-program/ - John Guttag
+[x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
+
+[x] https://frontendmasters.com/courses/go-for-js-devs/installing-go/ (introduction & printing, lessons 1 introduction - 9 printing) - Brenna Martenson
+
+[x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/lecture-3-problem-solving/ - John Guttag
+
+[x] https://frontendmasters.com/courses/go-for-js-devs/control-structures-if-else/ (basic go syntax, lessons 10 types - 19 functions) - Brenna Martenson
+
+[ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-4-machine-interpretation-of-a-program/ - John Guttag
+
+[ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-5-objects-in-python/ - John Guttag
+
+[ ] https://frontendmasters.com/courses/go-for-js-devs/arrays/ (arrays, lesson 20 - structs lesson 36) - Brenna Martenson
