@@ -53,7 +53,7 @@ How do we know what values a *looping program*, e.g. a "for" loop or a "while" l
 2. starts with a non-negative value
 3. a value is decreased on each iteration
 4. when the loop reaches 0 it terminates
-This is a decrementing function. When writing a loop, think about these conditions for termination. Loops can be used for exhaustive enumeration.
+This is a decrementing function. Its important with loops that search, that the solution is within the search space or the program will run forever. When writing a loop, think about these conditions for termination. Loops can be used for exhaustive enumeration.
 
 **Exhaustive enumeration** ("guess and check") is a type of algorithm. The guessing is not actually random, the space of possible answers is exhausted systematically. A program that relies on this is called a brute force algorithm, and despite its name it is often the correct way to solve a problem because today's computers are _fast_. There are still circumstances in which a brute force algorithm will start to take a long time.
 
@@ -62,12 +62,12 @@ Can we figure out how long an algorithm will take to run (algorithmic analysis)?
 - how big the steps are that we take through the algorithm are
 We can change both of these levers to adjust the run speed. Taking bigger steps allows us to more rapidly cut through the search space. One algorithmic technique to change the step size is called, "**bisection search**", where the step is half the search space. With algorithmic analysis we can actually know how long a computation will take to run, which permits us to decide if it's worth the time.
 
-Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
-- decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained and reusable.
-- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
+Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Goor programmers "write less code". When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
+- decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and hopefully coherent.
+- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
 A function can be used for this purpose. It effectively provides new language primitives.
 
-When calling a function the formal paramter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
+When the interpreter calls a function the formal paramter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
 
 ---
 ### Go syntax
@@ -150,9 +150,9 @@ func printAges(ages ...int) int {
 
 ```
 #### Examples
-3. paying off credit card debt, ([problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/))
+3. paying off credit card debt, [problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/), [solution](./03-paying-off-credit-card-debt.go)
 
----
+--- 
 
 ### Materials
 [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
@@ -163,7 +163,7 @@ func printAges(ages ...int) int {
 
 [x] https://frontendmasters.com/courses/go-for-js-devs/control-structures-if-else/ (basic go syntax, lessons 10 types - 19 functions) - Brenna Martenson
 
-[ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-4-machine-interpretation-of-a-program/ - John Guttag
+[x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-4-machine-interpretation-of-a-program/ - John Guttag
 
 [ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-5-objects-in-python/ - John Guttag
 
