@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 Paying Off Credit Card Debt
 
@@ -55,22 +57,37 @@ format shown in the test cases below. All numbers should be rounded to the neare
 Finally, print the result, which should include the total amount paid that year and the remaining
 balance
 
-Hints
-Use these ideas to guide the creation of your code. Use the round function. To help you get started, here is a rough outline of the stages you should probably follow in
-writing your code:
-- Retrieve user input.
-- Initialize some state variables. Remember to find the monthly interest rate from the annual interest rate taken in as input.
-For each month:
-	- Compute the new balance. This requires computing the minimum monthly
-payment and figuring out how much will be paid to interest and how much will be
-paid to the principal.
-	- Update the outstanding balance according to how much principal was paid off.
-	- Output the minimum monthly payment and the remaining balance.
-	- Keep track of the total amount of paid over all the past months so far.
-- Print out the result statement with the total amount paid and the remaining balance.
-
 */
 
-func main() {
+func calculateCreditCardDebt(balance float32, interestRate float32, paymentRate float32) (float32, float32, float32) {
+	minimumMonthlyPayment := paymentRate * balance
+	interestPaid := (interestRate / 12) * balance
+	principalPaid := minimumMonthlyPayment - interestPaid
+	remainingBalance := balance - principalPaid
+	return minimumMonthlyPayment, principalPaid, remainingBalance
+}
 
+func printMonthlyCreditCardDebt(month int, minimumMonthlyPayment float32, principlePaid float32, remainingBalance float32) {
+	fmt.Printf("Month: %d\n", month)
+	fmt.Printf("Minimum monthly payment: $%.2f\n", minimumMonthlyPayment)
+	fmt.Printf("Principle paid: $%.2f\n", principlePaid)
+	fmt.Printf("Remaining balance: $%.2f\n\n", remainingBalance)
+}
+
+func main() {
+	var creditCardBalance float32 = 4800
+	var annualInterestRate float32 = 0.2
+	var minimumMonthlyPaymentRate float32 = 0.02
+	var totalAmountPaid float32 = 0
+
+	for i := 1; i <= 12; i++ {
+		var minimumMonthlyPayment, principlePaid float32
+		minimumMonthlyPayment, principlePaid, creditCardBalance = calculateCreditCardDebt(creditCardBalance, annualInterestRate, minimumMonthlyPaymentRate)
+		totalAmountPaid = totalAmountPaid + minimumMonthlyPayment
+		printMonthlyCreditCardDebt(i, minimumMonthlyPayment, principlePaid, creditCardBalance)
+	}
+
+	fmt.Println("RESULT")
+	fmt.Printf("Total amount paid: $%f\n", totalAmountPaid)
+	fmt.Printf("Remaining balance: $%f\n", creditCardBalance)
 }

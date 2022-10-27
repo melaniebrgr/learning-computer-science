@@ -154,6 +154,8 @@ func printAges(ages ...int) int {
 
 --- 
 
+There are three flavours of data structures that are useful for collecting data: tuples, lists, and dictionaries. Tuples and lists have in common that they are ordered sequences of objects, e.g. first, second, last. Tuples are the simplest. They can be accessed by index or by sequence, e.g. next. Tuples are immutable while lists are mutable. Mutability is a powerful programming concept but also big source of programming blunders.
+
 ### Materials
 [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
 
