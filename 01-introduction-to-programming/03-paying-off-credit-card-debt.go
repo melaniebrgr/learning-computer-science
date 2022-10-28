@@ -74,7 +74,7 @@ func printMonthlyCreditCardDebt(month int, minimumMonthlyPayment float32, princi
 	fmt.Printf("Remaining balance: $%.2f\n\n", remainingBalance)
 }
 
-func main() {
+func payingOffCreditCardDebt() {
 	var creditCardBalance float32 = 4800
 	var annualInterestRate float32 = 0.2
 	var minimumMonthlyPaymentRate float32 = 0.02
@@ -88,6 +88,10 @@ func main() {
 	}
 
 	fmt.Println("RESULT")
-	fmt.Printf("Total amount paid: $%f\n", totalAmountPaid)
-	fmt.Printf("Remaining balance: $%f\n", creditCardBalance)
+	fmt.Printf("Total amount paid: $%.2f\n", totalAmountPaid)
+	fmt.Printf("Remaining balance: $%.2f\n", creditCardBalance)
+}
+
+func main() {
+	payingOffCreditCardDebt()
 }
