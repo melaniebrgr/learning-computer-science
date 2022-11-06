@@ -92,6 +92,6 @@ func payingOffCreditCardDebt() {
 	fmt.Printf("Remaining balance: $%.2f\n", creditCardBalance)
 }
 
-func main() {
-	payingOffCreditCardDebt()
-}
+// func main() {
+// 	payingOffCreditCardDebt()
+// }

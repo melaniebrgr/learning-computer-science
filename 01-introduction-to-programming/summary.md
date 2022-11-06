@@ -25,7 +25,7 @@ A programming language **syntax** determines whether a string is legal, **static
 
 ---
 
-### basic Go syntax
+### Go syntax: variables and assignments
 - string: string
 - boolean: bool
 - numeric: int8, uint8 (byte), int16, uint16, int32 (rune), uint32, int64, uint64, int, uint, uintptr, float32, float64, complex64, complex128
@@ -62,15 +62,8 @@ Can we figure out how long an algorithm will take to run (algorithmic analysis)?
 - how big the steps are that we take through the algorithm are
 We can change both of these levers to adjust the run speed. Taking bigger steps allows us to more rapidly cut through the search space. One algorithmic technique to change the step size is called, "**bisection search**", where the step is half the search space. With algorithmic analysis we can actually know how long a computation will take to run, which permits us to decide if it's worth the time.
 
-Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Goor programmers "write less code". When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
-- decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and hopefully coherent.
-- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
-A function can be used for this purpose. It effectively provides new language primitives.
-
-When the interpreter calls a function the formal paramter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
-
 ---
-### Go syntax
+### Go syntax: if, switch, looping, functions
 ```go
 // if statements
 num := -1
@@ -154,7 +147,44 @@ func printAges(ages ...int) int {
 
 --- 
 
-There are three flavours of data structures that are useful for collecting data: tuples, lists, and dictionaries. Tuples and lists have in common that they are ordered sequences of objects, e.g. first, second, last. Tuples are the simplest. They can be accessed by index or by sequence, e.g. next. Tuples are immutable while lists are mutable. Mutability is a powerful programming concept but also big source of programming blunders.
+There are three flavours of data structures that are useful for collecting data: tuples, lists, and dictionaries. Tuples and lists have in common that they are ordered sequences of objects, e.g. first, second, last. They can be accessed by index or by sequence, e.g. next. Tuples are the simplest, and are immutable while lists are mutable. Mutability, the ability to change object values, is a powerful programming concept but also big source of programming blunders.
+
+Dictionaries or "dicts" are sets of immutable keys and mutable values that are accessed by key. Anything can be a value, and, depending on the language, anything can be a key. Technically a dict can be implemented with a list data structure. However, to find a value all the keys need to be iterated over and the time to find a value would grow with the length of the list. On the other hand, with a dict the time to lookup the value is constant.
+
+### Go syntax: arrays, slice
+```go
+// initialize an empty array with default values (it can only contain 5 elements of type float)
+var scores [5]float64
+
+// initialize a filled array
+scores := [5]float64{9, 1.5, 4.5, 7, 8}
+scores := [...]float64{9, 1.5, 4.5, 7, 8}
+
+// looping over an array
+for _, value := range scores {
+    fmt.Println(value)
+}
+
+```
+
+Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Goor programmers "write less code". When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
+- decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and hopefully coherent.
+- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
+A function is effectively provides new language primitives, and for modular abstraction.
+
+We can make most problems simpler by breaking them into small problems:
+
+> "divide and rule" - Julia Caesar
+
+> "We must all hang together, or assuradely we will hang seperately" - Ben Franklin
+
+One great technique for divide and conquer algorithms is recursion.
+
+> it is legal for one function to call another ... it is also legal for a function to call itself. It may not be obvious why that is a good thing, but it turns out to be one of the most magical and interesting things a program can do
+
+Recursion provides an framework for describing a problem and also implementing a solution. How can you progressively solve smaller versions of the same or similar problem until a base case is reached.
+
+When the interpreter calls a function the formal parameter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
 
 ### Materials
 [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
@@ -167,6 +197,10 @@ There are three flavours of data structures that are useful for collecting data:
 
 [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-4-machine-interpretation-of-a-program/ - John Guttag
 
-[ ] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-5-objects-in-python/ - John Guttag
+[x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-5-objects-in-python/ - John Guttag
 
-[ ] https://frontendmasters.com/courses/go-for-js-devs/arrays/ (arrays, lesson 20 - structs lesson 36) - Brenna Martenson
+[ ] https://frontendmasters.com/courses/go-for-js-devs/arrays/ (arrays, lesson 20 - complex structures lesson 25) - Brenna Martenson
+
+[x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/lecture-6-recursion/ - Eric Grimson
+
+[ ] https://frontendmasters.com/courses/go-for-js-devs/arrays/ (go toolkit, lessons 26 - 30) - Brenna Martenson
