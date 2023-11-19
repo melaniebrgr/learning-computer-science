@@ -1,5 +1,7 @@
 # Introduction to computer science and programming
-## (MIT 6.00SC Unit 1, Front-End Masters "Go for JavaScript Developers")
+
+- MIT 6.00SC Unit 1,
+- Front-End Masters "Go for JavaScript Developers"
 
 > “The computer will always do exactly what you tell them to do.”
 
@@ -39,9 +41,9 @@ name := "Name"
 ### Types of algorithms
 
 An algorithm contains imperative steps on how to perform a computation until it “converges” (a fancy way to say that it’s halted). The recipe of an algorithm:
-- converges
+- it converges,
 - has instructions and flow controls, and
-- a termination of control
+- a termination of control.
 
 Assuming no static semantic errors, there are three types of errors a program can have:
 - it crashes
@@ -56,7 +58,7 @@ How do we know if **looping program**, e.g. a "for" loop or a "while" loop, will
 
 This is a **decrementing function**. A decrementing function guarantees to stop a loop execution. It can be a useful pattern for "searching for a solution". The solution must be within the search space of the looping program however, or the program will run forever. When writing a loop, think carefully about the conditions for termination mentioned above. Loops can be used for exhaustive enumeration.
 
-**Exhaustive enumeration** or "guess and check" is a type of algorithm. The guessing is not actually random, the space of possible answers is exhausted systematically. A program that relies on this is called a **brute force algorithm**, and despite its name it is often the correct way to solve a problem because today's computers are _fast_. That said, there are circumstances under which a brute force algorithm will start to take too long...
+**Exhaustive enumeration** or "guess and check" is a type of algorithm. The guessing is not actually random, the space of possible answers is exhausted systematically. A program that relies on this is called a **brute force algorithm**, and despite its name it is often the correct way to solve a problem because today's computers are _fast_. There are however some circumstances under which a brute force algorithm will start to take too long.
 
 ### Go syntax: if, switch, looping, functions
 ```go
@@ -122,7 +124,7 @@ for i, letter := range sentence {
 }
 
 // functions
-func add(a int, b int) int  {
+func add(a int, b int) int {
     return a + b
 }
 
@@ -207,7 +209,10 @@ moreFruit := append(splicedFruit, "cherries", "lemon")
 
 ```
 
-### Materials
+## Materials
+
+Original MIT introduction to computer science course was archived [here](https://dspace.mit.edu/handle/1721.1/150601)
+
 [x] https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/pages/unit-1/lecture-1-introduction-to-6-00/ - John Guttag
 
 [x] https://frontendmasters.com/courses/go-for-js-devs/installing-go/ (introduction & printing, lessons 1 introduction - 9 printing) - Brenna Martenson
