@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
-        "introduction to programming",
-        "operating systems"
+        "programming",
+        "os",
+        "rust"
     ]
 }
