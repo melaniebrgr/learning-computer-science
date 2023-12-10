@@ -13,20 +13,30 @@ The downsides of garbage collection? The first is that it is wasteful of memory,
 
 ## Basics
 
+### Variables
+
 Variable declaration, if-else statements, and operators are somewhat similar to JavaScript, but with fewer brackets.
-Immutable and mutable variable declaration with `let` and `mut`.
+It is not allowed to use or capture an uninitialized variable.
+Immutable variables are declared with with `let`
+Mutable variables are declated by adding `mut` before the variable name.
+Variables are immutable by default.
+`const` are also immutable but you can't use `mut` with them and they must be type annotated.
+By convention, `const` variable names are all uppercase with underscores between words.
+Constants are valid for the entire time a program runs.
+
+Shadowing is where a second variable with the same name overshadows the first, taking any uses of the variable name to itself until either it itself is shadowed or the scope ends.
+Shadow a variable by giving it the same name with the `let` keyword, effectively creating a new variable
+By shadowing, the variable is still immutable.
+
+```rust
+    let spaces = "   ";
+    let spaces = spaces.len();
+```
+
 Variable types are not silently converted but must be cast.
 Each operator (like +=) corresponds to a trait.
 AddAssign is the name of the trait implementing the += operator.
 
-```rust
-fn main() {
-    for i in 0..5 {
-        let even_odd = if i % 2 == 0 {"even"} else {"odd"};
-        println!("{} {}", even_odd, i);
-    }
-}
-```
 
 ### Functions
 
@@ -209,13 +219,18 @@ But you can do more, like matching on Some or None, and ranges, instead of just 
 ### Resources
 
 - [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
-  - [x] Basics
-  - [ ]Structs, Enums and Matching
-  - [ ]Filesystem and Processes
-  - [ ]Modules and Cargo
-  - [ ]Standard Library Containers
-  - [ ]Error Handling
-  - [ ]Threads, Networking and Sharing
-  - [ ]Object-Oriented Programming
-  - [ ] Parsing with Nom
-  - [ ]Pain Points
+    - [x] Basics
+    - [ ] Structs, Enums and Matching
+    - [ ] Filesystem and Processes
+    - [ ] Modules and Cargo
+    - [ ] Standard Library Containers
+    - [ ] Error Handling
+    - [ ] Threads, Networking and Sharing
+    - [ ] Object-Oriented Programming
+    - [ ] Parsing with Nom
+    - [ ] Pain Points
+- [Rust-lang book](https://doc.rust-lang.org/)
+    - [ ] 1.0 Getting Started
+    - [ ] 2.0 Programming a guessing game
+    - [ ] 3.0 Common Programming Concepts
+        - [x] 3.1 Variables ad Mutability
