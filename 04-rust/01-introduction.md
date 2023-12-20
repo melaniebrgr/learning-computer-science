@@ -37,35 +37,60 @@ Variable types are not silently converted but must be cast.
 Each operator (like +=) corresponds to a trait.
 AddAssign is the name of the trait implementing the += operator.
 
+### Types
 
-### Functions
+Every value in rust has a type.
+All variables types ust be known at compile time.
+Types can usually be infered, but must be specified for `const` and function arguments.
+When many types are possible a type annotation must be added, and the compiler will error: "type annotations needed".
 
-The compiler can work out its types with type inference exception functions.
-Functions are one place where the compiler will not work out types, inputs must be typed.
-The body of the function has the value of its last expression, just like with if-as-an-expression.
-Returns are generally only used for returning early from a function.
+There are two data type subsets: scalar and compound.
+A scalar type represents a single value.
+There are four primary scalar types: integers, floating-point numbers, Booleans, and characters.
+Compound types gropu multiple values into one type.
+There are two compound types: tuples and arrays.
+
+#### Numbers
+
+Integer types have different sizes (8, 16, 32, 64, 128, char) and are signed (`i`) or unsigned (`u`).
+For example, `i8` is a signed 8-bit integer and can represent numbers from -128 to 127 (-2^(n - 1) to 2^(n - 1) - 1, where n = 8).
+Another example, `u8` is an unsigned 8-bit integer and can represent values from 0 to 255 (0 to 2^(n - 1)).
+Number literal types can be denoted with a suffix, and use `_` to make the number more readable, e.g.  `1_000u32`.
+Number literal types include: decimal, hex, octal, binary, byte.
+
+There are two floating point primitive: `f32`, `f64`.
+The default type is `f64` because on modern CPUs, it’s roughly the same speed as `f32`.
+
+Basic math operations addition, subtraction, multiplication, division, and remainder are supported.
+Integer division truncates toward zero to the nearest integer.
+
+#### Character
+
+Rust’s `char` type is the language’s most primitive alphabetic type.
+
+#### Tuple
+
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type.
+Tuples have a fixed length: once declared, they cannot grow or shrink in size.
+Tuples can be accessed by destructuring or using a period (`.`) notation.
+The tuple without any values is called a unit `()` and represent an empty value or an empty return type.
 
 ```rust
-// return value is last 
-fn abs(x: f64) -> f64 {
-    if x > 0.0 {
-        x
-    } else {
-        -x
-    }
-}
+let tup: (i32, f64, u8) = (500, 6.4, 1);
+let (x, y, z) = tup;
+let five_hundred = tup.0;
 ```
 
-## Arrays
+#### Array
 
-All statically-typed languages have arrays, which are values packed nose to tail in memory.
-Array values are arranged next to each other in memory so that they are efficient to access.
-Arrays are indexed from zero.
-Rust arrays are fixed in size.
-Rust knows the size of an array at compile-time.
+Arrays are values packed nose to tail in memory, so that they are efficient to access.
 The type of an array includes its size, i.e. the type of `[10, 20]` would be `[i32; 2]`.
-Arrays can only contain one type of data.
-Because the type of an array includes its size, arrays are not used that often in Rust.
+Arrays are indexed from zero.
+Arrays can only contain one type of data, `let a: [i32; 5] = [1, 2, 3, 4, 5];`.
+An array can be initialised to contain the same value for each element by specifying the initial value, followed by a semicolon, e.g. `let a = [3; 5]; // [3, 3, 3, 3, 3]`.
+Rust arrays are fixed in size, and the size of an array is known at compile-time.
+Because the type of an array includes its size, they are not used that often.
+Arrays are useful when you want your data allocated on the stack rather than the heap.
 
 ```rust
 fn main() {
@@ -79,6 +104,11 @@ fn main() {
     println!("length {}", arr.len());
 }
 ```
+
+Rust checks that any index lookup is within the range of the array at runtime and exits if not.
+In orther languages when you provide an incorrect index, invalid memory can be accessed.
+
+##### Slices
 
 Slices are used more commonly.
 Slices are views into an underlying array of values.
@@ -110,10 +140,28 @@ Instead getting by index, use the slice method `get` which does not panic and re
 An Option in a box that may contain a value, or nothing (None).
 The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
 
+### Functions
+
+Functions are one place where the compiler will not work out types with type inference--inputs and outputs must be typed.
+The body of the function has the value of its last expression, just like with if-as-an-expression.
+Returns are generally only used for returning early from a function.
+
+```rust
+// return value is last 
+fn abs(x: f64) -> f64 {
+    if x > 0.0 {
+        x
+    } else {
+        -x
+    }
+}
+```
+
 ## Vectors
 
 Vectors are re-sizeable arrays.
-Sslice borrow the memory from the vector.
+A vector is a similar collection type provided by the standard library that is allowed to grow or shrink in size.
+Slice borrow the memory from the vector.
 When the vector dies or drops, it lets the memory go.
 Vectors compare with each other and with slices by value.
 Vectors have a size and a capacity. If you clear a vector, its size becomes zero, but it still retains its old capacity.
@@ -233,4 +281,7 @@ But you can do more, like matching on Some or None, and ranges, instead of just 
     - [ ] 1.0 Getting Started
     - [ ] 2.0 Programming a guessing game
     - [ ] 3.0 Common Programming Concepts
-        - [x] 3.1 Variables ad Mutability
+        - [x] 3.1 Variables and Mutability
+        - [x] 3.2 Data Types
+- [ ] [Rustlings](https://github.com/rust-lang/rustlings)
+        
