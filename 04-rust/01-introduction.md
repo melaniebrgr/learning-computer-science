@@ -66,7 +66,7 @@ Integer division truncates toward zero to the nearest integer.
 
 #### Character
 
-Rust’s `char` type is the language’s most primitive alphabetic type.
+Rust’s `char` type is the language’s most primitive alphabetic type. It is four bytes in size and represents a Unicode Scalar Value. THe Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive. The char literal is specified with single quotes, as opposed to string literals, which use double quotes.
 
 #### Tuple
 
