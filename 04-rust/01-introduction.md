@@ -84,11 +84,12 @@ let five_hundred = tup.0;
 #### Array
 
 Arrays are values packed nose to tail in memory, so that they are efficient to access.
-The type of an array includes its size, i.e. the type of `[10, 20]` would be `[i32; 2]`.
 Arrays are indexed from zero.
 Arrays can only contain one type of data, `let a: [i32; 5] = [1, 2, 3, 4, 5];`.
 An array can be initialised to contain the same value for each element by specifying the initial value, followed by a semicolon, e.g. `let a = [3; 5]; // [3, 3, 3, 3, 3]`.
-Rust arrays are fixed in size, and the size of an array is known at compile-time.
+
+The type of an array includes its size, i.e. the type of `[10, 20]` would be `[i32; 2]`.
+That is, Rust arrays are fixed in size, and the size of an array is known at compile-time.
 Because the type of an array includes its size, they are not used that often.
 Arrays are useful when you want your data allocated on the stack rather than the heap.
 
