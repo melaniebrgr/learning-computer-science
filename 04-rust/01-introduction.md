@@ -1,17 +1,17 @@
 # Introduction
 
-Rust is a curly-braces language with semicolons, C++ style comments and a main function.
-Rust is statically typed.
-In static types the type is known at compile time, and dynamic types are only known at run time.
+Rust is a statically typed, curly-braces language with semicolons, C++ style comments and a main function.
+(Static types are when types known at compile time, while dynamic types are only known at run time.)
 Rust is strongly typed in order to make it harder to write incorrect programs.
-All memory acces is checked.
-Write the best possible machine code with full control of memory use.
+
+In JavaScript we just create things, we don't think about how they're laid out in memory.
+In Rust you need to define the blueprint of exactly how things are going to be laid out in memory.
 
 > In systems languages, program memory comes in two kinds: the stack and the heap. It is very fast to allocate data on the stack, but the stack is limited; typically of the order of megabytes. The heap can be gigabytes, but allocating is relatively expensive, and such memory must be freed later. In so-called 'managed' languages (like Java, Go and the so-called 'scripting' languages) these details are hidden from you by that convenient municipal utility called the garbage collector. Once the system is sure that data is no longer referenced by other data, it goes back into the pool of available memory.
 
-The downsides of garbage collection? The first is that it is wasteful of memory, which matters in those small embedded microchips which increasingly rule our world. The second is that it will decide, at the worst possible time, that a clean up must happen now.
+The downsides of garbage collection are that it is wasteful of memory, which matters in small embedded microchips that increasingly rule our world. The second is that it will decide, potentially at the worst possible time, that a clean up must happen.
 
-## Basics: Types
+## Types
 
 Every value in rust has a type.
 All variables types ust be known at compile time.
@@ -213,7 +213,8 @@ fn main() {
 
 ### Functions
 
-Functions are one place where the compiler will not work out types with type inference--inputs and outputs must be typed.
+Are defined with the keyword `fn`.
+Functions are one place where the compiler will not work out types with type inference: inputs and outputs must be typed.
 The body of the function has the value of its last expression, just like with if-as-an-expression.
 Returns are generally only used for returning early from a function.
 
@@ -226,6 +227,25 @@ fn abs(x: f64) -> f64 {
         -x
     }
 }
+```
+
+### Closures
+Uses bar instead of parentheses
+
+```typescript
+(x) => {
+  return x;
+};
+
+(x) => x + 1;
+```
+
+```rust
+|x| {
+    return x;
+}
+
+|x| x + 1
 ```
 
 #### Passing variables to functions: Referencing or borrowing
@@ -253,6 +273,40 @@ fn main() {
 // res is 2
 ```
 
+### Classes
+
+In rust the behaviour and the data are defined in seperate block: a struct and and implementation.
+Struct is a concrete item.
+It has a defined size, that has a certain amount of bytes associated with it.
+
+```rust
+struct Foo {
+    properties ...
+    pub properties ...
+}
+
+impl Foo {
+    // these are both static methods
+    fn this() // available usage within the file
+    pub fn this() // available usage within the file
+
+    // you should be able to understand this before the end
+    // of the day..
+    //
+    // and all of this can add pub
+    // these are instance methods
+    fn this(&self)...
+    fn this(&mut self)...
+
+    // public instance methods
+    pub fn this(self)...
+}
+```
+
+### Interfaces
+
+A trait is effectively and interface.
+
 ## Basics: control flow
 
 ### if-else
@@ -268,6 +322,37 @@ if x == 10 {
 }
 ```
 
+### Ranges
+
+```rust
+// Exclusive range: up to and not including 10
+for i in 0..10 {
+    println!("Ring! Call number {}", i + 1);
+}
+
+// Inclusive range: up to and including 10
+for i in 0..=10 {
+    println!("Ring! Call number {}", i + 1);
+}
+```
+
+### While
+
+```rust
+while true { }
+```
+
+### Collections
+
+```rust
+for x in &some_array { }
+
+vec![1, 2, 3]
+    .iter()
+    .map()
+    .collect::<Vec<i32>>(); // become a data structure of this type at the end
+```
+
 ### Matching
 
 Like a switch statement, I think.
@@ -277,27 +362,3 @@ But you can do more, like matching on Some or None, and ranges, instead of just 
 
 - `::` means much the same as does '.' in other languages - it is a fully qualified name and means "using", e.g. `std::env::args`
 - An exclamation mark indicate a macro call. A useful macro is `assert_eq!` that asserts that two things must be equal or panic. Another is `format!` for building up strings.
-
-### Resources
-
-- [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
-    - [x] Basics
-    - [ ] Structs, Enums and Matching
-    - [ ] Filesystem and Processes
-    - [ ] Modules and Cargo
-    - [ ] Standard Library Containers
-    - [ ] Error Handling
-    - [ ] Threads, Networking and Sharing
-    - [ ] Object-Oriented Programming
-    - [ ] Parsing with Nom
-    - [ ] Pain Points
-- [Rust-lang book](https://doc.rust-lang.org/)
-    - [ ] 1.0 Getting Started
-    - [ ] 2.0 Programming a guessing game
-    - [ ] 3.0 Common Programming Concepts
-        - [x] 3.1 Variables and Mutability
-        - [x] 3.2 Data Types
-- [ ] [Rustlings](https://github.com/rust-lang/rustlings)
-- [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
-    - [ ] Basics
-        
