@@ -11,33 +11,7 @@ Write the best possible machine code with full control of memory use.
 
 The downsides of garbage collection? The first is that it is wasteful of memory, which matters in those small embedded microchips which increasingly rule our world. The second is that it will decide, at the worst possible time, that a clean up must happen now.
 
-## Basics
-
-### Variables
-
-Variable declaration, if-else statements, and operators are somewhat similar to JavaScript, but with fewer brackets.
-It is not allowed to use or capture an uninitialized variable.
-Immutable variables are declared with with `let`
-Mutable variables are declated by adding `mut` before the variable name.
-Variables are immutable by default.
-`const` are also immutable but you can't use `mut` with them and they must be type annotated.
-By convention, `const` variable names are all uppercase with underscores between words.
-Constants are valid for the entire time a program runs.
-
-Shadowing is where a second variable with the same name overshadows the first, taking any uses of the variable name to itself until either it itself is shadowed or the scope ends.
-Shadow a variable by giving it the same name with the `let` keyword, effectively creating a new variable
-By shadowing, the variable is still immutable.
-
-```rust
-    let spaces = "   ";
-    let spaces = spaces.len();
-```
-
-Variable types are not silently converted but must be cast.
-Each operator (like +=) corresponds to a trait.
-AddAssign is the name of the trait implementing the += operator.
-
-### Types
+## Basics: Types
 
 Every value in rust has a type.
 All variables types ust be known at compile time.
@@ -50,7 +24,29 @@ There are four primary scalar types: integers, floating-point numbers, Booleans,
 Compound types gropu multiple values into one type.
 There are two compound types: tuples and arrays.
 
-#### Numbers
+### Variables
+
+Variable declaration, if-else statements, and operators are similar to JavaScript with fewer brackets.
+All variables must be initialised.
+There are two types of variables, immutable and mutable.
+Variables are immutable by default and are declared with `let`, e.g. `let foo = 5;`.
+Mutable variables are declared by adding `mut` after the `let`, e.g. `let mut foo = 5;`.
+Immutable variables are also declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`
+Variables declared with `const` are immutable, can't be used with `mut` with them and must be type annotated.
+By convention, `const` variable names are all uppercase with underscores between words.
+
+In rust it is possible to shadow variables.
+Shadowing is where a second variable with the same name "overshadows" the first, taking any uses of the variable name to itself.
+Shadowing allows you to change types:
+
+```rust
+    // The shadowed variable is still immutable
+    let file = get_file(args); // Filehandle
+    let file = read_file(file); // String
+    let file = tokenize(file); // Vec<string>
+```
+
+### Numbers
 
 Integer types have different sizes (8, 16, 32, 64, 128, char) and are signed (`i`) or unsigned (`u`).
 For example, `i8` is a signed 8-bit integer and can represent numbers from -128 to 127 (-2^(n - 1) to 2^(n - 1) - 1, where n = 8).
@@ -64,11 +60,27 @@ The default type is `f64` because on modern CPUs, it’s roughly the same speed 
 Basic math operations addition, subtraction, multiplication, division, and remainder are supported.
 Integer division truncates toward zero to the nearest integer.
 
-#### Character
+### Character
 
 Rust’s `char` type is the language’s most primitive alphabetic type. It is four bytes in size and represents a Unicode Scalar Value. THe Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive. The char literal is specified with single quotes, as opposed to string literals, which use double quotes.
 
-#### Tuple
+### Strings
+
+A system language has to have two kinds of string, allocated dynamically at runtime or static.
+Under the hood, String is basically a Vec<u8> and &str is &[u8], but those bytes must represent valid UTF-8 text.
+Where u8 is a string of characters.
+
+```rust
+fn main() {
+    let text = "hello dolly";  // the string slice
+    let s = text.to_string();  // it's now an allocated string
+
+    dump(text);
+    dump(&s);
+}
+```
+
+### Tuple
 
 A tuple is a general way of grouping together a number of values with a variety of types into one compound type.
 Tuples have a fixed length: once declared, they cannot grow or shrink in size.
@@ -81,7 +93,9 @@ let (x, y, z) = tup;
 let five_hundred = tup.0;
 ```
 
-#### Array
+### Array-ish
+
+#### Arrays
 
 Arrays are values packed nose to tail in memory, so that they are efficient to access.
 Arrays are indexed from zero.
@@ -109,7 +123,7 @@ fn main() {
 Rust checks that any index lookup is within the range of the array at runtime and exits if not.
 In orther languages when you provide an incorrect index, invalid memory can be accessed.
 
-##### Slices
+#### Slices
 
 Slices are used more commonly.
 Slices are views into an underlying array of values.
@@ -141,24 +155,7 @@ Instead getting by index, use the slice method `get` which does not panic and re
 An Option in a box that may contain a value, or nothing (None).
 The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
 
-### Functions
-
-Functions are one place where the compiler will not work out types with type inference--inputs and outputs must be typed.
-The body of the function has the value of its last expression, just like with if-as-an-expression.
-Returns are generally only used for returning early from a function.
-
-```rust
-// return value is last 
-fn abs(x: f64) -> f64 {
-    if x > 0.0 {
-        x
-    } else {
-        -x
-    }
-}
-```
-
-## Vectors
+#### Vectors
 
 Vectors are re-sizeable arrays.
 A vector is a similar collection type provided by the standard library that is allowed to grow or shrink in size.
@@ -200,7 +197,7 @@ fn main() {
 }
 ```
 
-## Iterators
+#### Iterators
 
 `rustc` does a lot of optimizations in order to make it more efficient to iterate over an array or slice.
 
@@ -214,23 +211,24 @@ fn main() {
 }
 ```
 
-## Strings
+### Functions
 
-A system language has to have two kinds of string, allocated dynamically at runtime or static.
-Under the hood, String is basically a Vec<u8> and &str is &[u8], but those bytes must represent valid UTF-8 text.
-Where u8 is a string of characters.
+Functions are one place where the compiler will not work out types with type inference--inputs and outputs must be typed.
+The body of the function has the value of its last expression, just like with if-as-an-expression.
+Returns are generally only used for returning early from a function.
 
 ```rust
-fn main() {
-    let text = "hello dolly";  // the string slice
-    let s = text.to_string();  // it's now an allocated string
-
-    dump(text);
-    dump(&s);
+// return value is last 
+fn abs(x: f64) -> f64 {
+    if x > 0.0 {
+        x
+    } else {
+        -x
+    }
 }
 ```
 
-## Referencing or borrowing
+#### Passing variables to functions: Referencing or borrowing
 
 References are explicitly passed into functions with `&` and explicitly dereferenced with `*`.
 Passing by reference is important when we have a large object and don't want to copy it.
@@ -255,7 +253,22 @@ fn main() {
 // res is 2
 ```
 
-## Matching
+## Basics: control flow
+
+### if-else
+
+Same as JavaScript, just drop the parentheses.
+
+```rust
+let x = 10;
+if x == 10 {
+    println!("x is ten!");
+} else {
+    println!("x is not ten!");
+}
+```
+
+### Matching
 
 Like a switch statement, I think.
 But you can do more, like matching on Some or None, and ranges, instead of just values.
@@ -285,4 +298,6 @@ But you can do more, like matching on Some or None, and ranges, instead of just 
         - [x] 3.1 Variables and Mutability
         - [x] 3.2 Data Types
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
+- [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
+    - [ ] Basics
         
