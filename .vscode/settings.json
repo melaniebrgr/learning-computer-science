@@ -1,7 +1,8 @@
 {
     "conventionalCommits.scopes": [
-        "programming",
+        "prog",
         "os",
-        "rust"
+        "rust",
+        "wasm"
     ]
 }
