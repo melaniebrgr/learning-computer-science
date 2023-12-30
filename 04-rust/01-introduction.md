@@ -11,20 +11,7 @@ In Rust you need to define the blueprint of exactly how things are going to be l
 
 The downsides of garbage collection are that it is wasteful of memory, which matters in small embedded microchips that increasingly rule our world. The second is that it will decide, potentially at the worst possible time, that a clean up must happen.
 
-## Types
-
-Every value in rust has a type.
-All variables types ust be known at compile time.
-Types can usually be infered, but must be specified for `const` and function arguments.
-When many types are possible a type annotation must be added, and the compiler will error: "type annotations needed".
-
-There are two data type subsets: scalar and compound.
-A scalar type represents a single value.
-There are four primary scalar types: integers, floating-point numbers, Booleans, and characters.
-Compound types gropu multiple values into one type.
-There are two compound types: tuples and arrays.
-
-### Variables
+## Variables
 
 Variable declaration, if-else statements, and operators are similar to JavaScript with fewer brackets.
 All variables must be initialised.
@@ -46,6 +33,19 @@ Shadowing allows you to change types:
     let file = tokenize(file); // Vec<string>
 ```
 
+## Types
+
+Every value in rust has a type.
+All variables types ust be known at compile time.
+Types can usually be infered, but must be specified for `const` and function arguments.
+When many types are possible a type annotation must be added, and the compiler will error: "type annotations needed".
+
+There are two data type subsets: scalar and compound.
+A scalar type represents a single value.
+There are four primary scalar types: integers, floating-point numbers, Booleans, and characters.
+Compound types gropu multiple values into one type.
+There are two compound types: tuples and arrays.
+
 ### Numbers
 
 Integer types have different sizes (8, 16, 32, 64, 128, char) and are signed (`i`) or unsigned (`u`).
@@ -64,27 +64,26 @@ Integer division truncates toward zero to the nearest integer.
 
 Rust’s `char` type is the language’s most primitive alphabetic type. It is four bytes in size and represents a Unicode Scalar Value. THe Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive. The char literal is specified with single quotes, as opposed to string literals, which use double quotes.
 
-### Strings
+### String
 
-A system language has to have two kinds of string, allocated dynamically at runtime or static.
-Under the hood, String is basically a Vec<u8> and &str is &[u8], but those bytes must represent valid UTF-8 text.
-Where u8 is a string of characters.
+Any system language has two kinds of string, one static and known at compile time, and dynamically allocated at runtime.
+Rust is no exception: it has a static string literal (`str`) type, and dynamic capital "S" **S**tring.
+Said another way, there is a **S**tring with a pointer, a length and a capacity, and a `str` view into a string.
+Under the hood, String is basically a Vec<u8> and &str is &[u8], where those bytes represent valid UTF-8 text. 
 
 ```rust
 fn main() {
-    let text = "hello dolly";  // the string slice
-    let s = text.to_string();  // it's now an allocated string
-
-    dump(text);
-    dump(&s);
+    let text = "hello dolly";  // the string literal
+    let s = String::from(text);  // it's now an allocated string
 }
 ```
 
 ### Tuple
 
-A tuple is a general way of grouping together a number of values with a variety of types into one compound type.
-Tuples have a fixed length: once declared, they cannot grow or shrink in size.
+A tuple is a way of grouping together a number of values with different types into one compound type.
+Tuples have a fixed length and once declared, they cannot grow or shrink in size.
 Tuples can be accessed by destructuring or using a period (`.`) notation.
+Start at 0 when accessing by dot notation.
 The tuple without any values is called a unit `()` and represent an empty value or an empty return type.
 
 ```rust
@@ -93,9 +92,7 @@ let (x, y, z) = tup;
 let five_hundred = tup.0;
 ```
 
-### Array-ish
-
-#### Arrays
+### Arrays
 
 Arrays are values packed nose to tail in memory, so that they are efficient to access.
 Arrays are indexed from zero.
@@ -123,49 +120,45 @@ fn main() {
 Rust checks that any index lookup is within the range of the array at runtime and exits if not.
 In orther languages when you provide an incorrect index, invalid memory can be accessed.
 
-#### Slices
+### Slice
 
-Slices are used more commonly.
-Slices are views into an underlying array of values.
-You have to explicitly say that you want to pass an array as a slice using the & operator.
-When slicing a copy of the data is never made.
-Slices all borrow their data from their arrays.
+Slices are views into an underlying array of values and are used more commonly than arrays.
+You have to explicitly say that you want to create a slice with the `&` operator.
+Slices all _borrow_ their data, a copy is never made.
+Slices can be created from strings and arrays
 
 ```rust
-// read as: slice of i32
-fn sum(values: &[i32]) -> i32 {
-    let mut res = 0;
-    for i in 0..values.len() {
-        res += values[i]
-    }
-    res
-}
+// String slice
+let s = String::from("hello world");
+let hello = &s[0..5];
+let world = &s[6..11];
 
-fn main() {
-    let arr = [10,20,30,40];
-    // look at that &
-    let res = sum(&arr);
-    println!("sum {}", res);
-}
+// Array slice
+let a = [1, 2, 3, 4, 5];
+let nice_slice = &a[1..=3];
 ```
 
 How can you safely access slices at run time?
 Instead getting by index, use the slice method `get` which does not panic and returns an "Maybe" Some or None option.
 (Panics are memory safe because they happen before any illegal access to memory.)
-An Option in a box that may contain a value, or nothing (None).
+An Option is a box that may contain a value, or nothing (None).
 The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
 
-#### Vectors
+### Vector
 
 Vectors are re-sizeable arrays.
-A vector is a similar collection type provided by the standard library that is allowed to grow or shrink in size.
-Slice borrow the memory from the vector.
-When the vector dies or drops, it lets the memory go.
-Vectors compare with each other and with slices by value.
-Vectors have a size and a capacity. If you clear a vector, its size becomes zero, but it still retains its old capacity.
-You can insert values into a vector at arbitrary positions with insert, and remove with remove.
+They have a size and a capacity, i.e. if a vector is emptied, its size becomes zero, but it still retains its capacity.
+In Rust, there are two ways to define a Vector.
+1. One way is to use the `Vec::new()` function to create a new vector and fill it with the `push()` method.
+2. The second way, which is simpler is to use the `vec![]` macro and define your elements inside the square brackets.
+
+A vector is similar to a collection type provided by the standard library.
+A vector is allowed to grow or shrink in size, but must decalred as mutable to do so.
+When the vector dies or drops, the memory is let go.
+Values can be insterted into a vector at arbitrary positions with insert, and removed with remove.
 This is not as efficient as pushing and popping since the values will have to be moved to make room.
-Many vector operations are done in place so use clone to copy vectors.
+Many vector operations are done in place.
+Use clone to copy vectors.
 
 ```rust
 fn main() {
@@ -197,7 +190,18 @@ fn main() {
 }
 ```
 
-#### Iterators
+To iterate over values in a vector use a for loop.
+It is possible to iterate immutably and mutably, using `mut` and a dereference operator `*`.
+The reference to the vector that the for loop holds prevents simultaneous modification of the whole vector.
+
+```rust
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+### Iterator
 
 `rustc` does a lot of optimizations in order to make it more efficient to iterate over an array or slice.
 
@@ -211,7 +215,18 @@ fn main() {
 }
 ```
 
-### Functions
+### Collection
+
+```rust
+for x in &some_array { }
+
+vec![1, 2, 3]
+    .iter()
+    .map()
+    .collect::<Vec<i32>>(); // become a data structure of this type at the end
+```
+
+### Function
 
 Are defined with the keyword `fn`.
 Functions are one place where the compiler will not work out types with type inference: inputs and outputs must be typed.
@@ -229,7 +244,8 @@ fn abs(x: f64) -> f64 {
 }
 ```
 
-### Closures
+### Closure
+
 Uses bar instead of parentheses
 
 ```typescript
@@ -248,36 +264,16 @@ Uses bar instead of parentheses
 |x| x + 1
 ```
 
-#### Passing variables to functions: Referencing or borrowing
-
-References are explicitly passed into functions with `&` and explicitly dereferenced with `*`.
-Passing by reference is important when we have a large object and don't want to copy it.
-Borrowing is the name given whenever you pass something by reference.
-
-```rust
-fn modifies(x: &mut f64) {
-    *x += 1.0;
-}
-
-fn main() {
-    let mut res = 0.0;
-    println!("res is {}", res);
-    modifies(&mut res);
-    println!("res is {}", res);
-    modifies(&mut res);
-    println!("res is {}", res);
-}
-
-// res is 0
-// res is 1
-// res is 2
-```
-
-### Classes
+### Class
 
 In rust the behaviour and the data are defined in seperate block: a struct and and implementation.
 Struct is a concrete item.
 It has a defined size, that has a certain amount of bytes associated with it.
+
+### Struct
+
+Structs hold properties.
+A struct is a property layout, exactly what is going to be on that item.
 
 ```rust
 struct Foo {
@@ -303,11 +299,13 @@ impl Foo {
 }
 ```
 
-### Interfaces
+### Trait (interface)
 
-A trait is effectively and interface.
+A trait is effectively an interface.
+A trait is an implementation of a method on that struct.
+It allows for composing.
 
-## Basics: control flow
+## Control flow
 
 ### if-else
 
@@ -322,7 +320,7 @@ if x == 10 {
 }
 ```
 
-### Ranges
+### Range
 
 ```rust
 // Exclusive range: up to and not including 10
@@ -340,17 +338,6 @@ for i in 0..=10 {
 
 ```rust
 while true { }
-```
-
-### Collections
-
-```rust
-for x in &some_array { }
-
-vec![1, 2, 3]
-    .iter()
-    .map()
-    .collect::<Vec<i32>>(); // become a data structure of this type at the end
 ```
 
 ### Matching

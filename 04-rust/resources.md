@@ -17,6 +17,10 @@
     - [ ] 3.0 Common Programming Concepts
         - [x] 3.1 Variables and Mutability
         - [x] 3.2 Data Types
+    - [ ] 4.0 Understanding ownership
+        - [ ] 4.1 What is Ownership
+        - [ ] 4.2 References and Borrowing
+        - [ ] 4.3 The Slice Type
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
 - [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
     - [ ] Basics
