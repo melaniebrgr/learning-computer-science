@@ -5,11 +5,7 @@
 Each value in Rust has an owner.
 There can only be one owner at a time.
 When the owner goes out of scope, the value will be dropped.
-A scope is the range within a program for which an item is valid
-
-In Rust, when an argument is passed to a function and it's not explicitly returned, you can't use the original variable anymore, this is called "moving" a variable. To use the data that was moved to a function either 
-1. Make another, separate version of the data.
-2. Make the function borrow its argument instead of taking ownership of it, and then copy the data within the function in order to return an owned.
+A scope is the range within a program for which a value is valid
 
 ## Stack vs. heap
 
@@ -23,7 +19,9 @@ In an executing program data can be placed on the stack or heap.
 In the case of a string literal, since the contents are known at compile time it is hardcoded right into the final executable.
 With the String type, an amount of memory needs to be allocated on the heap, in order to support a mutable, growable piece of text.
 The memory needs to be requested from the allocator and returned when it no longer used during program run time.
-In Rust memory is automatically returned once the variable that owns it goes out of scope. 
+
+When an argument is passed to a function and it's not explicitly returned, you can't use the original variable anymore, this is called "moving" a variable. 
+Memory is automatically returned once the variable that owns it goes out of scope by calling a function `drop`.
 Deallocating resources at the end of an item’s lifetime is sometimes called Resource Acquisition Is Initialization (RAII).
 
 ```rust
@@ -36,7 +34,25 @@ fn main() {
     write_string(s);
     write_string(s);
 }
+
+// error[E0382]: use of moved value: `s`
+//  --> src/main.rs:8:18
+//   |
+// 6 |     let s = String::from("hello dolly");
+//   |         - move occurs because `s` has type `String`, which does not implement the `Copy` trait
+// 7 |     write_string(s);
+//   |                  - value moved here
+// 8 |     write_string(s);
+//   |                  ^ value used here after move
+//   |
+// note: consider changing this parameter type in function `write_string` to borrow instead if owning the value isn't necessary
+//  --> src/main.rs:1:23
 ```
+
+To use the data that was moved to a function either 
+1. Make another, separate version of the data.
+2. Make the function borrow its argument instead of taking ownership of it, and then copy the data within the function in order to return an owned.
+
 
 ## Referencing or borrowing
 
@@ -51,14 +67,10 @@ fn modifies(x: &mut f64) {
 
 fn main() {
     let mut res = 0.0;
-    println!("res is {}", res);
+    println!("res is {}", res); // res is 0
     modifies(&mut res);
-    println!("res is {}", res);
+    println!("res is {}", res); // res is 1
     modifies(&mut res);
-    println!("res is {}", res);
+    println!("res is {}", res); // res is 2
 }
-
-// res is 0
-// res is 1
-// res is 2
 ```

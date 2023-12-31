@@ -23,5 +23,6 @@
         - [ ] 4.3 The Slice Type
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
 - [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
-    - [ ] Basics
+    - [x] Basics
+    - [ ] Coding Rust
         

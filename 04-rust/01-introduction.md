@@ -80,7 +80,7 @@ fn main() {
 
 ### Tuple
 
-A tuple is a way of grouping together a number of values with different types into one compound type.
+A tuple is a way of grouping together values of different types into one compound type.
 Tuples have a fixed length and once declared, they cannot grow or shrink in size.
 Tuples can be accessed by destructuring or using a period (`.`) notation.
 Start at 0 when accessing by dot notation.
@@ -266,21 +266,36 @@ Uses bar instead of parentheses
 
 ### Class
 
-In rust the behaviour and the data are defined in seperate block: a struct and and implementation.
-Struct is a concrete item.
-It has a defined size, that has a certain amount of bytes associated with it.
+In rust the behaviour and the data are defined in seperate block: a struct and an implementation.
 
 ### Struct
 
 Structs hold properties.
-A struct is a property layout, exactly what is going to be on that item.
+A struct is a property layout, and define exactly what is going to be on that item.
+They are blueprints.
+It has a defined size, that has a certain amount of bytes associated with it.
 
 ```rust
-struct Foo {
-    properties ...
-    pub properties ...
-}
+fn main() {
+    struct Vector {
+        x: usize,
+        y: usize,
+        z: usize
+    }
 
+    let point = Vector {
+        x: 1,
+        y: 2,
+        z: 3,
+    };
+    
+    let Vector { x, y, z } = point;
+
+    println!("{}, {}, {}", x, y, z)
+}
+```
+
+```rust
 impl Foo {
     // these are both static methods
     fn this() // available usage within the file
@@ -349,3 +364,6 @@ But you can do more, like matching on Some or None, and ranges, instead of just 
 
 - `::` means much the same as does '.' in other languages - it is a fully qualified name and means "using", e.g. `std::env::args`
 - An exclamation mark indicate a macro call. A useful macro is `assert_eq!` that asserts that two things must be equal or panic. Another is `format!` for building up strings.
+- If you are iterating on code and what to thell the compile to ignore the missing pieces, you can add a `todo!("describe")`.
+- Use unreachable as a runtime assertion that a logic branch should never be reached, `unreachable!("how to tell the compiler that this should never happen")`.
+- Use `unwrap` to grab the inner value of an option.
