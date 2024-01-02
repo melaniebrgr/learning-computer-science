@@ -4,25 +4,32 @@
 
 Each value in Rust has an owner.
 There can only be one owner at a time.
+One Lord of the Ring.
 When the owner goes out of scope, the value will be dropped.
-A scope is the range within a program for which a value is valid
+A scope is the range within a program for which a value is valid.
 
-## Stack vs. heap
+## Stack and heap
 
-In an executing program data can be placed on the stack or heap.
-- Data is pushed or popped off the FIFO stack. All data stored on the stack must have a known, fixed size.
-- Data is allocated to the heap and a pointer is returned and pushed onto the stack. The memory allocator must return a pointer to the address a.k.a. a big enough empty spot on the heap.
+In an executing program, data can be placed on the stack or heap, i.e. there is stack data and heap data.
+Values with a known size at compile time are stored entirely on the stack, so copies of the actual values are quick to make. Stack facts:
+- All data stored on the stack must have a known, fixed size.
+- Data is pushed or popped off the FIFO stack. 
 - Accessing data in the stack is faster than the heap because you have don't have to follow a pointer to get there or jump around in memory.
+- pointer is pushed onto the stack when data is allocated to the heap. The memory allocator must return a pointer to the address a.k.a. a big enough empty spot on the heap.
 
-## String example
+In the case of a string literal, since the contents are known at compile time the text is hardcoded right into the final executable.
+On the other hand with a String type, an amount of memory needs to be allocated on the heap, in order to support a mutable, growable piece of text.
+The memory needs to be requested from the allocator and returned when it no longer in use.
+Once the variable that owns the data goes out of scope, memory is automatically returned during program execution.
+Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
 
-In the case of a string literal, since the contents are known at compile time it is hardcoded right into the final executable.
-With the String type, an amount of memory needs to be allocated on the heap, in order to support a mutable, growable piece of text.
-The memory needs to be requested from the allocator and returned when it no longer used during program run time.
+## Move
 
-When an argument is passed to a function and it's not explicitly returned, you can't use the original variable anymore, this is called "moving" a variable. 
-Memory is automatically returned once the variable that owns it goes out of scope by calling a function `drop`.
-Deallocating resources at the end of an item’s lifetime is sometimes called Resource Acquisition Is Initialization (RAII).
+You’ve probably heard the terms shallow copy and deep copy.
+The concept of copying the pointer, length, and capacity without copying the data probably sounds like making a shallow copy.
+But because Rust also invalidates the first variable, instead of being called a shallow copy, it’s known as a move.
+Assigning a variable allocated to the heap to a new variable invalidates the first and is called "moving" a variable.
+An argument passed to a function without explicitly returning it is called "moving" a variable.
 
 ```rust
 fn write_string(text: String) {
@@ -53,10 +60,14 @@ To use the data that was moved to a function either
 1. Make another, separate version of the data.
 2. Make the function borrow its argument instead of taking ownership of it, and then copy the data within the function in order to return an owned.
 
+## Reference and borrow
 
-## Referencing or borrowing
+- value, `let x = 5;`
+- immutable reference or immutable borrow, `y = &x;`
+- mutable reference or mutable borrow, `y = &mut x`
 
-References are explicitly passed into functions with `&` and explicitly dereferenced with `*`.
+References are explicitly created with `&`.
+When passed to a function references are explicitly dereferenced with `*`.
 Passing by reference is important when we have a large object and don't want to copy it.
 Borrowing is the name given whenever you pass something by reference.
 
