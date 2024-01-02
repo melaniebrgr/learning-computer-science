@@ -203,6 +203,8 @@ for i in &mut v {
 
 ### Iterator
 
+An iterator is a seperate data structure that can walk through other data structures, like a vector.
+An iterator has a pointer to a structure it can iterate, and an index.
 `rustc` does a lot of optimizations in order to make it more efficient to iterate over an array or slice.
 
 ```rust
