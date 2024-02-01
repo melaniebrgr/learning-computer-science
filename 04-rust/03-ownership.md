@@ -8,7 +8,7 @@ One Lord of the Ring.
 When the owner goes out of scope, the value will be dropped.
 A scope is the range within a program for which a value is valid.
 
-## Stack and heap
+## The stack and heap
 
 In an executing program, data can be placed on the stack or heap, i.e. there is stack data and heap data.
 Values with a known size at compile time are stored entirely on the stack, so copies of the actual values are quick to make. Stack facts:
@@ -18,18 +18,26 @@ Values with a known size at compile time are stored entirely on the stack, so co
 - pointer is pushed onto the stack when data is allocated to the heap. The memory allocator must return a pointer to the address a.k.a. a big enough empty spot on the heap.
 
 In the case of a string literal, since the contents are known at compile time the text is hardcoded right into the final executable.
-On the other hand with a String type, an amount of memory needs to be allocated on the heap, in order to support a mutable, growable piece of text.
+On the other hand, with a String type, an amount of memory needs to be allocated on the heap, in order to support a mutable, growable piece of text.
 The memory needs to be requested from the allocator and returned when it no longer in use.
-Once the variable that owns the data goes out of scope, memory is automatically returned during program execution.
+When a variable that includes data on the heap goes out of scope, the value will be cleaned up by drop unless ownership of the data has been moved to another variable.
+
+Once the variable that owns the data goes out of scope, memory is automatically returned during program execution by calling `Drop`.
+Anything that requires allocation or is some form of resource implements a `Drop` and cannot therefore implement `Copy`.
+Values that implement the `Copy` trait:
+- The Boolean type
+- All integer types, e.g. `u32`
+- All the floating-point e.g. `f64`
+- The character type, `char`
+- Tuples, if they only contain types that also implement Copy
+
 Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
 
 ## Move
 
-You’ve probably heard the terms shallow copy and deep copy.
-The concept of copying the pointer, length, and capacity without copying the data probably sounds like making a shallow copy.
-But because Rust also invalidates the first variable, instead of being called a shallow copy, it’s known as a move.
-Assigning a variable allocated to the heap to a new variable invalidates the first and is called "moving" a variable.
-An argument passed to a function without explicitly returning it is called "moving" a variable.
+When a variable allocated to the heap is reassigned to a new variable, first variable is invalidated.
+This is therefore a "move" instead of a shallow copy where the first variable is still valid.
+Passing a variable to a function, without explicitly returning it, will also move or copy, just as assignment does.
 
 ```rust
 fn write_string(text: String) {

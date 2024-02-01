@@ -24,5 +24,20 @@
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
 - [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
     - [x] Basics
+        - [x] Rust Basics
+        - [x] Numbers & Strings
+        - [x] Vector, Tuple, & Struct
+        - [x] todo, unreachable, & unwrap
     - [ ] Coding Rust
+        - [x] Install Rust
+        - [x] Value, Mutable, Immutable
+        - [x] Coding an Iterator
+        - [ ] Understanding Collect
+        - [ ] Iterating Through a Text File
+        - [ ] Iterator Memory Usage
+        - [ ] Enums in TypeScript vs Rust
+        - [ ] 
+        - [ ] 
+        - [ ] 
+        - [ ] 
         

@@ -13,21 +13,19 @@ The downsides of garbage collection are that it is wasteful of memory, which mat
 
 ## Variables
 
-Variable declaration, if-else statements, and operators are similar to JavaScript with fewer brackets.
-All variables must be initialised.
 There are two types of variables, immutable and mutable.
-Variables are immutable by default and are declared with `let`, e.g. `let foo = 5;`.
-Mutable variables are declared by adding `mut` after the `let`, e.g. `let mut foo = 5;`.
-Immutable variables are also declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`
-Variables declared with `const` are immutable, can't be used with `mut` with them and must be type annotated.
-By convention, `const` variable names are all uppercase with underscores between words.
+Variables are declared with `let`, e.g. `let foo = 5;` and are immutable by default.
+Mutable variables are declared by adding `mut`, e.g. `let mut foo = 5;`.
+Immutable variables can also be declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`
+Variables declared with `const` can't be used with `mut` and must be type annotated.
+By convention, `const` variable names are all uppercase and snakecase.
 
-In rust it is possible to shadow variables.
-Shadowing is where a second variable with the same name "overshadows" the first, taking any uses of the variable name to itself.
-Shadowing allows you to change types:
+In rust variables can be shadowed, where second variable with the same name "overshadows" the first.
+The second declaration takes any use of the variable name to itself.
+The shadowed variable can still be immutable.
+Types can be changed with shadowing.
 
-```rust
-    // The shadowed variable is still immutable
+```rust: shadowing
     let file = get_file(args); // Filehandle
     let file = read_file(file); // String
     let file = tokenize(file); // Vec<string>
@@ -36,15 +34,16 @@ Shadowing allows you to change types:
 ## Types
 
 Every value in rust has a type.
-All variables types ust be known at compile time.
-Types can usually be infered, but must be specified for `const` and function arguments.
-When many types are possible a type annotation must be added, and the compiler will error: "type annotations needed".
+All variables types must be known at compile time.
+Types can often be infered, but there are times must be specified:
+- When declaring with `const`
+- function arguments
+- when many types are possible, else the compiler will error "type annotations needed".
 
-There are two data type subsets: scalar and compound.
-A scalar type represents a single value.
-There are four primary scalar types: integers, floating-point numbers, Booleans, and characters.
-Compound types gropu multiple values into one type.
-There are two compound types: tuples and arrays.
+There are two subsets of data types: scalar and compound.
+A scalar type represents a single value, whereas compound types group multiple values into one type.
+The four primary scalar types: integers, floating-point numbers, Booleans, and characters.
+The two compound types: tuples and arrays.
 
 ### Numbers
 
@@ -62,7 +61,9 @@ Integer division truncates toward zero to the nearest integer.
 
 ### Character
 
-Rust’s `char` type is the language’s most primitive alphabetic type. It is four bytes in size and represents a Unicode Scalar Value. THe Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive. The char literal is specified with single quotes, as opposed to string literals, which use double quotes.
+Rust’s `char` type is the language’s most primitive alphabetic type. It is four bytes in size and represents a Unicode Scalar Value.
+The Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive.
+The char literal is specified with single quotes, as opposed to string literals, which use double quotes.
 
 ### String
 
@@ -90,142 +91,6 @@ The tuple without any values is called a unit `()` and represent an empty value 
 let tup: (i32, f64, u8) = (500, 6.4, 1);
 let (x, y, z) = tup;
 let five_hundred = tup.0;
-```
-
-### Arrays
-
-Arrays are values packed nose to tail in memory, so that they are efficient to access.
-Arrays are indexed from zero.
-Arrays can only contain one type of data, `let a: [i32; 5] = [1, 2, 3, 4, 5];`.
-An array can be initialised to contain the same value for each element by specifying the initial value, followed by a semicolon, e.g. `let a = [3; 5]; // [3, 3, 3, 3, 3]`.
-
-The type of an array includes its size, i.e. the type of `[10, 20]` would be `[i32; 2]`.
-That is, Rust arrays are fixed in size, and the size of an array is known at compile-time.
-Because the type of an array includes its size, they are not used that often.
-Arrays are useful when you want your data allocated on the stack rather than the heap.
-
-```rust
-fn main() {
-    let arr = [10, 20, 30, 40];
-    let first = arr[0];
-    println!("first {}", first);
-
-    for i in 0..4 {
-        println!("[{}] = {}", i,arr[i]);
-    }
-    println!("length {}", arr.len());
-}
-```
-
-Rust checks that any index lookup is within the range of the array at runtime and exits if not.
-In orther languages when you provide an incorrect index, invalid memory can be accessed.
-
-### Slice
-
-Slices are views into an underlying array of values and are used more commonly than arrays.
-You have to explicitly say that you want to create a slice with the `&` operator.
-Slices all _borrow_ their data, a copy is never made.
-Slices can be created from strings and arrays
-
-```rust
-// String slice
-let s = String::from("hello world");
-let hello = &s[0..5];
-let world = &s[6..11];
-
-// Array slice
-let a = [1, 2, 3, 4, 5];
-let nice_slice = &a[1..=3];
-```
-
-How can you safely access slices at run time?
-Instead getting by index, use the slice method `get` which does not panic and returns an "Maybe" Some or None option.
-(Panics are memory safe because they happen before any illegal access to memory.)
-An Option is a box that may contain a value, or nothing (None).
-The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
-
-### Vector
-
-Vectors are re-sizeable arrays.
-They have a size and a capacity, i.e. if a vector is emptied, its size becomes zero, but it still retains its capacity.
-In Rust, there are two ways to define a Vector.
-1. One way is to use the `Vec::new()` function to create a new vector and fill it with the `push()` method.
-2. The second way, which is simpler is to use the `vec![]` macro and define your elements inside the square brackets.
-
-A vector is similar to a collection type provided by the standard library.
-A vector is allowed to grow or shrink in size, but must decalred as mutable to do so.
-When the vector dies or drops, the memory is let go.
-Values can be insterted into a vector at arbitrary positions with insert, and removed with remove.
-This is not as efficient as pushing and popping since the values will have to be moved to make room.
-Many vector operations are done in place.
-Use clone to copy vectors.
-
-```rust
-fn main() {
-    let mut v = Vec::new();
-    v.push(1.0);
-    v.push(2.0);
-    v.push(3.0);
-
-    let slice = &v[1..];
-    println!("{:?}", slice);
-    // [2.0, 3.0]
-}
-```
-
-```rust
-fn main() {
-    let mut v1 = vec![10, 20, 30, 40];
-    v1.pop();
-
-    let mut v2 = Vec::new();
-    v2.push(10);
-    v2.push(20);
-    v2.push(30);
-
-    assert_eq!(v1, v2);
-
-    v2.extend(0..2);
-    assert_eq!(v2, &[10, 20, 30, 0, 1]);
-}
-```
-
-To iterate over values in a vector use a for loop.
-It is possible to iterate immutably and mutably, using `mut` and a dereference operator `*`.
-The reference to the vector that the for loop holds prevents simultaneous modification of the whole vector.
-
-```rust
-let mut v = vec![100, 32, 57];
-for i in &mut v {
-    *i += 50;
-}
-```
-
-### Iterator
-
-An iterator is a seperate data structure that can walk through other data structures, like a vector.
-An iterator has a pointer to a structure it can iterate, and an index.
-`rustc` does a lot of optimizations in order to make it more efficient to iterate over an array or slice.
-
-```rust
-fn main() {
-    let sum: i32  = (0..5).sum();
-    println!("sum was {}", sum);
-
-    let sum: i32 = [0, 1, 2].iter().sum();
-    println!("sum was {}", sum);
-}
-```
-
-### Collection
-
-```rust
-for x in &some_array { }
-
-vec![1, 2, 3]
-    .iter()
-    .map()
-    .collect::<Vec<i32>>(); // become a data structure of this type at the end
 ```
 
 ### Function
