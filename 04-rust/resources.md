@@ -32,12 +32,16 @@
         - [x] Install Rust
         - [x] Value, Mutable, Immutable
         - [x] Coding an Iterator
-        - [ ] Understanding Collect
+        - [x] Understanding Collect
         - [ ] Iterating Through a Text File
         - [ ] Iterator Memory Usage
         - [ ] Enums in TypeScript vs Rust
-        - [ ] 
-        - [ ] 
-        - [ ] 
-        - [ ] 
+        - [ ] Enums & Subtypes
+        - [ ] Options in TypeScript vs Rust
+        - [ ] Options in Rust
+        - [ ] Options Exercise
+        - [ ] Error Handling
+        - [ ] Results & Error Handling Exercise
+        - [ ] Q&A
+    - [ ] Borrow Checker
         

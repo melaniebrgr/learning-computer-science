@@ -85,9 +85,10 @@ for i in &mut v {
 
 ### Iterator
 
+The general pattern for interators: data structure A -> iterator -> data structure B
 An iterator is _a seperate data structure_, it is not the thing itself.
 An iterator only refers to the thing itself.
-If there is an order, like a vector, an iterator can walk through it.
+If a data structure has an order, like a vector, an iterator can walk through it.
 An iterator has a pointer to a structure it can iterate, an index, and a next method.
 `rustc` makes optimizations that make it more efficient to iterate over a array or slice.
 
