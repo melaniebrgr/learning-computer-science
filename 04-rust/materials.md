@@ -1,4 +1,4 @@
-# Resources
+# Materials
 
 - [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
     - [x] Basics
