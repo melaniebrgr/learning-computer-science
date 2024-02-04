@@ -11,6 +11,36 @@ In Rust you need to define the blueprint of exactly how things are going to be l
 
 The downsides of garbage collection are that it is wasteful of memory, which matters in small embedded microchips that increasingly rule our world. The second is that it will decide, potentially at the worst possible time, that a clean up must happen.
 
+## Running a program
+
+The `rustup` tool is used to install rust, and periodically update it via `rustup update`.
+Rust is an ahead-of-time compiled language, meaning you can compile a program and give the executable to someone else.
+To run a program written in Rust it first needs to be compiled.
+Rust ships with a compiler `rustc` that compiles rust files to binary executables.
+
+```bash
+rustc main.rs # compile
+./main # execute
+```
+
+Rust has a build system and package manager called `cargo`.
+Setting up a project with cargo with add a Cargo.toml, which is analogous to package.json.
+It contains a package configuration and dependencies list.
+
+```bash
+cargo new my_program # creates a new directory and project
+cargo init # for a directory with an existing project
+```
+
+Cargo puts the binary it generates in a directory named debug because the default build is a debug build.
+
+```bash
+cargo check ... # checks but does not compile
+cargo build ... # compiles executable
+cargo build --release # compiles optimised executable
+cargo run ... # compiles and runs executable
+```
+
 ## Variables
 
 There are two types of variables, immutable and mutable.

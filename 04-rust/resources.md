@@ -11,12 +11,20 @@
     - [ ] Object-Oriented Programming
     - [ ] Parsing with Nom
     - [ ] Pain Points
-- [Rust-lang book](https://doc.rust-lang.org/)
-    - [ ] 1.0 Getting Started
+- [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+    - [ ] Hello World
+- [The Rust Programming Language](https://doc.rust-lang.org/)
+    - [x] 1.0 Getting Started
+        - [x] 1.1. Installation
+        - [x] 1.2. Hello, World!
+        - [x] 1.3. Hello, Cargo!
     - [ ] 2.0 Programming a guessing game
     - [ ] 3.0 Common Programming Concepts
         - [x] 3.1 Variables and Mutability
         - [x] 3.2 Data Types
+        - [ ] 3.3. Functions
+        - [ ] 3.4. Comments
+        - [ ] 3.5. Control Flow
     - [ ] 4.0 Understanding ownership
         - [ ] 4.1 What is Ownership
         - [ ] 4.2 References and Borrowing
@@ -33,8 +41,8 @@
         - [x] Value, Mutable, Immutable
         - [x] Coding an Iterator
         - [x] Understanding Collect
-        - [ ] Iterating Through a Text File
-        - [ ] Iterator Memory Usage
+        - [x] Iterating Through a Text File
+        - [x] Iterator Memory Usage
         - [ ] Enums in TypeScript vs Rust
         - [ ] Enums & Subtypes
         - [ ] Options in TypeScript vs Rust
@@ -44,4 +52,6 @@
         - [ ] Results & Error Handling Exercise
         - [ ] Q&A
     - [ ] Borrow Checker
+    - [ ] Traits
+    - [ ] Wrapping Up
         
