@@ -123,6 +123,49 @@ let (x, y, z) = tup;
 let five_hundred = tup.0;
 ```
 
+### Struct
+
+Data and behaviour are defined in seperate blocks in Rust.
+A struct(ure) defines data, and an impl(ementation) defines behaviour.
+Structs hold properties, they are effectively blueprints.
+That is, a struct is a property layout, and define exactly what is going to be on that item.
+It has a defined size and will have certain amount of bytes associated with it.
+
+```rust
+struct Vector {
+    x: usize,
+    y: usize,
+    z: usize
+}
+
+let point = Vector {
+    x: 1,
+    y: 2,
+    z: 3,
+};
+
+let Vector { x, y, z } = point;
+
+println!("{}, {}, {}", x, y, z)
+```
+
+### Impl
+
+```rust
+impl Foo {
+    // these are static methods
+    fn this() // available usage within the file
+    pub fn this() // available usage within the file
+
+    // these are instance methods
+    fn this(&self)...
+    fn this(&mut self)...
+
+    // public instance methods
+    pub fn this(self)...
+}
+```
+
 ### Enum
 
 Enums are a way of saying a value is one of a possible set of values.
@@ -132,6 +175,7 @@ That is, IpAddr::V4() is a function call that takes a String argument and return
 each variant can have different types and amounts of associated data.
 Any kind of data can be put inside an enum variant: strings, numeric types, structs, other enums for example.
 Methods can be defined on enums using `impl`.
+That is you can hang methods off yenums using impls.
 
 ```rust
 enum IpAddrKind {

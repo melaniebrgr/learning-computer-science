@@ -36,53 +36,6 @@ Uses bar instead of parentheses
 |x| x + 1
 ```
 
-### Struct
-
-In rust the behaviour and the data are defined in seperate block: a struct and an implementation.
-Structs hold properties.
-A struct is a property layout, and define exactly what is going to be on that item.
-They are blueprints.
-It has a defined size, that has a certain amount of bytes associated with it.
-
-```rust
-fn main() {
-    struct Vector {
-        x: usize,
-        y: usize,
-        z: usize
-    }
-
-    let point = Vector {
-        x: 1,
-        y: 2,
-        z: 3,
-    };
-    
-    let Vector { x, y, z } = point;
-
-    println!("{}, {}, {}", x, y, z)
-}
-```
-
-```rust
-impl Foo {
-    // these are both static methods
-    fn this() // available usage within the file
-    pub fn this() // available usage within the file
-
-    // you should be able to understand this before the end
-    // of the day..
-    //
-    // and all of this can add pub
-    // these are instance methods
-    fn this(&self)...
-    fn this(&mut self)...
-
-    // public instance methods
-    pub fn this(self)...
-}
-```
-
 ### Trait (interface)
 
 A trait is effectively an interface.

@@ -63,7 +63,7 @@
         - [x] Understanding Collect
         - [x] Iterating Through a Text File
         - [x] Iterator Memory Usage
-        - [ ] Enums in TypeScript vs Rust
+        - [x] Enums in TypeScript vs Rust
         - [ ] Enums & Subtypes
         - [ ] Options in TypeScript vs Rust
         - [ ] Options in Rust
