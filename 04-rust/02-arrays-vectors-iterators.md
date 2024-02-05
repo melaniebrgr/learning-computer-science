@@ -177,3 +177,17 @@ Instead getting by index, use the slice method `get` which does not panic and re
 (Panics are memory safe because they happen before any illegal access to memory.)
 An Option is a box that may contain a value, or nothing (None).
 The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
+
+### Range
+
+```rust
+// Exclusive range: up to and not including 10
+for i in 0..10 {
+    println!("Ring! Call number {}", i + 1);
+}
+
+// Inclusive range: up to and including 10
+for i in 0..=10 {
+    println!("Ring! Call number {}", i + 1);
+}
+```

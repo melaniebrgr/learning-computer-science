@@ -14,21 +14,41 @@
 - [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
     - [ ] Hello World
 - [The Rust Programming Language](https://doc.rust-lang.org/)
-    - [x] 1.0 Getting Started
+    - [x] 1. Getting Started
         - [x] 1.1. Installation
         - [x] 1.2. Hello, World!
         - [x] 1.3. Hello, Cargo!
-    - [ ] 2.0 Programming a guessing game
-    - [ ] 3.0 Common Programming Concepts
+    - [ ] 2. Programming a guessing game
+    - [ ] 3. Common Programming Concepts
         - [x] 3.1 Variables and Mutability
         - [x] 3.2 Data Types
         - [ ] 3.3. Functions
         - [ ] 3.4. Comments
         - [ ] 3.5. Control Flow
-    - [ ] 4.0 Understanding ownership
+    - [ ] 4. Understanding ownership
         - [ ] 4.1 What is Ownership
         - [ ] 4.2 References and Borrowing
         - [ ] 4.3 The Slice Type
+    - [ ] 5. Using Structs to Structure Related Data
+    - [ ] 6. Enums and Pattern Matching
+        - [x] 6.1. Defining an Enum
+        - [ ] 6.2. The match Control Flow Construct
+        - [ ] 6.3. Concise Control Flow with if let
+    - [ ] 7. Managing Growing Projects with Packages, Crates, and Modules
+    - [ ] 8. Common Collections
+    - [ ] 9. Error Handling
+    - [ ] 10. Generic Types, Traits, and Lifetimes
+    - [ ] 11. Writing Automated Tests
+    - [ ] 12. An I/O Project: Building a Command Line Program
+    - [ ] 13. Functional Language Features: Iterators and Closures
+    - [ ] 14. More about Cargo and Crates.io
+    - [ ] 15. Smart Pointers
+    - [ ] 16. Fearless Concurrency
+    - [ ] 17. Object Oriented Programming Features of Rust
+    - [ ] 18. Patterns and Matching
+    - [ ] 19. Advanced Features
+    - [ ] 20. Final Project: Building a Multithreaded Web Server
+    - [ ] 21. Appendix
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
 - [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
     - [x] Basics

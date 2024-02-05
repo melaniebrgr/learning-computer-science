@@ -123,99 +123,56 @@ let (x, y, z) = tup;
 let five_hundred = tup.0;
 ```
 
-### Function
+### Enum
 
-Are defined with the keyword `fn`.
-Functions are one place where the compiler will not work out types with type inference: inputs and outputs must be typed.
-The body of the function has the value of its last expression, just like with if-as-an-expression.
-Returns are generally only used for returning early from a function.
+Enums are a way of saying a value is one of a possible set of values.
+After creating an enumeration, it is now a custom data type that be used elsewhere in the code.
+The name of each enum variant that we define also becomes a function that constructs an instance of the enum.
+That is, IpAddr::V4() is a function call that takes a String argument and returns an instance of the IpAddr type. We automatically get this constructor function defined as a result of defining the enum.
+each variant can have different types and amounts of associated data.
+Any kind of data can be put inside an enum variant: strings, numeric types, structs, other enums for example.
+Methods can be defined on enums using `impl`.
 
 ```rust
-// return value is last 
-fn abs(x: f64) -> f64 {
-    if x > 0.0 {
-        x
-    } else {
-        -x
+enum IpAddrKind {
+    V4,
+    V6,
+}
+
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6(String),
+}
+
+impl IpAddr {
+    fn call(&self) {
+        // method body would be defined here
     }
 }
+
+let ip = IpAddr::V6(String::from("::1"));
+ip.call();
 ```
 
-### Closure
-
-Uses bar instead of parentheses
-
-```typescript
-(x) => {
-  return x;
-};
-
-(x) => x + 1;
-```
+`Option<T>` is an example of an enum.
+The Option type encodes the common scenario in which a value could be something or it could be nothing.
 
 ```rust
-|x| {
-    return x;
-}
-
-|x| x + 1
-```
-
-### Class
-
-In rust the behaviour and the data are defined in seperate block: a struct and an implementation.
-
-### Struct
-
-Structs hold properties.
-A struct is a property layout, and define exactly what is going to be on that item.
-They are blueprints.
-It has a defined size, that has a certain amount of bytes associated with it.
-
-```rust
-fn main() {
-    struct Vector {
-        x: usize,
-        y: usize,
-        z: usize
-    }
-
-    let point = Vector {
-        x: 1,
-        y: 2,
-        z: 3,
-    };
-    
-    let Vector { x, y, z } = point;
-
-    println!("{}, {}, {}", x, y, z)
+enum Option<T> {
+    None,
+    Some(T),
 }
 ```
 
-```rust
-impl Foo {
-    // these are both static methods
-    fn this() // available usage within the file
-    pub fn this() // available usage within the file
+The `Option<T>` enum is still just a regular enum, and `Some(T)` and` Non`e are still variants of type `Option<T>`.
+The compiler won’t let us use an `Option<T>` value as if it were definitely a valid value.
 
-    // you should be able to understand this before the end
-    // of the day..
-    //
-    // and all of this can add pub
-    // these are instance methods
-    fn this(&self)...
-    fn this(&mut self)...
-
-    // public instance methods
-    pub fn this(self)...
-}
-```
-
-### Trait (interface)
-
-A trait is effectively an interface.
-A trait is an implementation of a method on that struct.
-It allows for composing.
+"In order to have a value that can possibly be null, you must explicitly opt in by making the type of that value Option<T>. Then, when you use that value, you are required to explicitly handle the case when the value is null. Everywhere that a value has a type that isn’t an Option<T>, you can safely assume that the value isn’t null. This was a deliberate design decision for Rust to limit null’s pervasiveness and increase the safety of Rust code."
 
 ## Control flow
 
@@ -232,30 +189,10 @@ if x == 10 {
 }
 ```
 
-### Range
-
-```rust
-// Exclusive range: up to and not including 10
-for i in 0..10 {
-    println!("Ring! Call number {}", i + 1);
-}
-
-// Inclusive range: up to and including 10
-for i in 0..=10 {
-    println!("Ring! Call number {}", i + 1);
-}
-```
-
-### While
-
-```rust
-while true { }
-```
-
 ### Matching
 
-Like a switch statement, I think.
-But you can do more, like matching on Some or None, and ranges, instead of just values.
+The match expression is a control flow construct that, when used with enums, will run different code depending on which variant of the enum it has.
+It can match on Some or None, and ranges, as well as plain values.
 
 ## Misc.
 
