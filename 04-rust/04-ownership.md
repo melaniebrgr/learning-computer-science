@@ -35,6 +35,10 @@ Deallocating resources at the end of an item’s lifetime is called Resource Acq
 
 ## Move
 
+Assignment of a non-Copy value moves the value from one location to another. Otherwise, Rust would be forced to implicitly do a copy and break its promise to make allocations explicit.
+So, the rule of thumb is to prefer to keep references to the original data - to 'borrow' it.
+But a reference must not outlive the owner!
+
 When a variable allocated to the heap is reassigned to a new variable, first variable is invalidated.
 This is therefore a "move" instead of a shallow copy where the first variable is still valid.
 Passing a variable to a function, without explicitly returning it, will also move or copy, just as assignment does.

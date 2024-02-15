@@ -43,17 +43,22 @@ cargo run ... # compiles and runs executable
 
 ## Variables
 
-There are two types of variables, immutable and mutable.
-Variables are declared with `let`, e.g. `let foo = 5;` and are immutable by default.
-Mutable variables are declared by adding `mut`, e.g. `let mut foo = 5;`.
-Immutable variables can also be declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`
-Variables declared with `const` can't be used with `mut` and must be type annotated.
-By convention, `const` variable names are all uppercase and snakecase.
+The `let` or `const` keyword is necessary to create a new variable binding.
+Immutable variables are declared with `let`, e.g. `let foo = 5;`.
+That is, the "regular" keyword for variable binding makes the value immutable by default.
+trying to assign a new value to foo will result in a compiler error.
 
-In rust variables can be shadowed, where second variable with the same name "overshadows" the first.
+Immutable variables can also be declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`
+Mutable variables are declared by including `mut`, e.g. `let mut foo = 5;`.
+Variables declared with `const` can't be used with `mut` and must be type annotated.
+By convention, `const` variable names are all upper, snakecase.
+Using or capturing an uninitialized variable is not allowed.
+This saves us from trying the use a variable that effectively doesn't exist.
+
+Variables can be shadowed, meaning a second variable with the same name "overshadows" the first.
 The second declaration takes any use of the variable name to itself.
-The shadowed variable can still be immutable.
-Types can be changed with shadowing.
+The shadowed and shadowing variable can be immutable.
+Types can change with shadowing.
 
 ```rust: shadowing
     let file = get_file(args); // Filehandle
@@ -66,14 +71,17 @@ Types can be changed with shadowing.
 Every value in rust has a type.
 All variables types must be known at compile time.
 Types can often be infered, but there are times must be specified:
-- When declaring with `const`
+- when declaring with `const`
 - function arguments
-- when many types are possible, else the compiler will error "type annotations needed".
+- when many types are possible
+
+When the compiler cannot infer the type, it will ask with the error "type annotations needed".
+Often the compiler can infer the type from the assigned value.
 
 There are two subsets of data types: scalar and compound.
 A scalar type represents a single value, whereas compound types group multiple values into one type.
-The four primary scalar types: integers, floating-point numbers, Booleans, and characters.
-The two compound types: tuples and arrays.
+The four primary scalar types: integer, floating-point number, Boolean, and character.
+The two compound types: tuple and array.
 
 ### Numbers
 
@@ -112,6 +120,8 @@ fn main() {
 ### Tuple
 
 A tuple is a way of grouping together values of different types into one compound type.
+Unlike arrays, tuples can contain multiple different types.
+They can be a useful way to return multiple values from a function.
 Tuples have a fixed length and once declared, they cannot grow or shrink in size.
 Tuples can be accessed by destructuring or using a period (`.`) notation.
 Start at 0 when accessing by dot notation.
@@ -126,63 +136,117 @@ let five_hundred = tup.0;
 ### Struct
 
 Data and behaviour are defined in seperate blocks in Rust.
-A struct(ure) defines data, and an impl(ementation) defines behaviour.
-Structs hold properties, they are effectively blueprints.
-That is, a struct is a property layout, and define exactly what is going to be on that item.
+A struct(ure) specifies the data shape and size, and an impl(ementation) defines behaviour.
+Rust structs contain named fields that hold properties.
+A struct is a property layout, essentially a blueprint, that defines exactly what is going to be on that item.
 It has a defined size and will have certain amount of bytes associated with it.
+The values of a struct will be placed next to each other in memory.
 
 ```rust
-struct Vector {
-    x: usize,
-    y: usize,
-    z: usize
+struct Person {
+    first_name: String,
+    last_name: String
 }
 
-let point = Vector {
-    x: 1,
-    y: 2,
-    z: 3,
+let p = Person {
+    first_name: "John".to_string(),
+    last_name: "Smith".to_string()
 };
 
-let Vector { x, y, z } = point;
+println!("person {} {}", p.first_name,p.last_name);
+```
 
-println!("{}, {}, {}", x, y, z)
+The `#[derive(Debug)]` directive can be used to debug structs.
+
+```rust
+#[derive(Debug)]
+struct Person {
+    first_name: String,
+    last_name: String
+}
 ```
 
 ### Impl
 
+Implementations are the associated function of a struct.
+An `impl` can use a reference self argument, i.e. `&self` is short for `self: &Person`.
+
 ```rust
-impl Foo {
-    // these are static methods
-    fn this() // available usage within the file
-    pub fn this() // available usage within the file
-
-    // these are instance methods
-    fn this(&self)...
-    fn this(&mut self)...
-
-    // public instance methods
-    pub fn this(self)...
+impl Person {
+    fn new(first: &str, name: &str) -> Person {
+        Person {
+            first_name: first.to_string(),
+            last_name: name.to_string()
+        }
+    }
+    fn full_name(&self) -> String {
+        format!("{} {}", self.first_name, self.last_name)
+    }
 }
+
+let p = Person::new("John","Smith");
+println!("fullname {}", p.full_name()); // fullname John Smith
 ```
+
+To summarize:
+
+- no `self` argument: you can associate functions with structs, like the new "constructor".
+- `&self` argument: can use the values of the struct, but not change them
+- `&mut self` argument: can modify the values
+- `self` argument: will consume the value, which will move.
 
 ### Enum
 
-Enums are a way of saying a value is one of a possible set of values.
-After creating an enumeration, it is now a custom data type that be used elsewhere in the code.
-The name of each enum variant that we define also becomes a function that constructs an instance of the enum.
-That is, IpAddr::V4() is a function call that takes a String argument and returns an instance of the IpAddr type. We automatically get this constructor function defined as a result of defining the enum.
-each variant can have different types and amounts of associated data.
-Any kind of data can be put inside an enum variant: strings, numeric types, structs, other enums for example.
-Methods can be defined on enums using `impl`.
-That is you can hang methods off yenums using impls.
+Enums are a way of saying a value is one of a definite set of possible values.
+For example direction has only four values: up, down, left, right.
+An enum becomes a custom data type to be used elsewhere in the code.
+An instance of one of the four direction variants can be created using the same identifier, and conseqently they have the same type.
 
 ```rust
-enum IpAddrKind {
-    V4,
-    V6,
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
 }
+// `start` is type `Direction`
+let start = Direction::Left;
+```
 
+Like `structs`, behaviour can be defined for an `enum` with an `impl`.
+
+```rust
+impl Direction {
+    fn as_str(&self) -> &'static str {
+        match *self { // *self has type Direction
+            Direction::Up => "Up",
+            Direction::Down => "Down",
+            Direction::Left => "Left",
+            Direction::Right => "Right"
+        }
+    }
+}
+```
+
+An enum can also be used to consicely represent not only the type kind but the value too.
+Put another way, each enum variant can become a function that constructs an enum instance.
+
+```rust
+    enum IpAddr {
+        V4(String),
+        V6(String),
+    }
+
+    let home = IpAddr::V4(String::from("127.0.0.1"));
+
+    let loopback = IpAddr::V6(String::from("::1"));
+```
+
+We automatically get this constructor function defined as a result of defining the enum.
+Any kind of data can be put inside an enum variant, e.g. strings, numeric types, structs, and other enums.
+Each variant can have different types and amounts of associated data.
+
+```rust
 enum IpAddr {
     V4(String),
     V6(String),
@@ -193,30 +257,11 @@ enum IpAddr {
     V6(String),
 }
 
-impl IpAddr {
-    fn call(&self) {
-        // method body would be defined here
-    }
-}
-
 let ip = IpAddr::V6(String::from("::1"));
-ip.call();
 ```
 
-`Option<T>` is an example of an enum.
-The Option type encodes the common scenario in which a value could be something or it could be nothing.
-
-```rust
-enum Option<T> {
-    None,
-    Some(T),
-}
-```
-
-The `Option<T>` enum is still just a regular enum, and `Some(T)` and` Non`e are still variants of type `Option<T>`.
-The compiler won’t let us use an `Option<T>` value as if it were definitely a valid value.
-
-"In order to have a value that can possibly be null, you must explicitly opt in by making the type of that value Option<T>. Then, when you use that value, you are required to explicitly handle the case when the value is null. Everywhere that a value has a type that isn’t an Option<T>, you can safely assume that the value isn’t null. This was a deliberate design decision for Rust to limit null’s pervasiveness and increase the safety of Rust code."
+Fun fact: `Option<T>` is an example of an enum.
+The Option type encodes the common scenario in which a value could be something or nothing.
 
 ## Control flow
 
@@ -235,8 +280,10 @@ if x == 10 {
 
 ### Matching
 
-The match expression is a control flow construct that, when used with enums, will run different code depending on which variant of the enum it has.
-It can match on Some or None, and ranges, as well as plain values.
+Rust has an extremely powerful control flow construct called match.
+It will execute code against a matching pattern.
+When used with enums, the match expression runs different code depending on which variant of the enum it has.
+Matches can match on enums (like Options), ranges, and plain values.
 
 ## Misc.
 

@@ -3,6 +3,21 @@
 - [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
     - [x] Basics
     - [ ] Structs, Enums and Matching
+        - [x] Rust likes to Move It, Move It
+        - [x] Scope of Variables
+        - [x] Tuples
+        - [x] Structs
+        - [ ] Lifetimes Start to Bite
+        - [ ] Traits
+        - [ ] Example: iterator over floating-point range
+        - [ ] Generic Functions
+        - [ ] Simple Enums
+        - [ ] Enums in their Full Glory
+        - [ ] More about Matching
+        - [ ] Closures
+        - [ ] The Three Kinds of Iterators
+        - [ ] Structs with Dynamic Data
+        - [ ] Generic Structs
     - [ ] Filesystem and Processes
     - [ ] Modules and Cargo
     - [ ] Standard Library Containers
@@ -12,7 +27,10 @@
     - [ ] Parsing with Nom
     - [ ] Pain Points
 - [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
-    - [ ] Hello World
+    - [ ] 1. Hello World
+        - [ ] 1.1. Comments
+        - [ ] 1.2. Formatted print
+    - [ ] 2. Primitives
 - [The Rust Programming Language](https://doc.rust-lang.org/)
     - [x] 1. Getting Started
         - [x] 1.1. Installation
@@ -50,6 +68,29 @@
     - [ ] 20. Final Project: Building a Multithreaded Web Server
     - [ ] 21. Appendix
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
+    - [x] variables      
+    - [ ] functions      
+    - [ ] if             
+    - [ ] primitive types
+    - [ ] vecs           
+    - [ ] move semantics 
+    - [ ] structs
+    - [ ] enums     
+    - [ ] strings        
+    - [ ] modules        
+    - [ ] hashmaps
+    - [ ] options        
+    - [ ] error handling 
+    - [ ] generics       
+    - [ ] traits         
+    - [ ] tests          
+    - [ ] lifetimes      
+    - [ ] iterators      
+    - [ ] threads        
+    - [ ] smart pointers 
+    - [ ] macros         
+    - [ ] clippy         
+    - [ ] conversions    
 - [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
     - [x] Basics
         - [x] Rust Basics
@@ -64,7 +105,7 @@
         - [x] Iterating Through a Text File
         - [x] Iterator Memory Usage
         - [x] Enums in TypeScript vs Rust
-        - [ ] Enums & Subtypes
+        - [x] Enums & Subtypes
         - [ ] Options in TypeScript vs Rust
         - [ ] Options in Rust
         - [ ] Options Exercise
