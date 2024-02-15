@@ -1,12 +1,12 @@
 ### Function
 
 Are defined with the keyword `fn`.
-Functions are one place where the compiler will not work out types with type inference: inputs and outputs must be typed.
-The body of the function has the value of its last expression, just like with if-as-an-expression.
+The body of the function has the value of its last expression.
 Returns are generally only used for returning early from a function.
+Function inputs and outputs _must be_ typed.
+(Functions are one place where the compiler will not infer the type.)
 
 ```rust
-// return value is last 
 fn abs(x: f64) -> f64 {
     if x > 0.0 {
         x
@@ -14,6 +14,7 @@ fn abs(x: f64) -> f64 {
         -x
     }
 }
+// Last value is return value, e.g. abs(-1.0) -> 1.0
 ```
 
 ### Closure
