@@ -47,9 +47,26 @@ fn print_color(color: Color) {
     }
 }
 
+struct Custom {
+    age: usize,
+    name: String,
+}
+
+enum Item {
+    Number(usize),
+    String(String),
+    MyCustom(Custom),
+}
+
+fn append(items: &mut Vec<Item>) {
+    items.push(Item::String("hello, Fem".into()));
+}
+
 fn main() {
     // log_lines();
-    print_color(Color::Red);
-    print_color(Color::Green);
-    print_color(Color::Blue);
+    // print_color(Color::Red);
+    // print_color(Color::Green);
+    // print_color(Color::Blue);
+    let mut items: Vec<Item> = vec![];
+    append(&mut items);
 }
