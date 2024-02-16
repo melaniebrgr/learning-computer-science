@@ -69,7 +69,7 @@
     - [ ] 21. Appendix
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
     - [x] variables      
-    - [ ] functions      
+    - [x] functions      
     - [ ] if             
     - [ ] primitive types
     - [ ] vecs           
@@ -106,7 +106,7 @@
         - [x] Iterator Memory Usage
         - [x] Enums in TypeScript vs Rust
         - [x] Enums & Subtypes
-        - [ ] Options in TypeScript vs Rust
+        - [x] Options in TypeScript vs Rust
         - [ ] Options in Rust
         - [ ] Options Exercise
         - [ ] Error Handling

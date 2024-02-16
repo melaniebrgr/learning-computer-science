@@ -278,28 +278,6 @@ let ip = IpAddr::V6(String::from("::1"));
 Fun fact: `Option<T>` is an example of an enum.
 The Option type encodes the common scenario in which a value could be something or nothing.
 
-## Control flow
-
-### if-else
-
-Same as JavaScript, just drop the parentheses.
-
-```rust
-let x = 10;
-if x == 10 {
-    println!("x is ten!");
-} else {
-    println!("x is not ten!");
-}
-```
-
-### Matching
-
-Rust has an extremely powerful control flow construct called match.
-It will execute code against a matching pattern.
-When used with enums, the match expression runs different code depending on which variant of the enum it has.
-Matches can match on enums (like Options), ranges, and plain values.
-
 ## Misc.
 
 - `::` means much the same as does '.' in other languages - it is a fully qualified name and means "using", e.g. `std::env::args`
