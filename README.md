@@ -2,10 +2,10 @@
 
 ## Topics
 
-1. [Programming](./01-programming/summary.md)
-2. [Operating systems](./02-operating-systems/summary.md)
-3. [Web Assembly](./03-web-assembly/01-introduction.md)
-4. [Rust](./04-rust/01-introduction.md)
+1. [Programming](./01-programming/)
+2. [Operating systems](./02-operating-systems/)
+3. [Web Assembly](./03-web-assembly/)
+4. [Rust](./04-rust/)
 
 ### Learning path materials
 
