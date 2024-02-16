@@ -107,7 +107,7 @@
         - [x] Enums in TypeScript vs Rust
         - [x] Enums & Subtypes
         - [x] Options in TypeScript vs Rust
-        - [ ] Options in Rust
+        - [x] Options in Rust
         - [ ] Options Exercise
         - [ ] Error Handling
         - [ ] Results & Error Handling Exercise

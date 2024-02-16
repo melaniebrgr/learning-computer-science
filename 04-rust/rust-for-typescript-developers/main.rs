@@ -62,11 +62,24 @@ fn append(items: &mut Vec<Item>) {
     items.push(Item::String("hello, Fem".into()));
 }
 
+fn take_some_num(n: Option<usize>) -> Option<usize> {
+    // return n.unwrap_or(0) * 5;
+    // return n.map(|x| x * 5);
+    Some(n? * 5)
+}
+
 fn main() {
+    // # Iterators
     // log_lines();
+
+    // # Enums
     // print_color(Color::Red);
     // print_color(Color::Green);
     // print_color(Color::Blue);
-    let mut items: Vec<Item> = vec![];
-    append(&mut items);
+    // let mut items: Vec<Item> = vec![];
+    // append(&mut items);
+
+    // # Options
+    let value = take_some_num(Some(5));
+    println!("{:?}", value);
 }
