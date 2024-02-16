@@ -70,7 +70,7 @@
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
     - [x] variables      
     - [x] functions      
-    - [ ] if             
+    - [x] if             
     - [ ] primitive types
     - [ ] vecs           
     - [ ] move semantics 
