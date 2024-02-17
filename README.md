@@ -2,8 +2,8 @@
 
 ## Topics
 
-1. [Programming](./01-programming/)
-2. [Operating systems](./02-operating-systems/)
+1. [Computers](./01-computers/)
+2. [Programming](./02-programming/)
 3. [Web Assembly](./03-web-assembly/)
 4. [Rust](./04-rust/)
 
