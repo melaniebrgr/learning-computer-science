@@ -13,10 +13,15 @@ The downsides of garbage collection are that it is wasteful of memory, which mat
 
 ## Running a program
 
-The `rustup` tool is used to install rust, and periodically update it via `rustup update`.
-Rust is an ahead-of-time compiled language, meaning you can compile a program and give the executable to someone else.
-To run a program written in Rust it first needs to be compiled.
-Rust ships with a compiler `rustc` that compiles rust files to binary executables.
+The `rustup` tool installs rust and manages the rust toolchain.
+Installing rustup will give you out of the box the latest stable compiler with your host platform as a target.
+`rustup update` updates the rust toolchain, which is recommended to do periodically.
+A new version of the compiler is released on the stable channel every six weeks, for example.
+Rust is an ahead-of-time compiled language. A program gets compiled before it can executed or be given to someone else to execute.
+Rust ships with a compiler `rustc`.
+The main purpose of the Rust compiler is to convert Rust code into machine code a.k.a binary executables, which is a set of instructions that CPUs and operating systems can understand and execute.
+The Rust project strives to support a broad range of compilation targets with various level of guarantees.
+Targets are split into tiers, from “guaranteed-to-work” Tier 1 to “best-effort” Tier 3.
 
 ```bash
 rustc main.rs # compile

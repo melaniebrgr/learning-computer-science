@@ -117,7 +117,7 @@
     - [ ] Wrapping Up
 - [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)
     - [ ] 1.0 Getting started
-        - [ ] 1.1 Installing the rust toolchain
+        - [x] 1.1 Installing the rust toolchain
         - [ ] 1.2 Project setup
         - [ ] 1.3 IDEs
         - [ ] Inner development loop

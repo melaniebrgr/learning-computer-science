@@ -51,4 +51,5 @@ What is a cloud-native applications? This is what we expect them to do:
 • To achieve high-availability while running in fault-prone environments;
 • To allow us to continuously release new versions with zero downtime;
 • To handle dynamic workloads (e.g. request volumes).
-"These requirements have a deep impact on the viable solution space for the architecture of our software."
+
+"These requirements have a deep impact on the viable solution space for the architecture of our software." The cloud, is by nature a fault prone environment, so to achieve high availability multiple instances of the application need to be running on multiple machines. To handle dynamic workloads the application needs to be able to scale up to meet demand, then scale back down to minimise costs. This then means we cannot hold state on the application servers. Databases need to be used for persistence.
