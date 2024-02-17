@@ -1,6 +1,6 @@
 # Materials
 
-- [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
+- [ ] [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
     - [x] Basics
     - [ ] Structs, Enums and Matching
         - [x] Rust likes to Move It, Move It
@@ -26,12 +26,12 @@
     - [ ] Object-Oriented Programming
     - [ ] Parsing with Nom
     - [ ] Pain Points
-- [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+- [ ] [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
     - [ ] 1. Hello World
         - [ ] 1.1. Comments
         - [ ] 1.2. Formatted print
     - [ ] 2. Primitives
-- [The Rust Programming Language](https://doc.rust-lang.org/)
+- [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
     - [x] 1. Getting Started
         - [x] 1.1. Installation
         - [x] 1.2. Hello, World!
@@ -115,4 +115,9 @@
     - [ ] Borrow Checker
     - [ ] Traits
     - [ ] Wrapping Up
-        
+- [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)
+    - [ ] 1.0 Getting started
+        - [ ] 1.1 Installing the rust toolchain
+        - [ ] 1.2 Project setup
+        - [ ] 1.3 IDEs
+        - [ ] Inner development loop
