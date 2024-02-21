@@ -121,3 +121,4 @@
         - [ ] 1.2 Project setup
         - [ ] 1.3 IDEs
         - [ ] Inner development loop
+- [ ] [Learn X in Y minutes](https://learnxinyminutes.com/)

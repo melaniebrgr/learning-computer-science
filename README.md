@@ -15,4 +15,5 @@
 - https://github.com/shiv4nsh/awesome-computer-science-resources
 - https://github.com/quabanc/awesome-computer-science
 - https://thecrashcourse.com/topic/computerscience
+- https://github.com/charlax/professional-programming
 

@@ -1,6 +1,12 @@
 # Introduction
 
-Rust is a statically typed, curly-braces language with semicolons, C++ style comments and a main function.
+Rust is a programming language developed by Mozilla Research.
+It was first released in 2012.
+Rust offers safety guarantees and low-level control over performance with high-level language ergonomics and without having a garbage collector or runtime.
+Rust is a compiled language, that is rust programs are compiled to binary executables that run natively on machines.
+JavaScript by contrast
+
+Rust is a statically typed, curly-braces language with semicolons, and a main function.
 (Static types are when types known at compile time, while dynamic types are only known at run time.)
 Rust is strongly typed in order to make it harder to write incorrect programs.
 
@@ -211,7 +217,7 @@ let p = Person::new("John","Smith");
 println!("fullname {}", p.full_name()); // fullname John Smith
 ```
 
-To summarize:
+To summarize
 
 - no `self` argument: you can associate functions with structs, like the new "constructor".
 - `&self` argument: can use the values of the struct, but not change them
@@ -286,10 +292,25 @@ let ip = IpAddr::V6(String::from("::1"));
 Fun fact: `Option<T>` is an example of an enum.
 The Option type encodes the common scenario in which a value could be something or nothing.
 
-## Misc.
+## Comments
 
-- `::` means much the same as does '.' in other languages - it is a fully qualified name and means "using", e.g. `std::env::args`
-- An exclamation mark indicate a macro call. A useful macro is `assert_eq!` that asserts that two things must be equal or panic. Another is `format!` for building up strings.
-- If you are iterating on code and what to thell the compile to ignore the missing pieces, you can add a `todo!("describe")`.
-- Use unreachable as a runtime assertion that a logic branch should never be reached, `unreachable!("how to tell the compiler that this should never happen")`.
-- Use `unwrap` to grab the inner value of an option.
+**Comments for humans**
+
+```rust
+// This is a comment. Line comments look like this...
+// and extend multiple lines like this.
+
+/* Block comments
+  /* can be nested. */ */
+
+/// Documentation comments look like this and support markdown notation.
+/// # Examples
+///
+/// ```
+/// let five = 5
+/// ```
+```
+
+**Comments for the machine**
+When working on the code, to the compiler to ignore unfinished parts, a `todo!("describe")` can be added.
+For a logic branch can never be reached, and unreachable runtime assertion, a `unreachable!("how to tell the compiler that this should never happen")` can be added.
