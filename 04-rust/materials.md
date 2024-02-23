@@ -1,124 +1,124 @@
 # Materials
 
 - [ ] [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
-    - [x] Basics
-    - [ ] Structs, Enums and Matching
-        - [x] Rust likes to Move It, Move It
-        - [x] Scope of Variables
-        - [x] Tuples
-        - [x] Structs
-        - [ ] Lifetimes Start to Bite
-        - [ ] Traits
-        - [ ] Example: iterator over floating-point range
-        - [ ] Generic Functions
-        - [ ] Simple Enums
-        - [ ] Enums in their Full Glory
-        - [ ] More about Matching
-        - [ ] Closures
-        - [ ] The Three Kinds of Iterators
-        - [ ] Structs with Dynamic Data
-        - [ ] Generic Structs
-    - [ ] Filesystem and Processes
-    - [ ] Modules and Cargo
-    - [ ] Standard Library Containers
-    - [ ] Error Handling
-    - [ ] Threads, Networking and Sharing
-    - [ ] Object-Oriented Programming
-    - [ ] Parsing with Nom
-    - [ ] Pain Points
-- [ ] [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
-    - [ ] 1. Hello World
-        - [ ] 1.1. Comments
-        - [ ] 1.2. Formatted print
-    - [ ] 2. Primitives
-- [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
-    - [x] 1. Getting Started
-        - [x] 1.1. Installation
-        - [x] 1.2. Hello, World!
-        - [x] 1.3. Hello, Cargo!
-    - [ ] 2. Programming a guessing game
-    - [ ] 3. Common Programming Concepts
-        - [x] 3.1 Variables and Mutability
-        - [x] 3.2 Data Types
-        - [ ] 3.3. Functions
-        - [ ] 3.4. Comments
-        - [ ] 3.5. Control Flow
-    - [ ] 4. Understanding ownership
-        - [ ] 4.1 What is Ownership
-        - [ ] 4.2 References and Borrowing
-        - [ ] 4.3 The Slice Type
-    - [ ] 5. Using Structs to Structure Related Data
-    - [ ] 6. Enums and Pattern Matching
-        - [x] 6.1. Defining an Enum
-        - [ ] 6.2. The match Control Flow Construct
-        - [ ] 6.3. Concise Control Flow with if let
-    - [ ] 7. Managing Growing Projects with Packages, Crates, and Modules
-    - [ ] 8. Common Collections
-    - [ ] 9. Error Handling
-    - [ ] 10. Generic Types, Traits, and Lifetimes
-    - [ ] 11. Writing Automated Tests
-    - [ ] 12. An I/O Project: Building a Command Line Program
-    - [ ] 13. Functional Language Features: Iterators and Closures
-    - [ ] 14. More about Cargo and Crates.io
-    - [ ] 15. Smart Pointers
-    - [ ] 16. Fearless Concurrency
-    - [ ] 17. Object Oriented Programming Features of Rust
-    - [ ] 18. Patterns and Matching
-    - [ ] 19. Advanced Features
-    - [ ] 20. Final Project: Building a Multithreaded Web Server
-    - [ ] 21. Appendix
-- [ ] [Rustlings](https://github.com/rust-lang/rustlings)
-    - [x] variables      
-    - [x] functions      
-    - [x] if             
-    - [ ] primitive types
-    - [ ] vecs           
-    - [ ] move semantics 
-    - [ ] structs
-    - [ ] enums     
-    - [ ] strings        
-    - [ ] modules        
-    - [ ] hashmaps
-    - [ ] options        
-    - [ ] error handling 
-    - [ ] generics       
-    - [ ] traits         
-    - [ ] tests          
-    - [ ] lifetimes      
-    - [ ] iterators      
-    - [ ] threads        
-    - [ ] smart pointers 
-    - [ ] macros         
-    - [ ] clippy         
-    - [ ] conversions    
-- [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
-    - [x] Basics
-        - [x] Rust Basics
-        - [x] Numbers & Strings
-        - [x] Vector, Tuple, & Struct
-        - [x] todo, unreachable, & unwrap
-    - [ ] Coding Rust
-        - [x] Install Rust
-        - [x] Value, Mutable, Immutable
-        - [x] Coding an Iterator
-        - [x] Understanding Collect
-        - [x] Iterating Through a Text File
-        - [x] Iterator Memory Usage
-        - [x] Enums in TypeScript vs Rust
-        - [x] Enums & Subtypes
-        - [x] Options in TypeScript vs Rust
-        - [x] Options in Rust
-        - [ ] Options Exercise
-        - [ ] Error Handling
-        - [ ] Results & Error Handling Exercise
-        - [ ] Q&A
-    - [ ] Borrow Checker
+  - [x] Basics
+  - [ ] Structs, Enums and Matching
+    - [x] Rust likes to Move It, Move It
+    - [x] Scope of Variables
+    - [x] Tuples
+    - [x] Structs
+    - [ ] Lifetimes Start to Bite
     - [ ] Traits
-    - [ ] Wrapping Up
+    - [ ] Example: iterator over floating-point range
+    - [ ] Generic Functions
+    - [ ] Simple Enums
+    - [ ] Enums in their Full Glory
+    - [ ] More about Matching
+    - [ ] Closures
+    - [ ] The Three Kinds of Iterators
+    - [ ] Structs with Dynamic Data
+    - [ ] Generic Structs
+  - [ ] Filesystem and Processes
+  - [ ] Modules and Cargo
+  - [ ] Standard Library Containers
+  - [ ] Error Handling
+  - [ ] Threads, Networking and Sharing
+  - [ ] Object-Oriented Programming
+  - [ ] Parsing with Nom
+  - [ ] Pain Points
+- [ ] [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+  - [ ] 1. Hello World
+    - [ ] 1.1. Comments
+    - [ ] 1.2. Formatted print
+  - [ ] 2. Primitives
+- [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
+  - [x] 1. Getting Started
+    - [x] 1.1. Installation
+    - [x] 1.2. Hello, World!
+    - [x] 1.3. Hello, Cargo!
+  - [ ] 2. Programming a guessing game
+  - [ ] 3. Common Programming Concepts
+    - [x] 3.1 Variables and Mutability
+    - [x] 3.2 Data Types
+    - [ ] 3.3. Functions
+    - [ ] 3.4. Comments
+    - [ ] 3.5. Control Flow
+  - [ ] 4. Understanding ownership
+    - [ ] 4.1 What is Ownership
+    - [ ] 4.2 References and Borrowing
+    - [ ] 4.3 The Slice Type
+  - [ ] 5. Using Structs to Structure Related Data
+  - [ ] 6. Enums and Pattern Matching
+    - [x] 6.1. Defining an Enum
+    - [ ] 6.2. The match Control Flow Construct
+    - [ ] 6.3. Concise Control Flow with if let
+  - [ ] 7. Managing Growing Projects with Packages, Crates, and Modules
+  - [ ] 8. Common Collections
+  - [ ] 9. Error Handling
+  - [ ] 10. Generic Types, Traits, and Lifetimes
+  - [ ] 11. Writing Automated Tests
+  - [ ] 12. An I/O Project: Building a Command Line Program
+  - [ ] 13. Functional Language Features: Iterators and Closures
+  - [ ] 14. More about Cargo and Crates.io
+  - [ ] 15. Smart Pointers
+  - [ ] 16. Fearless Concurrency
+  - [ ] 17. Object Oriented Programming Features of Rust
+  - [ ] 18. Patterns and Matching
+  - [ ] 19. Advanced Features
+  - [ ] 20. Final Project: Building a Multithreaded Web Server
+  - [ ] 21. Appendix
+- [ ] [Rustlings](https://github.com/rust-lang/rustlings)
+  - [x] variables
+  - [x] functions
+  - [x] if
+  - [ ] primitive types
+  - [ ] vecs
+  - [ ] move semantics
+  - [ ] structs
+  - [ ] enums
+  - [ ] strings
+  - [ ] modules
+  - [ ] hashmaps
+  - [ ] options
+  - [ ] error handling
+  - [ ] generics
+  - [ ] traits
+  - [ ] tests
+  - [ ] lifetimes
+  - [ ] iterators
+  - [ ] threads
+  - [ ] smart pointers
+  - [ ] macros
+  - [ ] clippy
+  - [ ] conversions
+- [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
+  - [x] Basics
+    - [x] Rust Basics
+    - [x] Numbers & Strings
+    - [x] Vector, Tuple, & Struct
+    - [x] todo, unreachable, & unwrap
+  - [ ] Coding Rust
+    - [x] Install Rust
+    - [x] Value, Mutable, Immutable
+    - [x] Coding an Iterator
+    - [x] Understanding Collect
+    - [x] Iterating Through a Text File
+    - [x] Iterator Memory Usage
+    - [x] Enums in TypeScript vs Rust
+    - [x] Enums & Subtypes
+    - [x] Options in TypeScript vs Rust
+    - [x] Options in Rust
+    - [ ] Options Exercise
+    - [ ] Error Handling
+    - [ ] Results & Error Handling Exercise
+    - [ ] Q&A
+  - [ ] Borrow Checker
+  - [ ] Traits
+  - [ ] Wrapping Up
 - [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)
-    - [ ] 1.0 Getting started
-        - [x] 1.1 Installing the rust toolchain
-        - [ ] 1.2 Project setup
-        - [ ] 1.3 IDEs
-        - [ ] Inner development loop
+  - [ ] 1.0 Getting started
+    - [x] 1.1 Installing the rust toolchain
+    - [ ] 1.2 Project setup
+    - [ ] 1.3 IDEs
+    - [ ] Inner development loop
 - [ ] [Learn X in Y minutes](https://learnxinyminutes.com/)
