@@ -6,7 +6,9 @@ Architecture is traditional understood as
 
 The conceptual structure is distinct from the physical implementation, controls, and logic design.
 
-How are hardware components designed? How are they chosen? How are the interfaces between hardware components designed? How are these choices influenced by functional, performance, energy, longevity, and cost goals? The is concern of computer architecture.
+How are hardware components designed? How are they chosen? How are the interfaces between hardware components designed? How are these choices influenced by functional, performance, energy, longevity, and cost goals? These are the concerns of computer architecture.
+
+What is a computer? There are three core components: computation, data that gets computed (storage or memory), and communication between them. Memory can be divided into a memory system "working memory" that will contain the data needed by running programs, and a more persistent storage system.
 
 In a simple multi-core computer system, sharing of resources can lead to unfairness. One application may be prioritised over another by the dynamic random access memory (DRAM) controller causing another application to be resource starved. The unfair policy might slow down some applications much more significantly than others.
 
