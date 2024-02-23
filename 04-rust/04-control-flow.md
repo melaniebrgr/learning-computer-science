@@ -1,6 +1,6 @@
 # Control flow
 
-## if-else
+## if/else
 
 Same as JavaScript, just drop the parentheses.
 Every arm of an `if` expression has to return the same type of value.
@@ -13,6 +13,14 @@ if x == 10 {
 } else {
     println!("x is not ten!");
 }
+```
+
+## ternary
+
+Kinda? Just use if/else
+
+```rust
+if condition { true_branch } else { false_branch }
 ```
 
 ## Matching

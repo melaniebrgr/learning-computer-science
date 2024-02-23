@@ -294,7 +294,7 @@ The Option type encodes the common scenario in which a value could be something 
 
 ## Comments
 
-**Comments for humans**
+### Comments for humans
 
 ```rust
 // This is a comment. Line comments look like this...
@@ -311,6 +311,7 @@ The Option type encodes the common scenario in which a value could be something 
 /// ```
 ```
 
-**Comments for the machine**
+### Comments for the machine
+
 When working on the code, to the compiler to ignore unfinished parts, a `todo!("describe")` can be added.
 For a logic branch can never be reached, and unreachable runtime assertion, a `unreachable!("how to tell the compiler that this should never happen")` can be added.
