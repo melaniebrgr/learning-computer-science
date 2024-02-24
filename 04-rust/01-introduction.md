@@ -79,7 +79,17 @@ Types can change with shadowing.
 
 ## Expressions and statements
 
-Rust distinguishes between expressions and statements: expressions return a value based on their operand(s), and statements simply return a `()` type which behaves just like `void` in C/C++ language. For example, `num * num` is an expression while `return num * num;` is a statement.
+Rust distinguishes between expressions and statements.
+Expressions return a value based on their operand(s).
+Statements simply return a `()` type which behaves just like `void` in C/C++ language.
+For example, `num * num` is an expression while `return num * num;` is a statement.
+
+## Logging
+
+```rust
+println!("{} {}", string, num);
+println!("{:?} {:?}", vector, slice);
+```
 
 ## Comments
 
