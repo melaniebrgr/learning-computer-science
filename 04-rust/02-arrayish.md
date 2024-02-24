@@ -1,4 +1,12 @@
-### Arrays
+# Data structures
+
+1. Array
+2. Vector
+3. Iterator
+4. Slice
+5. Range
+
+## Array
 
 Arrays are values packed nose to tail in memory, so that they are efficient to access.
 Arrays are indexed from zero.
@@ -26,11 +34,12 @@ fn main() {
 Rust checks that any index lookup is within the range of the array at runtime and exits if not.
 In orther languages when you provide an incorrect index, invalid memory can be accessed.
 
-### Vector
+## Vector
 
 Vectors are re-sizeable arrays.
 They have a size and a capacity, meaning that if a vector is emptied, its size becomes zero, but it still retains its capacity.
 In Rust, there are two ways to define a Vector.
+
 1. One way is to use the `Vec::new()` function to create a new vector and fill it with the `push()` method.
 2. The second way, which is simpler is to use the `vec![]` macro and define your elements inside the square brackets.
 
@@ -83,7 +92,7 @@ for i in &mut v {
 }
 ```
 
-### Iterator
+## Iterator
 
 The general pattern for interators: data structure A -> iterator -> data structure B
 An iterator is _a seperate data structure_, it is not the thing itself.
@@ -108,7 +117,7 @@ Rust is performs "pull" operations while Javascript performs "push".
 Where rust will lazily iterate over an iterator while conditions are met, javascript will loop over an entire array regardless of whether it is still necessary or not.
 With iterators rust pulls the value through the list of operations one a time and filly collects them into something at the end.
 
-### Collection
+## Collection
 
 After iterating over a value you still have a iterator data structure.
 To get it into a(nother) usable shape it needs to be collected into that type.
@@ -154,7 +163,7 @@ fn main() {
 }
 ```
 
-### Slice
+## Slice
 
 Slices are views into an underlying array of values and are used more commonly than arrays.
 You have to explicitly say that you want to create a slice with the `&` operator.
@@ -178,7 +187,7 @@ Instead getting by index, use the slice method `get` which does not panic and re
 An Option is a box that may contain a value, or nothing (None).
 The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
 
-### Range
+## Range
 
 ```rust
 // Exclusive range: up to and not including 10

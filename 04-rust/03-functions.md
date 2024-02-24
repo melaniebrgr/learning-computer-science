@@ -1,4 +1,4 @@
-### Function
+# Function
 
 Are defined with the keyword `fn`.
 The body of the function has the value of its last expression.
@@ -17,7 +17,7 @@ fn abs(x: f64) -> f64 {
 // Last value is return value, e.g. abs(-1.0) -> 1.0
 ```
 
-### Closure
+## Closure
 
 Uses bar instead of parentheses
 
@@ -37,7 +37,7 @@ Uses bar instead of parentheses
 |x| x + 1
 ```
 
-### Trait (interface)
+## Trait (interface)
 
 A trait is effectively an interface.
 A trait is an implementation of a method on that struct.
