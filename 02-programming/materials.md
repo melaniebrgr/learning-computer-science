@@ -14,4 +14,4 @@
   - [ ] Arrays, Complex structures, lessons 20 - 25
   - [ ] Go toolkit, lessons 26 - 30
 - [ ] Structure and Interpretation of Computer Programs
-- [ ] 
+- [ ] [Professional Programming](https://github.com/charlax/professional-programming)

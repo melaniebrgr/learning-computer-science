@@ -1,10 +1,4 @@
-# Introduction
-
-- Operating Systems: Principles & Practice, 2ed, Thomas Anderson and Michael Dahlin
-- [Lectures on Operating Systems, IIT Bombay](https://www.cse.iitb.ac.in/~mythili/os/)
-- [Berkeley CS 162: Operating Systems](https://www.youtube.com/playlist?list=PLRdybCcWDFzCag9A0h1m9QYaujD0xefgM)
-
-## Operating systems
+# Operating systems
 
 Operating systems (OSs) are some of the largest and most complex codebases. Many of the core concepts for the development of OS can be applied to the development of other software. OSs manage a computer's resources, such as CPU, memory, disk and I/O devices like the mouse and keyboard and abstract them for use for users and their applications. There are different types of opperating systems depending on the design goals:
 
