@@ -91,7 +91,7 @@
   - [ ] macros
   - [ ] clippy
   - [ ] conversions
-- [ ] [Rust for TypeScript Devs](https://frontendmasters.com/courses/rust-ts-devs)
+- [ ] [Rust for TypeScript Developers](https://frontendmasters.com/courses/rust-ts-devs)
   - [x] Basics
     - [x] Rust Basics
     - [x] Numbers & Strings
@@ -113,6 +113,10 @@
     - [ ] Results & Error Handling Exercise
     - [ ] Q&A
   - [ ] Borrow Checker
+    - [x] Stack vs Heap
+    - [ ] Borrow Checker
+    - [ ] Borrow Checker Practise
+    - [ ] Borrow Checker Q&A
   - [ ] Traits
   - [ ] Wrapping Up
 - [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)

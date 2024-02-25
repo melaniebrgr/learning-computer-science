@@ -1,5 +1,11 @@
 # Ownership
 
+You can have
+
+- the value
+- a reference to a value
+- a mutable reference to a value
+
 ## Rules of ownership
 
 Each value in Rust has an owner.
@@ -7,31 +13,23 @@ There can only be one owner at a time.
 One Lord of the Ring.
 When the owner goes out of scope, the value will be dropped.
 A scope is the range within a program for which a value is valid.
+Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
 
-## The stack and heap
+In the case of a string literal, since the contents are known at compile time the text is hardcoded right into the final executable and is available for the duration of the program.
+On the other hand, with a String type, memory needs to be allocated on the heap in order to support a potentially mutable, growable piece of text.
+The memory needs to be requested from the allocator and returned to the allocator when it no longer in use.
 
-In an executing program, data can be placed on the stack or heap, i.e. there is stack data and heap data.
-Values with a known size at compile time are stored entirely on the stack, so copies of the actual values are quick to make. Stack facts:
-- All data stored on the stack must have a known, fixed size.
-- Data is pushed or popped off the FIFO stack. 
-- Accessing data in the stack is faster than the heap because you have don't have to follow a pointer to get there or jump around in memory.
-- pointer is pushed onto the stack when data is allocated to the heap. The memory allocator must return a pointer to the address a.k.a. a big enough empty spot on the heap.
+When a variable on the heap goes out of scope, the value will be cleaned by dropping it, unless ownership of the data has been moved to another variable.
+That is, once the variable that owns the data goes out of scope, memory is automatically returned during program execution by calling `Drop`.
+Anything that requires allocation implements `Drop`, and therefore cannot implement `Copy`.
 
-In the case of a string literal, since the contents are known at compile time the text is hardcoded right into the final executable.
-On the other hand, with a String type, an amount of memory needs to be allocated on the heap, in order to support a mutable, growable piece of text.
-The memory needs to be requested from the allocator and returned when it no longer in use.
-When a variable that includes data on the heap goes out of scope, the value will be cleaned up by drop unless ownership of the data has been moved to another variable.
-
-Once the variable that owns the data goes out of scope, memory is automatically returned during program execution by calling `Drop`.
-Anything that requires allocation or is some form of resource implements a `Drop` and cannot therefore implement `Copy`.
 Values that implement the `Copy` trait:
+
 - The Boolean type
 - All integer types, e.g. `u32`
 - All the floating-point e.g. `f64`
 - The character type, `char`
-- Tuples, if they only contain types that also implement Copy
-
-Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
+- Tuples if they only contain types that implement Copy
 
 ## Move
 

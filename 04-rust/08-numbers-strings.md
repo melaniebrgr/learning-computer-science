@@ -18,8 +18,12 @@ The two compound types: tuple and array.
 
 ## Numbers
 
-**Integer** types have different sizes (8, 16, 32, 64, 128, char) and are signed (`i`) or unsigned (`u`). For example, `i8` is a signed 8-bit integer value from -128 to 127 (-2^7 to 2^7 - 1, or 00000000 to 11111111 in binary ).
-A `usize` is a "pointer-sized" unsiged integer. It's size depends on the target, e.g. on a 64 bit target the `usize` is 8 bytes (equivalent to `u64`). Therefore the maximum `usize` value depends on the system.
+**Integer** types have different sizes (8, 16, 32, 64, 128, char) and are signed (`i`) or unsigned (`u`).
+For example, `i8` is a signed 8-bit integer value from -128 to 127 (-2^7 to 2^7 - 1, or 00000000 to 11111111 in binary ).
+A `usize` is a "pointer-sized" unsiged integer.
+It's size depends on the target, e.g. on a 64 bit target the `usize` is 8 bytes (equivalent to `u64`).
+(There are 8 bits in a byte, so 8 bytes = 8 bytes * 8 bits = 64 bits.)
+Therefore the maximum `usize` value depends on the system.
 
 There are two floating point primitives, `f32` and `f64`. The default type is `f64` because on modern CPUs, it's roughly the same speed as `f32`.
 
