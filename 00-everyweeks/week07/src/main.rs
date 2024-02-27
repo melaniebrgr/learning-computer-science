@@ -1,14 +1,7 @@
-fn greet() -> String {
-    String::from("Hello dolly")
-}
-
-#[test]
-fn verify_greet() {
-    let s = greet();
-    assert_eq!(String::from("Hello dolly"), s);
-}
+use std::env;
 
 fn main() {
-    let s = greet();
-    println!("{}", s);
+    let args: Vec<String> = env::args().collect();
+    println!("My path is {}.", args[0]);
+    println!("I got {:?} arguments: {:?}.", args.len() - 1, &args[1..]);
 }
