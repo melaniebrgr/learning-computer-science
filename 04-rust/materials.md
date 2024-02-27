@@ -108,16 +108,25 @@
     - [x] Enums & Subtypes
     - [x] Options in TypeScript vs Rust
     - [x] Options in Rust
-    - [ ] Options Exercise
-    - [ ] Error Handling
-    - [ ] Results & Error Handling Exercise
-    - [ ] Q&A
-  - [ ] Borrow Checker
+    - [x] Options Exercise
+    - [x] Error Handling
+    - [x] Results & Error Handling Exercise
+    - [x] Q&A
+  - [x] Borrow Checker
     - [x] Stack vs Heap
-    - [ ] Borrow Checker
-    - [ ] Borrow Checker Practise
-    - [ ] Borrow Checker Q&A
+    - [x] Borrow Checker
+    - [x] Borrow Checker Practise
+    - [x] Borrow Checker Q&A
   - [ ] Traits
+    - [ ] Traits vs Interfaces
+    - [ ] Creating Modules
+    - [ ] Default & Display Traits
+    - [ ] Creating an Iterator
+    - [ ] IntoIterator & From Traits
+    - [ ] Custom Traits
+    - [ ] Generic Trait Implementation
+    - [ ] Refactor Rectangle and Circle
+    - [ ] Reading Shapes from a File
   - [ ] Wrapping Up
 - [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)
   - [ ] 1.0 Getting started

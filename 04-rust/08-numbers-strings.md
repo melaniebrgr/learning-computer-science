@@ -61,9 +61,13 @@ Under the hood, String is basically a `Vec<u8>` and &str is `&[u8]`, always hold
 Rust's `char` type is the language’s most primitive alphabetic type. It is four bytes in size and represents a Unicode Scalar Value.
 The Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive.
 The char literal is specified with single quotes, as opposed to string literals, which use double quotes.
+A char can be alphabetical `'爱'`, numerical `'4'`, or neither '🐓'.
 
 ### String
 
+If you squint, a vector and a String are almost the same thing.
+Both are allocated dynamically to the heap.
+A String is just restricted to UTF-8 data, whereas a vector can be anything.
 The String type is the most common string type that has ownership over the contents of the string.
 Strings are always valid UTF-8.
 Because UTF-8 is a variable width encoding, Strings are typically smaller than an array of the same chars.

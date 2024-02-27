@@ -8,6 +8,10 @@
 
 ## Array
 
+A primitive type, apparently.
+
+An array is a collection of objects of the same type T, stored in contiguous memory.
+Arrays are created using brackets [], and their length, which is known at compile time.
 Arrays are values packed nose to tail in memory, so that they are efficient to access.
 Arrays are indexed from zero.
 Arrays can only contain one type of data, `let a: [i32; 5] = [1, 2, 3, 4, 5];`.

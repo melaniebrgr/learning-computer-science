@@ -1,5 +1,8 @@
 # Introduction
 
+"Where do you want to spend your slow? Pre-compile or prod?" - the Primeagens case for Rust.
+There is no getting around errors and undefined: you always know when they can happen and must do something about them.
+
 Rust is a programming language developed by Mozilla Research.
 It was first released in 2012.
 Rust offers safety guarantees and low-level control over performance with high-level language ergonomics and without having a garbage collector or runtime.
@@ -54,17 +57,33 @@ cargo run ... # compiles and runs executable
 
 ## Variables
 
-The `let` or `const` keyword is necessary to create a new variable binding.
-Immutable variables are declared with `let`, e.g. `let foo = 5;`.
-That is, the "regular" keyword for variable binding makes the value immutable by default.
-trying to assign a new value to foo will result in a compiler error.
+Some rules:
 
-Immutable variables can also be declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`
-Mutable variables are declared by including `mut`, e.g. `let mut foo = 5;`.
-Variables declared with `const` can't be used with `mut` and must be type annotated.
+- One variable must own the the data (an uninitialized variable is not allowed)
+- One variable can change the data
+- Many variables can look at the data
+- You cannot look at and change the data simultaneously
+- You cannot look at something that has been dropped
+
+### let
+
+The `let` and `const` keywords create new variable bindings.
+Variables are immutable by default when declared with `let`, e.g. `let foo = 5;`.
+Trying to assign a new value to `foo` results in a compiler error.
+That is, the "regular" keyword for variable binding makes the value immutable.
+
+### const
+
+Immutable variables can also be declared with `const`, e.g. `const WELCOME: &str = r"Welcome to RUSTLINGS";`.
+Variables declared with `const` must be type annotated.
 By convention, `const` variable names are all upper, snakecase.
-Using or capturing an uninitialized variable is not allowed.
-This saves us from trying the use a variable that effectively doesn't exist.
+
+### mut
+
+Mutable variables are declared by including `mut`, e.g. `let mut foo = 5;`.
+Variables declared with `const` can't be used with `mut`.
+
+### shadowing
 
 Variables can be shadowed, meaning a second variable with the same name "overshadows" the first.
 The second declaration takes any use of the variable name to itself.
@@ -93,7 +112,7 @@ println!("{:?} {:?}", vector, slice);
 
 ## Comments
 
-### Comments for humans
+### for the humans
 
 ```rust
 // This is a comment. Line comments look like this...
@@ -110,7 +129,31 @@ println!("{:?} {:?}", vector, slice);
 /// ```
 ```
 
-### Comments for the machine
+### for the machine
 
 When working on the code, to the compiler to ignore unfinished parts, a `todo!("describe")` can be added.
 For a logic branch can never be reached, and unreachable runtime assertion, a `unreachable!("how to tell the compiler that this should never happen")` can be added.
+
+## Errors
+
+Everything that can be an error must be explicitely handled in Rust.
+An error is an enum, and it's variants, `Err` and `Ok` are first class citizens
+
+You can do a bunch of things with errors
+
+```rust
+if let Ok(value) = a_function_that_can_error() { ... }
+match a_function_that_can_error() {
+  Ok(value) => println!("{}", value);
+  Err(e) = eprintln!("{}", value);
+}
+_ = a_function_that_can_error();
+let foo = a_function_that_can_error().unwrap(); // yolo
+let foo = a_function_that_can_error().expect("should never fail"); // respectful yolo
+let foo = a_function_that_can_error().unwrap_or(0); // default value
+let foo = a_function_that_can_error().ok(); // convert to Option
+let foo = a_function_that_can_error()
+  .and_then(|value| only_executed_if_no_error(value)) // chaining
+let foo = a_function_that_can_error().ok();
+let foo = a_function_that_can_error()?;
+```

@@ -1,27 +1,31 @@
 # Ownership
 
-You can have
-
-- the value
-- a reference to a value
-- a mutable reference to a value
+Who owns the value and how long does it live for?
+Some languages use garbage collection to manage memory, in others programmers explicitely manage memory.
+Rust follows a different strategy, using ownership rules to decide how to manage memory.
+This is how we get "automatic memory management", or "garbage collection at the compiler level".
 
 ## Rules of ownership
 
-Each value in Rust has an owner.
-There can only be one owner at a time.
-One Lord of the Ring.
-When the owner goes out of scope, the value will be dropped.
+**Each value in Rust has an owner.**
+**There can only be one owner at a time**--one Lord of the Ring.
+There can be unlimited immutable borrows (references), _or_ only one mutable borrow.
+That is, you can read the value as many times as you want _or_ write the value in once place.
+
 A scope is the range within a program for which a value is valid.
+**When the owner goes out of scope, the value will be dropped.**
+In rust a scope is created with curly brace blocks.
+A reference also cannot outlive its value.
 Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
 
-In the case of a string literal, since the contents are known at compile time the text is hardcoded right into the final executable and is available for the duration of the program.
-On the other hand, with a String type, memory needs to be allocated on the heap in order to support a potentially mutable, growable piece of text.
-The memory needs to be requested from the allocator and returned to the allocator when it no longer in use.
+## Drop
 
-When a variable on the heap goes out of scope, the value will be cleaned by dropping it, unless ownership of the data has been moved to another variable.
-That is, once the variable that owns the data goes out of scope, memory is automatically returned during program execution by calling `Drop`.
-Anything that requires allocation implements `Drop`, and therefore cannot implement `Copy`.
+Dropping means releasing memory.
+When a variable on the heap goes out of scope the value is cleaned by dropping it, unless ownership of the data has been moved to another variable.
+Once the variable that owns the data goes out of scope, memory is automatically returned during program execution by calling `Drop`.
+Anything that requires allocation implements `Drop`.
+
+## Copy
 
 Values that implement the `Copy` trait:
 
@@ -33,7 +37,7 @@ Values that implement the `Copy` trait:
 
 ## Move
 
-Assignment of a non-Copy value moves the value from one location to another. Otherwise, Rust would be forced to implicitly do a copy and break its promise to make allocations explicit.
+Assignment of a non-copy value moves the value from one location to another. Otherwise, Rust would be forced to implicitly do a copy and break its promise to make allocations explicit.
 So, the rule of thumb is to prefer to keep references to the original data - to 'borrow' it.
 But a reference must not outlive the owner!
 
@@ -66,7 +70,8 @@ fn main() {
 //  --> src/main.rs:1:23
 ```
 
-To use the data that was moved to a function either 
+To use the data that was moved to a function either
+
 1. Make another, separate version of the data.
 2. Make the function borrow its argument instead of taking ownership of it, and then copy the data within the function in order to return an owned.
 
@@ -95,3 +100,15 @@ fn main() {
     println!("res is {}", res); // res is 2
 }
 ```
+
+## Misc.
+
+You can have
+
+- the value
+- a reference to a value
+- a mutable reference to a value
+
+In the case of a string literal, since the contents are known at compile time the text is hardcoded right into the final executable and is available for the duration of the program.
+With a String type, memory needs to be allocated on the heap in order to support a potentially mutable, growable piece of text.
+The memory needs to be requested from the allocator and returned to the allocator when it no longer in use.
