@@ -1,5 +1,7 @@
 # Computer Architecture
 
+> Network, storage, memore and compute: the four primary colours of computer science - guy from Tiger Beetle
+
 Architecture is traditional understood as ...
 
 > "the attributes of a system as seen by the programmer, i.e. the conceptual structure and functional behavior." - Gene Amdahl
