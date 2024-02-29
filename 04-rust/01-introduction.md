@@ -105,6 +105,9 @@ For example, `num * num` is an expression while `return num * num;` is a stateme
 
 ## Logging
 
+The `println!` macro takes a string formatter as the first argument.
+The variables to render within it are the second argument.
+
 ```rust
 println!("{} {}", string, num);
 println!("{:?} {:?}", vector, slice);

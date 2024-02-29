@@ -2,15 +2,15 @@
 
 ## Description
 
-A Rust CLI game where given a chinese character prompt, enter the correct pin yin.
+A Rust CLI game where given a chinese character prompt, enter the correct pinyin.
 
 ## Steps
 
-- [ ] init a new rust project
-- [ ] create a short list of sets of chinese characters and their corresponding pin yin
-- [ ] pick the first set (make it random later)
-- [ ] display the character to the user
-- [ ] take user input
-- [ ] check user input against correct pin yin
+- [x] init a new rust project
+- [x] create a short list of sets of chinese characters and their corresponding pin yin
+- [x] pick the first set (make it random later)
+- [x] display the character to the user
+- [x] take user input
+- [ ] check user input against correct pinyin
 - [ ] display whether it was correct or incorrect
 - [ ] exit
