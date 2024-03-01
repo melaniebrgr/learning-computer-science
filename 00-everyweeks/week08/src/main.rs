@@ -8,6 +8,8 @@ fn main() {
         ("hǎo".to_string(), "好".to_string()),
         ("zài".to_string(), "再".to_string()),
         ("jiàn".to_string(), "见".to_string()),
+        ("jiào".to_string(), "叫".to_string()),
+        ("lǐ".to_string(), "李".to_string()),
     ]);
 
     let random_hanzi = pinyin_to_hanzi.values().nth(0).unwrap();
@@ -24,7 +26,13 @@ fn main() {
     let you_are_wrong = "你错了！👎".to_string();
 
     match maybe_hanzi {
-        Some(_) => println!("{}", you_are_right),
+        Some(hanzi) => {
+            if hanzi == random_hanzi {
+                println!("{}", you_are_right)
+            } else {
+                println!("{}", you_are_wrong)
+            }
+        }
         None => println!("{}", you_are_wrong),
     }
 }
