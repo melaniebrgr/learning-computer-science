@@ -13,4 +13,4 @@ A Rust CLI game where given a chinese character prompt, enter the correct pinyin
 - [x] take user input
 - [ ] check user input against correct pinyin
 - [ ] display whether it was correct or incorrect
-- [ ] exit
+- [ ] randomly pick a pinyin set
