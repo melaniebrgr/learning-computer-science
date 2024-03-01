@@ -20,3 +20,11 @@ $ ./args arg1 arg2
 # The first arg is "./args".
 # The rest of the args are ["arg1", "arg2"] (`&args[1..]`).
 ```
+
+## Things I needed to learn
+
+1. How to create and use a HashMap in Rust?
+1. How do I use the standard library? I need to import things?
+1. How can I even type pinyin?
+1. I don't understand when I need a `String` or a `str`.
+1. Why did I need to trim the value before the HashMap lookup worked?
