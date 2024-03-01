@@ -1,10 +1,10 @@
-# Rust CLI: guess the pin yin
+# Spec
 
-## Description
+- You are presented a random hanzi (chinese character)
+- You guess the pinyin
+- You are informed if it was correct or not
 
-A Rust CLI game where given a chinese character prompt, enter the correct pinyin.
-
-## Steps
+## To dos
 
 - [x] init a new rust project
 - [x] create a short list of sets of chinese characters and their corresponding pin yin
