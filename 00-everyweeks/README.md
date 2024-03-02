@@ -14,9 +14,9 @@ Basically I will try something for a week and then move on to the next thing. Th
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | [Rust CLI: guess the pinyin](./07/) | FAIL | Didn't finish by EOW--great start! BUT I learned a lot about Rust. Try again for week 9. |
-|   9  |  |  |  |
-|  10  |  |  |  |
+|   8  | Rust CLI: guess the pinyin | FAIL | Didn't finish by EOW, but I learned somethings about Rust. Try again in week 9. |
+|   9  | [Rust CLI: guess the pinyin](./week08/) | SUCCESS | It runs. I'm taking the W. |
+|  10  | [Rust into webassembly](./week10/) | IN PROGRESS | TK |
 |  11  |  |  |  |
 |  12  |  |  |  |
 |  13  |  |  |  |
