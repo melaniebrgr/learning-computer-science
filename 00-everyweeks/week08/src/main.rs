@@ -12,22 +12,22 @@ fn main() {
         ("lǐ".to_string(), "李".to_string()),
     ]);
 
-    let random_hanzi = pinyin_to_hanzi.values().nth(0).unwrap();
+    let hanzi_pick = pinyin_to_hanzi.values().nth(0).unwrap();
 
-    println!("What is the pinyin for {}?", &random_hanzi);
+    println!("What is the pinyin for {}?", &hanzi_pick);
 
     let mut input = String::new();
 
     io::stdin().read_line(&mut input).unwrap();
 
-    let maybe_hanzi = pinyin_to_hanzi.get(input.trim());
+    let hanzi_maybe = pinyin_to_hanzi.get(input.trim());
 
     let you_are_right = "你不错了！👍".to_string();
     let you_are_wrong = "你错了！👎".to_string();
 
-    match maybe_hanzi {
+    match hanzi_maybe {
         Some(hanzi) => {
-            if hanzi == random_hanzi {
+            if hanzi == hanzi_pick {
                 println!("{}", you_are_right)
             } else {
                 println!("{}", you_are_wrong)
