@@ -32,7 +32,7 @@
     - [ ] 1.2. Formatted print
   - [ ] 2. Primitives
   - [ ] 19. Std library types
-    - [ ] 19.7 HashMap
+    - [x] 19.7 HashMap
 - [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
   - [x] 1. Getting Started
     - [x] 1.1. Installation
