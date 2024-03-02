@@ -31,6 +31,8 @@
     - [ ] 1.1. Comments
     - [ ] 1.2. Formatted print
   - [ ] 2. Primitives
+  - [ ] 19. Std library types
+    - [ ] 19.7 HashMap
 - [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
   - [x] 1. Getting Started
     - [x] 1.1. Installation
@@ -54,6 +56,9 @@
     - [ ] 6.3. Concise Control Flow with if let
   - [ ] 7. Managing Growing Projects with Packages, Crates, and Modules
   - [ ] 8. Common Collections
+    - [ ] 8.1 Storing Lists of Values with Vectors
+    - [ ] 8.2 Storing UTF-8 Encoded Text with Strings
+    - [x] 8.3 Storing Keys with Associated Values in Hash Maps
   - [ ] 9. Error Handling
   - [ ] 10. Generic Types, Traits, and Lifetimes
   - [ ] 11. Writing Automated Tests

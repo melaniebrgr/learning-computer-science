@@ -10,9 +10,36 @@ I watched the stream principally to see what I could take from it to code my own
 
 The goal of this weeks, is a Rust guessing game where given a chinese character prompt, you enter the  pinyin and are notified if it is correct or not. Maybe you can build a streak. Let's see.
 
-### Real stupid questions from development
+### Real stupid questions from development list
 
 1. How do I use a HashMap?
 1. Why does the nth HashMap value change every time?
 1. How can I even type pinyin?
 1. Why did I need to trim the value before the HashMap lookup worked?
+
+### Real answers
+
+#### How do I use a hash map?
+
+First, Rust has a standard library.
+A hash map is one of type of collection available in the standard library (Std, pronounced "stud", aha).
+To use it, import it `use std::collections::HashMap;` and call `HashMap::new()`.
+This creates a hash map on the heap with a default initial capacity.
+Hash maps must be homogeneous.
+All keys are the same type, and all values are the same type.
+
+"For types that implement the Copy trait, like i32, the values are copied into the hash map. For owned values like String, the values will be moved and the hash map will be the owner of those values."
+I guess this is a pattern?
+Copy-able things are coopied by default, and non-copy-able things are moved?
+Each unique key can only have one value associated with it at a time.
+
+Common things to do with a hash map
+
+- `insert`inserts a key-value pair into hashmap, overwritting an existing key if there is one
+- `entry` checks if the key exists first and `or_insert` adds it if it does not
+- `get` gets an `Option<&V>` value out of the hash map.
+
+#### Why does the nth HashMap value change every time?
+
+"Iterating over a hash map happens in an arbitrary order", but it's not clear to me why.
+Maybe it has something to do with how the data is allocated on the heap?
