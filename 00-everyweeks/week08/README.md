@@ -1,6 +1,6 @@
-# Journal: Weeks 8-9 project
+# Guess the pinyin
 
-## Guess the pinyin
+## Week 8-9s project journaling
 
 On a past ["Try Friday"](https://www.youtube.com/watch?v=YF_pq7dSMh0) CJ (Coding Garden) tried to learn Rust and build a simple CLI tool. It demonstrated that getting even a simple program running within a few hours in Rust is painful almost to the point of impossible. If you are coming from JavaScript, there are too many fundamental concepts to learn first.
 
@@ -10,7 +10,7 @@ I watched the stream principally to see what I could take from it to code my own
 
 The goal of weeks 8, then 9, was a Rust guessing game where given a chinese character prompt, you enter the pinyin and are notified if it is correct or not. Maybe you can tracking a streak. Let's see. I started by breaking the task into a [discrete list of steps](TODO.md). I tracked questions I had along the way like CJ was doing, and made sure to circle back and answer them.
 
-### Real stupid questions from development list
+### Stupid questions
 
 1. ✅ How do I use a HashMap?
 1. ✅ Why does the nth HashMap value change every time?

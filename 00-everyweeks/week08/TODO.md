@@ -11,6 +11,6 @@
 - [x] pick the first set (make it random later)
 - [x] display the character to the user
 - [x] take user input
-- [ ] check user input against correct pinyin
-- [ ] display whether it was correct or incorrect
-- [ ] randomly pick a pinyin set
+- [x] check user input against correct pinyin
+- [x] display whether it was correct or incorrect
+- [x] randomly pick a pinyin set
