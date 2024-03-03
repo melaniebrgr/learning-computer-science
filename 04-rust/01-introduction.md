@@ -103,26 +103,15 @@ Expressions return a value based on their operand(s).
 Statements simply return a `()` type which behaves just like `void` in C/C++ language.
 For example, `num * num` is an expression while `return num * num;` is a statement.
 
-## Logging
-
-The `println!` macro takes a string formatter as the first argument.
-The variables to render within it are the second argument.
-
-```rust
-println!("{} {}", string, num);
-println!("{:?} {:?}", vector, slice);
-```
-
 ## Comments
-
-### for the humans
 
 ```rust
 // This is a comment. Line comments look like this...
 // and extend multiple lines like this.
 
 /* Block comments
-  /* can be nested. */ */
+  /* can be nested. */
+*/
 
 /// Documentation comments look like this and support markdown notation.
 /// # Examples
@@ -132,10 +121,35 @@ println!("{:?} {:?}", vector, slice);
 /// ```
 ```
 
-### for the machine
+## Printing
 
-When working on the code, to the compiler to ignore unfinished parts, a `todo!("describe")` can be added.
-For a logic branch can never be reached, and unreachable runtime assertion, a `unreachable!("how to tell the compiler that this should never happen")` can be added.
+Printing is handled by a series of macros defined in `std::fmt`.
+`std::fmt::Display`: Uses the `{}` marker.
+`std::fmt::Debug:` Uses the `{:?}` marker. Format text for debugging purposes.
+Rust also provides "pretty printing" with `{:#?}`.
+
+Only types that implement `fmt::Display` can be formatted with `{}`.
+Not all types implement `fmt::Display` because there is no ideal style for all types, so the std library doesn't presume to dictate one.
+For example, `fmt::Display` is not implemented for `Vec<T>` or for any other generic containers, so `fmt::Debug` must be used for these cases.
+
+The `println!` macro takes a string formatter as the first argument.
+The variables to render within it are any following arguments.
+
+```rust
+println!("{} {}", string, num);
+println!("{:?} {:?}", vector, slice);
+println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+println!("{subject} {verb} {object}",
+  object="the lazy dog",
+  subject="the quick brown fox",
+  verb="jumps over");
+```
+
+- format!: write formatted text to String
+- print!: same as format! but the text is printed to the console (io::stdout).
+- println!: same as print! but a newline is appended.
+- eprint!: same as print! but the text is printed to the standard error (io::stderr).
+- eprintln!: same as eprint! but a newline is appended.
 
 ## Errors
 

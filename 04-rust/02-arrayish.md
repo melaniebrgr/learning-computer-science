@@ -1,26 +1,48 @@
 # Data structures
 
+1. Tuple
 1. Array
-2. Vector
-3. Iterator
-4. Slice
-5. Range
+1. Slice
+1. Vector
+1. Iterator
+1. Range
 
-## Array
+## Tuple (`(T1, T2, ...)`)
 
-A primitive type, apparently.
+A tuple is a way of grouping together values of different types into one compound type.
+Like arrays, tuples have a fixed length and once declared, they cannot grow or shrink in size.
+Unlike arrays, tuples can contain multiple different types.
 
-An array is a collection of objects of the same type T, stored in contiguous memory.
-Arrays are created using brackets [], and their length, which is known at compile time.
-Arrays are values packed nose to tail in memory, so that they are efficient to access.
-Arrays are indexed from zero.
-Arrays can only contain one type of data, `let a: [i32; 5] = [1, 2, 3, 4, 5];`.
-An array can be initialised to contain the same value for each element by specifying the initial value, followed by a semicolon, e.g. `let a = [3; 5]; // [3, 3, 3, 3, 3]`.
+Tuples are constructed using parentheses ()
+Tuples can be a useful way to return multiple values from a function.
+Tuples can be accessed in two ways
 
-The type of an array includes its size, i.e. the type of `[10, 20]` would be `[i32; 2]`.
-That is, Rust arrays are fixed in size, and the size of an array is known at compile-time.
-Because the type of an array includes its size, they are not used that often.
-Arrays are useful when you want your data allocated on the stack rather than the heap.
+- by destructuring
+- by "tuple indexing" using a period (`.`) notation
+
+Note, "key" names start at 0 when accessing by dot notation.
+The tuple without any values is called a unit `()` and represent an empty value or an empty return type.
+
+```rust
+let tup: (i32, f64, u8) = (500, 6.4, 1);
+let (x, y, z) = tup;
+let five_hundred = tup.0;
+```
+
+## Arrayn (`[T; length]`)
+
+In Rust, and array is primitive _compound_ type.
+THe only oother primitive compound type is a tuple.
+
+An array is a collection of objects of the same type that is stored in contiguous memory.
+What is contiguous memory is when values are packed nose-to-tail in memory, so that they are efficient to access.
+Arrays are created using brackets [], and a length.
+The type of an array always includes its size, i.e. the signature of `[10, 20]` is `[i32; 2]`.
+
+Like all arrays, Rust arrays are indexed from zero.
+Arrays can contain one data type, `let a: [i32; 5] = [1, 2, 3, 4, 5];`.
+An array can be initialised to contain a each element by specifying an initial value, followed by a semicolon and size, e.g. `let a = [3; 5]; // [3, 3, 3, 3, 3]`.
+
 
 ```rust
 fn main() {
@@ -35,8 +57,36 @@ fn main() {
 }
 ```
 
-Rust checks that any index lookup is within the range of the array at runtime and exits if not.
-In orther languages when you provide an incorrect index, invalid memory can be accessed.
+Rust arrays are fixed in size, and the size of an array is known at compile-time.
+Rust checks that any index lookup is within the range of the array at runtime and exits if it is not.
+In other languages when you provide an incorrect index, invalid memory can be accessed.
+While arrays are useful when you want your data allocated on the stack, because an array cannot change in size, it is not used that often.
+
+## Slice
+
+Slices are similar to arrays, but their length is not known at compile time.
+They are a view into an underlying array of values and have a type signature `&[T]`.
+Slices are used more commonly than arrays in order to borrow a section of one.
+
+Slices always _borrow_ their data and never copy it.
+You have to explicitly say that you want to create a slice with the `&` operator.
+Slices can be created from both strings and arrays
+
+```rust
+// String slice
+let s = String::from("hello world");
+let hello = &s[0..5]; // slices from 0 (incluse) to 5 (exclusize)
+// -> "hello"
+
+// Array slice
+let a = [1, 2, 3, 4, 5];
+let nice_slice = &a[1..=3]; // slices from 1 (incluse) to 3 (exclusize)
+// -> [2, 3, 4]
+```
+
+How can you safely access slices at run time?
+Instead getting by index, use the slice method `get` which does not panic and returns an "Maybe" (Some or None option).
+(Panics are memory safe because they happen before any illegal access to memory.)
 
 ## Vector
 
@@ -166,30 +216,6 @@ fn main() {
     println!("{:?}", foo); // {1, 2, 3}
 }
 ```
-
-## Slice
-
-Slices are views into an underlying array of values and are used more commonly than arrays.
-You have to explicitly say that you want to create a slice with the `&` operator.
-Slices all _borrow_ their data, a copy is never made.
-Slices can be created from strings and arrays
-
-```rust
-// String slice
-let s = String::from("hello world");
-let hello = &s[0..5];
-let world = &s[6..11];
-
-// Array slice
-let a = [1, 2, 3, 4, 5];
-let nice_slice = &a[1..=3];
-```
-
-How can you safely access slices at run time?
-Instead getting by index, use the slice method `get` which does not panic and returns an "Maybe" Some or None option.
-(Panics are memory safe because they happen before any illegal access to memory.)
-An Option is a box that may contain a value, or nothing (None).
-The Option box can be conditionally unwrapped, `*slice.get(5).unwrap_or(&-1);`.
 
 ## Range
 

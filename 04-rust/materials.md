@@ -27,10 +27,13 @@
   - [ ] Parsing with Nom
   - [ ] Pain Points
 - [ ] [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
-  - [ ] 1. Hello World
-    - [ ] 1.1. Comments
-    - [ ] 1.2. Formatted print
-  - [ ] 2. Primitives
+  - [x] 1. Hello World
+    - [x] 1.1. Comments
+    - [x] 1.2. Formatted print
+  - [x] 2. Primitives
+    - [x] 2.1. Literals and operators
+    - [x] 2.2. Tuples
+    - [x] 2.1. Arrays and slices
   - [ ] 19. Std library types
     - [x] 19.7 HashMap
 - [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
@@ -140,3 +143,4 @@
     - [ ] 1.3 IDEs
     - [ ] Inner development loop
 - [ ] [Learn X in Y minutes](https://learnxinyminutes.com/)
+- [ ] [Learn Rust with Rustlings](https://www.youtube.com/watch?v=G3Vr-yswlaU&t=763s)

@@ -1,25 +1,8 @@
 # Data structures
 
-1. tuple
-2. struct
-3. impl
-4. enum
-
-## Tuple
-
-A tuple is a way of grouping together values of different types into one compound type.
-Unlike arrays, tuples can contain multiple different types.
-They can be a useful way to return multiple values from a function.
-Tuples have a fixed length and once declared, they cannot grow or shrink in size.
-Tuples can be accessed by destructuring or using a period (`.`) notation.
-Start at 0 when accessing by dot notation.
-The tuple without any values is called a unit `()` and represent an empty value or an empty return type.
-
-```rust
-let tup: (i32, f64, u8) = (500, 6.4, 1);
-let (x, y, z) = tup;
-let five_hundred = tup.0;
-```
+1. struct
+1. impl
+1. enum
 
 ## Struct
 
