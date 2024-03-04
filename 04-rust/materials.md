@@ -105,7 +105,7 @@
     - [x] Numbers & Strings
     - [x] Vector, Tuple, & Struct
     - [x] todo, unreachable, & unwrap
-  - [ ] Coding Rust
+  - [x] Coding Rust
     - [x] Install Rust
     - [x] Value, Mutable, Immutable
     - [x] Coding an Iterator
@@ -126,7 +126,7 @@
     - [x] Borrow Checker Practise
     - [x] Borrow Checker Q&A
   - [ ] Traits
-    - [ ] Traits vs Interfaces
+    - [x] Traits vs Interfaces
     - [ ] Creating Modules
     - [ ] Default & Display Traits
     - [ ] Creating an Iterator

@@ -1,20 +1,4 @@
-# Types
-
-Every value in rust has a type.
-All variables types must be known at compile time.
-Types can often be infered, but there are times must be specified:
-
-- when declaring with `const`
-- function arguments
-- when many types are possible
-
-When the compiler cannot infer the type, it will ask with the error "type annotations needed".
-Often the compiler can infer the type from the assigned value.
-
-There are two subsets of data types: scalar and compound.
-A scalar type represents a single value, whereas compound types group multiple values into one type.
-The four primary scalar types: integer, floating-point number, Boolean, and character.
-The two compound types: tuple and array.
+# Primitives
 
 ## Numbers
 
