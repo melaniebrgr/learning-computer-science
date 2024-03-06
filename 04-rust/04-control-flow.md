@@ -1,6 +1,6 @@
 # Control flow
 
-## if/else
+## If/else
 
 Same as JavaScript, just drop the parentheses.
 Every arm of an `if` expression has to return the same type of value.
@@ -15,7 +15,7 @@ if x == 10 {
 }
 ```
 
-## ternary
+## Ternary
 
 Kinda? Just use if/else
 

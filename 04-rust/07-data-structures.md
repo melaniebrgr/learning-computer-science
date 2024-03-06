@@ -1,10 +1,11 @@
 # Data structures
 
 1. struct
-1. impl
 1. enum
 
 ## Struct
+
+A struct is an example of a "product" algebraic type
 
 Data and behaviour are defined in seperate blocks in Rust.
 A struct(ure) specifies the data shape and size, and an impl(ementation) defines behaviour.
@@ -37,36 +38,9 @@ struct Person {
 }
 ```
 
-## Impl
-
-Implementations are the associated function of a struct.
-An `impl` can use a reference self argument, i.e. `&self` is short for `self: &Person`.
-
-```rust
-impl Person {
-    fn new(first: &str, name: &str) -> Person {
-        Person {
-            first_name: first.to_string(),
-            last_name: name.to_string()
-        }
-    }
-    fn full_name(&self) -> String {
-        format!("{} {}", self.first_name, self.last_name)
-    }
-}
-
-let p = Person::new("John","Smith");
-println!("fullname {}", p.full_name()); // fullname John Smith
-```
-
-To summarize
-
-- no `self` argument: you can associate functions with structs, like the new "constructor".
-- `&self` argument: can use the values of the struct, but not change them
-- `&mut self` argument: can modify the values
-- `self` argument: will consume the value, which will move.
-
 ## Enum
+
+An enum is an example of a "sum" type, that is a type that can be one of several variants.
 
 Enums are a way of saying a value is one of a definite set of possible values.
 For example direction has only four values: up, down, left, right.
@@ -133,3 +107,27 @@ let ip = IpAddr::V6(String::from("::1"));
 
 Fun fact: `Option<T>` is an example of an enum.
 The Option type encodes the common scenario in which a value could be something or nothing.
+
+### Errors
+
+Everything that can be an error must be explicitely handled in Rust.
+An error is an enum, and it's variants, `Err` and `Ok` are first class citizens
+
+You can do a bunch of things with errors
+
+```rust
+if let Ok(value) = a_function_that_can_error() { ... }
+match a_function_that_can_error() {
+  Ok(value) => println!("{}", value);
+  Err(e) = eprintln!("{}", value);
+}
+_ = a_function_that_can_error();
+let foo = a_function_that_can_error().unwrap(); // yolo
+let foo = a_function_that_can_error().expect("should never fail"); // respectful yolo
+let foo = a_function_that_can_error().unwrap_or(0); // default value
+let foo = a_function_that_can_error().ok(); // convert to Option
+let foo = a_function_that_can_error()
+  .and_then(|value| only_executed_if_no_error(value)) // chaining
+let foo = a_function_that_can_error().ok();
+let foo = a_function_that_can_error()?;
+```

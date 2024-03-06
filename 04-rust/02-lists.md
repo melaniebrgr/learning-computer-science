@@ -1,4 +1,4 @@
-# Data structures
+# List Data Types
 
 1. Tuple
 1. Array

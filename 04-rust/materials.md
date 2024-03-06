@@ -144,3 +144,6 @@
     - [ ] Inner development loop
 - [ ] [Learn X in Y minutes](https://learnxinyminutes.com/)
 - [ ] [Learn Rust with Rustlings](https://www.youtube.com/watch?v=G3Vr-yswlaU&t=763s)
+- [ ] [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)
+- [ ] [Let's Get Rusty: Bootcamp](https://product.letsgetrusty.com/bootcamp)
+  - [x] Day 1: The Great Migration to Rust

@@ -34,7 +34,7 @@ Number literal types include decimal, hex, octal, binary, and byte. Number liter
 
 Basic math operations addition, subtraction, multiplication, division, and remainder are supported, e.g. `let sum = x + y + 13;`. Note that integer division truncates toward zero to the nearest integer.
 
-## Stringish
+## Text
 
 Any system language has two kinds of string, one static and known at compile time, and dynamically allocated at runtime.
 Rust is no exception: it has a static string literal (`str`) type, and dynamic **S**tring.
