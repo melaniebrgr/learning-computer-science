@@ -14,9 +14,9 @@ Basically I will try something for a week and then move on to the next thing. Th
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | Rust CLI: guess the pinyin | FAIL | Didn't finish by EOW, but I learned somethings about Rust. Try again in week 9. |
+|   8  | Rust command line game: guess the pinyin | FAIL | Didn't finish by EOW. I had to learn the language basics first. |
 |   9  | [Rust CLI: guess the pinyin](./week08/) | SUCCESS | It runs. I'm taking the W. |
-|  10  | [Rust into webassembly](./week10/) | IN PROGRESS | TK |
+|  10  | [Rust in JS](./week10/) | IN PROGRESS | TK |
 |  11  |  |  |  |
 |  12  |  |  |  |
 |  13  |  |  |  |
@@ -25,3 +25,18 @@ Basically I will try something for a week and then move on to the next thing. Th
 |  16  |  |  |  |
 |  17  |  |  |  |
 |  18  |  |  |  |
+|  19  |  |  |  |
+|  20  |  |  |  |
+|  21  |  |  |  |
+|  22  |  |  |  |
+|  23  |  |  |  |
+|  24  |  |  |  |
+
+## Topic ideas
+
+- Leptos
+- SQLite and Wasm
+- "Persistent Redis"
+- Godot
+- Build a game in Rust
+- Build git in Rust
