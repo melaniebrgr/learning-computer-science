@@ -84,7 +84,7 @@ For example, `num * num` is an expression while `return num * num;` is a stateme
 /// ```
 ```
 
-## Printing
+## Logging
 
 Printing is handled by a series of macros defined in `std::fmt`.
 `std::fmt::Display`: Uses the `{}` marker.

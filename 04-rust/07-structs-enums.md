@@ -1,11 +1,13 @@
-# Data structures
+# Algebraic data types (ADTs)
 
-1. struct
-1. enum
+1. structs
+1. enums
 
-## Struct
+ADTs allow us to model complex data structures and enforce constraints at the type level.
 
-A struct is an example of a "product" algebraic type
+## Structs
+
+A struct is an example of a "product" algebraic type that allows to group related types into a logical domain.
 
 Data and behaviour are defined in seperate blocks in Rust.
 A struct(ure) specifies the data shape and size, and an impl(ementation) defines behaviour.
@@ -15,30 +17,23 @@ It has a defined size and will have certain amount of bytes associated with it.
 The values of a struct will be placed next to each other in memory.
 
 ```rust
+#[derive(Debug)] 
 struct Person {
     first_name: String,
-    last_name: String
+    last_name: String, 
+    age: u32,
 }
 
 let p = Person {
     first_name: "John".to_string(),
-    last_name: "Smith".to_string()
+    last_name: "Smith".to_string(),
+    age: 16,
 };
-
-println!("person {} {}", p.first_name,p.last_name);
 ```
 
-The `#[derive(Debug)]` directive can be used to debug structs.
+Note, `#[derive(Debug)]` directive can be used to debug structs.
 
-```rust
-#[derive(Debug)]
-struct Person {
-    first_name: String,
-    last_name: String
-}
-```
-
-## Enum
+## Enums
 
 An enum is an example of a "sum" type, that is a type that can be one of several variants.
 

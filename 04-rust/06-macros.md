@@ -1,10 +1,15 @@
 # Macros
 
-Marcos look like functions but their names end with a bang.
-An exclamation mark indicates a macro call.
-Unlike a function function call, macro source code is expanded on compilation into the source code.
+Metaprogramming is where a program to manipulate or generate code during compile or runtime. Macros are a way to write code the modifies or generates code during compilation.
+This allows the language to be extended.
 
-A useful macro is `assert_eq!` that asserts that two things must be equal or panic.
-Another is `format!` for building up strings.
-When working on the code, to the compiler to ignore unfinished parts, a `todo!("describe")` can be added.
-For a logic branch can never be reached, and unreachable runtime assertion, a `unreachable!("how to tell the compiler that this should never happen")` can be added.
+Rust supports metaprogramming in the form of macros.
+Macros look like a function call but their names end with a bang (!).
+Unlike function calls though, macro source code is instead expanded on compilation into the source code.
+
+Some useful Rust macros:
+
+- `assert_eq!` asserts that two things must be equal or panics
+- `format!` builds up strings
+- `todo!("describe")` tells the compile to ignore unfinished parts to be added later
+- `unreachable!("this should never happen")` is an unreachable runtime assertion that that logic branch can never be reached.

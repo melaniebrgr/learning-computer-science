@@ -1,8 +1,9 @@
 # Behaviour
 
 1. Functions
-1. Traits
 1. Impls
+1. Traits
+1. Generics
 
 ## Functions
 
@@ -43,32 +44,6 @@ Uses a bar instead of parentheses
 |x| x + 1
 ```
 
-## Traits
-
-A trait is most similar to an interface in TypeScript.
-Traits are used to define behaviour, e.g. implement methods on structs.
-They enable composition.
-In TypeScript a Class can implement an interface, which requires that all properties and methods of the interface be implemented on the class.
-
-```typescript
-interface Area {
-  area(): number;
-}
-
-class Rectangle implements Area {
-  constructor(
-    public x: number,
-    public y: number,
-    public width: number,
-    public height: number
-  ) {}
-
-  area(): number {
-    return this.width * this.height;
-  }
-}
-```
-
 ## Impls
 
 Implementations are the associated function of a struct.
@@ -102,3 +77,35 @@ To summarize
 - `&self` argument: can use the values of the struct, but not change them
 - `&mut self` argument: can modify the values
 - `self` argument: will consume the value, which will move.
+
+## Traits
+
+Traits define a set of functions that types can implement.
+Types can implement multiple traits, and traits can have default implementations for functions.
+Traits are used to define behaviour, e.g. implement methods on structs.
+A trait is most similar to an interface in TypeScript.
+They enable composition.
+In TypeScript a Class can implement an interface, which requires that all properties and methods of the interface be implemented on the class.
+
+```typescript
+interface Area {
+  area(): number;
+}
+
+class Rectangle implements Area {
+  constructor(
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number
+  ) {}
+
+  area(): number {
+    return this.width * this.height;
+  }
+}
+```
+
+## Generics
+
+Functions that don't take a specific type as a parameter, but some type that implements a given trait.

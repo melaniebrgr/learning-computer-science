@@ -14,7 +14,7 @@ Ok... but what does any of that mean? Let's break it down.
 
 In JavaScript memory is automatically allocated when variables are declare, and automatically freed by the garbage collector when not needed and garbage collection is scheduled.
 
-Browsers are probably the most exposed piece of software nowadays, and the vendors already do a lot of work to provide secure sandboxing. When using JavaScript, you're using a memory-safe language, in a sandboxed environmen
+Browsers are probably the most exposed piece of software nowadays, and the vendors already do a lot of work to provide secure sandboxing. When using JavaScript, you're using a memory-safe language, in a sandboxed environment.
 
 Rust is a statically typed, meaning types known at compile time, while dynamic types are only known at run time. JavaScript and TypeScript are dynamically typed languages. Don't anyone fool you into believing otherwise. Rust's strong typing makes it harder to write incorrect programs.
 Rust knows what might be an error and what might be undefined and forces you to do something about it. (Even it's you just `.unwrap()` it, at least you are aware of your footgun.)
@@ -36,9 +36,7 @@ Rust follows the Resource Acquisition Is Initialisation (RAII) pattern from C++.
 
 ### without a runtime
 
-Rust is ahead-of-time compiled.
-A Rust program is compiled to binary executables that run natively on machines and can be given to someone else to execute.
-"Where do you want to spend your slow? Pre-compile or on prod?" - Primeagen
+Rust is ahead-of-time compiled to binary executables that run natively on machines and can be given to someone else to execute. "Where do you want to spend your slow? Pre-compile or on prod?" - Primeagen
 
 ## Installation
 
@@ -62,6 +60,7 @@ rustc main.rs # compile
 ## Creating a project
 
 Rust has a build system and package manager called `cargo`.
+Use cargo to manage building, compilation, and configuration.
 `cargo new` with a project name and optional flags will create a new project.
 `--bin` will setup a binary program (the default) and `--lib` will set up a library.
 
