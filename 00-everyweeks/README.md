@@ -16,7 +16,7 @@ Basically I will try something for a week and then move on to the next thing. Th
 | ---- | ---------------------------------------------------- | ------ | -------- |
 |   8  | Rust command line game: guess the pinyin | FAIL | Didn't finish by EOW. I had to learn the language basics first. |
 |   9  | [Rust CLI: guess the pinyin](./week08/) | SUCCESS | It runs. I'm taking the W. |
-|  10  | [Rust in JS](./week10/) | IN PROGRESS | TK |
+|  10  | [Rust in JavaScript](./week10/) | IN PROGRESS | TK |
 |  11  |  |  |  |
 |  12  |  |  |  |
 |  13  |  |  |  |
@@ -34,7 +34,7 @@ Basically I will try something for a week and then move on to the next thing. Th
 
 ## Topic ideas
 
-- Leptos
+- Leptos: create personal blog site
 - SQLite and Wasm
 - "Persistent Redis"
 - Godot
