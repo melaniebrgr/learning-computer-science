@@ -9,6 +9,7 @@
 ## Videos
 
 - [ ] [Lin Clark: A Cartoon Intro to WebAssembly | JSConf EU](https://www.youtube.com/watch?v=HktWin_LPf4)
+- [x] [Don't Trust Anything! Real-world Uses For WebAssembly](https://www.youtube.com/watch?v=zhVzWo6cdBM) by Katie Bell
 
 ## Courses
 
@@ -20,3 +21,6 @@
   - [ ] 1. Introduction
   - [ ] 2. "Hello, World" (Sort of)
   - [ ] 3. WebAssembly Modules
+- [ ] [Rust and WebAssembly](https://rustwasm.github.io/docs/book/)
+  - [x] 1-3. Intro, Why, Background
+  - [ ] 4. Tutorial
