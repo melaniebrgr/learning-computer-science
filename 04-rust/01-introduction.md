@@ -38,31 +38,31 @@ Rust follows the Resource Acquisition Is Initialisation (RAII) pattern from C++.
 
 Rust is ahead-of-time compiled to binary executables that run natively on machines and can be given to someone else to execute. "Where do you want to spend your slow? Pre-compile or on prod?" - Primeagen
 
-## Installation
+## Tooling
 
-The `rustup` tool installs rust and manages the rust toolchain.
-Installing rustup will give you out of the box the latest stable compiler with your host platform as a target.
-`rustup update` updates the rust toolchain, which is recommended to do periodically.
-A new version of the compiler is released on the stable channel every six weeks, for example.
+Rust toolchain, includes `rustup`, `rustc`, and `cargo`.
 
-## Compilation
+- `rustup` is the rust and rust toolchain installer and version manager
+- `rustc` is the compiler
+- `cargo` is build system and package manager
 
-Rust ships with a compiler `rustc`.
-The main purpose of the Rust compiler is to convert Rust code into machine code a.k.a binary executables, which is a set of instructions that CPUs and operating systems can understand and execute.
-The Rust project strives to support a broad range of compilation targets with various level of guarantees.
-Targets are split into tiers, from “guaranteed-to-work” Tier 1 to “best-effort” Tier 3.
+Installing `rustup` gives the latest stable compiler with your host platform as a target OOTB.
+Calling `rustup update` updates the rust toolchain.
+A new version of the compiler is released on the stable channel every six weeks.
+
+The main purpose of the Rust compiler, `rustc`, is to convert Rust code into machine code a.k.a binary executables. Binary executables are a set of instructions that CPUs and operating systems can understand and execute.
 
 ```bash
 rustc main.rs # compile
 ./main # execute
 ```
 
-## Creating a project
+The Rust project strives to support a broad range of compilation targets with various level of guarantees.
+Targets are split into tiers, from “guaranteed-to-work” Tier 1 to “best-effort” Tier 3.
 
-Rust has a build system and package manager called `cargo`.
-Use cargo to manage building, compilation, and configuration.
-`cargo new` with a project name and optional flags will create a new project.
-`--bin` will setup a binary program (the default) and `--lib` will set up a library.
+For greating convenience, `cargo` can be used to manage building, compilation, and configuration of a project.
+`cargo new` plus a project name will create a new project.
+The optional flags `--bin` will create a binary program (this is the default) and `--lib` will set up a library.
 
 ```bash
 cargo new hello_world # creates a new directory and project
@@ -71,8 +71,6 @@ cargo init # for a directory with an existing project
 
 Setting up a project with cargo will add a Cargo.toml, which is analogous to package.json.
 It contains a package configuration and dependencies list.
-
-## Building and compiling a program
 
 ```bash
 cargo check # checks but does not compile
