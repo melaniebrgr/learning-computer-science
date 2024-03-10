@@ -33,6 +33,7 @@ At the DevWorld conveference Ryan Dahl announced the release of [JSR](https://js
 
 ### 3. Compile Rust to wasm
 
+One reason Rust is a popular language to compile to wasm is that it, "lacks a runtime, enabling small .wasm sizes because there is no extra bloat included like a garbage collector."
 Browsers and Node support wasm.
 Compiling to wasm is built into the rust compiler, that can be optimised with wasm-opt.
 Wasm-bindgen provides the bindings for using wasm in JS.
@@ -42,7 +43,6 @@ Check out projects: trunk, web-sys
 ## Stupid questions
 
 1. Where all can I run wasm?
-1. Why is Rust apparently popular for generating webassembly?
 1. Is Figma using WebAssembly, and how?
 1. Is Photoshop-in-the-browser using WebAssembly, and how?
 
