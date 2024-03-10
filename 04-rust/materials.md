@@ -48,9 +48,9 @@
     - [ ] 3.3. Functions
     - [ ] 3.4. Comments
     - [ ] 3.5. Control Flow
-  - [ ] 4. Understanding ownership
-    - [ ] 4.1 What is Ownership
-    - [ ] 4.2 References and Borrowing
+  - [x] 4. Understanding ownership
+    - [x] 4.1 What is Ownership
+    - [x] 4.2 References and Borrowing
     - [x] 4.3 The Slice Type
   - [ ] 5. Using Structs to Structure Related Data
   - [ ] 6. Enums and Pattern Matching
@@ -59,10 +59,13 @@
     - [ ] 6.3. Concise Control Flow with if let
   - [ ] 7. Managing Growing Projects with Packages, Crates, and Modules
   - [ ] 8. Common Collections
-    - [ ] 8.1 Storing Lists of Values with Vectors
+    - [x] 8.1 Storing Lists of Values with Vectors
     - [ ] 8.2 Storing UTF-8 Encoded Text with Strings
     - [x] 8.3 Storing Keys with Associated Values in Hash Maps
   - [ ] 9. Error Handling
+    - [ ] 9.1 Unrecoverable Errors with panic!
+    - [ ] 9.2. Recoverable Errors with Result
+    - [ ] 9.3. To panic! or Not to panic!
   - [ ] 10. Generic Types, Traits, and Lifetimes
   - [ ] 11. Writing Automated Tests
   - [ ] 12. An I/O Project: Building a Command Line Program
@@ -80,7 +83,7 @@
   - [x] functions
   - [x] if
   - [x] primitive types
-  - [ ] vecs
+  - [x] vecs
   - [ ] move semantics
   - [ ] structs
   - [ ] enums

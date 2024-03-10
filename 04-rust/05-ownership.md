@@ -11,13 +11,15 @@ This is how we get "automatic memory management", or "garbage collection at the 
 **There can only be one owner at a time**--one Lord of the Ring.
 There can be unlimited immutable borrows (references), _or_ only one mutable borrow.
 That is, you can read the value as many times as you want _or_ write the value in once place.
-If we have an immutable reference to something, we cannot also take a mutable reference.
+If we have an immutable reference to something, we cannot also take a mutable reference in the same scope.
 
 A scope is the range within a program for which a value is valid.
 **When the owner goes out of scope, the value will be dropped.**
 In rust a scope is created with curly brace blocks.
-A reference also cannot outlive its value.
 Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
+**References must always be valid.**
+A reference's scope starts from where it is introduced and continues through the last time that reference is used.
+No dangles! A reference also cannot outlive its value, i.e. no references to empty, or wrong memory.
 
 ## Drop
 
@@ -76,33 +78,37 @@ To use the data that was moved to a function either
 1. Make another, separate version of the data.
 2. Make the function borrow its argument instead of taking ownership of it, and then copy the data within the function in order to return an owned.
 
-## Reference and borrow
+## Reference
 
-- value, `let x = 5;`
-- immutable reference or immutable borrow, `y = &x;`
-- mutable reference or mutable borrow, `y = &mut x`
-
-References are explicitly created with `&`.
-When passed to a function references are explicitly dereferenced with `*`.
 Passing by reference is important when we have a large object and don't want to copy it.
+Unlike a pointer, a reference is guaranteed to point to a valid value of a particular type for the life of that reference.
+Because it does not own it, the value the references points to will not be dropped when the reference stops being used.
+
+Ampersands represent references and they allow you to refer to some value without taking ownership of it.
+References are explicitly created with `&`.
+Add `&` prefix to a variable on instantiation, or to the parameter type signature if passed to a function.
+
+The opposite of referencing by using `&` is dereferencing, which is accomplished with the dereference operator, `*`.
+When passed to a function references are explicitly dereferenced with `*`.
 Borrowing is the name given whenever you pass something by reference.
 
-```rust
-fn modifies(x: &mut f64) {
-    *x += 1.0;
-}
+- a value, `let x = 5;`
+- an immutable reference or immutable borrow, `y = &x;`
+- mutable reference or mutable borrow, `y = &mut x`
 
-fn main() {
-    let mut res = 0.0;
-    println!("res is {}", res); // res is 0
-    modifies(&mut res);
-    println!("res is {}", res); // res is 1
-    modifies(&mut res);
-    println!("res is {}", res); // res is 2
-}
+If you have a mutable reference to a value, you can have no other references to that value.
+A reference’s scope starts from where it is introduced and continues through the last time that reference is used.
+
+```rust
+let mut x = 100;
+let y = &mut x;
+*y += 100;
+let z = &mut x; // this is ok because scope of y has ended
+*z += 1000;
+assert_eq!(x, 1200);
 ```
 
-## Misc.
+## Misc
 
 You can have
 

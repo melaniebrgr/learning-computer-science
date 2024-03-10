@@ -61,8 +61,55 @@ fn main() {
 }
 ```
 
-Use a for loop to iterate over values in a vector.
+If you want to store different types in a vector, you can use an enum.
+If you don’t know the exhaustive set of types a program will get at runtime to store in a vector, the enum technique won’t work and a trait object can be used instead.
+
+```rust
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
+
+let row = vec![
+    SpreadsheetCell::Int(3),
+    SpreadsheetCell::Text(String::from("blue")),
+    SpreadsheetCell::Float(10.12),
+];
+```
+
+There are two ways to reference a value stored in a vector: via indexing (`[0]`) or using the `.get(0)` method.
+The `.get` method returns an option.
+(There are [many useful methods](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html) on an Vector)
+Access via index when you want the program to panic for an out-of-bounds request.
+Access via get when you want to provide user friendly feedback for an out-of-bounds request.
+
+```rust
+let v = vec![1, 2, 3, 4, 5];
+
+let third: &i32 = &v[2];
+println!("The third element is {third}");
+
+let third: Option<&i32> = v.get(2);
+match third {
+    Some(third) => println!("The third element is {third}"),
+    None => println!("There is no third element."),
+}
+```
+
+To access all elements in turn we iterate over them.
+A for loop is used to iterate over values in a vector.
+
+```rust
+let v = vec![100, 32, 57];
+for i in &v {
+    println!("{i}");
+}
+```
+
 It is possible to iterate immutably and mutably, using `mut` and a dereference operator `*`.
+To change the value that the mutable reference refers to, we have to use the * dereference operator.
+The dereference operator let's us to get to the value in i before.
 The reference to the vector that the for loop holds prevents simultaneous modification of the whole vector.
 
 ```rust
@@ -71,10 +118,6 @@ for i in &mut v {
     *i += 50;
 }
 ```
-
-There are two ways to reference a value stored in a vector: via indexing or using the get method
-
-
 
 ## Iterator
 
