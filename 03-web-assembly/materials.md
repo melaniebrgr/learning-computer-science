@@ -24,3 +24,7 @@
 - [ ] [Rust and WebAssembly](https://rustwasm.github.io/docs/book/)
   - [x] 1-3. Intro, Why, Background
   - [ ] 4. Tutorial
+
+## Tools
+
+- [wat2wasm](https://webassembly.github.io/wabt/demo/wat2wasm/)

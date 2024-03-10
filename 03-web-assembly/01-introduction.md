@@ -1,4 +1,4 @@
-# WebAssembly (wasm)
+# WebAssembly (Wasm)
 
 WebAssembly was aimed primarily at the web platform.
 Think of WebAssembly like a tiny simulated computer: it has it's own call stack and instructions, it's own byte-array of memory, and is sandboxed unless access to the outside world is explicitely provided.
@@ -20,9 +20,7 @@ The wasm executable format was designed to be portable and compact.
 The wasm binary file can be used in the same process as another language.
 In JS the wasm binary gets compiled into a module and called from JS runtime context.
 
-## WASI
-
-The WebAssembly System interface standard is like an API ontop of WebASsembly. The (preview1) spec API provides for:
+The WebAssembly System interface (WASI) standard is like an API ontop of WebASsembly. The (preview1) spec API provides for:
 
 - command line arguments
 - environment variables
@@ -30,6 +28,8 @@ The WebAssembly System interface standard is like an API ontop of WebASsembly. T
 - get random
 - file system access
 - _use_ sockets (but not create them)
+
+A note on Assembly versus WebAssembly because they can be confused. While both assembly language and WebAssembly are low-level programming languages, assembly language is specific to particular hardware architectures and is used for low-level system programming, whereas WebAssembly is a platform-independent bytecode format designed for running code efficiently in web browsers.
 
 ## Tooling
 
