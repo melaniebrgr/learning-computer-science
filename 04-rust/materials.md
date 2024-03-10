@@ -51,7 +51,7 @@
   - [ ] 4. Understanding ownership
     - [ ] 4.1 What is Ownership
     - [ ] 4.2 References and Borrowing
-    - [ ] 4.3 The Slice Type
+    - [x] 4.3 The Slice Type
   - [ ] 5. Using Structs to Structure Related Data
   - [ ] 6. Enums and Pattern Matching
     - [x] 6.1. Defining an Enum
@@ -79,7 +79,7 @@
   - [x] variables
   - [x] functions
   - [x] if
-  - [ ] primitive types
+  - [x] primitive types
   - [ ] vecs
   - [ ] move semantics
   - [ ] structs

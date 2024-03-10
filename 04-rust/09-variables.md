@@ -1,5 +1,11 @@
 # Basics
 
+- types
+- variables
+- expressions
+- comments
+- logging
+
 ## Types
 
 Every value in rust has a type.

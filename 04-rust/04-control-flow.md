@@ -1,5 +1,8 @@
 # Control flow
 
+- if/else
+- matching
+
 ## If/else
 
 Same as JavaScript, just drop the parentheses.
@@ -15,7 +18,7 @@ if x == 10 {
 }
 ```
 
-## Ternary
+### Ternary
 
 Kinda? Just use if/else
 

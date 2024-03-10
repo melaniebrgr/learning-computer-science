@@ -11,6 +11,7 @@ This is how we get "automatic memory management", or "garbage collection at the 
 **There can only be one owner at a time**--one Lord of the Ring.
 There can be unlimited immutable borrows (references), _or_ only one mutable borrow.
 That is, you can read the value as many times as you want _or_ write the value in once place.
+If we have an immutable reference to something, we cannot also take a mutable reference.
 
 A scope is the range within a program for which a value is valid.
 **When the owner goes out of scope, the value will be dropped.**
