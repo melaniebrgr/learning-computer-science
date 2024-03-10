@@ -1,6 +1,8 @@
 # Algebraic data types (ADTs)
 
 1. structs
+1. tuple structs
+1. unit-like structs
 1. enums
 
 ADTs allow us to model complex data structures and enforce constraints at the type level.
@@ -9,12 +11,10 @@ ADTs allow us to model complex data structures and enforce constraints at the ty
 
 A struct is an example of a "product" algebraic type that allows to group related types into a logical domain.
 
-Data and behaviour are defined in seperate blocks in Rust.
-A struct(ure) specifies the data shape and size, and an impl(ementation) defines behaviour.
-Rust structs contain named fields that hold properties.
+A struct, or structure, lets you package together and name multiple related values to make up a meaningful group.
 A struct is a property layout, essentially a blueprint, that defines exactly what is going to be on that item.
-It has a defined size and will have certain amount of bytes associated with it.
-The values of a struct will be placed next to each other in memory.
+Structs and enums are the building blocks for creating new types in your program’s domain.
+The struct definition is like a general template for the type, and instances fill in that template with particular data to create values of the type.
 
 ```rust
 #[derive(Debug)] 
@@ -31,7 +31,46 @@ let p = Person {
 };
 ```
 
-Note, `#[derive(Debug)]` directive can be used to debug structs.
+(Note, `#[derive(Debug)]` directive can be used to debug structs.)
+
+It’s often useful to create a new instance of a struct that includes most of the values from another instance, but changes some. You can do this using struct update syntax.
+
+```rust
+let user2 = User {
+    email: String::from("another@example.com"),
+    ..user1
+};
+```
+
+Structs have a defined size and will have certain amount of bytes associated with it.
+The values of a struct will be placed next to each other in memory.
+While a `struct` specifies the data shape and size, and an `impl` defines behaviour.
+Data and behaviour are defined in seperate blocks in Rust.
+
+## Tuple structs
+
+Tuple structs have added meaning from the struct name, but don’t have named fields.
+They are useful when you want to give the whole tuple a name to differentiate it from other tuples.
+Even if another Tuple struct has the same type signature, a function that takes a parameter a tuple struct of one type cannot take another.
+Tuple structs are accessed like tuples.
+
+```rust
+struct Color(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+}
+```
+
+## Unit-like structs
+
+Unit-like structs are structs that don’t have fields.
+Theya re useful when it is necessary to implement a trait on a type but don't have data to store in the type itself.
+Unit-like structs behave like `()`.
+
+```rust
+struct AlwaysEqual;
+```
 
 ## Enums
 
