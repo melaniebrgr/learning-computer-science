@@ -34,6 +34,7 @@ let p = Person {
 (Note, `#[derive(Debug)]` directive can be used to debug structs.)
 
 It’s often useful to create a new instance of a struct that includes most of the values from another instance, but changes some. You can do this using struct update syntax.
+The syntax .. specifies that the _remaining fields not explicitly set_ should have the same value as the fields in the given instance.
 
 ```rust
 let user2 = User {

@@ -9,6 +9,8 @@ Unlike function calls though, macro source code is instead expanded on compilati
 
 Some useful Rust macros:
 
+- `println!("{}", value)`, `println!("{:?}", value)`, or `println!("{:?}", value)` (might need to pair with `#[derive(Debug)]`)
+- `dbg!(value)`
 - `assert_eq!` asserts that two things must be equal or panics
 - `format!` builds up strings
 - `todo!("describe")` tells the compile to ignore unfinished parts to be added later

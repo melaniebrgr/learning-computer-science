@@ -1,7 +1,6 @@
 # Behaviour
 
 1. Functions
-1. Impls
 1. Traits
 1. Generics
 
@@ -43,40 +42,6 @@ Uses a bar instead of parentheses
 
 |x| x + 1
 ```
-
-## Impls
-
-Implementations are the associated function of a struct.
-An `impl` can use a reference self argument, i.e. `&self` is short for `self: &Person`.
-
-```rust
-struct Person {
-    first_name: String,
-    last_name: String
-}
-
-impl Person {
-    fn new(first: &str, name: &str) -> Person {
-        Person {
-            first_name: first.to_string(),
-            last_name: name.to_string()
-        }
-    }
-    fn full_name(&self) -> String {
-        format!("{} {}", self.first_name, self.last_name)
-    }
-}
-
-let p = Person::new("John","Smith");
-println!("fullname {}", p.full_name()); // fullname John Smith
-```
-
-To summarize
-
-- no `self` argument: you can associate functions with structs, like the new "constructor".
-- `&self` argument: can use the values of the struct, but not change them
-- `&mut self` argument: can modify the values
-- `self` argument: will consume the value, which will move.
 
 ## Traits
 
