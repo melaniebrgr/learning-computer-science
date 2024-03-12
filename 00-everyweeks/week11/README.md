@@ -43,6 +43,8 @@ Check out projects: trunk, web-sys
 ## Stupid questions
 
 1. Where all can I run wasm?
+1. What is `wasm-pack`?
+1. What is all that stuff that `wasm-pack build` generated?
 1. Is Figma using WebAssembly, and how?
 1. Is Photoshop-in-the-browser using WebAssembly, and how?
 
