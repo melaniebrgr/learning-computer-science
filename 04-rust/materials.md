@@ -88,7 +88,7 @@
   - [x] primitive types
   - [x] vecs
   - [x] move semantics
-  - [ ] structs
+  - [x] structs
   - [ ] enums
   - [ ] strings
   - [ ] modules
