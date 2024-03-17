@@ -1,6 +1,6 @@
 # Everyweeks
 
-The idea is stolen from [beeple](https://www.beeple-crap.com/everydays[) and [coding garden's try Fridays](https://coding.garden/) except the timescale is a week, not a day. It will go something like this:
+The idea is stolen from [beeple](https://www.beeple-crap.com/everydays) and [coding garden's try Fridays](https://coding.garden/) except the timescale is a week, not a day. It will go something like this:
 
 - Monday: learn and ideate
 - Tuesday: learn and ideate
