@@ -6,6 +6,7 @@
 2. [Programming](./02-programming/)
 3. [Web Assembly](./03-web-assembly/)
 4. [Rust](./04-rust/)
+5. [Systems](./05-systems)
 
 ### Learning path materials
 
@@ -16,4 +17,3 @@
 - https://github.com/quabanc/awesome-computer-science
 - https://thecrashcourse.com/topic/computerscience
 - https://github.com/charlax/professional-programming
-
