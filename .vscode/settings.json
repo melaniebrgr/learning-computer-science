@@ -4,6 +4,7 @@
         "prog",
         "comp",
         "rust",
-        "wasm"
+        "wasm",
+        "sys"
     ]
 }
