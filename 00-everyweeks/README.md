@@ -34,11 +34,10 @@ Basically I will try something for a week and then move on to the next thing. Th
 
 ## Topic ideas
 
-- Leptos: create personal blog site
+- Create personal blog site with Leptos
 - SQLite and Wasm
-- "Persistent Redis"
 - Godot
-- Build a game in Rust
+- Build a game in Rust, e.g. a maze explorer
 - Build git in Rust
 - FE systems: web sockets, workers, local caching, cookies, polling
 - SpacetimeDB (https://spacetimedb.com/)

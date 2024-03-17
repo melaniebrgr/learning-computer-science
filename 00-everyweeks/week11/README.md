@@ -3,11 +3,18 @@
 ## Week 10 project journaling
 
 DevWorld conf in Amsterdam on March 1 was my first "silent disco" conference.
-In the main hall, talks were attended by putting on the headphones left on the seat.
-One silent disco talk I listened to was on Wasm and serverless.
-During the talk the presenter made a pretty compelling case.
+In the main hall the talks were attended by putting on the headphones left on the seat that were pretuned to the stages radio frequency (I assumed).
+One of the silent disco talks was on Wasm and serverless, "A Greener, Cost-Effective Cloud with Serverless WebAssembly" by Sohan Maheshwar, and he made a compelling case for it (8).
+I've been curious out WebAssembly (wasm) for a long time, but even after listening to talks about it and reading some articles I still couldn't wrap my head around it.
+I think part of the problem for me is that WebAssembly encompasses of different concepts, and when people discuss WebAssembly what the mean can be different depending on the context.
+They can mean the bytecode itself, the original project vision of running non-JS code in the browser, the new iniatives to run Wasm outside the browser.
+Surrounding wasm is dizzying amount of supporting projects and tools: WASI, WABT, Wasmer, Wasmtime ... it's a lot.
 
-How can Rust be used _with_ JS? From Chris Biscardi (1) here are three ways:
+The lure of idea of building web applications with native-like performance with wasm was one of my main motivations, maybe strangely, for Rust though.
+I knew that wasm was being used to create the Figma application--it made a big spash in the dev world several years ago--and Rust was coming up a lot as being well-positioned for wasm development.
+For this everyweek I wanted to explore this idea for myself, finally.
+
+I started by first taking a step back, because apparently porting to wasm isn't the only way to use Rust with JS. According to Chris Biscardi (1) there are three ways:
 
 1. Embed Rust in a JS package
 2. Publish Rust binaries to NPM
@@ -33,16 +40,28 @@ At the DevWorld conveference Ryan Dahl announced the release of [JSR](https://js
 
 ### 3. Compile Rust to Wasm
 
-The Rust language has repeatedly been mentioned as great compilation to wasm story.
-This was actually the main reason I started getting interested in it.
-Rust is a popular for compilations to wasm because it, "lacks a runtime, enabling small `.wasm` sizes because there is no extra bloat included like a garbage collector."
-It's also relatively easy, because compiling to wasm is built into the rust compiler.
-The wasm that `rustc` generates can also be optimised further with `wasm-opt`.
-With cargo we can install the crate `wasm-bindgen`, a tool that bridges JS and Rust and "allows JS to call a Rust API with a string, or a Rust function to catch a JavaScript exception" (7).
+Why has the Rust language has repeatedly been mentioned as great compilation to wasm story?
+Because it "lacks a runtime, enabling small `.wasm` sizes because there is no extra bloat included like a garbage collector."
+It's also relatively easy to do, because compiling to wasm is built into the rust compiler.
+The wasm that `rustc` generates can be optimised further with `wasm-opt` (this is done automatically if you use `wasm-pack` to build the wasm lib).
+With cargo we can install the crate `wasm-bindgen`, a tool that bridges JS and Rust.
+It "wraps up that WebAssembly file into a module the browser can understand" (7).
 
-## Stupid questions
+1. `cargo new --lib guess-the-pinyin`
+2. update TOML file specifying lib type (`cdylib`) and dependencies (`wasm-bindgen`)
+3. Replace the generated code with some simple Rust code the `lib.rs` to get started.
+4. Build the wasm file! `wasm-pack build --target web`.
+5. Load it the wasm file! Create a simple HTML file that loads the JS module that loads the wasm file that `wasm-pack` just generated.
+6. 派对！(pàiduì! a.k.a party!)
 
-1. How do I even execute wasm in the browser?
+## Q. Stupid questions
+
+1. ✅ How do I even execute wasm in the browser?
+1. ✅ Why is Rust such a popular language for using for WebAssembly?
+1. ⬜️ How is Figma using WebAssembly?
+1. ⬜️ What is all that stuff in the JS module wasm-bindgen generated?
+
+### How do I even execute wasm in the browser?
 
 Starting from a very basic handwritten `wat` file, a `wasm` file can first be generated and loaded by JS.
 I created a `hello.wat` file and pasted in some basic wat code.
@@ -57,13 +76,9 @@ Because it's not so obvious for basic JS developers like myself, here are the st
 
 To run `hello.wasm` in the browser, the wasm file needed to be loaded by JS, the JS needed to be bootstrapped by HTML, and the HTML needed served from a server and not just the local filesystem. (The [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VSCode extension was nice for this because is has live reloading.) After all of that, I did manage to log out (and then contemplate) the meaning of life to console. Great success.
 
-1. Why is Rust such a popular language for using for WebAssembly?
+### Why is Rust such a popular language for using for WebAssembly?
 
 "For the third year running, Rust is the most frequently used language for WebAssembly. Rust has always been a good fit for WebAssembly; it is a modern system-level language that has broad popularity (the Stack Overflow revealed it is the most desired language seven years in a row), it also happens to be a popular language for authoring WebAssembly runtimes and platforms." (6)
-
-1. How is Figma using WebAssembly?
-1. How is Photoshop-in-the-browser using WebAssembly?
-1. What are these related projects I hear about, trunk, web-sys?
 
 ## References
 
@@ -74,3 +89,4 @@ To run `hello.wasm` in the browser, the wasm file needed to be loaded by JS, the
 5. [Packaging Rust Applications for the NPM Registry](https://blog.orhun.dev/packaging-rust-for-npm/)
 6. [The State of WebAssembly 2023](https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html)
 7. [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
+8. This isn't the talk from DevWorld, but is the same take he gave at another conference, [A Greener, Cost-Effective Cloud with Serverless WebAssembly](https://www.youtube.com/watch?v=QVfKt7aIZO8)
