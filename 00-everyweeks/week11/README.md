@@ -34,17 +34,20 @@ At the DevWorld conveference Ryan Dahl announced the release of [JSR](https://js
 ### 3. Compile Rust to Wasm
 
 The Rust language has repeatedly been mentioned as great compilation to wasm story.
-One reason Rust is a popular language to compile to wasm is that it, "lacks a runtime, enabling small .wasm sizes because there is no extra bloat included like a garbage collector."
-Compiling to wasm is built into the rust compiler, that can be optimised with wasm-opt.
-Wasm-bindgen provides the bindings for using wasm in JS.
+This was actually the main reason I started getting interested in it.
+Rust is a popular for compilations to wasm because it, "lacks a runtime, enabling small `.wasm` sizes because there is no extra bloat included like a garbage collector."
+It's also relatively easy, because compiling to wasm is built into the rust compiler.
+The wasm that `rustc` generates can also be optimised further with `wasm-opt`.
+With cargo we can install the crate `wasm-bindgen`, a tool that bridges JS and Rust and "allows JS to call a Rust API with a string, or a Rust function to catch a JavaScript exception" (7).
 
 ## Stupid questions
 
-1. Can I even execute wasm in the browser?
+1. How do I even execute wasm in the browser?
 
-Yes, starting from a very basic handwritten `wat` file, a `wasm` file can be generated and loaded by JS.
-I wrote the simpled `hello.wat` file, and generated the bytecode `wasm` file using the `wat2wasm` tool from the WebAssembly Binary Toolkit (wabt).
-Because it's probably not so obvious for basic JS developers like me, here are the exact steps to install `wabt` tools on MacOS 14.4:
+Starting from a very basic handwritten `wat` file, a `wasm` file can first be generated and loaded by JS.
+I created a `hello.wat` file and pasted in some basic wat code.
+Then I generated the bytecode `wasm` file using the `wat2wasm` tool from the WebAssembly Binary Toolkit (`wabt`).
+Because it's not so obvious for basic JS developers like myself, here are the steps I took to install the `wabt` tools on my MacOS (v14.4):
 
   1. Git clone the repo [as instructed](https://github.com/WebAssembly/wabt?tab=readme-ov-file#cloning).
   2. Install `cmake` with brew, `$ brew install cmake`, and restart the old terminal to check the installation, `$ cmake --version`.
@@ -52,7 +55,7 @@ Because it's probably not so obvious for basic JS developers like me, here are t
   4. Add the folder to your PATH, e.g. to my `.zshrc` I added `export PATH="/path/to/wabt/build/:$PATH"`, then applied the changes to terminal, `$ source ~/.zshrc ` (or you can restart again).
   5. Then `$ wat2wasm hello.wat` created `wat2wasm hello.wasm`. Great success.
 
-To run `hello.wasm` in the browser, The wasm file needed to be loaded by JS, which needed to be bootstrapped by HTML, which needed served from a server and not just the local filesystem. The [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VSCode extension is nice for this because is does live reloading.
+To run `hello.wasm` in the browser, the wasm file needed to be loaded by JS, the JS needed to be bootstrapped by HTML, and the HTML needed served from a server and not just the local filesystem. (The [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VSCode extension was nice for this because is has live reloading.) After all of that, I did manage to log out (and then contemplate) the meaning of life to console. Great success.
 
 1. Why is Rust such a popular language for using for WebAssembly?
 
@@ -70,3 +73,4 @@ To run `hello.wasm` in the browser, The wasm file needed to be loaded by JS, whi
 4. [Lefthook: The fastest polyglot Git hooks manager out there](https://github.com/evilmartians/lefthook/blob/master/packaging/npm/lefthook/package.json)
 5. [Packaging Rust Applications for the NPM Registry](https://blog.orhun.dev/packaging-rust-for-npm/)
 6. [The State of WebAssembly 2023](https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html)
+7. [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm)
