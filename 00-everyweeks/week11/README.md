@@ -59,7 +59,7 @@ It "wraps up that WebAssembly file into a module the browser can understand" (7)
 1. ✅ How do I even execute wasm in the browser?
 1. ✅ Why is Rust such a popular language for using for WebAssembly?
 1. ⬜️ How is Figma using WebAssembly?
-1. ⬜️ What is all that stuff in the JS module wasm-bindgen generated?
+1. ⬜️ What is all that stuff in the JS module `wasm-bindgen` generated?
 
 ### How do I even execute wasm in the browser?
 

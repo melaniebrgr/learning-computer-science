@@ -38,14 +38,21 @@ Common things you can do with a hash map
 
 #### 3. How can I even type pinyin?
 
-On a Mac:
+[Setting up a Mac](https://yoyochinese.com/blog/how-to-type-pinyin-mandarin-chinese-tone-marks-windows-mac-os):
 
 - Keyboard > Text Input > Edit...
 - Add "Pinyin - Simplified" and "ABC - Extended".
 - Toggle on "Pinyin - Simplified" to get the hanzi from typing in pinyin, like 好!
-- Toggle on "ABC - Extended" to type the accented pinyin characters, like hǎo.
+- Toggle on "ABC - Extended" to type the accented pinyin characters.
 
-It's a nuisance. Do specialised keyboards exist or you just get used to it?
+Using the tones on a Mac:
+
+- 1st tone (¯): option + a
+- 2nd tone (´): option + e
+- 3rd tone (ˇ): option + v
+- 4th tone (`): option + ~
+
+So, `⌥ + v + a = ǎ`. It's a nuisance. Do specialised keyboards exist or you just get used to it?
 
 #### 4. Why did I need to trim the value before the HashMap lookup worked?
 
