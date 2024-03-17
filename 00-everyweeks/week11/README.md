@@ -54,6 +54,86 @@ It "wraps up that WebAssembly file into a module the browser can understand" (7)
 5. Load it the wasm file! Create a simple HTML file that loads the JS module that loads the wasm file that `wasm-pack` just generated.
 6. 派对！(pàiduì! a.k.a party!)
 
+Here's the full snippet of input Rust code, modified from the previous "everyweek":
+
+```rust
+use std::collections::HashMap;
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+
+    pub fn alert(s: &str);
+
+    pub fn prompt(s: &str) -> String;
+}
+
+#[wasm_bindgen]
+pub fn main() -> String {
+    let pinyin_to_hanzi = HashMap::from([
+        ("wǒ".to_string(), "我".to_string()),
+        ("nǐ".to_string(), "你".to_string()),
+        ("hǎo".to_string(), "好".to_string()),
+        ("zài".to_string(), "再".to_string()),
+        ("jiàn".to_string(), "见".to_string()),
+        ("jiào".to_string(), "叫".to_string()),
+        ("lǐ".to_string(), "李".to_string()),
+    ]);
+
+    let hanzi_pick = pinyin_to_hanzi.values().nth(0).unwrap();
+    let input = prompt(&format!("What is the pinyin for {}?", &hanzi_pick));
+    let hanzi_maybe = pinyin_to_hanzi.get(input.trim());
+    let you_are_right = "你不错了！👍".to_string();
+    let you_are_wrong = "你错了！👎".to_string();
+    let result;
+
+    match hanzi_maybe {
+        Some(hanzi) => {
+            if hanzi == hanzi_pick {
+                result = you_are_right;
+            } else {
+                result = you_are_wrong;
+            }
+        }
+        None => result = you_are_wrong,
+    }
+
+    return result;
+}
+```
+
+and here's the full snippet HTML code using the output wasm module:
+
+```html
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+  <script type="module">
+    import init, { main } from "./pkg/guess_the_pinyin.js";
+    init().then(() => {
+      const result = main();
+      document.getElementById("result").textContent = result;
+    });
+  </script>
+  <h1>Week 11</h1>
+  <p id="result"></p>
+</body>
+
+</html>
+```
+
+And wow, it really actually worked.
+
+![The prompt dialog is triggered from the wasm module](./assets/screenshot-1.png)
+![User input is compared to the value in the wasm module and the result is returned](./assets/screenshot-2.png)
+
 ## Q. Stupid questions
 
 1. ✅ How do I even execute wasm in the browser?
