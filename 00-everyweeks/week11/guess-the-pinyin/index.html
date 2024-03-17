@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <h1>Week 11</h1>
+</head>
+
+<body>
+  <script type="module">
+    import init, { main } from "./pkg/guess_the_pinyin.js";
+    init().then(() => {
+      const result = main();
+      console.log(result);
+    });
+  </script>
+</body>
+
+</html>
