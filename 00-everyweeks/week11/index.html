@@ -1,0 +1,21 @@
+<html>
+
+<head>
+  <title>Week 11</title>
+</head>
+
+<body>
+  <h1>Week 11</h1>
+  <script>
+    window.onload = async function () {
+      const wasm = await WebAssembly.instantiateStreaming(fetch('./hello.wasm'), {
+        "js": {
+          "print": (x) => console.log(x)
+        }
+      });
+      wasm.instance.exports.addTwo(21, 21);
+    }
+  </script>
+</body>
+
+</html>
