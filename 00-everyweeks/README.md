@@ -40,3 +40,5 @@ Basically I will try something for a week and then move on to the next thing. Th
 - Godot
 - Build a game in Rust
 - Build git in Rust
+- FE systems: web sockets, workers, local caching, cookies, polling
+- SpacetimeDB (https://spacetimedb.com/)
