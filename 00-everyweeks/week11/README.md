@@ -1,36 +1,36 @@
-# Rust in JavaScript (JS)
+# Rust in JavaScript
 
-## Week 10 project journaling
+## Week 10-11 project journaling
 
-The [DevWorld conference](https://devworldconference.com/) in Amsterdam on March 1 was my first "silent disco" conference. To attend talks in the main hall, you put on the headphones left on the seat, which were pretuned to that stages' radio transmission. (I assume but honestly not sure if that was the exact setup.) Anyway, one of the silent disco talks was on WebAssembly (wasm) and serverless, "A Greener, Cost-Effective Cloud with Serverless WebAssembly", by Sohan Maheshwar and he made a compelling case for it (8).
+The [DevWorld conference](https://devworldconference.com/) in Amsterdam on March 1 was my first "silent disco" conference. To attend talks in the main hall, you put on the headphones left on the seat, which were pre-tuned to that stages' radio transmission. (I assume but honestly not sure if that was the exact setup.) Anyway, one of the silent disco talks was on WebAssembly (wasm) and serverless, "A Greener, Cost-Effective Cloud with Serverless WebAssembly", by Sohan Maheshwar and he made a compelling case for it (8).
 
-I've been curious about wasm for a long time, but after listening to some talks and reading articles about it, I still haven't been able to wrap my head around it. I think part my problem was is WebAssembly felt overloaded and when people discussed WebAssembly they might be refering to a different aspect of it depending on the context. There's wasm the bytecode itself, wasm the estoric description ("a binary instruction format for a stack-based virtual machine"), and wasm the ongoing project of supporting non-JS code across browsers. Not to mention that surrounding wasm is dizzying number of related projects and tools: WASI, WABT, Wasmer, Wasmtime ... it's a lot.
+I've been curious about wasm for a long time, but I still haven't been able to wrap my head around it. I think part my problem is WebAssembly feels overloaded and when people discuss WebAssembly they might be referring to different aspects of it depending on the context. There's wasm the bytecode itself, wasm the estoric description ("a binary instruction format for a stack-based virtual machine"), and wasm the ongoing project of supporting non-JavaScript code across browsers. Not to mention that wasm is supported by dizzying number of related projects and tools: WASI, WABT, Wasmer, Wasmtime ... it's a lot.
 
-The lure of building web applications with native-like performance was one of my main motivationss, maybe unintuitively, for learning Rust though. I knew that wasm was being used to create the Figma application—[it made a big spash in the dev world several years ago](https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/)—and Rust was coming up a lot as being well-positioned for wasm development. So, for this "everyweek" I wanted to finally pick at the idea for myself.
+The lure of building web applications with native-like performance was one of my main motivations for learning Rust though. I knew that wasm was being used to create the Figma application—[it made a big spash in the dev world](https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/)—and Rust was coming up repeatedly as being well-positioned for wasm development. So, for this "everyweek" I wanted to pick at the idea for myself, finally.
 
 I started with the initial assumption that porting Rust to wasm was the only way to "use Rust with JS". According to Chris Biscardi (1) there are three ways in fact,
 
-1. embed Rust in a JS package,
+1. embed Rust in a JavaScript (JS) package,
 2. publish Rust binaries to NPM, and
 3. compile Rust to wasm.
 
 ### 1. Embed Rust in a JS program
 
-Rust code is compiled to native binaries and [NAPI-RS](https://napi.rs/), "a framework for building pre-compiled Node.js addons in Rust", provides the bindings for calling out to the native code from a Node application. `NAPI_RS` automatically generates `.d.ts` files, using the `#[napi]` macros (if I understand everything correctly). The goal of the project is "to provide a complete solution for building Node.js native addons, especially for enterprise users" (2). The purpose of going this route is to get a more performant Node.js application (3), since using NAPI-rs incurs a maintainance burden at build time, but not a runtime burden.
+In this approach Rust code is compiled to native binaries and [NAPI-RS](https://napi.rs/), "a framework for building pre-compiled Node.js addons in Rust", provides the bindings for calling out to the native code from a Node application. `NAPI_RS` also automatically generates `.d.ts` files, using the `#[napi]` macros (if I understand everything correctly). The goal of the project is "to provide a complete solution for building Node.js native addons, especially for enterprise users" (2). The idea in the end is a more performant Node.js application (3). Using `NAPI-RS` incurs a maintainance burden at build time, but not, importantly, at runtime.
 
-The project has impressive sponsorship. I'm super curious where and how it might be getting used in production.
+The project has impressive sponsorship. I'm super curious where and how it’s getting used in production applications.
 
 ### 2. Publish Rust binaries to NPM
 
-This is not so much a way to use Rust _in_ a JS program so much as _on_ one, i.e. you created a tool for the JS ecosystem in Rust and want to distribute it where JS developers are: NPM. Paraphrasing from a blog post (5), the idea is that binaries are built for different architectures and distributed with NPM, and each NPM package is responsible for wrapping the target-specific binary and a "base" package that is exposed to the end user. This is what Lefthook does with it's Go code, for example (4). It uses bin path in `package.json` to lookup the executable depending on the OS and arch. Library creators need to publish multiple optional packages for each target. It's a bit tedious and not always straighforward.
+This is not a way to use Rust _in_ a JS program so much as _on_ one, i.e. you created a tool for the JS ecosystem in Rust and want to distribute it where JS developers are: NPM. Paraphrasing from a blog post (5), the idea is that binaries are built for different architectures and distributed with NPM, and each NPM package is responsible for wrapping the target-specific binary and a "base" package that is exposed to the end user. This is what Lefthook does with it's Go code, for example (4). It uses bin path in `package.json` to lookup the executable depending on the OS and arch. The library creators then publish multiple optional packages for each target. It's a bit tedious and not always straighforward.
 
-As a side note, at the DevWorld conveference Ryan Dahl announced the release of [JSR](https://jsr.io/), a "superset" of the node package resgistry NPM. It will be interesting to see if binaries can be published in a similar fashion there.
+As a side note, at the DevWorld conference Ryan Dahl announced the release of [JSR](https://jsr.io/), a "superset" of the node package registry NPM. It will be interesting to see if binaries can be published in a similar fashion there.
 
-### 3. Compile Rust to Wasm
+### 3. Compile Rust to wasm
 
 > "For the third year running, Rust is the most frequently used language for WebAssembly. Rust has always been a good fit for WebAssembly; it is a modern system-level language that has broad popularity (the Stack Overflow revealed it is the most desired language seven years in a row), it also happens to be a popular language for authoring WebAssembly runtimes and platforms." (6)
 
-Why has Rust been repeatedly mentioned as having a great compilation to wasm story? For one, because it "lacks a runtime and no extra bloat like a garbage collector, enabling small `.wasm` sizes." For two, it's relatively easy to do: compiling to wasm is built directly into the rust compiler. The wasm that `rustc` generates can be further optimised with `wasm-opt`. In fact, this is done automatically if you use `wasm-pack` to build the wasm lib. `wasm-pack` seems the recommened way to generat wasm. It "wraps up that WebAssembly file into a module the browser can understand" (7). Lastly, `wasm-bindgen` cargo crate has great support for bridging JS and Rust code.
+Why has Rust been repeatedly mentioned as having a great compilation to wasm story? For one, because it "lacks a runtime and no extra bloat like a garbage collector, enabling small `.wasm` sizes." For two, it's relatively easy: compiling to wasm is built directly into the rust compiler. The wasm that `rustc` generates can be further optimised with `wasm-opt`. In fact, this is done automatically if you use `wasm-pack` to build the wasm lib. `wasm-pack` seems to be the recommended way to generate wasm. It "wraps up that WebAssembly file into a module the browser can understand" (7). Lastly, `wasm-bindgen` cargo crate has great support for bridging JS and Rust code.
 
 To get started I followed the instructions on MDN (7):
 
@@ -139,7 +139,7 @@ I created a `hello.wat` file and copied in some basic wat code. Then I generated
   2. Install `cmake` with brew, `$ brew install cmake`, restart the old terminal, and check the installation, `$ cmake --version`.
   3. Build the executable [as instructed](https://github.com/WebAssembly/wabt?tab=readme-ov-file#building-using-cmake-directly-linux-and-macos).
   4. Add the folder to the PATH, e.g. to my `.zshrc` I added `export PATH="/path/to/wabt/build/:$PATH"`, then applied the changes to terminal, `$ source ~/.zshrc` (or you can restart again).
-  5. Then running `$ wat2wasm hello.wat` created `hello.wasm`. Great success.
+  5. Then run `$ wat2wasm hello.wat` to create `hello.wasm`. Great success.
 
 To run `hello.wasm` in the browser, the wasm file needed to be loaded by JS, the JS needed to be bootstrapped by HTML, and the HTML needed served from a server and not just the local filesystem. (The [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VSCode extension was nice for this because is has live reloading.)
 

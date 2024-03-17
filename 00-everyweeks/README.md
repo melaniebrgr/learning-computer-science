@@ -16,8 +16,8 @@ Basically I will try something for a week and then move on to the next thing. Th
 | ---- | ---------------------------------------------------- | ------ | -------- |
 |   8  | Rust command line game: guess the pinyin | FAIL | Didn't finish by EOW. I had to learn the language basics first. |
 |   9  | [Rust CLI: guess the pinyin](./week09/) | SUCCESS | It runs. I'm taking the W. |
-|  10  | Rust in JavaScript | FAIL | Didn't finish by EOW. Had fun learning more about Wasm though. |
-|  11  | [Rust in JavaScript](./week10/) | IN PROGRESS | TK |
+|  10  | Rust in JavaScript | FAIL | Didn't finish by EOW, but learned more about Wasm. |
+|  11  | [Rust in JavaScript](./week11/) | SUCCESS | Too much wasm and not enough Rust programming though. |
 |  12  |  |  |  |
 |  13  |  |  |  |
 |  14  |  |  |  |
