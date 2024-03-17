@@ -2,6 +2,16 @@ use std::collections::HashMap;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+
+    pub fn alert(s: &str);
+
+    pub fn prompt(s: &str) -> String;
+}
+
+#[wasm_bindgen]
 pub fn main() -> String {
     let pinyin_to_hanzi = HashMap::from([
         ("wǒ".to_string(), "我".to_string()),
@@ -14,6 +24,22 @@ pub fn main() -> String {
     ]);
 
     let hanzi_pick = pinyin_to_hanzi.values().nth(0).unwrap();
+    let input = prompt(&format!("What is the pinyin for {}?", &hanzi_pick));
+    let hanzi_maybe = pinyin_to_hanzi.get(input.trim());
+    let you_are_right = "你不错了！👍".to_string();
+    let you_are_wrong = "你错了！👎".to_string();
+    let result;
 
-    return hanzi_pick.to_string();
+    match hanzi_maybe {
+        Some(hanzi) => {
+            if hanzi == hanzi_pick {
+                result = you_are_right;
+            } else {
+                result = you_are_wrong;
+            }
+        }
+        None => result = you_are_wrong,
+    }
+
+    return result;
 }
