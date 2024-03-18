@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+  <script type="module">
+    import init, { main } from "./pkg/guess_the_pinyin.js";
+    init().then(() => {
+      const result = main();
+      document.getElementById("result").textContent = result;
+    });
+  </script>
+  <h1>Week 12</h1>
+  <p id="result"></p>
+</body>
+
+</html>
