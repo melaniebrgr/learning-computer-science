@@ -28,18 +28,15 @@ pub fn main() -> String {
     let hanzi_maybe = pinyin_to_hanzi.get(input.trim());
     let you_are_right = "你不错了！👍".to_string();
     let you_are_wrong = "你错了！👎".to_string();
-    let result;
 
-    match hanzi_maybe {
+    return match hanzi_maybe {
         Some(hanzi) => {
             if hanzi == hanzi_pick {
-                result = you_are_right;
+                you_are_right
             } else {
-                result = you_are_wrong;
+                you_are_wrong
             }
         }
-        None => result = you_are_wrong,
-    }
-
-    return result;
+        None => you_are_wrong,
+    };
 }
