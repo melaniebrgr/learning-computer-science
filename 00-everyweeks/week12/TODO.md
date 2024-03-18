@@ -9,6 +9,7 @@
 - [ ] Best all time streak is displayed
 - [ ] Compiles to wasm
 - [ ] Application is deployed (live)
+- [ ] Share it!
 
 ## Tech spec
 
