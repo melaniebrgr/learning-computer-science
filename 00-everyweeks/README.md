@@ -18,7 +18,7 @@ Basically I will try something for a week and then move on to the next thing. Th
 |   9  | [Rust CLI: guess the pinyin](./week09/) | SUCCESS | It runs. I'm taking the W. |
 |  10  | Rust in JavaScript | FAIL | Didn't finish by EOW, but learned more about Wasm. |
 |  11  | [Rust in JavaScript](./week11/) | SUCCESS | Too much wasm and not enough Rust programming though. |
-|  12  |  |  |  |
+|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | IN PROGRESS |  |
 |  13  |  |  |  |
 |  14  |  |  |  |
 |  15  |  |  |  |
@@ -31,6 +31,34 @@ Basically I will try something for a week and then move on to the next thing. Th
 |  22  |  |  |  |
 |  23  |  |  |  |
 |  24  |  |  |  |
+|  25  |  |  |  |
+|  26  |  |  |  |
+|  27  |  |  |  |
+|  28  |  |  |  |
+|  29  |  |  |  |
+|  30  |  |  |  |
+|  31  |  |  |  |
+|  32  |  |  |  |
+|  33  |  |  |  |
+|  34  |  |  |  |
+|  35  |  |  |  |
+|  36  |  |  |  |
+|  37  |  |  |  |
+|  38  |  |  |  |
+|  39  |  |  |  |
+|  40  |  |  |  |
+|  41  |  |  |  |
+|  42  |  |  |  |
+|  43  |  |  |  |
+|  44  |  |  |  |
+|  45  |  |  |  |
+|  46  |  |  |  |
+|  47  |  |  |  |
+|  48  |  |  |  |
+|  49  |  |  |  |
+|  50  |  |  |  |
+|  51  |  |  |  |
+|  52  |  |  |  |
 
 ## Topic ideas
 
