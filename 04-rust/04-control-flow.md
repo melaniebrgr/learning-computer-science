@@ -33,6 +33,22 @@ It will execute code against a matching pattern.
 Matching is based on expressions.
 Matches can match on enums (like Options), ranges, and plain values.
 When used with enums, the match expression runs different code depending on which variant of the enum it has.
+Match can be treated as a value and assigned to a variable.
+A catch all can be added to avoid handling all variants but won't give an error if a new variant is added to the enum later.
+
+```rust
+let color_str = match current_color {
+    Color::Green => {
+        "Green"
+    }
+    Color::Yellow => {
+        "Yellow"
+    }
+    _ => {
+        "Nothing"
+    }
+}
+```
 
 ```rust
 let foo = OptionalI32::AnI32(1);

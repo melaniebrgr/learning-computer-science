@@ -29,9 +29,26 @@ let p = Person {
     last_name: "Smith".to_string(),
     age: 16,
 };
+
+println!("Full name: {} {}", p.first_name, p.last_name);
 ```
 
 (Note, `#[derive(Debug)]` directive can be used to debug structs.)
+Structs can contain nested structs, nested tuples and so on.
+
+```rust
+struct Point {
+    x: u8,
+    y: u8,
+}
+
+struct State {
+    color: (u8, u8, u8),
+    position: Point,
+    quit: bool,
+    message: String,
+}
+```
 
 It’s often useful to create a new instance of a struct that includes most of the values from another instance, but changes some. You can do this using struct update syntax.
 The syntax .. specifies that the _remaining fields not explicitly set_ should have the same value as the fields in the given instance.
@@ -77,39 +94,61 @@ struct AlwaysEqual;
 
 An enum is an example of a "sum" type, that is a type that can be one of several variants.
 
+An enum is an _enumeration of possible values_.
 Enums are a way of saying a value is one of a definite set of possible values.
-For example direction has only four values: up, down, left, right.
-An enum becomes a custom data type to be used elsewhere in the code.
-An instance of one of the four direction variants can be created using the same identifier, and conseqently they have the same type.
+For example, direction has only four values: up, down, left, right.
 
 ```rust
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right
+enum Direction { // ← type
+    Up, // ← variant
+    Down, // ← variant
+    Left, // ← variant
+    Right, // ← variant
 }
-// `start` is type `Direction`
-let start = Direction::Left;
+
+let start = Direction::Left; // `start` is has a type of `Direction`
 ```
 
-Like `structs`, behaviour can be defined for an `enum` with an `impl`.
+An instance of one of the four direction variants can be created using the same identifier.
+Enums are instantiated with the `Type::NameOfVariant`, in case there are other enums in the same scope.
+Enum variants can also be used without manual scoping with the `use` keyword, e.g. `use crate::Status::{Poor, Rich};`
+Although the have different values, they have the _same type_.
+Effectively, and enum becomes a custom data type.
+Enum variants can have other types of data inside them, called a payload.
+Any kind of data can be put inside an enum variant, e.g. strings, numeric types, tuples, structs, and other enums.
+Each variant can have different types and amounts of associated data.
 
 ```rust
-impl Direction {
-    fn as_str(&self) -> &'static str {
-        match *self { // *self has type Direction
-            Direction::Up => "Up",
-            Direction::Down => "Down",
-            Direction::Left => "Left",
-            Direction::Right => "Right"
-        }
+enum Message {
+    Move { x: i32, y: i32 },
+    Echo(String),
+    ChangeColor(u8, u8, u8),
+    Quit,
+}
+
+impl Message {
+    fn call(&self) {
+        println!("{:?}", self);
+    }
+}
+
+fn main() {
+    let messages = [
+        Message::Move { x: 10, y: 30 },
+        Message::Echo(String::from("hello world")),
+        Message::ChangeColor(200, 255, 255),
+        Message::Quit,
+    ];
+
+    for message in &messages {
+        message.call();
     }
 }
 ```
 
-An enum can also be used to consicely represent not only the type kind but the value too.
+An enum can also be used to consicely represent not only the type but the value too.
 Put another way, each enum variant can become a function that constructs an enum instance.
+We automatically get this constructor function defined as a result of defining the enum.
 
 ```rust
     enum IpAddr {
@@ -118,26 +157,17 @@ Put another way, each enum variant can become a function that constructs an enum
     }
 
     let home = IpAddr::V4(String::from("127.0.0.1"));
-
     let loopback = IpAddr::V6(String::from("::1"));
 ```
 
-We automatically get this constructor function defined as a result of defining the enum.
-Any kind of data can be put inside an enum variant, e.g. strings, numeric types, structs, and other enums.
-Each variant can have different types and amounts of associated data.
+Enums can also have an explicit discriminator:
 
 ```rust
-enum IpAddr {
-    V4(String),
-    V6(String),
+enum Color {
+    Red = 0xff0000,
+    Green = 0x00ff00,
+    Blue = 0x0000ff,
 }
-
-enum IpAddr {
-    V4(u8, u8, u8, u8),
-    V6(String),
-}
-
-let ip = IpAddr::V6(String::from("::1"));
 ```
 
 Fun fact: `Option<T>` is an example of an enum.

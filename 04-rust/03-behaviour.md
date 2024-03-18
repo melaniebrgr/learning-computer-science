@@ -71,6 +71,21 @@ class Rectangle implements Area {
 }
 ```
 
+Like `structs`, behaviour can be defined for an `enum` with an `impl`.
+
+```rust
+impl Direction {
+    fn as_str(&self) -> &'static str {
+        match *self { // *self has type Direction
+            Direction::Up => "Up",
+            Direction::Down => "Down",
+            Direction::Left => "Left",
+            Direction::Right => "Right"
+        }
+    }
+}
+```
+
 ## Generics
 
 Functions that don't take a specific type as a parameter, but some type that implements a given trait.

@@ -1,5 +1,7 @@
 # Materials
 
+## Books
+
 - [ ] [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
   - [x] Basics
   - [ ] Structs, Enums and Matching
@@ -81,6 +83,16 @@
   - [ ] 19. Advanced Features
   - [ ] 20. Final Project: Building a Multithreaded Web Server
   - [ ] 21. Appendix
+- [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)
+  - [ ] 1.0 Getting started
+    - [x] 1.1 Installing the rust toolchain
+    - [ ] 1.2 Project setup
+    - [ ] 1.3 IDEs
+    - [ ] Inner development loop
+- [ ] [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)
+
+## Exercises
+
 - [ ] [Rustlings](https://github.com/rust-lang/rustlings)
   - [x] variables
   - [x] functions
@@ -89,7 +101,7 @@
   - [x] vecs
   - [x] move semantics
   - [x] structs
-  - [ ] enums
+  - [x] enums
   - [ ] strings
   - [ ] modules
   - [ ] hashmaps
@@ -105,6 +117,9 @@
   - [ ] macros
   - [ ] clippy
   - [ ] conversions
+
+## Courses
+
 - [ ] [Rust for TypeScript Developers](https://frontendmasters.com/courses/rust-ts-devs)
   - [x] Basics
     - [x] Rust Basics
@@ -142,14 +157,29 @@
     - [ ] Refactor Rectangle and Circle
     - [ ] Reading Shapes from a File
   - [ ] Wrapping Up
-- [ ] [Zero to production in rust](https://www.zero2prod.com/index.html)
-  - [ ] 1.0 Getting started
-    - [x] 1.1 Installing the rust toolchain
-    - [ ] 1.2 Project setup
-    - [ ] 1.3 IDEs
-    - [ ] Inner development loop
-- [ ] [Learn X in Y minutes](https://learnxinyminutes.com/)
+- [ ] [The Rust Programming Language](https://frontendmasters.com/courses/rust/)
+  - [ ] Introduction
+  - [ ] Primitives
+    - [ ] Strings
+    - [ ] Floats & Mutability
+    - [ ] Rust Q&A
+    - [ ] Numeric Types & Type Annotations
+    - [ ] Integers
+    - [ ] Booleans, Conditionals, Statements, and Expressions
+    - [ ] Statements, and Expressions Q&A
+    - [ ] Primitives Recap and Q&A
+    - [ ] Primitives Exercise
+    - [ ] Primitives Solution
+  - [ ] Collections
+  - [ ] Pattern matching
+    - [x] Enums & Pattern Matching
+    - [ ] Methods
+    - [ ] Type Parameters
+
+## Videos
+
 - [ ] [Learn Rust with Rustlings](https://www.youtube.com/watch?v=G3Vr-yswlaU&t=763s)
-- [ ] [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)
-- [ ] [Let's Get Rusty: Bootcamp](https://product.letsgetrusty.com/bootcamp)
-  - [x] Day 1: The Great Migration to Rust
+
+## Articles
+
+- [ ] [Learn X in Y minutes](https://learnxinyminutes.com/)
