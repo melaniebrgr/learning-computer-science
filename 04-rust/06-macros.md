@@ -9,6 +9,7 @@ Unlike function calls though, macro source code is instead expanded on compilati
 
 Some useful Rust macros:
 
+- `write!` here f is anything that implements Write.
 - `println!("{}", value)`, `println!("{:?}", value)`, or `println!("{:?}", value)` (might need to pair with `#[derive(Debug)]`)
 - `dbg!(value)`
 - `assert_eq!` asserts that two things must be equal or panics

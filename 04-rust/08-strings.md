@@ -13,6 +13,12 @@ This is why string literals are immutable; `&str` is an immutable reference.
 
 ## String
 
+At a glance:
+
+- allocated on the heap
+- have an address, size, capacity
+- do not implement the Copy trait / get moved
+
 Any system language has two kinds of string, one static and known at compile time, and dynamically allocated at runtime.
 Rust is no exception: it has a static string literal (`str`) type, and dynamic **S**tring.
 Under the hood, String is basically a `Vec<u8>` and &str is `&[u8]`, always holding or referencing a valid UTF-8 sequence.
@@ -84,7 +90,13 @@ for _ in 0..5 {
 // if the correct capacity, 25, had been pre-allocated more would not have been re-allocated in the loop
 ```
 
-## str
+## &str
+
+At a glance:
+
+- allocated on the stack
+- have an address, size
+- implement the Copy trait
 
 The `str` type, also called a 'string slice', is the most primitive string type.
 A string slice is an immutable view into another string, like a view `&[u8]` into `Vec<T>`

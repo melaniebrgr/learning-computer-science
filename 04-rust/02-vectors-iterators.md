@@ -121,6 +121,9 @@ for i in &mut v {
 
 ## Iterator
 
+An interator is a struct with a next method that may return Some or None.
+In the process the iterator itself gets modified, it keeps the state for the iteration (like next index).
+The data being iterated over _usually_ is not modified.
 The general pattern for interators: data structure A -> iterator -> data structure B
 An iterator is _a seperate data structure_, it is not the thing itself.
 An iterator only refers to the thing itself.

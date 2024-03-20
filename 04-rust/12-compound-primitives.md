@@ -11,6 +11,7 @@ Rust has two primitive compound types: tuples and arrays.
 A tuple is a way of grouping together values of different types into one compound type.
 Like arrays, tuples have a fixed length and once declared, they cannot grow or shrink in size.
 Unlike arrays, tuples can contain multiple different types.
+An example is the Iterator `enumerate` that creates tuples of the key and value.
 
 Tuples are constructed using parentheses ()
 Tuples can be a useful way to return multiple values from a function.

@@ -1,6 +1,7 @@
 # Behaviour
 
 1. Functions
+1. Impls
 1. Traits
 1. Generics
 
@@ -43,7 +44,7 @@ Uses a bar instead of parentheses
 |x| x + 1
 ```
 
-## Methods
+## Impl (methods)
 
 Methods are used to define behaviour..
 Behaviour can be defined for a `struct` and a `enum` with an `impl`.
@@ -53,6 +54,13 @@ Methods are essentially namespaced functions.
 Self refers to the instance of the struct or enum.
 It enables "method syntax".
 Properly, a method is anything that takes self as an argument.
+
+To summarize:
+
+- no `self` argument: associates a function with the struct or enum, like a new "constructor"
+- `&self` argument: uses values but does not change them
+- `&mut self` argument: changes values
+- `self` argument: consumes the value, moving it
 
 ```rust
 enum Color { ... }
@@ -76,6 +84,29 @@ impl Direction {
             Direction::Left => "Left",
             Direction::Right => "Right"
         }
+    }
+}
+```
+
+## Traits
+
+A reusable deffinition for implementations to ensure consistent behaviour.
+After defining a trait you can then implement that trait _for_ a type.
+
+```rust
+trait Show {
+    fn show(&self) -> String;
+}
+
+impl Show for i32 {
+    fn show(&self) -> String {
+        format!("four-byte signed {}", self)
+    }
+}
+
+impl fmt::Debug for Person {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.full_name())
     }
 }
 ```

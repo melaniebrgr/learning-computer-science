@@ -160,7 +160,8 @@ We automatically get this constructor function defined as a result of defining t
     let loopback = IpAddr::V6(String::from("::1"));
 ```
 
-Enums can also have an explicit discriminator:
+Enums can also have an explicit discriminator.
+Only "primitive representations" can be used as explicit discriminators: u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, and isize.
 
 ```rust
 enum Color {

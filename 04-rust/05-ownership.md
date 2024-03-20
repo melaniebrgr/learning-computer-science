@@ -18,6 +18,7 @@ A scope is the range within a program for which a value is valid.
 In rust a scope is created with curly brace blocks.
 Deallocating resources at the end of an item’s lifetime is called Resource Acquisition Is Initialization (RAII).
 **References must always be valid.**
+A reference must not outlive the owner!
 A reference's scope starts from where it is introduced and continues through the last time that reference is used.
 No dangles! A reference also cannot outlive its value, i.e. no references to empty, or wrong memory.
 
@@ -30,6 +31,8 @@ Anything that requires allocation implements `Drop`.
 
 ## Copy
 
+Assignment of a non-Copy value moves the value from one location to another.
+Otherwise, Rust would be forced to implicitly do a copy and break its promise to make allocations explicit.
 Values that implement the `Copy` trait:
 
 - The Boolean type

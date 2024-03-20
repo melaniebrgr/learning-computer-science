@@ -173,13 +173,13 @@ WARNING: No more materials are allowed!
     - [ ] Primitives Exercise
     - [ ] Primitives Solution
   - [ ] Collections
-  - [ ] Pattern matching
+  - [x] Pattern matching
     - [x] Enums & Pattern Matching
     - [x] Methods
     - [x] Type Parameters
     - [x] Pattern Matching Recap and Q&A
     - [x] Pattern Matching Exercise
-    - [ ] Pattern Matching Solution
+    - [x] Pattern Matching Solution
   - [ ] Vectors
     - [ ] Stack Memory
     - [ ] The Heap
