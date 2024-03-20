@@ -8,6 +8,7 @@
 - [x] Current streak is displayed
 - [ ] Best all time streak is tracked
 - [ ] Best all time streak is displayed
+- [ ] Pick the tone mark... somehow
 - [ ] Compiles to wasm
 - [ ] Application is deployed (live)
 - [ ] Share it!

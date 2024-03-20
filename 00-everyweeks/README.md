@@ -62,7 +62,8 @@ Basically I will try something for a week and then move on to the next thing. Th
 
 ## Topic ideas
 
-- Create personal blog site with Leptos
+- Create a website with Leptos
+- Deploying an a wasm app: CI/CD and AWS
 - SQLite and Wasm
 - Godot
 - Build a game in Rust, e.g. a maze explorer
