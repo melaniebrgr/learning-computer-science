@@ -170,23 +170,42 @@ enum Color {
 }
 ```
 
-Fun fact: `Option<T>` is an example of an enum.
+### Option
+
+Option represents the possible absense of a value.
+`Option<T>` is an example of an enum.
 The Option type encodes the common scenario in which a value could be something or nothing.
-
-### Errors
-
-Everything that can be an error must be explicitely handled in Rust.
-An error is an enum, and it's variants, `Err` and `Ok` are first class citizens
-
-You can do a bunch of things with errors
+Because Options are so common they are built into the standard library and the variants can be used without namespacing, e.g. `let email: Option<String> = Some(email_str);`
 
 ```rust
-if let Ok(value) = a_function_that_can_error() { ... }
+enum Option<T> { // T is a type parameter
+    None,
+    Some(T),
+}
+```
+
+### Result
+
+Result represents an operation that could have failed, i.e. an error.
+An error is an enum, and it's variants, `Err` and `Ok` are first class citizens
+Everything that can be an error must be explicitely handled in Rust.
+
+```rust
+enum Result<O, E> {
+    Ok(O),
+    Err(E),
+}
+```
+
+Results can also be used without namespacing.
+You can do a bunch of things with errors.
+
+```rust
 match a_function_that_can_error() {
   Ok(value) => println!("{}", value);
   Err(e) = eprintln!("{}", value);
 }
-_ = a_function_that_can_error();
+
 let foo = a_function_that_can_error().unwrap(); // yolo
 let foo = a_function_that_can_error().expect("should never fail"); // respectful yolo
 let foo = a_function_that_can_error().unwrap_or(0); // default value

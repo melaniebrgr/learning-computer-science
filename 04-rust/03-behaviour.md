@@ -43,35 +43,29 @@ Uses a bar instead of parentheses
 |x| x + 1
 ```
 
-## Traits
+## Methods
 
-Traits define a set of functions that types can implement.
-Types can implement multiple traits, and traits can have default implementations for functions.
-Traits are used to define behaviour, e.g. implement methods on structs.
-A trait is most similar to an interface in TypeScript.
+Methods are used to define behaviour..
+Behaviour can be defined for a `struct` and a `enum` with an `impl`.
 They enable composition.
-In TypeScript a Class can implement an interface, which requires that all properties and methods of the interface be implemented on the class.
+Methods are essentially namespaced functions.
+`self` and `Self` are special values in Rust and can only be used within an `impl`.
+Self refers to the instance of the struct or enum.
+It enables "method syntax".
+Properly, a method is anything that takes self as an argument.
 
-```typescript
-interface Area {
-  area(): number;
+```rust
+enum Color { ... }
+
+impl Color {
+  fn rgb(color: Color) -> (u8, u8, u8) {}
+  fn new(r: u8, g: u8, b: u8) -> Color { ... }
 }
 
-class Rectangle implements Area {
-  constructor(
-    public x: number,
-    public y: number,
-    public width: number,
-    public height: number
-  ) {}
-
-  area(): number {
-    return this.width * this.height;
-  }
-}
+let red = Color::new(250, 0, 0);
+let (r, g, b) = Color::rgb(purple); // this is the same
+let (r, g, b) = red.rgb(); // as this (but this is more amenabell to chaining, a syntactive convenience)
 ```
-
-Like `structs`, behaviour can be defined for an `enum` with an `impl`.
 
 ```rust
 impl Direction {

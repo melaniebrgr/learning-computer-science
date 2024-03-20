@@ -1,5 +1,7 @@
 # Materials
 
+WARNING: No more materials are allowed!
+
 ## Books
 
 - [ ] [Rust gentle introduction](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
@@ -173,8 +175,18 @@
   - [ ] Collections
   - [ ] Pattern matching
     - [x] Enums & Pattern Matching
-    - [ ] Methods
-    - [ ] Type Parameters
+    - [x] Methods
+    - [x] Type Parameters
+    - [x] Pattern Matching Recap and Q&A
+    - [x] Pattern Matching Exercise
+    - [ ] Pattern Matching Solution
+  - [ ] Vectors
+    - [ ] Stack Memory
+    - [ ] The Heap
+    - [ ] Vectors Recap and Q&A
+    - [ ] Vectors Exercise
+    - [ ] Vectors Solution
+  - [ ] Ownership
 
 ## Videos
 
