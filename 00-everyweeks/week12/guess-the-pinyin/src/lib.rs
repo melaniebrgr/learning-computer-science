@@ -27,6 +27,13 @@ impl State {
     }
 }
 
+enum Tone {
+    First = 1,  // ¯
+    Second = 2, // ´,
+    Third = 3,  // ˇ,
+    Fourth = 4, // `,
+}
+
 #[wasm_bindgen]
 pub fn main() -> String {
     let mut state = State::new();
@@ -44,8 +51,8 @@ pub fn main() -> String {
     let hanzi_pick = pinyin_to_hanzi.values().nth(0).unwrap();
     let input = prompt(&format!("What is the pinyin for {}?", &hanzi_pick));
     let hanzi_maybe = pinyin_to_hanzi.get(input.trim());
-    let you_are_right = "你不错了！👍".to_string();
-    let you_are_wrong = "你错了！👎".to_string();
+    let you_are_right = "好！👍".to_string();
+    let you_are_wrong = "不好！👎".to_string();
 
     return match hanzi_maybe {
         Some(hanzi) => {
