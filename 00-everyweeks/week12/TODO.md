@@ -2,16 +2,21 @@
 
 ## Feature spec
 
+- [ ] Extend the hanzi list (is there an API?)
 - [ ] A character is picked randomly
-- [ ] Current streak is tracked
-- [ ] Current streak is displayed
+- [x] Current streak is tracked
+- [x] Current streak is displayed
 - [ ] Best all time streak is tracked
 - [ ] Best all time streak is displayed
 - [ ] Compiles to wasm
 - [ ] Application is deployed (live)
 - [ ] Share it!
+- [ ] Use a form element
 
 ## Tech spec
 
-- [ ] An enum with variants of different types
-- [ ] A matcher
+- [x] Struct
+- [x] Impl on a struct
+- [ ] Enum simple
+- [ ] Enum with variants of different types
+- [ ] Matcher

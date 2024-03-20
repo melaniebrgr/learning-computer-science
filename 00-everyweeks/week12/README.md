@@ -13,3 +13,6 @@ The app should be still be compilable to wasm at the end of the week, and this t
 - [ ] What does `wasm-bindgen` do?
 - [ ] Why is `extern "C"` used to import functions from browser-land?
 - [ ] Can I add a build script to `cargo.toml` like I would `package.json`?
+- [ ] How can I debug wasm _well_?
+- [ ] How can I deploy a web app?
+- [ ] Can I compile to wasm on save?

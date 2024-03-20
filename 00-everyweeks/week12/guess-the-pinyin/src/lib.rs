@@ -11,8 +11,26 @@ extern "C" {
     pub fn prompt(s: &str) -> String;
 }
 
+struct State {
+    current_streak: u32,
+}
+
+impl State {
+    fn new() -> Self {
+        State { current_streak: 0 }
+    }
+    fn increment(&mut self) {
+        self.current_streak += 1
+    }
+    fn reset(&mut self) {
+        self.current_streak = 0
+    }
+}
+
 #[wasm_bindgen]
 pub fn main() -> String {
+    let mut state = State::new();
+
     let pinyin_to_hanzi = HashMap::from([
         ("wǒ".to_string(), "我".to_string()),
         ("nǐ".to_string(), "你".to_string()),
@@ -32,11 +50,16 @@ pub fn main() -> String {
     return match hanzi_maybe {
         Some(hanzi) => {
             if hanzi == hanzi_pick {
-                you_are_right
+                state.increment();
+                format!("{}, streak: {}", you_are_right, state.current_streak)
             } else {
-                you_are_wrong
+                state.reset();
+                format!("{}, streak: {}", you_are_wrong, state.current_streak)
             }
         }
-        None => you_are_wrong,
+        None => {
+            state.reset();
+            format!("{}, streak: {}", you_are_wrong, state.current_streak)
+        }
     };
 }
