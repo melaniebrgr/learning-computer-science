@@ -16,8 +16,9 @@
 
 ## Tech spec
 
-- [x] Struct
-- [x] Impl on a struct
-- [ ] Enum simple
-- [ ] Enum with variants of different types
-- [ ] Matcher
+- [x] Struct: `State`
+- [x] Impl on a struct: `State`
+- [x] Enum simple: `Tone`
+- [x] Enum with variants of different types: `Option`
+- [x] Matcher: `hanzi_maybe`
+- [x] String/str manipulation: `trim`
