@@ -38,8 +38,33 @@ WARNING: No more materials are allowed!
     - [x] 2.1. Literals and operators
     - [x] 2.2. Tuples
     - [x] 2.1. Arrays and slices
+  - [ ] 3. Custom Types
+    - [ ] 3.1 Structures
+    - [x] 3.2 Enums
+    - [ ] 3.3 constants
+  - [ ] 4. Variable Bindings
+  - [ ] 5. Types
+  - [ ] 6. Conversion
+  - [ ] 7. Expressions
+  - [ ] 8. Flow of Control
+  - [ ] 9. Functions
+  - [ ] 10. Modules
+  - [ ] 11. Crates
+  - [ ] 12. Cargo
+  - [ ] 13. Attributes
+  - [ ] 14. Generics
+  - [ ] 15. Scoping rules
+  - [ ] 16. Traits
+  - [ ] 17. macro_rules!
+  - [ ] 18. Error handling
   - [ ] 19. Std library types
+    - [x] 19.3 Strings
     - [x] 19.7 HashMap
+  - [ ] 20. Std misc
+  - [ ] 21. Testing
+  - [ ] 22. Unsafe Operations
+  - [ ] 23. Compatibility
+  - [ ] 24. Meta
 - [ ] [The Rust Programming Language](https://doc.rust-lang.org/)
   - [x] 1. Getting Started
     - [x] 1.1. Installation
@@ -104,7 +129,7 @@ WARNING: No more materials are allowed!
   - [x] move semantics
   - [x] structs
   - [x] enums
-  - [ ] strings
+  - [x] strings
   - [ ] modules
   - [ ] hashmaps
   - [ ] options
