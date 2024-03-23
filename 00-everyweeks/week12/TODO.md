@@ -3,7 +3,7 @@
 ## Feature spec
 
 - [ ] Extend the hanzi list (is there an API?)
-- [ ] A character is picked randomly
+- [x] A character is picked randomly
 - [x] Current streak is tracked
 - [x] Current streak is displayed
 - [ ] Best all time streak is tracked

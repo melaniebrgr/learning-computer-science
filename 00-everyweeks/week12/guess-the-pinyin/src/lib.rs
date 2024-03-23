@@ -1,3 +1,4 @@
+use rand::Rng;
 use std::collections::HashMap;
 use wasm_bindgen::prelude::*;
 
@@ -28,10 +29,10 @@ impl State {
 }
 
 enum Tone {
-    First = 1,  // ¯
-    Second = 2, // ´,
-    Third = 3,  // ˇ,
-    Fourth = 4, // `,
+    First = 1,  // 1st tone (¯): option + a
+    Second = 2, // 2nd tone (´): option + e
+    Third = 3,  // 3rd tone (ˇ): option + v
+    Fourth = 4, // 4th tone (`): option + ~
 }
 
 #[wasm_bindgen]
@@ -48,7 +49,8 @@ pub fn main() -> String {
         ("lǐ".to_string(), "李".to_string()),
     ]);
 
-    let hanzi_pick = pinyin_to_hanzi.values().nth(0).unwrap();
+    let random_number = rand::thread_rng().gen_range(0..=6);
+    let hanzi_pick = pinyin_to_hanzi.values().nth(random_number).unwrap();
     let input = prompt(&format!("What is the pinyin for {}?", &hanzi_pick));
     let hanzi_maybe = pinyin_to_hanzi.get(input.trim());
     let you_are_right = "好！👍".to_string();
