@@ -64,7 +64,7 @@ Basically I will try something for a week and then move on to the next thing. Th
 
 - Create a website with Leptos
 - Deploying an a wasm app: CI/CD and AWS
-- SQLite and Wasm
+- SQLite and Wasm (SQLX?)
 - Godot
 - Build a game in Rust, e.g. a maze explorer
 - Build git in Rust

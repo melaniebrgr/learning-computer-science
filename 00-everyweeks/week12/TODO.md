@@ -9,7 +9,6 @@
 - [ ] Best all time streak is tracked
 - [ ] Best all time streak is displayed
 - [ ] Pick the tone mark... somehow
-- [ ] Compiles to wasm
 - [ ] Application is deployed (live)
 - [ ] Share it!
 - [ ] Use a form element
@@ -22,3 +21,5 @@
 - [x] Enum with variants of different types: `Option`
 - [x] Matcher: `hanzi_maybe`
 - [x] String/str manipulation: `trim`
+- [ ] Module
+- [ ] Crate: `rand` crate (<ch02-00-guessing-game-tutorial.html>)

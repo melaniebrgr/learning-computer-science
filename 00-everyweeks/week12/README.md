@@ -7,6 +7,19 @@ For every tutorial, rustling or chapter of the Rust book I read I will find some
 I will also complete the list of backlogged features I imagined for the app.
 The app should be still be compilable to wasm at the end of the week, and this time I will deploy it somewhere.
 
+Random numbers vs. WebAssembly
+
+> WebAssembly support
+>This crate fully supports the wasm32-wasi and wasm32-unknown-emscripten targets. However, the wasm32-unknown-unknown target (i.e. the target used by wasm-pack) is not automatically supported since, from the target name alone, we cannot deduce which JavaScript interface is in use (or if JavaScript is available at all).
+>
+>Instead, if the js Cargo feature is enabled, this crate will assume that you are building for an environment containing JavaScript, and will call the appropriate methods. Both web browser (main window and Web Workers) and Node.js environments are supported, invoking the methods described above using the wasm-bindgen toolchain.
+>
+>This can be done even if getrandom is not a direct dependency. Cargo allows crates to enable features for indirect dependencies.
+>
+>This feature should only be enabled for binary, test, or benchmark crates. Library crates should generally not enable this feature, leaving such a decision to users of their library. Also, libraries should not introduce their own js features just to enable getrandom’s js feature.
+>
+>This feature has no effect on targets other than wasm32-unknown-unknown.
+>
 ### Stupid questions
 
 - [ ] What does `cdylib` do?
