@@ -27,8 +27,9 @@ mod hanzi {
     }
 
     pub fn rand() -> String {
-        let random_number = rand::thread_rng().gen_range(0..=6);
-        return pinyin_to_hanzi()
+        let pinyin_to_hanzi = pinyin_to_hanzi();
+        let random_number = rand::thread_rng().gen_range(0..pinyin_to_hanzi.len());
+        return pinyin_to_hanzi
             .values()
             .nth(random_number)
             .unwrap()
