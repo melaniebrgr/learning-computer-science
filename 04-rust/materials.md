@@ -89,7 +89,12 @@ WARNING: No more materials are allowed!
     - [x] 6.1. Defining an Enum
     - [ ] 6.2. The match Control Flow Construct
     - [ ] 6.3. Concise Control Flow with if let
-  - [ ] 7. Managing Growing Projects with Packages, Crates, and Modules
+  - [x] 7. Managing Growing Projects with Packages, Crates, and Modules
+    - [x] 7.1 Packages and Crates
+    - [x] 7.2. Defining Modules to Control Scope and Privacy
+    - [x] 7.3. Paths for Referring to an Item in the Module Tree
+    - [x] 7.4. Bringing Paths Into Scope with the use Keyword
+    - [x] 7.5. Separating Modules into Different Files
   - [ ] 8. Common Collections
     - [x] 8.1 Storing Lists of Values with Vectors
     - [ ] 8.2 Storing UTF-8 Encoded Text with Strings
@@ -130,7 +135,7 @@ WARNING: No more materials are allowed!
   - [x] structs
   - [x] enums
   - [x] strings
-  - [ ] modules
+  - [x] modules
   - [ ] hashmaps
   - [ ] options
   - [ ] error handling
