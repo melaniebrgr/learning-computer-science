@@ -11,7 +11,8 @@
 - [ ] Pick the tone mark... somehow
 - [ ] Application is deployed (live)
 - [ ] Share it!
-- [ ] Use a form element
+- [ ] Use a form element?
+- [ ] Be able to get a new hanzi
 
 ## Tech spec
 
@@ -21,5 +22,5 @@
 - [x] Enum with variants of different types: `Option`
 - [x] Matcher: `hanzi_maybe`
 - [x] String/str manipulation: `trim`
-- [ ] Module
-- [ ] Crate: `rand` crate (<ch02-00-guessing-game-tutorial.html>)
+- [x] Module
+- [x] Crate: `rand` crate (<ch02-00-guessing-game-tutorial.html>)
