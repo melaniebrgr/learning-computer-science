@@ -1,24 +1,23 @@
 # Module system
 
 - modules
-  - use
-  - paths
+  - pub
+- paths
+- use / as
 - crates
 - packages
 - workspaces
 
 ## Modules
 
-Modules and use let you control the organization, scope, and privacy of paths.
 Modules are units of organisation, reuse, and privacy.
+Modules and use let you control the organization, scope, and privacy of paths.
 Related functionality can be grouped in a module, imported elsewhere and access to internals must be explicitely provided.
 Module internal are private my default, but can be exposed for external code reuse by making them public.
 To sum up, a module wraps functionality and only explicity exposes `pub`lic functionality.
 
-Modules are useful for splitting code in logical units (modules), and manage visibility (public/private).
 A modules can contain other modules.
-Code within a module is private from its parent modules by default. To make a module public, declare it with pub mod instead of mod.
-
+Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules.
 The source code,
 
 ```rust
@@ -28,12 +27,6 @@ mod front_of_house {
         fn add_to_waitlist() {}
         fn seat_at_table() {}
     }
-
-    mod serving {
-        fn take_order() {}
-        fn serve_order() {}
-        fn take_payment() {}
-    }
 }
 ```
 
@@ -42,45 +35,28 @@ translates to a module tree where the entire tree is rooted under the implicit m
 ```txt
 crate
  └── front_of_house
-     ├── hosting
-     │   ├── add_to_waitlist
-     │   └── seat_at_table
-     └── serving
-         ├── take_order
-         ├── serve_order
-         └── take_payment
+     └── hosting
+         ├── add_to_waitlist
+         └── seat_at_table
 ```
 
-Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules. 
+### Pub
 
-### Use
+The pub keywork is used to specific the public access of a value in a module.
+Structs have visibility level with their fields, with a default private visibility that can be overridden with the pub modifier.
+There are many variations:
 
-Within a scope, the `use` keyword creates shortcuts to items to reduce repetition of long paths.
-You can bring module paths into scopes and provide new names for them with the 'use' and 'as' keywords.
+- `pub fn function()`: the `pub` modifier to override default visibility
+- `pub mod nested`: nested modules can be published
+- `pub(in crate::my_mod) fn public_function_in_my_mod()`: the path must be a parent or ancestor module and the function is only visible within that path.
+- `pub(self) fn public_function_in_nested()`: only visible within the current module, which is the same as leaving them private
+- `pub(super) fn public_function_in_super_mod()`: only visible within the parent module
 
-```rust
-mod delicious_snacks {
-    pub use self::fruits::PEAR as fruit;
-    pub use self::veggies::CUCUMBER as veggie;
-
-    mod fruits {
-        pub const PEAR: &'static str = "Pear";
-        pub const APPLE: &'static str = "Apple";
-    }
-
-    mod veggies {
-        pub const CUCUMBER: &'static str = "Cucumber";
-        pub const CARROT: &'static str = "Carrot";
-    }
-}
-```
-
-### Paths
+## Paths
 
 Paths are way of naming an item, such as a struct, function, or module.
 Path identifiers are seperated by `::`.
-Absolute paths either begin from the crate root, the literal `crate`
-or with the name of the external crate.
+Absolute paths either begin from the crate root, the literal `crate` or with the name of the external crate.
 relative paths begin from the current module and use `self` or `super`.
 
 ```rust
@@ -96,6 +72,32 @@ pub fn eat_at_restaurant() {
 
     // Relative path
     front_of_house::hosting::add_to_waitlist();
+}
+```
+
+## Use, as
+
+The the 'use' and 'as' keywords can be used to bind a full path to a new name, for easier access.
+It just creates shortcuts to items to reduce repetition of long paths.
+It's useful for not only getting values more conveniently, but also exposing values more conveniently.
+
+```rust
+use crate::deeply::nested::{
+    my_first_function,
+    my_second_function,
+    AndATraitType
+};
+
+use deeply::nested::function as other_function;
+```
+
+```rust
+mod delicious_snacks {
+    pub use self::fruits::PEAR as fruit;
+
+    mod fruits {
+        pub const PEAR: &'static str = "Pear";
+    }
 }
 ```
 
