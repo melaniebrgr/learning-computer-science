@@ -36,8 +36,8 @@ mod hanzi {
             .to_string();
     }
 
-    pub fn get_pinyin(input: String) -> Option<String> {
-        pinyin_to_hanzi().get(input.trim()).cloned()
+    pub fn get_pinyin(hanzi: &str) -> Option<String> {
+        pinyin_to_hanzi().get(hanzi).cloned()
     }
 }
 
@@ -66,12 +66,12 @@ enum Tone {
 
 #[wasm_bindgen]
 pub fn main() -> String {
-    let mut state = State::new();
     let hanzi_pick = hanzi::rand();
     let input = prompt(&format!("What is the pinyin for {}?", &hanzi_pick));
-    let hanzi_maybe = hanzi::get_pinyin(input);
+    let hanzi_maybe = hanzi::get_pinyin(&input.trim());
     let you_are_right = "好！👍".to_string();
     let you_are_wrong = "不好！👎".to_string();
+    let mut state = State::new();
 
     return match hanzi_maybe {
         Some(hanzi) => {
