@@ -71,3 +71,5 @@ Basically I will try something for a week and then move on to the next thing. Th
 - FE systems: web sockets, workers, local caching, cookies, polling
 - SpacetimeDB (https://spacetimedb.com/)
 - Debugging wasm
+- Modern VCS, e.g. Jujutsu https://github.com/martinvonz/jj
+
