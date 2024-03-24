@@ -15,6 +15,9 @@ Modules and use let you control the organization, scope, and privacy of paths.
 Related functionality can be grouped in a module, imported elsewhere and access to internals must be explicitely provided.
 Module internal are private my default, but can be exposed for external code reuse by making them public.
 To sum up, a module wraps functionality and only explicity exposes `pub`lic functionality.
+To create many modules in one file use the mod keywork.
+Any new file is "automatically" a module, and the code within doesn't need to be wrapped by the `mod` keyword.
+The name of the module is the file name.
 
 A modules can contain other modules.
 Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules.

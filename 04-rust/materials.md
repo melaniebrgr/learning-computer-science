@@ -48,7 +48,7 @@ WARNING: No more materials are allowed!
   - [ ] 7. Expressions
   - [ ] 8. Flow of Control
   - [ ] 9. Functions
-  - [ ] 10. Modules
+  - [x] 10. Modules
   - [ ] 11. Crates
   - [ ] 12. Cargo
   - [ ] 13. Attributes
