@@ -1,8 +1,10 @@
 # Materials
 
+## 01 introduction
+
 - Architectural Characteristics
 
-## Frontend
+## 02 Frontend
 
 - [ ] Component Architecture
 - [ ] Frameworks
@@ -27,7 +29,7 @@
 - [ ] PWA
 - [ ] WebAssembly
 
-## Backend
+## 03 Backend
 
 - [ ] Languages
 - [ ] Frameworks
@@ -42,25 +44,35 @@
 - [ ] Cloud Services
 - [ ] AI
 
-## Databases
+## 04 Databases
+
+### Considerations
+
+- [ ] Geographic distribution <https://youtu.be/JQfnMp0OeTA>
+- [ ] General database internals
+  - [ ] <https://youtu.be/DiLA0Ri6RfY>
+  - [ ] <https://youtu.be/IW4cpnpVg7E>
+- [ ] Write ahead logging:
+  - [ ] <https://youtu.be/yV_Zp0Mi3xs>
+  - [ ] <https://youtu.be/2MqY_mT1vw8>
+
+### Types
 
 - [ ] Blob
 - [ ] SQL
 - [ ] Schema design
 - [ ] NoSQL
+- [ ] Document
 - [ ] KV
 - [ ] Search
+- [ ] Graph
+- [ ] Streaming
+
+#### Examples
 
 - [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
 - [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
 - [ ] CockroachDB: <https://youtu.be/1NuvxQEoVHU>
-- [ ] General database internals
-  - [ ] <https://youtu.be/DiLA0Ri6RfY>
-  - [ ] <https://youtu.be/IW4cpnpVg7E>
-- [ ] Geo Distribution of databases <https://youtu.be/JQfnMp0OeTA>
-- [ ] Write ahead logging:
-  - [ ] <https://youtu.be/yV_Zp0Mi3xs>
-  - [ ] <https://youtu.be/2MqY_mT1vw8>
 - [ ] Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
 - [ ] CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
 - [ ] Twisp: <https://youtu.be/VGb54yNQrHM>
@@ -72,5 +84,11 @@
 - [ ] Duckdb: <https://youtu.be/f9QlkXW4H9A>
 - [ ] RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
 - [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
+- [ ] Turso
+- [ ] PGLite: <https://github.com/electric-sql/pglite>
 
-## Testing
+## 05 Testing
+
+## 06 Documentation
+
+## 07 Version control
