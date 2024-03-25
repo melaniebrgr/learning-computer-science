@@ -3,6 +3,7 @@
 ## Feature spec
 
 - [ ] Extend the hanzi list (is there an API?)
+- [ ] Track which hanzi was previously displayed
 - [x] A character is picked randomly
 - [x] Current streak is tracked
 - [x] Current streak is displayed

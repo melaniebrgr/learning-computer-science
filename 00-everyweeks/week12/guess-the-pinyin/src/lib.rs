@@ -12,13 +12,28 @@ extern "C" {
     pub fn prompt(s: &str) -> String;
 }
 
-struct State {
+struct HanziState {
+    current_hanzi: String,
+}
+
+impl HanziState {
+    fn new() -> Self {
+        HanziState {
+            current_hanzi: hanzi::rand(),
+        }
+    }
+    fn get(&self) -> &str {
+        &self.current_hanzi
+    }
+}
+
+struct ScoreState {
     current_streak: u32,
 }
 
-impl State {
+impl ScoreState {
     fn new() -> Self {
-        State { current_streak: 0 }
+        ScoreState { current_streak: 0 }
     }
     fn increment(&mut self) {
         self.current_streak += 1
@@ -38,26 +53,26 @@ enum Tone {
 
 #[wasm_bindgen]
 pub fn main() -> String {
-    let hanzi_pick = hanzi::rand();
-    let input = prompt(&format!("What is the pinyin for {}?", &hanzi_pick));
+    let hanzi = HanziState::new();
+    let input = prompt(&format!("What is the pinyin for {}?", hanzi.get()));
     let hanzi_maybe = hanzi::get_pinyin(&input.trim());
     let you_are_right = "好！👍".to_string();
     let you_are_wrong = "不好！👎".to_string();
-    let mut state = State::new();
+    let mut score = ScoreState::new();
 
     return match hanzi_maybe {
-        Some(hanzi) => {
-            if hanzi == hanzi_pick {
-                state.increment();
-                format!("{}, streak: {}", you_are_right, state.current_streak)
+        Some(hanzi_guess) => {
+            if hanzi_guess == hanzi.get() {
+                score.increment();
+                format!("{}, streak: {}", you_are_right, score.current_streak)
             } else {
-                state.reset();
-                format!("{}, streak: {}", you_are_wrong, state.current_streak)
+                score.reset();
+                format!("{}, streak: {}", you_are_wrong, score.current_streak)
             }
         }
         None => {
-            state.reset();
-            format!("{}, streak: {}", you_are_wrong, state.current_streak)
+            score.reset();
+            format!("{}, streak: {}", you_are_wrong, score.current_streak)
         }
     };
 }
