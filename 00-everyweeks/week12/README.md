@@ -7,7 +7,7 @@ For every tutorial, rustling or chapter of the Rust book I read I will find some
 I will also complete the list of backlogged features I imagined for the app.
 The app should be still be compilable to wasm at the end of the week, and this time I will deploy it somewhere.
 
-Random numbers vs. WebAssembly
+### Random numbers in WebAssembly
 
 > WebAssembly support
 >This crate fully supports the wasm32-wasi and wasm32-unknown-emscripten targets. However, the wasm32-unknown-unknown target (i.e. the target used by wasm-pack) is not automatically supported since, from the target name alone, we cannot deduce which JavaScript interface is in use (or if JavaScript is available at all).
@@ -20,9 +20,12 @@ Random numbers vs. WebAssembly
 >
 >This feature has no effect on targets other than wasm32-unknown-unknown.
 
+### Importing the wasm module
+
 `<script type="module">`
 import and export statements can only be used inside modules
 "SyntaxError: import declarations may only appear at top level of a module"
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_standard_scripts>
 
 ### Stupid questions
 

@@ -7,13 +7,22 @@
 
 <body>
   <script type="module">
-    import init, { main } from "./pkg/guess_the_pinyin.js";
+    import init, { hanzi_question_get, pinyin_answer_check } from "./pkg/guess_the_pinyin.js";
     init().then(() => {
-      const result = main();
-      document.getElementById("result").textContent = result;
+      const hanzi = hanzi_question_get();
+      document.getElementById("question").textContent = "What is the pinyin for " + hanzi + "?";
+      document.getElementById("answer").addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          let answerValue = document.getElementById("answer").value;
+          let result = pinyin_answer_check(answerValue);
+          document.getElementById("result").textContent = result;
+        }
+      });
     });
   </script>
   <h1>Week 12</h1>
+  <p id="question"></p>
+  <input id="answer" type="text" />
   <p id="result"></p>
 </body>
 

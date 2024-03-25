@@ -52,15 +52,19 @@ enum Tone {
 }
 
 #[wasm_bindgen]
-pub fn main() -> String {
+pub fn hanzi_question_get() -> String {
     let hanzi = HanziState::new();
-    let input = prompt(&format!("What is the pinyin for {}?", hanzi.get()));
-    let hanzi_maybe = hanzi::get_pinyin(&input.trim());
+    hanzi.get().to_string()
+}
+
+#[wasm_bindgen]
+pub fn pinyin_answer_check(pinyin_answer: Option<String>) -> String {
+    let hanzi = HanziState::new(); // Yeah, this is a new instance. I need to figure out how to share state.
     let you_are_right = "好！👍".to_string();
     let you_are_wrong = "不好！👎".to_string();
     let mut score = ScoreState::new();
 
-    return match hanzi_maybe {
+    return match pinyin_answer {
         Some(hanzi_guess) => {
             if hanzi_guess == hanzi.get() {
                 score.increment();

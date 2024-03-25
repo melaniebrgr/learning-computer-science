@@ -9,11 +9,11 @@
 - [x] Current streak is displayed
 - [ ] Best all time streak is tracked
 - [ ] Best all time streak is displayed
-- [ ] Pick the tone mark... somehow
-- [ ] Application is deployed (live)
-- [ ] Share it!
-- [ ] Use a form element?
+- [ ] Pick the tone mark... somehow?
+- [x] Use a form element?
 - [ ] Be able to get a new hanzi
+- [ ] Deploy it!
+- [ ] Share it!
 
 ## Tech spec
 
