@@ -20,7 +20,7 @@ Characteristics:
 
 Components:
 
-- a pointer to some bytes,
+- a pointer,
 - a length, and
 - a capacity.
 

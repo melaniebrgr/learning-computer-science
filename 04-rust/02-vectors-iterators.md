@@ -6,60 +6,68 @@
 
 ## Vector (`Vec<T>`)
 
-Vectors allow you to store more than one value in a single data structure that puts all the values next to each other in memory.
-Vectors are re-sizeable.
-They have a size and a capacity, meaning that if a vector is emptied, its size becomes zero, but it still retains its capacity.
-Vectors can only store values of the same type.
-They are useful when you have a list of items.
-Vectors are implemented using generics.
+Characteristics:
+
+- allocated on the heap
+- have an address (index of the first element), size, capacity
+
+Components:
+
+- a pointer,
+- a length, and
+- a capacity.
+
+A vector is like a tuple but with consistent types, which is what allows us to iterate over them.
+Vectors are a data structure for storing multiple values of the same type in a contiguous section of the heap.
+They have a size and a capacity.
+If a vector is emptied its size becomes zero, but it retains its capacity.
+Vectors can only store values of the same type, or else we would know how to iterate over them (unknown memory sizes).
+
+Often though Rust can infer the type from the items initially passed to the Vec.
 If items aren't placed in a vector on instantiation, it must be type annotated.
-Often though Rust can infer the type.
 
 ```rust
 let v: Vec<i32> = Vec::new();
 ```
-
-A vector is allowed to grow or shrink in size, but it must declared as mutable to do so.
-Values can be insterted into a vector at arbitrary positions with insert, and removed with remove.
-This is not as efficient as pushing and popping since the values will have to be moved to make room.
-When the vector dies or drops, the memory is let go.
-Many vector operations are done in place.
-Vectors can be copied by cloning.
 
 In Rust, there are two ways to define a Vector.
 
 1. One way is to use the `Vec::new()` function to create a new vector and fill it with the `push()` method.
 2. The second way, which is simpler is to use the `vec![]` macro and define your elements inside the square brackets.
 
-```rust
-fn main() {
-    let mut v = Vec::new();
-    v.push(1.0);
-    v.push(2.0);
-    v.push(3.0);
+If you are able to, it is considered a best practise to indicate the size of a vector at compile time, so it can be properly allocated on the heap.
 
-    let slice = &v[1..];
-    println!("{:?}", slice);
-    // [2.0, 3.0]
-}
+```rust
+let mut v = Vec::new();
+v.push(1.0);
+v.push(2.0);
+v.push(3.0);
+
+let slice = &v[1..];
+println!("{:?}", slice);
+// [2.0, 3.0]
 ```
 
 ```rust
-fn main() {
-    let mut v1 = vec![10, 20, 30, 40];
-    v1.pop();
+let mut v1 = vec![10, 20, 30, 40];
+v1.pop();
 
-    let mut v2 = Vec::new();
-    v2.push(10);
-    v2.push(20);
-    v2.push(30);
+let mut v2 = Vec::new();
+v2.push(10);
+v2.push(20);
+v2.push(30);
 
-    assert_eq!(v1, v2);
+assert_eq!(v1, v2);
 
-    v2.extend(0..2);
-    assert_eq!(v2, &[10, 20, 30, 0, 1]);
-}
+v2.extend(0..2);
+assert_eq!(v2, &[10, 20, 30, 0, 1]);
 ```
+
+Vectors are re-sizeable.
+Vectors are allowed to grow or shrink in size, but it must declared as mutable.
+Values can be insterted into a vector at arbitrary positions with insert, and removed with remove.
+This is not as efficient as pushing and popping since the values will have to be moved to make room.
+Many vector operations are done in place, but Vectors can be copied by cloning.
 
 If you want to store different types in a vector, you can use an enum.
 If you don’t know the exhaustive set of types a program will get at runtime to store in a vector, the enum technique won’t work and a trait object can be used instead.
@@ -80,7 +88,6 @@ let row = vec![
 
 There are two ways to reference a value stored in a vector: via indexing (`[0]`) or using the `.get(0)` method.
 The `.get` method returns an option.
-(There are [many useful methods](https://doc.rust-lang.org/stable/std/vec/struct.Vec.html) on an Vector)
 Access via index when you want the program to panic for an out-of-bounds request.
 Access via get when you want to provide user friendly feedback for an out-of-bounds request.
 
@@ -109,8 +116,6 @@ for i in &v {
 
 It is possible to iterate immutably and mutably, using `mut` and a dereference operator `*`.
 To change the value that the mutable reference refers to, we have to use the * dereference operator.
-The dereference operator let's us to get to the value in i before.
-The reference to the vector that the for loop holds prevents simultaneous modification of the whole vector.
 
 ```rust
 let mut v = vec![100, 32, 57];

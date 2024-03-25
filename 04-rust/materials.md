@@ -203,6 +203,13 @@ WARNING: No more materials are allowed!
     - [ ] Primitives Exercise
     - [ ] Primitives Solution
   - [ ] Collections
+    - [ ] Tuples
+    - [ ] Structs
+    - [x] Arrays
+    - [x] Memory
+    - [x] Collections Recap and Q&A
+    - [x] Collections Exercise
+    - [ ] Collections Solution
   - [x] Pattern matching
     - [x] Enums & Pattern Matching
     - [x] Methods
@@ -210,13 +217,34 @@ WARNING: No more materials are allowed!
     - [x] Pattern Matching Recap and Q&A
     - [x] Pattern Matching Exercise
     - [x] Pattern Matching Solution
-  - [ ] Vectors
-    - [ ] Stack Memory
-    - [ ] The Heap
-    - [ ] Vectors Recap and Q&A
-    - [ ] Vectors Exercise
-    - [ ] Vectors Solution
+  - [x] Vectors
+    - [x] Vectors
+    - [x] Stack Memory
+    - [x] The Heap
+    - [x] Vectors Recap and Q&A
+    - [x] Vectors Exercise
+    - [x] Vectors Solution
   - [ ] Ownership
+    - [x] Heap Bookeeping
+    - [ ] Manual Memory Management
+    - [ ] Rust Memory Management
+    - [ ] Ownership
+    - [ ] Ownership Recap & Memory Exercise
+    - [ ] Memory Solution
+  - [ ] Borrowing
+    - [ ] References & Borrowing
+    - [ ] Mutable References
+    - [ ] Slices
+    - [ ] Borrowing Exercise
+    - [ ] Borrowing Solution
+  - [ ] Lifetimes
+    - [ ] Lifetimes
+    - [ ] Lifetime Annotations
+    - [ ] Lifetime Elision
+    - [ ] The Static Lifetime & Lifetimes Recap
+    - [ ] Lifetimes Exercise
+    - [ ] Lifetimes Solution
+  - [ ] Wrapping Up
 
 ## Videos
 
