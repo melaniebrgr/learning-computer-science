@@ -224,15 +224,15 @@ WARNING: No more materials are allowed!
     - [x] Vectors Recap and Q&A
     - [x] Vectors Exercise
     - [x] Vectors Solution
-  - [ ] Ownership
+  - [x] Ownership
     - [x] Heap Bookeeping
-    - [ ] Manual Memory Management
-    - [ ] Rust Memory Management
-    - [ ] Ownership
-    - [ ] Ownership Recap & Memory Exercise
-    - [ ] Memory Solution
+    - [x] Manual Memory Management
+    - [x] Rust Memory Management
+    - [x] Ownership
+    - [x] Ownership Recap & Memory Exercise
+    - [x] Memory Solution
   - [ ] Borrowing
-    - [ ] References & Borrowing
+    - [x] References & Borrowing
     - [ ] Mutable References
     - [ ] Slices
     - [ ] Borrowing Exercise

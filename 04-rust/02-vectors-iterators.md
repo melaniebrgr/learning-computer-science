@@ -124,6 +124,45 @@ for i in &mut v {
 }
 ```
 
+## Slices (`&[T]`)
+
+A string slice is a reference to part of a String.
+A vector slice is a reference to part of a Vector.
+They are a view into an underlying array of values and have a type signature `&[T]`.
+If a String is updated, so is the view of it.
+Slices always _borrow_ their data and never copy it.
+You have to explicitly say that you want to create a slice with the `&` operator.
+Slices can be created from strings, arrays and vectors.
+
+We create slices using a range within brackets by specifying `[starting_index..ending_index]`.
+`starting_index` is the first position in the slice and `ending_index` is one more than the last position in the slice.
+The `..` is the range syntax.
+Slices are similar to arrays, but their length is known at compile time.
+Slices are used more commonly than arrays in order to borrow a section of one.
+
+```rust
+// String slice
+let s = String::from("hello");
+let hello = &s[0..5]; // slices from 0 (incluse) to 5 (exclusize)
+hello = &s[..5]; // equivalent to &s[0..5] 
+hello = &s[0..]; // equivalent to &s[0..5]
+hello = &s[..]; // equivalent to &s[0..5]
+// -> "hello"
+
+// Array slice
+let a = [1, 2, 3, 4, 5];
+let a_slice = &a[1..=3]; // slices from 1 (incluse) to 3 (inclusive)
+// -> [2, 3, 4]
+
+// Vector slice
+let b = vec![1,2,3];
+let b_slice = &nums[0..2];
+```
+
+How can you safely access slices at run time?
+Instead getting by index, use the slice method `get` which does not panic and returns an "Maybe" (Some or None option).
+(Panics are memory safe because they happen before any illegal access to memory.)
+
 ## Iterator
 
 An interator is a struct with a next method that may return Some or None.
