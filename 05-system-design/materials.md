@@ -1,4 +1,4 @@
-# Materials
+# Topics
 
 ## 01 introduction
 
@@ -68,7 +68,15 @@
 - [ ] Graph
 - [ ] Streaming
 
-#### Examples
+## 05 Testing
+
+## 06 Documentation
+
+## 07 Version control
+
+# Materials
+
+- [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
 
 - [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
 - [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
@@ -86,9 +94,3 @@
 - [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
 - [ ] Turso
 - [ ] PGLite: <https://github.com/electric-sql/pglite>
-
-## 05 Testing
-
-## 06 Documentation
-
-## 07 Version control
