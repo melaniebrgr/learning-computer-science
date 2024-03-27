@@ -12,14 +12,23 @@ The idea is stolen from [beeple](https://www.beeple-crap.com/everydays) and [cod
 
 Basically I will try something for a week and then move on to the next thing. There are 52 weeks in a year, I already missed the first few in 2024, so starting today, which is week 8.
 
+Status codes:
+
+- 102: processing
+- 200: successful
+- 206: partially successful
+- 301: redirected (to next week)
+- 400: fail (my fault)
+- 501: fail (not my fault)
+
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | Rust command line game: guess the pinyin | FAIL | Didn't finish by EOW. I had to learn the language basics first. |
-|   9  | [Rust CLI: guess the pinyin](./week09/) | SUCCESS | It runs. I'm taking the W. |
+|   8  | Rust command line game: guess the pinyin | 400 | Didn't finish by EOW. I had to learn the language basics first. |
+|   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs. I'm taking the W. |
 |  10  | Rust in JavaScript | FAIL | Didn't finish by EOW, but learned more about Wasm. |
 |  11  | [Rust in JavaScript](./week11/) | SUCCESS | Too much wasm and not enough Rust programming though. |
-|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | IN PROGRESS |  |
-|  13  |  |  |  |
+|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings to the game based on Rust learnings, but did not get as much done as I wanted. |
+|  13  | [Wasm game of life](./week13) | 102 |  |
 |  14  |  |  |  |
 |  15  |  |  |  |
 |  16  |  |  |  |
@@ -72,4 +81,4 @@ Basically I will try something for a week and then move on to the next thing. Th
 - SpacetimeDB (https://spacetimedb.com/)
 - Debugging wasm
 - Modern VCS, e.g. Jujutsu https://github.com/martinvonz/jj
-
+- Create a book from my notes with <https://rust-lang.github.io/mdBook/>
