@@ -6,7 +6,7 @@
 
 ## 02 Frontend
 
-- [ ] Component Architecture
+- [ ] Component architecture
 - [ ] Frameworks
 - [ ] Design systems
 - [ ] SEO
@@ -25,8 +25,8 @@
 - [ ] Cookies
 - [ ] Authentication
 - [ ] Authorisation
-- [ ] Client storage
-- [ ] PWA
+- [ ] Client-side storage
+- [ ] PWAs
 - [ ] WebAssembly
 
 ## 03 Backend
