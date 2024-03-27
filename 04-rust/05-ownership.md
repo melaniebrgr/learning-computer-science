@@ -69,6 +69,7 @@ A reference’s scope starts from where it is introduced and continues through t
 Example, `mutable_years.clear()` while it borrows the reference to the vector from the owner it has elevated permissions to make changes to it. Clear empties out a vec.
 Mutable references have additional restrictions though.
 Rust prevents you have a reference to a value while an immutable reference to it is out, so that it can not change surprisingly from underneath you.
+It's also to prevent race conditions.
 
 - one mutable reference at a time, or
 - as many immutable references as you want

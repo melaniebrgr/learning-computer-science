@@ -126,8 +126,10 @@ for i in &mut v {
 
 ## Slices (`&[T]`)
 
-A string slice is a reference to part of a String.
-A vector slice is a reference to part of a Vector.
+Slices are a way to piggy-back off an existing allocation.
+You don't have to go back to the book keeping system to find a slot in the heap.
+A string slice is a _reference_ to part of a String.
+A vector slice is a _reference_ to part of a Vector.
 They are a view into an underlying array of values and have a type signature `&[T]`.
 If a String is updated, so is the view of it.
 Slices always _borrow_ their data and never copy it.

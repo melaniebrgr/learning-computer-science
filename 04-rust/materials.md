@@ -231,12 +231,12 @@ WARNING: No more materials are allowed!
     - [x] Ownership
     - [x] Ownership Recap & Memory Exercise
     - [x] Memory Solution
-  - [ ] Borrowing
+  - [x] Borrowing
     - [x] References & Borrowing
-    - [ ] Mutable References
-    - [ ] Slices
-    - [ ] Borrowing Exercise
-    - [ ] Borrowing Solution
+    - [x] Mutable References
+    - [x] Slices
+    - [x] Borrowing Exercise
+    - [x] Borrowing Solution
   - [ ] Lifetimes
     - [ ] Lifetimes
     - [ ] Lifetime Annotations
