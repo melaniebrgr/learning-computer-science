@@ -10,6 +10,14 @@
 - [ ] Frameworks
 - [ ] Design systems
 - [ ] SEO
+- [ ] Performance
+  - [ ] <https://frontendmasters.com/courses/blazingly-fast-js/>
+  - [ ] File compression
+  - [ ] Image compression
+  - [ ] Code splitting
+  - [ ] Tree-shaking
+  - [ ] Pagination
+  - [ ] Virtualisation
 - [ ] Core Web Vitals
 - [ ] Images
 - [ ] Video
@@ -28,6 +36,7 @@
 - [ ] Client-side storage
 - [ ] PWAs
 - [ ] WebAssembly
+- [ ] Bundlers
 
 ## 03 Backend
 
@@ -35,6 +44,7 @@
 - [ ] Frameworks
 - [ ] Component Architecture
 - [ ] Design patterns
+  - [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
 - [ ] Firewalls
 - [ ] Load Balancers
 - [ ] GraphQL
@@ -67,30 +77,26 @@
 - [ ] Search
 - [ ] Graph
 - [ ] Streaming
+- [ ] Misc.
+  - [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
+  - [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
+  - [ ] CockroachDB: <https://youtu.be/1NuvxQEoVHU>
+  - [ ] Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
+  - [ ] CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
+  - [ ] Twisp: <https://youtu.be/VGb54yNQrHM>
+  - [ ] Kafka: <https://youtu.be/d89W_GzWnRw>
+  - [ ] YugaByteDB: <https://youtu.be/cXIPIA7e220>
+  - [ ] B-Trees: <https://youtu.be/dTfR0S_rBGg>
+  - [ ] Graph Databases: <https://youtu.be/iihJXKAQZkA>
+  - [ ] ScyllaDb: <https://youtu.be/AqY13RjWwJg>
+  - [ ] Duckdb: <https://youtu.be/f9QlkXW4H9A>
+  - [ ] RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
+  - [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
+  - [ ] Turso
+  - [ ] PGLite: <https://github.com/electric-sql/pglite>
 
 ## 05 Testing
 
 ## 06 Documentation
 
 ## 07 Version control
-
-# Materials
-
-- [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
-
-- [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
-- [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
-- [ ] CockroachDB: <https://youtu.be/1NuvxQEoVHU>
-- [ ] Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
-- [ ] CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
-- [ ] Twisp: <https://youtu.be/VGb54yNQrHM>
-- [ ] Kafka: <https://youtu.be/d89W_GzWnRw>
-- [ ] YugaByteDB: <https://youtu.be/cXIPIA7e220>
-- [ ] B-Trees: <https://youtu.be/dTfR0S_rBGg>
-- [ ] Graph Databases: <https://youtu.be/iihJXKAQZkA>
-- [ ] ScyllaDb: <https://youtu.be/AqY13RjWwJg>
-- [ ] Duckdb: <https://youtu.be/f9QlkXW4H9A>
-- [ ] RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
-- [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
-- [ ] Turso
-- [ ] PGLite: <https://github.com/electric-sql/pglite>
