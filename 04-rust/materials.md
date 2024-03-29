@@ -237,13 +237,13 @@ WARNING: No more materials are allowed!
     - [x] Slices
     - [x] Borrowing Exercise
     - [x] Borrowing Solution
-  - [ ] Lifetimes
-    - [ ] Lifetimes
-    - [ ] Lifetime Annotations
-    - [ ] Lifetime Elision
-    - [ ] The Static Lifetime & Lifetimes Recap
-    - [ ] Lifetimes Exercise
-    - [ ] Lifetimes Solution
+  - [x] Lifetimes
+    - [x] Lifetimes
+    - [x] Lifetime Annotations
+    - [x] Lifetime Elision
+    - [x] The Static Lifetime & Lifetimes Recap
+    - [x] Lifetimes Exercise
+    - [x] Lifetimes Solution
   - [ ] Wrapping Up
 
 ## Videos

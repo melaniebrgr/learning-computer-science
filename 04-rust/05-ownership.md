@@ -5,6 +5,7 @@
 - Owner
 - Reference
 - Dereference
+- Lifetimes
 - Misc
 
 Who owns the a heap allocated value and how long does it live for?
@@ -147,6 +148,26 @@ To use the data that was moved to a function either
 
 1. Make another, separate version of the data.
 2. Make the function borrow its argument instead of taking ownership of it, and then copy the data within the function in order to return an owned.
+
+## Lifetimes
+
+A lifetime is how long a value lives: the time between when it is allocated and when it is deallocated.
+If Rust can't elide the lifetime, it will ask for hints or lifetime annotations.
+If a struct contains references lifetime annotations must be added to it.
+Help Rust understand the lifetime of a value by annotating them (`<'a>`).
+Once the annotations are specified all the way down, then Rust can follow the lifetime thread during compilation.
+Lifetime elision is similar to type inference in TypeScript.
+Use the special annotation `<'_>` to inform the compiler to infer the lifetimes "all the way down".
+And the full, verbose annotations are left out.
+Another special lifetime annotation is `'static`, which means "the life time of the entire program".
+Values with the static lifetime are never allocated or deallocated--they are _in the binary itself_.
+The binary is already in memory on the hard disk to Rust (as well as C), opt not create a value on the heap and use the value in the binary.
+
+```rust
+let name = "Sam";
+let name: &'static str = "Sam"; // 'static is commonly elided here
+let name: &str = "Sam" // this is a string slice not of the heap but the binary itself
+```
 
 ## Misc
 
