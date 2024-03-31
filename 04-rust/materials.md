@@ -180,7 +180,7 @@ WARNING: No more materials are allowed!
     - [x] Borrow Checker Q&A
   - [ ] Traits
     - [x] Traits vs Interfaces
-    - [ ] Creating Modules
+    - [x] Creating Modules
     - [ ] Default & Display Traits
     - [ ] Creating an Iterator
     - [ ] IntoIterator & From Traits

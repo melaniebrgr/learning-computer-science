@@ -131,29 +131,6 @@ impl Direction {
 }
 ```
 
-## Traits
-
-A reusable deffinition for implementations to ensure consistent behaviour.
-After defining a trait you can then implement that trait _for_ a type.
-
-```rust
-trait Show {
-    fn show(&self) -> String;
-}
-
-impl Show for i32 {
-    fn show(&self) -> String {
-        format!("four-byte signed {}", self)
-    }
-}
-
-impl fmt::Debug for Person {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.full_name())
-    }
-}
-```
-
 ## Generics
 
 Functions that don't take a specific type as a parameter, but some type that implements a given trait.

@@ -189,9 +189,9 @@ fn main() {
 }
 ```
 
-Rust is performs "pull" operations while Javascript performs "push".
+Rust performs "pull" operations while Javascript performs "push".
 Where rust will lazily iterate over an iterator while conditions are met, javascript will loop over an entire array regardless of whether it is still necessary or not.
-With iterators rust pulls the value through the list of operations one a time and filly collects them into something at the end.
+With iterators rust pulls the value through the list of operations one a time and finally collects them into something at the end.
 
 ## Collection
 
