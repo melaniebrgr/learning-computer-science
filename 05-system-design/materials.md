@@ -18,6 +18,8 @@
   - [ ] Tree-shaking
   - [ ] Pagination
   - [ ] Virtualisation
+- Security
+  - [ ] CORS
 - [ ] Core Web Vitals
 - [ ] Images
 - [ ] Video
