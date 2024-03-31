@@ -25,7 +25,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  10  | Rust in JavaScript | 400 | Didn't finish by EOW, but learned more about Wasm. |
 |  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming though. |
 |  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings to the game based on Rust learnings, but did not get as much done as I wanted. |
-|  13  | [Wasm game of life](./week13) | 102 |  |
+|  13  | [Wasm game of life](./week13) | 206 |  |
 |  14  |  |  |  |
 |  15  |  |  |  |
 |  16  |  |  |  |
@@ -65,17 +65,3 @@ Basically I will try something for a week, document my learning, judge its succe
 |  50  |  |  |  |
 |  51  |  |  |  |
 |  52  |  |  |  |
-
-## Topic ideas
-
-- Create a website with Leptos
-- Deploying an a wasm app: CI/CD and AWS
-- SQLite and Wasm (SQLX?)
-- Godot
-- Build a game in Rust, e.g. a maze explorer
-- Build git in Rust
-- FE systems: web sockets, workers, local caching, cookies, polling
-- SpacetimeDB (https://spacetimedb.com/)
-- Debugging wasm
-- Modern VCS, e.g. Jujutsu https://github.com/martinvonz/jj
-- Create a book from my notes with <https://rust-lang.github.io/mdBook/>

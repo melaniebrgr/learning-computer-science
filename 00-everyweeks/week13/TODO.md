@@ -3,9 +3,9 @@
 Complete the [tutorial](https://rustwasm.github.io/docs/book/game-of-life/introduction.html)
 
 - [x] 4.1 Setup
-- [ ] 4.2 Hello, World!
-- [ ] 4.3. Rules
-- [ ] 4.4. Implementing Life
+- [x] 4.2 Hello, World!
+- [x] 4.3. Rules
+- [x] 4.4. Implementing Life
 - [ ] 4.5. Testing Life
 - [ ] 4.6. Debugging
 - [ ] 4.7. Adding Interactivity
