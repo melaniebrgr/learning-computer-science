@@ -2,7 +2,7 @@
 
 ## Week 13 project journaling
 
-This week I wanted to follow a tutorial for building a WebAssembly app with Rust. I thought if I followed a blessed path I would be able to grok project structure and Rustlang best practises. After completing the first, implemetation section of the tutorial, I'm not confident that I did, and I certainly do not feel empowered to build my own anything.
+This week I wanted to follow a tutorial for building a WebAssembly app with Rust. I thought if I followed a blessed path I would be able to grok project structure and Rustlang best practises. After completing the first, implementation section of the tutorial, I'm not confident that I did, and I certainly do not feel empowered to build my own anything.
 
 The [tutorial](https://rustwasm.github.io/docs/book/game-of-life/testing.html) starts off by instructing you to use a template project, `cargo generate --git https://github.com/rustwasm/wasm-pack-template` in order to "start with sane defaults". While you are at least walked through what's inside the repo afterward, I would have prefered to have been guided more deliberatly on project setup. Is it really so complicate that we need to use a template everytime we want to create a Rust-Wasm project? I don't thinks so. I also dislike "needing" to use a template on principle, so there's that.
 
@@ -41,7 +41,7 @@ Error: error:0308010C:digital envelope routines::unsupported
 }
 ```
 
-Welp. Ok, so if this tutorial bakes in best practices, possibly some worst practises are baked in as well. The tech landscape can change sufficiently that tutorials very quickly fall out of date. This is officially not going well now though, since I'm focussion on dev set up instead of Rust + WebAssembly. [Stack Overflow suggested](https://stackoverflow.com/questions/67503242/how-to-fix-node12364-dep0111-deprecationwarning-access-to-process-binding) that Node version compatibility could be the issue: "Downgrading node js version from 16.8.0 to 14.17.5 resolved my issue." I deffinitely won't be doing do that though.
+Welp. This is officially not going well. Now I'm focussed on dev set up instead of Rust + WebAssembly. [Stack Overflow suggested](https://stackoverflow.com/questions/67503242/how-to-fix-node12364-dep0111-deprecationwarning-access-to-process-binding) that Node version compatibility could be the issue: "Downgrading node js version from 16.8.0 to 14.17.5 resolved my issue." I deffinitely won't be doing do that though. I feel bad for people trying to create tutorials though. The tech landscape can changes so rapidly that tutorials very quickly fall out of date. It's really impossible to create timeless tech content, I suppose.
 
 ...(next day)...
 
@@ -51,7 +51,7 @@ After running `npm upgrade` the application server spun up happily. Moving on.
 
 This is interesting. I think it means that ideally we should communicate between JS and Wasm through the shared memory? So, to make computations in WebAssembly efficient we should also model the problem in terms of linear memory space?
 
-...(hours later)...
+...(the next day)...
 
 The implementation sunk me into a depression. It hit hard that there is still a lot of Rust concepts I don't understand.
 
