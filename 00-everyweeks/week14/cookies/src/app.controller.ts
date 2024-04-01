@@ -6,7 +6,5 @@ export class AppController {
 
   @Get()
   @Render('index')
-  root() {
-    return { message: 'Hello Vincenzo!' };
-  }
+  root() {}
 }
