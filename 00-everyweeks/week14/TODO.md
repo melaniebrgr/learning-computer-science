@@ -1,7 +1,7 @@
 # TODO
 
 - [x] Init a server with Nest.js
-- [ ] Create an HTML document
+- [x] Create an HTML document
 - [ ] Execute a client-side script that creates a cookie
 - [ ] Inspect the implicit properties and property values of this client cookie
 - [ ] Create a server side cookie
