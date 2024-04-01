@@ -20,13 +20,13 @@ Basically I will try something for a week, document my learning, judge its succe
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | Rust command line game: guess the pinyin | 400 | Didn't finish by EOW. I had to learn the language basics first. |
-|   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs. I'm taking the W. |
-|  10  | Rust in JavaScript | 400 | Didn't finish by EOW, but learned more about Wasm. |
-|  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming though. |
-|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings to the game based on Rust learnings, but did not get as much done as I wanted. |
-|  13  | [Wasm game of life](./week13) | 206 |  |
-|  14  |  |  |  |
+|   8  | Rust command line game: guess the pinyin | 400 | I needed to learn more language basics first. |
+|   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs. |
+|  10  | Rust in JavaScript | 400 | Learned more about wasm, but didn't finish in time. |
+|  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming. |
+|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted. |
+|  13  | [Wasm game of life](./week13) | 206 | A setback. |
+|  14  | [Cookies: a snack break from Rust](./week14/) | 102 |  |
 |  15  |  |  |  |
 |  16  |  |  |  |
 |  17  |  |  |  |
