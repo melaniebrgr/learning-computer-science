@@ -2,7 +2,7 @@
 
 ## 01 introduction
 
-- Architectural Characteristics
+- [ ] Architectural Characteristics
 
 ## 02 Frontend
 
@@ -11,7 +11,6 @@
 - [ ] Design systems
 - [ ] SEO
 - [ ] Performance
-  - [ ] <https://frontendmasters.com/courses/blazingly-fast-js/>
   - [ ] File compression
   - [ ] Image compression
   - [ ] Code splitting
@@ -46,7 +45,6 @@
 - [ ] Frameworks
 - [ ] Component Architecture
 - [ ] Design patterns
-  - [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
 - [ ] Firewalls
 - [ ] Load Balancers
 - [ ] GraphQL
@@ -58,18 +56,6 @@
 
 ## 04 Databases
 
-### Considerations
-
-- [ ] Geographic distribution <https://youtu.be/JQfnMp0OeTA>
-- [ ] General database internals
-  - [ ] <https://youtu.be/DiLA0Ri6RfY>
-  - [ ] <https://youtu.be/IW4cpnpVg7E>
-- [ ] Write ahead logging:
-  - [ ] <https://youtu.be/yV_Zp0Mi3xs>
-  - [ ] <https://youtu.be/2MqY_mT1vw8>
-
-### Types
-
 - [ ] Blob
 - [ ] SQL
 - [ ] Schema design
@@ -79,26 +65,37 @@
 - [ ] Search
 - [ ] Graph
 - [ ] Streaming
-- [ ] Misc.
-  - [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
-  - [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
-  - [ ] CockroachDB: <https://youtu.be/1NuvxQEoVHU>
-  - [ ] Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
-  - [ ] CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
-  - [ ] Twisp: <https://youtu.be/VGb54yNQrHM>
-  - [ ] Kafka: <https://youtu.be/d89W_GzWnRw>
-  - [ ] YugaByteDB: <https://youtu.be/cXIPIA7e220>
-  - [ ] B-Trees: <https://youtu.be/dTfR0S_rBGg>
-  - [ ] Graph Databases: <https://youtu.be/iihJXKAQZkA>
-  - [ ] ScyllaDb: <https://youtu.be/AqY13RjWwJg>
-  - [ ] Duckdb: <https://youtu.be/f9QlkXW4H9A>
-  - [ ] RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
-  - [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
-  - [ ] Turso
-  - [ ] PGLite: <https://github.com/electric-sql/pglite>
+- [ ] Turso
 
 ## 05 Testing
 
 ## 06 Documentation
 
 ## 07 Version control
+
+# Materials
+
+- [ ] Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
+- [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
+- [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
+- [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
+- [ ] CockroachDB: <https://youtu.be/1NuvxQEoVHU>
+- [ ] Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
+- [ ] CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
+- [ ] Twisp: <https://youtu.be/VGb54yNQrHM>
+- [ ] Kafka: <https://youtu.be/d89W_GzWnRw>
+- [ ] YugaByteDB: <https://youtu.be/cXIPIA7e220>
+- [ ] B-Trees: <https://youtu.be/dTfR0S_rBGg>
+- [ ] Graph Databases: <https://youtu.be/iihJXKAQZkA>
+- [ ] ScyllaDb: <https://youtu.be/AqY13RjWwJg>
+- [ ] Duckdb: <https://youtu.be/f9QlkXW4H9A>
+- [ ] RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
+- [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
+- [ ] PGLite: <https://github.com/electric-sql/pglite>
+- [ ] Geographic distribution <https://youtu.be/JQfnMp0OeTA>
+- [ ] General database internals:
+  - [ ] <https://youtu.be/DiLA0Ri6RfY>
+  - [ ] <https://youtu.be/IW4cpnpVg7E>
+- [ ] Write ahead logging:
+  - [ ] <https://youtu.be/yV_Zp0Mi3xs>
+  - [ ] <https://youtu.be/2MqY_mT1vw8>
