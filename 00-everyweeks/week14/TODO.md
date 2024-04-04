@@ -8,7 +8,9 @@
 - [ ] Inspect the implicit properties and property values of this server cookie
 - [ ] Configure two URL paths
 - [ ] Create cookies scoped to the two paths
+- [ ] Create an "everything" cookie with a Domain, Path, Max-age or Expires, Same-site ...
 
 ## Materials
 
 - [ ] [HTTP Cookies Crash Course](https://www.youtube.com/watch?v=sovAIX4doOE)
+- [ ] [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
