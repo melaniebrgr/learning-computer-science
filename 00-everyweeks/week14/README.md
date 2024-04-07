@@ -1,63 +1,47 @@
-# Magic cookies
+# Consenting to magic cookies
 
 ## Week 14 project journaling
 
-Cookies are small key-value stores that are sent along with every server request the browser makes.
-It began innocently enough in 1994 when the cookie was added to the Netscape browser by founding engineer and now Worl Wide Web Hall of Fame Inductee, Lou Montulli (1, 2).
-So it was not a new idea since magic cookies were being used for communicating programs, it was only new to web.
+It all began innocently enough in 1994 when now World Wide Web Hall of Famer, Lou Montulli, added the cookie to the Netscape browser (1, 2). It was not a new idea technically, magic cookies were already being used for communicating programs, it was just new to web. The problem Lou was reputedly solving at the time was how to store user data--a shopping cart in this case--_not_ on the server. So he implemented a cookie, a small key-value store that hitches a ride along with every browser request to a server.
 
-The problem Lou was solving was how to store user data--a shopping cart in this case--_not_ on the server.
-It was OG LoFi ([local-first apps](https://localfirstweb.dev//)), if your will, where your data exists on your machine and server remains stateless.
-It was about two years that someone (Tim Jackson?) realised that cookies could be used to invade your privacy.
-It makes you wonder what the internet would look like today if the HTTP cookie had never been invented.
+It was OG [local-first apps](https://localfirstweb.dev//), if you will, where your data persists on your machine and server remains stateless. It took about two years until someone realised that cookies could be used to invade your privacy. What would the internet would look like today if the HTTP cookie had never been invented? We can only imagine...
 
 ### How are cookies created?
 
-Cookies can be created on the client with javascript:
+Cookies can be created on the client with javascript,
 
 ```js
 document.cookie = "chip=chocolate"
 ```
 
-By default, cookies created with JS will have the current domain and path.
-Cookies can be created on the server with the `Set-Cookie` header:
+and they can be created on the server using a `Set-Cookie` header,
 
-```js
-request.setHeader('Cookie', ['chip=chocolate']); // Set-Cookie: chip=chocolate
+```HTTP
+Set-Cookie: week14.2=cookie-set-by-server-home-page;
 ```
 
-The server instructs the client browser to set a cookie with the Set-Cookie header.
-On receiving the server response with the set-cookie header, the browser sets the cookie.
-Then with every subsequent request the server makes, this cookie is sent.
+On receiving a server response with the set-cookie header, the client browser sets the cookie, and then the client browser sends it with every subsequent request.
 
 ### How to scope cookies in space and time
 
-Cookies can be scoped
+Cookies can be scoped by
 
-- by same or cross-domain
-- by domain
-- by path
-- by duration
+- site (same or cross),
+- domain,
+- path, and
+- duration
 
-When following a link on a page the full cookie jar is sent along to the destination site by default. This lax behaviour could be taken advantage of. On a malicious site if you click a malicious link all your cookies (that might contain credentials and session info) get passed along by default, which could be taken advantage of to take a malicious action. For example, on `www.evilwebsite.com` you click on a link to `www.yourbank.com/pay-evil-persion/1000000000` and the cross-site (your bank) thinks it is you (paying the evil person) due to the cookies it receives, that had been set on a previous session with your bank. This is known as cross-site request forgery or CSRF. Setting the same site propery, `SameSite=strict` can limit the domain scope for which the browser sends cookies.
+As mentioned before, when following a link on a page all pertinent cookies are sent along to the destination site, a behaviour could be taken advantage of. On a malicious site if you click a malicious link your cookies can be leveraged to take a malicious action. For a contrived example, on `www.evilwebsite.com` you click on a link to `www.yourbank.com/pay-evil-persion/1000000000` and the cross-site (your bank) executes a payment the to evil person with your banks authentication cookie. This is known as cross-site request forgery or CSRF. Setting the same site propery, `SameSite=strict` limits the **site scope** for which the browser sends cookies.
 
-The domain property specifies the server that a cookie is sent to.
-By default, the domain of the cookie created is the full, current website domain, i.e. the subdomain, domain and top-level domain.
-A cookie created for `www.example.com` will not be available on `example.com`.
-However, we can specify that a cookie be created so that it is available on all subdomains, `domain=.example.com`.
-(Too bad the syntax isn't `domain=*.example.com`, that would be more explicit, in my opinion.)
-The path property specifies the path that must exist in the URL for the cookie to be sent.
+The **domain scope** is configured property. The domain specifies the server that a cookie is sent to. A cookie created for `www.example.com` will not be available on `example.com`. However, we can specify that the cookie be available on all subdomains with `domain=.example.com`. (A shame the syntax isn't `domain=*.example.com`, which would be more explicit, in my opinion.) The **path** property specifies the path that must exist in the URL for the cookie to be sent.
 
 ```HTTP
 Set-Cookie: chip=chocolate; Domain=mozilla.org; Path=/docs;
 ```
 
-Cookies can be **scoped in place** as well as **scoped in time** by using the "Expires" and "Max-age" properties to set cookie duration.
-If these properties are set, the browser considers them as "permanent" cookies since they can persist past browser opening and closing.
-If they aren't set, the cookie is deleted when the tab is closed.
-This is called a "session" cookie.
+Cookies can be scoped in time as well by using the "Expires" and "Max-age" properties to set cookie **duration**. If these properties are set, the browser considers them permanent cookies since they can persist past browser opening and closing. If they aren't set, the cookie is deleted when the tab is closed. This is called a session cookie.
 
-There is additionally a inherent quantity and size scope aspects to a cookie: there can only be up to 300 at a time, and can only be 4 MB in size.
+There is additionally a built in quantity and size scope limitation to cookies: there can only be up to 300 at a time, and they can be up to only 4 MB in size. (This is quite a lot to forward on every request though, come to think of it.)
 
 ### TL;DR cookie property review
 
@@ -71,7 +55,7 @@ There is additionally a inherent quantity and size scope aspects to a cookie: th
 
 ### Demo time
 
-A simple Node server that returns some HTML and sets and parses cookies:
+Here is an example of a simple Node server that returns some HTML and sets and parses cookies:
 
 ```js
 import { createServer } from 'node:http';
@@ -134,7 +118,7 @@ server.listen(3000, '127.0.0.1', () => {
 
 ```
 
-The following cookies are sent with server requests:
+The following cookies are set and sent by the browser:
 
 ```zsh
 # On starting the server
@@ -172,45 +156,29 @@ Listening on 127.0.0.1:3000
 
 ```
 
-In summary, cookies were first set, then sent on _subsequent_ requests to the server only if permitted by cookie properties.
-For example the secure cookie was never sent, and the cookie set for the `/about` path was only sent on that path (when I navigated to it for the second time).
+In summary, cookies were first set, then sent on every _subsequent_ requests to the server _only if_ it was permitted by cookie's property settings. For example the secure cookie was never sent, and the cookie set for the `/about` path was only sent when navigating to that path path for the second time.
 
 ### Types of cookies feat. third party cookies
 
-Through combinations of cookie properties you can build very different types of cookies for very different purposes: session or permanent cookies, private cookies, first-party cookies, third-party cookies, partitioned cookies.
+Through the combinations of cookie properties mentioned previously you can build very different types of cookies for very different purposes: session or permanent cookies, private cookies, first-party cookies, third-party cookies, partitioned cookies.
 
-The third party cookie is the one we've heard about the most recently.
-It's when we install some scripts on our website from a--you guessed it--third party that creates a cookie intended for that third partie's domain, not for the current application domain.
-For example, for `www.mywebsite.com` I implement a Google ad that creates a cookie for the domain `.google.com`.
-To complete the example by contrast, a first party cookie is one I set myself for `www.mywebsite.com` with a domain `.mywebsite.com`.
+The third party cookie is the one we've heard about the most recently. It's when we install some scripts on our website from--you guessed it--a third party that creates a cookie intended for that third partie's domain and not for the current application domain. For example, for `www.mywebsite.com` I implement a Google ad that creates a cookie for the domain `.google.com`. This Google cookie is a third-party cookie on my websit. To complete the example by contrast, a first party cookie is one that I set myself for `www.mywebsite.com` with a domain `.mywebsite.com`.
 
-### Why do we need cookie banners all the time?
+### Why do we need cookie consent banners all the time?
 
-Social media buttons. Google ads. Any innocuous piece of code that we web developpers willingly load on our applications because we want people to like, subscribe, tweet and ultimately make money, are slurping up your personal data.
-When clicked, all your cookies ~~are belong to Google~~ are forwarded with the request, and any `.google.com` ones can be read by Google.
-So now Meta and Google know what you've liked, subscribed and paid for and they can in turn t/sell others what ad to microtarget to you.
-If you're curious what Google knows about you, head to [Google's ad center](https://myadcenter.google.com/controls).
-By law now however, when a website collects private information about you it can only do so with your consent.
-The two regulations inforcing this are the General Data Privacy Regulation (GDRP) and ePrivacy Directive.
+Social media buttons. Google ads. Any innocuous piece of code that we web developpers willingly load on our applications because we want people to like, subscribe, tweet and ultimately pay us money, are setting third-party cookies to slurp up your personal data. When clicked, all your `.google.com` domain cookies are belong to Google or Meta or Twitter and so forth. So now Meta knows what you've liked, Google knows what you've subscribed and ad you've clicked, and they can in turn t/sell others what ad is best to microtarget you with. If you're curious what Google knows about you, head to [Google's ad center](https://myadcenter.google.com/controls). By law now though, when a website collects private information about you it can only do so with your consent. The two regulations inforcing this are the General Data Privacy Regulation (GDRP) and ePrivacy Directive, which at least now requires us to get your consent about the cookies used on the website.
 
 ### What do we use cookies for in 2024?
 
-The three main uses of cookies in 2024 are
+The three main uses of cookies are
 
 1. State management e.g. a game score, shopping cart, or user settings
 2. Session management or maintaining authentication / identity status
-3. Ad targeting, I assue this will go away though as third-party cookie "end"
+3. Ad targeting, though I assue this will fade away as third-party cookie "end"
 
-Chrome has recently been quite noisy about deprecating third-party cookies.
-As if they should be credited with this privacy oriented initiate, when the fact is that Safari and Firefox has been blocking third-party cookies since about 2017.
-As of Q1 this year though Google has "disabled third-party cookies" for 1% of Chrome users with the final pahse out planned for the end of the year.
-But what does this mean for use web developers?
-If our website have been working well in Safari and Firefox already, then they will likely continue to do so in Chrome.
-For companies with multiple domains though, Chrome is implementing new features for cookies to help "legitimate" third-party cookie usage.
+Chrome has recently been quite noisy about deprecating third-party cookies, as if they should be credited with this privacy oriented initiate, when in fact Safari and Firefox have been blocking third-party cookies since 2017/9. As of Q1 this year Google has disabled third-party cookies in 1% of Chrome users with the final phase out planned for the end of the year. But what does this mean for us web developers? If our website have been working fine in Safari and Firefox all this time, then probably nothing. They'll likely continue to work in Chrome. For companies with multiple domains though Chrome is implementing some new features for cookies to help this more legitimate third-party cookie usage. If you've come across the terms privacy sandbox, partitioned cookie, first party sets or CHIPS, that's what's going on.
 
-If you've come across the terms privacy sandbox, partitioned cookie, first party sets or CHIPS, that's what this is about.
-To be frank though, Google already knows a lot about you and will continue to because of what you're googling.
-If you really care about privacy, then use a privacy-focussed search engine like DuckDuckGo.
+To be frank though, Google already knows a lot about you and will continue to because of what you're googling. If you really care about privacy, then use a privacy-focussed search engine like DuckDuckGo.
 
 ## References
 
