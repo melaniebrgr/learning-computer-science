@@ -30,46 +30,6 @@ The server instructs the client browser to set a cookie with the Set-Cookie head
 On receiving the server response with the set-cookie header, the browser sets the cookie.
 Then with every subsequent request the server makes, this cookie is sent.
 
-### Demo
-
-The following cookies are sent with server requests
-
-```zsh
-# On starting the server
-Listening on 127.0.0.1:3000
-
-# on reloading the page:
-## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, everything-cookie
-## Cookies parsed by server:
-{}
-
-# on clicking about page link:
-## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, cookie-set-by-server-about-page
-## Cookies parsed by server:
-{
-  'week14.1': 'cookie-set-by-client'
-  'week14.2': 'cookie-set-by-server-home-page',
-}
-
-# on clicking back button:
-## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, everything-cookie, cookie-set-by-server-about-page
-## Cookies parsed by server:
-{
-  'week14.1': 'cookie-set-by-client'
-  'week14.2': 'cookie-set-by-server-home-page',
-}
-
-# on clicking about page link again:
-## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, cookie-set-by-server-about-page
-## Cookies parsed by server:
-{
-  'week14.1': 'cookie-set-by-client'
-  'week14.2': 'cookie-set-by-server-home-page',
-  'week14.4': 'cookie-set-by-server-about-page',
-}
-
-```
-
 ### How to scope cookies in space and time
 
 Cookies can be scoped
@@ -109,9 +69,115 @@ There is additionally a inherent quantity and size scope aspects to a cookie: th
 - HttpOnly: cookie data can't be read on the client, e.g. by calling `document.cookie` in JS (They are still sent on eveery request however.)
 - Secure: The cookie is only sent over HTTPS
 
+### Demo time
+
+A simple Node server that returns some HTML and sets and parses cookies:
+
+```js
+import { createServer } from 'node:http';
+import cookie from 'cookie';
+
+const home = (_, res) => {
+    res.writeHead(200, { 
+      'Content-Type': 'text/html',
+      'Set-Cookie': [
+        'week14.2=cookie-set-by-server-home-page;',
+        'week14.3=everything-cookie; HttpOnly; SameSite=Strict; path=/; Domain=127.0.0.1; Max-Age=5; Secure;',
+      ]
+    });
+    res.end(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>Week 14: Cookies</title>
+        <script>
+          document.cookie = 'week14.1=cookie-set-by-client';
+        </script>
+      </head>
+      <body>
+        <h1>Week 14: Magic Cookies</h1>
+        <a href="/about">about</a>
+      </body>
+      </html>
+    `);
+};
+
+const about = (_, res) => {
+  res.writeHead(200, { 
+    'Content-Type': 'text/plain',
+    'Set-Cookie': 'week14.4=cookie-set-by-server-about-page; path=/about;'
+  });
+  res.end('About page');
+}
+
+const server = createServer((req, res) => {
+  const cookies = cookie.parse(req.headers.cookie || '');
+  console.log(req.url, cookies);
+  
+  switch (req.url) {
+    case '/':
+      home(req, res);
+      break;
+    case '/about':
+      about(req, res);
+      break;
+    default:
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Not found');
+  }
+});
+
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Listening on 127.0.0.1:3000');
+});
+
+```
+
+The following cookies are sent with server requests:
+
+```zsh
+# On starting the server
+Listening on 127.0.0.1:3000
+
+# on loading the home page:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, everything-cookie
+## Cookies received by server:
+{}
+
+# on clicking about page link:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, cookie-set-by-server-about-page
+## Cookies received by server:
+{
+  'week14.1': 'cookie-set-by-client'
+  'week14.2': 'cookie-set-by-server-home-page',
+}
+
+# on clicking back button:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, everything-cookie, cookie-set-by-server-about-page
+## Cookies received by server:
+{
+  'week14.1': 'cookie-set-by-client'
+  'week14.2': 'cookie-set-by-server-home-page',
+}
+
+# on clicking about page link again:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, cookie-set-by-server-about-page
+## Cookies received by server:
+{
+  'week14.1': 'cookie-set-by-client'
+  'week14.2': 'cookie-set-by-server-home-page',
+  'week14.4': 'cookie-set-by-server-about-page',
+}
+
+```
+
+In summary, cookies were first set, then sent on _subsequent_ requests to the server only if permitted by cookie properties.
+For example the secure cookie was never sent, and the cookie set for the `/about` path was only sent on that path (when I navigated to it for the second time).
+
 ### Types of cookies feat. third party cookies
 
-Through combinations of the above properties you can build very different types of cookies for very different purposes: session or permanent cookies, private cookies, first-party cookies, third-party cookies, partitioned cookies.
+Through combinations of cookie properties you can build very different types of cookies for very different purposes: session or permanent cookies, private cookies, first-party cookies, third-party cookies, partitioned cookies.
 
 The third party cookie is the one we've heard about the most recently.
 It's when we install some scripts on our website from a--you guessed it--third party that creates a cookie intended for that third partie's domain, not for the current application domain.
@@ -123,7 +189,7 @@ To complete the example by contrast, a first party cookie is one I set myself fo
 Social media buttons. Google ads. Any innocuous piece of code that we web developpers willingly load on our applications because we want people to like, subscribe, tweet and ultimately make money, are slurping up your personal data.
 When clicked, all your cookies ~~are belong to Google~~ are forwarded with the request, and any `.google.com` ones can be read by Google.
 So now Meta and Google know what you've liked, subscribed and paid for and they can in turn t/sell others what ad to microtarget to you.
-If you're curious what Google knows about you, head to (Google's ad center)[https://myadcenter.google.com/controls].
+If you're curious what Google knows about you, head to [Google's ad center](https://myadcenter.google.com/controls).
 By law now however, when a website collects private information about you it can only do so with your consent.
 The two regulations inforcing this are the General Data Privacy Regulation (GDRP) and ePrivacy Directive.
 
@@ -148,5 +214,5 @@ If you really care about privacy, then use a privacy-focussed search engine like
 
 ## References
 
-1. (Lou Montulli)[https://en.wikipedia.org/wiki/Lou_Montulli]
-2. (World Wide Web Hall of Fame Inductees)[https://en.wikipedia.org/wiki/First_International_Conference_on_the_World-Wide_Web#World_Wide_Web_Hall_of_Fame_Inductees]
+1. [Lou Montulli](https://en.wikipedia.org/wiki/Lou_Montulli)
+2. [World Wide Web Hall of Fame Inductees](https://en.wikipedia.org/wiki/First_International_Conference_on_the_World-Wide_Web#World_Wide_Web_Hall_of_Fame_Inductees)
