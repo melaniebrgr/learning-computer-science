@@ -11,3 +11,4 @@
 - Modern VCS, e.g. Jujutsu <https://github.com/martinvonz/jj>
 - Create a book from my notes with <https://rust-lang.github.io/mdBook/>
 - Write myself a git in Rust <https://wyag.thb.lt/#intro>
+- System retrosynthetic analysis

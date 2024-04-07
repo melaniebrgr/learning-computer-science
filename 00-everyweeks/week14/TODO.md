@@ -9,6 +9,7 @@
 - [ ] Configure two URL paths
 - [ ] Create cookies scoped to the two paths
 - [ ] Create an "everything" cookie with a Domain, Path, Max-age or Expires, Same-site ...
+- [ ] Parse and read all the cookies on the server
 
 ## Materials
 
