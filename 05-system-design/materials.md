@@ -17,8 +17,11 @@
   - [ ] Tree-shaking
   - [ ] Pagination
   - [ ] Virtualisation
+  - [ ] Caching (FE)
 - Security
+  - [ ] XSS
   - [ ] CORS
+  - [ ] CSRF
 - [ ] Core Web Vitals
 - [ ] Images
 - [ ] Video
@@ -26,12 +29,14 @@
 - [ ] Accessibility
 - [ ] Internationalisation
 - [ ] Localisation
-- [ ] Signals
-- [ ] Observables
+- [ ] State management
+  - [ ] Signals
+  - [ ] Observables
 - [ ] Polling
 - [ ] Sockets
 - [ ] Client
 - [ ] Cookies
+- [ ] JWTs
 - [ ] Authentication
 - [ ] Authorisation
 - [ ] Client-side storage
