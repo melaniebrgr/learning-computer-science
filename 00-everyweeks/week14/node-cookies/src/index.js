@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { readFile} from 'node:fs';
 
 const server = createServer((req, res) => {
-  readFile('./index.html', 'utf8', (err, data) => {
+  readFile('./src/index.html', 'utf8', (err, data) => {
     if (err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('Internal server error');
