@@ -30,6 +30,46 @@ The server instructs the client browser to set a cookie with the Set-Cookie head
 On receiving the server response with the set-cookie header, the browser sets the cookie.
 Then with every subsequent request the server makes, this cookie is sent.
 
+### Demo
+
+The following cookies are sent with server requests
+
+```zsh
+# On starting the server
+Listening on 127.0.0.1:3000
+
+# on reloading the page:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, everything-cookie
+## Cookies parsed by server:
+{}
+
+# on clicking about page link:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, cookie-set-by-server-about-page
+## Cookies parsed by server:
+{
+  'week14.1': 'cookie-set-by-client'
+  'week14.2': 'cookie-set-by-server-home-page',
+}
+
+# on clicking back button:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, everything-cookie, cookie-set-by-server-about-page
+## Cookies parsed by server:
+{
+  'week14.1': 'cookie-set-by-client'
+  'week14.2': 'cookie-set-by-server-home-page',
+}
+
+# on clicking about page link again:
+## Cookies set in browser: cookie-set-by-client, cookie-set-by-server-home-page, cookie-set-by-server-about-page
+## Cookies parsed by server:
+{
+  'week14.1': 'cookie-set-by-client'
+  'week14.2': 'cookie-set-by-server-home-page',
+  'week14.4': 'cookie-set-by-server-about-page',
+}
+
+```
+
 ### How to scope cookies in space and time
 
 Cookies can be scoped
@@ -61,8 +101,8 @@ There is additionally a inherent quantity and size scope aspects to a cookie: th
 
 ### TL;DR cookie property review
 
-- Domain: which server can receive the cookie e.g. the current domain `.example.com` or a third-parties `.tiktok.com`.
-- Path: what path the cookie is active for
+- Domain: The server can receive the cookie e.g. the current domain `.example.com` or a third-parties `.tiktok.com`. The defaul value is the current domain.
+- Path: The path the cookie is active on. The default value is the root.
 - Expires: the cookie expiry date when it will be deleted
 - Max-Age: the time in seconds after which a cookie will be deleted
 - SameSite: send cookies only when on the same (strict) or permit cross-site (lax) or are a dead giveaway of being a third-party cookie (none)
