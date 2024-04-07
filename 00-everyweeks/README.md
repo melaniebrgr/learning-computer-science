@@ -26,7 +26,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming. |
 |  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted. |
 |  13  | [Wasm game of life](./week13) | 206 | A setback. |
-|  14  | [Cookies: a snack break from Rust](./week14/) | 102 |  |
+|  14  | [Magic cookies](./week14/) | 200 | 🍪 |
 |  15  |  |  |  |
 |  16  |  |  |  |
 |  17  |  |  |  |

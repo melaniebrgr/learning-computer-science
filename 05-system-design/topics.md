@@ -35,7 +35,7 @@
 - [ ] Polling
 - [ ] Sockets
 - [ ] Client
-- [ ] Cookies
+- [x] [Cookies](../00-everyweeks/week14/README.md): 2024-04-07
 - [ ] JWTs
 - [ ] Authentication
 - [ ] Authorisation
@@ -78,7 +78,7 @@
 
 ## 07 Version control
 
-# Materials
+### Misc. materials
 
 - [ ] Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
 - [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
