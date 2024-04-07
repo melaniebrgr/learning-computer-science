@@ -2,13 +2,14 @@
 
 ## Week 14 project journaling
 
-Cookies are small key-value stores that are sent along with every server request the browser makes (unless certain properties are enforced).
-It began innocently enough in 1994 when the HTTP cookies was invented by a Netscape founding engineer (1).
-It was invented to store user data--a shopping cart in this case--on the client instead of the server, so that the server could remain stateless.
-It was OG Lofi, if your will.
-In 1996 someone (Tim Jackson?) realised that cookies could be used to invade your privacy.
-It makes you wonder what the internet world would have look like today if the cookie had never been invented.
-An entirely different place.
+Cookies are small key-value stores that are sent along with every server request the browser makes.
+It began innocently enough in 1994 when the cookie was added to the Netscape browser by founding engineer and now Worl Wide Web Hall of Fame Inductee, Lou Montulli (1, 2).
+So it was not a new idea since magic cookies were being used for communicating programs, it was only new to web.
+
+The problem Lou was solving was how to store user data--a shopping cart in this case--_not_ on the server.
+It was OG LoFi ([local-first apps](https://localfirstweb.dev//)), if your will, where your data exists on your machine and server remains stateless.
+It was about two years that someone (Tim Jackson?) realised that cookies could be used to invade your privacy.
+It makes you wonder what the internet would look like today if the HTTP cookie had never been invented.
 
 ### How are cookies created?
 
@@ -21,7 +22,7 @@ document.cookie = "chip=chocolate"
 By default, cookies created with JS will have the current domain and path.
 Cookies can be created on the server with the `Set-Cookie` header:
 
-```js (Node)
+```js
 request.setHeader('Cookie', ['chip=chocolate']); // Set-Cookie: chip=chocolate
 ```
 
@@ -88,22 +89,24 @@ The two regulations inforcing this are the General Data Privacy Regulation (GDRP
 
 ### What do we use cookies for in 2024?
 
-What are the main uses of cookies in 2024 and what is their approximate distribution?
+The three main uses of cookies in 2024 are
 
-- Maintaining some application state, e.g. a game score or shopping cart
-- Maintaining your authentication / identity status?
-- Advertising?
-- Tracking you around the internet?
+1. State management e.g. a game score, shopping cart, or user settings
+2. Session management or maintaining authentication / identity status
+3. Ad targeting, I assue this will go away though as third-party cookie "end"
 
-Chrome is notoriously taking the lead on deprecating third-party cookies.
-As of Q1 this year it "disabled third-party cookies" for 1% of Chrome users with the final pahse out planned for Q4.
-But what does this mean
+Chrome has recently been quite noisy about deprecating third-party cookies.
+As if they should be credited with this privacy oriented initiate, when the fact is that Safari and Firefox has been blocking third-party cookies since about 2017.
+As of Q1 this year though Google has "disabled third-party cookies" for 1% of Chrome users with the final pahse out planned for the end of the year.
+But what does this mean for use web developers?
+If our website have been working well in Safari and Firefox already, then they will likely continue to do so in Chrome.
+For companies with multiple domains though, Chrome is implementing new features for cookies to help "legitimate" third-party cookie usage.
 
-Privacy sandbox?
-Partitioned cookie? First part sets or CHIPS?
-Let's be realy though, Google already knows a ton about you because of what you've been googling.
-If you really care about privacy, use a privacy-focussed search engine like DuckDuckGo.
+If you've come across the terms privacy sandbox, partitioned cookie, first party sets or CHIPS, that's what this is about.
+To be frank though, Google already knows a lot about you and will continue to because of what you're googling.
+If you really care about privacy, then use a privacy-focussed search engine like DuckDuckGo.
 
-References
+## References
 
 1. (Lou Montulli)[https://en.wikipedia.org/wiki/Lou_Montulli]
+2. (World Wide Web Hall of Fame Inductees)[https://en.wikipedia.org/wiki/First_International_Conference_on_the_World-Wide_Web#World_Wide_Web_Hall_of_Fame_Inductees]
