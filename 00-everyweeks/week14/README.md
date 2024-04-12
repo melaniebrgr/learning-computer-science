@@ -1,4 +1,4 @@
-# Consenting to magic cookies
+# Taking a magic cookie break
 
 ## Week 14 project journaling
 

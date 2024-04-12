@@ -21,7 +21,7 @@
 - Security
   - [ ] XSS
   - [ ] CORS
-  - [ ] CSRF
+  - [x] [CSRF](../00-everyweeks/week14/README.md) (2024-04-07)
 - [ ] Core Web Vitals
 - [ ] Images
 - [ ] Video
@@ -35,13 +35,13 @@
 - [ ] Polling
 - [ ] Sockets
 - [ ] Client
-- [x] [Cookies](../00-everyweeks/week14/README.md): 2024-04-07
+- [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
 - [ ] JWTs
 - [ ] Authentication
 - [ ] Authorisation
 - [ ] Client-side storage
 - [ ] PWAs
-- [ ] WebAssembly
+- [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
 - [ ] Bundlers
 
 ## 03 Backend
@@ -50,6 +50,8 @@
 - [ ] Frameworks
 - [ ] Component Architecture
 - [ ] Design patterns
+- [ ] Data structures
+- [ ] Algorithms
 - [ ] Firewalls
 - [ ] Load Balancers
 - [ ] GraphQL
@@ -104,3 +106,14 @@
 - [ ] Write ahead logging:
   - [ ] <https://youtu.be/yV_Zp0Mi3xs>
   - [ ] <https://youtu.be/2MqY_mT1vw8>
+- [ ] Web capabilities: <https://frontendmasters.com/courses/device-web-apis/>
+- [ ] Intl:
+  - [ ] Learn responsive design <https://web.dev/learn/design/>
+  - [ ] Software intl. <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
+  - [ ] ICU message syntax <https://support.crowdin.com/icu-message-syntax/>
+- [ ] AWS Architecture as a card game <https://explore.skillbuilder.aws/learn/course/external/view/elearning/17564/aws-card-clash-an-architecture-design-game>
+- [ ] [Grokking Algorithms](https://www.manning.com/books/grokking-algorithms)
+- [ ] [Grokking Algorithms YouTube series](https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT)
+- [ ] [The Last Algorithms Course You'll Need (Part 1)](https://frontendmasters.com/courses/algorithms/)
+- [ ] [The Last Algorithms Course You'll Want (Part 2)](https://frontendmasters.com/courses/advanced-algorithms/)
+- [ ] [Practical Problem Solving with Algorithms](https://frontendmasters.com/courses/algorithms-practice/)

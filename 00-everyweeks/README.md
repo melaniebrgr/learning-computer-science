@@ -20,16 +20,14 @@ Basically I will try something for a week, document my learning, judge its succe
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | Rust command line game: guess the pinyin | 400 | I needed to learn more language basics first. |
+|   8  | Rust command line game: guess the pinyin | 400 | Had to learn the language basics first. |
 |   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs. |
 |  10  | Rust in JavaScript | 400 | Learned more about wasm, but didn't finish in time. |
 |  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming. |
 |  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted. |
 |  13  | [Wasm game of life](./week13) | 206 | A setback. |
-|  14  | [Magic cookies](./week14/) | 200 | 🍪 |
-|  15  |  |  |  |
-|  16  |  |  |  |
-|  17  |  |  |  |
+|  14  | [Magic cookies](./week14/) | 200 | A 🍪 break from Rust. |
+|  15  | [App performance & the CWVs](./week15/) |  |  |
 |  18  |  |  |  |
 |  19  |  |  |  |
 |  20  |  |  |  |
@@ -65,3 +63,22 @@ Basically I will try something for a week, document my learning, judge its succe
 |  50  |  |  |  |
 |  51  |  |  |  |
 |  52  |  |  |  |
+
+## Topic ideas
+
+- Create a website with Leptos
+- Deploying a wasm app: CI/CD and AWS
+- SQLite and Wasm (SQLX?)
+- Godot
+- Build a game in Rust, e.g. a maze explorer
+- FE systems, e.g. web sockets, workers, local caching, polling
+- SpacetimeDB <https://spacetimedb.com/>
+- Debugging wasm
+- How does the modern VCS work, e.g. Jujutsu <https://github.com/martinvonz/jj>
+- Git, mercurial, graphite
+- Create a book from my notes with <https://rust-lang.github.io/mdBook/>
+- Write myself a git in Rust <https://wyag.thb.lt/#intro>
+- System retrosynthetic analysis methodology
+- Any open system design topic
+- VPN - how does it work, how is it detected?
+- Using in Node, <https://nodejs.org/api/wasi.html>
