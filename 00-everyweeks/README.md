@@ -81,4 +81,9 @@ Basically I will try something for a week, document my learning, judge its succe
 - System retrosynthetic analysis methodology
 - Any open system design topic
 - VPN - how does it work, how is it detected?
-- Using in Node, <https://nodejs.org/api/wasi.html>
+- Using wasi in Node, <https://nodejs.org/api/wasi.html>
+- A Chrome extension
+- A Chrome side panel feature
+- Service workers
+- Wasm by example: <https://wasmbyexample.dev/home.en-us.html#>
+- Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>

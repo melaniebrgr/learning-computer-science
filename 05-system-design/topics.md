@@ -13,11 +13,13 @@
 - [ ] Performance
   - [ ] File compression
   - [ ] Image compression
-  - [ ] Code splitting
+  - [ ] Code optimisation (splitting)
   - [ ] Tree-shaking
   - [ ] Pagination
   - [ ] Virtualisation
-  - [ ] Caching (FE)
+  - [ ] Browser cache
+  - [ ] Bf cache
+  - [ ] Service workers
 - Security
   - [ ] XSS
   - [ ] CORS
