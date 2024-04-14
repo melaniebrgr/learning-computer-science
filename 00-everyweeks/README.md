@@ -87,3 +87,4 @@ Basically I will try something for a week, document my learning, judge its succe
 - Service workers
 - Wasm by example: <https://wasmbyexample.dev/home.en-us.html#>
 - Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>
+- web worker and service worker
