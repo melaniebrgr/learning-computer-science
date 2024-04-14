@@ -13,13 +13,11 @@ These are most elementary things that I am currently not even thinking about as 
 Making changes on the FE is cheap, fast and has a high impact.
 And I am still underesitmating and not prioritising mobile web.
 
-The levers of web performance: bandwidth, network speed, hardware speeds (CPU, GPU).
-Network layer, parsing, resource discovery, resource prioritisation, layout, paint.
-Web performance metrics have been around for a while, probably the earliest being page load time
-These are more browser centric measures of web performance.
-The user centric measures of web performance:
-user feel like the website is loaded when the images load.
-Average latency for 5G network in Canada is 50ms and increases for 4G, 3G and so on. For DSL is 12ms.
+Web performance metrics have been around for a while, probably the earliest being page load time.
+There have been a lot of different metric overs the yeas
+Some web performance measures are more browser centric, and some more user centric measures.
+Initial browser centric measures predominated since they were easier to measure and understand, but over time with the realisation that user's perception of webspage speed matters more than hard metrics, the measures that we use have trended to being more user focussed.
+For example, surveys have shown that a user feel like the website is loaded when the images load.
 
 - Time to first byte (TTFB) the browser receives the first byte of response
 - First paint the browser has painted something, even a line
@@ -33,7 +31,7 @@ Average latency for 5G network in Canada is 50ms and increases for 4G, 3G and so
 - Time to interactive
 - First input delay (FID)
 
-Core Web Vitals were introduced by Google who added them to the search console in 2020 (1) as benchmarks for the web developer community to aim for.
+The Core Web Vitals were introduced by Google who added them to the search console in 2020 (1) as benchmarks for the web developer community to aim for.
 Core Web Vitals are meant to evoke health.
 These are the vital signs of your application.
 There are other metrics but these are the core ones.
@@ -41,14 +39,15 @@ They take the pulse of your website so you know wether only need to monitor or r
 Once you have a diagnosis then your can work on a treatment plan toward a cure.
 Now there are 3:
 
-- **Largest contentful paint** (LCP) is performance oriented measure
-- **Cumulative layout shift** less about performance and more of a user experience quality of visual stability
+- **Largest contentful paint** (LCP) is an indicator of how long it takes for the main content to appear.
+- **Cumulative layout shift** (CLS) is an indicator of visual stability much more aligned with user experience than the other two metrics.
 - **Interaction to next paint** (INP) an indicator of web page "snappiness". INP is a performance oriented measure that is intended to do a better job as an indicator of user experience than FID. It captures the delay in response to all clicking, tapping or key pressing due to blocking of the main thread, and then take's as the metric the worst one. All the delays in a user's a session are noted and the worst one is sent on the conclusion of the session. A good value is less than 200 ms.
 
 March 12, 2024 was Interaction to Next Paint's (INP) first birthday.
 It replaced First Input Delay (FID).
-Google says it's "not a ranking signal or factor" but might be a lie. It might be a slight one.
-"We highly recommend site owners achieve good Core Web Vitals for success with Search ... but good stats don't guarantee good rankings."
+
+While Google says these CWVs are "not a ranking signal or factor" it might be a lie and might be a slight one.
+"We highly recommend site owners achieve good Core Web Vitals for success with Search ... but good stats don't guarantee good rankings." (4)
 
 ### How to measure CWVs
 
@@ -68,10 +67,17 @@ Apply techniques and measure again.
 - Performance tab in Chrome DevTools: configuration options, hit record and refresh page.
 - WebPageTest.org results for one device, for that moment, for one point in the world
 
-### Stupid questions
+Film strip view showing all metrics overlayed on a page load
 
-- Why is INP useful?
-- Can it be gamed?
-- Does Google use it to rank pages?
-- What are the common things people measure, what are good, ok and bad values, and when were they popular and why?
-- Film strip view showing all metrics overlayed on a page load
+### A website comparison
+
+## References
+
+- [x] 1. [Introducing INP to Core Web Vitals](https://developers.google.com/search/blog/2023/05/introducing-inp)
+- [x] 2. [Shift from FID to INP: Mastering the New Core Web Vitals Metric](https://www.youtube.com/watch?v=qWXGBGhEZ0w)
+- [x] 3. [Deciphering INP and Core Web Vitals](https://www.youtube.com/watch?v=QdcKuo-N3kU)
+- [ ] 4. [Understanding Core Web Vitals and Google search results](https://developers.google.com/search/docs/appearance/core-web-vitals)
+- [x] 6. [Web App performance](https://frontendmasters.com/courses/web-app-performance)
+  - [x] Introduction
+  - [x] Metrics & tools
+  - [x] Basic optimisations
