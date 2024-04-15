@@ -1,10 +1,10 @@
-# INP is not a Meyers-Briggs personality type
+# INP is not a Myers–Briggs personality type
 
 ## Week 15 project journaling on web performance metrics
 
 ### With great front-end power...
 
-When it comes to website performance, front-end (FE) developers can _make the most biggest impact_. Making changes on the FE is cheap, fast and effective compared to the backend. Front-enders can...
+When it comes to website performance, front-end (FE) developers can _make the biggest impact_. Making changes on the FE is cheap, fast and effective compared to the backend. Front-enders can...
 
 - reduce the amount of time JavaScript loading blocks parsing,
 - reduce the amount of time CSS blocks rendering,
@@ -12,18 +12,17 @@ When it comes to website performance, front-end (FE) developers can _make the mo
 - define an HTTP cache policy, and
 - tell BE developers when they should start optimising their queries because TTFB tanked. Aha.
 
-These are the elementary things that I typically _do not even think about_ as go about day to day feature development. Not only that, I am still generally prioritising desktop web over mobile web. As I make code changes I a monitor the updates in a full-screen Chrome browser tab in a second monitor.
+These are the elementary things that I typically _do not even think about_ as go about day to day feature development. Not only that, I am still generally prioritising desktop web over mobile web. As I make code changes I am monitoring the updates on a second monitor in a full-screen Chrome browser tab.
 
 ### Step 1: awareness
 
 What can we measure in order to manage web performance?
 
-The earliest web performance metric we cared about was page load time. Remember how we used to wait for this event in order to run jQuery?
-There have been a lot of other metric overs the years, intended to capture different aspects of performance.
+The earliest web performance metric we cared about was page load time. Remember how we used to wait for it in order to run jQuery? There have been many other metric overs the years each intended to capture different aspects of performance.
 
 Initially browser centric measures predominated since they were easier to measure and understand. However over time with the realisation that a user's _perception_ of webpage speed matters more than actuals (for example, data shows that we feel like a website is loaded when the images are loaded), the metrics that we use have trended towards being more user focussed. Some example metrics:
 
-- **Page load** is fired when the browser has nothing left to do and all files, images, and content even below the fold is ready. This metric is less important metric now since we reaslised that the page is usuable before being fully loaded, but popular in the 90's and early 2000's. Note that Generally we want to use DOMContentLoaded instead now.
+- **Page load** is fired when the browser has nothing left to do and all files, images, and content even below the fold is ready. This metric is less important metric now since we reaslised that the page is usuable before being fully loaded, but popular in the 90's and early 2000's. Note that generally we want to use DOMContentLoaded instead now.
 - **Time to first byte (TTFB)** is when the browser receives the first byte of response.
 - **First contentful paint (FCP)** is when the browser has painted something, even a line.
 - **Time to interactive** is the first that when the main thread has been release for a few milliseconds.
@@ -59,7 +58,7 @@ Here is a list of tools for measuring CWVs and more:
 - **Treo** a paid, page speed monitoring tool enablong easy cross-comparison with different sites.
 - **SpeedCurve** another paid tool to monitor your competitor's performance.
 
-### A comparison of some of our EdTech competitors
+### A comparison of some EdTech competition
 
 #### The CrUX report
 
