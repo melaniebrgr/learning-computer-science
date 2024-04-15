@@ -61,7 +61,7 @@ Here is a list of tools for measuring CWVs and more:
 
 #### The CrUX report
 
-| Origin | LCP | INP (ms) | CLS |
+| Origin | LCP (s) | INP (ms) | CLS |
 | --- | --- | --- | --- |
 | https://knowunity.com | 🟠 2.6  | 🟢 175  | 🟢 0.05 |
 | https://quizlet.com |  🟢 2.2 | 🟠 250  | 🟢 0 |

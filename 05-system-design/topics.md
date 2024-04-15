@@ -10,7 +10,7 @@
 - [ ] Frameworks
 - [ ] Design systems
 - [ ] SEO
-- [ ] Performance
+- [ ] [Performance](../00-everyweeks/week15/README.md) (2024-04-15)
   - [ ] File compression
   - [ ] Image compression
   - [ ] Code optimisation (splitting)
