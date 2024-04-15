@@ -56,6 +56,8 @@ Here is a list of tools for measuring CWVs and more:
 - **Google Lighthouse** is a lab performance analysis tool. The name "Lighthouse" is meant to suggest that it is a guide for web developers, i.e. Lighthouse score should guide us in the right direction. Once a problem is identified with real user data the Lighthouse DevTools can be useful for testing different solutions.
 - The **Performance tab** in Chrome DevTools is also convenient for testing solutions. Just configure the options you need and hit record.
 - **WebPageTest.org** shows real data but keep in mind that the results are for one device in time and at one point in the world.
+- **Treo** a paid, page speed monitoring tool enablong easy cross-comparison with different sites.
+- **SpeedCurve** another paid tool to monitor your competitor's performance.
 
 ### A comparison of some of our EdTech competitors
 
