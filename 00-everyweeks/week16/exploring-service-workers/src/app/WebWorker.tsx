@@ -1,12 +1,19 @@
 'use client';
 
+import { useEffect, useRef } from "react";
+
 export function WebWorker() {
-  const runWorker = () => {
-    const worker = new Worker("./worker.js");
+  const { current: worker } = useRef(new Worker("./worker.js"));
+
+  useEffect(() => {
     worker.addEventListener("message", (e: MessageEvent) => {
-      console.log(e.data);
+      console.log('Message received in react:', e.data);
     });
+  }, []);
+
+  const postMessage = () => {
+    worker.postMessage("from react");
   }
 
-  return <button onClick={runWorker} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Run Web Worker</button>;
+  return <button onClick={postMessage} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Run Web Worker</button>;
 }
