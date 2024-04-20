@@ -31,6 +31,8 @@ export function WebWorker() {
 }
 
 /*
+// worker.js
+
 self.onmessage = (e) => {
   checkProfanity(e.data);
 }
