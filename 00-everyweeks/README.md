@@ -67,11 +67,11 @@ Basically I will try something for a week, document my learning, judge its succe
 ## Topic ideas
 
 - Create a website with Leptos
-- Deploying a wasm app: CI/CD and AWS
-- SQLite and Wasm (SQLX?)
+- Deploying a wasm app
+- SQLite/SQLX and wasm
 - Godot
 - Build a game in Rust, e.g. a maze explorer
-- FE systems, e.g. web sockets, workers, local caching, polling
+- Any FE systems topics (polling, workers, caching)
 - SpacetimeDB <https://spacetimedb.com/>
 - Debugging wasm
 - How does the modern VCS work, e.g. Jujutsu <https://github.com/martinvonz/jj>
@@ -81,11 +81,10 @@ Basically I will try something for a week, document my learning, judge its succe
 - System retrosynthetic analysis methodology
 - Any open system design topic
 - VPN - how does it work, how is it detected?
-- Using wasi in Node, <https://nodejs.org/api/wasi.html>
+- Using WASI in Node, <https://nodejs.org/api/wasi.html>
 - A Chrome extension
 - A Chrome side panel feature
 - Service workers
 - Wasm by example: <https://wasmbyexample.dev/home.en-us.html#>
 - Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>
-- web worker and service worker
-- <https://eleftheriabatsou.hashnode.dev/5-rust-project-ideas-for-absolutely-beginners-devs>
+- PDF renderer in Rust

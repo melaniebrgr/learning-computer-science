@@ -10,7 +10,7 @@
 - [ ] Frameworks
 - [ ] Design systems
 - [ ] SEO
-- [ ] [Performance](../00-everyweeks/week15/README.md) (2024-04-15)
+- [ ] Performance
   - [ ] File compression
   - [ ] Image compression
   - [ ] Code optimisation (splitting)
@@ -19,13 +19,18 @@
   - [ ] Virtualisation
   - [ ] Browser cache
   - [ ] Bf cache
+- [ ] Web workers
   - [ ] Service workers
 - Security
   - [ ] XSS
   - [ ] CORS
   - [x] [CSRF](../00-everyweeks/week14/README.md) (2024-04-07)
-- [ ] Core Web Vitals
+- [x] [Core Web Vitals](../00-everyweeks/week15/README.md) (2024-04-15)
+- [ ] WebGL
+- [ ] WebGPU
 - [ ] Images
+- [ ] canvas
+- [ ] svg
 - [ ] Video
 - [ ] Audio
 - [ ] Accessibility
@@ -36,11 +41,10 @@
   - [ ] Observables
 - [ ] Polling
 - [ ] Sockets
-- [ ] Client
 - [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
-- [ ] JWTs
 - [ ] Authentication
 - [ ] Authorisation
+- [ ] JWTs
 - [ ] Client-side storage
 - [ ] PWAs
 - [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
@@ -50,7 +54,7 @@
 
 - [ ] Languages
 - [ ] Frameworks
-- [ ] Component Architecture
+- [ ] Component architecture
 - [ ] Design patterns
 - [ ] Data structures
 - [ ] Algorithms

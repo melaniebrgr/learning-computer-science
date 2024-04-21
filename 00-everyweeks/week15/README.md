@@ -9,7 +9,7 @@ When it comes to website performance, front-end (FE) developers can _make the bi
 - reduce the amount of time JavaScript loading blocks parsing,
 - reduce the amount of time CSS blocks rendering,
 - reduce image size,
-- define an HTTP cache policy, and
+- set up browser caching (HTTP headers, service workers)
 - tell BE developers when they should start optimising their queries because TTFB tanked. Aha.
 
 These are the elementary things that I typically _do not even think about_ as go about day to day feature development. Not only that, I am still generally prioritising desktop web over mobile web. As I make code changes I am monitoring the updates on a second monitor in a full-screen Chrome browser tab.
