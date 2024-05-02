@@ -8,6 +8,11 @@
 
 - [ ] Component architecture
 - [ ] Frameworks
+  - [ ] React
+  - [ ] Vue
+  - [ ] Solid
+- [ ] Meta frameworks
+  - [ ] Next.js
 - [ ] Design systems
 - [ ] SEO
 - [ ] Performance
