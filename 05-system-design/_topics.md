@@ -6,13 +6,14 @@
 
 ## 02 Frontend
 
+- [ ] Web APIs
 - [ ] Component architecture
-- [ ] Frameworks
+- [ ] Frameworks & metaframeworks
   - [ ] React
   - [ ] Vue
   - [ ] Solid
-- [ ] Meta frameworks
-  - [ ] Next.js
+  - [x] [Next.js](./frameworks/nextjs.md) (2023-05-07)
+- [x] [Rendering patterns: SSG, SSR, CSR, server components](./frameworks/rendering.md) (2024-05-02)
 - [ ] Design systems
 - [ ] SEO
 - [ ] Performance
