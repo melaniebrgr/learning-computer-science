@@ -6,7 +6,7 @@ export function WebWorker() {
   const worker  = useRef<Worker>();
 
   useEffect(() => {
-    worker.current = new Worker("./worker.js");
+    worker.current = new Worker("./web-worker.js");
     worker.current.addEventListener("message", (e: MessageEvent) => {
       console.log('Is profane:', e.data);
     });

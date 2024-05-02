@@ -8,7 +8,7 @@ The idea is stolen from [beeple](https://www.beeple-crap.com/everydays) and [cod
 - Thursday: build
 - Friday: build
 - Saturday: share
-- Sunday: even god rested for a day (but also choose the next topic)
+- Sunday: rest and choose the next topic
 
 Basically I will try something for a week, document my learning, judge its success then move on to the next thing. There are 52 weeks in a year, I already missed the first few in 2024, so starting today, which is week 8. Status codes will signal how well I think it went:
 
@@ -28,7 +28,9 @@ Basically I will try something for a week, document my learning, judge its succe
 |  13  | [Wasm game of life](./week13) | 206 | A setback. |
 |  14  | [Magic cookies](./week14/) | 200 | A 🍪 break from Rust. |
 |  15  | [Web performance & the CWVs](./week15/) | 200 |  |
-|  18  | [Service workers](./week16/) | 102 |  |
+|  16  | Service workers | 400 | too busy on vacation |
+|  17  | [Service workers](./week17/) | 102 |  |
+|  18  |  |  |  |
 |  19  |  |  |  |
 |  20  |  |  |  |
 |  21  |  |  |  |
@@ -88,3 +90,6 @@ Basically I will try something for a week, document my learning, judge its succe
 - Wasm by example: <https://wasmbyexample.dev/home.en-us.html#>
 - Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>
 - PDF renderer in Rust
+- Next.js Server components, Client components
+- Drag and drop API
+- Openai assistant
