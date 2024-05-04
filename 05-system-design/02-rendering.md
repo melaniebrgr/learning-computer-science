@@ -1,4 +1,4 @@
-# Rendering
+# 02 Rendering
 
 In web development, the Network Boundary is a conceptual line that separates the different environments. For example, the client and the server, or the server and the data store.
 As web developers we choose where to place the client-server network boundary wherever it makes the most sense.

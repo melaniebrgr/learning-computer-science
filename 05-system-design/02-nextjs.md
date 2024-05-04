@@ -1,6 +1,4 @@
-# Metaframeworks
-
-## Next.js
+# 02 Next.js
 
 It's a better React.
 
@@ -31,7 +29,7 @@ An aggregation of good conventions learned over the past 20 years of building we
 - File and folder structure
 - …and more optimisations
 
-### Historical timeline
+## Historical timeline
 
 Understand what Next.js is by looking at where it came from, what prompted its creation
 
@@ -55,7 +53,7 @@ Popularity:
 - <https://2022.stateofjs.com/en-US/libraries/rendering-frameworks/>
 - <https://npmtrends.com/@remix-run/react-vs-astro-vs-next-vs-nuxt-vs-svelte>
 
-### A tour
+## A tour
 
 The building blocks (of any web application):
 
@@ -66,7 +64,7 @@ The building blocks (of any web application):
 5. Water / electricity: data
 6. Furniture: UI components
 
-#### 1. Foundation: configuration files
+### 1. Foundation: configuration files
 
 package.json
 
@@ -81,7 +79,7 @@ next.config.js
 - Customise webpack config
 - Clever choosing of allowed page extensions
 
-#### 2. Frame: layout files
+### 2. Frame: layout files
 
 document.tsx
 
@@ -100,7 +98,7 @@ app.tsx
 - Any styles imported in components are locally scoped.
 - <liveshare: _app page in Studocu monorepo>
 
-#### 3. Rooms: pages
+### 3. Rooms: pages
 
 - In Next.js, a page is a React Component exported from a file in the pages directory.
 - Pages in Next have three parts: a file name, a default exported react component, and (often) a server-side pre-rendering method.
@@ -121,7 +119,7 @@ app.tsx
 - This method cannot be exported from non-page files.
 - It only runs on the server and never on the browser
 
-#### 4. Driveways, hallways and doors: routes
+### 4. Driveways, hallways and doors: routes
 
 - The router and routing conventions are one of the most popular features of Next.
 - Routing in a Next.js application is initiated by clicking on a Next <Link> component
@@ -139,7 +137,7 @@ app.tsx
 
 - A note about Linking: the routes module was ported to Next. Routes + 'next/link' (Routes module + a)
 
-#### 5. Water, electricity, wifi: data
+### 5. Water, electricity, wifi: data
 
 - `getServerSideProps`
 

@@ -2,9 +2,9 @@
 
 ## 01 Foundation
 
-- [Philosophy](./01-introduction.md)
+- [x] [Philosophy](./01-philosophy.md)
 - [ ] Architectural characteristics
-- [ ] Design patterns
+- [ ] [Application architecture](./01-application-architecture.md) (2024-04-10)
 - [ ] The Internet
 
 ## 02 Frontend
@@ -28,8 +28,8 @@
   - [ ] Virtualisation
   - [ ] Browser cache
   - [ ] Bf cache
-- [ ] Web workers
-  - [ ] Service workers
+- [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-04)
+- [ ] Service workers
 - Security
   - [ ] XSS
   - [ ] CORS
@@ -39,7 +39,7 @@
 - [ ] WebGPU
 - [ ] Images
 - [ ] canvas
-- [ ] svg
+- [ ] SVG
 - [ ] Video
 - [ ] Audio
 - [ ] Accessibility
@@ -95,7 +95,8 @@
 
 ## 07 AI
 
-- [ ] 
+- [ ] openai
+  - [ ] assistants
 
 ## 08 Version control
 
