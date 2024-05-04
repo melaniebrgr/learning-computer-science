@@ -12,6 +12,7 @@
 - [ ] [Photoshop's journey to the web](https://web.dev/articles/ps-on-the-web)
 - [ ] [WebAssembly cut Figma's load time by 3x](https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/)
 - [x] [State of WebAssembly 2023 survey](https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html)
+- [ ] [WebAssembly: A New Hope](https://pspdfkit.com/blog/2017/webassembly-a-new-hope/)
 
 ## Videos
 

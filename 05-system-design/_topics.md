@@ -1,8 +1,10 @@
 # Topics
 
-## 01 introduction
+## 01 Foundation
 
-- [ ] Architectural Characteristics
+- [Philosophy](./01-introduction.md)
+- [ ] Architectural characteristics
+- [ ] Design patterns
 
 ## 02 Frontend
 
@@ -12,8 +14,8 @@
   - [ ] React
   - [ ] Vue
   - [ ] Solid
-  - [x] [Next.js](./frameworks/nextjs.md) (2023-05-07)
-- [x] [Rendering patterns: SSG, SSR, CSR, server components](./frameworks/rendering.md) (2024-05-02)
+  - [x] [Next.js](./02-nextjs.md) (2023-05-07)
+- [x] [Rendering patterns: SSG, SSR, CSR, server components](./02-rendering.md) (2024-05-02)
 - [ ] Design systems
 - [ ] SEO
 - [ ] Performance
@@ -61,7 +63,6 @@
 - [ ] Languages
 - [ ] Frameworks
 - [ ] Component architecture
-- [ ] Design patterns
 - [ ] Data structures
 - [ ] Algorithms
 - [ ] Firewalls
@@ -71,7 +72,6 @@
 - [ ] gRPC
 - [ ] APIs
 - [ ] Cloud Services
-- [ ] AI
 
 ## 04 Databases
 
@@ -90,10 +90,15 @@
 
 ## 06 Documentation
 
-## 07 Version control
+## 07 AI
 
-### Misc. materials
+- [ ] 
 
+## 08 Version control
+
+## Misc
+
+- [ ] AWS FS framework: <https://sst.dev/>
 - [ ] Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
 - [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
 - [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
