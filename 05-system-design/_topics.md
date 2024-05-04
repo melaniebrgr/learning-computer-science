@@ -5,6 +5,7 @@
 - [Philosophy](./01-introduction.md)
 - [ ] Architectural characteristics
 - [ ] Design patterns
+- [ ] The Internet
 
 ## 02 Frontend
 
@@ -75,16 +76,18 @@
 
 ## 04 Databases
 
-- [ ] Blob
-- [ ] SQL
-- [ ] Schema design
-- [ ] NoSQL
-- [ ] Document
-- [ ] KV
-- [ ] Search
-- [ ] Graph
+- [x] [Blob](./04-databases.md) (2023-04-12)
+- [x] [SQL](./04-databases.md) (2023-04-12)
+- [x] [NoSQL](./04-databases.md) (2023-04-12)
+- [x] [Document](./04-databases.md) (2023-04-12)
+- [x] [Key-value (KV)](./04-databases.md) (2023-04-12)
+- [x] [Search](./04-databases.md) (2023-04-12)
+- [x] [Graph](./04-databases.md) (2023-04-12)
 - [ ] Streaming
 - [ ] Turso
+- [ ] Schema design
+- [ ] Data maintance / management
+- [ ] Database caching
 
 ## 05 Testing
 

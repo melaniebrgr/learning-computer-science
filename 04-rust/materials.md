@@ -152,6 +152,8 @@ WARNING: No more materials are allowed!
 
 ## Courses
 
+- [ ] [Comprehensive Rust 🦀](https://google.github.io/comprehensive-rust/)
+- [ ] [Take your first steps with Rust](https://learn.microsoft.com/en-us/training/paths/rust-first-steps/)
 - [ ] [Rust for TypeScript Developers](https://frontendmasters.com/courses/rust-ts-devs)
   - [x] Basics
     - [x] Rust Basics

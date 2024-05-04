@@ -28,9 +28,9 @@ Basically I will try something for a week, document my learning, judge its succe
 |  13  | [Wasm game of life](./week13) | 206 | A setback. |
 |  14  | [Magic cookies](./week14/) | 200 | A 🍪 break from Rust. |
 |  15  | [Web performance & the CWVs](./week15/) | 200 |  |
-|  16  | Service workers | 400 | too busy on vacation |
-|  17  | [Service workers](./week17/) | 102 |  |
-|  18  |  |  |  |
+|  16  | Service workers | 501 | too busy on vacation |
+|  17  | [Service workers](./week17/) | 400 | too busy with back-to-work, and learned just enough about this topic to probably be dangerous |
+|  18  | [OpenAI Assistant](./week18) | 102 |  |
 |  19  |  |  |  |
 |  20  |  |  |  |
 |  21  |  |  |  |
