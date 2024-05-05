@@ -56,6 +56,15 @@ The assistant created will have an ID.
 
 ## Demo
 
+How to set up a python environment
+
+1. download and install python
+1. in the project directory...
+1. `$ python3 -m venv myenv`
+1. `$ source myenv/bin/activate`
+1. `$ pip install -r requirements.txt`
+1. python3 assistant.py
+
 ```bash
 # assistant.py
 Determining Assistant
@@ -203,11 +212,3 @@ Here is a multiple-choice quiz based on the provided documents:
 
 These questions are based on the content from "Biology 3316: Lecture 5", "Biology 3316: Lecture 6", and "3316 Midterm 1".
 ```
-
-### Questions
-
-1. How can Assistants be useful for generating learnable document summaries
-1. Can assistants be better than a GPT, or Chat Completion API?
-1. Can assistants be easier or faster to implement than a GPT, or "regular chat"?
-1. How would it compare to a ChatPDF?
-1. What are the challenges? Privacy

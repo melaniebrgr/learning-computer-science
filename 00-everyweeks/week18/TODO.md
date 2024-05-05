@@ -2,6 +2,15 @@
 
 ## To build
 
+## To answer
+
+1. How can Assistants be useful for generating learnable document summaries
+1. Can assistants be better than a GPT, or Chat Completion API?
+1. Can assistants be easier or faster to implement than a GPT, or "regular chat"?
+1. How would it compare to a ChatPDF?
+1. What are the challenges? Privacy
+1. What are the context limitations and how do they compare to the completions API?
+
 ## To learn
 
 - [ ] [AssistantsAPI](https://platform.openai.com/docs/assistants/overview)
@@ -13,8 +22,8 @@
   - [x] (0:04:22) VS Code Installation
   - [x] (0:05:31) OpenAI Account - Generate an API Key
   - [x] (0:07:53) What is the Assistants API & Benefits - Comparison Between the Chat Completion API and the Assistants API
-  - [ ] (0:18:16) Assistants API Building Blocks
-  - [ ] (0:24:04) Creating an Assistants API - Manually (Personal Trainer)
+  - [x] (0:18:16) Assistants API Building Blocks
+  - [x] (0:24:04) Creating an Assistants API - Manually (Personal Trainer)
   - [ ] (0:38:20) Creating an Assistants API - In Code (Personal Trainer)
   - [ ] (1:04:15) Build a News Summarizer Introduction: Function Calling - A Streamlit Application
   - [ ] (1:25:39) Create an AssistantsManager Class For our News Summarizer

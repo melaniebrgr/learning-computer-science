@@ -1,0 +1,11 @@
+{
+  "name": "week18",
+  "version": "1.0.0",
+  "description": "Try it first in the OpenAI Assistant platform UI, then in code.",
+  "main": "assistant.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
