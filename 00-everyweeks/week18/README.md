@@ -1,12 +1,9 @@
 # OpenAI Assistants API: Week 18 project journaling
 
-Try it first in the OpenAI Assistant platform UI, then in code.
-
-The assistants API extends the OpenAi API that make it easier to build AI assistants.
-It provides a framework or platform.
+The assistants API extends the OpenAI API and makes it easier to build AI assistants.
 What problem does it solve?
-
-The build AI applications requires
+It provides a framework or platform.
+The build AI applications requires.
 
 - infra management
 - data
@@ -16,36 +13,44 @@ The build AI applications requires
 - understand embeddings
 - storage mechanism
 
-Instead of distraction of stitching these piees togeather, these parts are abstracted.
-LLMs don't habve stat or save the context of a converstaion
+In Chat Complete API is that the Knowledge base is already there and limited to a certain date in time.
+It can't be contributed to.
+LLMs don't have state or save the context of a converstaion.
 Assistants save messages and the context of the messages.
 It also provides retrieval mechanisms for diging through data
 Can uplodad files and add it to the knowledge base in addition to the conversation
 It also has a code interpreter
 It can also do function calling.
 
-ASsitants call OpenAi models to tune their capabilities, can call multiple tools in parallel (code interpreter, knowledge retireval, function calling), persistent threads save history and provide context.
+Instead of distraction of stitching these pieces together, these parts are abstracted.
+Assitants call OpenAi models to tune their capabilities, can call multiple tools in parallel (code interpreter, knowledge retireval, function calling), persistent threads save history and provide context.
 
-Function call
+## Agentic workflow
 
-Create own tools on top of OpenAI tools.
+It also eases the set up for an **Agentic workflow**.
+Where we can have multiple AI assistants specialised on  work on one knowledge base.
+LLM AI + "self-dialogue" via reflection = "Agent".
+Multiple "Agents" together meet. User asks them to solve a problem. "Agents" all start collaborating with one another to generate a solution. So awesome!
+Exponentially self-improving agents.
 
-If differst from Chat Complete API is that the Knowledge base is already there and limited to a certain date in time.
-It can't be contributed to.
+## Building an application
 
-The assistant API components
+The components of an assistant:
 
-- the assistant
-- the conversation thread that contains messages from the use
-- the run entitity that can access an assistant and a thread (ID). It can access further code interpreter or tools as need be in the run steps. THe run can post a message back to the thread.
+- an assistant
+- a conversation thread
+- a run entitity
 
-Steps in the whole process or Assistant workflow
+Workflow for integration of an assistant:
 
-1. Create the assistant
-2. Create a thread
-3. Add the user message to the thread
-4. Run the thread
-5. Add the assistant message to the thread
+1. Create an Assistant
+2. Create a Thread
+3. Add the user message to the Thread
+4. Run the Assistant on the Thread
+5. Read the Assistant response message from the Thread
+6. Iterate
+
+### 1. Create an Assistant
 
 Can be created via the openai platform (platform.openai.com) UI or programmatically.
 The assistant is given an name, and an identity or instructions.
@@ -53,10 +58,29 @@ The instructions are like a prompt for how the assistant should behave.
 The assistant is then given a model to use.
 Different tools can then be attached to the assistant, e.g. functions, code interpreter.
 The assistant created will have an ID.
+defining its custom instructions and picking a model.
+Optionally add files and enable tools like Code Interpreter, File Search, and Function calling.
 
-## Demo
+### 2. Create a Thread
 
-How to set up a python environment
+Lke a conversational thread, it starts with a question from a user.
+Contains messages from the user and the assistant
+
+### 3. Add the user message to the Thread
+
+### 4. Run the Assistant on the Thread
+
+A run can access an assistant and a thread (ID).
+It can access further code interpreter or tools as need be in the run steps. THe run can post a message back to the thread.
+
+### 5. Read the Assistant response message from the Thread
+
+### 6. Iterate
+
+## Python demo
+
+Note: helpful to try it first in the OpenAI Assistant platform UI, then in code.
+How to set up a python environment:
 
 1. download and install python
 1. in the project directory...
@@ -82,11 +106,8 @@ Run Finished: completed
 Run Completion Tokens: 1100
 Run Prompt Tokens: 5551
 Run Total Tokens: 6651
-```
 
-```bash
 assistant Message msg_GyS9XBfBSodyEbbBji0cLNgM:
-
 
 Here is a multiple-choice quiz based on the provided documents:
 

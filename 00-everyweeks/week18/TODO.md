@@ -5,15 +5,43 @@
 ## To answer
 
 1. How can Assistants be useful for generating learnable document summaries
-1. Can assistants be better than a GPT, or Chat Completion API?
-1. Can assistants be easier or faster to implement than a GPT, or "regular chat"?
-1. How would it compare to a ChatPDF?
-1. What are the challenges? Privacy
-1. What are the context limitations and how do they compare to the completions API?
+2. Can assistants be easier or faster to implement than a GPT, or "regular chat"?
+
+    `gpt-4-turbo` with the Chat Completions API might be easier to start working with considering we are currently using it. The large number of tokens would handle almost all PDF files on Studocu. (`gpt-4-turbo` has a context window of 128K tokens compared to `gpt-3.5` with 16K.) However, the token limitation still needs to be handled, including potentially chunking data across messages, but more significantly the manipulation of file content, such as text and image extraction. We are looking at use tools like PSPDFKit for example, which can extract text and have no solution yet for images.
+
+    The Assistants API abstracts a number of details, such as file hosting, content extraction. The number of [file types that is supported](https://platform.openai.com/docs/assistants/tools/file-search/supported-files) is extensive, including TEXT, DOC, DOCX, PDF. Video file aren't supported but there is a demo analysing the static frames of a video with `gpt-4` on the other hand we would need to track file uploads and ensure they are deleted at the end of the session.
+
+3. Can assistants be better than a GPT, the Chat Completions API, or ChatPDF?
+
+    Yes. It _can_ provide better content extraction. It enables agentic workflows that have shown to provide a better outcomes over "one shot" APIs.
+
+    The fact that it's newer can also be a strategic advantage. While other tools provide many similar offerings, Assistants affords new capabilities that others haven't brought to market yet.
+
+4. What are the challenges with Assitants?
+
+    - GDPR: we need to ensure content is removed after a session
+    - More unknowns: Assistants is in Beta so there will be changes we will need to keep on top of and more unknowns in terms of cost.
+
+5. What are the context limitations and how do they compare to the Completions API?
+
+    Assistants API limitations (per Ruan from one of OpenAI's articles):
+    - 512MB per file
+    - Each end-user is capped at 10GB
+    - Each organization is capped at 100GB
+
+    Completions API limitations:
+    - 128K tokens (most of our docs)
 
 ## To learn
 
-- [ ] [AssistantsAPI](https://platform.openai.com/docs/assistants/overview)
+- [ ] [Assistants API](https://platform.openai.com/docs/assistants/overview)
+  - [ ] Overview
+  - [ ] How Assistants work
+  - [ ] File Search
+  - [ ] Code Interpreter
+  - [ ] Function Calling
+  - [ ] Migration Guide
+  - [ ] What's New
 - [ ] [OpenAI Assistants API – Course for Beginners](https://www.youtube.com/watch?v=qHPonmSX4Ms)
   - [x] (0:00:00) Introduction
   - [x] (0:01:02) What’s This Course About - What Will You Learn?
@@ -32,3 +60,6 @@
   - [ ] (2:35:25) Build a Study Buddy Streamlit Application
   - [ ] (3:22:24) Run the Study Buddy Streamlit Application and Test
   - [ ] (3:29:27) Wrap up and Final Considerations
+- [ ] [Azure OpenAI Assistants API (Preview)](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/assistants)
+- [ ] [OpenAI Assistants vs. AWS Bedrock Agents: Which Should You Choose?](https://medium.com/@woyera/openai-assistants-vs-aws-bedrock-agents-which-should-you-choose-18d8daa2de39)
+- [ ] [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)
