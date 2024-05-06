@@ -1,3 +1,4 @@
 .env
-assets
+images
+documents-*
 myenv

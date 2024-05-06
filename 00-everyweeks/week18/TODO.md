@@ -32,6 +32,10 @@
     Completions API limitations:
     - 128K tokens (most of our docs)
 
+6. How convenient is it to specify the output format (markdown, LaTeX)?
+
+7. Does implementing in the first iteration add value?
+
 ## To learn
 
 - [ ] [Assistants API](https://platform.openai.com/docs/assistants/overview)

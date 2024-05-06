@@ -3,10 +3,10 @@ from openai import OpenAI
 import uuid
 import os
 
-client = OpenAI(api_key='<API KEY HERE>') # FIXME: Replace with your API key
+client = OpenAI(api_key='') # FIXME: Replace with your API key
 
 def get_document_list():
-    input_dir = "documents"
+    input_dir = "documents-bio"
     pdf_files = [f for f in os.listdir(input_dir) if f.endswith('.pdf')]
 
     if not pdf_files:
