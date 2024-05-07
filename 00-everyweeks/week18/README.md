@@ -1,9 +1,7 @@
 # OpenAI Assistants API: Week 18 project journaling
 
 The assistants API extends the OpenAI API and makes it easier to build AI assistants.
-What problem does it solve?
-It provides a framework or platform.
-The build AI applications requires.
+It provides a framework or platform for build AI applications requires.
 
 - infra management
 - data
@@ -28,10 +26,63 @@ Assitants call OpenAi models to tune their capabilities, can call multiple tools
 ## Agentic workflow
 
 It also eases the set up for an **Agentic workflow**.
-Where we can have multiple AI assistants specialised on  work on one knowledge base.
-LLM AI + "self-dialogue" via reflection = "Agent".
-Multiple "Agents" together meet. User asks them to solve a problem. "Agents" all start collaborating with one another to generate a solution. So awesome!
-Exponentially self-improving agents.
+Where we can have multiple AI assistants specialised on work on one knowledge base.
+An LLM AI + "self-dialogue" via reflection = "Agent".
+Multiple "Agents" are brought together to collaborate and generate a solution to a user question.
+Exponentially self-improving agents has shown better results than using even the most powerful model in one shot (2).
+
+## FAQ
+
+1. **How can Assistants be useful for generating learnable document summaries**
+
+    There are two main affordances of the Assistants API:
+
+    1. Abstraction layer for AI applications: GPT knowledbase is fixed, whereas usages are custom to a particular domain or subeset of knowledge. convenient for providing a specific knowledge base. can be configured with OpenAI-hosted tools — like code_interpreter and file_search — or tools you build / host (via function calling) capability. Thre thread is managed for you Threads simplify AI application development by storing message history and truncating it when the conversation gets too long for the model’s context length. Assistants can access files in several formats can also create files (e.g., images, spreadsheets, etc) and cite files they reference in the Messages they create.
+    2. AI reflection and iteration: Assistants can call OpenAI’s models with specific instructions to tune their application so they can be used in an agentic workflow.
+
+    That is to say, the Assistants API is both an assistant to the developer and user.
+
+2. **Can assistants be easier or faster to implement than a GPT, or "regular chat"?**
+
+    If you want to, you could implement the Completions API style using the Assistant API.
+    You don't _need_ to supply a knowledge base, but that is the point of the assistant. To make adding context more convenient.
+
+    `gpt-4-turbo` with the Chat Completions API might be easier to start working with considering we are currently using it. The large number of tokens would handle almost all PDF files on Studocu. (`gpt-4-turbo` has a context window of 128K tokens compared to `gpt-3.5` with 16K.) However, the token limitation still needs to be handled, including potentially chunking data across messages, but more significantly the manipulation of file content, such as text and image extraction. We are looking at use tools like PSPDFKit for example, which can extract text and have no solution yet for images.
+
+    The Assistants API abstracts a number of details, such as file hosting, content extraction. The number of [file types that is supported](https://platform.openai.com/docs/assistants/tools/file-search/supported-files) is extensive, including TEXT, DOC, DOCX, PDF. Video file aren't supported but there is a demo analysing the static frames of a video with `gpt-4`. We can plug-in tools like web-scrapping APIs, or YouTube video transcript extractors. on the other hand we would need to track file uploads and ensure they are deleted at the end of the session.
+
+3. **Can assistants be better than a GPT, the Chat Completions API, or ChatPDF?**
+
+    Yes. It enables agentic workflows that have shown to provide a better outcomes over "one shot" APIs.
+
+    The fact that it's newer can also be a strategic advantage. While other tools provide many similar offerings, Assistants affords new capabilities that others haven't brought to market yet. There're quite a few  offerings already:
+
+    - [PDF GPT](https://www.pdfgpt.chat/) - upload all the PDFs you want to chat with
+    - [Magic Notes]
+
+    How can we make a stand out wow product? Combine more content types, provide better output, make it more convenient. Assistants _can_ provide better content extraction.
+
+4. **What are the challenges with Assitants?**
+
+    - GDPR: we need to ensure content is removed after a session
+    - More changes and unknowns likely: Assistants is in Beta so there will be changes we will need to keep on top of and more unknowns in terms of cost.
+
+5. **What are the context limitations and how do they compare to the Completions API?**
+
+    Assistants API limitations (per Ruan from one of OpenAI's articles):
+    - 512MB per file (average PDF on Studocu is 2MB)
+    - Each end-user is capped at 10GB
+    - Each organization is capped at 100GB
+
+    Completions API limitations:
+    - 128K tokens (most PDFs)
+
+6. **How convenient is it to specify the output format (markdown, LaTeX)?**
+
+7. **Does implementing in the first iteration add value?**
+
+    Agentic workflows have strong potential.
+    We could set up an Assitant that first deduplicates the content, creating a full text file, then an Assistance specialised in determining the optimal outline or that takes an outline and restructures the content to follow an outline.
 
 ## Building an application
 
@@ -44,48 +95,42 @@ The components of an assistant:
 Workflow for integration of an assistant:
 
 1. Create an Assistant
-2. Create a Thread
-3. Add the user message to the Thread
-4. Run the Assistant on the Thread
-5. Read the Assistant response message from the Thread
-6. Iterate
+1. (Optional) Addon tool(s)
+1. Create a Thread and add the user message
+1. Run the Thread with an Assistant
+1. Profit & iterate
 
 ### 1. Create an Assistant
 
+"An Assistant represents an entity that can be configured to respond to a user's messages using several parameters like model, instructions, and tools."
+
 Can be created via the openai platform (platform.openai.com) UI or programmatically.
-The assistant is given an name, and an identity or instructions.
-The instructions are like a prompt for how the assistant should behave.
-The assistant is then given a model to use.
-Different tools can then be attached to the assistant, e.g. functions, code interpreter.
+The Assistant is given a name and an "identity".
+The identity instructions are akin to a prompt for how the assistant should behave.
+The assistant is assiged a model to use.
+Finally, different tools can then be attached to the assistant, e.g. functions, code interpreter.
+
 The assistant created will have an ID.
 defining its custom instructions and picking a model.
 Optionally add files and enable tools like Code Interpreter, File Search, and Function calling.
 
-### 2. Create a Thread
+### 2. Create a Thread and add a message to it
 
-Lke a conversational thread, it starts with a question from a user.
-Contains messages from the user and the assistant
+Contains messages from the user and the assistant.
+Like a conversational thread, it starts with a question from a user.
+A Thread represents a conversation between a user and one or many Assistants. You can create a Thread when a user (or your AI application) starts a conversation with your Assistant.
+The contents of the messages your users or applications create are added as Message objects to the Thread. Messages can contain both text and files. There is no limit to the number of Messages you can add to Threads — we smartly truncate any context that does not fit into the model's context window.
 
-### 3. Add the user message to the Thread
-
-### 4. Run the Assistant on the Thread
+### 3. Run the Thread with an Assistant
 
 A run can access an assistant and a thread (ID).
 It can access further code interpreter or tools as need be in the run steps. THe run can post a message back to the thread.
+Once all the user Messages have been added to the Thread, you can Run the Thread with any Assistant. Creating a Run uses the model and tools associated with the Assistant to generate a response. These responses are added to the Thread as assistant Messages.
+A run can be created with and without streaming.
 
-### 5. Read the Assistant response message from the Thread
+### 4. Iterate
 
-### 6. Iterate
+## References
 
-## Python demo
-
-(Note that it can be helpful to try it first in the OpenAI Assistant platform UI, then in code.)
-
-How to set up a python environment:
-
-1. download and install python
-1. in the project directory...
-1. `$ python3 -m venv myenv`
-1. `$ source myenv/bin/activate`
-1. `$ pip install -r requirements.txt`
-1. run the script: `$ python3 assistant.py`
+1. [Assistants API](https://platform.openai.com/docs/assistants/)
+2. [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)

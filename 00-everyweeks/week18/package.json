@@ -2,10 +2,15 @@
   "name": "week18",
   "version": "1.0.0",
   "description": "Try it first in the OpenAI Assistant platform UI, then in code.",
-  "main": "assistant.js",
+  "main": "assistant-summarise.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node assistant-summarise.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.41.1"
+  }
 }

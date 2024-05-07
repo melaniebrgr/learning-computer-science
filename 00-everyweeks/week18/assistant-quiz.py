@@ -3,6 +3,18 @@ from openai import OpenAI
 import uuid
 import os
 
+## Python demo
+
+# (Note that it can be helpful to try it first in the OpenAI Assistant platform UI, then in code.)
+# How to set up a python environment:
+
+# 1. download and install python
+# 1. in the project directory...
+# 1. `$ python3 -m venv myenv`
+# 1. `$ source myenv/bin/activate`
+# 1. `$ pip install -r requirements.txt`
+# 1. run the script: `$ python3 assistant.py`
+
 client = OpenAI(api_key='') # FIXME: Replace with your API key
 
 def get_document_list():
