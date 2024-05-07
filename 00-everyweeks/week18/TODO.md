@@ -2,11 +2,12 @@
 
 ## To build
 
-- [ ] Create and use multiple assistants
 - [x] Create and use a tool
 - [x] Implement in Node
+- [x] Propose a system design
 - [ ] Implement in Next.js
-- [ ] Propose a system design
+- [ ] Create and use multiple assistants
+- [ ] Signin to OpenAi platform/programatically clean
 
 ## To learn
 
@@ -16,8 +17,8 @@
   - [ ] File Search
   - [ ] Code Interpreter
   - [ ] Function Calling
-  - [ ] Migration Guide
-  - [ ] What's New
+  - [x] ~Migration Guide~ (Starting with v2)
+  - [x] What's New
 - [ ] [Assistants (API reference)](https://platform.openai.com/docs/api-reference/assistants)
   - [ ] Assistants
 - [ ] [OpenAI Assistants API – Course for Beginners](https://www.youtube.com/watch?v=qHPonmSX4Ms)

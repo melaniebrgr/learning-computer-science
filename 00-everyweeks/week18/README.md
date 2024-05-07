@@ -1,5 +1,7 @@
 # OpenAI Assistants API: Week 18 project journaling
 
+## Introduction
+
 The assistants API extends the OpenAI API and makes it easier to build AI assistants.
 It provides a framework or platform for build AI applications requires.
 
@@ -23,7 +25,7 @@ It can also do function calling.
 Instead of distraction of stitching these pieces together, these parts are abstracted.
 Assitants call OpenAi models to tune their capabilities, can call multiple tools in parallel (code interpreter, knowledge retireval, function calling), persistent threads save history and provide context.
 
-## Agentic workflow
+### Agentic workflow
 
 It also eases the set up for an **Agentic workflow**.
 Where we can have multiple AI assistants specialised on work on one knowledge base.
@@ -31,7 +33,7 @@ An LLM AI + "self-dialogue" via reflection = "Agent".
 Multiple "Agents" are brought together to collaborate and generate a solution to a user question.
 Exponentially self-improving agents has shown better results than using even the most powerful model in one shot (2).
 
-## Knowledge retrieval
+### Knowledge retrieval
 
 Documents can be added to the openAI knowledge base so it is part of the pool of knowledge that we can query.
 Documents are split into chunks, transformed into emdeddings and placed into a vector store.
@@ -39,6 +41,8 @@ A vector store holds embeddings a mathematical representation of the text.
 The mathicamtical representation makes ti easy for algorithms to search.
 Content (images, text, audio) are transformed into a vector or mathematical representation, which can be processed by algorithms to calculate a results.
 The same process happens with queries, they are transformed into embdeddings so the algorithm can search the vector store.
+
+Once a file is added to a vector store, it’s automatically parsed, chunked, and embedded, made ready to be searched. Vector stores can be used across assistants and threads, simplifying file management and billing. (3)
 
 ## FAQ
 
@@ -78,34 +82,52 @@ The same process happens with queries, they are transformed into embdeddings so 
 4. **What are the challenges with Assitants?**
 
     - GDPR: we need to ensure content is removed after a session
-    - Less stable than Chat Completions: Assistants is in Beta so there will be changes we will need to keep on top of and more unknowns in terms of cost.
+    - Less stable than Chat Completions: V2 was just released last month, April 2024. Assistants is in Beta so there will be changes we will need to keep on top of and more unknowns in terms of cost. M
     - The Assistants can be "finicky"
+    - SDKs in Node and Python only (no PHP)
 
 5. **What are the context limitations and how do they compare to the Completions API?**
 
     Assistants API limitations (per Ruan from one of OpenAI's articles):
     - The maximum file size is 512 MB (average PDF on Studocu is 2MB)
-    - Each file should contain no more than 5,000,000 tokens per file (computed automatically when you attach a file)
+    - 10,000 files per assistant
     - Each end-user is capped at 10GB
     - Each organization is capped at 100GB
+    - Each file should contain no more than 5,000,000 tokens per file (computed automatically a file is attached).  The maximum number of tokens a run uses in the Assistants API can be controlled allowing management of token usage costs. Limits on the number of tokens for previous / recent messages used in each run can also be set.
 
     Completions API limitations:
     - 128K tokens (most PDFs)
 
 6. **How convenient is it to specify the output format (markdown, LaTeX)?**
 
+    Trivial: configure the `response_format` on the assistant and also in the prompt.
+
 7. **Does implementing in the first iteration add value?**
 
+    Yes it can speed up the workflow.
     Agentic workflows have strong potential.
     We could set up an Assitant that first deduplicates the content, creating a full text file, then an Assistance specialised in determining the optimal outline or that takes an outline and restructures the content to follow an outline.
 
 8. **How should we manage the uploaded files?**
 
-  File Search augments the Assistant with knowledge from outside its model, such as proprietary product information or documents provided by your users. 
+    File Search augments the Assistant with knowledge from outside its model, such as proprietary product information or documents provided by your users.
 
 9. **Can it speed up the incorporation of other media types?**
 
-## Building an example application
+    [File types supported OOTB](https://platform.openai.com/docs/assistants/tools/file-search/supported-files), notably:
+    - `.doc`*,
+    - `.docx`*,
+    - `.html`,
+    - `.json`,
+    - `.md`,
+    - `.pdf`*,
+    - `.pptx`*,
+    - `.txt`*
+    - `.tex` (LaTex)
+    "At the moment, user-created Messages cannot contain image files but we plan to add support for this in the future."
+    Assistants can also create files (e.g., images, spreadsheets, etc)
+
+## Implementation
 
 The components of an assistant:
 
@@ -122,6 +144,8 @@ Workflow for integration of an assistant:
 1. Run the Thread with an Assistant
 1. Profit & iterate
 
+Assistants ans Node and Pythin SDKs and supports streaming.
+
 ### 1. Create an Assistant
 
 "An Assistant represents an entity that can be configured to respond to a user's messages using several parameters like model, instructions, and tools."
@@ -136,13 +160,23 @@ The assistant created will have an ID.
 defining its custom instructions and picking a model.
 Optionally add files and enable tools like Code Interpreter, File Search, and Function calling.
 
+#### (Optional) Addon tool(s)
+
+Tool choice is enforceable, e.g. file_search, code_interpreter, or a function.
+With function ...
+Function calling in Assistants you can call any external API any computation/calculation.
+Can be called in parallel.
+File Search, Code Interpreter, tools supplied out of the box.
+Build your own tools with function calling.
+Assistant access to up to 128 tools.
+
 #### (Optional) Extend knowledge base
 
 Vector stores can be associated with the Assistant or with the Thread.
 
 You can also attach files as Message attachments on your thread. Doing so will create another vector_store associated with the thread, or, if there is already a vector store attached to this thread, attach the new files to the existing thread vector store. When you create a Run on this thread, the file search tool will query both the vector_store from your assistant and the vector_store on the thread.
 
-Vector stores created using message attachements have a default expiration policy of 7 days after they were last active (defined as the last time the vector store was part of a run). This default exists to help you manage your vector storage costs. You can override these expiration policies at any time.
+Vector stores created using message attachements have a **default expiration policy of 7 days** after they were last active (defined as the last time the vector store was part of a run). This default exists to help you manage your vector storage costs. You can override these expiration policies at any time.
 
 Vector Store objects give the File Search tool the ability to search your files. Adding a file to a vector_store automatically parses, chunks, embeds and stores the file in a vector database that's capable of both keyword and semantic search. Each vector_store can hold up to 10,000 files. Vector stores can be attached to both Assistants and Threads. Today, you can attach at most one vector store to an assistant and at most one vector store to a thread.
 
@@ -166,3 +200,4 @@ A run can be created with and without streaming.
 
 1. [Assistants API](https://platform.openai.com/docs/assistants/)
 2. [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)
+3. [New features in the Assistants API!](https://community.openai.com/t/new-features-in-the-assistants-api/720539)

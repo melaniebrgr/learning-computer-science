@@ -12,29 +12,8 @@ async function main() {
   // Step 1: create an Assistant
   const assistant = await createAssistant();
   
-  let vectorStore = await openai.beta.vectorStores.create({
-    name: "Chemical Retrosynthesis",
-  });
-
-  console.log(`Vector store created: ${vectorStore.id}, name: ${vectorStore.name}`);
-
-  const file = await openai.files.create({
-    file: fs.createReadStream("documents-chem/org2topic-3-09-full-retrosynthesis.pdf"),
-    purpose: "assistants",
-  });
-  
-  const vectorStoreFile = await openai.beta.vectorStores.files.create(
-    vectorStore.id,
-    {
-      file_id: file.id,
-    }
-  );
-
-  console.log(`Vector store file created: ${vectorStoreFile.id}`);
-
-  await openai.beta.assistants.update(assistant.id, {
-    tool_resources: { file_search: { vector_store_ids: [vectorStore.id] } },
-  });
+  // Step ?: create a Vector Store
+  await createVectorStore(assistant.id);
 
   // Step 2: create a Thread
   const thread = await createThread();
@@ -61,6 +40,34 @@ async function createAssistant() {
   });
   console.log(`Assistant created: ${assistant.id}, name: ${assistant.name}`);
   return assistant;
+}
+
+async function createVectorStore(assistantId) {
+  let vectorStore = await openai.beta.vectorStores.create({
+    name: "Chemical Retrosynthesis",
+  });
+
+  console.log(`Vector store created: ${vectorStore.id}, name: ${vectorStore.name}`);
+
+  const file = await openai.files.create({
+    file: fs.createReadStream("documents-chem/org2topic-3-09-full-retrosynthesis.pdf"),
+    purpose: "assistants",
+  });
+  
+  const vectorStoreFile = await openai.beta.vectorStores.files.create(
+    vectorStore.id,
+    {
+      file_id: file.id,
+    }
+  );
+
+  console.log(`Vector store file created: ${vectorStoreFile.id}`);
+
+  await openai.beta.assistants.update(assistantId, {
+    tool_resources: { file_search: { vector_store_ids: [vectorStore.id] } },
+  });
+
+  return vectorStore;
 }
 
 async function createThread() {
