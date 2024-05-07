@@ -1,3 +1,7 @@
+# Run version 001
+
+This run used the python script loosely converted to summarise rather than generate a quiz.
+
 ```bash
 Determining Assistant
 Assistant not found... Creating new Assistant

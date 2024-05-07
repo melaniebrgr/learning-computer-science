@@ -3,8 +3,8 @@
 ## To build
 
 - [ ] Create and use multiple assistants
-- [ ] Create and use a tool
-- [ ] Implement in Node
+- [x] Create and use a tool
+- [x] Implement in Node
 - [ ] Implement in Next.js
 - [ ] Propose a system design
 
@@ -31,7 +31,7 @@
   - [x] (0:18:16) Assistants API Building Blocks
   - [x] (0:24:04) Creating an Assistants API - Manually (Personal Trainer)
   - [x] (0:38:20) Creating an Assistants API - In Code (Personal Trainer)
-  - [ ] (1:04:15) Build a News Summarizer Introduction: Function Calling - A Streamlit Application
+  - [x] (1:04:15) Build a News Summarizer Introduction: Function Calling - A Streamlit Application
   - [ ] (1:25:39) Create an AssistantsManager Class For our News Summarizer
   - [ ] (2:10:46) Using the AssistantManager Class to Create an Assistant and run it as a Streamlit App
   - [ ] (2:28:23) Knowledge Bases Retrieval Tools - How it Works & Introduction to Embeddings

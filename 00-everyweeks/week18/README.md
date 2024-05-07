@@ -31,6 +31,15 @@ An LLM AI + "self-dialogue" via reflection = "Agent".
 Multiple "Agents" are brought together to collaborate and generate a solution to a user question.
 Exponentially self-improving agents has shown better results than using even the most powerful model in one shot (2).
 
+## Knowledge retrieval
+
+Documents can be added to the openAI knowledge base so it is part of the pool of knowledge that we can query.
+Documents are split into chunks, transformed into emdeddings and placed into a vector store.
+A vector store holds embeddings a mathematical representation of the text.
+The mathicamtical representation makes ti easy for algorithms to search.
+Content (images, text, audio) are transformed into a vector or mathematical representation, which can be processed by algorithms to calculate a results.
+The same process happens with queries, they are transformed into embdeddings so the algorithm can search the vector store.
+
 ## FAQ
 
 1. **How can Assistants be useful for generating learnable document summaries**
@@ -57,20 +66,26 @@ Exponentially self-improving agents has shown better results than using even the
 
     The fact that it's newer can also be a strategic advantage. While other tools provide many similar offerings, Assistants affords new capabilities that others haven't brought to market yet. There're quite a few  offerings already:
 
-    - [PDF GPT](https://www.pdfgpt.chat/) - upload all the PDFs you want to chat with
-    - [Magic Notes]
+    - [ChatPDF](https://www.chatpdf.com/)
+    - [PDF GPT](https://www.pdfgpt.chat/)
+    - [PDF Summarizer](https://www.pdfsummarizer.org/)
+    - [Adobe Acrobat AI Assistant](https://www.adobe.com/acrobat/generative-ai-pdf.html)
+    - [PopAi](https://www.popai.pro/)
+    - ...and at least 8 more
 
     How can we make a stand out wow product? Combine more content types, provide better output, make it more convenient. Assistants _can_ provide better content extraction.
 
 4. **What are the challenges with Assitants?**
 
     - GDPR: we need to ensure content is removed after a session
-    - More changes and unknowns likely: Assistants is in Beta so there will be changes we will need to keep on top of and more unknowns in terms of cost.
+    - Less stable than Chat Completions: Assistants is in Beta so there will be changes we will need to keep on top of and more unknowns in terms of cost.
+    - The Assistants can be "finicky"
 
 5. **What are the context limitations and how do they compare to the Completions API?**
 
     Assistants API limitations (per Ruan from one of OpenAI's articles):
-    - 512MB per file (average PDF on Studocu is 2MB)
+    - The maximum file size is 512 MB (average PDF on Studocu is 2MB)
+    - Each file should contain no more than 5,000,000 tokens per file (computed automatically when you attach a file)
     - Each end-user is capped at 10GB
     - Each organization is capped at 100GB
 
@@ -84,7 +99,13 @@ Exponentially self-improving agents has shown better results than using even the
     Agentic workflows have strong potential.
     We could set up an Assitant that first deduplicates the content, creating a full text file, then an Assistance specialised in determining the optimal outline or that takes an outline and restructures the content to follow an outline.
 
-## Building an application
+8. **How should we manage the uploaded files?**
+
+  File Search augments the Assistant with knowledge from outside its model, such as proprietary product information or documents provided by your users. 
+
+9. **Can it speed up the incorporation of other media types?**
+
+## Building an example application
 
 The components of an assistant:
 
@@ -95,7 +116,8 @@ The components of an assistant:
 Workflow for integration of an assistant:
 
 1. Create an Assistant
-1. (Optional) Addon tool(s)
+    1. (Optional) Addon tool(s)
+    1. (Optional) Extend knowledge base
 1. Create a Thread and add the user message
 1. Run the Thread with an Assistant
 1. Profit & iterate
@@ -113,6 +135,16 @@ Finally, different tools can then be attached to the assistant, e.g. functions, 
 The assistant created will have an ID.
 defining its custom instructions and picking a model.
 Optionally add files and enable tools like Code Interpreter, File Search, and Function calling.
+
+#### (Optional) Extend knowledge base
+
+Vector stores can be associated with the Assistant or with the Thread.
+
+You can also attach files as Message attachments on your thread. Doing so will create another vector_store associated with the thread, or, if there is already a vector store attached to this thread, attach the new files to the existing thread vector store. When you create a Run on this thread, the file search tool will query both the vector_store from your assistant and the vector_store on the thread.
+
+Vector stores created using message attachements have a default expiration policy of 7 days after they were last active (defined as the last time the vector store was part of a run). This default exists to help you manage your vector storage costs. You can override these expiration policies at any time.
+
+Vector Store objects give the File Search tool the ability to search your files. Adding a file to a vector_store automatically parses, chunks, embeds and stores the file in a vector database that's capable of both keyword and semantic search. Each vector_store can hold up to 10,000 files. Vector stores can be attached to both Assistants and Threads. Today, you can attach at most one vector store to an assistant and at most one vector store to a thread.
 
 ### 2. Create a Thread and add a message to it
 
