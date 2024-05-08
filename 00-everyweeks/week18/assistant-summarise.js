@@ -5,7 +5,7 @@ import fs from 'node:fs';
 // Run version 002
 
 dotenv.config();
-const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY_NEW });
 
 async function main() {
 
@@ -27,7 +27,7 @@ async function main() {
 
 async function createAssistant() {
   const assistant = await openai.beta.assistants.create({
-    name: "Summary Creator",
+    name: "Mel's Summary Creator",
     instructions: "You are a personal study assistant. You generate a deduplicated, structured and precise summary of the information provided. The subject can be anything, from math to history.",
     model: "gpt-3.5-turbo-0125",
     tools: [{ type: "file_search" }],
@@ -44,13 +44,13 @@ async function createAssistant() {
 
 async function createVectorStore(assistantId) {
   let vectorStore = await openai.beta.vectorStores.create({
-    name: "Chemical Retrosynthesis",
+    name: "Mel's Chemical Retrosynthesis",
   });
 
   console.log(`Vector store created: ${vectorStore.id}, name: ${vectorStore.name}`);
 
   const file = await openai.files.create({
-    file: fs.createReadStream("documents-chem/org2topic-3-09-full-retrosynthesis.pdf"),
+    file: fs.createReadStream("documents-chem/mel-org2topic-3-09-full-retrosynthesis.pdf"),
     purpose: "assistants",
   });
   
@@ -87,11 +87,6 @@ async function createThread() {
     }],
   });
   
-  // Step 2.5: append more messages to the Thread as desired
-  // await openai.beta.threads.messages.create(
-  //   thread.id,
-  //   {},
-  // );
   console.log(`Thread created: ${thread.id}`);
   return thread;
 }

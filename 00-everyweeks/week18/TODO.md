@@ -5,18 +5,23 @@
 - [x] Create and use a tool
 - [x] Implement in Node
 - [x] Propose a system design
+- [ ] Attach a VectorStore to a thread
+- [x] Signin to OpenAi platform
 - [ ] Implement in Next.js
 - [ ] Create and use multiple assistants
-- [ ] Signin to OpenAi platform/programatically clean
+- [ ] Read docs for system proposal in PHP monolith
+- [ ] Clean summary notes
+- [ ] Publish summary notes
+- [ ] Check LangChain and schedule meet with Mustafa
 
 ## To learn
 
-- [ ] [Assistants API](https://platform.openai.com/docs/assistants/overview)
+- [x] [Assistants API](https://platform.openai.com/docs/assistants/overview)
   - [x] Overview
-  - [ ] How Assistants work
-  - [ ] File Search
-  - [ ] Code Interpreter
-  - [ ] Function Calling
+  - [x] How Assistants work
+  - [x] File Search
+  - [x] Code Interpreter
+  - [x] Function Calling
   - [x] ~Migration Guide~ (Starting with v2)
   - [x] What's New
 - [ ] [Assistants (API reference)](https://platform.openai.com/docs/api-reference/assistants)
@@ -42,3 +47,4 @@
 - [ ] [Azure OpenAI Assistants API (Preview)](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/assistants)
 - [ ] [OpenAI Assistants vs. AWS Bedrock Agents: Which Should You Choose?](https://medium.com/@woyera/openai-assistants-vs-aws-bedrock-agents-which-should-you-choose-18d8daa2de39)
 - [x] [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)
+- [ ] How to deploy a Next.js app on Vercel

@@ -172,6 +172,7 @@ def assign_assistant_vector_store(assistant, vector_store):
         assistant_id=assistant.id,
         tool_resources={"file_search": {"vector_store_ids": [vector_store.id]}},
     )
+
 def add_message_to_thread(thread, message):
     print(f"Creating Message '{message}' on Thread - {thread.id}")
     thread_message = client.beta.threads.messages.create(
@@ -234,7 +235,6 @@ def run_thread_on_assistant(assistant, thread):
 
     if run.status == 'requires_action':
         handle_tools(run, thread)
-
 
 def generate_quiz():
     assistant = create_or_find_assistant()

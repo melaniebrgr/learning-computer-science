@@ -1,5 +1,7 @@
 # Run version 002
 
+Example 1
+
 ```bash
 Assistant created: asst_MU8053pRn1On75XdpLdoPztU, name: Summary Creator
 Vector store created: vs_1lJQMf0GUk7AOPnIwuKyCy7o, name: Chemical Retrosynthesis
@@ -45,4 +47,47 @@ This comprehensive summary covers the key aspects of retrosynthetic analysis in 
 [1]org2topic-3-09-full-retrosynthesis.pdf
 [2]org2topic-3-09-full-retrosynthesis.pdf
 [3]org2topic-3-09-full-retrosynthesis.pdf
+```
+
+Example 2
+
+```bash
+npm run start
+
+> week18@1.0.0 start
+> node assistant-summarise.js
+
+Assistant created: asst_ephGw5q6G8iH1axjyKdP7r10, name: Summary Creator
+Vector store created: vs_R9YAdGQ06KSFZBRXKECfMoPF, name: Chemical Retrosynthesis
+Vector store file created: file-30ibrjlHj8r5itaRBOp3R7Sf
+Thread created: thread_bJamfweneVPVTqkzsu5fGPrF
+Run completed
+### Summary of Retrosynthetic Analysis in Organic Chemistry
+
+**Introduction to Retrosynthetic Analysis:**
+- **Definition:** Retrosynthetic analysis involves breaking a complex target molecule down into starting materials by disconnecting bonds and converting functional groups.
+- **Symbol:** Retrosynthetic schemes are depicted using the symbol  indicating "could be made from."
+- **Synthons:** Disconnections lead to species called synthons, which may not physically exist but have equivalent reagents.
+
+**Key Concepts and Examples:**
+1. **Basic Concepts:**
+   - RSA involves breaking down a target molecule into starting materials through disconnections and functional group interconversions.
+   - Synthons are critical in formulating retrosynthetic strategies.
+
+2. **Forward Synthesis:**
+   - Forward synthesis involves constructing compounds guided by latent polarity.
+   - Functional group interconversions, like the Michael reaction, play a crucial role in building complex molecules.
+
+3. **Synthons and Reagent Analysis:**
+   - Route analysis involves determining if synthons have corresponding readily available starting materials.
+   - The choice of reagents or synthetic equivalents influences the feasibility of a retrosynthetic route.
+   - Reactions like oxidation and functional group interconversions are essential in organic synthesis.
+   - Logical forward reactions are identified based on the compatibility of the synthons with available reagents.
+
+**Conclusion:**
+- Retrosynthetic analysis is a fundamental strategy in organic synthesis, enabling the efficient planning of complex molecule construction.
+- Understanding the interplay between target molecules, starting materials, and available reagents is crucial for successful organic synthesis planning.
+
+For more details, refer to the complete set of notes on Retrosynthesis in Organic Chemistry by SIC2002[0].
+[0]org2topic-3-09-full-retrosynthesis.pdf
 ```
