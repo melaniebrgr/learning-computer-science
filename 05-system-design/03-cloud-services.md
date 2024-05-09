@@ -1,35 +1,5 @@
 # 03 Cloud services
 
-- Authenticaion & authorization:
-  - Identity & Access management (IAM)
-  - Security Token Service (STS)
-  - Cognito
-
-- Compute:
-  - Elastic Compute Cloud (EC2)
-  - Lambda
-
-- Storage:
-  - Relational Database Service (RDS)
-  - DynamoDB
-
-- Routing:
-  - Route 53
-  - API Gateway
-
-- Scaling management:
-  - Elastic Load Balancing (ELB)
-  - AWS Auto Scaling Groups
-
-- Latency management:
-  - Regions
-  - AWS Local Zones
-  - AWS Wavelength
-
-- Cloud management:
-  - Virtual Private Cloud (VPC)
-  - AWS Outposts family
-
 ## Cloud Computing
 
 Cloud computing is the on-demand delivery of some IT capabilities over the internet. A key characteristic of cloud computing is typically their rapid, on-demand elasticity.
@@ -43,6 +13,59 @@ There are three main cloud computing services models:
 There are three cloud deployment models: private, public and hybrid. In a private cloud you own and operate your own datacenter and have total control over the stack. The biggest reason for doing so is security. A public cloud can offer economies of scale and elasticity. A hybrid cloud, of course, is a combination of both.
 
 ## AWS services
+
+- Authentication, authorization, security:
+  - Cognito
+  - Identity & Access management (IAM)
+  - Security Token Service (STS)
+  - Security Group
+  - Key Management Service (KMS)
+
+- Routing:
+  - Route 53
+  - API Gateway
+  - Web Application Firewall (WAF)
+
+- Compute:
+  - Elastic Compute Cloud (EC2)
+  - Lambda
+  - Comprehend (sentiment)
+  - Rekognition (text-from-image detection)
+
+- Storage:
+  - CodeCommit
+  - Relational Database Service (RDS)
+  - DynamoDB
+  - Elastic Block Store (EBS)
+  - Elastic File System (EFS)
+  - Simple Storage Solution (S3)
+  - AWS Backup
+  - AWS Backup Vault
+
+- Search
+  - OpenSearch Service
+
+- Workflow management
+  - Simple Notification Service (SNS)
+  - Simple Queue Service (SQS)
+  - CodeBuild (build a repo)
+  - CodeDeploy (deploy a build)
+  - CodePipeline
+
+- Cloud management:
+  - Virtual Private Cloud (VPC)
+  - AWS Outposts family
+
+- Scaling management:
+  - Elastic Load Balancing (ELB)
+  - AWS Auto Scaling Groups
+
+- Latency management:
+  - Regions
+  - AWS Local Zones
+  - AWS Wavelength
+
+### Introduction
 
 AWS services can either be global or regional. For example, Route 53, CloudFront, and IAM are all global. You don't want to configure these in different regions. However, rhe majority of services are regional.
 
@@ -163,6 +186,11 @@ A domain name system (DNS) is responsible for resolving the domain names we ente
 
 Route 53 can direct to different IP addresses based on different policies. A simple routing policy does a simple mapping, a weighted routing policy will route to an IP address depending on the weighting assigned to it, a latency routing policy will route based on geographic proximity, a failover routes depending on a health check. This is how multi-region load balancing is possible. (Load balancers can only span one region).
 
+**Web Application Firewall (WAF)** filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
+
+**AWS API Gateway** is a "front door" to an application. API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, CORS support, authorization and access control, throttling, monitoring, and API version management. It is useful for building REST and WebSocket APIs.
+API Gateway supports containerized and serverless workloads, as well as web applications.
+
 **Cloudfront** is a content delivery network (CDN) that lets you store/cache content in "edge locations" all over the world (both the larger regional edge caches and the global edge locations), improving request latency. It also offers some protection against DDoS attacks.
 
 **Global Accelerator** is a new AWS service that connects local and global users over the AWS global network, not the internet, and directs traffic to the closet region and providing automatic failover if there is a problem. The Edge locations point to different server instances. It's more akin to a load balancer than Cloudfront, which is more strictly about better performance. "AWS Global Accelerator is a networking service that sends your user’s traffic through Amazon Web Service’s global network infrastructure, improving your internet user performance by up to 60%. When the internet is congested, Global Accelerator’s automatic routing optimisations will help keep your packet loss, jitter, and latency consistently low."
@@ -199,15 +227,10 @@ There are four different support plans:
 If you have multiple AWS accounts they can be consolidated with **AWS Organizations**. The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
 
 ### Application Integration
-
-**AWS API Gateway** is a "front door" to an application.
-
-API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, CORS support, authorization and access control, throttling, monitoring, and API version management. It is useful for building REST and WebSocket APIs.
-API Gateway supports containerized and serverless workloads, as well as web applications.
   
 There are a four AWS services that are used to connect applications with each other, i.e. are used for the purpose of integrating applications in a decoupled architecture:
 
-1. **Amazon Simple Notification Service (SNS)** sends notification to a Topic for an _app/EC2/CloudWatch (publisher)_ to communicate with _lambda/email/SQS or other application (subscriber)_. It enables a pub/sub model. Messages are pushed to subscribers, they are not waiting. They can be pushed to multiple endpoints. Additionally, SNS can be used to fan out notifications to end users using mobile push, SMS, and email.
+1. **Amazon Simple Notification Service (SNS)** sends notification to a Topic for an _app/EC2/CloudWatch (publisher)_ to communicate with _lambda/email/SQS or other application (subscriber)_. It enables a pub/sub model. Notifications are sent two ways, A2A and A2P. A2A provides high-throughput, pushed based, many-to-many messaging between distributed systems, microservices, and event driven serverless applications. The applications include SQS, Amazon Kinesis Data Firehose, Lambda, abd other HTTPS endpoints. A2P helps send messages to customers with SMS texts, push notifications, and email.
 2. **Amazon Simple Queue Service (SQS)** is useful in cases where data cannot be processed quickly enough for example. Messages can be placed in a queue and a separate service polls the queue periodically. It's a hosted service used to enable distributed/decoupled applications. A SNS Topics and SQS can be strung together.
 3. **Amazon Simple Workflow Service (SWF)** enables automation of workflows that may have a human component. It is less preferred than the newer Step Functions.
 4. **Step Functions** are used to coordinate components of applications in a workflow. You can defines the sequences in a step, e.g. in a situation where a number of lambda functions should operate in sequence. It has a visual editor and output that shows the steps and status.
