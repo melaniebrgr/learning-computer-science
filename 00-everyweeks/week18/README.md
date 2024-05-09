@@ -223,6 +223,10 @@ A run can be created with and without streaming.
 
 ### 4. Iterate
 
+### Attach a VectorStore to a thread
+
+Why is this hard??? The first try wasn't successful; the assistant wasn't generating a summary from the vector store I believed to be attached to the _Thread_, nor the vector store I believed to the attached to the _Run_, nor the file I believed to be passed as on the Thread _Message_. The result was a mix of summaries entirely unrelated to the file subject, or a response that it was waiting for files to be supplied. Decided to revert all changes back to a point were things were working, with the vector store attached to the Assistant. Will try again later with a fresh brain.
+
 ## References
 
 1. [Assistants API](https://platform.openai.com/docs/assistants/)
