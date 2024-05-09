@@ -6,11 +6,18 @@
 - [ ] Architectural characteristics
 - [ ] [Application architecture](./01-application-architecture.md) (2024-04-10)
 - [ ] The Internet
+- [ ] Role and responsibilities
 
 ## 02 Frontend
 
 - [ ] Web APIs
 - [ ] Component architecture
+- [ ] Languages
+  - [ ] HTML
+  - [ ] CSS
+  - [ ] JavaScript
+  - [x] [TypeScript](./02-typescript.md) (2022-09-12)
+  - [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
 - [ ] Frameworks & metaframeworks
   - [ ] React
   - [ ] Vue
@@ -29,7 +36,7 @@
   - [ ] Browser cache
   - [ ] Bf cache
 - [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-04)
-- [ ] Service workers
+  - [ ] Service workers
 - Security
   - [ ] XSS
   - [ ] CORS
@@ -44,7 +51,7 @@
 - [ ] Audio
 - [ ] Accessibility
 - [ ] Internationalisation
-- [ ] Localisation
+  - [ ] Localisation
 - [ ] State management
   - [ ] Signals
   - [ ] Observables
@@ -54,14 +61,15 @@
 - [ ] Authentication
 - [ ] Authorisation
 - [ ] JWTs
-- [ ] Client-side storage
+- [ ] Storage
 - [ ] PWAs
-- [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
 - [ ] Bundlers
 
 ## 03 Backend
 
 - [ ] Languages
+  - [ ] Node
+  - [ ] Go
 - [ ] Frameworks
 - [ ] Component architecture
 - [ ] Data structures
@@ -72,7 +80,7 @@
 - [ ] Rest
 - [ ] gRPC
 - [ ] APIs
-- [ ] Cloud Services
+- [x] [Cloud Services](./03-cloud-services.md) (2024-05-09)
 
 ## 04 Databases
 
@@ -84,7 +92,6 @@
 - [x] [Search](./04-databases.md) (2023-04-12)
 - [x] [Graph](./04-databases.md) (2023-04-12)
 - [ ] Streaming
-- [ ] Turso
 - [ ] Schema design
 - [ ] Data maintance / management
 - [ ] Database caching
@@ -95,6 +102,7 @@
 
 ## 07 AI
 
+- [ ] LLMs
 - [ ] openai
   - [ ] assistants
 
