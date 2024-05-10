@@ -2,24 +2,25 @@ import dotenv from "dotenv";
 import OpenAI from "openai";
 import fs from 'node:fs';
 
-// Run version 003
+// Run version 004
 
 dotenv.config();
 const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY_NEW });
 
 async function main() {
+  console.time("Execution Time");
 
-  // Step 1: get the Assistant (pre-created manually or programmatically)
-  const assistant = await getAssistant();
+  // Step 1: get Assistant (manually or programmatically pre-created)
+  // Step 2: create Thread
+  const [assistant, thread] = await Promise.all([ getAssistant(), createThread()]);
 
-  // Step 2: create a Thread
-  const thread = await createThread();
-
-  // Step 3: Create a Run of the Thread with an Assistant
+  // Step 3: Run Thread with an Assistant
   const run = await createRun(thread.id, assistant.id);
 
   // // Step 4: Profit
   await printMessages(thread, run);
+
+  console.timeEnd("Execution Time");
 }
 
 async function getAssistant() {
@@ -30,23 +31,49 @@ async function getAssistant() {
 
 async function createThread() {
   const thread = await openai.beta.threads.create();
-  console.log(`Thread created, id: ${thread.id}`);
 
-  const file = await openai.files.create({
-    file: fs.createReadStream("documents-chem/mel-org2topic-3-09-full-retrosynthesis.pdf"),
-    purpose: "assistants",
-  });
-  console.log(`File created, id: ${file.id}`);
+  const [file1, file2, file3, file4] = await Promise.all([
+    openai.files.create({
+      file: fs.createReadStream("documents-chem/mel-intro-to-retrosynthetic-analysis.pdf"),
+      purpose: "assistants",
+    }),
+    openai.files.create({
+      file: fs.createReadStream("documents-chem/mel-org2topic-3-09-full-retrosynthesis.pdf"),
+      purpose: "assistants",
+    }),
+    openai.files.create({
+      file: fs.createReadStream("documents-chem/mel-retrosynthesis.txt"),
+      purpose: "assistants",
+    }),
+    openai.files.create({
+      file: fs.createReadStream("documents-chem/mel-the-logic-of-chemical-synthesis-ej-cory.pdf"),
+      purpose: "assistants",
+    })
+  ]);
+  console.log("Files created");
 
   await openai.beta.threads.messages.create(thread.id, {
 		role: "user",
 		content: "Summarise",
 		attachments: [{
-      file_id: file.id,
+      file_id: file1.id,
+      tools: [{ type: "file_search"}]
+    },
+    {
+      file_id: file2.id,
+      tools: [{ type: "file_search"}]
+    },
+    {
+      file_id: file3.id,
+      tools: [{ type: "file_search"}]
+    },
+    {
+      file_id: file4.id,
       tools: [{ type: "file_search"}]
     }]
 	});
-  console.log(`Message and vector store created`);
+
+  console.log(`Thread created, id: ${thread.id}`);
 
   return thread;
 }

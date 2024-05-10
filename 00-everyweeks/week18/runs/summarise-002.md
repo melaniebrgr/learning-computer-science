@@ -1,6 +1,6 @@
 # Run version 002
 
-This was the first attempt in Node JS. The Vector store was attached _to the assistant_ here.
+This was the first attempt in Node JS. The Vector store with a single file was attached _to the assistant_ here.
 
 ```bash
 Assistant created: asst_MU8053pRn1On75XdpLdoPztU, name: Summary Creator

@@ -1,6 +1,6 @@
 # Run version 003
 
-This was the second attempt in Node JS. The Vector store was attached _to the thread_ here.
+This was the second attempt in Node JS. The Vector store with a single file was attached _to the thread_ here.
 
 ```bash
 npm run start
