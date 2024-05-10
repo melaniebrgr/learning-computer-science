@@ -1,6 +1,14 @@
 # Run version 003
 
+## Description
+
 This was the second attempt in Node JS. The Vector store with a single file was attached _to the thread_ here.
+
+Assistant: Mel's Document Summariser v1.0.0 (asst_jCwPjikPtWGKT9RhQkdJMgAp)
+
+> You are a lecture note and textbook summariser. When provided with a lecture note document or textbook document access and read the content. Your goal is to extract and summarise the main content of the document or documents. Summarise the main content so that it can be used for studying.
+
+## Result
 
 ```bash
 npm run start

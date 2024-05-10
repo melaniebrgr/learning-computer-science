@@ -1,6 +1,10 @@
 # Run version 002
 
+## Description
+
 This was the first attempt in Node JS. The Vector store with a single file was attached _to the assistant_ here.
+
+## Result
 
 ```bash
 Assistant created: asst_MU8053pRn1On75XdpLdoPztU, name: Summary Creator

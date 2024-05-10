@@ -1,6 +1,12 @@
 # Run version 004
 
+## Description
+
 This was the third run in Node JS. This time multiple files, PDF and text, were uploaded and summarised. A timing function was also added to get a sense of the delay. For 4 files the full summary request below took ~48s.
+
+Assistant: Mel's Document Summariser v1.0.0 (asst_jCwPjikPtWGKT9RhQkdJMgAp)
+
+## Result
 
 ```bash
 npm run start
