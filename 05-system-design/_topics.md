@@ -81,6 +81,7 @@
 - [ ] gRPC
 - [ ] APIs
 - [x] [Cloud Services](./03-cloud-services.md) (2024-05-09)
+  - [ ] Design patterns
 
 ## 04 Databases
 
@@ -100,7 +101,7 @@
 
 ## 06 Documentation
 
-## 07 AI
+## 07 Datascience & AI
 
 - [ ] LLMs
 - [ ] openai
@@ -110,6 +111,7 @@
 
 ## Misc
 
+- [ ] Cloud Design Patterns: <https://learn.microsoft.com/en-us/azure/architecture/patterns/>
 - [ ] AWS FS framework: <https://sst.dev/>
 - [ ] Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
 - [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>

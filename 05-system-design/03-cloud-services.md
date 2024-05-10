@@ -29,10 +29,13 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 - Compute:
   - Elastic Compute Cloud (EC2)
   - Lambda
+  - Fargate (EC2 with container)
   - Comprehend (sentiment)
   - Rekognition (text-from-image detection)
+  - Glue Crawler
 
 - Storage:
+  - Glue Data Catalog
   - CodeCommit
   - Relational Database Service (RDS)
   - DynamoDB
@@ -44,26 +47,44 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 
 - Search
   - OpenSearch Service
+  - Athena (SQL search of S3)
+  - QuickSight (BI)
 
 - Workflow management
   - Simple Notification Service (SNS)
   - Simple Queue Service (SQS)
-  - CodeBuild (build a repo)
-  - CodeDeploy (deploy a build)
-  - CodePipeline
+  - Kinesis Data streams
+  - Kinesis Data firehose
 
 - Cloud management:
   - Virtual Private Cloud (VPC)
-  - AWS Outposts family
+  - AWS Outposts Family
+  - AWS Cloud Map
 
 - Scaling management:
-  - Elastic Load Balancing (ELB)
   - AWS Auto Scaling Groups
+  - Elastic Load Balancing (ELB)
+  - Elastic Container Registry
+  - Elastic Container Service (ECS)
+  - Elastic Kubernetes Service (EKS)
 
 - Latency management:
   - Regions
   - AWS Local Zones
   - AWS Wavelength
+
+- People management
+  - Connect
+
+- CI/CD
+  - CodeStar
+  - CodePipeline
+  - CodeBuild (build a repo)
+  - CodeDeploy (deploy a build)
+  - Device Farm
+
+- IDE
+  Cloud9
 
 ### Introduction
 
