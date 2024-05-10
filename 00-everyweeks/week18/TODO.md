@@ -46,3 +46,4 @@
 - [ ] [OpenAI Assistants vs. AWS Bedrock Agents: Which Should You Choose?](https://medium.com/@woyera/openai-assistants-vs-aws-bedrock-agents-which-should-you-choose-18d8daa2de39)
 - [x] [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)
 - [ ] [LangChain]()
+- [ ] [Crafting Intelligent User Experiences: A Deep Dive into OpenAI Assistants API](https://medium.com/@2twitme/crafting-intelligent-user-experiences-a-deep-dive-into-openai-assistants-api-00439ace108a)

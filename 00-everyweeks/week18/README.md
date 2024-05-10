@@ -104,7 +104,7 @@ Once a file is added to a vector store, it’s automatically parsed, chunked, an
     - No stated limit to the number of Assistants
     - No stated limit to the number of Threads
     - Each end-user is capped at 10GB (What is an end user?????????)
-    - Each organization is capped at 100GB
+    - Each organization is capped at 100GB by default ("reach out to our support team to increase this limit")
     - Each file should contain no more than 5,000,000 tokens per file (computed automatically a file is attached).  The maximum number of tokens a run uses in the Assistants API can be controlled allowing management of token usage costs. Limits on the number of tokens for previous / recent messages used in each run can also be set.
 
     Vector Store limitations ("adding support for in the coming months"):
@@ -155,22 +155,20 @@ Once a file is added to a vector store, it’s automatically parsed, chunked, an
 
 ## Implementation
 
-The components of an assistant:
+The components of an assistant are an Assistant, a conversation Thread, and a Run entitity.
 
-- an assistant
-- a conversation thread
-- a run entitity
-
-Workflow for integration of an assistant:
+The general workflow for integration of an assistant:
 
 1. Create an Assistant
-    1. (Optional) Addon tool(s)
-    1. (Optional) Extend knowledge base
+    - (Optional) Addon tool(s)
+    - (Optional) Extend knowledge base
 1. Create a Thread and add the user message
-1. Run the Thread with an Assistant
+    - (Optional) Extend knowledge base
+1. Run the Thread with Assistant(s)
 1. Profit & iterate
 
-Assistants ans Node and Pythin SDKs and supports streaming.
+OpenAI offers Node and Pythin SDKs for Assistants that supports streaming.
+Vercel also has a Vercel AS SDK that supports many model providers and can be used with frameworks besides Next.js. It even offers a [useAssistant hook](https://sdk.vercel.ai/docs/ai-sdk-ui/openai-assistants).
 
 ### 1. Create an Assistant
 
