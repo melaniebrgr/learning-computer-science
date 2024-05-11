@@ -24,7 +24,12 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 - Routing:
   - Route 53
   - API Gateway
+  - Storage Gateway
   - Web Application Firewall (WAF)
+  - Direct connect
+  - Eventbridge
+  - Kinesis Data streams
+  - Kinesis Data firehose
 
 - Compute:
   - Elastic Compute Cloud (EC2)
@@ -32,16 +37,18 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Fargate (EC2 with container)
   - Comprehend (sentiment)
   - Rekognition (text-from-image detection)
+  - Translate
   - Glue Crawler
 
 - Storage:
-  - Glue Data Catalog
   - CodeCommit
-  - Relational Database Service (RDS)
   - DynamoDB
+  - Glue Data Catalog
+  - Relational Database Service (RDS)
   - Elastic Block Store (EBS)
   - Elastic File System (EFS)
   - Simple Storage Solution (S3)
+  - Simple Storage Solution Glacier
   - AWS Backup
   - AWS Backup Vault
 
@@ -49,17 +56,6 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - OpenSearch Service
   - Athena (SQL search of S3)
   - QuickSight (BI)
-
-- Workflow management
-  - Simple Notification Service (SNS)
-  - Simple Queue Service (SQS)
-  - Kinesis Data streams
-  - Kinesis Data firehose
-
-- Cloud management:
-  - Virtual Private Cloud (VPC)
-  - AWS Outposts Family
-  - AWS Cloud Map
 
 - Scaling management:
   - AWS Auto Scaling Groups
@@ -73,8 +69,28 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - AWS Local Zones
   - AWS Wavelength
 
+- Workflow management
+  - Simple Notification Service (SNS)
+  - Simple Queue Service (SQS)
+  - Step Functions
+  - Systems Manager
+  - Config
+
+- Cloud management:
+  - Virtual Private Cloud (VPC)
+  - Virtual Private Network (VPN)
+  - AWS Outposts Family
+
+- Cloud monitoring
+  - AWS Cloud Map
+  - Macie
+  - Cloudtrail
+  - Cloudwatch
+
 - People management
-  - Connect
+  - Simple Notification Service (SNS)
+  - Connect (contact center service)
+  - Pinpoint (marketing communications)
 
 - CI/CD
   - CodeStar
