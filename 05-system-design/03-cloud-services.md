@@ -27,30 +27,36 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Storage Gateway
   - Web Application Firewall (WAF)
   - Direct connect
-  - Eventbridge
-  - Kinesis Data streams
-  - Kinesis Data firehose
 
 - Compute:
   - Elastic Compute Cloud (EC2)
   - Lambda
   - Fargate (EC2 with container)
+
+- Jobs
   - Comprehend (sentiment)
   - Rekognition (text-from-image detection)
-  - Translate
-  - Glue Crawler
+  - Translate (lang-to-lang)
+  - Glue Crawler (crawl data stores and populate Glue catalog)
+  - Database migration service
+  - Macie (PPI checker)
+  - Glue DataBrew
+  - Elastic MacpReduce (EMR)
+  - AI Services
+  - Sagemaker (ML model training)
 
 - Storage:
-  - CodeCommit
-  - DynamoDB
-  - Glue Data Catalog
   - Relational Database Service (RDS)
   - Elastic Block Store (EBS)
   - Elastic File System (EFS)
   - Simple Storage Solution (S3)
   - Simple Storage Solution Glacier
+  - Cloudfront
   - AWS Backup
   - AWS Backup Vault
+  - CodeCommit
+  - DynamoDB
+  - Glue Data Catalog
 
 - Search
   - OpenSearch Service
@@ -83,12 +89,21 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 
 - Cloud monitoring
   - AWS Cloud Map
-  - Macie
   - Cloudtrail
   - Cloudwatch
 
+- Data transfering
+  - Eventbridge
+  - Kinesis Data streams
+  - Kinesis Data firehose
+  - Managed service for apache flink
+
+- Data management
+  - Lake formation
+  - Redshift
+  - Quicksight
+
 - People management
-  - Simple Notification Service (SNS)
   - Connect (contact center service)
   - Pinpoint (marketing communications)
 
