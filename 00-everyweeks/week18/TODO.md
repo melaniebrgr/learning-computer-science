@@ -4,14 +4,14 @@
 
 - [x] Create and use a tool
 - [x] Implement in Node
-- [x] Propose a system design
 - [x] Signin to OpenAi platform
 - [x] Deploy on Vercel
+- [x] Attach a VectorStore to a thread
 - [ ] Implement in Next.js
-- [ ] Attach a VectorStore to a thread
+- [ ] Propose a system design
 - [ ] Clean summary notes
 - [ ] Publish summary notes
-- [ ] Create and use multiple assistants
+- [ ] Bonus: Create and use multiple assistants
 
 ## To learn
 
@@ -47,3 +47,4 @@
 - [x] [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)
 - [ ] [LangChain]()
 - [ ] [Crafting Intelligent User Experiences: A Deep Dive into OpenAI Assistants API](https://medium.com/@2twitme/crafting-intelligent-user-experiences-a-deep-dive-into-openai-assistants-api-00439ace108a)
+- [ ] [Next.js AI SDK](https://sdk.vercel.ai/docs/introduction)

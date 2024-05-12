@@ -2,28 +2,17 @@
 
 ## Introduction
 
-There are two main affordances of the Assistants API:
+There are two main affordances of the Assistants API. Firstly, it extends the OpenAI API and makes it easier to build AI agents. Secondly, it furnishes some abstractions and platform tooling for building AI applications.
 
-1. Abstraction layer for AI applications
-
-    GPT knowledbase is fixed, whereas usages are custom to a particular domain or subeset of knowledge. convenient for providing a specific knowledge base. can be configured with OpenAI-hosted tools — like code_interpreter and file_search — or tools you build / host (via function calling) capability. Thre thread is managed for you Threads simplify AI application development by storing message history and truncating it when the conversation gets too long for the model’s context length. Assistants can access files in several formats can also create files (e.g., images, spreadsheets, etc) and cite files they reference in the Messages they create.
-
-2. AI reflection and iteration
+1. AI reflection and iteration a.k.a agents
   
-    Assistants can call OpenAI’s models with specific instructions to tune their application so they can be used in an agentic workflow.
+    Assistants call OpenAI’s models with special instructions that tune their behaviour. They are used in what is called an agentic workflow, a dynamic and self-reflective process where specialised agents collaborate on a task. The AI program is given a goal, and the agents works towards accomplishing it on their own.
 
-That is to say, the Assistants API is both an assistant to the developer and user.
+2. Abstraction layer for AI applications
 
-The assistants API extends the OpenAI API and makes it easier to build AI assistants.
-It provides a framework or platform for build AI applications requires.
+    The GPT knowledbase is fixed but uses typically need to be custom to a particular topic. convenient for providing a specific knowledge base. can be configured with OpenAI-hosted tools — like code_interpreter and file_search — or tools you build / host (via function calling) capability. Thre thread is managed for you Threads simplify AI application development by storing message history and truncating it when the conversation gets too long for the model’s context length. Assistants can access files in several formats can also create files (e.g., images, spreadsheets, etc) and cite files they reference in the Messages they create.
 
-- infra management
-- data
-- models
-- prompts
-- application state
-- understand embeddings
-- storage mechanism
+That is to say, the Assistants API assits both end user in the task they need to perform, and the developer to build the application.
 
 In Chat Complete API is that the Knowledge base is already there and limited to a certain date in time.
 It can't be contributed to.
