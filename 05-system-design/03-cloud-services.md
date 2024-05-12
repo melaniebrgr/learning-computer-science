@@ -34,15 +34,20 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Fargate (EC2 with container)
 
 - Jobs
-  - Comprehend (sentiment)
+  - Textract (OCR text extraction)
   - Rekognition (text-from-image detection)
+  - Comprehend (sentiment)
   - Translate (lang-to-lang)
+  - Polly (text-to-speech)
+  - AI Services 
+
+  <!-- catamarang -->
+
   - Glue Crawler (crawl data stores and populate Glue catalog)
   - Database migration service
   - Macie (PPI checker)
   - Glue DataBrew
-  - Elastic MacpReduce (EMR)
-  - AI Services
+  - Elastic MapReduce (EMR)
   - Sagemaker (ML model training)
 
 - Storage:
