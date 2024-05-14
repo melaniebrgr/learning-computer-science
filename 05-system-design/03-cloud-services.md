@@ -39,10 +39,7 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Comprehend (sentiment)
   - Translate (lang-to-lang)
   - Polly (text-to-speech)
-  - AI Services 
-
-  <!-- catamarang -->
-
+  - AI Services
   - Glue Crawler (crawl data stores and populate Glue catalog)
   - Database migration service
   - Macie (PPI checker)
@@ -54,9 +51,10 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Relational Database Service (RDS)
   - Elastic Block Store (EBS)
   - Elastic File System (EFS)
+  - FSx (fully managed file servers)
   - Simple Storage Solution (S3)
   - Simple Storage Solution Glacier
-  - Cloudfront
+  - Cloudfront (CDN)
   - AWS Backup
   - AWS Backup Vault
   - CodeCommit
@@ -90,15 +88,21 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 - Cloud management:
   - Virtual Private Cloud (VPC)
   - Virtual Private Network (VPN)
-  - AWS Outposts Family
+  - Outposts Family
+  - Organizational Unit
+  - Organizations
+  - App2container
 
 - Cloud monitoring
-  - AWS Cloud Map
+  - Cloud Map
   - Cloudtrail
-  - Cloudwatch
+  - CloudWatch
+  - Config (evaluates AWS config)
+  - GuardDuty (threat monitoring and detection)
 
 - Data transfering
-  - Eventbridge
+  - Datasync
+  - EventBridge (ingests and routes app data)
   - Kinesis Data streams
   - Kinesis Data firehose
   - Managed service for apache flink
@@ -121,6 +125,14 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 
 - IDE
   Cloud9
+
+- Migration management
+  - Migration hub
+  - Migration evaluator
+  - Application discovery service
+  - Application migration service
+  - Database migration service
+
 
 ### Introduction
 
