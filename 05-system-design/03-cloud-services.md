@@ -20,6 +20,7 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Security Token Service (STS)
   - Security Group
   - Key Management Service (KMS)
+  - Secrets Manager
 
 - Routing:
   - Route 53
@@ -27,6 +28,8 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Storage Gateway
   - Web Application Firewall (WAF)
   - Direct connect
+  - RDS Proxy
+  - Transit Gateway
 
 - Compute:
   - Elastic Compute Cloud (EC2)
@@ -46,9 +49,12 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Glue DataBrew
   - Elastic MapReduce (EMR)
   - Sagemaker (ML model training)
+  - Bedrock (AI)
 
 - Storage:
   - Relational Database Service (RDS)
+  - DynamoDB
+  - Aurora Serverless V2
   - Elastic Block Store (EBS)
   - Elastic File System (EFS)
   - FSx (fully managed file servers)
@@ -58,20 +64,23 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - AWS Backup
   - AWS Backup Vault
   - CodeCommit
-  - DynamoDB
   - Glue Data Catalog
 
 - Search
   - OpenSearch Service
   - Athena (SQL search of S3)
   - QuickSight (BI)
+  - Kendra
+  - Elasticache for Redis
 
 - Scaling management:
   - AWS Auto Scaling Groups
   - Elastic Load Balancing (ELB)
   - Elastic Container Registry
   - Elastic Container Service (ECS)
+  - Elastic Container Registry
   - Elastic Kubernetes Service (EKS)
+  - Amplify
 
 - Latency management:
   - Regions

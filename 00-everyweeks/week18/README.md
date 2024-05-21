@@ -49,6 +49,67 @@ Once a file is added to a vector store, it’s automatically parsed, chunked, an
 
 > files can be removed from a vector store by either: Deleting the vector store file object or, by deleting the underlying file object (which removes the file it from all vector_store and  code_interpreter configurations across all assistants and threads in your organization)
 
+**How does streaming working with routing work if we use the app router beside the page router**
+
+- pages and app routing can coexist side by side
+- handy error messages if a matching routes are created
+- Next supports streaming (SSE) with app router
+- Further, the Vercel AI SDK abstracts the complexities of doing so
+
+**Limitations for long running HTTP connections**
+
+[AWS lambda supports streaming SSE.](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/)
+"You can read a streamed response from your function via a Lambda function URL or use the AWS SDK to call the new API directly."
+There is an initial maximum response size of 20 MB, which is a soft limit you can increase. The first 6MB of the response payload is streamed without any bandwidth constraints. Beyond 6MB, there is a maximum bandwidth throughput limit of 16 Mbps (2 MB/s).
+
+There is an initial maximum response size of 20 MB, which is a soft limit you can increase. The first 6MB of the response payload is streamed without any bandwidth constraints. Beyond 6MB, there is a maximum bandwidth throughput limit of 16 Mbps (2 MB/s).
+
+Vercel has limitations that our own implementation would not:
+These functions must beging sending a response within 25 seconds. After the initial response begins, you can continuously stream the response with no time limit. Your streamed response size cannot exceed Vercel's memory allocation limit of 128 MB.
+
+**What should we do if the lambda fails?**
+Send message to client to retry. Retry. Add check if files are uploaded so don't upload already existing.
+
+**What should we do if node fails?**
+Throttle? with health check?
+
+**Where are server actions running?**
+TL;DR wherever we want. They can be extracted to their own lambda if we want. Or not.
+
+Traditionally (pages folder) form call API route to talk to backend securely.
+With app router can use server actions.
+useFormState hook? action calls function on the server. "We just call functions."
+Everything runs securely on the server.
+Server-Sent Events (SSE) to send a stream of data from a server action to the client in Next.js
+Streaming is a data transfer technique that allows you to break down a route into smaller "chunks" and progressively stream them from the server to the client as they become ready.
+
+I think there's probably distinction to make: where server actions _can_ run, and where they _do_ run in typical Vercel deployment. It is still unclear. On one hand under the "Functions" menu there are `studysesh` and `studysesh.rsc` Functions. Vercel Functions "enable running compute on-demand without needing to manage your own infrastructure, provision servers, or upgrade hardware." Sounds a lot like a discrete lambda, but is it? Vercel applications sound like they could be AWS lambda's all the way down ([1](https://vercel.com/blog/aws-and-vercel-accelerating-innovation-with-serverless-computing), [2](https://vercel.com/blog/streaming-for-serverless-node-js-and-edge-runtimes-with-vercel-functions)). Maybe its the same lambda?
+
+> Next.js automatically generates an API endpoint for each server action. These endpoints are created during the compilation process and are not visible in your codebase. The generated endpoints handle the incoming requests from the client and route them to the corresponding server action.
+> When you invoke a server action from the client-side, such as through a form submission or a button click, Next.js sends a POST request to the generated API endpoint (7).
+
+Vercel is deploying the infrastructure as defined by the framework configuration. That is Next.js is inferring and then automagically deploying infrastructure it has deemed optimally based on an analysis of the build output.
+
+> In Vercel’s case, this means that a serverless function based on AWS Lambda is created and deployed with the code necessary to render the page. The knowledge to invoke this function is then deployed to the gateway service as part of the application's routing table (5).
+
+For actions they are deploying them to a lambda.
+
+When a user interacts with your app on the client side, they can directly call Server Actions which will be executed securely on the server side.
+
+This approach provides a seamless Remote Procedure Call (RPC) experience between the client and the server. Instead of writing a separate API route to communicate with the server, you can directly call Server Actions from your Client Components (6).
+
+Pros of separate service:
+
+- Elasticity
+- Iteration ability(?)
+
+Cons of separate service:
+
+- Deployment complexity
+- Initial implementation slower
+
+Suggestion: MVP in Next.js, in parallel work on service-based architecture
+
 ## FAQ
 
 1. **Can assistants be easier or faster to implement than a GPT, or "regular chat"?**
@@ -84,25 +145,22 @@ Once a file is added to a vector store, it’s automatically parsed, chunked, an
 
 1. **What are the context limitations and how do they compare to the Completions API?**
 
-    Assistants API limitations (per Ruan from one of OpenAI's articles):
-    - The maximum file size is 512 MB (average PDF on Studocu is 2MB)
-    - 10,000 files per vector store
-    - 1 vector store per Assistant
-    - 1 vector store per Thread
-    - Therefore 10,000 files per thread
-    - No stated limit to the number of Assistants
-    - No stated limit to the number of Threads
-    - Each end-user is capped at 10GB (What is an end user?????????)
-    - Each organization is capped at 100GB by default ("reach out to our support team to increase this limit")
-    - Each file should contain no more than 5,000,000 tokens per file (computed automatically a file is attached).  The maximum number of tokens a run uses in the Assistants API can be controlled allowing management of token usage costs. Limits on the number of tokens for previous / recent messages used in each run can also be set.
-
-    Vector Store limitations ("adding support for in the coming months"):
-    - parsing images within documents (including images of charts, graphs, tables etc.)
-    - structured file formats like csv or jsonl
-    - better support for summarization — the tool today is optimized for search queries.
-
-    Completions API limitations:
-    - 128K tokens (most PDFs)
+    Assistants API limitations (per the docs):
+    Files:
+        - The maximum file size is 512 MB (average PDF on Studocu is 2MB)
+        - the size of all files uploaded by one organization can be up to 100 GB
+        - "Please contact us if you need to increase these storage limits"
+        - Each file should contain no more than 5,000,000 tokens per file (computed automatically a file is attached).  The maximum number of tokens a run uses in the Assistants API can be controlled allowing management of token usage costs. Limits on the number of tokens for previous / recent messages used in each run can also be set. (Completion api 128K tokens.)
+    Vector store:
+        - 10,000 files per vector store
+        - 1 vector store per Assistant/Thread (files are added to it)
+        - adding support for parsing images within documents (including images of charts, graphs, tables etc.)
+        - adding support for structured file formats like csv or jsonl
+        - better support for summarization (the tool today is optimized for search queries).
+    Assistants:
+        - No stated limit
+    Threads:
+        - No stated limit
 
 1. **How convenient is it to specify the output format (markdown, LaTeX)?**
 
@@ -133,14 +191,6 @@ Once a file is added to a vector store, it’s automatically parsed, chunked, an
 
     "At the moment, user-created Messages cannot contain image files but we plan to add support for this in the future."
     Assistants can also create files (e.g., images, spreadsheets, etc)
-
-1. **EXTRA QUESTIONS**
-
-- How much does this cost? Is it per request or something? (Fede, Gabi will take it)
-- File cleanup options?
-- Rate limitations?
-- How many VectorStore + Threads can we have?
-- What is the whole speed for the user?
 
 ## Implementation
 
@@ -208,14 +258,32 @@ It can access further code interpreter or tools as need be in the run steps. THe
 Once all the user Messages have been added to the Thread, you can Run the Thread with any Assistant. Creating a Run uses the model and tools associated with the Assistant to generate a response. These responses are added to the Thread as assistant Messages.
 A run can be created with and without streaming.
 
-### 4. Iterate
-
-### Attach a VectorStore to a thread
+### Attaching a VectorStore to a thread
 
 Why is this hard??? The first try wasn't successful; the assistant wasn't generating a summary from the vector store I believed to be attached to the _Thread_, nor the vector store I believed to the attached to the _Run_, nor the file I believed to be passed as on the Thread _Message_. The result was a mix of summaries entirely unrelated to the file subject, or a response that it was waiting for files to be supplied. Decided to revert all changes back to a point were things were working, with the vector store attached to the Assistant. Will try again later with a fresh brain.
+
+Adding openai file ids to the message automatically created the vector store. Aha.
+
+### Deploy
+
+Deployed on Vercel and ran into an issue with CORS and the lambda edge function. CORS was resolved by adding openai to the CSP. The lambda resource issuse were more problematic. Locally the full request takes 10-30s. In Vercel "hobby" lambdas this is over the 10s execution duration time. Further the memore allocation could be problematic with a limit of 1024 MB. With a small file the response is fast enough (<10s). Memory and duration time [can be configured](https://vercel.com/docs/functions/configuring-functions/duration), but the hobby tier is seemingly capped.
+
+### Architecture
+
+Seeing the limitations suggested a new architecture. Using S3 as an intermediary queue (we wanted to store the inputs somehow anyway).
+> If you need to fetch data in a client component, you can call a Route Handler from the client. Route Handlers execute on the server and return the data to the client. This is useful when you don't want to expose sensitive information to the client, such as API tokens.
+
+Tried using server actions with the new app router and got the error.
+> Uncaught (in promise) Error: Only plain objects, and a few built-ins, can be passed to Server Actions. Classes or null prototypes are not supported.
+This makes sense because Next.js server actions cannot directly receive FileList objects as parameters, because the FileList object is a web API that's only available in a browser environment.
+A server action can accept a FormData type however, so if I create a form data object I can parse it in a server action. It's so easy.
 
 ## References
 
 1. [Assistants API](https://platform.openai.com/docs/assistants/)
 2. [AI Pioneer Shows The Power of AI AGENTS - "The Future Is Agentic"](https://www.youtube.com/watch?v=ZYf9V2fSFwU&t=329)
 3. [New features in the Assistants API!](https://community.openai.com/t/new-features-in-the-assistants-api/720539)
+4. [NextJS’s Amazing New Streaming Server Actions](https://jherr2020.medium.com/nextjss-amazing-new-streaming-server-actions-ef4f6e2b1ca2)
+5. [Framework defined infrastructure](https://vercel.com/blog/framework-defined-infrastructure)
+6. [Understanding React Server Components](https://vercel.com/blog/understanding-react-server-components)
+7. [Nuances of Server Actions in Next.js](https://tigerabrodi.blog/nuances-of-server-actions-in-nextjs)

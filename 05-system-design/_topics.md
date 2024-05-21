@@ -11,6 +11,7 @@
 ## 02 Frontend
 
 - [ ] Web APIs
+  - [ ] File
 - [ ] Component architecture
 - [ ] Languages
   - [ ] HTML

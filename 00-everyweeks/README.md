@@ -68,6 +68,8 @@ Basically I will try something for a week, document my learning, judge its succe
 
 ## Topic ideas
 
+- What happens when a file is uploaded?
+- CORS
 - Create a website with Leptos
 - Deploying a wasm app
 - SQLite/SQLX and wasm
