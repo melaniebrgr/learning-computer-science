@@ -27,6 +27,8 @@ AWS services can either be global or regional. For example, Route 53, CloudFront
 
 A "region" is a physically isolated geographical area (~100 miles apart) with a cluster of at least three 3 (or more) availability zones (AZs). An AZ contains 1 or more datacenters that are also physically seperated (~2 miles apart) and have their own power source. Resources are launched into AZs. If one AZ has an outage it can fail over to another AZ. Although they are physically isolated, regions and AZs have a direct, low-latency, global network connecting to each other.
 
+Health of services used by your account can be observed from the service health dashboard. A general overview of all service health around the world can also be viewed.
+
 ### Service types
 
 There are two broad categories of services: self-service and managed (by AWS). Self service like EC2 reselved instances use underlying hardware managed by AWS but are fully configurable. Managed services are less configurable and can often mixed and matached with other services.
@@ -35,11 +37,36 @@ EC2 Reserved Instances (RI) provide a significant discount (up to 72%) compared 
 
 AWS Managed Services (AMS) operates AWS on your behalf, providing a secure AWS Landing Zone, features which help you meet various compliance program requirements (HIPAA, HITRUST, GDPR, SOC, ISO, PCI), a proven enterprise operating model, on-going cost optimization, and day-to-day infrastructure management. By implementing best practices to maintain your infrastructure, AWS Managed Services helps to reduce your operational overhead and risk. AWS Managed Services automates common activities, such as change requests, monitoring, patch management, security, and backup services, and provides full-lifecycle services to provision, run, and support your infrastructure. AWS Managed Services unburdens you from infrastructure operations so you can direct resources toward differentiating your business.
 
+### Billing and pricing
+
+There are three pricing models: in advance, subscription and on demand. For example, you can pay on demand, for a dedicated instance that does not share resources with anyone else, for a spot instance, or for a reserved instance (RI) for a 1 or 3 year term. On demand is by far the most common. With on demand you pay only for what you use, and it varies depending on the service, the region, and the type of infrastructure. AWS has a pricing page for each service, and pricing calculator to explore costs. A free tier is generally available to new AWS users.
+
+There are three things you tend to pay for on AWS:
+
+1. pay for computation (time, e.g. EC2),
+2. pay for storage space used (S3), and
+3. pay for data outbound.
+
+Expenses are monitored from the billing dashboard, where budgets can also be set to be notified of cost overages. Each services has different limits or quotas that can be increased on request. Tags can be attached to AWS resources, and can be inherited from other resources, e.g. Cloud Formation Resource groups can be used to group resources with the same tags. Cost allocation Tags are a useful way of tracking resource costs.
+
+**AWS Cost Explorer** is a free tool that can be used to view past cost data and future projections. A set of default reports is provided the can be further filtered, e.g. cost per EC2 instance type per month. The AWS Pricing Calculator can useful to plan costs before committing to services. The AWS Total Cost of Ownership (TCO) Calculator is for comparing on premises costs to cloud costs.
+
+**AWS Budgets** allows you to set custom budgets to track your cost and usage from the simplest to the most complex use cases. With AWS Budgets, you can choose to be alerted by email or SNS notification when actual or forecasted cost and usage exceed your budget threshold, or when your actual RI and Savings Plans' utilization or coverage drops below your desired threshold.
+
+There are four different **support plans**:
+
+1. Basic - access to forums only
+2. Developer - email support during business hours, one person can open unlimited cases with <12 h response time for some system impairment
+3. Business - email, chat, phone support 24h, unlimited people can open unlimited cases with <12 h response time for some system impairment, <4 h for production system impairment, <1 h for prod is down
+4. Enterprise - email, chat, phone support 24h, unlimited people can open unlimited cases, with <12 h response time for some system impairment, <4 h for production system impairment, <1 h for prod is down, < 15 min for business cirtical system down. Only enterprise gets a TAM, training and account assistance.
+
+If you have multiple AWS accounts they can be consolidated with **AWS Organizations**. The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
+
 ### Services
 
 - Authentication, authorization, security:
-  - Cognito
   - Identity & Access management (IAM)
+  - Cognito
   - Security Token Service (STS)
   - Security Group
   - Key Management Service (KMS)
@@ -165,18 +192,42 @@ AWS Managed Services (AMS) operates AWS on your behalf, providing a secure AWS L
   - Application migration service
   - Database migration service
 
-### Identity and Access Management (IAM)
+### Configuring services
 
-There are 4 IAM types: root, users, groups and roles. A username and password used to create an account of the root user. It has "super user" like powers and can access billing information. It should never be used for day-to-day activities and should not be shared. Instead, create users instead, and enable MFA for each of them.
+AWS services can be access and configured from
 
-Multi-factor authentication (MFA) can consist of two or more of
+- Management console
+- CLI
+- CloudShell (CLI is preinstalled)
+- SDK
+- API
+
+### Authentication, authorization, security
+
+#### Security model
+
+AWS is responsible for what it can control: physical machines, infrastructure, managed services. You are responsible for what you can control: account and access, applications. Use secure credentials, and multi-factor authentication (MFA).
+
+MFA can consist of two or more of
 
 1. something I know, e.g. password
 2. something I have, e.g. mobile device with Google Authenticator (virtual MFA), or USB (physical MFA)
 3. something I am, e.g. fingerprint or other biometric data
+
 It's a best practise know for all privileged accounts to have MFA set up.
 
-**Amazon Security Token Service (STS)** is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
+#### Identity and access management
+
+Identities are the entities that are allowed or not allowed to so something (the "who"). Access management refers to the permissions that are granted or not granted (the "what"), which is managed with policies.
+
+IAM users are seperate users created with generally more limited permissions. There are 4 IAM types: root, users, users groups and roles.
+A root user has "super user" powers and should never be shared or used for day-to-day activities. Instead, create users and enable MFA for them, for example an admin account for billing. A user entity is typically created and assigned to everyone who accesses the AWS account. Users can be assigned to groups to share permissions. Roles are typically assigned to services so that they can perform tasks.
+
+To set permissions for a user you can add them to an existing group, copy over permissions from an existing user, or attach built-in or custom policies. Policies group permissions together. By default, no permissions are granted to a user. Note that in case of clash of policy permissions, e.g. Policy A "allows EC3 read" and Policy B "Denies all EC2 access" the least permissive option wins, that is that user with both policies attached will not have EC2 access.
+
+#### Amazon Security Token Service (STS)
+
+STS is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
 
 A user represents a single person or a service a.k.a "service accounts". Each user has an Amazon Resource Name (ARN). Users can be assigned a key ID and a secret access key so that they can log in programmatically in addition to logging in through a software interface with the standard username and password. A best practise is to create an individual account per user, i.e. do not reuse credentials between individuals. By default users have no permissions and must be given some to do anything. Use the principle of least privilege when assigning permissions.
 
@@ -196,7 +247,7 @@ Policies are JSON documents that define the permissions for a user, group or ro
 
 ### Compute
 
-Servers comprise of the physical hardware (CPU, RAM, disk, NIC) and an operating system (Linux, MacOS, Windows). A virtual server on AWS is set up by launching an **Elastic Compute Cloud (EC2)** instance using a particular **Amazon Machine Image (AMI)** on Amazon hardware. An AMI is made up of an **Elastic Blockstore Snapshot (EBS)** with Windows or Linux preinstalled. An AMI includes all the information necessary to launch an instance, using either an EBS snapshot (permanent) or template (non-permanent). There are three categories of snapshots: community (free), marketplace (pay to use), my AMIs (own custom).
+Servers comprise of physical hardware (CPU, RAM, disk, NIC) and an operating system (Linux, MacOS, Windows). A virtual server on AWS is set up by launching an **Elastic Compute Cloud (EC2)** instance using a particular **Amazon Machine Image (AMI)** on Amazon hardware. An AMI is made up of an **Elastic Blockstore Snapshot (EBS)** with Windows or Linux preinstalled. An AMI includes all the information necessary to launch an instance, using either an EBS snapshot (permanent) or template (non-permanent). There are three categories of snapshots: community (free), marketplace (pay to use), my AMIs (own custom).
 
 There are many different instance types to choose between that are optimised for different purposes, e.g. more memory, more storage or general. With EC2 though you have full control: you choose the image and the hardware specs and can install any software needed. If you want certain commands to run after launching an EC2 instance, e.g. that starts a web server, they can be entered into the "user data" text field on the "configure instance details" step. The instance can be updated through a REST API and instance metadata, such as the instance ID, can be accessed over HTTP after the instance is created. EC2 is well-suited for a long running, traditional applications.
 
@@ -293,21 +344,6 @@ CloudTrail is an auditing service, it logs all API activity for an AWS account (
 
 AWS offers tools for migrating on premises databases, servers and file servers to the cloud, e.g. AWS Migration Hub, AWS Database Migration Service, Server Migration Service, and Datasync. You can migrate databases homogeneously (Oracle to Oracle) or heterogeneously (Oracle to Amazon) with Database Migration Service. You can migrate servers with Server Migration Service,. Under the hood the server volumes are replicated in EBS and used to save an AMI which is then used to launch an EC2 instance. With Datasync filesystems can be migrated over TLS to S3, FSx (Windows specific), or EFS. AWS Migration Hub, is useful for planning the migration process and viewing their status.
 
-### AWS Billing and Pricing
-
-AWS Cost Explorer is a free tool that can be used to view past cost data and future projections.  A set of default reports is provided the can be further filtered, e.g. cost per EC2 instance type per month. The AWS Simple Monthly Calculator can be used to estimate the monthly bill, it's a helpful to project to project infrastructure costs. It is being deprecated in favour of the AWS Pricing Calculator. It can useful to plan costs before committing to services. The AWS Total Cost of Ownership (TCO) Calculator is for comparing on premises costs to cloud costs. AWS Budgets allows you to set custom budgets to track your cost and usage from the simplest to the most complex use cases. With AWS Budgets, you can choose to be alerted by email or SNS notification when actual or forecasted cost and usage exceed your budget threshold, or when your actual RI and Savings Plans' utilization or coverage drops below your desired threshold.
-
-Tags can be attached to AWS resources, and can be inherited from other resources, e.g. Cloud Formation. Resource groups can be used to group resources with the same tags. Cost allocation Tags are a useful way of tracking resource costs.
-
-There are four different support plans:
-
-1. Basic - access to forums only
-2. Developer - email support during business hours, one person can open unlimited cases with <12 h response time for some system impairment
-3. Business - email, chat, phone support 24h, unlimited people can open unlimited cases with <12 h response time for some system impairment, <4 h for production system impairment, <1 h for prod is down
-4. Enterprise - email, chat, phone support 24h, unlimited people can open unlimited cases, with <12 h response time for some system impairment, <4 h for production system impairment, <1 h for prod is down, < 15 min for business cirtical system down. Only enterprise gets a TAM, training and account assistance.
-
-If you have multiple AWS accounts they can be consolidated with **AWS Organizations**. The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
-
 ### Application Integration
   
 There are a four AWS services that are used to connect applications with each other, i.e. are used for the purpose of integrating applications in a decoupled architecture:
@@ -359,16 +395,6 @@ The shared responsibility model helps to define the lines of responsibility be
 ### Analytics
 
 Analyze datasets on Amazon S3 with Amazon Athena. You can write queries in SQL, and Athena uses Glue, which contains information about the schemas and databases the queries are being made against. Glue is an extract, transform and load (ETL) service. Amazon Elastic Map Reduce (EMR) is a web service that enables businesses, researchers, data analysts, and developers to easily and cost-effectively process vast amounts of data. EMR utilizes a hosted Hadoop framework running on Amazon EC2 and Amazon S3. Kinesis is a way to collect, process and analyse real-time streaming data, or small amounts of data that are being updated with high-frequency over time. Amazon QuickSight is trying to take the role of a data scientist: extract business insights from your data. In summary: for data at rest consider Athena, EMR, and QuickSight to answer questions about your data and extract business insights respectively. For data in transit use Kinesis.
-
-### Pricing
-
-There are three AWS pricing models:
-
-1. pay for computation (time, e.g. EC2),
-2. pay for storage space used (S3), and
-3. pay for data outbound.
-
-You can pay on demand, for a dedicated instance that does not share resources with anyone else, for a spot instance, or for a reserved instance (RI) for a 1 or 3 year term.
 
 ## References
 
