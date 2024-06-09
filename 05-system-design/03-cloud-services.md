@@ -2,9 +2,16 @@
 
 ## Cloud Computing
 
-Cloud computing is the on-demand delivery of some IT capabilities over the internet. A key characteristic of cloud computing is typically their rapid, on-demand elasticity.
+Cloud computing is the on-demand delivery of IT resources and capabilities over the internet
+There are a number of cloud computing service providers, such as AWS, Azure, and GCP, which own and operate their own IT infrastructure.
+Typically we don't rent a whole machine, but a "slice" of a server, e.g. EC2.
 
-There are three main cloud computing services models:
+With on-premises IT you have complete control and responsibility over the physical hardware and software running on the machine. However you are responsible for capacity planning and upgrading, securing, and handling infrastructre outages. Having too much or too little capacity is a common problem, and typically you do no have the elasticity to handle large events.
+
+By contrast cloud computing providers manage the underlying infrastructure, have datacenters around the globe for redundancy, and to choose the best location for users, and offer service guarantees (SLAs).
+Rapid, on-demand elasticity, and scalability are cloud features.
+
+There are three main cloud computing service models:
 
 1. infrastructure as a service (IaaS) e.g. EC2,
 2. platform as a service (PaaS), e.g. elastic beanstalk, and
@@ -12,7 +19,23 @@ There are three main cloud computing services models:
 
 There are three cloud deployment models: private, public and hybrid. In a private cloud you own and operate your own datacenter and have total control over the stack. The biggest reason for doing so is security. A public cloud can offer economies of scale and elasticity. A hybrid cloud, of course, is a combination of both.
 
-## AWS services
+## Amazon Web Services (AWS) services
+
+### Regions and availability
+
+AWS services can either be global or regional. For example, Route 53, CloudFront, and IAM are global. You don't want to configure these in different regions. However, the majority of services are regional. For many services, you can select the region to deploy to. Pricing, service offerings, legal concerns, and proximity to users vary between regions.
+
+A "region" is a physically isolated geographical area (~100 miles apart) with a cluster of at least three 3 (or more) availability zones (AZs). An AZ contains 1 or more datacenters that are also physically seperated (~2 miles apart) and have their own power source. Resources are launched into AZs. If one AZ has an outage it can fail over to another AZ. Although they are physically isolated, regions and AZs have a direct, low-latency, global network connecting to each other.
+
+### Service types
+
+There are two broad categories of services: self-service and managed (by AWS). Self service like EC2 reselved instances use underlying hardware managed by AWS but are fully configurable. Managed services are less configurable and can often mixed and matached with other services.
+
+EC2 Reserved Instances (RI) provide a significant discount (up to 72%) compared to on-demand pricing and provide a capacity reservation when used in a specific Availability Zone. The following types of RI are available: Standard RIs: These provide the most significant discount (up to 75% off On-Demand) and are best suited for steady-state usage. Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage. Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
+
+AWS Managed Services (AMS) operates AWS on your behalf, providing a secure AWS Landing Zone, features which help you meet various compliance program requirements (HIPAA, HITRUST, GDPR, SOC, ISO, PCI), a proven enterprise operating model, on-going cost optimization, and day-to-day infrastructure management. By implementing best practices to maintain your infrastructure, AWS Managed Services helps to reduce your operational overhead and risk. AWS Managed Services automates common activities, such as change requests, monitoring, patch management, security, and backup services, and provides full-lifecycle services to provision, run, and support your infrastructure. AWS Managed Services unburdens you from infrastructure operations so you can direct resources toward differentiating your business.
+
+### Services
 
 - Authentication, authorization, security:
   - Cognito
@@ -141,25 +164,6 @@ There are three cloud deployment models: private, public and hybrid. In a privat
   - Application discovery service
   - Application migration service
   - Database migration service
-
-
-### Introduction
-
-AWS services can either be global or regional. For example, Route 53, CloudFront, and IAM are all global. You don't want to configure these in different regions. However, rhe majority of services are regional.
-
-A "region" is geographical area with a cluster of 2 or more availability zones (AZs), which are physically isolated datacenters. AZs even have their own power sources. Resources are launched into these availability zones. If something impacts one AZ then it can fail over to another AZ, providing redundancy. Although they are physically isolated, AZs in a region have a direct, low-latency network connection to each other.
-
-EC2 Reserved Instances (RI) provide a significant discount (up to 72%) compared to on-demand pricing and provide a capacity reservation when used in a specific Availability Zone. The following types of RI are available: Standard RIs: These provide the most significant discount (up to 75% off On-Demand) and are best suited for steady-state usage. Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage. Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
-
-AWS Managed Services (AMS) operates AWS on your behalf, providing a secure AWS Landing Zone, features which help you meet various compliance program requirements (HIPAA, HITRUST, GDPR, SOC, ISO, PCI), a proven enterprise operating model, on-going cost optimization, and day-to-day infrastructure management. By implementing best practices to maintain your infrastructure, AWS Managed Services helps to reduce your operational overhead and risk. AWS Managed Services automates common activities, such as change requests, monitoring, patch management, security, and backup services, and provides full-lifecycle services to provision, run, and support your infrastructure. AWS Managed Services unburdens you from infrastructure operations so you can direct resources toward differentiating your business.
-
-There are three AWS pricing models:
-
-1. pay for computation (time, e.g. EC2),
-2. pay for storage space used (S3), and
-3. pay for data outbound.
-
-You can pay on demand, for a dedicated instance that does not share resources with anyone else, for a spot instance, or for a reserved instance (RI) for a 1 or 3 year term.
 
 ### Identity and Access Management (IAM)
 
@@ -356,7 +360,18 @@ The shared responsibility model helps to define the lines of responsibility be
 
 Analyze datasets on Amazon S3 with Amazon Athena. You can write queries in SQL, and Athena uses Glue, which contains information about the schemas and databases the queries are being made against. Glue is an extract, transform and load (ETL) service. Amazon Elastic Map Reduce (EMR) is a web service that enables businesses, researchers, data analysts, and developers to easily and cost-effectively process vast amounts of data. EMR utilizes a hosted Hadoop framework running on Amazon EC2 and Amazon S3. Kinesis is a way to collect, process and analyse real-time streaming data, or small amounts of data that are being updated with high-frequency over time. Amazon QuickSight is trying to take the role of a data scientist: extract business insights from your data. In summary: for data at rest consider Athena, EMR, and QuickSight to answer questions about your data and extract business insights respectively. For data in transit use Kinesis.
 
+### Pricing
+
+There are three AWS pricing models:
+
+1. pay for computation (time, e.g. EC2),
+2. pay for storage space used (S3), and
+3. pay for data outbound.
+
+You can pay on demand, for a dedicated instance that does not share resources with anyone else, for a spot instance, or for a reserved instance (RI) for a 1 or 3 year term.
+
 ## References
 
 - <https://cardclash.skillbuilder.aws/> Fun!
 - <https://aws.amazon.com/training/digital/aws-cloud-quest>
+- <https://pro.academind.com/courses/aws-cloud-practitioner-clf-c01-complete-aws-introduction>

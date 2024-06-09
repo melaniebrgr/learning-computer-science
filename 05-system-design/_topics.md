@@ -11,7 +11,14 @@
 ## 02 Frontend
 
 - [ ] Web APIs
+  - [ ] Compression Streams
+  - [ ] DOM & DOM interfaces
   - [ ] File
+  - [ ] File System
+  - [ ] File and Directory Entries
+  - [ ] Popover
+  - [ ] Server Sent Events
+  - [ ] View Transitions
 - [ ] Component architecture
 - [ ] Languages
   - [ ] HTML
@@ -53,10 +60,12 @@
 - [ ] Accessibility
 - [ ] Internationalisation
   - [ ] Localisation
+  - [ ] ICU message syntax
 - [ ] State management
   - [ ] Signals
   - [ ] Observables
-- [ ] Polling
+- [ ] Short polling
+- [ ] Long polling
 - [ ] Sockets
 - [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
 - [ ] Authentication
@@ -69,17 +78,20 @@
 ## 03 Backend
 
 - [ ] Languages
-  - [ ] Node
+  - [ ] Rust
   - [ ] Go
+  - [ ] JS (Node)
 - [ ] Frameworks
 - [ ] Component architecture
 - [ ] Data structures
 - [ ] Algorithms
 - [ ] Firewalls
 - [ ] Load Balancers
+- [ ] REST
 - [ ] GraphQL
-- [ ] Rest
+- [ ] tRPC
 - [ ] gRPC
+- [ ] Streaming
 - [ ] APIs
 - [x] [Cloud Services](./03-cloud-services.md) (2024-05-09)
   - [ ] Design patterns
@@ -93,7 +105,6 @@
 - [x] [Key-value (KV)](./04-databases.md) (2023-04-12)
 - [x] [Search](./04-databases.md) (2023-04-12)
 - [x] [Graph](./04-databases.md) (2023-04-12)
-- [ ] Streaming
 - [ ] Schema design
 - [ ] Data maintance / management
 - [ ] Database caching
