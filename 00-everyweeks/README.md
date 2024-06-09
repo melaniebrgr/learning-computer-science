@@ -31,12 +31,12 @@ Basically I will try something for a week, document my learning, judge its succe
 |  16  | Service workers | 501 | too busy on vacation |
 |  17  | [Service workers](./week17/) | 400 | too busy with back-to-work, and learned just enough about this topic to probably be dangerous |
 |  18  | [OpenAI Assistant](./week18) | 102 |  |
-|  19  |  |  |  |
-|  20  |  |  |  |
-|  21  |  |  |  |
-|  22  |  |  |  |
-|  23  |  |  |  |
-|  24  |  |  |  |
+|  19  | [OpenAI Assistant](./week18) | 102 |  |
+|  20  | [OpenAI Assistant](./week18) | 206 | Completed but as of yet unpublished. |
+|  21  | [File handling on the Web](./week21) | 400 | All my mindshare belongs to work rn. |
+|  22  |  |  | Conference and travelling |
+|  23  |  |  | Travelling |
+|  24  |  |  | Taking AWS Cloud Practioner course |
 |  25  |  |  |  |
 |  26  |  |  |  |
 |  27  |  |  |  |
@@ -88,10 +88,7 @@ Basically I will try something for a week, document my learning, judge its succe
 - Using WASI in Node, <https://nodejs.org/api/wasi.html>
 - A Chrome extension
 - A Chrome side panel feature
-- Service workers
 - Wasm by example: <https://wasmbyexample.dev/home.en-us.html#>
 - Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>
-- PDF renderer in Rust
-- Next.js Server components, Client components
-- Drag and drop API
-- Openai assistant
+- Content renderer in Rust
+- Does streaming HTML make critical CSS generation unnecessary?
