@@ -15,14 +15,15 @@ Basically I will try something for a week, document my learning, judge its succe
 - 102: processing
 - 200: successful
 - 206: partially successful
-- 400: fail (my fault)
-- 501: fail (not my fault)
+- 303: see other
+- 403: not found (failure my fault)
+- 503: service unavailable (failure not my fault)
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | Rust command line game: guess the pinyin | 400 | Had to learn the language basics first. |
+|   8  | Rust command line game: guess the pinyin | 403 | Had to learn the language basics first. |
 |   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs. |
-|  10  | Rust in JavaScript | 400 | Learned more about wasm, but didn't finish in time. |
+|  10  | Rust in JavaScript | 403 | Learned more about wasm, but didn't finish in time. |
 |  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming. |
 |  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted. |
 |  13  | [Wasm game of life](./week13) | 206 | A setback. |
@@ -33,10 +34,10 @@ Basically I will try something for a week, document my learning, judge its succe
 |  18  | [OpenAI Assistant](./week18) | 102 |  |
 |  19  | [OpenAI Assistant](./week18) | 102 |  |
 |  20  | [OpenAI Assistant](./week18) | 206 | Completed but as of yet unpublished. |
-|  21  | [File handling on the Web](./week21) | 400 | All my mindshare belongs to work rn. |
-|  22  |  |  | Conference and travelling |
-|  23  |  |  | Travelling |
-|  24  |  |  | Taking AWS Cloud Practioner course |
+|  21  | [File handling on the Web](./week21) | 403 | All my mindshare still belonged to the OpenAI project. |
+|  22  | - | 503 | Conference and travelling |
+|  23  | - | 503 | Travelling |
+|  24  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Taking an AWS Cloud Practioner course with a colleague! |
 |  25  |  |  |  |
 |  26  |  |  |  |
 |  27  |  |  |  |
