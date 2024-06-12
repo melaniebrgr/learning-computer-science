@@ -65,10 +65,11 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
 ### Services
 
 - Authentication, authorization, security:
+  - _The shared responsibility model_
   - Identity & Access management (IAM)
   - Cognito
-  - Security Token Service (STS)
   - Security Group
+  - Security Token Service (STS)
   - Key Management Service (KMS)
   - Secrets Manager
 
@@ -84,9 +85,18 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
 - Compute:
   - Elastic Compute Cloud (EC2)
   - Lambda
-  - Fargate (EC2 with container)
+  - Lightsail
 
-- Jobs
+- Scaling compute:
+  - AWS Auto Scaling Groups
+  - Elastic Load Balancing (ELB)
+  - Elastic Container Registry
+  - Elastic Container Service (ECS)
+  - Elastic Kubernetes Service (EKS)
+  - Fargate
+  - Amplify
+
+- Jobs:
   - Textract (OCR text extraction)
   - Rekognition (text-from-image detection)
   - Comprehend (sentiment)
@@ -116,28 +126,19 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
   - CodeCommit
   - Glue Data Catalog
 
-- Search
+- Search:
   - OpenSearch Service
   - Athena (SQL search of S3)
   - QuickSight (BI)
   - Kendra
   - Elasticache for Redis
 
-- Scaling management:
-  - AWS Auto Scaling Groups
-  - Elastic Load Balancing (ELB)
-  - Elastic Container Registry
-  - Elastic Container Service (ECS)
-  - Elastic Container Registry
-  - Elastic Kubernetes Service (EKS)
-  - Amplify
-
 - Latency management:
   - Regions
   - AWS Local Zones
   - AWS Wavelength
 
-- Workflow management
+- Workflow management:
   - Simple Notification Service (SNS)
   - Simple Queue Service (SQS)
   - Step Functions
@@ -152,38 +153,36 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
   - Organizations
   - App2container
 
-- Cloud monitoring
+- Cloud monitoring:
   - Cloud Map
   - Cloudtrail
   - CloudWatch
   - Config (evaluates AWS config)
   - GuardDuty (threat monitoring and detection)
 
-- Data transfering
+- Data transfer:
   - Datasync
   - EventBridge (ingests and routes app data)
   - Kinesis Data streams
   - Kinesis Data firehose
   - Managed service for apache flink
 
-- Data management
+- Data management:
   - Lake formation
   - Redshift
   - Quicksight
 
-- People management
+- People management:
   - Connect (contact center service)
   - Pinpoint (marketing communications)
 
-- CI/CD
+- Coding:
+  - Cloud9
   - CodeStar
   - CodePipeline
   - CodeBuild (build a repo)
   - CodeDeploy (deploy a build)
   - Device Farm
-
-- IDE
-  Cloud9
 
 - Migration management
   - Migration hub
@@ -204,9 +203,22 @@ AWS services can be access and configured from
 
 ### Authentication, authorization, security
 
-#### Security model
+#### The shared responsibility model
 
 AWS is responsible for what it can control: physical machines, infrastructure, managed services. You are responsible for what you can control: account and access, applications. Use secure credentials, and multi-factor authentication (MFA).
+
+The shared responsibility model defines the lines of responsibility between the customer and Amazon. Amazon is responsible for the physical hardware and the software that runs on top of it. The customer is responsible for the data itself including encryption of data and network traffic. If they're running OSs on computer services they are responsible for that.
+
+"AWS operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the facilities in which the service operates. The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software as well as the configuration of the AWS provided security group firewall." Responsibilities vary depending on the services used.
+
+- Educate: For information about AWS' security and compliance use AWS Artifact.
+- Automate (compliance assessment): For automated security compliance assessments of software and networks use Amazon Inspector.
+- Protect: AWS WAF is a web application firewall that protects against common exploits that could compromise application availability, compromise security or consume excessive resources.
+- Protect: AWS Shield protects against DDoS attacks. there is standard (available by default) and advanced which can provide more details about an attack.
+- Monitor: Amazon GuardDuty monitors for malicious or unauthorized behaviour by monitoring CloudWatch, VPC and DNS logs.
+- Encrypt: An example of encryption is transit is SSL. Data even if it is unencrypted as it is transferred over an HTTPS connection is encrypted. AWS Certificate can be used to manage the certs for SSL/TLS. An example of encryption at rest is when data arrives in your bucket and you've applied encryption to the bucket the data will be encrypted.
+- Encrypt: Amazon Key Management Service KMS and CloudHSM helps manage the keys that are used to encrypt data at rest. The difference is that KMS is multi-tenant where CloudHSM dedicates hardware specifically to you.
+- Automate (key management): A best practise is to store and automate rotation of passwords, API keys and tokens AWS services with AWS Secrets Manager.
 
 MFA can consist of two or more of
 
@@ -216,18 +228,12 @@ MFA can consist of two or more of
 
 It's a best practise know for all privileged accounts to have MFA set up.
 
-#### Identity and access management
+#### Identity and access management (IAM)
 
 Identities are the entities that are allowed or not allowed to so something (the "who"). Access management refers to the permissions that are granted or not granted (the "what"), which is managed with policies.
 
 IAM users are seperate users created with generally more limited permissions. There are 4 IAM types: root, users, users groups and roles.
 A root user has "super user" powers and should never be shared or used for day-to-day activities. Instead, create users and enable MFA for them, for example an admin account for billing. A user entity is typically created and assigned to everyone who accesses the AWS account. Users can be assigned to groups to share permissions. Roles are typically assigned to services so that they can perform tasks.
-
-To set permissions for a user you can add them to an existing group, copy over permissions from an existing user, or attach built-in or custom policies. Policies group permissions together. By default, no permissions are granted to a user. Note that in case of clash of policy permissions, e.g. Policy A "allows EC3 read" and Policy B "Denies all EC2 access" the least permissive option wins, that is that user with both policies attached will not have EC2 access.
-
-#### Amazon Security Token Service (STS)
-
-STS is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
 
 A user represents a single person or a service a.k.a "service accounts". Each user has an Amazon Resource Name (ARN). Users can be assigned a key ID and a secret access key so that they can log in programmatically in addition to logging in through a software interface with the standard username and password. A best practise is to create an individual account per user, i.e. do not reuse credentials between individuals. By default users have no permissions and must be given some to do anything. Use the principle of least privilege when assigning permissions.
 
@@ -241,27 +247,64 @@ There are three authentication methods:
 2. IAM (username and password), for AWS console access. You can require users to reset their passwords.
 3. Signing certificate (SSL/TLS) is available for some services and should be managed through the AWS Certificate Manager.
 
+To set permissions for a user you can add them to an existing group, copy over permissions from an existing user, or attach built-in or custom policies. Policies group permissions together. By default, no permissions are granted to a user. Note that in case of clash of policy permissions, e.g. Policy A "allows EC3 read" and Policy B "Denies all EC2 access" the least permissive option wins, that is that user with both policies attached will not have EC2 access.
+
 Policies are JSON documents that define the permissions for a user, group or role. It can be defined through the management console and can contain conditional statements, like IP address restrictions. The policy simulator can be used to test the effects of a policy.
 
-**AWS Cognito** is an identity and access management (CIAM) platform that provides compliance certified under  user authentication (sign up and sign in) throurgh social and identify provides.
+#### Cognito
+
+Is an identity and access management (IAM) platform that provides user authentication (sign up and sign in) via social and identity providers.
+
+#### Security group
+
+A security group is like a firewall that can be attached to an instance that limits internet traffic to the instance.
+
+#### Security Token Service (STS)
+
+STS is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
 
 ### Compute
 
-Servers comprise of physical hardware (CPU, RAM, disk, NIC) and an operating system (Linux, MacOS, Windows). A virtual server on AWS is set up by launching an **Elastic Compute Cloud (EC2)** instance using a particular **Amazon Machine Image (AMI)** on Amazon hardware. An AMI is made up of an **Elastic Blockstore Snapshot (EBS)** with Windows or Linux preinstalled. An AMI includes all the information necessary to launch an instance, using either an EBS snapshot (permanent) or template (non-permanent). There are three categories of snapshots: community (free), marketplace (pay to use), my AMIs (own custom).
+### Elastic compute cloud (EC2)
 
-There are many different instance types to choose between that are optimised for different purposes, e.g. more memory, more storage or general. With EC2 though you have full control: you choose the image and the hardware specs and can install any software needed. If you want certain commands to run after launching an EC2 instance, e.g. that starts a web server, they can be entered into the "user data" text field on the "configure instance details" step. The instance can be updated through a REST API and instance metadata, such as the instance ID, can be accessed over HTTP after the instance is created. EC2 is well-suited for a long running, traditional applications.
+Renting a virtual remote server is probably AWS' most important service. With EC2 you have full control over the image, the hardware specs and you can install any software needed. If you want certain commands to run after launching an EC2 instance, e.g. that starts a web server, they can be entered into the "user data" text field for convience, or you can SSH or use EC2 connect to access instance to install or execute code afterward. The instance can be also updated through a REST API. Instance metadata, such as the instance ID, can be accessed over HTTP after the instance is created. Security groups can be attached to a EC2 instand in order to control network access. EC2 is well-suited for a long running, traditional applications.
 
-**Lambda** is called a serverless service because you don't need to be concerned about configuring or managing a server at all--you just write the code and set the trigger for when the code should execute. It is a "function as a service" (FaaS). The lambda is executed as needed and scales automatically based on demand. Lambdas are well-suited for ETL, data-validation, and mobile back-ends. Examples of lambda applications:
+Servers comprise both physical hardware (CPU, RAM, disk, NIC) and an operating system (Linux, MacOS, Windows) and when you set up an EC2 instance you need to select both and the region they are located in (cost can vary per region). To elaborate, an EC2 virtual server is launched using a **Amazon Machine Image (AMI)** on Amazon hardware. An AMI is an **Elastic Blockstore Snapshot (EBS)** with Windows or Linux preinstalled, and includes all the necessary information to launch an instance. There are three categories of AMIs / EBS snapshots: community (free), marketplace (pay to use), my AMIs (own custom). There are many different instance types of AMIs to choose between that are optimised for different purposes, e.g. more memory, more storage or general purpose. Note when setting up an EC2 instance you don't rent an entire server but an isolated slice of a specific physical machine that is fully isolated and has dedicated hardware.
+
+There are 4 EC2 pricing models:
+
+- on demand instances (most common) =  pay per use
+- spot instances (left over instances that can be reclaimed whenever) = discounts
+- savings plan (committing to compute 1 or 3 years in advance) = discounts
+- reserved instances (pay for instance configurations 1 or 3 years) = discounts
+
+#### Lambda
+
+Lambda is a "serverless" service because you can run code without configuring or managing any servers explicitely at all--you just write the code and set the trigger for when the code should execute. Often multiple serverless tasks need to be combined for a workload. It is a "function as a service" (FaaS). The lambda is executed as needed and scales automatically based on demand. Lambdas are well-suited for ETL, data-validation, and mobile back-ends. Examples of lambda applications:
 
 1. write entries to a Cloudwatch log service
 2. resizing images and moving them into a different bucket
 3. send a CloudWatch entry when a user writes an update to a DynamoDB
 
-**Amazon LightSail** is a compute service for people who do not have expert AWS knowledge. It allows you to quickly spin up pre-configured virtual servers. VPCs, subnets and other details do not need to be configured. It simplifies things and allows quick launch of instances and databases.
+#### LightSail
+
+Amazon LightSail is a compute service for people who do not have expert AWS knowledge. It allows you to quickly spin up pre-configured virtual servers. VPCs, subnets and other details do not need to be configured. It simplifies things and allows quick launch of instances and databases.
+
+### Scaling compute
+
+Containers are "packages of code and all their execution requirements", e.g. OS, softare. The contaners can be deployed to any environment that support containers. Environments that are preconfigured to support containers and not the app itself directly are **Elastic container service** and **Elastic kubernetes service**.
+
+#### Elastic Load Balancing
+
+A load balancer is a device that is internet facing and has a single endpoint that redistributes incoming client requests to different servers based on some algorithm. **Elastic Load Balancing (ELB)** is an Amazon load balancing service. It also sends health checks to the servers and if one fails to respond in time, it knows to route additional requests to different servers. Load balancers help ensure availability. AWS has three different kinds of ELB: application, network and classic. Classic is being phased out. Application inspects domain names and forwards requests accordingly. Network load balances work at the TCP/UDP/TLS protocol level.
+
+#### Auto Scaling
+
+Loading balancing determines where the load is distributed, whereas auto-scaling adjusts the number of servers able to take load. For example if an instance fails a health check, or if the cloud watch monitoring service detects that CPU usage is above a certain threshold in an **AWS Auto Scaling Group**, new instances are spawned. A scaling plan defines the triggers for when a new instance should be de/provisioned.
 
 ### Storage
 
-There are three types of storage service:*object (S3), block (EBS), and file (EFS). In **Amazon Simple Storage Service (S3)** everything is an object (an object can be thought of as a file), and objects are uploaded into buckets. It can be a publicly accessible service. S3 can be connected to from a browser over the public internet, accessed via a REST API (get, put, post, delete), and from EC2 over the internet or an S3 Gateway endpoint. If you are accessing S3 from EC2, the best practise way is to create an IAM role with a policy granting access. This is preferred over storing your secret access key on the EC2 instance. Because it is a universal namespace, bucket names must be unique globally, however, buckets exist in a specific region. In total, a S3 object contains the data itself, metadata, and a global unique identifier. Metadata can include a key, version ID, value (the file content itself), metadata, sub-resources, access control information, and more. Use cases for S3 include: backing up of data, web app hosting, media hosting, and software delivery by download.
+There are three types of storage service: object (S3), block (EBS), and file (EFS). In **Amazon Simple Storage Service (S3)** everything is an object (an object can be thought of as a file), and objects are uploaded into buckets. It can be a publicly accessible service. S3 can be connected to from a browser over the public internet, accessed via a REST API (get, put, post, delete), and from EC2 over the internet or an S3 Gateway endpoint. If you are accessing S3 from EC2, the best practise way is to create an IAM role with a policy granting access. This is preferred over storing your secret access key on the EC2 instance. Because it is a universal namespace, bucket names must be unique globally, however, buckets exist in a specific region. In total, a S3 object contains the data itself, metadata, and a global unique identifier. Metadata can include a key, version ID, value (the file content itself), metadata, sub-resources, access control information, and more. Use cases for S3 include: backing up of data, web app hosting, media hosting, and software delivery by download.
 
 There are 6 Amazon S3 storage classes. All share 11 9's of durability but vary slightly in other aspects of availability, zones, fees, and latency.
 
@@ -289,25 +332,11 @@ Features of S3:
 
 **AWS Storage Gateway** is for on premises cloud storage (like a Google Drive). It gives you a local, low-latency cache. There are three types: Tape, File and Volume Gateway.
 
-### Amazon Virtual Private Cloud (VPC)
-
-Amazon Virtual Private Cloud (VPC) is an isolated virtual network — your own datacenter — in the AWS cloud. A VPC spans all availability zones in a region. A router directs traffic between the subnets and Internet Gateway, the internet Gateway is a connection to the public internet. A secure VPN connection can be made between the Internet and Customer Gateways.  A Direct Connect private network connection is also possible. AWS Direct Connect can be used as an alternative to connecting to a VPC via the internet and it enables a hybrid cloud architecture. Direct Connect has a higher bandwidth compared to a managed VPN, but takes weeks to months to setup and is much more expensive. An AWS Direct Connect connection is a private, dedicated link to AWS. As it does not use the internet, performance is consistent.
-
-Security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic, Network access control lists (ACLs) are firewalls applied at the subnet level of the VPC. Every instance has a private IP address and if it's in a public subnet it will have a public address. When the instance is stopped and restarted it will lose and get a new public IP. If you don't want to lose the public IP, you can create a permanent elastic IP.
-
-A VPC has a collection of IP addresses associated with it, and subnets have a subset of those. Network Address Translation (NAT) Gateway can be created in a public subnet that communicates with an EC2 instance in a private subnet and with the Internet Gateway. The same problem can be similarly solved by a NAT Instance but it is self managed. AWS Transit Gateway is a way to connect multiple VPCs through a central hub. It avoids complex peering relationships, which are 1:1 connections. Data is encrypted--it is not the public internet.
-
-### AWS Databases
+#### AWS Databases
 
 A SQL database in the cloud can be set up using **Amazon Relational Database Service (RDS)**. RDS uses EC2 and you can select the flavour of SQL: Oracle, MariaDB, MySQL, PostgreSQL, Amazon's own Aurora, or other. Data can be encrypted and snapshoted. It is possibly to have Multi-AZ replicas for fault tolerance or better read performance. There are two types of relational databases: online analytical processing (OLAP) used for business intelligence and online transactional processing (OLTP), used for e.g. banking. Amazon also offers DynamoDB, a NoSQL database.
 
 **ElastiCache** does in-memory caching and is used to improve latency for read or compute-heavy application workloads. (It's faster because it's in memory and not on disk.) It runs on EC2. There are two types of engines: Memcached (simplest, more elasticity) or Redis (supports encryption (HIPAA), numerous reliability features).
-
-### Elastic Load Balancing and Auto Scaling
-
-A load balancer is a device that is internet facing and has a single endpoint that redistributes incoming client requests to different servers based on some algorithm. **Elastic Load Balancing (ELB)** is an Amazon load balancing service. It also sends health checks to the servers and if one fails to respond in time, it knows to route additional requests to different servers. Load balancers help ensure availability. AWS has three different kinds of ELB: application, network and classic. Classic is being phased out. Application inspects domain names and forwards requests accordingly. Network load balances work at the TCP/UDP/TLS protocol level.
-
-Loading balancing determines where the load is distributed, whereas auto-scaling adjusts the number of servers able to take load. For example if an instance fails a health check, or if the cloud watch monitoring service detects that CPU usage is above a certain threshold in an **AWS Auto Scaling Group**, new instances are spawned. A scaling plan defines the triggers for when a new instance should be de/provisioned.
 
 ### Content Delivery, DNS Services and Routing
 
@@ -328,9 +357,25 @@ API Gateway supports containerized and serverless workloads, as well as web appl
 
 **Global Accelerator** is a new AWS service that connects local and global users over the AWS global network, not the internet, and directs traffic to the closet region and providing automatic failover if there is a problem. The Edge locations point to different server instances. It's more akin to a load balancer than Cloudfront, which is more strictly about better performance. "AWS Global Accelerator is a networking service that sends your user’s traffic through Amazon Web Service’s global network infrastructure, improving your internet user performance by up to 60%. When the internet is congested, Global Accelerator’s automatic routing optimisations will help keep your packet loss, jitter, and latency consistently low."
 
-### Monitoring and Logging Services
+### Cloud management
 
-**Amazon CloudWatch** collects metrics from other services (performance monitoring), e.g. EC2 CPU utilisation, etc. Alarms can be set on CouldWatch that trigger a response when certain thresholds are met, such as a notification or remediation. It is a regional service. Use CloudWatch to configure alarms that deliver a notification when activated. The alarms can use cost metrics that trigger the alarm when a certain amount of spend has been reached.
+#### Amazon Virtual Private Cloud (VPC)
+
+The idea here is that you might have multiple EC2 instances that should be grouped able to talk to each other, but should not be able to be connected to via the internet for example. A tag could be used
+
+Amazon Virtual Private Cloud (VPC) is an isolated virtual network — your own datacenter — in the AWS cloud. A VPC spans all availability zones in a region. A router directs traffic between the subnets and Internet Gateway, which is a connection to the public internet. A secure VPN connection can be made between the Internet and Customer Gateways.
+
+A Direct Connect private network connection is also possible. **AWS Direct Connect** can be used as an alternative to connecting to a VPC via the internet and it enables a hybrid cloud architecture. An AWS Direct Connect connection is a private, dedicated link to AWS. Direct Connect has a higher bandwidth compared to a managed VPN, but takes weeks to months to setup and is much more expensive. As it does not use the internet, performance is consistent.
+
+Security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic, Network access control lists (ACLs) are firewalls applied at the subnet level of the VPC. Every instance has a private IP address and if it's in a public subnet it will have a public address. When the instance is stopped and restarted it will lose and get a new public IP. If you don't want to lose the public IP, you can create a permanent elastic IP.
+
+A VPC has a collection of IP addresses associated with it, and subnets have a subset of those. **Network Address Translation (NAT)** Gateway can be created in a public subnet that communicates with an EC2 instance in a private subnet and with the Internet Gateway. The same problem can be similarly solved by a NAT Instance but it is self managed. **AWS Transit Gateway** is a way to connect multiple VPCs through a central hub. It avoids complex peering relationships (1:1 connections0. Data is encrypted--it is not the public internet.
+
+### Cloud monitoring
+
+#### Amazon CloudWatch
+
+Collects metrics from other services (performance monitoring), e.g. EC2 CPU utilisation, etc. Alarms can be set on CouldWatch that trigger a response when certain thresholds are met, such as a notification or remediation. It is a regional service. Use CloudWatch to configure alarms that deliver a notification when activated. The alarms can use cost metrics that trigger the alarm when a certain amount of spend has been reached.
 
 CloudTrail is an auditing service, it logs all API activity for an AWS account (regardless of whether it's through the console or CLI), to an S3 bucket so you can diagnose what happened.
 
@@ -369,19 +414,6 @@ Misc. management services:
 - AWS Personal Health Dashboard shows any operational/availabilities issues with your AWS resources. The dashboard displays relevant and timely information to help you manage events in progress, and provides proactive notification to help you plan for scheduled activities. With Personal Health Dashboard, alerts are triggered by changes in the health of AWS resources, giving you event visibility, and guidance to help quickly diagnose and resolve issues.
 - Servive Health Dashboard shows current information on services, but is not specific to your resources. It's a quick look at what's going on right now.
 
-### AWS Cloud Security and Identity
-
-The shared responsibility model helps to define the lines of responsibility between the customer and Amazon. Amazon is responsible for the physical hardware and the software that runs on top of it. The customer is responsible for the data itself including encryption of data and network traffic. If they're running OSs on computer services they are responsible for that too. "AWS operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the facilities in which the service operates. The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software as well as the configuration of the AWS provided security group firewall." Responsibilities vary depending on the services used.
-
-- Educate: For information about AWS' security and compliance use AWS Artifact.
-- Automate (compliance assessment): For automated security compliance assessments of software and networks use Amazon Inspector.
-- Protect: AWS WAF is a web application firewall that protects against common exploits that could compromise application availability, compromise security or consume excessive resources.
-- Protect: AWS Shield protects against DDoS attacks. there is standard (available by default) and advanced which can provide more details about an attack.
-- Monitor: Amazon GuardDuty monitors for malicious or unauthorized behaviour by monitoring CloudWatch, VPC and DNS logs.
-- Encrypt: An example of encryption is transit is SSL. Data even if it is unencrypted as it is transferred over an HTTPS connection is encrypted. AWS Certificate can be used to manage the certs for SSL/TLS. An example of encryption at rest is when data arrives in your bucket and you've applied encryption to the bucket the data will be encrypted.
-- Encrypt: Amazon Key Management Service KMS and CloudHSM helps manage the keys that are used to encrypt data at rest. The difference is that KMS is multi-tenant where CloudHSM dedicates hardware specifically to you.
-- Automate (key management): A best practise is to store and automate rotation of passwords, API keys and tokens AWS services with AWS Secrets Manager.
-
 ### Machine Learning
 
 **AWS Rekognition** is a service for identifying objects within images or video (computer vision). It requires no knowledge of AI/ML. You can use it to
@@ -401,3 +433,4 @@ Analyze datasets on Amazon S3 with Amazon Athena. You can write queries in SQL,
 - <https://cardclash.skillbuilder.aws/> Fun!
 - <https://aws.amazon.com/training/digital/aws-cloud-quest>
 - <https://pro.academind.com/courses/aws-cloud-practitioner-clf-c01-complete-aws-introduction>
+- <https://aws.amazon.com/certification/certified-cloud-practitioner/>
