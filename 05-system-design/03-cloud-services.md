@@ -65,11 +65,11 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
 ### Services
 
 - Authentication, authorization, security:
-  - _The shared responsibility model_
-  - Identity & Access management (IAM)
-  - Cognito
-  - Security Group
-  - Security Token Service (STS)
+  - ✔️ _The shared responsibility model_
+  - ✔️ Identity & Access management (IAM)
+  - ✔️ Cognito
+  - ✔️ Security Group
+  - ✔️ Security Token Service (STS)
   - Key Management Service (KMS)
   - Secrets Manager
 
@@ -78,14 +78,14 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
   - API Gateway
   - Storage Gateway
   - Web Application Firewall (WAF)
-  - Direct connect
+  - ✔️ Direct connect
   - RDS Proxy
   - Transit Gateway
 
 - Compute:
-  - Elastic Compute Cloud (EC2)
-  - Lambda
-  - Lightsail
+  - ✔️ Elastic Compute Cloud (EC2)
+  - ✔️ Lambda
+  - ✔️ Lightsail
 
 - Scaling compute:
   - AWS Auto Scaling Groups
@@ -257,11 +257,21 @@ Is an identity and access management (IAM) platform that provides user authentic
 
 #### Security group
 
-A security group is like a firewall that can be attached to an instance that limits internet traffic to the instance.
+A security group is like a firewall that can be attached to an instance that limits internet traffic to the instance. Put another way, security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic.
+
+#### Network access control list
+
+Network access control lists (ACLs) are firewalls applied at the subnet level of the VPC. Every instance has a private IP address and if it's in a public subnet it will have a public address. When the instance is stopped and restarted it will lose and get a new public IP. If you don't want to lose the public IP, you can create a permanent elastic IP.
 
 #### Security Token Service (STS)
 
 STS is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
+
+### Routing
+
+#### Direct Connect
+
+A direct, private network connection is also possible. **AWS Direct Connect** can be used as an alternative to connecting to a VPC via the internet and it enables a hybrid cloud architecture. An AWS Direct Connect connection is a private, dedicated link to AWS. Direct Connect has a higher bandwidth compared to a managed VPN, but takes weeks to months to setup and is much more expensive. As it does not use the internet, performance is consistent.
 
 ### Compute
 
@@ -361,13 +371,9 @@ API Gateway supports containerized and serverless workloads, as well as web appl
 
 #### Amazon Virtual Private Cloud (VPC)
 
-The idea here is that you might have multiple EC2 instances that should be grouped able to talk to each other, but should not be able to be connected to via the internet for example. A tag could be used
+Amazon Virtual Private Cloud (VPC) is an isolated virtual network — your own datacenter — in the AWS cloud. A VPC spans all availability zones in a region. The goal of a VPC is best understood by example. Imagine a scenario where there multiple EC2 instances that should be grouped and be able to talk to each other, but should not be able to be connected to via the internet. A tag could be used to group instances, but what a VPC provides is networking configuration at the group level.
 
-Amazon Virtual Private Cloud (VPC) is an isolated virtual network — your own datacenter — in the AWS cloud. A VPC spans all availability zones in a region. A router directs traffic between the subnets and Internet Gateway, which is a connection to the public internet. A secure VPN connection can be made between the Internet and Customer Gateways.
-
-A Direct Connect private network connection is also possible. **AWS Direct Connect** can be used as an alternative to connecting to a VPC via the internet and it enables a hybrid cloud architecture. An AWS Direct Connect connection is a private, dedicated link to AWS. Direct Connect has a higher bandwidth compared to a managed VPN, but takes weeks to months to setup and is much more expensive. As it does not use the internet, performance is consistent.
-
-Security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic, Network access control lists (ACLs) are firewalls applied at the subnet level of the VPC. Every instance has a private IP address and if it's in a public subnet it will have a public address. When the instance is stopped and restarted it will lose and get a new public IP. If you don't want to lose the public IP, you can create a permanent elastic IP.
+Networking is achieved but setting up subnets within a VPC. It's a the subnet level that control connectivity / network access is set: public subnets have public connectivity, private subnets are not connected to the internet. Each subnet can be placed in a different AZ. All subnets can still speak to each other. A public subnet is connected to the internet with an Internet Gateway. (An internet Gateway is a connection to the public internet.) A NAT gateway can be set, so that public subnets can speak to private ones. A router directs traffic between the subnets and the Internet Gateway. A secure VPN connection can be made between the Internet and Customer Gateways.
 
 A VPC has a collection of IP addresses associated with it, and subnets have a subset of those. **Network Address Translation (NAT)** Gateway can be created in a public subnet that communicates with an EC2 instance in a private subnet and with the Internet Gateway. The same problem can be similarly solved by a NAT Instance but it is self managed. **AWS Transit Gateway** is a way to connect multiple VPCs through a central hub. It avoids complex peering relationships (1:1 connections0. Data is encrypted--it is not the public internet.
 
@@ -393,12 +399,25 @@ AWS offers tools for migrating on premises databases, servers and file servers t
   
 There are a four AWS services that are used to connect applications with each other, i.e. are used for the purpose of integrating applications in a decoupled architecture:
 
-1. **Amazon Simple Notification Service (SNS)** sends notification to a Topic for an _app/EC2/CloudWatch (publisher)_ to communicate with _lambda/email/SQS or other application (subscriber)_. It enables a pub/sub model. Notifications are sent two ways, A2A and A2P. A2A provides high-throughput, pushed based, many-to-many messaging between distributed systems, microservices, and event driven serverless applications. The applications include SQS, Amazon Kinesis Data Firehose, Lambda, abd other HTTPS endpoints. A2P helps send messages to customers with SMS texts, push notifications, and email.
-2. **Amazon Simple Queue Service (SQS)** is useful in cases where data cannot be processed quickly enough for example. Messages can be placed in a queue and a separate service polls the queue periodically. It's a hosted service used to enable distributed/decoupled applications. A SNS Topics and SQS can be strung together.
-3. **Amazon Simple Workflow Service (SWF)** enables automation of workflows that may have a human component. It is less preferred than the newer Step Functions.
-4. **Step Functions** are used to coordinate components of applications in a workflow. You can defines the sequences in a step, e.g. in a situation where a number of lambda functions should operate in sequence. It has a visual editor and output that shows the steps and status.
+#### 1. Amazon Simple Notification Service (SNS)
 
-**Amazon Simple Email Service (SES)** is a cost-effective, flexible, and scalable email service that enables developers to send mail from within any application. Not geared towards applicatioin integration however. This service is used for sending email but not SMS text messages.
+sends notification to a Topic for an _app/EC2/CloudWatch (publisher)_ to communicate with _lambda/email/SQS or other application (subscriber)_. It enables a pub/sub model. Notifications are sent two ways, A2A and A2P. A2A provides high-throughput, pushed based, many-to-many messaging between distributed systems, microservices, and event driven serverless applications. The applications include SQS, Amazon Kinesis Data Firehose, Lambda, abd other HTTPS endpoints. A2P helps send messages to customers with SMS texts, push notifications, and email.
+
+#### 2. Amazon Simple Queue Service (SQS)
+
+is useful in cases where data cannot be processed quickly enough for example. Messages can be placed in a queue and a separate service polls the queue periodically. It's a hosted service used to enable distributed/decoupled applications. A SNS Topics and SQS can be strung together.
+
+#### 3. Amazon Simple Workflow Service (SWF)
+
+enables automation of workflows that may have a human component. It is less preferred than the newer Step Functions.
+
+#### 4. Step Functions
+
+are used to coordinate components of applications in a workflow. You can defines the sequences in a step, e.g. in a situation where a number of lambda functions should operate in sequence. It has a visual editor and output that shows the steps and status.
+
+#### Amazon Simple Email Service (SES)
+
+is a cost-effective, flexible, and scalable email service that enables developers to send mail from within any application. Not geared towards applicatioin integration however. This service is used for sending email but not SMS text messages.
 
 ### Management and Governance
 
@@ -416,13 +435,17 @@ Misc. management services:
 
 ### Machine Learning
 
-**AWS Rekognition** is a service for identifying objects within images or video (computer vision). It requires no knowledge of AI/ML. You can use it to
+#### AWS Rekognition
+
+is a service for identifying objects within images or video (computer vision). It requires no knowledge of AI/ML. You can use it to
 
 - list of objects in an image with percent confidence rating, e.g. people, text, nsfw
 - analyse facial expressions and count people
 - identify celebrities
 
-**Amazon Transcribe** is used for transcribing speech to text, it has an API that can be called and used in applications. Amazon translate translates text to different languages and has an API. Amazon Polly turns text to speech. Amazon Macie uses ML to identify PI and PHI in your S3 buckets.
+#### Amazon Transcribe
+
+is used for transcribing speech to text, it has an API that can be called and used in applications. Amazon translate translates text to different languages and has an API. Amazon Polly turns text to speech. Amazon Macie uses ML to identify PI and PHI in your S3 buckets.
 
 ### Analytics
 
