@@ -77,22 +77,37 @@
 
 ## 03 Backend
 
+- [ ] Communication protocols
+  - [ ] Hypertext Transfer Protocol (HTTP)
+  - [ ] Hypertext Transfer Protocol Secure (HTTPS)
+  - [ ] WebSockets
+  - [ ] Transmission Control Protocol (TCP)
+  - [ ] User Datagram Protocol (UDP)
+  - [ ] gRPC Remote Procedure Calls (gRPC)
+  - [ ] tRPC
+- Message formats
+  - [ ] XML
+  - [ ] JSON
+  - [ ] protocol buffs
 - [ ] Languages
   - [ ] Rust
   - [ ] Go
   - [ ] JS (Node)
-- [ ] Frameworks
+- [ ] Web frameworks
+  - [ ] Django
+  - [ ] Express
+- [ ] Proxies
+- [ ] Caching
+- [ ] Web servers
+- [ ] Messaging systems
+- [ ] REST
+- [ ] GraphQL
+- [ ] Streaming
+- [ ] APIs
 - [ ] Component architecture
 - [ ] Data structures
 - [ ] Algorithms
-- [ ] Firewalls
-- [ ] Load Balancers
-- [ ] REST
-- [ ] GraphQL
-- [ ] tRPC
-- [ ] gRPC
-- [ ] Streaming
-- [ ] APIs
+- [ ] Security
 - [x] [Cloud Services](./03-cloud-services.md) (2024-05-09)
   - [ ] Design patterns
 
@@ -121,42 +136,39 @@
 
 ## 08 Version control
 
-## Misc
+## Resources
 
-- [ ] Cloud Design Patterns: <https://learn.microsoft.com/en-us/azure/architecture/patterns/>
-- [ ] AWS FS framework: <https://sst.dev/>
-- [ ] Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
-- [ ] Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
-- [ ] DynamoDB: <https://youtu.be/ifSckJlatWE>
-- [ ] Cassandra: <https://youtu.be/V1EO_0i3RNA>
-- [ ] CockroachDB: <https://youtu.be/1NuvxQEoVHU>
-- [ ] Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
-- [ ] CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
-- [ ] Twisp: <https://youtu.be/VGb54yNQrHM>
-- [ ] Kafka: <https://youtu.be/d89W_GzWnRw>
-- [ ] YugaByteDB: <https://youtu.be/cXIPIA7e220>
-- [ ] B-Trees: <https://youtu.be/dTfR0S_rBGg>
-- [ ] Graph Databases: <https://youtu.be/iihJXKAQZkA>
-- [ ] ScyllaDb: <https://youtu.be/AqY13RjWwJg>
-- [ ] Duckdb: <https://youtu.be/f9QlkXW4H9A>
-- [ ] RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
-- [ ] Clickhouse: <https://youtu.be/sh5EBqrrwEU>
-- [ ] PGLite: <https://github.com/electric-sql/pglite>
-- [ ] Geographic distribution <https://youtu.be/JQfnMp0OeTA>
-- [ ] General database internals:
-  - [ ] <https://youtu.be/DiLA0Ri6RfY>
-  - [ ] <https://youtu.be/IW4cpnpVg7E>
-- [ ] Write ahead logging:
-  - [ ] <https://youtu.be/yV_Zp0Mi3xs>
-  - [ ] <https://youtu.be/2MqY_mT1vw8>
-- [ ] Web capabilities: <https://frontendmasters.com/courses/device-web-apis/>
-- [ ] Intl:
-  - [ ] Learn responsive design <https://web.dev/learn/design/>
-  - [ ] Software intl. <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
-  - [ ] ICU message syntax <https://support.crowdin.com/icu-message-syntax/>
-- [ ] AWS Architecture as a card game <https://explore.skillbuilder.aws/learn/course/external/view/elearning/17564/aws-card-clash-an-architecture-design-game>
-- [ ] [Grokking Algorithms](https://www.manning.com/books/grokking-algorithms)
-- [ ] [Grokking Algorithms YouTube series](https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT)
-- [ ] [The Last Algorithms Course You'll Need (Part 1)](https://frontendmasters.com/courses/algorithms/)
-- [ ] [The Last Algorithms Course You'll Want (Part 2)](https://frontendmasters.com/courses/advanced-algorithms/)
-- [ ] [Practical Problem Solving with Algorithms](https://frontendmasters.com/courses/algorithms-practice/)
+- Cloud Design Patterns: <https://learn.microsoft.com/en-us/azure/architecture/patterns/>
+- AWS FS framework: <https://sst.dev/>
+- Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
+- Data-Oriented Design: <https://www.dataorienteddesign.com/dodmain/>
+- DynamoDB: <https://youtu.be/ifSckJlatWE>
+- Cassandra: <https://youtu.be/V1EO_0i3RNA>
+- CockroachDB: <https://youtu.be/1NuvxQEoVHU>
+- Realtime Analytics with Apache Pinot: <https://youtu.be/cGTffWg2EFs>
+- CDC and Debezium: <https://youtu.be/VGH6TlhEJpM>
+- Twisp: <https://youtu.be/VGb54yNQrHM>
+- Kafka: <https://youtu.be/d89W_GzWnRw>
+- YugaByteDB: <https://youtu.be/cXIPIA7e220>
+- B-Trees: <https://youtu.be/dTfR0S_rBGg>
+- Graph Databases: <https://youtu.be/iihJXKAQZkA>
+- ScyllaDb: <https://youtu.be/AqY13RjWwJg>
+- Duckdb: <https://youtu.be/f9QlkXW4H9A>
+- RisingWave Streaming Database: <https://youtu.be/nckuW02gI3Y>
+- Clickhouse: <https://youtu.be/sh5EBqrrwEU>
+- PGLite: <https://github.com/electric-sql/pglite>
+- Geographic distribution <https://youtu.be/JQfnMp0OeTA>
+- General database internals: <https://youtu.be/DiLA0Ri6RfY>
+- General database internals: <https://youtu.be/IW4cpnpVg7E>
+- <https://frontendmasters.com/courses/device-web-apis/>
+- <https://web.dev/learn/design/>
+- <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
+- <https://support.crowdin.com/icu-message-syntax/>
+- <https://www.manning.com/books/grokking-algorithms>
+- <https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT>
+- <https://frontendmasters.com/courses/algorithms/>
+- <https://frontendmasters.com/courses/advanced-algorithms/>
+- <https://frontendmasters.com/courses/algorithms-practice/>
+- <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
+- <https://refactoring.guru/design-patterns>
+- <https://gameprogrammingpatterns.com/>
