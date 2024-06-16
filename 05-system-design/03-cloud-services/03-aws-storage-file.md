@@ -15,25 +15,28 @@ S3 can be connected to from a browser over the (public) internet, accessed via a
 
 What can you do with S3? Use cases include backing up of data, web app hosting, media hosting, and software delivery. Objects up to 5GB in size can be uploaded to S3 in a single put operation, for large objects up to 5TB the multipart upload API must be used.
 
-There are 6 Amazon S3 storage classes. All share 11 9's of durability but vary slightly in other aspects of availability, zones, fees, and latency.
+There are 6 Amazon S3 storage classes. All share 11 9's of durability but vary slightly in other aspects of availability, zones, fees, and latency. The different storage classes generally align with 3 different types of file access patterns: frequent, infrequent and archival.
 
 - standard: durable, immediately available and frequently accessed
-- intelligent tiering: automatically moves data to most cost effective tier for usage pattern
 - standard-IA: designed for when you don't need to access often
 - one zone-IA: only available in one zone, every other class is available in 3 or more zones. designed for when you don't need to access often (even lower availability)
 - glacier: for archival data that needs to be backed-up longterm but doesn't need to be accessed often
 - glacier deep archive: lowest cost storage and will take longest to retrieve data
+- intelligent tiering: automatically moves data to most cost effective tier for usage pattern when you don't know where to put the file
 
 Features of S3:
 
-- you can use CloudFront to accelerate data upload,
-- you configure S3 so that the requester, not you, pays for data transfer,
-- tags can be assigned that can be leveraged in billing,
-- events can be set on buckets that trigger lambdas,
-- it can be used to host static websites,
-- it can be used for bit torrenting (object can be retrieved by bit torrent),
-- versioning can be configured. With S3 versioning enabled you can still access each file version, even deleted files.
-- S3 can be set up to replicate objects across regions (CRR) or in the same region (SRR). Versioning needs to be enabled on the bucket for this. Note, objects replicated across regions don't need to use the same storage class.
+- you can use CloudFront to accelerate data upload
+- you configure S3 so that the requester, not you, pays for data transfer
+- tags can be assigned that can be leveraged in billing
+- events can be set on buckets that trigger lambdas
+- inventory and analytics can be applied to files in S3 in order to understand the data in them
+- locks can be applied to objects to prvetn changes or deletions for auditing purposes
+- files can be automatically encrypted on upload
+- versioning can be configured and when enabled each file version can be accessed, even deleted files
+- S3 can be set up to replicate objects across regions (CRR) or in the same region (SRR). Objects replicated across regions don't need to use the same storage class.
+- it can be used to host static websites
+- it can be used for bit torrenting (object can be retrieved by bit torrent)
 
 ### Elastic block storage (EBS)
 
