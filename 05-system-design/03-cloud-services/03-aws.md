@@ -195,13 +195,7 @@ A direct, private network connection is also possible. **AWS Direct Connect** ca
 
 AWS' internet. Doesn't use _the internet_. Uses VPC endpoints.
 
-#### AWS Databases
-
-A SQL database in the cloud can be set up using **Amazon Relational Database Service (RDS)**. RDS uses EC2 and you can select the flavour of SQL: Oracle, MariaDB, MySQL, PostgreSQL, Amazon's own Aurora, or other. Data can be encrypted and snapshoted. It is possibly to have Multi-AZ replicas for fault tolerance or better read performance. There are two types of relational databases: online analytical processing (OLAP) used for business intelligence and online transactional processing (OLTP), used for e.g. banking. Amazon also offers DynamoDB, a NoSQL database.
-
-**ElastiCache** does in-memory caching and is used to improve latency for read or compute-heavy application workloads. (It's faster because it's in memory and not on disk.) It runs on EC2. There are two types of engines: Memcached (simplest, more elasticity) or Redis (supports encryption (HIPAA), numerous reliability features).
-
-### Content Delivery, DNS Services and Routing
+#### Route 53
 
 A domain name system (DNS) is responsible for resolving the domain names we enter in a browser to an internet protocol (IP) address of the instance where the web service might run. **Route 53** is a DNS that can also do domain name registration. Route 53 can create different kinds of records:
 
