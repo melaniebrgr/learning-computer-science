@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import OpenAI from "openai";
+import OpenAI from "openai/index.mjs";
 import fs from 'node:fs';
 
 // Run version 004

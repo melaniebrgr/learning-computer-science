@@ -16,9 +16,7 @@
 - Routing:
   - Route 53
   - API Gateway
-  - Storage Gateway
   - Web Application Firewall (WAF)
-  - RDS Proxy
   - Transit Gateway
   - ✔️ Direct connect
   - ✔️ Private Link
@@ -27,6 +25,10 @@
   - ✔️ Elastic Compute Cloud (EC2)
   - ✔️ Lambda
   - ✔️ Lightsail
+  - Elastic Container Servive (ECS)
+  - Elastic Kubernetes Service (EKS)
+  - Fargate
+  - Elastic Container Registry
 
 - Specialised compute:
   - Textract (OCR text extraction)
@@ -46,25 +48,23 @@
 - Scaling compute:
   - ✔️ Auto Scaling Groups
   - ✔️ Elastic Load Balancing (ELB)
-  - Elastic Container Registry
-  - Elastic Container Service (ECS)
-  - Elastic Kubernetes Service (EKS)
-  - Fargate
   - Amplify
 
 - File storage:
-  - Elastic Block Store (EBS)
-  - Elastic File System (EFS)
-  - Simple Storage Solution (S3)
-
-- Storage
-  - DynamoDB
-  - Aurora Serverless V2
-  - Relational Database Service (RDS)
-  - FSx (fully managed file servers)
-  - Simple Storage Solution Glacier
+  - ✔️ Elastic Block Store (EBS)
+  - ✔️ Elastic File System (EFS)
+  - ✔️ Simple Storage Solution (S3)
+  - ✔️ Simple Storage Solution Glacier
+  - ✔️ FSx (fully managed file servers)
   - Cloudfront (CDN)
-  - AWS Backup
+  - Storage Gateway
+
+- Database storage
+  - ✔️ DynamoDB
+  - ✔️ Aurora Serverless V2
+  - ✔️ Relational Database Service (RDS)
+  - RDS Proxy
+  - ✔️ AWS Backup
   - AWS Backup Vault
   - CodeCommit
   - Glue Data Catalog
@@ -185,35 +185,6 @@ AWS services can be access and configured from
 - SDK
 - API
 
-### Routing
-
-#### Direct Connect
-
-A direct, private network connection is also possible. **AWS Direct Connect** can be used as an alternative to connecting to a VPC via the internet and it enables a hybrid cloud architecture. An AWS Direct Connect connection is a private, dedicated link to AWS. Direct Connect has a higher bandwidth compared to a managed VPN, but takes weeks to months to setup and is much more expensive. As it does not use the internet, performance is consistent.
-
-#### Private Link
-
-AWS' internet. Doesn't use _the internet_. Uses VPC endpoints.
-
-#### Route 53
-
-A domain name system (DNS) is responsible for resolving the domain names we enter in a browser to an internet protocol (IP) address of the instance where the web service might run. **Route 53** is a DNS that can also do domain name registration. Route 53 can create different kinds of records:
-
-- A (name to IP)
-- CNAME, or canonical name (name to another name)
-- MX (mail)
-
-Route 53 can direct to different IP addresses based on different policies. A simple routing policy does a simple mapping, a weighted routing policy will route to an IP address depending on the weighting assigned to it, a latency routing policy will route based on geographic proximity, a failover routes depending on a health check. This is how multi-region load balancing is possible. (Load balancers can only span one region).
-
-**Web Application Firewall (WAF)** filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
-
-**AWS API Gateway** is a "front door" to an application. API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, CORS support, authorization and access control, throttling, monitoring, and API version management. It is useful for building REST and WebSocket APIs.
-API Gateway supports containerized and serverless workloads, as well as web applications.
-
-**Cloudfront** is a content delivery network (CDN) that lets you store/cache content in "edge locations" all over the world (both the larger regional edge caches and the global edge locations), improving request latency. It also offers some protection against DDoS attacks.
-
-**Global Accelerator** is a new AWS service that connects local and global users over the AWS global network, not the internet, and directs traffic to the closet region and providing automatic failover if there is a problem. The Edge locations point to different server instances. It's more akin to a load balancer than Cloudfront, which is more strictly about better performance. "AWS Global Accelerator is a networking service that sends your user’s traffic through Amazon Web Service’s global network infrastructure, improving your internet user performance by up to 60%. When the internet is congested, Global Accelerator’s automatic routing optimisations will help keep your packet loss, jitter, and latency consistently low."
-
 ### Cloud management
 
 #### Amazon Virtual Private Cloud (VPC)
@@ -237,8 +208,6 @@ CloudTrail is an auditing service, it logs all API activity for an AWS account (
 ### Automation and Platform Services
 
 **CloudFormation** is similar to TerraForm in that you specify your environment as code (JSON, YAML), and AWS uses it to provision services. **AWS Elastic Beanstalk** is a PaaS; you deploy your code and AWS takes care of deploying the web application. You don't have to worry about EC2, auto-scaling, elastic load balancing, or the development environment. Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS. You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring. At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.
-
-**Amazon Elastic Container Service (ECS)** provides infrastructure for launching docker containers. It's a containers as a service (CaaS). There are two different ECS launch types: EC2 which is manually managed, and **Amazon Fargate** which is  automatically managed, e.g. provisions based on demand and upgrades automatically. ECS/Fargate is well-suited for microservices.
 
 ### Migration and Transfer Services
 

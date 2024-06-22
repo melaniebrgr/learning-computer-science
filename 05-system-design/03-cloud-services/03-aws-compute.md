@@ -17,7 +17,13 @@ There are 4 EC2 pricing models:
 
 ### Lambda
 
-Lambda is a "serverless" service because you can run code without configuring or managing any servers explicitely at all--you just write the code and set the trigger for when the code should execute. Often multiple serverless tasks need to be combined for a workload. It is a "function as a service" (FaaS). The lambda is executed as needed and scales automatically based on demand. Lambdas are well-suited for ETL, data-validation, and mobile back-ends. Examples of lambda applications:
+"Functions as a service" (FaaS). Lambda is a "serverless" service because you can run code without configuring or managing any servers explicitely at all--you just write the code and set the trigger for when it should execute.
+
+- code: Is uploaded or defined in the console as a docker file or zip in one of the supported languages.
+- event: There are a broad variety of supported events, e.g. object upload to S3.
+- configuration: Add environment variables and lambda timeones, attach file systems, role permissions, VPC access.
+
+The lambda is executed as needed and scales automatically based on demand. Multiple serverless tasks need to be combined for a workload. Lambdas are well-suited for ETL, data-validation, and mobile back-ends. Example lambda applications:
 
 1. write entries to a Cloudwatch log service
 2. resizing images and moving them into a different bucket
@@ -26,3 +32,13 @@ Lambda is a "serverless" service because you can run code without configuring or
 ### LightSail
 
 Amazon LightSail is a compute service for people who do not have expert AWS knowledge. It allows you to quickly spin up pre-configured virtual servers. VPCs, subnets and other details do not need to be configured. It simplifies things and allows quick launch of instances and databases.
+
+### Elastic Container Service (ECS)
+
+ECS provides infrastructure for launching docker containers a.k.a. containers as a service (CaaS). Dockers images define the run environment and code used to created a container instance.
+
+### Fargate
+
+There are two different ECS launch types: EC2 which is manually managed, and **Amazon Fargate** which is  automatically managed. Fargate provisions based on demand and upgrades automatically. ECS/Fargate is well-suited for microservices.
+
+### Elastic Kubernetes Service (EKS)

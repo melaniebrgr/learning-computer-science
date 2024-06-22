@@ -31,15 +31,15 @@ Basically I will try something for a week, document my learning, judge its succe
 |  15  | [Web performance & the CWVs](./week15/) | 200 |  |
 |  16  | Service workers | 501 | too busy on vacation |
 |  17  | [Service workers](./week17/) | 400 | too busy with back-to-work, and learned just enough about this topic to probably be dangerous |
-|  18  | [OpenAI Assistant](./week18) | 102 |  |
-|  19  | [OpenAI Assistant](./week18) | 102 |  |
-|  20  | [OpenAI Assistant](./week18) | 206 | Completed but as of yet unpublished. |
-|  21  | [File handling on the Web](./week21) | 403 | All my mindshare still belonged to the OpenAI project. |
+|  18  | [OpenAI Assistant](./week18-20) | 102 |  |
+|  19  | [OpenAI Assistant](./week18-20) | 102 |  |
+|  20  | [OpenAI Assistant](./week18-20) | 206 | Completed but as of yet unpublished. |
+|  21  | File handling on the Web | 403 | All my mindshare still belonged to the OpenAI project. |
 |  22  | - | 503 | Conference and travelling |
 |  23  | - | 503 | Travelling |
 |  24  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Taking an AWS Cloud Practioner course with a colleague! |
-|  25  |  |  |  |
-|  26  |  |  |  |
+|  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Still taking an AWS Cloud Practioner course. |
+|  26  | [Iterators, Generators their async versions and fucking Streams](./week26) | 102 |  |
 |  27  |  |  |  |
 |  28  |  |  |  |
 |  29  |  |  |  |
