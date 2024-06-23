@@ -4,12 +4,12 @@ for (const service of [
   'elastic compute cloud',
   'relational database service',
 ]) {
-  service; // 'simple storage service' 'elastic compute cloud' 'relational database service'
+  service;
 }
 
 // Strings are iterable
 for (const letter of 's3') {
-  letter; // 's' '3'
+  letter;
 }
 
 // Sets are iterable
@@ -18,7 +18,7 @@ for (const service of new Set([
   'elastic compute cloud',
   'relational database service',
 ])) {
-  service; // 'simple storage service' 'elastic compute cloud' 'relational database service'
+  service;
 }
 
 // Maps are iterable
@@ -27,11 +27,11 @@ for (const [acronym, service] of new Map([
   ['ec2', 'elastic compute cloud'],
   ['rds', 'relational database service'],
 ])) {
-  acronym; // 's3' 'ec2' 'rds'
-  service; // 'simple storage service' 'elastic compute cloud' 'relational database service'
+  acronym;
+  service;
 }
 
-// The iterators can be invoked directly
+// Iterators can be invoked manually (outside of for...of)
 const services = [
   'simple storage service',
   'elastic compute cloud',
@@ -44,13 +44,7 @@ servicesIt.next(); // { value: 'relational database service', done: false }
 servicesIt.next(); // { value: undefined, done: true }
 servicesIt.next(); // { value: undefined, done: true } and on...
 
-// You can create an iterable by hand by writing out an iterator function
-const makeRandomNumber = () => Math.round(Math.random() * 1000000000);
-const makeLambda = () => ({
-  functionName: 'lambda-' + makeRandomNumber(),
-  runtime: 'Node.js 20.x',
-  architecture: 'arm64'
-})
+// Iterators can be written by hand
 const lambdaCreator = {
   [Symbol.iterator]() {
     return {
@@ -67,10 +61,10 @@ for (const lambda of lambdaCreator) {
   lambda;
 }
 
-// Any iterable can be converted to an array
-[...lambdaCreator]; // [{ functionName: 'lambda-557803918', runtime: 'Node.js 20.x', architecture: 'arm64' }, ...and on ]
+// Iterables can be converted to arrays
+[...lambdaCreator];
 
-// Generators are syntactic sugar for iterator generation. Kind of.
+// Generators are syntactic sugar for iterator creation.
 function* lambdaGenerator() {
   while (true) {
     const enough = Math.random() > 0.80;
@@ -78,4 +72,60 @@ function* lambdaGenerator() {
     yield makeLambda();
   }
 }
-[...lambdaGenerator()]; // [{ functionName: 'lambda-557803918', runtime: 'Node.js 20.x', architecture: 'arm64' }, ...and on... or not because random ]
+[...lambdaGenerator()];
+
+// AsyncIterators can be written by hand too
+const asyncLambdaCreator = {
+  [Symbol.asyncIterator]() {
+    return {
+      next() {
+        return Promise.resolve({ value: undefined, done: true });
+      }
+    }
+  }
+};
+
+(async () => {
+  for await (const lambda of asyncLambdaCreator) {
+    lambda;
+  }
+})()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Extra helper stuff that can be ingored
+function makeRandomNumber() {
+  return Math.round(Math.random() * 1000000000);
+}
+function makeLambda() {
+  return ({
+    functionName: 'lambda-' + makeRandomNumber(),
+    runtime: 'Node.js 20.x',
+    architecture: 'arm64'
+  });
+}
