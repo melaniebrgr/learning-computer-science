@@ -25,15 +25,6 @@ In Cloudfront a "distribution" is configured that connects to a set of data sour
 
 "AWS Global Accelerator is a networking service that sends your user’s traffic through Amazon Web Service’s global network infrastructure, improving your internet user performance by up to 60%. When the internet is congested, Global Accelerator’s automatic routing optimisations will help keep your packet loss, jitter, and latency consistently low." GA is a new AWS service that connects local and global users over the AWS global network instead of the internet, directing traffic to the closet region and providing automatic failover. The Edge locations point to different server instances. It's somewhat akin to a load balancer. **S3 transfer acceleration** similar is about using AWS' network to deliver S3 content faster. You pay more for a speed boost.
 
-### AWS API Gateway
-
-is a "front door" to an application. API Gateway handles all the tasks involved in accepting and processing up to hundreds of thousands of concurrent API calls, including traffic management, CORS support, authorization and access control, throttling, monitoring, and API version management. It is useful for building REST and WebSocket APIs.
-API Gateway supports containerized and serverless workloads, as well as web applications.
-
-### Web application firewall (WAF)
-
-WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
-
 ### Direct Connect
 
 A direct, private network connection is also possible. **AWS Direct Connect** can be used as an alternative to connecting to a VPC via the internet and it enables a hybrid cloud architecture. An AWS Direct Connect connection is a private, dedicated link to AWS. Direct Connect has a higher bandwidth compared to a managed VPN, but takes weeks to months to setup and is much more expensive. As it does not use the internet, performance is consistent.

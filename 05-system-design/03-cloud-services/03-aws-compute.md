@@ -33,12 +33,16 @@ The lambda is executed as needed and scales automatically based on demand. Multi
 
 Amazon LightSail is a compute service for people who do not have expert AWS knowledge. It allows you to quickly spin up pre-configured virtual servers. VPCs, subnets and other details do not need to be configured. It simplifies things and allows quick launch of instances and databases.
 
-### Elastic Container Service (ECS)
+### Elastic Container Service (ECS) and Elastic Kubernetes Service (EKS)
 
-ECS provides infrastructure for launching docker containers a.k.a. containers as a service (CaaS). Dockers images define the run environment and code used to created a container instance.
+Containers are "packages of code and all their execution requirements", e.g. OS, softare. The contaners can be deployed to any environment that support containers. Environments that are preconfigured to support containers and not the app itself directly are **Elastic container service** and **Elastic kubernetes service**.
+
+ECS provides infrastructure for launching docker containers a.k.a. containers as a service (CaaS). ECS and EKS take care of installing and upgrading docker, container distribution across multiple servers. They are managed services for running containers. They simply the process of running clusters of containers in the cloud.
 
 ### Fargate
 
-There are two different ECS launch types: EC2 which is manually managed, and **Amazon Fargate** which is  automatically managed. Fargate provisions based on demand and upgrades automatically. ECS/Fargate is well-suited for microservices.
+Fargate is a serverless container execution environement. Fargate provisions servers based on demand and upgrades automatically. ECS and Fargate are well-suited for microservices.
 
-### Elastic Kubernetes Service (EKS)
+### Elastic Container Registry (ECR)
+
+A registry where you can manage an docker image repository, which can then be used by ECS and EKS.

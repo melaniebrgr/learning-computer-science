@@ -1,6 +1,6 @@
 # 03 Cloud services
 
-## Scaling compute
+## Compute scaling
 
 ### Auto scaling groups
 
@@ -15,7 +15,3 @@ Loading balancing determines where the load is distributed, whereas auto-scaling
 ELB is an Amazon load balancing service. It also sends health checks to the servers and if one fails to respond in time, it knows to route additional requests to different servers. Load balancers help ensure availability. AWS has three different kinds of ELB: application, network and classic. Classic is being phased out. Application inspects domain names and forwards requests accordingly. Network load balances work at the TCP/UDP/TLS protocol level.
 
 There are two types of load balancers: **application load balancer (ALB)** and **network load balancer (NLB)**. An ALB is generally suitable for HTTP applications and is very feature rich with a wide variety of possible forward rules and cusotmisations. NLB is more suited for non-HTTP applications and has a more limited feature set.
-
-## Elastic Container Service (ECS)
-
-Containers are "packages of code and all their execution requirements", e.g. OS, softare. The contaners can be deployed to any environment that support containers. Environments that are preconfigured to support containers and not the app itself directly are **Elastic container service** and **Elastic kubernetes service**.

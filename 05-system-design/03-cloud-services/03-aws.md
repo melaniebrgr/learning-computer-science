@@ -14,21 +14,23 @@
   - Secrets Manager
 
 - Routing:
-  - Route 53
+  - ✔️ Route 53
+  - ✔️ Direct connect
+  - ✔️ Private Link
+
+- API
   - API Gateway
   - Web Application Firewall (WAF)
   - Transit Gateway
-  - ✔️ Direct connect
-  - ✔️ Private Link
 
 - Compute:
   - ✔️ Elastic Compute Cloud (EC2)
   - ✔️ Lambda
   - ✔️ Lightsail
-  - Elastic Container Servive (ECS)
-  - Elastic Kubernetes Service (EKS)
-  - Fargate
-  - Elastic Container Registry
+  - ✔️ Elastic Container Registry
+  - ✔️ Elastic Container Servive (ECS)
+  - ✔️ Elastic Kubernetes Service (EKS)
+  - ✔️ Fargate
 
 - Specialised compute:
   - Textract (OCR text extraction)
@@ -44,11 +46,11 @@
   - Elastic MapReduce (EMR)
   - Sagemaker (ML model training)
   - Bedrock (AI)
+  - Amplify
 
 - Scaling compute:
   - ✔️ Auto Scaling Groups
   - ✔️ Elastic Load Balancing (ELB)
-  - Amplify
 
 - File storage:
   - ✔️ Elastic Block Store (EBS)
@@ -66,7 +68,6 @@
   - RDS Proxy
   - ✔️ AWS Backup
   - AWS Backup Vault
-  - CodeCommit
   - Glue Data Catalog
 
 - Search:
@@ -126,6 +127,7 @@
   - CodeBuild (build a repo)
   - CodeDeploy (deploy a build)
   - Device Farm
+  - CodeCommit
 
 - Migration management
   - Migration hub
