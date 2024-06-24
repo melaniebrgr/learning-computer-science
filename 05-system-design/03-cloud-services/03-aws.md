@@ -4,8 +4,8 @@
 
 ### Services
 
-- Authentication, authorization, security:
-  - ✔️ _The shared responsibility model_
+- Authentication, authorization, and security:
+  - ✔️ The shared responsibility model
   - ✔️ Identity & Access management (IAM)
   - ✔️ Cognito
   - ✔️ Security Group
@@ -14,19 +14,21 @@
   - Secrets Manager
 
 - Routing:
+  - ✔️ Regions
   - ✔️ Route 53
   - ✔️ Direct connect
   - ✔️ Private Link
 
 - API
-  - API Gateway
-  - Web Application Firewall (WAF)
+  - ✔️ API Gateway
+  - ✔️ AppSync
+  - ✔️ Web Application Firewall (WAF)
   - Transit Gateway
+  - Storage Gateway
 
 - Compute:
   - ✔️ Elastic Compute Cloud (EC2)
   - ✔️ Lambda
-  - ✔️ Lightsail
   - ✔️ Elastic Container Registry
   - ✔️ Elastic Container Servive (ECS)
   - ✔️ Elastic Kubernetes Service (EKS)
@@ -46,7 +48,14 @@
   - Elastic MapReduce (EMR)
   - Sagemaker (ML model training)
   - Bedrock (AI)
-  - Amplify
+
+- Application integration
+  - Simple Notification Service (SNS)
+  - Simple Queue Service (SQS)
+  - Step Functions
+  - Systems Manager
+  - Config
+  - EventBridge (ingests and routes app data)
 
 - Scaling compute:
   - ✔️ Auto Scaling Groups
@@ -58,8 +67,7 @@
   - ✔️ Simple Storage Solution (S3)
   - ✔️ Simple Storage Solution Glacier
   - ✔️ FSx (fully managed file servers)
-  - Cloudfront (CDN)
-  - Storage Gateway
+  - ✔️ Cloudfront (CDN)
 
 - Database storage
   - ✔️ DynamoDB
@@ -77,17 +85,14 @@
   - Kendra
   - Elasticache for Redis
 
+- Automation and platform services
+  - ✔️ Amplify
+  - ✔️ Elastic Beanstalk
+  - ✔️ Lightsail
+
 - Latency management:
-  - Regions
   - AWS Local Zones
   - AWS Wavelength
-
-- Workflow management:
-  - Simple Notification Service (SNS)
-  - Simple Queue Service (SQS)
-  - Step Functions
-  - Systems Manager
-  - Config
 
 - Cloud management:
   - ✔️ Virtual Private Cloud (VPC)
@@ -106,7 +111,6 @@
 
 - Data transfer:
   - Datasync
-  - EventBridge (ingests and routes app data)
   - Kinesis Data streams
   - Kinesis Data firehose
   - Managed service for apache flink
@@ -135,14 +139,6 @@
   - Application discovery service
   - Application migration service
   - Database migration service
-
-### Regions and availability
-
-AWS services can either be global or regional. For example, Route 53, CloudFront, and IAM are global. You don't want to configure these in different regions. However, the majority of services are regional. For many services, you can select the region to deploy to. Pricing, service offerings, legal concerns, and proximity to users vary between regions.
-
-A "region" is a physically isolated geographical area (~100 miles apart) with a cluster of at least three 3 (or more) availability zones (AZs). An AZ contains 1 or more datacenters that are also physically seperated (~2 miles apart) and have their own power source. Resources are launched into AZs. If one AZ has an outage it can fail over to another AZ. Although they are physically isolated, regions and AZs have a direct, low-latency, global network connecting to each other.
-
-Health of services used by your account can be observed from the service health dashboard. A general overview of all service health around the world can also be viewed.
 
 ### Service types
 

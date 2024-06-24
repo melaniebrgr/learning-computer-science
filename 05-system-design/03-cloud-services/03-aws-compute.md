@@ -29,10 +29,6 @@ The lambda is executed as needed and scales automatically based on demand. Multi
 2. resizing images and moving them into a different bucket
 3. send a CloudWatch entry when a user writes an update to a DynamoDB
 
-### LightSail
-
-Amazon LightSail is a compute service for people who do not have expert AWS knowledge. It allows you to quickly spin up pre-configured virtual servers. VPCs, subnets and other details do not need to be configured. It simplifies things and allows quick launch of instances and databases.
-
 ### Elastic Container Service (ECS) and Elastic Kubernetes Service (EKS)
 
 Containers are "packages of code and all their execution requirements", e.g. OS, softare. The contaners can be deployed to any environment that support containers. Environments that are preconfigured to support containers and not the app itself directly are **Elastic container service** and **Elastic kubernetes service**.

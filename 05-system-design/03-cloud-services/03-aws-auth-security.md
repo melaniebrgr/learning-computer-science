@@ -52,7 +52,7 @@ Policies are JSON documents that define the permissions for a user, group or ro
 
 ### Cognito
 
-Is an identity and access management (IAM) platform that provides user authentication (sign up and sign in) via social and identity providers.
+Cognito is a managed authentication service for the users of your applications. (The IAM service is to manage users for the AWS account, not the product you are building.) User pools are created credential requirements, authentication experience and configured for them. The users pools are then integrated in the application. Social signs can also be set up with federated identity pools.
 
 ### Security groups
 
