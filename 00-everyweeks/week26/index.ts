@@ -61,10 +61,7 @@ for (const lambda of lambdaCreator) {
   lambda;
 }
 
-// Iterables can be converted to arrays
-[...lambdaCreator];
-
-// Generators are syntactic sugar for iterator creation.
+// Generators are syntactic sugar for iterator creation (kind of)
 function* lambdaGenerator() {
   while (true) {
     const enough = Math.random() > 0.80;
@@ -72,27 +69,45 @@ function* lambdaGenerator() {
     yield makeLambda();
   }
 }
-[...lambdaGenerator()];
+for (const lambda of lambdaGenerator()) {
+  lambda;
+}
 
 // AsyncIterators can be written by hand too
 const asyncLambdaCreator = {
   [Symbol.asyncIterator]() {
+    let lambdaCount = 0;
     return {
       next() {
-        return Promise.resolve({ value: undefined, done: true });
+        if (lambdaCount < 3) {
+          lambdaCount++;
+          return Promise.resolve({ value: makeLambda(), done: false });
+        } else {
+          return Promise.resolve({ value: undefined, done: true });
+        }
       }
     }
   }
 };
-
 (async () => {
   for await (const lambda of asyncLambdaCreator) {
     lambda;
   }
-})()
+})();
 
-
-
+// Async generators are syntactic sugar for async iterator creation (kind of)
+async function* asyncLambdaGenerator () {
+  let lambdaCount = 0;
+  while (lambdaCount < 3) {
+    yield makeLambda();
+    lambdaCount++;
+  }
+}
+(async () => {
+  for await (const lambda of asyncLambdaGenerator()) {
+    lambda;
+  }
+})();
 
 
 

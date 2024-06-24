@@ -35,8 +35,14 @@ To repeat, these JavaScript types are iterable because they implement a method `
 To see this in action, you could invoke the iterator method on the object directly to get the iterator, and call the next method sequentially.
 Notes that this is essentially what `for...of` is doing under the hood.
 `for...of` is calling the iterator's next method until the `done` property is `true`.
+
 If you don't feel like coding iterators by hand, generators are syntatic sugar for iterator creation.
-This is typically how people write them today.
+This is typically how people write them.
+There are some differences between hand-rolled iterators and those created from generators.
+One is what happens during to early exit from a `for...of` loop.
+In the case of a hand-rolled iterable the iterator without a return method, the iterator is not finished yet and if it is used in a second loop it will continue from where the first one left off.
+On the other hand generators implement a return() method, which causes the generator function to early return when the loop exits.
+This makes generators not reusable between loops.
 
 ### AsyncIterators
 

@@ -39,7 +39,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  23  | - | 503 | Travelling |
 |  24  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Taking an AWS Cloud Practioner course with a colleague! |
 |  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Still taking an AWS Cloud Practioner course. |
-|  26  | [Iterators, Generators their async versions and fucking Streams](./week26) | 102 |  |
+|  26  | [Iterators, Generators their async versions and fucking Streams](./week26) | 200 | Learned and problem I was having with a feature solved. |
 |  27  |  |  |  |
 |  28  |  |  |  |
 |  29  |  |  |  |
