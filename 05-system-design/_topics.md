@@ -172,3 +172,4 @@
 - <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
 - <https://refactoring.guru/design-patterns>
 - <https://gameprogrammingpatterns.com/>
+- <https://roadmap.sh/system-design>

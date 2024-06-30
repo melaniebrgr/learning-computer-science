@@ -2,9 +2,9 @@
 
 ## Week 8-9s project journaling
 
-On a past ["Try Friday"](https://www.youtube.com/watch?v=YF_pq7dSMh0) CJ (Coding Garden) tried to learn Rust and build a simple CLI tool. It demonstrated that getting even a simple program running within a few hours in Rust is painful almost to the point of impossible. If you are coming from JavaScript, there are too many fundamental concepts to learn first.
+On a past ["Try Friday"](https://www.youtube.com/watch?v=YF_pq7dSMh0) CJ (Coding Garden) tried learning Rust and building a CLI tool. It really showed that getting even a simple program running within a few hours in Rust is painful and essentially impossible. If you are coming from a language like JavaScript, well, you can't, without learning some fundamental computer systems concepts first.
 
-Props to CJ for persevering on _livestream_. I thought it was interesting how he juggled building with learning. When backed into inscrutable error messages, it "would tell him to spend a moment learning". He then headed to the docs and learned just enough to jump back to coding. Seeing a more talented developer struggle with Rust was also... encouraging. It's not just me who finds it a heavy lift. (Also pretty cool to see that CJ joined the Syntax team recently!)
+So hats off to CJ for persevering on a livestream and moving back and forth between building with learning. When backed into inscrutable error messages, it "would tell him to spend a moment learning". He then headed to the docs and learned just enough to jump back to coding. Seeing a more talented developer struggle with Rust was also... encouraging. It's not just me who finds it a heavy lift. (Also pretty cool to see that CJ joined the Syntax team recently!)
 
 I watched the stream principally to see what I could take from it to code my own CLI tool, but I ended up doing something completely different. My goal was quite different. I wanted to create a small program to help me learn Chinese. I have this simple children's book on my desk, "小王子" (The Little Prince), and by the end of 2024 I'd really like to be able to read it without a Google Translate tool. Let's go.
 
@@ -20,7 +20,7 @@ The goal of weeks 8, then 9, was a Rust guessing game where given a chinese char
 
 #### 1. How do I use a hash map?
 
-First, Rust has a standard library. A hash map is just one of types available in the standard library (Std, pronounced "stud", aha). To use a hash map, import it with `use std::collections::HashMap;` and call the constructor, `HashMap::new()`. This creates a hash map on the heap with a default initial capacity. Hash maps are growable and shrinkable.
+First, Rust has a standard library. A hash map is one of types available in the standard library (Std, pronounced "stud", aha). To use a hash map, import it with `use std::collections::HashMap;` and call the constructor, `HashMap::new()`. This creates a hash map on the heap with a default initial capacity. Hash maps are growable and shrinkable.
 
 Hash maps must be homogeneous. Each unique key can only have one value associated with it at a time. All keys must be the same type, and all values must be the same type. What kinds of keys can be used? "Any type that implements the Eq and Hash traits", like `bool`, `int`, `uint`, `String`, `str`. "For types that implement the Copy trait, like i32, the values are _copied_ into the hash map. For owned values like String, the values will be moved and the hash map will be the owner of those values." I guess this is a trend in Rust? Copy-able things are copied by default, and non-copy-able things are moved?
 

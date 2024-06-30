@@ -2,6 +2,20 @@
 
 ## Amazon web services (AWS)
 
+There are two broad categories of services: self-service and managed (by AWS). Self service like EC2 reselved instances use underlying hardware managed by AWS but are fully configurable. Managed services are less configurable and can often mixed and matached with other services.
+
+EC2 Reserved Instances (RI) provide a significant discount (up to 72%) compared to on-demand pricing and provide a capacity reservation when used in a specific Availability Zone. The following types of RI are available: Standard RIs: These provide the most significant discount (up to 75% off On-Demand) and are best suited for steady-state usage. Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage. Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
+
+AWS Managed Services (AMS) operates AWS on your behalf, providing a secure AWS Landing Zone, features which help you meet various compliance program requirements (HIPAA, HITRUST, GDPR, SOC, ISO, PCI), a proven enterprise operating model, on-going cost optimization, and day-to-day infrastructure management. By implementing best practices to maintain your infrastructure, AWS Managed Services helps to reduce your operational overhead and risk. AWS Managed Services automates common activities, such as change requests, monitoring, patch management, security, and backup services, and provides full-lifecycle services to provision, run, and support your infrastructure. AWS Managed Services unburdens you from infrastructure operations so you can direct resources toward differentiating your business.
+
+AWS services can be access and configured from the
+
+- Management console
+- CLI
+- CloudShell (CLI is preinstalled)
+- SDK
+- API
+
 ### Services
 
 - Authentication, authorization, and security:
@@ -49,13 +63,13 @@
   - Sagemaker (ML model training)
   - Bedrock (AI)
 
-- Application integration
-  - Simple Notification Service (SNS)
-  - Simple Queue Service (SQS)
-  - Step Functions
+- App integration
+  - ✔️ Simple Notification Service (SNS)
+  - ✔️ Simple Queue Service (SQS)
+  - ✔️ EventBridge
+  - ✔️ Step Functions
   - Systems Manager
   - Config
-  - EventBridge (ingests and routes app data)
 
 - Scaling compute:
   - ✔️ Auto Scaling Groups
@@ -78,7 +92,7 @@
   - AWS Backup Vault
   - Glue Data Catalog
 
-- Search:
+- Search
   - OpenSearch Service
   - Athena (SQL search of S3)
   - QuickSight (BI)
@@ -101,13 +115,6 @@
   - Organizational Unit
   - Organizations
   - App2container
-
-- Cloud monitoring:
-  - Cloud Map
-  - Cloudtrail
-  - CloudWatch
-  - Config (evaluates AWS config)
-  - GuardDuty (threat monitoring and detection)
 
 - Data transfer:
   - Datasync
@@ -140,14 +147,6 @@
   - Application migration service
   - Database migration service
 
-### Service types
-
-There are two broad categories of services: self-service and managed (by AWS). Self service like EC2 reselved instances use underlying hardware managed by AWS but are fully configurable. Managed services are less configurable and can often mixed and matached with other services.
-
-EC2 Reserved Instances (RI) provide a significant discount (up to 72%) compared to on-demand pricing and provide a capacity reservation when used in a specific Availability Zone. The following types of RI are available: Standard RIs: These provide the most significant discount (up to 75% off On-Demand) and are best suited for steady-state usage. Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage. Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
-
-AWS Managed Services (AMS) operates AWS on your behalf, providing a secure AWS Landing Zone, features which help you meet various compliance program requirements (HIPAA, HITRUST, GDPR, SOC, ISO, PCI), a proven enterprise operating model, on-going cost optimization, and day-to-day infrastructure management. By implementing best practices to maintain your infrastructure, AWS Managed Services helps to reduce your operational overhead and risk. AWS Managed Services automates common activities, such as change requests, monitoring, patch management, security, and backup services, and provides full-lifecycle services to provision, run, and support your infrastructure. AWS Managed Services unburdens you from infrastructure operations so you can direct resources toward differentiating your business.
-
 ### Billing and pricing
 
 There are three pricing models: in advance, subscription and on demand. For example, you can pay on demand, for a dedicated instance that does not share resources with anyone else, for a spot instance, or for a reserved instance (RI) for a 1 or 3 year term. On demand is by far the most common. With on demand you pay only for what you use, and it varies depending on the service, the region, and the type of infrastructure. AWS has a pricing page for each service, and pricing calculator to explore costs. A free tier is generally available to new AWS users.
@@ -173,67 +172,9 @@ There are four different **support plans**:
 
 If you have multiple AWS accounts they can be consolidated with **AWS Organizations**. The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
 
-### Configuring services
-
-AWS services can be access and configured from
-
-- Management console
-- CLI
-- CloudShell (CLI is preinstalled)
-- SDK
-- API
-
-### Cloud management
-
-#### Amazon Virtual Private Cloud (VPC)
-
-"Isolated Cloud Resources". Amazon Virtual Private Cloud (VPC) is an isolated virtual network — your own datacenter — in the AWS cloud. A VPC is launched in a specific region and spans all availability zones in a region. The goal of a VPC is best understood by example. Imagine a scenario where there multiple EC2 instances that should be grouped and be able to talk to each other, but should not be able to be connected to via the internet. A tag could be used to group instances, but what a VPC provides is networking configuration at the group level.
-
-Networking is achieved but setting up subnets within a VPC. It's at the subnet level that control connectivity / network access is set: public subnets have public connectivity, private subnets are not connected to the internet. Each subnet can be placed in a different AZ. All subnets can still speak to each other. A public subnet is connected to the internet with an Internet Gateway. (An internet Gateway is a connection to the public internet.) A NAT gateway also can be set, so that private subnets can connect to outside services but outside services cannot connect to them. A router directs traffic between the subnets and the Internet Gateway. A secure VPN connection can be made between the Internet and Customer Gateways.
-
-A VPC has a collection of IP addresses associated with it, and subnets have a subset of those. **Network Address Translation (NAT)** Gateway can be created in a public subnet that communicates with an EC2 instance in a private subnet and with the Internet Gateway. The same problem can be similarly solved by a NAT Instance but it is self managed. **AWS Transit Gateway** is a way to connect multiple VPCs through a central hub. It avoids complex peering relationships (1:1 connections). Data is encrypted--it is not the public internet.
-
-Every instance in a subnet has a private IP address and if it's in a public subnet it will have a public address. When the instance is stopped and restarted it will lose and get a new public IP. If you don't want to lose the public IP, you can create a permanent elastic IP.
-
-### Cloud monitoring
-
-#### Amazon CloudWatch
-
-Collects metrics from other services (performance monitoring), e.g. EC2 CPU utilisation, etc. Alarms can be set on CouldWatch that trigger a response when certain thresholds are met, such as a notification or remediation. It is a regional service. Use CloudWatch to configure alarms that deliver a notification when activated. The alarms can use cost metrics that trigger the alarm when a certain amount of spend has been reached.
-
-CloudTrail is an auditing service, it logs all API activity for an AWS account (regardless of whether it's through the console or CLI), to an S3 bucket so you can diagnose what happened.
-
-### Automation and Platform Services
-
-**CloudFormation** is similar to TerraForm in that you specify your environment as code (JSON, YAML), and AWS uses it to provision services. **AWS Elastic Beanstalk** is a PaaS; you deploy your code and AWS takes care of deploying the web application. You don't have to worry about EC2, auto-scaling, elastic load balancing, or the development environment. Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS. You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring. At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.
-
 ### Migration and Transfer Services
 
 AWS offers tools for migrating on premises databases, servers and file servers to the cloud, e.g. AWS Migration Hub, AWS Database Migration Service, Server Migration Service, and Datasync. You can migrate databases homogeneously (Oracle to Oracle) or heterogeneously (Oracle to Amazon) with Database Migration Service. You can migrate servers with Server Migration Service,. Under the hood the server volumes are replicated in EBS and used to save an AMI which is then used to launch an EC2 instance. With Datasync filesystems can be migrated over TLS to S3, FSx (Windows specific), or EFS. AWS Migration Hub, is useful for planning the migration process and viewing their status.
-
-### Application Integration
-  
-There are a four AWS services that are used to connect applications with each other, i.e. are used for the purpose of integrating applications in a decoupled architecture:
-
-#### 1. Amazon Simple Notification Service (SNS)
-
-sends notification to a Topic for an _app/EC2/CloudWatch (publisher)_ to communicate with _lambda/email/SQS or other application (subscriber)_. It enables a pub/sub model. Notifications are sent two ways, A2A and A2P. A2A provides high-throughput, pushed based, many-to-many messaging between distributed systems, microservices, and event driven serverless applications. The applications include SQS, Amazon Kinesis Data Firehose, Lambda, abd other HTTPS endpoints. A2P helps send messages to customers with SMS texts, push notifications, and email.
-
-#### 2. Amazon Simple Queue Service (SQS)
-
-is useful in cases where data cannot be processed quickly enough for example. Messages can be placed in a queue and a separate service polls the queue periodically. It's a hosted service used to enable distributed/decoupled applications. A SNS Topics and SQS can be strung together.
-
-#### 3. Amazon Simple Workflow Service (SWF)
-
-enables automation of workflows that may have a human component. It is less preferred than the newer Step Functions.
-
-#### 4. Step Functions
-
-are used to coordinate components of applications in a workflow. You can defines the sequences in a step, e.g. in a situation where a number of lambda functions should operate in sequence. It has a visual editor and output that shows the steps and status.
-
-#### Amazon Simple Email Service (SES)
-
-is a cost-effective, flexible, and scalable email service that enables developers to send mail from within any application. Not geared towards applicatioin integration however. This service is used for sending email but not SMS text messages.
 
 ### Management and Governance
 
