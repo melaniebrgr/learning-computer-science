@@ -175,3 +175,7 @@ app.tsx
     - Images are resized on demand and served images
   - To recap, the Next.js image component is improved, performant version of the <img> HTML element and adds a number of custom properties to enable the client to choose the right image size, and the server to generate the right size.
   - To achieve these benefits you, use the Image component to get to know the image API, especially width, height and sizes
+
+## Resources
+
+- <https://nextjs.org/learn/dashboard-app>
