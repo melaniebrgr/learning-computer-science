@@ -32,6 +32,10 @@ AWS services can be access and configured from the
   - ✔️ Route 53
   - ✔️ Direct connect
   - ✔️ Private Link
+  - ✔️ Local Zones
+  - ✔️ Wavelength
+  - ✔️ Virtual Private Cloud (VPC)
+  - Virtual Private Network (VPN)
 
 - API
   - ✔️ API Gateway
@@ -47,6 +51,7 @@ AWS services can be access and configured from the
   - ✔️ Elastic Container Servive (ECS)
   - ✔️ Elastic Kubernetes Service (EKS)
   - ✔️ Fargate
+  - App2container
 
 - Specialised compute:
   - Textract (OCR text extraction)
@@ -68,8 +73,6 @@ AWS services can be access and configured from the
   - ✔️ Simple Queue Service (SQS)
   - ✔️ EventBridge
   - ✔️ Step Functions
-  - Systems Manager
-  - Config
 
 - Scaling compute:
   - ✔️ Auto Scaling Groups
@@ -87,8 +90,8 @@ AWS services can be access and configured from the
   - ✔️ DynamoDB
   - ✔️ Aurora Serverless V2
   - ✔️ Relational Database Service (RDS)
-  - RDS Proxy
   - ✔️ AWS Backup
+  - RDS Proxy
   - AWS Backup Vault
   - Glue Data Catalog
 
@@ -104,17 +107,12 @@ AWS services can be access and configured from the
   - ✔️ Elastic Beanstalk
   - ✔️ Lightsail
 
-- Latency management:
-  - AWS Local Zones
-  - AWS Wavelength
-
 - Cloud management:
-  - ✔️ Virtual Private Cloud (VPC)
-  - Virtual Private Network (VPN)
-  - Outposts Family
-  - Organizational Unit
-  - Organizations
-  - App2container
+  - ✔️ Config
+  - ✔️ Organizations
+  - ✔️ CloudFormation
+  - ✔️ Outposts Family
+  - Systems Manager (SSM)
 
 - Data transfer:
   - Datasync
@@ -175,20 +173,6 @@ If you have multiple AWS accounts they can be consolidated with **AWS Organizat
 ### Migration and Transfer Services
 
 AWS offers tools for migrating on premises databases, servers and file servers to the cloud, e.g. AWS Migration Hub, AWS Database Migration Service, Server Migration Service, and Datasync. You can migrate databases homogeneously (Oracle to Oracle) or heterogeneously (Oracle to Amazon) with Database Migration Service. You can migrate servers with Server Migration Service,. Under the hood the server volumes are replicated in EBS and used to save an AMI which is then used to launch an EC2 instance. With Datasync filesystems can be migrated over TLS to S3, FSx (Windows specific), or EFS. AWS Migration Hub, is useful for planning the migration process and viewing their status.
-
-### Management and Governance
-
-Assess, audit and evaluate service configuration with AWS Config. It provides an inventory of the resources being used and the configuration they are using for verification and compliance, i.e. make sure resource configurations comply with government regulations. You can also see the history of the resource's configuration. Used AWS Config to see what changed, use CloudTrail to see who changed it. Remediation actions can also be configured.
-
-Misc. management services:
-
-- AWS OpsWorks gives you a managed implementation of Chef and Puppet, useful for patching, updating, and backing up. It's used for EC2 management.
-- AWS Systems Manager provides a resource overview: you can group and visualise resources.
-- AWS Trusted Advisor provides advice for resource management. Trusted Advisor checks help optimize your AWS infrastructure, increase security and performance, reduce your overall costs, and monitor service limits. AWS Trusted Advisor checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
-
-- AWS Catalog allows you to curate a list of approved services a company is allowed to use. Helps observe governance and compliance. You can also set budget constraints.
-- AWS Personal Health Dashboard shows any operational/availabilities issues with your AWS resources. The dashboard displays relevant and timely information to help you manage events in progress, and provides proactive notification to help you plan for scheduled activities. With Personal Health Dashboard, alerts are triggered by changes in the health of AWS resources, giving you event visibility, and guidance to help quickly diagnose and resolve issues.
-- Servive Health Dashboard shows current information on services, but is not specific to your resources. It's a quick look at what's going on right now.
 
 ### Machine Learning
 

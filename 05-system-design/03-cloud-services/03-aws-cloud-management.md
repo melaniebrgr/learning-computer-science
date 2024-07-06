@@ -1,13 +1,33 @@
 # 03 Cloud services
 
-## Cloud management
+## Cloud management and governance
 
-### Amazon Virtual Private Cloud (VPC)
+### Config
 
-"Isolated Cloud Resources". Amazon Virtual Private Cloud (VPC) is an isolated virtual network — your own datacenter — in the AWS cloud. A VPC is launched in a specific region and spans all availability zones in a region. The goal of a VPC is best understood by example. Imagine a scenario where there multiple EC2 instances that should be grouped and be able to talk to each other, but should not be able to be connected to via the internet. A tag could be used to group instances, but what a VPC provides is networking configuration at the group level.
+Manmage and control service config on a central level.
+Assess, audit and evaluate service configuration with AWS Config. It provides an inventory of the resources being used and their configuration. This is useful for verification and compliance, i.e. make sure resource configurations comply with government regulations. You can also see the history of the resource's configuration. Used AWS Config to see what changed, use CloudTrail to see who changed it. Remediation actions can also be configured.
 
-Networking is achieved but setting up subnets within a VPC. It's at the subnet level that control connectivity / network access is set: public subnets have public connectivity, private subnets are not connected to the internet. Each subnet can be placed in a different AZ. All subnets can still speak to each other. A public subnet is connected to the internet with an Internet Gateway. (An internet Gateway is a connection to the public internet.) A NAT gateway also can be set, so that private subnets can connect to outside services but outside services cannot connect to them. A router directs traffic between the subnets and the Internet Gateway. A secure VPN connection can be made between the Internet and Customer Gateways.
+### Trusted Advisor
 
-A VPC has a collection of IP addresses associated with it, and subnets have a subset of those. **Network Address Translation (NAT)** Gateway can be created in a public subnet that communicates with an EC2 instance in a private subnet and with the Internet Gateway. The same problem can be similarly solved by a NAT Instance but it is self managed. **AWS Transit Gateway** is a way to connect multiple VPCs through a central hub. It avoids complex peering relationships (1:1 connections). Data is encrypted--it is not the public internet.
+provides advice for resource management. Trusted Advisor checks help optimize your AWS infrastructure, increase security and performance, reduce your overall costs, and monitor service limits. AWS Trusted Advisor checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
 
-Every instance in a subnet has a private IP address and if it's in a public subnet it will have a public address. When the instance is stopped and restarted it will lose and get a new public IP. If you don't want to lose the public IP, you can create a permanent elastic IP.
+### Personal Health Dashboard
+
+AWS shows any operational/availabilities issues with your AWS resources. The dashboard displays relevant and timely information to help you manage events in progress, and provides proactive notification to help you plan for scheduled activities. With Personal Health Dashboard, alerts are triggered by changes in the health of AWS resources, giving you event visibility, and guidance to help quickly diagnose and resolve issues.
+
+### Misc. management services and features
+
+- **AWS Organisations** occasionally an organisation may wish to have multiple AWS accounts, if for example there are different teams with different goals and needs that could clash under a single account. Multiple accounts can also allow you to access additional resources. You can manage e.g. backups and policies accross accounts like this from a central place.
+- **Control Tower** creates and configures multiple accounts with best practises
+- **AWS OpsWorks** gives you a managed implementation of Chef and Puppet, useful for patching, updating, and backing up. It's used for EC2 management.
+- **Cost Explorer** to get more details about the cost.
+- **AWS Systems Manager** provides a resource overview: you can group and visualise resources.
+- **AWS Catalog** allows you to curate a list of approved services a company is allowed to use. Helps observe governance and compliance. You can also set budget constraints.
+- **Servive Health Dashboard** shows current information on services, but is not specific to your resources. It's a quick look at what's going on right now.
+- **Tags** (pieces of metadata) can be attached to almost all resources that can be used as a filter in teh cost explorer.
+- **Consolidated Billing** getting one single bill, share saving planes and pricing discounts for multiple accounts
+- **CloudFormation** templates for reproducible infrastructure deployments (check CloudFormation designer). Create a template like a blueprint for the stack you want to launch.
+- **Outposts** server racks on shipped to you from AWS, so you can still your AWS on prem.
+- **Systems manager** manages workloads centrally fleet of servers rolling out patches simultations and share parameter store
+- **Resource access manager** its about the acutal services (not just their blueprints) share a centrally managed VPC.
+- **License manager** warn and help enforce license requirements when using services.

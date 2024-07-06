@@ -27,6 +27,28 @@ MFA can consist of two or more of
 
 It's a best practise know for all privileged accounts to have MFA set up.
 
+### Security Matters
+
+1. Account protection:
+
+- issues: compromised accounts, malicious employee usage, insecure cross-acount usage, non-standard service usage
+- services: IAM (access advisor, access analyser), SSO, CloudTrail, GuardDuty, Organizations, Artifact, Config, Audit
+
+1. Application protection:
+
+- issues: software vulerabilities, insecure configurations, incident analysis
+- services: Inspector, Detective
+
+1. Network protection:
+
+- issues: malicious traffice, DDoS attacks
+- services: WAF, Network Firewall, Firewall Manager, Shield, Shield Advanced
+
+1. Data protection:
+
+- insecure/unencrypted data, credential leaks, data breaches or exposure
+- services: KMS, CloudHSM, Secrets Manager, ACM, Maci, Security Hub
+
 ### Identity and access management (IAM)
 
 Identities are the entities that are allowed or not allowed to so something (the "who"). Access management refers to the permissions that are granted or not granted (the "what"), which is managed with policies.
