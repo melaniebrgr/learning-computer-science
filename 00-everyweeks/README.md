@@ -21,27 +21,27 @@ Basically I will try something for a week, document my learning, judge its succe
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|   8  | Rust command line game: guess the pinyin | 403 | Had to learn the language basics first. |
-|   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs. |
-|  10  | Rust in JavaScript | 403 | Learned more about wasm, but didn't finish in time. |
-|  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming. |
-|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted. |
-|  13  | [Wasm game of life](./week13) | 206 | A setback. |
-|  14  | [Magic cookies](./week14/) | 200 | A 🍪 break from Rust. |
+|   8  | Rust command line game: guess the pinyin | 403 | Had to learn the language basics first |
+|   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs |
+|  10  | Rust in JavaScript | 403 | Learned more about wasm, but didn't finish in time |
+|  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming |
+|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted |
+|  13  | [Wasm game of life](./week13) | 206 | A setback |
+|  14  | [Magic cookies](./week14/) | 200 | A 🍪 break from Rust |
 |  15  | [Web performance & the CWVs](./week15/) | 200 |  |
 |  16  | Service workers | 501 | too busy on vacation |
 |  17  | [Service workers](./week17/) | 400 | too busy with back-to-work, and learned just enough about this topic to probably be dangerous |
 |  18  | [OpenAI Assistant](./week18-20) | 102 |  |
 |  19  | [OpenAI Assistant](./week18-20) | 102 |  |
-|  20  | [OpenAI Assistant](./week18-20) | 206 | Completed but as of yet unpublished. |
-|  21  | File handling on the Web | 403 | All my mindshare still belonged to the OpenAI project. |
+|  20  | [OpenAI Assistant](./week18-20) | 206 | Completed but unpublished |
+|  21  | File handling on the Web | 403 | Too focussed on the AI project |
 |  22  | - | 503 | Conference and travelling |
 |  23  | - | 503 | Travelling |
-|  24  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Taking an AWS Cloud Practioner course with a colleague! |
-|  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Still taking an AWS Cloud Practioner course. |
-|  26  | [Iterators, Generators, and their async versions oh my](./week26) | 200 | Learned and problem I was having with a feature solved. |
-|  27  | [This I Promise you](./week27) | 102  |  |
-|  28  |  |  |  |
+|  24  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Taking an AWS Cloud Practioner course with a colleague |
+|  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | AWS Cloud Practioner course ongoing |
+|  26  | [Iterators, Generators, and their async versions oh my](./week26) | 200 | Learned and solved a problem I was having |
+|  27  | - | 403 | Read up on promises but did not write about it. |
+|  28  | File input security |  |  |
 |  29  |  |  |  |
 |  30  |  |  |  |
 |  31  |  |  |  |
