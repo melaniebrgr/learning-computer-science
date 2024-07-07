@@ -1,6 +1,6 @@
 # 03 cloud services
 
-## Application integration
+## AWS application integration
 
 Whenever there are seperation of applications (for whatever reason) there is a need to manage the communication between the applications. AWS provides multiple tools for app integration. 
 
