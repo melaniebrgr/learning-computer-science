@@ -41,7 +41,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | AWS Cloud Practioner course ongoing |
 |  26  | [Iterators, Generators, and their async versions oh my](./week26) | 200 | Learned and solved a problem I was having |
 |  27  | - | 403 | Read up on promises but did not write about it. |
-|  28  | File input security |  |  |
+|  28  | [File input security](./week28/README.md) | 200 |  |
 |  29  |  |  |  |
 |  30  |  |  |  |
 |  31  |  |  |  |
