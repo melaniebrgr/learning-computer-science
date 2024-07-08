@@ -2,6 +2,14 @@
 
 ## AWS Compute
 
+- ✔️ Elastic Compute Cloud (EC2)
+- ✔️ Lambda
+- ✔️ Elastic Container Registry
+- ✔️ Elastic Container Servive (ECS)
+- ✔️ Elastic Kubernetes Service (EKS)
+- ✔️ Fargate
+- App2container
+
 ### Elastic compute cloud (EC2)
 
 Renting a virtual remote server is probably AWS' most important service. With EC2 you have full control over the image, the hardware specs and you can install any software needed. If you want certain commands to run after launching an EC2 instance, e.g. that starts a web server, they can be entered into the "user data" text field for convience, or you can SSH or use EC2 connect to access instance to install or execute code afterward. The instance can be also updated through a REST API. Instance metadata, such as the instance ID, can be accessed over HTTP after the instance is created. Security groups can be attached to a EC2 instand in order to control network access. EC2 is well-suited for a long running, traditional applications.
@@ -42,3 +50,30 @@ Fargate is a serverless container execution environement. Fargate provisions ser
 ### Elastic Container Registry (ECR)
 
 A registry where you can manage an docker image repository, which can then be used by ECS and EKS.
+
+## AWS Compute (specialsed)
+
+- Textract (OCR text extraction)
+- Rekognition (text-from-image detection)
+- Comprehend (sentiment)
+- Translate (lang-to-lang)
+- Polly (text-to-speech)
+- AI Services
+- Glue Crawler (crawl data stores and populate Glue catalog)
+- Database migration service
+- Glue DataBrew
+- Elastic MapReduce (EMR)
+- Bedrock (AI)
+- Sagemaker (ML model training)
+
+### Rekognition
+
+is a service for identifying objects within images or video (computer vision). It requires no knowledge of AI/ML. You can use it to
+
+- list of objects in an image with percent confidence rating, e.g. people, text, nsfw
+- analyse facial expressions and count people
+- identify celebrities
+
+### Transcribe
+
+is used for transcribing speech to text, it has an API that can be called and used in applications. Amazon translate translates text to different languages and has an API. Amazon Polly turns text to speech. Amazon Macie uses ML to identify PI and PHI in your S3 buckets.

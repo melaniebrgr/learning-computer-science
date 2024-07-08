@@ -2,6 +2,14 @@
 
 ## AWS authentication, authorization and security
 
+- ✔️ The shared responsibility model
+- ✔️ Identity & Access management (IAM)
+- ✔️ Cognito
+- ✔️ Security Group
+- ✔️ Security Token Service (STS)
+- ✔️ Key Management Service (KMS)
+- ✔️ Macie (PPI checker)
+
 ### The shared responsibility model
 
 AWS is responsible for what it can control: physical machines, infrastructure, managed services. You are responsible for what you can control: account and access, applications. Use secure credentials, and multi-factor authentication (MFA).
@@ -26,28 +34,6 @@ MFA can consist of two or more of
 3. something I am, e.g. fingerprint or other biometric data
 
 It's a best practise know for all privileged accounts to have MFA set up.
-
-### Security Matters
-
-1. Account protection:
-
-- issues: compromised accounts, malicious employee usage, insecure cross-acount usage, non-standard service usage
-- services: IAM (access advisor, access analyser), SSO, CloudTrail, GuardDuty, Organizations, Artifact, Config, Audit
-
-1. Application protection:
-
-- issues: software vulerabilities, insecure configurations, incident analysis
-- services: Inspector, Detective
-
-1. Network protection:
-
-- issues: malicious traffice, DDoS attacks
-- services: WAF, Network Firewall, Firewall Manager, Shield, Shield Advanced
-
-1. Data protection:
-
-- insecure/unencrypted data, credential leaks, data breaches or exposure
-- services: KMS, CloudHSM, Secrets Manager, ACM, Maci, Security Hub
 
 ### Identity and access management (IAM)
 
@@ -75,6 +61,28 @@ Policies are JSON documents that define the permissions for a user, group or ro
 ### Cognito
 
 Cognito is a managed authentication service for the users of your applications. (The IAM service is to manage users for the AWS account, not the product you are building.) User pools are created credential requirements, authentication experience and configured for them. The users pools are then integrated in the application. Social signs can also be set up with federated identity pools.
+
+### Security Matters
+
+Account protection:
+
+- issues: compromised accounts, malicious employee usage, insecure cross-acount usage, non-standard service usage
+- services: IAM (access advisor, access analyser), SSO, CloudTrail, GuardDuty, Organizations, Artifact, Config, Audit
+
+Application protection:
+
+- issues: software vulerabilities, insecure configurations, incident analysis
+- services: Inspector, Detective
+
+Network protection:
+
+- issues: malicious traffice, DDoS attacks
+- services: WAF, Network Firewall, Firewall Manager, Shield, Shield Advanced
+
+Data protection:
+
+- insecure/unencrypted data, credential leaks, data breaches or exposure
+- services: KMS, CloudHSM, Secrets Manager, ACM, Maci, Security Hub
 
 ### Security groups
 

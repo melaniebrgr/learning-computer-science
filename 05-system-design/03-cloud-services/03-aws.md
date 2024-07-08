@@ -53,7 +53,7 @@ AWS services can be access and configured from the
   - ✔️ Fargate
   - App2container
 
-- Specialised compute:
+- Compute (specialised):
   - Textract (OCR text extraction)
   - Rekognition (text-from-image detection)
   - Comprehend (sentiment)
@@ -67,15 +67,19 @@ AWS services can be access and configured from the
   - Bedrock (AI)
   - Sagemaker (ML model training)
 
-- Scaling compute:
+- Compute scaling:
   - ✔️ Auto Scaling Groups
   - ✔️ Elastic Load Balancing (ELB)
 
 - App integration:
   - ✔️ Simple Notification Service (SNS)
   - ✔️ Simple Queue Service (SQS)
+  - ✔️ Simple Email Service (SES)
+  - ✔️ Simple Workflow Service (SWF)
+  - ✔️ Cloudmap
   - ✔️ EventBridge
   - ✔️ Step Functions
+  - ✔️ Batch
 
 - File storage:
   - ✔️ Elastic Block Store (EBS)
@@ -138,31 +142,13 @@ AWS services can be access and configured from the
   - ✔️ Connect (contact center service)
   - Pinpoint (marketing communications)
 
-- Migration management:
+- Migration:
   - Migration hub
   - Migration evaluator
   - Application discovery service
   - Application migration service
   - Database migration service
 
-## To be sorted
-
 ### Migration and Transfer Services
 
 AWS offers tools for migrating on premises databases, servers and file servers to the cloud, e.g. AWS Migration Hub, AWS Database Migration Service, Server Migration Service, and Datasync. You can migrate databases homogeneously (Oracle to Oracle) or heterogeneously (Oracle to Amazon) with Database Migration Service. You can migrate servers with Server Migration Service,. Under the hood the server volumes are replicated in EBS and used to save an AMI which is then used to launch an EC2 instance. With Datasync filesystems can be migrated over TLS to S3, FSx (Windows specific), or EFS. AWS Migration Hub, is useful for planning the migration process and viewing their status.
-
-### AWS Rekognition
-
-is a service for identifying objects within images or video (computer vision). It requires no knowledge of AI/ML. You can use it to
-
-- list of objects in an image with percent confidence rating, e.g. people, text, nsfw
-- analyse facial expressions and count people
-- identify celebrities
-
-### Amazon Transcribe
-
-is used for transcribing speech to text, it has an API that can be called and used in applications. Amazon translate translates text to different languages and has an API. Amazon Polly turns text to speech. Amazon Macie uses ML to identify PI and PHI in your S3 buckets.
-
-### Analytics
-
-Analyze datasets on Amazon S3 with Amazon Athena. You can write queries in SQL, and Athena uses Glue, which contains information about the schemas and databases the queries are being made against. Glue is an extract, transform and load (ETL) service. Amazon Elastic Map Reduce (EMR) is a web service that enables businesses, researchers, data analysts, and developers to easily and cost-effectively process vast amounts of data. EMR utilizes a hosted Hadoop framework running on Amazon EC2 and Amazon S3. Kinesis is a way to collect, process and analyse real-time streaming data, or small amounts of data that are being updated with high-frequency over time. Amazon QuickSight is trying to take the role of a data scientist: extract business insights from your data. In summary: for data at rest consider Athena, EMR, and QuickSight to answer questions about your data and extract business insights respectively. For data in transit use Kinesis.

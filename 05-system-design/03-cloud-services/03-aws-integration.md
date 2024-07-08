@@ -1,6 +1,15 @@
 # 03 cloud services
 
-## AWS application integration
+## AWS integration
+
+- ✔️ Simple Notification Service (SNS)
+- ✔️ Simple Queue Service (SQS)
+- ✔️ Simple Email Service (SES)
+- ✔️ Simple Workflow Service (SWF)
+- ✔️ Cloudmap
+- ✔️ EventBridge
+- ✔️ Step Functions
+- ✔️ Batch
 
 Whenever there are seperation of applications (for whatever reason) there is a need to manage the communication between the applications. AWS provides multiple tools for app integration. 
 

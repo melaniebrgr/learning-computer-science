@@ -2,6 +2,9 @@
 
 ## Compute scaling
 
+- ✔️ Auto Scaling Groups
+- ✔️ Elastic Load Balancing (ELB)
+
 ### Auto scaling groups
 
 Autoscaling groups are collections of Amazon EC2 instances that enable automatic scaling. For example if an instance fails a health check, or if the cloud watch monitoring service detects that CPU usage is above a certain threshold in an **AWS Auto Scaling Group** a new instance is spawned.
