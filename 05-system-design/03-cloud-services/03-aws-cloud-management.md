@@ -35,6 +35,8 @@ Occasionally an organisation may wish to have multiple AWS accounts, if for exam
 
 The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
 
+Service Control Policies are an AWS Organizations feature that allows you to set permission guardrails for organization accounts. These guardrails set maximum access rights which can't be exceeded by permissions set inside of the affected organization accounts. Even if an identity (e.g., an IAM user) in an account would receive a policy that grants more access rights, the SCP would restrict the maximum access rights.
+
 ### Config
 
 Manmage and control service config on a central level.

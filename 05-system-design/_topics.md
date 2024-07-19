@@ -160,7 +160,7 @@
 - Geographic distribution <https://youtu.be/JQfnMp0OeTA>
 - General database internals: <https://youtu.be/DiLA0Ri6RfY>
 - General database internals: <https://youtu.be/IW4cpnpVg7E>
-- <https://frontendmasters.com/courses/device-web-apis/>
+- Web APIs: <https://frontendmasters.com/courses/device-web-apis/>
 - <https://web.dev/learn/design/>
 - <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
 - <https://support.crowdin.com/icu-message-syntax/>
@@ -173,3 +173,6 @@
 - <https://refactoring.guru/design-patterns>
 - <https://gameprogrammingpatterns.com/>
 - <https://roadmap.sh/system-design>
+- FE: <https://frontendmasters.com/guides/front-end-handbook/2024/>
+- Design patterns: <https://dev.to/superviz/design-pattern-5-adapter-pattern-4gif?context=digest>
+- Next.js: <https://frontendmasters.com/courses/intermediate-next-js>
