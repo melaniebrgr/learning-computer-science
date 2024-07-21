@@ -3,12 +3,11 @@
 ## AWS authentication, authorization and security
 
 - The shared responsibility model
-- Identity & Access management (IAM)
-- Cognito
-- Security Group
-- Security Token Service (STS)
-- Key Management Service (KMS)
-- Macie (PPI checker)
+- Authentication and authorisation
+  - Identity & Access management (IAM)
+  - Cognito
+  - Security Token Service (STS)
+- Security Matters
 
 ### The shared responsibility model
 
@@ -16,18 +15,9 @@ The shared responsibility model defines the lines of responsibility between the
 
 > "AWS operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the facilities in which the service operates. The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software as well as the configuration of the AWS provided security group firewall."
 
-### Misc. security services
+### Authentication and authorisation
 
-- Educate: For information about AWS' security and compliance use **AWS Artifact**.
-- Automate (compliance assessment): For automated security compliance assessments of software and networks use **Amazon Inspector**.
-- Protect: **AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, compromise security or consume excessive resources such as SQL injection, and XSS.
-- Protect: **AWS Shield** protects against DDoS attacks. There is standard (available by default) and advanced shield which can provide more details about an attack.
-- Monitor: **Amazon GuardDuty** provides automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by monitoring CloudWatch, VPC and DNS logs using ML and other rules. Automatic responses can be configured.
-- Encrypt: An example of encryption is transit is SSL. Unencrypted data as it is transferred over an HTTPS connection is encrypted. **AWS Certificate** can be used to manage the certs for SSL/TLS. An example of encryption at rest is when data arrives in your bucket and you've applied encryption to the bucket the data will be encrypted.
-- Encrypt: **Amazon Key Management Service (KMS)** and **CloudHSM** help manage the keys that are used to encrypt data at rest. The key policy let's you control when how and who can read the data. It is integrated with over 100 AWS services. The difference is CloudHSM dedicates hardware specifically to you so you can create a custom key-store that could then be used by KMS.
-- Automate (key management): A best practise is to store, managae and automate rotation of passwords, API keys and tokens for AWS services with **AWS Secrets Manager**. It is meant to work with IAM.
-
-### Identity and access management (IAM)
+#### Identity and access management (IAM)
 
 Identities are the entities that are allowed or not allowed to so something (the "who"). Access management refers to the permissions that are granted or not granted (the "what"), which is managed with policies.
 
@@ -58,50 +48,123 @@ It's a best practise for all privileged accounts to have MFA set up. MFA can con
 2. something I have, e.g. mobile device with Google Authenticator (virtual MFA), or USB (physical MFA)
 3. something I am, e.g. fingerprint or other biometric data
 
-### Cognito
+#### Cognito
 
-Cognito is a managed authentication service for the users of your applications. (The IAM service is to manage users for the AWS account, not the product you are building.) User pools are created credential requirements, authentication experience and configured for them. The users pools are then integrated in the application. Social signs can also be set up with federated identity pools.
+Cognito is a managed authentication service for the users of your applications. (The IAM service is to manage users for the AWS account, not the product you are building.) User pools are created with credential requirements and then integrated in the application. Social sign up can also be set up with federated identity pools.
+
+#### Secure token service (STS)
+
+STS is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
 
 ### Security Matters
 
-Account protection:
+Security concerns vary by domain:
 
-- issues: compromised accounts, malicious employee usage, insecure cross-acount usage, non-standard service usage
-- services: IAM (access advisor, access analyser), SSO, CloudTrail, GuardDuty, Organizations, Artifact, Config, Audit
+#### Account protection
 
-Application protection:
+- issues:
+  - compromised accounts,
+  - malicious employee usage,
+  - insecure cross-acount usage,
+  - non-standard service usage
+- services:
+  - IAM (access advisor, access analyser),
+  - SSO,
+  - CloudTrail,
+  - GuardDuty,
+  - Organizations,
+  - Artifact,
+  - Config,
+  - Audit
 
-- issues: software vulerabilities, insecure configurations, incident analysis
-- services: Inspector, Detective
+#### Application protection
+
+- issues:
+  - software vulerabilities,
+  - insecure configurations,
+  - incident analysis
+- services:
+  - Inspector,
+  - Detective
 
 Network protection:
 
-- issues: malicious traffice, DDoS attacks
-- services: WAF, Network Firewall, Firewall Manager, Shield, Shield Advanced
+- issues:
+  - malicious traffic,
+  - DDoS attacks
+- services:
+  - WAF,
+  - Network Firewall,
+  - Firewall Manager,
+  - Shield,
+  - Shield Advanced
 
 Data protection:
 
 - insecure/unencrypted data, credential leaks, data breaches or exposure
 - services: KMS, CloudHSM, Secrets Manager, ACM, Maci, Security Hub
 
-### Security groups
+### Security-related services
 
-A security group is like a firewall that can be attached to an instance that limits internet traffic to the instance. Put another way, security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic.
+#### Standardisation & compliance
 
-- A firewall for a single EC2 instance
-- Checks incoming and outgoing requests and periodically blocks
-- "Stateful" response are always allowed if the request was
-- There can be multiple security groups for an instance
+##### Organisation
 
-### Network access control list (NACLs)
+Consistent usage of best practise across accounts by setting up organisations units (OU) with **Organisations**. For example, help ensure security practises are applied to production services.
 
-Network access control lists (NACLs) are firewalls applied at the subnet level.
+Occasionally an organisation may wish to have multiple AWS accounts, if for example there are different teams with different goals and needs that could clash under a single account. If you have multiple AWS accounts they can be consolidated with **AWS Organizations**. Multiple accounts can also allow you to access additional resources. You can manage e.g. backups and policies accross accounts from a central place.
+
+The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
+
+Service Control Policies are an AWS Organizations feature that allows you to set permission guardrails for organization accounts. These guardrails set maximum access rights which can't be exceeded by permissions set inside of the affected organization accounts. Even if an identity (e.g., an IAM user) in an account would receive a policy that grants more access rights, the SCP would restrict the maximum access rights.
+
+##### Config
+
+Configurations for all AWS resources can be enforced with **AWS Config**, which evaluates, audits and notifies of resources not compliant with established configurations. Provides a dashboard to see compliance at a glance. Manage and control service config on a central level.
+Assess, audit and evaluate service configuration with AWS Config. It provides an inventory of the resources being used and their configuration. This is useful for verification and compliance, i.e. make sure resource configurations comply with government regulations. You can also see the history of the resource's configuration. Used AWS Config to see what changed, use CloudTrail to see who changed it. Remediation actions can also be configured.
+
+##### Trusted Advisor
+
+**Trusted Advisor** provides advice for resource management. Trusted Advisor checks help optimize your AWS infrastructure, increase security and performance, reduce your overall costs, and monitor service limits. It checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
+
+##### Misc. standardisation & compliance services
+
+For information about AWS' security and compliance use **AWS Artifact**. Use **AWS Audit Manager** to map your compliance requirements to AWS usage data with prebuilt and custom frameworks and automated evidence collection.
+
+For automated security compliance assessments of software and networks use **Amazon Inspector**, especially useful for multi-account configurations to make sure security is consistent across these. "Amazon Inspector automatically discovers workloads, such as Amazon EC2 instances, containers, and Lambda functions, and scans them for software vulnerabilities and unintended network exposure." It collects and centralises security data.
+
+#### Protect
+
+**AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, that compromise security or that consume excessive resources such as SQL injection, and XSS. WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
+
+**Network access control lists (NACLs)** are firewalls applied at the subnet level.
 
 - A firewall for a subnet
 - Checks incoming and outgoing requests and periodically blocks
 - "Stateless" requests and responses are decoupled
 - One NACL per subnet
 
-### Security Token Service (STS)
+A **security group** is like a firewall that can be attached to an instance that limits internet traffic to the instance. Put another way, security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic.
 
-STS is a global amazon service for requesting temporary, limited-privilege credentials for IAM or federated users. Federated users (external identities) are users you manage outside of AWS in your corporate directory, but to whom you grant access to your AWS account using temporary security credentials.
+- A firewall for a single EC2 instance
+- Checks incoming and outgoing requests and periodically blocks
+- "Stateful" response are always allowed if the request was
+- There can be multiple security groups for an instance
+
+Use **AWS Shield** to protect against DDoS attacks. There is standard (available by default) and advanced shield which can provide more details about an attack. Both WAF and shield provide protection at the network level.
+
+#### Monitor
+
+**Amazon GuardDuty** provides automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by monitoring CloudWatch, VPC and DNS logs using ML and other rules. Automatic responses can be configured. Use **AWS CloudTrail** to analyse, track and search across all the logs to see who made changes where and when. It works across all regions and automatic responses can be configured when inconsistencies are detected.
+
+#### Encrypt
+
+in-transit: An example of encryption is transit is SSL. Unencrypted data as it is transferred over an HTTPS connection is encrypted. **AWS Certificate** can be used to manage the certs for SSL/TLS. An example of encryption at rest is when data arrives in your bucket and you've applied encryption to the bucket the data will be encrypted.
+
+at-rest: **Amazon Key Management Service (KMS)** and **CloudHSM** help manage the keys that are used to encrypt data at rest. The key policy let's you control when how and who can read the data. It is integrated with over 100 AWS services. The difference is CloudHSM dedicates hardware specifically to you so you can create a custom key-store that could then be used by KMS.
+
+A best practise is to store, manage and automate rotation of passwords, API keys and tokens for AWS services with **AWS Secrets Manager**. It is meant to work with IAM.
+
+#### Investigate
+
+Find root causes of security issues with **Amazon Detective**. "Amazon Detective automatically collects log data from your AWS resources and uses machine learning (ML), statistical analysis, and graph theory to build a dataset that you can use to conduct more efficient security investigations." Seems to be useful for post-mortems.
