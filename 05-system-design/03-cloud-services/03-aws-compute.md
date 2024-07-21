@@ -23,6 +23,12 @@ There are 4 EC2 pricing models:
 - savings plan (committing to compute 1 or 3 years in advance) = discounts
 - reserved instances (pay for instance configurations 1 or 3 years) = discounts
 
+EC2 Reserved Instances (RI) provide a significant discount (up to 72%) compared to on-demand pricing and provide a capacity reservation when used in a specific Availability Zone. Reserved Instances are not physical instances, but rather a billing discount applied to the use of On-Demand Instances. You can purchase a Reserved Instance for a one-year or three-year commitment, with the three-year commitment offering a bigger discount. The following types of RI are available:
+
+- Standard RIs: These provide the most significant discount (up to 75% off On-Demand) and are best suited for steady-state usage.
+- Convertible RIs: These provide a discount (up to 54% off On-Demand) and the capability to change the attributes of the RI as long as the exchange results in the creation of Reserved Instances of equal or greater value. Like Standard RIs, Convertible RIs are best suited for steady-state usage.
+- Scheduled RIs: These are available to launch within the time windows you reserve. This option allows you to match your capacity reservation to a predictable recurring schedule that only requires a fraction of a day, a week, or a month.
+
 ### Lambda
 
 "Functions as a service" (FaaS). Lambda is a "serverless" service because you can run code without configuring or managing any servers explicitely at all--you just write the code and set the trigger for when it should execute.
