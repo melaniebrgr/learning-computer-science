@@ -63,6 +63,7 @@ AWS Managed Services (AMS) operate AWS on your behalf, providing a secure AWS La
   - Comprehend (sentiment)
   - Translate (lang-to-lang)
   - Polly (text-to-speech)
+  - Transcribe (speech-to-text)
   - AI Services
   - Glue Crawler (crawl data stores and populate Glue catalog)
   - Database migration service
@@ -175,6 +176,52 @@ AWS services can be access and configured from the
 - SDK
 - API
 
+## Tests
+
+- https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/tree/master/practice-exam
+
 ### Practise exam 1
 
-You scored 54 / 65 (83%), wrong questions 11, 22, 34, 38, 40, 48, 49
+You scored 54 / 65 (83%), wrong questions: 11, 22, 34, 38, 40, 48, 49
+
+### Practise exam 2
+
+You scored 16 / 20 (80%), wrong questions: 9, 12, 13, 20
+
+CloudWatch monitors your AWS resources and the applications that you run on AWS in real time. You can use CloudWatch with AWS CloudTrail to monitor and receive alerts about console sign-in events that involve the AWS account root user.
+
+Trusted Advisor checks security groups for rules that allow unrestricted access to a resource. Unrestricted access increases opportunities for malicious activity, such as hacking, denial-of-service attacks, or loss of data.
+
+support plans: enterprise, business, developer, basic
+
+Correct. Lambda charges are dependent on the number of requests for your Lambda functions.
+
+AWS MGN is an automated lift-and-shift solution. This solution can migrate physical servers and any databases or applications that run on them to EC2 instances in AWS.
+
+Macie is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS.
+
+### Practise exam 3
+
+[AWS-Certified-Cloud-Practitioner-Notes/practice-exam/practice-exam-1.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-1.md)
+
+You scored 45 / 50 (90%), wrong questions: 8, 18, 19, 31, 36
+
+Which of the following must an IAM user provide to interact with AWS services using the AWS Command Line Interface (AWS CLI)?
+
+You have AWS Basic support, and you have discovered that some AWS resources are being used maliciously, and those resources could potentially compromise your data. What should you do? AWS Support Concierge for enterprise.
+
+Study: migration, support account differences
+
+### Practise exam 4
+
+[AWS-Certified-Cloud-Practitioner-Notes/practice-exam/practice-exam-2.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-2.md)
+
+You scored 39 / 50 (%), wrong questions: 7, 9, 16, 22, 32, 33, 36, 37, 44, 48, 49
+
+Amazon Inspector, AWS Trusted Advisor, Amazon CloudWatch, Concierge Support Team, Infrastructure Event Management, AWS Global accelerator, AWS Config, Security Groups, APN Consulting Partners
+
+According to the AWS Shared responsibility model, which of the following are the responsibility of the customer? Protecting the confidentiality of data in transit in Amazon S3, Patching applications installed on Amazon EC2.
+
+Which of the following EC2 instance purchasing options supports the Bring Your Own License (BYOL) model for almost every BYOL scenario? Dedicated Hosts.
+
+In your on-premises environment, you can create as many virtual servers as you need from a single template. What can you use to perform the same in AWS? AMI

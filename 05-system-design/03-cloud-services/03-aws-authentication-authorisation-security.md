@@ -120,7 +120,7 @@ Service Control Policies are an AWS Organizations feature that allows you to set
 
 ##### Config
 
-Configurations for all AWS resources can be enforced with **AWS Config**, which evaluates, audits and notifies of resources not compliant with established configurations. Provides a dashboard to see compliance at a glance. Manage and control service config on a central level.
+Configurations for all AWS resources can be enforced with **AWS Config**, which evaluates, audits and notifies of resources not compliant with established configurations, and provides a dashboard to see compliance at a glance. Manage and control service config on a central level.
 Assess, audit and evaluate service configuration with AWS Config. It provides an inventory of the resources being used and their configuration. This is useful for verification and compliance, i.e. make sure resource configurations comply with government regulations. You can also see the history of the resource's configuration. Used AWS Config to see what changed, use CloudTrail to see who changed it. Remediation actions can also be configured.
 
 ##### Trusted Advisor
@@ -134,6 +134,8 @@ For information about AWS' security and compliance use **AWS Artifact**. Use **
 For automated security compliance assessments of software and networks use **Amazon Inspector**, especially useful for multi-account configurations to make sure security is consistent across these. "Amazon Inspector automatically discovers workloads, such as Amazon EC2 instances, containers, and Lambda functions, and scans them for software vulnerabilities and unintended network exposure." It collects and centralises security data.
 
 #### Protect
+
+Use **AWS Shield** to protect against DDoS attacks. There is standard (available by default) and advanced shield which can provide more details about an attack. Both WAF and shield provide protection at the network level.
 
 **AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, that compromise security or that consume excessive resources such as SQL injection, and XSS. WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
 
@@ -151,11 +153,7 @@ A **security group** is like a firewall that can be attached to an instance that
 - "Stateful" response are always allowed if the request was
 - There can be multiple security groups for an instance
 
-Use **AWS Shield** to protect against DDoS attacks. There is standard (available by default) and advanced shield which can provide more details about an attack. Both WAF and shield provide protection at the network level.
-
-#### Monitor
-
-**Amazon GuardDuty** provides automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by monitoring CloudWatch, VPC and DNS logs using ML and other rules. Automatic responses can be configured. Use **AWS CloudTrail** to analyse, track and search across all the logs to see who made changes where and when. It works across all regions and automatic responses can be configured when inconsistencies are detected.
+**Amazon GuardDuty** provides automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by monitoring CloudWatch, VPC and DNS logs using ML and other rules. Automatic responses can be configured.
 
 #### Encrypt
 

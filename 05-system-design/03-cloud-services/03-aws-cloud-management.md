@@ -36,7 +36,7 @@ Expenses are monitored from the billing dashboard, where budgets can also be set
 
 **AWS Cost Explorer** is a free tool that can be used to view past cost data and future projections. A set of default reports is provided the can be further filtered, e.g. cost per EC2 instance type per month.
 
-The **AWS Pricing Calculator** can useful to plan costs before committing to services. The **AWS Total Cost of Ownership (TCO)** Calculator is for comparing on premises costs to cloud costs.
+The **AWS Pricing Calculator** can useful to estimate and plan costs before committing to services. The **AWS Total Cost of Ownership (TCO)** Calculator is for comparing on premises costs to cloud costs.
 
 **Budgets** allows you to set custom budgets to track your cost and usage from the simplest to the most complex use cases. With AWS Budgets, you can choose to be alerted by email or SNS notification when actual or forecasted cost and usage exceed your budget threshold, or when your actual RI and Savings Plans' utilization or coverage drops below your desired threshold.
 
