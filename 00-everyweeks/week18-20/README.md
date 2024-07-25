@@ -28,6 +28,46 @@ Assitants call OpenAi models to tune their capabilities, can call multiple tools
 
 Competitors: OpenAI Assistants, AWS Bedrock Agents, GCP Agents
 
+### OpenAI Build Hour: Assistants & Agents Notes
+
+See Assistants API Quickstart.
+Practises to follow up on
+
+- evals: https://cookbook.openai.com/examples/evaluation/getting_started_with_openai_evals
+- prompt injection: You can use an asynchronous guardrail step to check for this and to ensure the user’s question is relevant to the agent
+- routines: use in the prompt
+- reinforce tool use: you can refine the system prompt to avoid this behavior. Additionnally, you can use the tool_choice = “required” parameter and add a tool “message” to make sure the assistant picks a tool each time, and only uses the “message” tool to convey important information or ask for follow-up questions.
+- guardrails: for example, taking a second pass at the output
+
+text completion (cumbersome) -> instruction folow -> assistant with aper sona -> instructions and functions
+An assistant is the notion of instructions and function.
+A "batteries included chat experience".
+**An assistant is a LLM system that has instructions and tools.**
+When we talk about agents in includes concepts of multistep exections with some self-correction and planning.
+The assistan API is to simplify the assitant like experience with enabling tools like code interpreter and retrieval.
+What is an assistnat isn't as important as the underlying concept.
+Assistants tend to be async and stateful while chate completions tend to be synchronous and stateless.
+To know if you should use agents, look at the workflow and capabilities that you need.
+Hard logic is best represented with code.
+For more consistency need to constrain the LLM task.
+
+Use evals
+
+Evals is short for “evaluations” which essentially means how you’re going to gauge whether the agent answered something correctly or took the correct action.
+Here’s a resource on evals: https://cookbook.openai.com/examples/evaluation/getting_started_with_openai_evals
+
+A routine is a checklist of steps that you supply in the prompt
+This is softer logic that is recommended.
+With respect to orchestration, start as simple as possible with routines.
+
+Orchestration techniques:
+
+- hand-offs: a triage that hands-off task to the best suited agent, e.g. "I want to return" an time handsoff the request to the Orders assistant (and not the tech support assistant, and sales assistant.)
+- nested-calls: multiple function calls that use the results of the previous
+- manager: one manager assigns tasks which communicate back and forth. THis is a more complex approach that tends to be more common to fail.
+
+To hand off a conversation you need to load in a new system.
+
 ### Agentic workflow
 
 It also eases the set up for an **Agentic workflow**.

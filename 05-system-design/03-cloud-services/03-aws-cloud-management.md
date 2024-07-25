@@ -65,3 +65,5 @@ AWS shows any operational/availabilities issues with your AWS resources. The da
 - **Outposts** server racks on shipped to you from AWS, so you can still your AWS on prem.
 - **Resource access manager** its about the actual services (not just their blueprints) share a centrally managed VPC.
 - **License manager** warn and help enforce license requirements when using services.
+- **Amazon Connect** is an AI-powered cloud contact center. It automatically detects customer issues, and provides agents with contextual customer information and suggested responses and actions for faster resolution of issues.
+- **Penetration testing** AWS customers are welcome to carry out security assessments or penetration tests of their AWS infrastructure without prior approval for Permitted Services: EC2, RDS, CloudFront (15 total). Customers are not permitted to conduct any security assessments of AWS infrastructure or the AWS services themselves. Customers seeking to test non approved services will need to work directly with AWS Support or your account representative. 

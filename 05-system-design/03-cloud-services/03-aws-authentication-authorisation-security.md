@@ -123,9 +123,21 @@ Service Control Policies are an AWS Organizations feature that allows you to set
 Configurations for all AWS resources can be enforced with **AWS Config**, which evaluates, audits and notifies of resources not compliant with established configurations, and provides a dashboard to see compliance at a glance. Manage and control service config on a central level.
 Assess, audit and evaluate service configuration with AWS Config. It provides an inventory of the resources being used and their configuration. This is useful for verification and compliance, i.e. make sure resource configurations comply with government regulations. You can also see the history of the resource's configuration. Used AWS Config to see what changed, use CloudTrail to see who changed it. Remediation actions can also be configured.
 
+- _fine-grained visibility into what resources exist and how they are configured_ at any time.
+- send notifications whenever resources are created, modified, or deleted without having to monitor these changes by polling
+- access historical configurations of resources.
+- view how the resource you intend to modify is related to other resources and assess the impact of your change
+- view the IAM policy that was assigned to a user, group, or role at any time
+- evaluate configurations by establishing AWS Config rules; resources can have the status of compliant, non-complaitn, error or not applicable
+
 ##### Trusted Advisor
 
-**Trusted Advisor** provides advice for resource management. Trusted Advisor checks help optimize your AWS infrastructure, increase security and performance, reduce your overall costs, and monitor service limits. It checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
+**Trusted Advisor** provides advice for resource management.
+
+> Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps. If you have a Basic or Developer Support plan, you can use the Trusted Advisor console to access all checks in the Service Limits category and six checks in the Security category. If you have a Business, Enterprise On-Ramp, or Enterprise Support plan, you can use the Trusted Advisor console and the AWS Trusted Advisor API to access all Trusted Advisor checks.  
+
+Like a static analysis check across your account.
+For example, it checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
 
 ##### Misc. standardisation & compliance services
 
@@ -166,3 +178,7 @@ A best practise is to store, manage and automate rotation of passwords, API keys
 #### Investigate
 
 Find root causes of security issues with **Amazon Detective**. "Amazon Detective automatically collects log data from your AWS resources and uses machine learning (ML), statistical analysis, and graph theory to build a dataset that you can use to conduct more efficient security investigations." Seems to be useful for post-mortems.
+
+Identify sensitive data in s3 buckets with **Amazon Macie**. Amazon Macie is a data security service that discovers sensitive data by using machine learning and pattern matching.
+
+> Macie provides you with an inventory of your S3 general purpose buckets, and automatically evaluates and monitors the buckets for security and access control. If Macie detects a potential issue with the security or privacy of your data, such as a bucket that becomes publicly accessible, Macie generates a finding for you to review and remediate as necessary.

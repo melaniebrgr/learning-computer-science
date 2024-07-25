@@ -22,7 +22,7 @@ AWS Managed Services (AMS) operate AWS on your behalf, providing a secure AWS La
 
 ### Services
 
-- ✔️ Authentication, authorization, and security:
+- Authentication, authorization, and security:
   - The shared responsibility model
   - Authentication and authorisation
     - Identity & Access management (IAM)
@@ -42,7 +42,7 @@ AWS Managed Services (AMS) operate AWS on your behalf, providing a secure AWS La
   - Virtual Private Cloud (VPC)
   - Virtual Private Network (VPN)
 
-- ✔️ API:
+- API:
   - API Gateway
   - AppSync
   - Transit Gateway
@@ -86,7 +86,7 @@ AWS Managed Services (AMS) operate AWS on your behalf, providing a secure AWS La
   - Step Functions
   - Batch
 
-- ✔️ File storage:
+- File storage:
   - Elastic Block Store (EBS)
   - Elastic File System (EFS)
   - Simple Storage Solution (S3)
@@ -202,7 +202,7 @@ Macie is an automated security assessment service that helps improve the securit
 
 ### Practise exam 3
 
-[AWS-Certified-Cloud-Practitioner-Notes/practice-exam/practice-exam-1.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-1.md)
+[practice-exam-1.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-1.md)
 
 You scored 45 / 50 (90%), wrong questions: 8, 18, 19, 31, 36
 
@@ -214,9 +214,9 @@ Study: migration, support account differences
 
 ### Practise exam 4
 
-[AWS-Certified-Cloud-Practitioner-Notes/practice-exam/practice-exam-2.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-2.md)
+[practice-exam-2.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-2.md)
 
-You scored 39 / 50 (%), wrong questions: 7, 9, 16, 22, 32, 33, 36, 37, 44, 48, 49
+You scored 39 / 50 (78%), wrong questions: 7, 9, 16, 22, 32, 33, 36, 37, 44, 48, 49
 
 Amazon Inspector, AWS Trusted Advisor, Amazon CloudWatch, Concierge Support Team, Infrastructure Event Management, AWS Global accelerator, AWS Config, Security Groups, APN Consulting Partners
 
@@ -225,3 +225,45 @@ According to the AWS Shared responsibility model, which of the following are the
 Which of the following EC2 instance purchasing options supports the Bring Your Own License (BYOL) model for almost every BYOL scenario? Dedicated Hosts.
 
 In your on-premises environment, you can create as many virtual servers as you need from a single template. What can you use to perform the same in AWS? AMI
+
+### Practise exam 5
+
+[practice-exam-23.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-23.md)
+
+You scored  41 / 50 (82%), wrong questions: 7, 9, 15, 22, 24, 31, 32, 44, 48
+
+"A user is planning to migrate..."
+
+"Which component must be attached to a VPC to enable inbound Internet access?" Internet gateway
+
+"A company has a MySQL database running on a single Amazon EC2 instance. The company now requires higher availability in the event of an outage.
+Which set of tasks would meet this requirement?" Migrate to Amazon RDS and enable Multi-AZ
+
+"Under the AWS shared responsibility model, which of the following is the customer's responsibility?" Patching guest OS and applications
+
+"What is the customer's responsibility when using AWS Lambda?" Code encryption
+
+OpsWorks, Amazon Connect, PCI-compliant workload, AWS Trusted Advisor, Macie, AWS Personal Health Dashboard, AWS Direct Connect, AWS Config rules, AWS Transit Gateway (VPC)
+
+<https://d0.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf>
+
+### Practise exam 6
+
+[practice-exam-22.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-22.md)
+
+You scored 44 / 50 (88%), wrong questions: 1, 13, 18, 22, 32, 45
+
+What is the recommended method to request penetration testing on AWS resources?
+
+Which components are required to build a successful site-to-site VPN connection on AWS? (Choose two.)
+
+Internet gateway, ~~NAT gateway~~, ~~Customer gateway~~, ~~Transit gateway~~, ~~Virtual private gateway~~, AWS Security Bulletins, Amazon Elastic Block Store, AWS Simple Monthly Calculator
+
+Which of the following allows AWS users to manage cost allocations for billing? Tagging resources.
+
+Which requirement must be met for a member account to be unlinked from an AWS Organizations account? The member account must meet the requirements of a standalone account.
+
+Which AWS tools automatically forecast future AWS costs? Cost Explorer
+
+A user has a stateful workload that will run on Amazon EC2 for the next 3 years.
+What is the MOST cost-effective pricing model for this workload? Reserved Instances ( < Dedicated Instances)

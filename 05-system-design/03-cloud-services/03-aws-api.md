@@ -4,7 +4,6 @@
 
 - API Gateway
 - AppSync
-- Transit Gateway
 - Storage Gateway
 
 ### AWS API Gateway
@@ -15,10 +14,6 @@
 
 **A managed GraphQL API service**. You get an API without writing API code and worrying about the deployment. You defined schemas, queries, mutations, connect schemas to sources and resolvers. Both real-time and on-demand connections are supported similar to API Gateway.
 
-### AWS Transit Gateway
-
-AWS Transit Gateway connects your Amazon Virtual Private Clouds (VPCs) and on-premises networks through a central hub.
-
 ### AWS Storage Gateway
 
-AWS Storage Gateway gives your applications on-premises and in-cloud access to virtually unlimited cloud storage. It is for on premises cloud storage (like a Google Drive). It gives you a local, low-latency cache. There are three types: Tape, File and Volume Gateway.
+Gives on-premises "limitless" cloud storage, like a Google Drive. There are three types: Tape, File and Volume Gateway.
