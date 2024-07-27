@@ -36,7 +36,7 @@ Expenses are monitored from the billing dashboard, where budgets can also be set
 
 **AWS Cost Explorer** is a free tool that can be used to view past cost data and future projections. A set of default reports is provided the can be further filtered, e.g. cost per EC2 instance type per month.
 
-The **AWS Pricing Calculator** can useful to estimate and plan costs before committing to services. The **AWS Total Cost of Ownership (TCO)** Calculator is for comparing on premises costs to cloud costs.
+The **AWS Pricing Calculator** is a free web-based planning tool that you can use to create cost estimates for using AWS services. The **AWS Total Cost of Ownership (TCO)** Calculator is for comparing on premises costs to cloud costs.
 
 **Budgets** allows you to set custom budgets to track your cost and usage from the simplest to the most complex use cases. With AWS Budgets, you can choose to be alerted by email or SNS notification when actual or forecasted cost and usage exceed your budget threshold, or when your actual RI and Savings Plans' utilization or coverage drops below your desired threshold.
 
@@ -55,7 +55,7 @@ AWS shows any operational/availabilities issues with your AWS resources. The da
 
 ### Misc. management services and features
 
-- **Control Tower** creates and configures multiple accounts with best practises
+- **Control Tower** creates and configures multiple accounts with best practises. Control Tower automates the process of setting up a new baseline multi-account AWS environment that is secure, well-architected, and ready to use. Control Tower incorporates the knowledge that AWS Professional Service has gained over the course of thousands of successful customer engagements.
 - **AWS OpsWorks** gives you a managed implementation of Chef and Puppet, useful for patching, updating, and backing up. It's used for EC2 management.
 - **AWS Systems Manager** provides a resource overview: you can group and visualise resources. Manage workloads centrally fleet of servers rolling out patches simultations and share parameter store.
 - **AWS Catalog** allows you to curate a list of approved services a company is allowed to use. Helps observe governance and compliance. You can also set budget constraints.

@@ -15,9 +15,14 @@
 
 AWS services can either be global or regional. For example, Route 53, CloudFront, and IAM are global. You don't want to configure these in different regions. However, the majority of services are regional. For many services, you can select the region to deploy to. Pricing, service offerings, legal concerns, and proximity to users vary between regions.
 
-A "region" is a physically isolated geographical area (~100 miles apart) with a cluster of at least three 3 (or more) availability zones (AZs). An AZ contains 1 or more datacenters that are also physically seperated (~2 miles apart) and have their own power source. Resources are launched into AZs. If one AZ has an outage it can fail over to another AZ. Although they are physically isolated, regions and AZs have a direct, low-latency, global network connecting to each other.
+A **Region** is a geographical area that contains AWS resources. An **Availability Zone** is a single data center or a group of data centers within a Region. Availability Zones are located 10s of miles apart from each other and have their own power source. This is close enough to have low latency (the time between when content requested and received) between Availability Zones. However, if a disaster occurs in one part of the Region, they are distant enough to reduce the chance that multiple Availability Zones are affected. For example, The Northern California Region is called `us-west-1`, and this Region contains three AZs (`1a`, `1b`, and `1c`). Then, within each AZ there are three data centers.
 
-Health of services used by your account can be observed from the service health dashboard. A general overview of all service health around the world can also be viewed.
+When choosing a region to operate out of, there are four main considerations:
+
+1. **Compliance**: Depending on your company and location, you might need to run your data out of specific areas. For example, if your company requires all of its data to reside within the boundaries of the UK, you would choose the London Region. By default, data in a region _stays_ in that region, unless you explicitely give it permission to move outside of that region.
+2. **Proximity to customers**: The speed of light is still an upper limiting factor. Selecting a Region that is close to your customers will help you to get content to them faster.
+3. **Service availability**: Sometimes, the closest Region might not have all the features that you want to offer to customers. AWS is frequently innovating by creating new services and expanding on features within existing services. However, making new services available around the world sometimes requires AWS to build out physical hardware one Region at a time.
+4. **Pricing**: The cost of services can vary from Region to Region.
 
 ### Route 53
 

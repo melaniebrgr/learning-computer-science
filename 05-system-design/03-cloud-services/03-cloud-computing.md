@@ -26,8 +26,9 @@ There are three cloud deployment models: private, public and hybrid. In a privat
 - <https://pro.academind.com/courses/aws-cloud-practitioner-clf-c01-complete-aws-introduction>
 - <https://aws.amazon.com/certification/certified-cloud-practitioner/>
 - <https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html>
-- Core Cloud Concepts: https://aws.amazon.com/getting-started/cloud-essentials/
-AWS Infrastructure: https://aws.amazon.com/about-aws/global-infrastructure/
-AWS Benefits: https://aws.amazon.com/application-hosting/benefits/
-Cloud Computing Advantages: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html
-Well-Architected Framework: https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc
+- Core Cloud Concepts: <https://aws.amazon.com/getting-started/cloud-essentials/>
+- AWS Infrastructure: <https://aws.amazon.com/about-aws/global-infrastructure/>
+- AWS Benefits: <https://aws.amazon.com/application-hosting/benefits/>
+- Cloud Computing Advantages: <https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html>
+- Well-Architected Framework: <https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc>
+- <https://explore.skillbuilder.aws/learn/course/134>
