@@ -151,20 +151,6 @@ Use **AWS Shield** to protect against DDoS attacks. There is standard (availab
 
 **AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, that compromise security or that consume excessive resources such as SQL injection, and XSS. WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
 
-**Network access control lists (NACLs)** are firewalls applied at the subnet level.
-
-- A firewall for a subnet
-- Checks incoming and outgoing requests and periodically blocks
-- "Stateless" requests and responses are decoupled
-- One NACL per subnet
-
-A **security group** is like a firewall that can be attached to an instance that limits internet traffic to the instance. Put another way, security groups are a virtual firewall applied at the instance level controlling outbound and inbound traffic.
-
-- A firewall for a single EC2 instance
-- Checks incoming and outgoing requests and periodically blocks
-- "Stateful" response are always allowed if the request was
-- There can be multiple security groups for an instance
-
 **Amazon GuardDuty** provides automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by monitoring CloudWatch, VPC and DNS logs using ML and other rules. Automatic responses can be configured.
 
 #### Encrypt
