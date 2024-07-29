@@ -33,7 +33,7 @@
 
 ### Data warehouse
 
-**Redshift** is a database to be used specifically for data analysis. It is comparable to RDS except where RDS is meant for application data, Redshift is for business intelligence, and it combines and structures data from different business sectors and sources.
+**Redshift** is data warehousing service that you can use for big data analytics. That is, it is a big data BI solution; a database to be used specifically for analysis of exabytes of data. It is comparable to RDS except where RDS is meant for application data, Redshift is for business intelligence. It combines and structures data from different business sectors and sources and allows you to aun a SQL query against exabytes of data. Suitable when you want to look backwards.
 
 ### Extract and transform
 

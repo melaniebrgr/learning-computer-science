@@ -1,12 +1,12 @@
 # 03 Cloud services
 
-## Block Storage
+## Object & Block Storage
 
 Broadly speaking, data can be stored in files or stored in databases. You can think of block-level storage as a place to store files. A file being a series of bytes that are stored in blocks on disc. When a file is updated, the whole series of blocks aren't all overwritten. Instead, it updates just the pieces that change. This makes it an efficient storage type when working with applications like databases, enterprise software, or file systems.
 
 Files are often generated in the course of typical web application usage, e.g. user file uploads, invoice generation, image transformations, legal documents, and so on. So we need services for file storage.
 
-There are three types of block or file storage services:
+There are three types of object / block / file storage services:
 
 - instance storage,
 - block (EBS),
@@ -14,6 +14,8 @@ There are three types of block or file storage services:
 - object (S3).
 
 These provide different levels of abstraction. **EBS block storage** provides an unformatted hardrive that can be formatted and structured however you like. Any structure and any file can go. If you don't care about the underlying hardrive and its formatting, but do care about configuring the file system however you like, then use a **network files system service like EFS and FSx**. When you don't want to bother with any of that and store files without caring about the underlying system, then use **simple storage service (S3)**.
+
+> Object storage treats any file as a complete, discreet object. Now this is great for documents, and images, and video files that get uploaded and consumed as entire objects, but every time there's a change to the object, you must re-upload the entire file. There are no delta updates. Block storage breaks those files down to small component parts or blocks. This means, for that 80-gigabyte file, when you make an edit to one scene in the film and save that change, the engine only updates the blocks where those bits live. If you're making a bunch of micro edits, using EBS, elastic block storage, is the perfect use case.
 
 ### Instance storage
 
@@ -36,7 +38,7 @@ Because EBS volumes are for data that needs to persist, it’s important to back
 
 For custom AMIs, EBS snapshots can be created in S3. These are basically point-in-time diffs of the EBS volume.
 
-### Amazon Simple Storage Service (S3)
+### Simple Storage Service (S3)
 
 The world according to S3: everything is an object and objects are uploaded into buckets. Buckets exist in a specific region, but bucket names have a universal namespace and must be unique globally.
 
@@ -44,7 +46,7 @@ In object storage, each object consists of data, metadata, and a key. When you u
 
 S3 can be connected to from a browser over the (public) internet, accessed via a REST API, and from EC2 over the internet or an S3 Gateway. When accessing S3 from EC2, it is recommended to create a role with a policy granting access, instead of storing a secret access key on the EC2 instance. In total, a S3 object is made up of the data itself, metadata, and a global unique identifier. Metadata can include a key, version ID, sub-resources, access control information, and more.
 
-Use cases for S3 include backing up of data, static web site hosting, media hosting, software delivery, bit torrenting (object can be retrieved by bit torrent). Objects up to 5GB in size can be uploaded to S3 in a single put operation, the multipart upload API must be used for larger objects up to 5TB in size. CloudFront can be used to accelerate data upload.
+Use cases for S3 include backing up of data, static web site hosting, media hosting, software delivery, bit torrenting (object can be retrieved by bit torrent). Objects up to 5GB in size can be uploaded to S3 in a single put operation, the multipart upload API must be used for larger objects up to 5TB in size. CloudFront can be used to accelerate data upload. 5TB is the maximum size.
 
 There are 8 Amazon S3 **storage classes**. All share 11 9's of durability but vary slightly in other aspects of availability, zones, fees, and latency. The different storage classes generally align with 3 different types of file access patterns: frequent, infrequent and archival.
 
@@ -124,7 +126,13 @@ Billing
 
 ### Elastic file system (EFS)
 
+File storage is ideal for use cases in which a large number of services and resources need to access the same data at the same time.
+
 EFS is a preformatted file system that scales automatically and has multi-attach is a core feature. For this reason it is a great solution for when you want to share data between multiple EC2 instances. **It can be shared** between different availability zones in a region and even with premises clients. With EFS a file system can be mounted to some mount point on an EC2 instance. The EFS needs to be created within a subnet in a specific region.
+
+Amazon EBS volumes attach to EC2 instances and are a (single) AZ resource. In order to attach EC2 to EBS, you need to be in the same AZ. It's a hard drive you can save files to, run a database on top of it, or store applications on. If you provision a 2TB EBS volume and fill it up, it doesn't automatically scale to give you more storage.
+
+Amazon EFS it isn't just a blank hard drive that you can write to. It is a true file system for Linux. It is a regional resource and stores data in and across multiple AZs. This means, any EC2 instance in the Region can write to the EFS file system, i.e. you can have multiple instances reading and writing from it at the same time. As you write more data to EFS, it automatically scales. No need to provision any more volumes.
 
 ### FSx Lustre
 
