@@ -14,13 +14,9 @@ A managed SQL database in the cloud can be set up using **Amazon Relational Data
 
 Aurora is SQL engine created by Amazon for the AWS cloud that claims to be MySQL and PostgreSQL compatible. There is a serverless version of Aurora available so you only use and pay for it when you need it. Built on RDS, i.e. Amazon RDS for Aurora.
 
-### Elasticache
-
-Elasticache is a fully managed caching Redis or Memcached database running on EC2. Memcached is simplest and more elasticity. Redis supports encryption and HIPAA, and has a number of other reliability features. In-memory caching is useful for low latency reads, particularly for compute-heavy application workloads.
-
 ### DynamoDB
 
-DynamoDB is a fully managed KV DB that is useful for unstructured data. To manage the data use the AWS API / SDK. Features:
+DynamoDB is a fully managed key-value DB that is useful for unstructured data. To manage the data use the AWS API / SDK. Features:
 
 - serverless: you do not have to provision, patch, or manage servers, or install, maintain, or operate software
 - streams: subscribe to a time-orded series of DB changes
@@ -30,20 +26,23 @@ DynamoDB is a fully managed KV DB that is useful for unstructured data. To manag
 
 ### Other AWS databases
 
-- MemoryDB: Persistent in-memory storage
-- DocumentDB: AWS alternative to MongoDB
-- Keyspaces: Wide column database
-- Neptune: Graph database
-- Timestream: Time series database
-- Quantum ledger: An immutable log of database changes
+- **DocumentDB**: AWS alternative to MongoDB suitable for content management, catalogs, and user profiles
+- **Neptune**: Graph database for social networking and recommendation engines, also great for fraud detection needs
+- **Quantum ledger database (QLDB)**: An immutable system of record where any entry can never be removed from the audits
+- **MemoryDB**: Persistent in-memory storage
+- **Keyspaces**: Wide column database
+- **Timestream**: Time series database
+- **Amazon managed blockchain**: Create and manage blockchain networks with open-source frameworks
 
-For more info: <https://aws.amazon.com/products/databases/>
+## Database services
 
-## Database service
+### Accelerator options
+
+**Elasticache** is a fully managed caching Redis or Memcached database running on EC2. Memcached is simplest and more elasticity. Redis supports encryption and HIPAA, and has a number of other reliability features. In-memory caching is useful for low latency reads, particularly for compute-heavy application workloads. **DynamoDB Accelerator (DAX)**, a native caching layer designed to dramatically improve read times for your nonrelational data.
 
 ### Database Migration Service (DMS)
 
-**Database Migration Service (DMS)** enables you to create a migration task with connections to the source and target databases and start it with a click of the button. Homogenous migrations are database migrations of the same type. Heterogeneous migrations are when source and target databases are of different types and it's a two-step process. First the schema is converted with the **AWS Schema Conversion Tool**, then DMS migrates data. Use cases:
+DMS enables you to create a migration task with connections to the source and target databases and start it with a click of the button. Homogenous migrations are database migrations of the same type. Heterogeneous migrations are when source and target databases are of different types and it's a two-step process. First the schema is converted with the **AWS Schema Conversion Tool**, then DMS migrates data. Use cases:
 
 - migrate relational and nonrelational databases, and other types of data stores
 - perform homogenous and heterogenous migrations

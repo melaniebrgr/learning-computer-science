@@ -108,16 +108,6 @@ Data protection:
 
 #### Standardisation & compliance
 
-##### Organisation
-
-Consistent usage of best practise across accounts by setting up organisations units (OU) with **Organisations**. For example, help ensure security practises are applied to production services.
-
-Occasionally an organisation may wish to have multiple AWS accounts, if for example there are different teams with different goals and needs that could clash under a single account. If you have multiple AWS accounts they can be consolidated with **AWS Organizations**. Multiple accounts can also allow you to access additional resources. You can manage e.g. backups and policies accross accounts from a central place.
-
-The Paying account is where the bills get paid, so that you get one bill, far all the linked accounts services. The combined usage enables shared volume discounts. There is no extra fee for AWS Organizations. Service Control Policies (SCP) can be attached to individual organizations to control or limit what administrators of those organizations can do.
-
-Service Control Policies are an AWS Organizations feature that allows you to set permission guardrails for organization accounts. These guardrails set maximum access rights which can't be exceeded by permissions set inside of the affected organization accounts. Even if an identity (e.g., an IAM user) in an account would receive a policy that grants more access rights, the SCP would restrict the maximum access rights.
-
 ##### Config
 
 Configurations for all AWS resources can be enforced with **AWS Config**, which evaluates, audits and notifies of resources not compliant with established configurations, and provides a dashboard to see compliance at a glance. Manage and control service config on a central level.
@@ -130,34 +120,49 @@ Assess, audit and evaluate service configuration with AWS Config. It provides 
 - view the IAM policy that was assigned to a user, group, or role at any time
 - evaluate configurations by establishing AWS Config rules; resources can have the status of compliant, non-complaitn, error or not applicable
 
-##### Trusted Advisor
+##### Inspector
 
-**Trusted Advisor** provides advice for resource management.
+Run security assessments on demand.
 
-> Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps. If you have a Basic or Developer Support plan, you can use the Trusted Advisor console to access all checks in the Service Limits category and six checks in the Security category. If you have a Business, Enterprise On-Ramp, or Enterprise Support plan, you can use the Trusted Advisor console and the AWS Trusted Advisor API to access all Trusted Advisor checks.  
+> **Amazon Inspector** automatically discovers workloads, such as Amazon EC2 instances, containers, and Lambda functions, and scans them for software vulnerabilities and unintended network exposure.
 
-Like a static analysis check across your account.
-For example, it checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
+Amazon Inspector helps to improve security, and compliance of your AWS deployed applications by running an automated security assessment against your infrastructure. Specifically, it helps to check on deviations of security best practices, exposure of EC2 instances, vulnerabilities, and so forth. The service consists of three parts:
+
+1. a network configuration reachability piece,
+2. an Amazon agent, which can be installed an EC2 instances, and
+3. a security assessment service that brings them all together.
+
+To use it, you configure Inspector options, run the service, out pops a list of potential security issues. The resulting findings are displayed in the Amazon Inspector console, and they are presented with a detailed description of the security issue, and a recommendation on how to fix it. Additionally, you can retrieve findings through an API. In a multi-account organisation, it collects and centralises security data.
+
+##### Artifact
+
+**AWS Artifact** provides access to AWS security and compliance documents, such as AWS ISO certifications, Payment Card Industry (PCI) reports, and Service Organization Control (SOC) reports.. **AWS Artifact Agreements** can be used to sign an agreement with AWS regarding your use of certain types of information throughout AWS services. You can review, accept, and manage agreements for an individual account and for all your accounts in AWS Organizations. **AWS Artifact Reports** provide compliance reports from third-party auditors. These auditors have tested and verified that AWS is compliant with a variety of global, regional, and industry-specific security standards and regulations and remains up-to-date.
 
 ##### Misc. standardisation & compliance services
 
-For information about AWS' security and compliance use **AWS Artifact**. Use **AWS Audit Manager** to map your compliance requirements to AWS usage data with prebuilt and custom frameworks and automated evidence collection.
+In the **Customer Compliance Center** there are resources to help learn more about AWS compliance. You can also access compliance whitepapers on AWS answers to key compliance questions, overviews of AWS risk and compliance, auditing security checklists.
 
-For automated security compliance assessments of software and networks use **Amazon Inspector**, especially useful for multi-account configurations to make sure security is consistent across these. "Amazon Inspector automatically discovers workloads, such as Amazon EC2 instances, containers, and Lambda functions, and scans them for software vulnerabilities and unintended network exposure." It collects and centralises security data.
+Use **AWS Audit Manager** to map your compliance requirements to AWS usage data with prebuilt and custom frameworks and automated evidence collection.
 
 #### Protect
 
-Use **AWS Shield** to protect against DDoS attacks. There is standard (available by default) and advanced shield which can provide more details about an attack. Both WAF and shield provide protection at the network level.
+Basic protections are built into **security groups** and **ELBs** that protect at the AWS instance, e.g. they can prevent UDP flood DDoD attacks by denying entry of those packets. Security groups operate at the network level like a firewall. **Elastic load balancers** protect against the slow loris attack by waiting for the request to complete before forwarding it.
 
-**AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, that compromise security or that consume excessive resources such as SQL injection, and XSS. WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS.
+**AWS Shield** protects your AWS resources from the most common, frequently occurring types of DDoS attacks. AWS Shield provides two levels of protection: Standard and Advanced. **Standard** automatically protects all AWS customers at no cost. As network traffic comes into your applications, AWS Shield Standard uses a variety of analysis techniques to detect malicious traffic in real time and automatically mitigates it. AWS Shield **Advanced** is a paid service that provides detailed attack diagnostics and the ability to detect and mitigate sophisticated DDoS attacks. It also integrates with other services such as Amazon CloudFront, Amazon Route 53, and Elastic Load Balancing. Additionally, you can integrate _AWS Shield with AWS WAF_ by writing custom rules to mitigate complex DDoS attacks.
 
-**Amazon GuardDuty** provides automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by monitoring CloudWatch, VPC and DNS logs using ML and other rules. Automatic responses can be configured.
+**AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, that compromise security or that consume excessive resources such as SQL injection, and XSS. WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS. Both WAF and shield provide protection at the network level and use machine learning to recognise new threats as they evolve. AWS WAF works together with Amazon CloudFront and an Application Load Balancer using a web access control list (ACL). The WACL can be configures to allow all requests except those from the IP addresses that you have specified.
+
+**Amazon GuardDuty** provides continuous automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by analyzing continuous streams of metadata generated from your account, and network activity found on AWS CloudTrail events, Amazon VPC Flow Logs, and DNS logs. It uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning to identify threats more accurately. The best part is that it runs independently from your other AWS services, so it won't affect performance or availability of your existing infrastructure, and workloads. Automatic responses can be configured.
+
+Amazon GuardDuty is a service that provides intelligent threat detection for your AWS environment and resources. It identifies threats by continuously monitoring the network activity and account behavior within your AWS environment.
 
 #### Encrypt
 
-in-transit: An example of encryption is transit is SSL. Unencrypted data as it is transferred over an HTTPS connection is encrypted. **AWS Certificate** can be used to manage the certs for SSL/TLS. An example of encryption at rest is when data arrives in your bucket and you've applied encryption to the bucket the data will be encrypted.
+There are two variants of encryption to consider: encryption at rest and encryption in transit.
 
-at-rest: **Amazon Key Management Service (KMS)** and **CloudHSM** help manage the keys that are used to encrypt data at rest. The key policy let's you control when how and who can read the data. It is integrated with over 100 AWS services. The difference is CloudHSM dedicates hardware specifically to you so you can create a custom key-store that could then be used by KMS.
+Encryption at-rest: For example, using **Amazon Key Management Service (KMS)** for managing the encryption key that is used to encrypt DynamoDB tables automatically. The key policy let's you control when how and who can read the data. KMS is integrated with over 100 AWS services. The difference between CloudHSM dedicates hardware specifically to you so you can create a custom key-store that could then be used by KMS. With AWS KMS, you can choose the specific levels of access control that you need for your keys. For example, you can specify which IAM users and roles are able to manage keys. Alternatively, you can temporarily disable keys so that they are no longer in use by anyone. Your keys never leave AWS KMS, and you are always in control of them. Another example of encryption at rest is when you've applied encryption to the bucket so that data arriving in the bucket is encrypted.
+
+Encryption in-transit: Usually refers to using secure sockets layer, or SSL connections to encrypt data in transit, and we can use service certificates to validate, and authorize a client. Unencrypted data as it is transferred over an HTTPS connection is encrypted. **AWS Certificate**  manages the certs for SSL/TLS.
 
 A best practise is to store, manage and automate rotation of passwords, API keys and tokens for AWS services with **AWS Secrets Manager**. It is meant to work with IAM.
 
