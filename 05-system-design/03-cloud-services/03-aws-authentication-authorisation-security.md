@@ -118,7 +118,7 @@ Assess, audit and evaluate service configuration with AWS Config. It provides 
 - access historical configurations of resources.
 - view how the resource you intend to modify is related to other resources and assess the impact of your change
 - view the IAM policy that was assigned to a user, group, or role at any time
-- evaluate configurations by establishing AWS Config rules; resources can have the status of compliant, non-complaitn, error or not applicable
+- evaluate configurations by establishing AWS Config rules; resources can have the status of compliant, non-compliant, error or not applicable
 
 ##### Inspector
 
@@ -152,7 +152,7 @@ Basic protections are built into **security groups** and **ELBs** that protect a
 
 **AWS Web Application Firewall (WAF)** is a web application firewall that protects against common exploits that could compromise application availability, e.g. from the OWASP list, that compromise security or that consume excessive resources such as SQL injection, and XSS. WAF filters web traffic according to custom rules based on conditions that include IP addresses, HTTP headers and body, or custom URIs. More conveniently block exploits like SQL injection and XSS. Both WAF and shield provide protection at the network level and use machine learning to recognise new threats as they evolve. AWS WAF works together with Amazon CloudFront and an Application Load Balancer using a web access control list (ACL). The WACL can be configures to allow all requests except those from the IP addresses that you have specified.
 
-**Amazon GuardDuty** provides continuous automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by analyzing continuous streams of metadata generated from your account, and network activity found on AWS CloudTrail events, Amazon VPC Flow Logs, and DNS logs. It uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning to identify threats more accurately. The best part is that it runs independently from your other AWS services, so it won't affect performance or availability of your existing infrastructure, and workloads. Automatic responses can be configured.
+**Amazon GuardDuty** provides continuous automatic threat detection. It monitors for malicious or unauthorized behaviour in serverless, compute, databases and stores by analyzing continuous streams of metadata generated from your account, and network activity found on AWS CloudTrail events, Amazon VPC Flow Logs, and DNS logs. It uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning to identify threats more accurately. It runs independently from other AWS services, so it won't affect performance or availability of existing infrastructure, and workloads. Automatic responses can be configured.
 
 Amazon GuardDuty is a service that provides intelligent threat detection for your AWS environment and resources. It identifies threats by continuously monitoring the network activity and account behavior within your AWS environment.
 

@@ -10,13 +10,15 @@
 
 Like a static analysis check across your account. For example, it checks security groups for rules that allow unrestricted access (0.0.0.0/0) to specific ports. Unrestricted access increases opportunities for malicious activity (hacking, denial-of-service attacks, loss of data). The ports with highest risk are flagged red, and those with less risk are flagged yellow. Ports flagged green are typically used by applications that require unrestricted access, such as HTTP and SMTP.
 
-> AWS Trusted Advisor(opens in a new tab) is a web service that inspects your AWS environment and provides real-time recommendations in accordance with AWS best practices. Trusted Advisor compares its findings to AWS best practices in five categories:
+> AWS Trusted Advisor is a web service that inspects your AWS environment and provides real-time recommendations in accordance with AWS best practices. Trusted Advisor compares its findings to AWS best practices in five categories:
 
 1. cost optimization,
 2. performance,
 3. security,
 4. fault tolerance, and
 5. service limits.
+
+
 
 For the checks in each category, Trusted Advisor offers a list of recommended actions and additional resources to learn more about AWS best practices.
 

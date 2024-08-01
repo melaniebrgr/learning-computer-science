@@ -57,6 +57,8 @@ Multi-region load balancing is possible like this. (Load balancers can only span
 
 "**AWS Global Accelerator** is a networking service that sends your user’s traffic through Amazon Web Service’s global network infrastructure, improving your internet user performance by up to 60%. When the internet is congested, Global Accelerator’s automatic routing optimisations will help keep your packet loss, jitter, and latency consistently low." GA is a new AWS service that connects local and global users over the AWS global network instead of the internet, directing traffic to the closet region and providing automatic failover. The Edge locations point to different server instances. It's somewhat akin to a load balancer. **S3 transfer acceleration** similar is about using AWS' network to deliver S3 content faster. You pay more for a speed boost.
 
+AWS Global Accelerator uses the AWS global network to optimize the path from your users to your applications, improving the performance of your traffic by as much as 60%. AWS Global Accelerator continually monitors the health of your application endpoints and redirects traffic to healthy endpoints in less than 30 seconds.
+
 ### Amazon Virtual Private Cloud (VPC)
 
 > A VPC lets you provision logically isolated sections of the AWS Cloud where you can launch AWS resources. These resources can be public facing with **internet gateway** so they have access to the internet, or private with no internet access but accessible privately via **virtual private gateway**. _The public and private grouping of resources are known as subnets_ and they are ranges of IP addresses in your VPC. A VPC is launched in a specific region and spans all availability zones in a region. Each subnet can be placed in a different AZ. 

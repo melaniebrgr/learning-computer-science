@@ -129,9 +129,9 @@ Topics: Amazon CloudWatch dashboard, Access Control Lists (ACL), <https://aws.am
 
 ## Practise exam
 
-[]()
+[practice-exam-20.md](https://github.com/kananinirav/AWS-Certified-Cloud-Practitioner-Notes/blob/master/practice-exam/practice-exam-20.md)
 
-You scored  / 50 (%), wrong questions:
+You scored 46 / 50 (92%), wrong questions: 9, 10, 14, 50
 
 <!-- ## Practise exam
 

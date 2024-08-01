@@ -90,7 +90,7 @@ There are 8 Amazon S3 **storage classes**. All share 11 9's of durability but 
 
 Transfer
 
-- Transfer Acceleration is designed to optimize transfer speeds from across the world into S3 buckets. 
+- Transfer Acceleration is designed to optimize transfer speeds from across the world into S3 buckets.
 - Transfer Acceleration takes advantage of the globally distributed edge locations in Amazon CloudFront. As the data arrives at an edge location, the data is routed to Amazon S3 over an optimized network path.
 
 Lifecycle
