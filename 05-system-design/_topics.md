@@ -138,6 +138,7 @@
 
 ## Resources
 
+- BE architectures: <https://frontendmasters.com/courses/backend-architectures/>
 - Cloud Design Patterns: <https://learn.microsoft.com/en-us/azure/architecture/patterns/>
 - AWS FS framework: <https://sst.dev/>
 - Performance: <https://frontendmasters.com/courses/blazingly-fast-js/>
@@ -161,18 +162,21 @@
 - General database internals: <https://youtu.be/DiLA0Ri6RfY>
 - General database internals: <https://youtu.be/IW4cpnpVg7E>
 - Web APIs: <https://frontendmasters.com/courses/device-web-apis/>
-- <https://web.dev/learn/design/>
-- <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
-- <https://support.crowdin.com/icu-message-syntax/>
-- <https://www.manning.com/books/grokking-algorithms>
-- <https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT>
-- <https://frontendmasters.com/courses/algorithms/>
-- <https://frontendmasters.com/courses/advanced-algorithms/>
-- <https://frontendmasters.com/courses/algorithms-practice/>
+- Design: <https://web.dev/learn/design/>
+- i18n: <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
+- i18n: <https://support.crowdin.com/icu-message-syntax/>
+- Algorithms: <https://www.manning.com/books/grokking-algorithms>
+- Algorithms: <https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT>
+- Algorithms:<https://frontendmasters.com/courses/algorithms/>
+- Algorithms:<https://frontendmasters.com/courses/advanced-algorithms/>
+- Algorithms:<https://frontendmasters.com/courses/algorithms-practice/>
 - <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
-- <https://refactoring.guru/design-patterns>
-- <https://gameprogrammingpatterns.com/>
-- <https://roadmap.sh/system-design>
+- Design patterns: <https://refactoring.guru/design-patterns>
+- Design patterns: <https://gameprogrammingpatterns.com/>
+- Web app design patterns: <https://frontendmasters.com/courses/js-design-patterns/>
+- System design: <https://roadmap.sh/system-design>
 - FE: <https://frontendmasters.com/guides/front-end-handbook/2024/>
 - Design patterns: <https://dev.to/superviz/design-pattern-5-adapter-pattern-4gif?context=digest>
 - Next.js: <https://frontendmasters.com/courses/intermediate-next-js>
+- FE system design: <https://frontendmasters.com/courses/frontend-system-design/>
+- Javascript: <https://frontendmasters.com/courses/pro-js-features/>
