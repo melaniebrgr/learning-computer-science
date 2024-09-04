@@ -63,3 +63,15 @@ export class MoveBackwardCommand extends Command implements TCommand {
     this.#actor.moveForward();
   }
 }
+
+export class QuitCommand extends Command implements TCommand {
+  #quit: () => void;
+  constructor(quit) {
+    super();
+    this.#quit = quit
+  }
+  execute() {
+    this.#quit();
+  }
+  undo() {}
+}
