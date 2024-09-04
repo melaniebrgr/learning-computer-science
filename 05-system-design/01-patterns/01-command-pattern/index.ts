@@ -3,7 +3,7 @@ import * as readline from 'node:readline/promises';
 // @ts-expect-error
 import { stdin, stdout } from 'node:process';
 import { KeyboardInputHandler } from './inputHandler';
-import { MoveLeftCommand, MoveRightCommand, MoveForwardCommand, MoveBackwardCommand, QuitCommand } from './command';
+import { MoveLeftCommand, MoveRightCommand, MoveForwardCommand, MoveBackwardCommand, QuitCommand } from './command'
 import { BUTTON  } from './button';
 
 const actor = {
@@ -28,7 +28,7 @@ const keyboardInputHandler = new KeyboardInputHandler({
   [BUTTON.D]: new MoveRightCommand(actor),
   [BUTTON.W]: new MoveForwardCommand(actor),
   [BUTTON.S]: new MoveBackwardCommand(actor),
-  [BUTTON.Q]: new QuitCommand(rl.close),
+  [BUTTON.Q]: new QuitCommand(),
 });
 
 while (true) {

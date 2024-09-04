@@ -65,13 +65,9 @@ export class MoveBackwardCommand extends Command implements TCommand {
 }
 
 export class QuitCommand extends Command implements TCommand {
-  #quit: () => void;
-  constructor(quit) {
-    super();
-    this.#quit = quit
-  }
   execute() {
-    this.#quit();
+    // @ts-expect-error
+    process.exit(1);
   }
   undo() {}
 }

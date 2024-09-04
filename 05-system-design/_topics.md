@@ -7,7 +7,7 @@
 - [ ] [Application architecture](./01-application-architecture.md) (2024-04-10)
 - [ ] The Internet
 - [ ] Role and responsibilities
-- [ ] Patterns
+- [ ] Programming patterns
   - [ ] Command
 - [ ] Data structures
 - [ ] Algorithms
