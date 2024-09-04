@@ -3,13 +3,17 @@
 ## 01 Foundation
 
 - [x] [Philosophy](./01-philosophy.md)
-- [ ] Architectural characteristics
+- [x] [Architectural characteristics](./01-application-architecture.md) (2021-05-01)
 - [ ] [Application architecture](./01-application-architecture.md) (2024-04-10)
 - [ ] The Internet
 - [ ] Role and responsibilities
+- [ ] Patterns
+- [ ] Data structures
+- [ ] Algorithms
 
 ## 02 Frontend
 
+- [ ] Frontend System Design
 - [ ] Web APIs
   - [ ] Compression Streams
   - [ ] DOM & DOM interfaces
@@ -105,8 +109,6 @@
 - [ ] Streaming
 - [ ] APIs
 - [ ] Component architecture
-- [ ] Data structures
-- [ ] Algorithms
 - [ ] Security
 - [x] [Cloud Services](./03-cloud-services.md) (2024-05-09)
   - [ ] Design patterns

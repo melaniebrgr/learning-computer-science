@@ -3,26 +3,30 @@
 ## Types of algorithms
 
 An algorithm contains imperative steps on how to perform a computation until it “converges” (a fancy way to say that it’s halted). The recipe of an algorithm:
+
 - it converges,
 - has instructions and flow controls, and
 - a termination of control.
 
 Assuming no static semantic errors, there are three types of errors a program can have:
+
 - it crashes
 - it never terminates
 - it gives an incorrect result (the worst possible outcome)
 
 How do we know if **looping program**, e.g. a "for" loop or a "while" loop, will terminate? A looping function that has all the following features will always terminate:
-1. it maps a set of program variables to an integer,
-2. it starts with a non-negative value,
+
+1. it maps a set of program variables to an integer
+2. it starts with a non-negative value
 3. a value is decreased on each iteration
-4. the loop terminates when it reaches 0 
+4. the loop terminates when it reaches 0
 
 This is a **decrementing function**. A decrementing function guarantees to stop a loop execution. It can be a useful pattern for "searching for a solution". The solution must be within the search space of the looping program however, or the program will run forever. When writing a loop, think carefully about the conditions for termination mentioned above. Loops can be used for exhaustive enumeration.
 
 **Exhaustive enumeration** or "guess and check" is a type of algorithm. The guessing is not actually random, the space of possible answers is exhausted systematically. A program that relies on this is called a **brute force algorithm**, and despite its name it is often the correct way to solve a problem because today's computers are _fast_. There are however some circumstances under which a brute force algorithm will start to take too long.
 
 ### Go syntax: if, switch, looping, functions
+
 ```go
 // if statements
 num := -1
