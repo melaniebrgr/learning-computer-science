@@ -2,13 +2,9 @@
 import * as readline from 'node:readline/promises';
 // @ts-expect-error
 import { stdin, stdout } from 'node:process';
-import { InputHandler } from './InputHandler';
-import { Command } from './Command';
+import { KeyboardInputHandler } from './InputHandler';
+import { MoveLeftCommand, MoveRightCommand, MoveForwardCommand, MoveBackwardCommand } from './Command';
 import { BUTTON  } from './button';
-
-const rl = readline.createInterface({ input: stdin, output: stdout });
-
-let input;
 
 const actor = {
   moveForward() {
@@ -23,18 +19,22 @@ const actor = {
   moveRight() {
     console.log('Move right')
   }
-}
+};
 
-const inputHandler = new InputHandler({
-  [BUTTON.A]: new Command(actor.moveLeft),
-  [BUTTON.D]: new Command(actor.moveRight),
-  [BUTTON.W]: new Command(actor.moveForward),
-  [BUTTON.S]: new Command(actor.moveBackward),
+const keyboardInputHandler = new KeyboardInputHandler({
+  [BUTTON.A]: new MoveLeftCommand(actor),
+  [BUTTON.D]: new MoveRightCommand(actor),
+  [BUTTON.W]: new MoveForwardCommand(actor),
+  [BUTTON.S]: new MoveBackwardCommand(actor),
 });
+
+const rl = readline.createInterface({ input: stdin, output: stdout });
+
+let input;
 
 while (input !== BUTTON.Q) {
   input = await rl.question('');
-  inputHandler.handle(input);
+  keyboardInputHandler.handle(input);
 }
 
 rl.close();

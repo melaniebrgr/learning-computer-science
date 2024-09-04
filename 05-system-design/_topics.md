@@ -8,6 +8,7 @@
 - [ ] The Internet
 - [ ] Role and responsibilities
 - [ ] Patterns
+  - [ ] Command
 - [ ] Data structures
 - [ ] Algorithms
 
