@@ -2,9 +2,9 @@
 import * as readline from 'node:readline/promises';
 // @ts-expect-error
 import { stdin, stdout } from 'node:process';
-import { KeyboardInputHandler } from './inputHandler';
-import { MoveLeftCommand, MoveRightCommand, MoveForwardCommand, MoveBackwardCommand, QuitCommand } from './command'
-import { BUTTON  } from './button';
+import { KeyboardInputHandler } from './src/inputHandler';
+import { MoveLeftCommand, MoveRightCommand, MoveForwardCommand, MoveBackwardCommand, QuitCommand } from './src/command'
+import { BUTTON  } from './src/button';
 
 const actor = {
   moveForward() {

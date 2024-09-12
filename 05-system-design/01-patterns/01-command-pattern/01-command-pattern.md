@@ -10,7 +10,7 @@ Actualising the actions of your system into discrete objects with a common inter
 }
 ```
 
-The advantages of the Command pattern are the utter convenience of attaching commands to certain events, undoing individual commands, and undoing chains of commands (assuming commands are stored in a queue). See full example from `./index.ts`.
+The advantages of the Command pattern are the utter convenience of attaching and unattaching commands to certain events, undoing and redoing individual commands, or undoing and redoing chains of commands assuming commands are stored in a queue. See full example from `./index.ts`.
 
 ## References
 
