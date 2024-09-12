@@ -8,7 +8,8 @@ class Observable implements IObservable {
   }
   
   detachObserver(observer: IObserver) {
-    this.#observers = this.#observers.filter(o => o !== observer);
+    const i = this.#observers.indexOf(observer);
+    this.#observers.splice(i, 1);
   }
   
   notify() {
