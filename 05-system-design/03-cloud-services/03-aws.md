@@ -191,4 +191,3 @@ AWS CloudFormation, treats infrastructure as code. CloudFormation also supports 
   - Application discovery service
   - Application migration service
   - Database migration service
-

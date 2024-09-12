@@ -3,12 +3,30 @@
 ## 01 Foundation
 
 - [x] [Philosophy](./01-philosophy.md)
-- [x] [Architectural characteristics](./01-application-architecture.md) (2021-05-01)
-- [ ] [Application architecture](./01-application-architecture.md) (2024-04-10)
-- [ ] The Internet
 - [ ] Role and responsibilities
-- [ ] Programming patterns
-  - [ ] Command
+- [x] [Architectural characteristics](./01-application-architecture.md) (2021-05-01)
+- [x] [Application architecture](./01-application-architecture.md) (2024-04-10)
+- [ ] The Internet
+- Programming patterns
+  - [x] [Command](./01-patterns/01-command-pattern/) (2024-09-10)
+  - [x] [Flyweight](./01-patterns/01-flyweight-pattern/) (2024-09-11)
+  - [x] [Observer](./01-patterns/01-observer-pattern/) (2024-09-12)
+  - [ ] Prototype
+  - [ ] Singleton
+  - [ ] State
+  - [ ] Double buffer
+  - [ ] Game loop
+  - [ ] Update method
+  - [ ] Bytecode
+  - [ ] Subclass sandbox
+  - [ ] Type object
+  - [ ] Component
+  - [ ] Event queue
+  - [ ] Service locator
+  - [ ] Data locality
+  - [ ] Dirty flag
+  - [ ] Object pool
+  - [ ] Spatial partition
 - [ ] Data structures
 - [ ] Algorithms
 
@@ -16,14 +34,14 @@
 
 - [ ] Frontend System Design
 - [ ] Web APIs
-  - [ ] Compression Streams
+  - [ ] Compression streams
   - [ ] DOM & DOM interfaces
   - [ ] File
   - [ ] File System
-  - [ ] File and Directory Entries
+  - [ ] File and directory entries
   - [ ] Popover
-  - [ ] Server Sent Events
-  - [ ] View Transitions
+  - [ ] Server sent events
+  - [ ] View transitions
 - [ ] Component architecture
 - [ ] Languages
   - [ ] HTML
@@ -95,8 +113,8 @@
   - [ ] JSON
   - [ ] protocol buffs
 - [ ] Languages
-  - [ ] Rust
-  - [ ] Go
+  - [~] [Rust](../04-rust/) (2024-02-14)
+  - [~] [Go](../02-programming/go-for-js-devs/) (2022-11-06)
   - [ ] JS (Node)
 - [ ] Web frameworks
   - [ ] Django
@@ -111,7 +129,8 @@
 - [ ] APIs
 - [ ] Component architecture
 - [ ] Security
-- [x] [Cloud Services](./03-cloud-services.md) (2024-05-09)
+- [x] [Cloud computing](./03-cloud-services/03-cloud-computing.md) (2024-05-09)
+  - [x] [Amazon web servvices](./03-cloud-services/03-aws.md) (2024-05-09)
   - [ ] Design patterns
 
 ## 04 Databases
