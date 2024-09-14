@@ -1,6 +1,6 @@
 # WebAssembly (Wasm)
 
-## A binary instruction format for a stack-based virtual machine.
+## A binary instruction format for a stack-based virtual machine
 
 WebAssembly bytecode is encoded for a stack based virtual machine.
 A virtual machine is something that executes a specific set of possible instructions on specific data in a specific region of computer memory.

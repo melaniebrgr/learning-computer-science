@@ -105,18 +105,22 @@ func printAges(ages ...int) int {
 }
 
 ```
+
 ### Examples
+
 3. paying off credit card debt, [problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/), [solution](./03-paying-off-credit-card-debt.go)
 
 ## Speeding up algorithms
 
 Can we figure out how long an algorithm will take to run (algorithmic analysis)? Yes, we can look at what the run time depends on:
+
 - desired answer precision
 - how big the steps are that we take through the algorithm are
 
 We can change both of these levers to adjust the run speed. Taking bigger steps allows us to more rapidly cut through the search space. One algorithmic technique to change the step size is called, "**bisection search**", where the step is half the search space. With algorithmic analysis we can actually know how long a computation will take to run, which permits us to decide if it's worth the time.
 
 Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Goor programmers "write less code". When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
+
 - decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and hopefully coherent.
 - abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
 A function is effectively provides new language primitives, and for modular abstraction.
@@ -124,7 +128,6 @@ A function is effectively provides new language primitives, and for modular abst
 We can make most problems simpler by breaking them into small problems:
 
 > "divide and rule" - Julia Caesar
-
 > "We must all hang together, or assuradely we will hang seperately" - Ben Franklin
 
 One great technique for divide and conquer algorithms is recursion.

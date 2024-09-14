@@ -8,7 +8,7 @@
 
 There are two kinds of knowledge: declarative and imperative. **Declarative knowledge** is a statement about something that is true, e.g. a chocolate cake is bad for you. While it doesn’t tell you how to do it, it does tell you about how to test correctness. **Imperative knowledge** tells you how to do something, e.g. how to make the chocolate cake. Another example of imperative knowledge is Heron’s method of finding the square root of a number. Heron proposed a formula that could be repeated iteratively until it converged on the value of the square root. Hero is a greek experimenter who lived in Alexandria in 50 AD.
 
-### Fixed and stored programs
+## Fixed and stored programs
 
 The initial computers were designed to do very specific things, like computing the square root of a number. These are called **“fixed program computers”**. An example of this is Alan Turing’s enigma code breaker. In a **“stored program computer”** the instructions are the same as data. Once it was possible machines became infinitely flexible. An “interpreter” is a program that can execute any legal set of instructions.
 
@@ -20,7 +20,8 @@ Alan Turing showed that there were six primitive instructions with which you cou
 
 Interpreted languages give errors in the language of the source code (that you wrote in), whereas compiled languages give errors in the compiled object code, which is harder to debug. However, compiled languages tend to be more efficient.
 
-### Go syntax: variables and assignments
+## Go syntax: variables and assignments
+
 - string: string
 - boolean: bool
 - numeric: int8, uint8 (byte), int16, uint16, int32 (rune), uint32, int64, uint64, int, uint, uintptr, float32, float64, complex64, complex128
@@ -35,17 +36,14 @@ var name = "Name"
 name := "Name"
 ```
 
-#### Examples
+### Examples
+
 1. [hello world](./01-hello.go)
 2. [entering and printing your name](./02-entering-and-printing-your-name.go)
 
-
-
-
-
 ## The great big world of applications
 
-### Cloud Native 
+### Cloud Native
 
 What is a cloud-native applications? This is what we expect them to do:
 • To achieve high-availability while running in fault-prone environments;

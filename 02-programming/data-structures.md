@@ -4,7 +4,8 @@ There are three flavours of data structures that are useful for collecting data:
 
 Dictionaries or "dicts" are sets of immutable keys and mutable values that are accessed by key. Anything can be a value, and, depending on the language, anything can be a key. Technically a dict can be implemented with a list data structure. However, to find a value all the keys need to be iterated over and the time to find a value would grow with the length of the list. On the other hand, with a dict the time to lookup the value is constant.
 
-### Go syntax: arrays, slice, map
+## Go syntax: arrays, slice, map
+
 ```go
 // initialize an empty array with default values (it can only contain 5 elements of type float)
 var myArray [5]float64

@@ -3,7 +3,6 @@
 ## 01 Foundation
 
 - [x] [Philosophy](./01-philosophy.md)
-- [ ] Role and responsibilities
 - [x] [Architectural characteristics](./01-application-architecture.md) (2021-05-01)
 - [x] [Application architecture](./01-application-architecture.md) (2024-04-10)
 - [ ] The Internet
