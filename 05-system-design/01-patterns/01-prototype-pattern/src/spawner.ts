@@ -1,4 +1,4 @@
-import { Clone } from "./monster";
+import { Clone } from "./monster.ts";
 
 export class Spawner {
   #prototype;
