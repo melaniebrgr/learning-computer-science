@@ -10,7 +10,7 @@
   - [x] [Command](./01-patterns/01-command-pattern/) (2024-09-10)
   - [x] [Flyweight](./01-patterns/01-flyweight-pattern/) (2024-09-11)
   - [x] [Observer](./01-patterns/01-observer-pattern/) (2024-09-12)
-  - [ ] Prototype
+  - [x] [Prototype](./01-patterns/01-prototype-pattern/) (2021-06-15)
   - [ ] Singleton
   - [ ] State
   - [ ] Double buffer
