@@ -6,28 +6,6 @@
 - [x] [Architectural characteristics](./01-application-architecture.md) (2021-05-01)
 - [x] [Application architecture](./01-application-architecture.md) (2024-04-10)
 - [ ] The Internet
-- Programming patterns
-  - [x] [Command](./01-patterns/01-command-pattern/) (2024-09-10)
-  - [x] [Flyweight](./01-patterns/01-flyweight-pattern/) (2024-09-11)
-  - [x] [Observer](./01-patterns/01-observer-pattern/) (2024-09-12)
-  - [x] [Prototype](./01-patterns/01-prototype-pattern/) (2024-09-15)
-  - [x] [Singleton](./01-patterns/01-singleton-pattern/) (2024-09-17)
-  - [ ] State
-  - [ ] Double buffer
-  - [ ] Game loop
-  - [ ] Update method
-  - [ ] Bytecode
-  - [ ] Subclass sandbox
-  - [ ] Type object
-  - [ ] Component
-  - [ ] Event queue
-  - [ ] Service locator
-  - [ ] Data locality
-  - [ ] Dirty flag
-  - [ ] Object pool
-  - [ ] Spatial partition
-- [ ] Data structures
-- [ ] Algorithms
 
 ## 02 Frontend
 

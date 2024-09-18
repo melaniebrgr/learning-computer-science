@@ -1,0 +1,24 @@
+# Topics
+
+- Programming patterns
+  - [x] [Command](./04-design-patterns/command-pattern/) (2024-09-10)
+  - [x] [Flyweight](./04-design-patterns/flyweight-pattern/) (2024-09-11)
+  - [x] [Observer](./04-design-patterns/observer-pattern/) (2024-09-12)
+  - [x] [Prototype](./04-design-patterns/prototype-pattern/) (2024-09-15)
+  - [x] [Singleton](./04-design-patterns/singleton-pattern/) (2024-09-17)
+  - [ ] State
+  - [ ] Double buffer
+  - [ ] Game loop
+  - [ ] Update method
+  - [ ] Bytecode
+  - [ ] Subclass sandbox
+  - [ ] Type object
+  - [ ] Component
+  - [ ] Event queue
+  - [ ] Service locator
+  - [ ] Data locality
+  - [ ] Dirty flag
+  - [ ] Object pool
+  - [ ] Spatial partition
+- [ ] Data structures
+- [ ] Algorithms
