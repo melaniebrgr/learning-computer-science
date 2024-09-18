@@ -10,3 +10,5 @@
   - [ ] Lecture 7
 - [ ] Structure and Interpretation of Computer Programs
 - [ ] [Professional Programming](https://github.com/charlax/professional-programming)
+- [ ] [JavaScript Patterns Workshop](https://javascriptpatterns.vercel.app/patterns)
+- [ ] [Game Programming Patterns - Robert Nystrom](https://gameprogrammingpatterns.com/)
