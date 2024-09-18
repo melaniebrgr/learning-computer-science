@@ -10,8 +10,8 @@
   - [x] [Command](./01-patterns/01-command-pattern/) (2024-09-10)
   - [x] [Flyweight](./01-patterns/01-flyweight-pattern/) (2024-09-11)
   - [x] [Observer](./01-patterns/01-observer-pattern/) (2024-09-12)
-  - [x] [Prototype](./01-patterns/01-prototype-pattern/) (2021-06-15)
-  - [ ] Singleton
+  - [x] [Prototype](./01-patterns/01-prototype-pattern/) (2024-09-15)
+  - [x] [Singleton](./01-patterns/01-singleton-pattern/) (2024-09-17)
   - [ ] State
   - [ ] Double buffer
   - [ ] Game loop

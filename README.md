@@ -2,11 +2,19 @@
 
 ## Topics
 
+0. [Everyweeks](./00-everyweeks/)
 1. [Computers](./01-computers/)
+    - computer architecture
+    - operating systems
+    - heap vs. stack
 2. [Programming](./02-programming/)
+    - data structures
+    - algorithms
+    - programs
+    
 3. [Web Assembly](./03-web-assembly/)
 4. [Rust](./04-rust/)
-5. [Systems](./05-systems)
+5. [System design](./05-system-design)
 
 ### Learning path materials
 

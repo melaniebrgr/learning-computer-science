@@ -14,7 +14,7 @@ The advantages of the Command pattern are the utter convenience of attaching and
 
 ## References
 
-- [x] Game Programming Patterns: Chapter 2, Command
+- [x] "Game Programming Patterns" by Rober Nystrom, Chapter 2
 - [ ] Headfirst Design Patterns
-- [ ] [Command Pattern – Design Patterns (ep 7)](https://www.youtube.com/watch?v=9qA5kw8dcSU)
+- [x] [Command Pattern – Design Patterns (ep 7)](https://www.youtube.com/watch?v=9qA5kw8dcSU)
 - [ ] [Refactoring Guru](https://refactoring.guru/design-patterns/command)

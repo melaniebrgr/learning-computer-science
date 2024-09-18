@@ -1,4 +1,4 @@
-# Programming
+# Programs
 
 > “Computational processes are abstract beings that inhabit computers. As they evolve, processes manipulate other abstract things called data. The evolution of a process is directed by a pattern of rules called a program” - Structure and Interpretation of Computer Programs
 
