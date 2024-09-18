@@ -1,6 +1,8 @@
-# Mel's Method of Learning Computer Science
+# The Debug Diaries
 
-## Topics
+## Mel's computer learning journey
+
+## Chapters
 
 0. [Everyweeks](./00-everyweeks/)
 1. [Computers](./01-computers/)
@@ -17,7 +19,7 @@
 5. [System design](./05-system-design)
 6. [Go](./06-go/)
 
-### Learning path materials
+## Resources
 
 - <http://blog.agupieware.com/2014/05/online-learning-bachelors-level.html>
 - <http://blog.agupieware.com/2014/06/online-learning-intensive-bachelors.html>
