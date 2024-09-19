@@ -16,14 +16,47 @@ const STOPLIGHT = {
 
 type Stoplight = typeof STOPLIGHT[keyof typeof STOPLIGHT];
 
+class RedStoplightState {
+  color = STOPLIGHT.RED;
+
+  handleTransition(stoplight: StoplightState, transition: Transition): void {
+      if (transition === TRANSITION.GO) {
+        stoplight.updateState(StoplightState.green);
+      }
+  }
+}
+
+class GreenStoplightState {
+  color = STOPLIGHT.GREEN;
+
+  handleTransition(stoplight: StoplightState, transition: Transition): void {
+    if (transition === TRANSITION.WAIT) {
+      stoplight.updateState(StoplightState.Yellow);
+    }
+  }
+}
+
+class YellowStoplightState {
+  color = STOPLIGHT.YELLOW;
+
+  handleTransition(stoplight: StoplightState, transition: Transition): void {
+    if (transition === TRANSITION.STOP) {
+      stoplight.updateState(StoplightState.red);
+    }
+  }
+}
+
 class StoplightState {
   #state;
+  static red = new RedStoplightState();
+  static green = new GreenStoplightState();
+  static Yellow = new YellowStoplightState();
 
   handleTransition(transition: Transition) {
     this.#state.handleTransition(this, transition);
   }
 
-  updateState(newState: StoplightState) {
+  updateState(newState: RedStoplightState | GreenStoplightState | YellowStoplightState) {
     this.#state = newState;
   }
 
@@ -32,43 +65,10 @@ class StoplightState {
   }
 }
 
-interface StoplightState {
-  color: Stoplight;
-  handleTransition(self: any, transition: Transition): void;
-}
 
-class RedStoplightState implements StoplightState {
-  color = STOPLIGHT.RED;
-
-  handleTransition(self: any, transition: Transition): void {
-      // if (transition === TRANSITION.GO) {
-        self.updateState(new GreenStoplightState());
-      // }
-  }
-}
-
-class GreenStoplightState extends StoplightState implements StoplightState {
-  color = STOPLIGHT.GREEN;
-
-  handleTransition(self, transition: Transition): void {
-    // if (transition === TRANSITION.WAIT) {
-      self.updateState(new YellowStoplightState());
-    // }
-  }
-}
-
-class YellowStoplightState extends StoplightState implements StoplightState {
-  color = STOPLIGHT.YELLOW;
-
-  handleTransition(self, transition: Transition): void {
-    // if (transition === TRANSITION.STOP) {
-      self.updateState(new RedStoplightState());
-    // }
-  }
-}
 
 const stoplight = new StoplightState();
-stoplight.updateState(new RedStoplightState());
+stoplight.updateState(StoplightState.red);
 
 const transitions = [TRANSITION.GO, TRANSITION.WAIT, TRANSITION.STOP]
 
