@@ -164,18 +164,10 @@
 - Design: <https://web.dev/learn/design/>
 - i18n: <https://unicode-org.github.io/icu/userguide/icu/i18n.html>
 - i18n: <https://support.crowdin.com/icu-message-syntax/>
-- Algorithms: <https://www.manning.com/books/grokking-algorithms>
-- Algorithms: <https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT>
-- Algorithms:<https://frontendmasters.com/courses/algorithms/>
-- Algorithms:<https://frontendmasters.com/courses/advanced-algorithms/>
-- Algorithms:<https://frontendmasters.com/courses/algorithms-practice/>
-- <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
-- Design patterns: <https://refactoring.guru/design-patterns>
-- Design patterns: <https://gameprogrammingpatterns.com/>
-- Web app design patterns: <https://frontendmasters.com/courses/js-design-patterns/>
 - System design: <https://roadmap.sh/system-design>
 - FE: <https://frontendmasters.com/guides/front-end-handbook/2024/>
 - Design patterns: <https://dev.to/superviz/design-pattern-5-adapter-pattern-4gif?context=digest>
 - Next.js: <https://frontendmasters.com/courses/intermediate-next-js>
 - FE system design: <https://frontendmasters.com/courses/frontend-system-design/>
 - Javascript: <https://frontendmasters.com/courses/pro-js-features/>
+- <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
