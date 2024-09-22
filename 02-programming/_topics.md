@@ -6,8 +6,8 @@
   - [x] [Observer](./04-design-patterns/observer-pattern/) (2024-09-12)
   - [x] [Prototype](./04-design-patterns/prototype-pattern/) (2024-09-15)
   - [x] [Singleton](./04-design-patterns/singleton-pattern/) (2024-09-17)
-  - [ ] State
-  - [ ] Double buffer
+  - [x] [State](./04-design-patterns/state-pattern/) (2024-09-19)
+  - [x] [Double buffer](./04-design-patterns/double-buffer-pattern/) (2024-09-22)
   - [ ] Game loop
   - [ ] Update method
   - [ ] Bytecode
