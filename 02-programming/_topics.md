@@ -8,7 +8,7 @@
   - [x] [Singleton](./04-design-patterns/singleton-pattern/) (2024-09-17)
   - [x] [State](./04-design-patterns/state-pattern/) (2024-09-19)
   - [x] [Double buffer](./04-design-patterns/double-buffer-pattern/) (2024-09-22)
-  - [ ] Game loop
+  - [x] [Game loop](./04-design-patterns/game-loop-pattern/) (2024-09-30)
   - [ ] Update method
   - [ ] Bytecode
   - [ ] Subclass sandbox
