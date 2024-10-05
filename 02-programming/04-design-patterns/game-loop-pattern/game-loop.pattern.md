@@ -1,10 +1,11 @@
 # Game loop pattern
 
-The goal of every video game is to present the player with a situation, get their input, interpret those signals into actions, and calculate a new situation resulting from those actions:
+The goal of every video game is to present the player with a situation, get their input, interpret input signals into actions, and calculate a new situation resulting from those actions:
 
-1. process input
-2. updated
-3. render
+1. process input,
+2. update,
+3. render,
+4. repeat.
 
 Games are looping through these stages over and over, until some end condition occurs like winning, losing, or exiting to go to bed. Not surprisingly, this pattern corresponds to how a game engine is programmed (1).
 

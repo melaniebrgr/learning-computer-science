@@ -23,7 +23,7 @@
 - [ ] Languages
   - [ ] HTML
   - [ ] CSS
-  - [ ] JavaScript
+  - [~] [JavaScript](./02-javascript.md) (2024-10-05)
   - [x] [TypeScript](./02-typescript.md) (2022-09-12)
   - [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
 - [ ] Frameworks & metaframeworks
@@ -168,6 +168,8 @@
 - FE: <https://frontendmasters.com/guides/front-end-handbook/2024/>
 - Design patterns: <https://dev.to/superviz/design-pattern-5-adapter-pattern-4gif?context=digest>
 - Next.js: <https://frontendmasters.com/courses/intermediate-next-js>
-- FE system design: <https://frontendmasters.com/courses/frontend-system-design/>
+- FE system design
+  - <https://frontendmasters.com/courses/frontend-system-design/>
+  - <https://frontendatscale.com/courses/frontend-architecture/>
 - Javascript: <https://frontendmasters.com/courses/pro-js-features/>
 - <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
