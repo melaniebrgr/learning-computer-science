@@ -1,4 +1,5 @@
-const MS_PER_FRAME = 1000 / 60;
+// const MS_PER_FRAME = 1000 / 60; // 16 FPS
+const MS_PER_FRAME = 1000 / 2; // 2 FPS
 
 class Entity {
   #x;
@@ -28,19 +29,40 @@ class Entity {
   }
 }
 
+class Skeleton extends Entity {
+  #patrollingLeft = false;
+
+  constructor() {
+    super();
+    this.x = 50;
+    this.y = 0;
+  }
+
+  update() {
+    if (this.#patrollingLeft) {
+      this.x--;
+      if (this.x === 0) this.#patrollingLeft = false;
+    } else {
+      this.x++;
+      if (this.x === 100) this.#patrollingLeft = true;
+    }
+    console.log(`The skeleton is at ${this.x}`);
+  }
+}
+
 class World {
-  entities = [];
+  static #entities = [new Skeleton()];
 
   static #handleInput() {
-    console.log('processed input');
+    // console.log('processed input');
   }
 
   static #update() {
-    console.log('updated');
+    World.#entities.forEach(entity => entity.update())
   }
 
   static #render() {
-    console.log('rendered scene');
+    // console.log('rendered scene');
   }
   
   static gameloop() {
@@ -71,8 +93,6 @@ class World {
       World.#render();
     }
   }
-
-
 }
 
 World.gameloop();
