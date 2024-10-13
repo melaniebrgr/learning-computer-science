@@ -73,7 +73,7 @@ class VM {
   }
 }
 
-const vm = new VM([
+const instructionsForMyNewWand = [
   INST.LITERAL,
   0,
   INST.LITERAL,
@@ -87,9 +87,13 @@ const vm = new VM([
   INST.LITERAL,
   0,
   INST.LITERAL,
-  0,
+  1,
   INST.GET_HEALTH,
   INST.SET_WISDOM,
-]);
+]
+
+const vm = new VM(instructionsForMyNewWand);
+
+console.log("What my new wand does:")
 
 vm.interpret();
