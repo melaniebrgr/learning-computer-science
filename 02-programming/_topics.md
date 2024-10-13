@@ -9,8 +9,8 @@
   - [x] [State](./04-design-patterns/state-pattern/) (2024-09-19)
   - [x] [Double buffer](./04-design-patterns/double-buffer-pattern/) (2024-09-22)
   - [x] [Game loop](./04-design-patterns/game-loop-pattern/) (2024-09-30)
-  - [ ] Update method
-  - [ ] Bytecode
+  - [x] [Update method](./04-design-patterns/update-method-pattern/) (2024-10-05)
+  - [x] [Bytecode](./04-design-patterns/bytecode-pattern/) (2024-10-13)
   - [ ] Subclass sandbox
   - [ ] Type object
   - [ ] Component
