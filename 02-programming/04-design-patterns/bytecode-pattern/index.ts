@@ -97,3 +97,12 @@ const vm = new VM(instructionsForMyNewWand);
 console.log("What my new wand does:")
 
 vm.interpret();
+
+```bash
+bun run index.ts
+What my new wand does:
+Setting wizard 0 health to 10
+Setting wizard 0 agility to 42
+Getting wizard 1 health of 69
+Setting wizard 0 wisdom to 69
+```
