@@ -69,6 +69,7 @@ Basically I will try something for a week, document my learning, judge its succe
 
 ## Topic ideas
 
+- How to profile memory usage in Next.js
 - What happens when a file is uploaded?
 - CORS
 - Create a website with Leptos
