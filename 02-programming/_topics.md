@@ -11,7 +11,7 @@
   - [x] [Game loop](./04-design-patterns/game-loop-pattern/) (2024-09-30)
   - [x] [Update method](./04-design-patterns/update-method-pattern/) (2024-10-05)
   - [x] [Bytecode](./04-design-patterns/bytecode-pattern/) (2024-10-13)
-  - [ ] Subclass sandbox
+  - [x] [Subclass sandbox](./04-design-patterns/subclass-sandbox-pattern/) (2024/10/13)
   - [ ] Type object
   - [ ] Component
   - [ ] Event queue

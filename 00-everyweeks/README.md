@@ -57,7 +57,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  41  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  42  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  43  | Try Godot |  |  |
-|  44  |  |  |  |
+|  44  | IndexedDB vs Origin private file system |  |  |
 |  45  |  |  |  |
 |  46  |  |  |  |
 |  47  |  |  |  |
