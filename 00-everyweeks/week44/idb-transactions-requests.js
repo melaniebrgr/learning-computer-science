@@ -85,7 +85,16 @@ function renderFileList() {
     fileList.innerHTML = '';
     event.target.result.forEach((file) => {
       const li = document.createElement('li');
+      li.setAttribute('id', file.id);
       li.textContent = file.title;
+      li.addEventListener('click', () => {
+        const tx = createTxForStore(DB_STORE_ID, 'readonly');
+        const request = tx.get(file.id);
+        request.onsuccess = () => {
+          const p = document.getElementById('file-picked');
+          p.textContent = JSON.stringify(file, null, 2);
+        };
+      });
       fileList.appendChild(li);
     });
   };
