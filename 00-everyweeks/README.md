@@ -41,7 +41,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | AWS Cloud Practioner course ongoing |
 |  26  | [Iterators, Generators, and their async versions oh my](./week26) | 200 | Learned and solved a problem I was having |
 |  27  | - | 403 | Read up on promises but did not write about it. |
-|  28  | [File input security](./week28/README.md) | 200 | Considers various file upload security risks. |
+|  28  | [File input security](./week28/) | 200 | Considers various file upload security risks. |
 |  29  | - | 503 | Shipping AI notes @ Studocu |
 |  30  | - | 503 | Shipping AI notes @ Studocu |
 |  31  | - | 503 | Shipping AI notes @ Studocu |
@@ -56,8 +56,8 @@ Basically I will try something for a week, document my learning, judge its succe
 |  40  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  41  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  42  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
-|  43  | Try Godot |  |  |
-|  44  | IndexedDB vs Origin private file system |  |  |
+|  43  | Try Godot | 102 | TK |
+|  44  | [Beginner's guide to IndexedDB](./week44/) | 200 | A small website with a vanilla JS IBD usage example |
 |  45  |  |  |  |
 |  46  |  |  |  |
 |  47  |  |  |  |
