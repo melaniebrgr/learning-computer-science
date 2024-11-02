@@ -94,3 +94,6 @@ Basically I will try something for a week, document my learning, judge its succe
 - Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>
 - Content renderer in Rust
 - Does streaming HTML make critical CSS generation unnecessary?
+- Error handling design
+  - https://www.youtube.com/watch?v=xyxrB2Aa7KE
+  - Toyoto Full Send was an error handling bug

@@ -9,17 +9,6 @@
 
 ## 02 Frontend
 
-- [ ] Frontend System Design
-- [ ] Web APIs
-  - [ ] Compression streams
-  - [ ] DOM & DOM interfaces
-  - [ ] File
-  - [ ] File System
-  - [ ] File and directory entries
-  - [ ] Popover
-  - [ ] Server sent events
-  - [ ] View transitions
-- [ ] Component architecture
 - [ ] Languages
   - [ ] HTML
   - [ ] CSS
@@ -31,7 +20,26 @@
   - [ ] Vue
   - [ ] Solid
   - [x] [Next.js](./02-nextjs.md) (2023-05-07)
-- [x] [Rendering patterns: SSG, SSR, CSR, server components](./02-rendering.md) (2024-05-02)
+- [ ] Web APIs
+  - [ ] Compression streams
+  - [ ] DOM & DOM interfaces
+  - [ ] File
+  - [ ] File and directory entries
+  - [ ] Popover
+  - [ ] Server sent events
+  - [ ] View transitions
+  - [ ] WebGL
+  - [ ] WebGPU
+  - [ ] Images
+  - [ ] canvas
+  - [ ] SVG
+  - [ ] Video
+  - [ ] Audio
+- [ ] Storage
+  - [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
+  - [ ] LocalStorage
+  - [x] [IndexedDB](../00-everyweeks/week44/README.md) (2024-11-01)
+  - [ ] File System
 - [ ] Design systems
 - [ ] SEO
 - [ ] Performance
@@ -45,18 +53,11 @@
   - [ ] Bf cache
 - [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-04)
   - [ ] Service workers
-- Security
+- [ ] Security
   - [ ] XSS
   - [ ] CORS
   - [x] [CSRF](../00-everyweeks/week14/README.md) (2024-04-07)
 - [x] [Core Web Vitals](../00-everyweeks/week15/README.md) (2024-04-15)
-- [ ] WebGL
-- [ ] WebGPU
-- [ ] Images
-- [ ] canvas
-- [ ] SVG
-- [ ] Video
-- [ ] Audio
 - [ ] Accessibility
 - [ ] Internationalisation
   - [ ] Localisation
@@ -64,16 +65,16 @@
 - [ ] State management
   - [ ] Signals
   - [ ] Observables
-- [ ] Short polling
-- [ ] Long polling
-- [ ] Sockets
-- [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
-- [ ] Authentication
-- [ ] Authorisation
+- [ ] Data fetching
+  - [ ] Short polling
+  - [ ] Long polling
+  - [ ] Sockets
 - [ ] JWTs
-- [ ] Storage
 - [ ] PWAs
 - [ ] Bundlers
+- [ ] Frontend System Design
+  - [ ] Component architecture
+  - [x] [Rendering patterns: SSG, SSR, CSR, server components](./02-rendering.md) (2024-05-02)
 
 ## 03 Backend
 
@@ -106,6 +107,8 @@
 - [ ] APIs
 - [ ] Component architecture
 - [ ] Security
+- [ ] Authentication
+- [ ] Authorisation
 - [x] [Cloud computing](./03-cloud-services/03-cloud-computing.md) (2024-05-09)
   - [x] [Amazon web servvices](./03-cloud-services/03-aws.md) (2024-05-09)
   - [ ] Design patterns
