@@ -45,6 +45,10 @@ Cursors are IDB feature available. They are analogous to a for loop and sequenti
 However, as a transaction cursors are not long-lived and cannot be used with async callback functions.
 The transaction "wants to complete".
 
+What about observing changes. Well, [not so great](https://github.com/WICG/indexed-db-observers/blob/gh-pages/EXPLAINER.md).
+
+> IndexedDB doesn't have any observer support. This could normally be implemented by the needed website (or third party) as a wrapper around the database. However, IDB spans browsing contexts (tabs, workers, etc), and implementing a javascript wrapper that supports all of the needed features would be very difficult and performance optimization of the features would be impossible. This project aims to add IndexedDB observers as part of the specification.
+
 #### Storage persistence
 
 The data that's stored by IDB is handled by a storage management system that's specific to each browser. Different browsers have different storage quotas and eviction policies. When the browser's limit is reached, either data will get evicted, or new data will fail to be written to the storage. Generally browsers use a Least Recently Used (LRU) policy to deal data eviction. It is possible to find how much storage is available and take some action when a percent of available storage is reached.
