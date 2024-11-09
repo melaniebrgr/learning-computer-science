@@ -12,7 +12,7 @@
   - [x] [Update method](./04-design-patterns/update-method-pattern/) (2024-10-05)
   - [x] [Bytecode](./04-design-patterns/bytecode-pattern/) (2024-10-13)
   - [x] [Subclass sandbox](./04-design-patterns/subclass-sandbox-pattern/) (2024/10/13)
-  - [ ] Type object
+  - [x] [Type object](./04-design-patterns/type-object-pattern/) (2024/11/09)
   - [ ] Component
   - [ ] Event queue
   - [ ] Service locator

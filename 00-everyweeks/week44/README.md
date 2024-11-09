@@ -145,8 +145,9 @@ Disadvantages: no guaranteed to persist as users can always clear their storage,
 
 ## References
 
-1. https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
-2. https://web.dev/articles/origin-private-file-system
+1. <https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API>
+2. <https://web.dev/articles/origin-private-file-system>
 3. Persistence
-    1. https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria
-    2. https://dexie.org/docs/StorageManager
+    1. <https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria>
+    2. <https://dexie.org/docs/StorageManager>
+4. <https://web.dev/articles/indexeddb>
