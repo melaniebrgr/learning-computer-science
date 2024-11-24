@@ -151,3 +151,5 @@ Disadvantages: no guaranteed to persist as users can always clear their storage,
     1. <https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria>
     2. <https://dexie.org/docs/StorageManager>
 4. <https://web.dev/articles/indexeddb>
+5. <https://medium.com/@webelightsolutions/effortless-client-side-storage-using-indexeddb-with-react-hooks-87ae6ee3cffe>
+6. <https://medium.com/@kamresh485/indexeddb-tutorial-for-beginners-a-comprehensive-guide-with-coding-examples-74df2914d4d5>

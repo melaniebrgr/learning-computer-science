@@ -13,7 +13,7 @@
   - [x] [Bytecode](./04-design-patterns/bytecode-pattern/) (2024-10-13)
   - [x] [Subclass sandbox](./04-design-patterns/subclass-sandbox-pattern/) (2024/10/13)
   - [x] [Type object](./04-design-patterns/type-object-pattern/) (2024/11/09)
-  - [ ] Component
+  - [x] [Component](./04-design-patterns/component-pattern/) (2024/11/24)
   - [ ] Event queue
   - [ ] Service locator
   - [ ] Data locality

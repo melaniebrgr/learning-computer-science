@@ -1,6 +1,6 @@
 # Command pattern
 
-Actualising the actions of your system into discrete objects with a common interface ("command packets"), so that they can be attached to different events, passed around, queued, dispatched or whatever else you can imagine. On implementing the Command pattern, you will have in your system many command packets pinging around with the following shape:
+Actualise system actions into objects with a common interface ("command packets"), so that they can be attached to different events, passed around, queued, dispatched or whatever else you can imagine. Command packets will be pinging around your system with the following shape:
 
 ```js
 // stabCommand
@@ -10,7 +10,7 @@ Actualising the actions of your system into discrete objects with a common inter
 }
 ```
 
-The advantages of the Command pattern are the utter convenience of attaching and unattaching commands to certain events, undoing and redoing individual commands, or undoing and redoing chains of commands assuming commands are stored in a queue. See full example from `./index.ts`.
+The advantages of the Command pattern are the utter convenience of attaching and unattaching commands to certain events, undoing and redoing individual commands, and undoing and redoing chains of commands (assuming commands are stored in a queue).
 
 ## References
 
