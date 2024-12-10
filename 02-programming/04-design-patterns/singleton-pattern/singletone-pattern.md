@@ -4,9 +4,9 @@
 
 The Singleton pattern is acutally considered to be a code smell and best avoided for the reasons the we avoid globals in general:
 
-1. They make it harder to reason about the code since we need to understand all the points that modiffy it when there's a bug
+1. They make it harder to reason about the code since we need to understand all the points that modify it when there's a bug
 2. Encourage coupling between modules
-3. Aren't concurrency friendlt
+3. Aren't concurrency friendly
 4. Are difficult to refactor, since they require touching every file the singleton is accessed.
 
 ## References

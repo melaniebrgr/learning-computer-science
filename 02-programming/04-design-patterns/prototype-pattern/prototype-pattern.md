@@ -1,8 +1,8 @@
 # Prototype pattern
 
-The prototype pattern works my creating new objects from a prototypical instance.
+Because of confusing terminology overlap with the JS prototype, I hereby dub this the spawner pattern. The prototype pattern works my creating new objects from a prototypical instance.
 
-Need to spawn mutiple clones of an entity? Or have one off special items that very slightly from a base version? The prototype pattern offers ans easy way to lots of rich variations in the game world environment and items.
+Need to spawn mutiple clones of an entity? Or have one off special items that vary slightly from a base version? The prototype pattern offers ans easy way to create lots of rich variations in the game world environment and items.
 
 ## What about JavaScript?
 
@@ -29,7 +29,7 @@ The fields and methods are sequentially looked up, or rather down, the prototype
 
 ### Object.assign
 
-`Object.assign({}, prototype)` shallowly copies _only_ enumerable and own properties from a source object (prototype) to a target object. Because properties on the prototype chain and non-enumerable properties cannot be copied, and only the reference to _reference_ values is copied, the target object outcome is but a pale imitation of it's source. It is not suitable for the prototype pattern.
+`Object.assign({}, prototype)` shallowly copies _only_ enumerable and own properties from a source object (prototype) to a target object. Because properties on the prototype chain and non-enumerable properties cannot be copied, and only the reference to _reference_ values is copied, the target object outcome can be an incomplete imitation of it's source. It is not suitable for the prototype pattern.
 
 ### structuredClone
 
@@ -46,7 +46,7 @@ Sounds promising. It works perfectly for all public properties and methods, but 
 
 All the ways of implementing the prototype pattern are hereby listed.
 
-1. A spawner class containing a prototype: The prototype contains a clone method that the spawner calls to stamp exect replicas of the current prototype. You need to implement and decide how deep the clone the properties. (See example from `index.ts`.)
+1. A spawner class containing a prototype: The prototype contains a clone method that the spawner calls to stamp exact replicas of the current prototype. You need to implement and decide how deep the clone the properties. (See example from `index.ts`.)
 2. A spawner class containing a spawner method: The function doesn't retain the state of the prototype, however.
 3. Use `Object.create` > `structureClone` > `Object.assign` depending on the fidelity needed of the clone.
 

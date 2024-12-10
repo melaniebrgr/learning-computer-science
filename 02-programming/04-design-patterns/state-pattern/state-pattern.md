@@ -7,7 +7,7 @@ A Finite State Machine (FSM)
 - each state has a set of _transitions_ that point to a new state
 - changes from one state to another are in response to some input
 
-State machines are memoryless; they make decisions (transition) based soley on where they are currently.
+State machines are memoryless; they make decisions (transition) based solely on where they are currently.
 
 An FSM can be completely described by a list of all its states, an initial state, and the inputs that trigger each transition. A change from one state to another is called a transition. There are of two types for FSMs: deterministic and non-deterministic.
 
@@ -27,8 +27,7 @@ Example: a traffic light 🔴🟡🟢
 ## Implementation
 
 The simplest way to implement a FSM is with an enum and a switch statement.
-
-Use the State pattern when you need to update multiple functions or add data to a parent that only belongs to one finite state.
+A more complicated implimentation: each state contains the logic to decide which state it transitions to next.
 
 ## Resources
 

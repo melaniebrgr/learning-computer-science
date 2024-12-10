@@ -1,4 +1,4 @@
-# 02 Next.js
+# 02 Next.js presentation notes
 
 It's a better React.
 
@@ -176,6 +176,8 @@ app.tsx
   - To recap, the Next.js image component is improved, performant version of the <img> HTML element and adds a number of custom properties to enable the client to choose the right image size, and the server to generate the right size.
   - To achieve these benefits you, use the Image component to get to know the image API, especially width, height and sizes
 
-## Resources
+### Resources
 
 - <https://nextjs.org/learn/dashboard-app>
+- <https://nextjs.org/blog/next-15>
+- <https://x.com/feedthejim/status/1785242054773145636>
