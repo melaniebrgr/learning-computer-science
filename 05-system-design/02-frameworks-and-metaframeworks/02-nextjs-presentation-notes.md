@@ -1,6 +1,8 @@
 # 02 Next.js presentation notes
 
-It's a better React.
+## What is Next.js?
+
+"It's a better React."
 
 - “Next.js is a flexible React framework that gives you building blocks to create fast web applications.”
 - “Next.js handles the tooling and configuration needed for React”

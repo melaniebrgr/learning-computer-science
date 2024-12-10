@@ -39,12 +39,3 @@ There are different organisational patterns ranging between the `app` folder bei
 ## Routing
 
 > The skeleton of every application is routing.
-
-## Resources
-
-- [x] Getting started
-    - [x] Installation
-    - [x] Project structure
-- [x] Build your application
-    - [ ] Routing
-        - [ ] Defining routes
