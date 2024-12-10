@@ -36,6 +36,10 @@ The routing based file system supports several organisational conventions
 
 There are different organisational patterns ranging between the `app` folder being only for routing to colocating content next to the route that uses it.
 
+## Routing
+
+> The skeleton of every application is routing.
+
 ## Resources
 
 - [x] Getting started
