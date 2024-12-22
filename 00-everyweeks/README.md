@@ -58,14 +58,14 @@ Basically I will try something for a week, document my learning, judge its succe
 |  42  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  43  | Try Godot | 403 | Got bored by the tutorial and petered out |
 |  44  | [Beginner's guide to IndexedDB](./week44/) | 200 | A small website with a vanilla JS IBD usage example |
-|  45  | Padel |  |  |
-|  46  | Padel |  |  |
-|  47  | Try anything in Godot |  |  |
-|  48  |  |  |  |
-|  49  |  |  |  |
-|  50  |  |  |  |
-|  51  |  |  |  |
-|  52  | Jack Herrington Workshop: Next.js foundations for Professional Web Development |  |  |
+|  45  | Padel | 403 |  |
+|  46  | Padel | 403 |  |
+|  47  | Try anything in Godot | 206 | Did not finish the official tutorial |
+|  48  | - | 403 |  |
+|  49  | - | 403 |  |
+|  50  | - | 403 |  |
+|  51  | - | 403 |  |
+|  52  | Jack Herrington Workshop: Next.js foundations for Professional Web Development | 102 |  |
 
 ## Topic ideas
 
