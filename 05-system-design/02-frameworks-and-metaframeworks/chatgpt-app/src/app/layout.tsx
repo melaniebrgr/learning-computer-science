@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ChatGPT App",
-  description: "Demo app for ChatGPT",
+  title: "Next.js ChatGPT App",
+  description: "Next.js demo app for ChatGPT",
 }
 
 export default function RootLayout({
