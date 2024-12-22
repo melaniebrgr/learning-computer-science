@@ -1,4 +1,28 @@
-# Next.js RTFM
+# Next.js
+
+Advantages
+
+1. Support RSC, a method of rendering components only on the server so the code is not download to the client.
+1. Support streaming, wrap an RSC in a suspense boundary for a streaming connection, so while backend services respond content can beging to stream in for the data available and hold the connection open.
+1. Partial pre-rendering where the shell can be sent milliseconds after the request and then content is streamed in. (Only available on Vercel?)
+1. Parallel routing can enable page segmentation into blocks that are individually streamed in.
+1. Offers rendering modes like SSG that enables pages to be rendered at application build time.
+1. Is well-positioned for full-stack application development.
+1. Has a large community surrounding it and good development support.
+
+Tradeoffs
+
+Next.js require client hydration, meaiong the HTML page returned has extra data for hydration that bulks out the payload. Every tag is effectively replicated in a payload at the bottom of the page, doubling the size of the response. For a more static, content heavy website consider Astro, for a client interaction heavy application a SPA with vite may be more suitable. More applications exist on a spectrum between these two.
+
+Deployment
+
+- On Vercel (Svelte app can also be deployed on Vercel)
+- SST
+- OpenNext
+
+## Project management
+
+The `build` command builds the production code, transpiled under a `.next` directory, which can then be run with the `start` command.
 
 ## Project structure
 

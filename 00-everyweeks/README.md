@@ -65,10 +65,11 @@ Basically I will try something for a week, document my learning, judge its succe
 |  49  |  |  |  |
 |  50  |  |  |  |
 |  51  |  |  |  |
-|  52  |  |  |  |
+|  52  | Jack Herrington Workshop: Next.js foundations for Professional Web Development |  |  |
 
 ## Topic ideas
 
+- Grafana
 - How to profile memory usage in Next.js
 - What happens when a file is uploaded?
 - CORS
