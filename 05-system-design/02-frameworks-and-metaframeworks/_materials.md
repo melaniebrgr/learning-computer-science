@@ -1,11 +1,14 @@
 # Next.js Materials
 
-## [Next.js Docs](https://nextjs.org/docs) checklist
+## [Next.js Docs](https://nextjs.org/docs)
 
-- [x] Getting started
+- [x] Getting Started
   - [x] Installation
-  - [x] Project structure
-- [x] Build your application
+  - [x] Project Structure
+  - [ ] Layouts and Pages
+  - [ ] Images and Fonts
+  - [ ] CSS and Styling
+- [ ] Building Your Application
   - [ ] Routing
   - [ ] Defining routes
 
@@ -18,12 +21,22 @@
     - [x] Why You Should Choose Next.js
     - [x] When Not to Use Next.js
     - [x] The React, Next.js and Vercel Controversy
-  - [ ] Application Setup and Layout
-    - [ ] Create and Deploy a Next.js Application
-    - [ ] An Overview of the First Application
-    - [ ] Create Your First Route
-    - [ ] Add a Header Using Layout
-    - [ ] Choosing a SSR Framework or a SPA System
-    - [ ] Client vs. Server Components in Next.js
-  - [ ] Adding authorisation
-
+  - [x] Application Setup and Layout
+    - [x] Create and Deploy a Next.js Application
+    - [x] An Overview of the First Application
+    - [x] Create Your First Route
+    - [x] Add a Header Using Layout
+    - [x] Choosing a SSR Framework or a SPA System
+    - [x] Client vs. Server Components in Next.js
+  - [x] Adding Authorisation
+    - [x] Add Authentication with NextAuth.js
+    - [x] NextAuth v5 Update
+  - [ ] Adding Interactivity
+    - [ ] Composition in Next.js: Understanding Client and Server Components
+    - [ ] Intro to Server Actions
+    - [ ] Add Interactivity with Next.js Server Actions
+  - [ ] Connecting to a Database
+    - [ ] Store Chat Data in a Database
+  - [ ] Routing
+    - [ ] File-Based Routing with App Router
+    - [ ] Adding Parameterized Routes to a Next.js App
