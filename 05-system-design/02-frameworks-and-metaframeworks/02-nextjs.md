@@ -1,6 +1,6 @@
-# Next.js
+# Next.js 15 (App router)
 
-Advantages
+Advantages:
 
 1. Support RSC, a method of rendering components only on the server so the code is not download to the client.
 1. Support streaming, wrap an RSC in a suspense boundary for a streaming connection, so while backend services respond content can beging to stream in for the data available and hold the connection open.
@@ -12,9 +12,9 @@ Advantages
 
 Tradeoffs
 
-Next.js require client hydration, meaiong the HTML page returned has extra data for hydration that bulks out the payload. Every tag is effectively replicated in a payload at the bottom of the page, doubling the size of the response. For a more static, content heavy website consider Astro, for a client interaction heavy application a SPA with vite may be more suitable. More applications exist on a spectrum between these two.
+Next.js require client hydration, meaning the HTML page returned also contains all the code and data needed for hydration, which bulks out the payload. With hydration, every tag is effectively replicated in a payload at the bottom of the page which doubles the size of the response. If you don't need to build an application, other technical appraoches can be optimal. For example, for a static and content heavy website consider Astro. For a client interaction heavy website consider a SPA and Vite. Most applications exist on a spectrum between these two extremes.
 
-## Project management
+## Project delivery
 
 Deploy on
 
@@ -69,23 +69,34 @@ Use the `Link` component for routing in Next.js.
 
 ## Components
 
-Server component code is only executed on the server and is not part of the payload downloaded to the client.
+Server component code is only executed on the server and is not part of the payload downloaded to the client. The advantages of this are
 
-- Reduced Bundle Size: Server component code is not sent to the client, reducing the bundle size and speeding up the application.
-- Security: Server component code only runs on the server, preventing leakage of secrets to the client.
+- Reduced Bundle Size: the bundle size is smaller because server component code is not sent to the client, speeding up the application.
+- Security: Server component code only runs on the server, avoiding leakage of secrets to the client.
 - Data Loading: Server components make it easy to load data from backend services.
-Server components call backend services asynchronously behind a firewall in your cluster and pass that data to child components.
-The data fetched from BE services is or can be cached and reused.
-Server components should not call into state management tooling but be stateless.
-It's important you don't try to work around this, because Next.js does heavy caching of rendered components.
-(console.log statements appear in the terminal)
 
-To also execute code on the client it also needs to be marked as `use client`.
-In that case the code data it is passed by server components is serialised, downloaded in the SSR payload and executed on the client during rehydration.
-Data can't be fetched the same way in client components, as async client components [currently aren't supported](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md#why-cant-client-components-be-async-functions), a useEffect hook would need to be used instead.
+Server components call backend services asynchronously behind a firewall in your cluster and pass that data to child components.
+The data fetched from BE services can be cached.
+Server components should be stateless and not call into state management libraries.
+It's important not to work around this, because Next.js does heavy caching of rendered components.
+
+To also execute code on the client, mark it as `use client`.
+Client component code and data it is passed, e.g. from server components, is downloaded in the SSR payload and executed on the client during rehydration.
+Data can't be fetched the same way in client components as async client components [currently aren't supported](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md#why-cant-client-components-be-async-functions), and so request data can't be awaited; instead a useEffect hook needs to be used.
 Hooks can only be used in client components.
-This means that useEffect to load your data, it won't run on the server.
-(console.log statements appear in the terminal and in the browser console.)
+This means that if useEffect to load your data, the hook won't run on the server.
+
+Components without `use client` are not necessarily always server components.
+Non `use client` components are be "promoted" to client components if they are rendered from client components (provided they are not async, since async components cannot be used within client components).
+Restated, when a client component invokes another component, that component automatically becomes a client component.
+The `use client` marker essentially creates a zone inside of the client component where any component that is invoked is promoted to a client component.
+This is how hooks can be used from within client components have haven't been marked as client components for instance.
+
+By passing the server component as a child to the client component the server component remains a server component, while the client component acts as a container a.k.a. donut component composition, e.g. Providers.
+Providers are client components that pass data to child components as props, because they take server components as props, server components remain components.
+
+Whether something is or is not a server component can be verified by checking where console log statements appear.
+`console.log` statements appear in the terminal and in the browser console for client components, and only in the terminal for server components.
 
 ## Authentication
 
