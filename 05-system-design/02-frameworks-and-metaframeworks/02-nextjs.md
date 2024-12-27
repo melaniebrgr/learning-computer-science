@@ -67,6 +67,44 @@ There are different organisational patterns ranging between the `app` folder bei
 Use the `Link` component for routing in Next.js.
 `Link` provides a SPA like experience for routing: instead of the whole page reloading, the shell is rendered imeediately while the other information is being fetched.
 
+## Data fetching
+
+There are three points of data interaction
+
+1. Server components: fetch data and pass it as props RSCs run only on the back end and are a good place to fetch data without leaking API keys.
+1. Server actions: a new way of conveninently mutating data enabled by app router
+1. API routes: Next.js applications have always supported API routes for data fetching and mutations
+
+**Server components** call backend services asynchronously behind a firewall in your cluster and pass that data to child components.
+The data fetched from BE services can be cached.
+Server components should be stateless and not call into state management libraries.
+What about mutations? Are these inadvisable from server components?
+It's important not to work around this, because Next.js does heavy caching of rendered components.
+The `use cache` experimental directive from Next.js that can be added to routes, components, and queries that are slow, e.g. sloe network requests, database queries.
+By default the revalidation period is 15 minutes, but can be customised with the `cacheLife` and `cacheTag` APIs.
+For fetching data, using server-side rendering and passing the data as props may often a better choice than using server actions.
+
+Data can't be fetched the same way as server components in client components since async client components [currently aren't supported](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md#why-cant-client-components-be-async-functions), and so request data can't be awaited; instead a useEffect hook needs to be used.
+This means that if useEffect to load your data, the hook won't run on the server because hooks can only be used in client components.
+
+**Server Actions (SAs)** are special functions you define that are specifically run on the server.
+Whenever you call a server function from a client component, Next.js handles fetch and data retrieval from the server.
+The `use server` directive is what indicates that the function is a server action that should be executed on the server when called from the client.
+SAs can be call from both server and client components.
+Making GET requests to the server using server actions will always result in POST requests.
+A POST means we can't cache the request.
+Since SAs are generally mutation requests, revalidating or updating the component on data change is necessary.
+One approach is to use the `revalidatePath` function, which tells Next.js to invalidate the data at the specified path and refetch it on the next request.
+However this couples the server action to the route.
+Another approach is to use `revalidateTag` to invalidate a specific data fetch.
+
+An **API route** let's the verb GET/PUT/POST be specified.
+API routes expose endpoints other clients can use.
+
+The blurring of the server and component boundaries can make it easier for sensitive data to accidentally leak to the client.
+React offers experimental [utils to "taint" objects and values](https://react.dev/reference/react/experimental_taintObjectReference#prevent-user-data-from-unintentionally-reaching-the-client) so that they through errors if accidentally passed through to the client.
+**Tainting** can also avoid whole kitchen sink pass through of user objects.
+
 ## Components
 
 Server component code is only executed on the server and is not part of the payload downloaded to the client. The advantages of this are
@@ -75,16 +113,14 @@ Server component code is only executed on the server and is not part of the payl
 - Security: Server component code only runs on the server, avoiding leakage of secrets to the client.
 - Data Loading: Server components make it easy to load data from backend services.
 
-Server components call backend services asynchronously behind a firewall in your cluster and pass that data to child components.
-The data fetched from BE services can be cached.
-Server components should be stateless and not call into state management libraries.
-It's important not to work around this, because Next.js does heavy caching of rendered components.
+Server components are rendered on the server and their state and props are serialized and sent to the client.
+Functions, however, cannot be serialized and sent over the network.
+For this reason, "functions cannot be passed directly to Client Components (for server components) unless it is explicitly exposed by marking it with "use server" as a server action.
 
 To also execute code on the client, mark it as `use client`.
-Client component code and data it is passed, e.g. from server components, is downloaded in the SSR payload and executed on the client during rehydration.
-Data can't be fetched the same way in client components as async client components [currently aren't supported](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md#why-cant-client-components-be-async-functions), and so request data can't be awaited; instead a useEffect hook needs to be used.
 Hooks can only be used in client components.
-This means that if useEffect to load your data, the hook won't run on the server.
+Client component code and data it is passed from server components is serialised, and included in the SSR payload sent to the browser.
+The SSR payload is executed on the client during rehydration.
 
 Components without `use client` are not necessarily always server components.
 Non `use client` components are be "promoted" to client components if they are rendered from client components (provided they are not async, since async components cannot be used within client components).

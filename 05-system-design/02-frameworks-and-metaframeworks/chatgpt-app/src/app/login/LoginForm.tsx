@@ -2,20 +2,23 @@
 
 import { login } from "@/actions/auth"
 import { useActionState } from "react"
+import { Input } from "@/components/input"
+import { Button } from "@/components/button"
+import { Label } from "@/components/label"
 
 export function LoginForm() {
   const [state, action, pending] = useActionState(login, undefined)
 
   return (
     <form action={action}>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="Email" />
+      <div className="my-4">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" name="email" type="email" placeholder="Email" />
       </div>
       {state?.errors?.email && <p>{state.errors.email}</p>}
-      <div>
-        <label htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" />
+      <div className="my-4">
+        <Label htmlFor="password">Password</Label>
+        <Input id="password" name="password" type="password" />
       </div>
       {state?.errors?.password && (
         <div>
@@ -27,7 +30,7 @@ export function LoginForm() {
           </ul>
         </div>
       )}
-      <button disabled={pending} type="submit">Login</button>
+      <Button disabled={pending} type="submit">Login</Button>
     </form>
   )
 }

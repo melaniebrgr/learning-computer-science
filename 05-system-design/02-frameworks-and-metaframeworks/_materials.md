@@ -32,11 +32,13 @@
     - [x] Add Authentication with NextAuth.js
     - [x] NextAuth v5 Update
   - [ ] Adding Interactivity
-    - [ ] Composition in Next.js: Understanding Client and Server Components
-    - [ ] Intro to Server Actions
+    - [x] Composition in Next.js: Understanding Client and Server Components
+    - [x] Intro to Server Actions
     - [ ] Add Interactivity with Next.js Server Actions
   - [ ] Connecting to a Database
     - [ ] Store Chat Data in a Database
   - [ ] Routing
     - [ ] File-Based Routing with App Router
     - [ ] Adding Parameterized Routes to a Next.js App
+  - [ ] React Server Components (RSC)
+    - [ ] Access Data with React Server Components

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
  
 const protectedRoutes = ['/chat']
-const publicRoutes = ['/login', '/about', '/']
+const publicRoutes = ['/', '/login', '/about']
  
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname
