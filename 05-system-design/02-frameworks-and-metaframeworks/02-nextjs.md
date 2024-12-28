@@ -37,7 +37,11 @@ A route is not publicly accessible until a page.js or route.js file is added to 
 Still, when colocating content with the nested route, delimiting a directory as private with `_` can avoid future naming conflicts.
 Root layout are set up with html and body tags and an initial `page.tsx`.
 
+There are different organisational patterns ranging between the `app` folder being only for routing to colocating content next to the route that uses it.
+
 ## Routing
+
+Like the pages router, the app router is a file-based router but the syntax has changed.
 
 > The skeleton of every application is routing.
 
@@ -48,6 +52,39 @@ Routing based on directory structure supports the following routing patterns:
     - optional catch-all (`[[...path]]`)
     - parallel (`@nonpath`)
     - intercepted (`(.), (..), (..)(..), (...)`)
+
+### params
+
+Every page.tsx route receives two special properties:
+
+1. search params (`Record<string, string | string[]`)
+2. route params (or just "params")
+
+Any route can take search parameters.
+`searchParams` are passed into the page component as a property by default.
+The value of the param can be a string or array of strings, since if there are duplicate keys the values are combined in an array.
+For example, `?q=5&a=10&q=6` is passed as
+
+```js
+{ a : "10", q: ['5', '6'] }
+```
+
+A "parameterised" route or dynamic route parameters are also passed into the page component as a `params` property by default.
+The name of path segment because the key of the params object passed to the page.
+
+| Path | URL Examples |
+| ---- | ------------ |
+| `/page.tsx` | / |
+| `/about/page.tsx` | /about |
+| `/about/you/page.tsx` | /about/you |
+| `/product/[productId]/page.tsx` | /product/foo, /product/bar |
+| `/product/page.tsx` | /product |
+| `/setting/[...setting]/page.tsx` | /setting/a, /setting/b/c |
+| `/setting/page.tsx` | /setting |
+| `/info/[[...item]]/page.tsx` | /info, /info/23, /info/23/detail |
+| `/(teamA)/editor/page.tsx` | /editor |
+
+### parallel routing
 
 A parallel route is a micropage.
 A parallel route can be rendered within another page, e.g. embedded or from a modal, and it can have it's own loading and error page views.
@@ -62,7 +99,7 @@ The routing based file system supports several organisational conventions
     - grouping e.g. by domain, or team
     - opt-out (private)
 
-There are different organisational patterns ranging between the `app` folder being only for routing to colocating content next to the route that uses it.
+### linking
 
 Use the `Link` component for routing in Next.js.
 `Link` provides a SPA like experience for routing: instead of the whole page reloading, the shell is rendered imeediately while the other information is being fetched.
@@ -164,3 +201,7 @@ Page level access can be implemented in the middleware by checking for session d
 Request level access can be done in server actions before database requests are made, by verifying the DB session, a.k.a a "data access layer"
 Data level access can be enforced by implemention data transfer objects or DTOs, that verify access for each field.
 In Next.js authorisation by component is possible too, by verifying the session and rendering a component based on role.
+
+## Styling
+
+Add add CSS rules global.css to apply styles to all the routes in the application, such as CSS reset rules, site-wide styles for HTML elements like links, and more.
