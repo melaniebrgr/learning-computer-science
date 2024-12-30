@@ -14,6 +14,17 @@ export async function getCompletion(
   }[],
   chatId?: number,
 ) {
+  let chat = { id: chatId }
+  
+  if (!chat.id) {
+    chat = await createChat({ user_id: 1, name: Date.now().toString() })
+  }
+
+  if (chat.id && messageHistory.length > 0) {
+    const lastMsg = messageHistory[messageHistory.length - 1]
+    await createMsg(chat.id, { role: lastMsg.role, content: lastMsg.content })
+  }
+
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: messageHistory,
@@ -29,12 +40,6 @@ export async function getCompletion(
     message
   ]
 
-  let chat = { id: chatId }
-  
-  if (!chat.id) {
-    chat = await createChat({ user_id: 1, name: Date.now().toString() })
-  }
-  
   if (chat.id) {
     await createMsg(chat.id, { role: message.role, content: message.content })
   }

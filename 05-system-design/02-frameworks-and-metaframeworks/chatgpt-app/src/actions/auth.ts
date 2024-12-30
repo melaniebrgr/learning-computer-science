@@ -4,6 +4,7 @@ import { LoginFormSchema, LoginFormState } from '@/lib/auth/definitions'
 import { getUserByEmail } from '@/lib/db/user';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { USER_ID_COOKIE } from '@/lib/auth/constants';
  
 export async function login(_state: LoginFormState, formData: FormData) {
   // Validate login form fields
@@ -33,7 +34,7 @@ export async function createSession(userId: string) {
   const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
   const cookieStore = await cookies()
  
-  cookieStore.set('nc-user', userId, {
+  cookieStore.set(USER_ID_COOKIE, userId, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,

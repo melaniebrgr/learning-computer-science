@@ -14,6 +14,12 @@ Tradeoffs
 
 Next.js require client hydration, meaning the HTML page returned also contains all the code and data needed for hydration, which bulks out the payload. With hydration, every tag is effectively replicated in a payload at the bottom of the page which doubles the size of the response. If you don't need to build an application, other technical appraoches can be optimal. For example, for a static and content heavy website consider Astro. For a client interaction heavy website consider a SPA and Vite. Most applications exist on a spectrum between these two extremes.
 
+## Definitions
+
+- SC: Server Component
+- CC: Client Component
+- SA: Server Action
+
 ## Project delivery
 
 Deploy on
@@ -53,6 +59,18 @@ Routing based on directory structure supports the following routing patterns:
     - parallel (`@nonpath`)
     - intercepted (`(.), (..), (..)(..), (...)`)
 
+It's a theme in app router: there is a different way to do things depending on whether you're in a server component or a client component.
+Take navigation:
+
+- `<Link>`-> CC, SC
+- `useRouter` -> CC
+- `redirect` -> middleware, SC, SA, CC (during the render process only, not event handlers)
+- History API -> CC
+
+The recommended method of navigation, **`<Link>`** renders an anchor tag and prefetches the page in the background on the client when the link is in the viewport. Prefetching behaviour is controlled with the prefetch prop. The default is to cache the prefetched page up to the loading boundaries for 30s. It can also be disabled or set to cache past loading boundaries. Use **useRouter** and **redirect** for programmatic client side and server side navigation respectively. `redirect` accepts absolute URLs and can redirect to external links as well. The native history API can be accessed to update the browser's history stack without reloading the page.
+
+It is beneficial to share layout, with as mich layout as possible implemented in the parent page, "when a user navigates to a new route the browser doesn't reload the page. Only the route segments that change re-render improving the navigation experience and performance."
+
 ### params
 
 Every page.tsx route receives two special properties:
@@ -84,12 +102,16 @@ The name of path segment because the key of the params object passed to the page
 | `/info/[[...item]]/page.tsx` | /info, /info/23, /info/23/detail |
 | `/(teamA)/editor/page.tsx` | /editor |
 
+Prefer to use the `Link` component for routing in Next.js.
+`Link` provides a SPA like experience for routing: instead of the whole page reloading, the shell is rendered imeediately while the other information is being fetched.
+
 ### parallel routing
 
-A parallel route is a micropage.
-A parallel route can be rendered within another page, e.g. embedded or from a modal, and it can have it's own loading and error page views.
-While the parallel route slot is not a route segment, it can have nested routes, and intercept routes that point elsewhere.
-Instead of incurring a full page reload, content is loaded dynamically while maintaining the current context.
+Parallel route are micropages: imagine an analytics dashboard that displays many graphs of different types at the same time.
+A parallel route is effectively a page rendered within another page, e.g. embedded or from a modal, that can have it's own loading and error pages.
+While a parallel route slot is not a route segment, it can have nested routes, and intercept routes that point elsewhere.
+Instead of incurring a full page reload, content is loaded in parallel while maintaining the current context.
+Consider parallel routes when you want to leverage parallel data loading and state management.
 Parallel route example use cases:
     - Dashboards combining multiple charts or widgets displayed in parallel, e.g. Mixpanel dashboard with a team's different health graphs.
     - Product pages were selecting on the product opens a modal, but navigating to the URL opens the full product detail page.
@@ -99,10 +121,6 @@ The routing based file system supports several organisational conventions
     - grouping e.g. by domain, or team
     - opt-out (private)
 
-### linking
-
-Use the `Link` component for routing in Next.js.
-`Link` provides a SPA like experience for routing: instead of the whole page reloading, the shell is rendered imeediately while the other information is being fetched.
 
 ## Data fetching
 
@@ -142,6 +160,8 @@ The blurring of the server and component boundaries can make it easier for sensi
 React offers experimental [utils to "taint" objects and values](https://react.dev/reference/react/experimental_taintObjectReference#prevent-user-data-from-unintentionally-reaching-the-client) so that they through errors if accidentally passed through to the client.
 **Tainting** can also avoid whole kitchen sink pass through of user objects.
 
+> In Next.js One of the biggest advantages of the App Router system over the Pages Router system comes down to managing laggy components with **Suspense**. With the Pages Router system, it was far more involved. You'd have to bail out of getServerSideProps, make requests off the client, open up APIs, and so on. It required a lot of work, potentially opening up a host of security issues.
+
 ## Components
 
 Server component code is only executed on the server and is not part of the payload downloaded to the client. The advantages of this are
@@ -170,6 +190,16 @@ Providers are client components that pass data to child components as props, bec
 
 Whether something is or is not a server component can be verified by checking where console log statements appear.
 `console.log` statements appear in the terminal and in the browser console for client components, and only in the terminal for server components.
+
+## Caching
+
+"Next.js has an in-memory client-side cache called the **Router Cache**. As users navigate around the app, the React Server Component Payload of prefetched route segments and visited routes are stored in the cache ... on navigation, the cache is reused as much as possible".
+
+Next.js used to cache routes aggressively which required you to "force dynamic" or use other options to fetch data on route reload.
+
+## Styling
+
+Add add CSS rules global.css to apply styles to all the routes in the application, such as CSS reset rules, site-wide styles for HTML elements like links, and more.
 
 ## Authentication
 
@@ -201,7 +231,3 @@ Page level access can be implemented in the middleware by checking for session d
 Request level access can be done in server actions before database requests are made, by verifying the DB session, a.k.a a "data access layer"
 Data level access can be enforced by implemention data transfer objects or DTOs, that verify access for each field.
 In Next.js authorisation by component is possible too, by verifying the session and rendering a component based on role.
-
-## Styling
-
-Add add CSS rules global.css to apply styles to all the routes in the application, such as CSS reset rules, site-wide styles for HTML elements like links, and more.

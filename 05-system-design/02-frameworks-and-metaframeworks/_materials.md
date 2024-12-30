@@ -1,6 +1,20 @@
-# Next.js Materials
+# Materials
 
-## [Next.js Docs](https://nextjs.org/docs)
+## [React Reference Overview v19](https://react.dev/reference/react)
+
+### react@19
+
+- [ ] Hooks
+- [ ] Components
+- [ ] APIs
+
+### react-dom@19
+
+- [ ] Hooks
+- [ ] Components
+- [ ] APIs
+
+## [Next.js Docs v15](https://nextjs.org/docs)
 
 - [x] Getting Started
   - [x] Installation
@@ -9,10 +23,21 @@
   - [ ] Images and Fonts
   - [ ] CSS and Styling
 - [ ] Building Your Application
-  - [ ] Routing
-  - [ ] Defining routes
+  - [ ] Layouts and Templates
+  - [x] Linking and Navigating
+  - [ ] Error Handling
+  - [ ] Loading UI and Streaming
+  - [ ] Redirecting
+  - [ ] Route Groups
+  - [ ] Dynamic Routes
+  - [ ] Parallel Routes
+  - [ ] Intercepting Routes
+  - [ ] Route Handlers
+  - [ ] Middleware
+  - [ ] Internationalization
+- [ ] API reference
 
-## [Learn Next.js](https://nextjs.org/learn)
+## [Learn Next.js v15](https://nextjs.org/learn)
 
 - [ ] Introduction
 - [ ] Getting Started
@@ -56,25 +81,17 @@
     - [x] Add Interactivity with Next.js Server Actions
   - [x] Connecting to a Database
     - [x] Store Chat Data in a Database
-  - [ ] Routing
-    - [ ] File-Based Routing with App Router
-    - [ ] Adding Parameterized Routes to a Next.js App
-  - [ ] React Server Components (RSC)
-    - [ ] Access Data with React Server Components
+  - [x] Routing
+    - [x] File-Based Routing with App Router
+    - [x] Adding Parameterized Routes to a Next.js App
+  - [x] React Server Components (RSC)
+    - [x] Access Data with React Server Components
+  - [ ] Advanced Routing
+    - [ ] Implement Parallel Routes for a Chat Menu Sidebar
+  - [ ] Streaming
+    - [ ] Implement Streaming AI responses
+  - [ ] What you've learned so far
 
-## Application ideas
+## Misc
 
-### Option 1: Our shared story app
-
-Each new prompt is folded into an ongoing, never ending story that everyone can contribute to
-
-- [ ] Change to new AI model
-- [ ] Generate illustrations
-- [ ] Request to access form
-- [ ] Proper authentication
-- [ ] UI reskinning
-- [ ] Pay to read the full story, e.g. like WebToon
-
-### Option 2: Next.js certification exam
-
-Test your knowledge of Next.js and see how you score on the leaderboard. Receive certications and awards.
+- [ ] [This Next.js Feature is a Game Changer (Parallel Routes)](https://www.youtube.com/watch?v=VNcl_VFDo24&t=73s)

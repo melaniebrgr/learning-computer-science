@@ -1,23 +1,13 @@
+import { Suspense } from "react";
+import PreviousChats from "./PreviousChats";
 
-type Params = { slug: undefined }
-type SearchParams = { [key: string]: string | string[] | undefined }
-
-interface LandingRouteProps {
-  params: Params;
-  searchParams: SearchParams;
-}
-
-export default async function LandingRoute(props: LandingRouteProps) {
-  const params = await props.params
-  const searchParams = await props.searchParams
-  console.log(
-    "LandingRoute",
-    params,
-    searchParams
-  );
+export default function LandingRoute() {
   return (
     <main className="p-5">
       <h1 className="text-4xl font-bold">Welcome To GPT Chat</h1>
+      <Suspense fallback={<div>Loading Previous Chats</div>}>
+        <PreviousChats />
+      </Suspense>
     </main>
   );
 }

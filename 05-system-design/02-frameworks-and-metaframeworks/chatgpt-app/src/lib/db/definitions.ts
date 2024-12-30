@@ -24,3 +24,10 @@ export interface MsgDB {
 }
 
 export type CreateMsgDB = Omit<MsgDB, "id" | "created_at" | "chat_id">;
+
+export interface ChatWithMsgsDB { chat: ChatDB; messages: MsgDB[] }
+
+export interface MsgOpenAI {
+  role: "user" | "assistant";
+  content: string;
+}
