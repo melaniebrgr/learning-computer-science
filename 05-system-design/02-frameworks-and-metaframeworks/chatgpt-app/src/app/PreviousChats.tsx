@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default async function PreviousChats() {
   const userId = await getUserIdFromCookie()
-  const chats = await getChatByUserIdAndMessages(userId)
+  const chats = userId ? (await getChatByUserIdAndMessages(userId)) : []
 
   return (
     <div>
@@ -30,9 +30,9 @@ export default async function PreviousChats() {
         </>
       )}
       {chats.length === 0 && (
-        <div className="flex justify-center">
-          <div className="text-gray-500 italic text-2xl">
-            No previous chats.
+        <div className="my-4">
+          <div className="text-gray-500 text-2xl">
+            No previous chats. Did you forget to <Link href="/login" className="text-blue-500 underline">login?</Link>
           </div>
         </div>
       )}

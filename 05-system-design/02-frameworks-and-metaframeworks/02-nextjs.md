@@ -45,6 +45,12 @@ Root layout are set up with html and body tags and an initial `page.tsx`.
 
 There are different organisational patterns ranging between the `app` folder being only for routing to colocating content next to the route that uses it.
 
+There three general system architecture groups we can consider
+
+1. "Local architecture": simplest variant where Next.js handles everything. The client connects to the server with REST, GraphQL, tRPC (using API routes), or built-in Server Actions, and the server makes a direct connection with the database.
+2. "Backend for frontend": Next.js acts a UI server and intermediary for a number of services that communicate with the database. Next.js communicates with the services via REST, GraphQL, tRPC, or WebSockets.
+3. "External architecture": The BE and FE are on seperate domains and the client may interact with both, require caching and session coordination.
+
 ## Routing
 
 Like the pages router, the app router is a file-based router but the syntax has changed.
@@ -120,7 +126,8 @@ Parallel, intercepted and route organisation is only supported in app router.
 The routing based file system supports several organisational conventions
     - grouping e.g. by domain, or team
     - opt-out (private)
-
+Parallel routes provide implicit suspense behavior at the route level.
+For more fine-grained control over suspense boundaries and loading states, the Suspense component can be used.
 
 ## Data fetching
 
@@ -152,6 +159,7 @@ Since SAs are generally mutation requests, revalidating or updating the componen
 One approach is to use the `revalidatePath` function, which tells Next.js to invalidate the data at the specified path and refetch it on the next request.
 However this couples the server action to the route.
 Another approach is to use `revalidateTag` to invalidate a specific data fetch.
+Remember, server actions return promises.
 
 An **API route** let's the verb GET/PUT/POST be specified.
 API routes expose endpoints other clients can use.
@@ -193,13 +201,71 @@ Whether something is or is not a server component can be verified by checking wh
 
 ## Caching
 
-"Next.js has an in-memory client-side cache called the **Router Cache**. As users navigate around the app, the React Server Component Payload of prefetched route segments and visited routes are stored in the cache ... on navigation, the cache is reused as much as possible".
+High performance apps are high performance primarily because they are largely cached. There are multiple caches in the Next.js whose interactions need to be understood.
+Note that in dev mode caching behaviour may not match the prod mode caching behaviour.
 
-Next.js used to cache routes aggressively which required you to "force dynamic" or use other options to fetch data on route reload.
+### Full route cache (Next.js)
+
+There are two different kinds of routes, the **static route** and **dynamic route**. Static routes are statically generated when the application is built and are saved. When the route is accessed, the static page is returned. A dynamic route is always rerendered at request time by the server. Though generally undesirable for performance, it is possible to force a static route to be rendered dynamically.
+
+The route cache behaviour changed from Next.js 14 to 15.
+Next.js 14 cached routes aggressively which required you to "force dynamic" to fetch data on route reload.
+In Next.js 15 app router the page is dynamic by default now and data fetching will happen at runtime  unless otherwise specified in parts of the application.
+Note, it might be necessary to opt into "dynamicIO" behaviour for the following:
+Caching behaviour can be defined with `use cache` at the page, function, or component level.
+It is expected to use `use cache` in conjunction with `cacheLife`, `connection()`, and `Suspense`.
+The `connection()` function indicates that rendering should wait for an incoming user request before continuing.
+In general,
+
+- If you want something dynamic, wrap it in a suspense boundary. Suspense lets Next.js auto-detect that we have dynamic data. You'll find you'll need to wrap suspense boundaries more and more around anyhting async.
+- If you want something cached, use the use cache directive.
+
+Static routes can be configured to incrementally update.
+Revalidation can be automatic according to some time period, e.g. `cacheLife({ revalidate: 10 });`, `cacheLife("minutes");`, or programmatic, e.g. from a server action(`expirePath, expireTag`).
+In general there are four "caching" strategies: no cache, always cache, cache but revalidate after some time, cache but revalidate for a specific route or tag.
+This means we can leverage the caching strategy discretely for each different data type.
+Note that caching only updates when a request comes in, and if no request arrives, the cache remains unchanged.
+
+### Data cache (Next.js)
+
+Next.js caches data from fetches made inside of React Server Components, called the data cache.
+Caching behaviour in **fetch requests** can be configured as follows:
+
+```js
+fetch("http://localhost:8080/time", {
+    cache: "no-store",
+});
+```
+
+- "no-store": the response is not cached and the value is dynamically fetched on every request
+- "revalidate": the statically generated page is refreshed every x seconds
+
+Within a server action the `"use cache";` directive will cache data between server requests, even if the route itself is dynamic.
+Restated, the cache is still active between requests, even though the route is dynamic
+The lifetime of the server action cache can be configured so that it is incrementally updated as well, with `cacheLife`.
+If a request comes in that's older thant he cacheLife only then is the cache invalidated.
+
+### Data cache (React)
+
+Data is cached _within that request_ so any other data fetches to the same endpoint within that request will use the cache.
+
+### Router cache (Next.js)
+
+"Next.js has an in-memory client-side cache called the **Router Cache**. As users navigate around the app, the React Server Component Payload of prefetched route segments and visited routes are stored in the cache ... on navigation, the cache is reused as much as possible".
+To differentiate between the route cache and router cache, you can use `router.refresh()` to bust the router cash.
+If the page stays the same, e.g. a `Date.now()` rendering, then you know its the route cache not router cache.
+`router.refresh()` can be used to update the current page content on demand in general.
+
+Server actions and API requests that contain revalidation instructions include headers to force the router running in the Next.js client to revalidate.
+Most of the time the router cache "just works":
+
+> When a server action is executed, the Next.js client sends a request to the server with a special next-action-id header. The server recognizes this header and executes the corresponding server action. If this action includes revalidatePath or revalidateTag, the server's response will include a x-nextjs-revalidate header. This header tells the Next.js client to invalidate its cache for the specified route or tags, which will trigger a revalidation on the next navigation.
 
 ## Styling
 
-Add add CSS rules global.css to apply styles to all the routes in the application, such as CSS reset rules, site-wide styles for HTML elements like links, and more.
+Use `global.css` to add CSS rules to all the routes in your application.
+`global.css` is where to put CSS reset rules, and any site-wide styles for HTML elements like links.
+The file can be imported in any component, but the best practise is to import it at the top level root layout.
 
 ## Authentication
 
