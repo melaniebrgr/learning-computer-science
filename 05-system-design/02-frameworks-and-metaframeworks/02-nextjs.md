@@ -51,6 +51,28 @@ There three general system architecture groups we can consider
 2. "Backend for frontend": Next.js acts a UI server and intermediary for a number of services that communicate with the database. Next.js communicates with the services via REST, GraphQL, tRPC, or WebSockets.
 3. "External architecture": The BE and FE are on seperate domains and the client may interact with both, require caching and session coordination.
 
+## Styles
+
+Use `global.css` to add CSS rules to all the routes in your application.
+`global.css` is where to put CSS reset rules, and any site-wide styles for HTML elements like links.
+The file can be imported in any component, but the best practise is to import it at the top level root layout.
+
+## Fonts
+
+Next.js automatically optimizes fonts in the application when you use the next/font module.
+It hosts font files with other static assets so that there are no additional network requests at run time.
+
+## Images & other static assets
+
+Next.js can serve static assets, like images, under the top-level /public folder.
+Files inside /public can be referenced in your application.
+The `<Image>` Component is an extension of the HTML `<img>` tag, and comes with automatic image optimization.
+
+- Preventing layout shift automatically when images are loading.
+- Resizing images to avoid shipping large images to devices with a smaller viewport.
+- Lazy loading images by default (images load as they enter the viewport).
+- Serving images in modern formats, like WebP and AVIF, when the browser supports it.
+
 ## Routing
 
 Like the pages router, the app router is a file-based router but the syntax has changed.
@@ -129,37 +151,43 @@ The routing based file system supports several organisational conventions
 Parallel routes provide implicit suspense behavior at the route level.
 For more fine-grained control over suspense boundaries and loading states, the Suspense component can be used.
 
-## Data fetching
+## Data fetching and mutation
 
 There are three points of data interaction
 
-1. Server components: fetch data and pass it as props RSCs run only on the back end and are a good place to fetch data without leaking API keys.
-1. Server actions: a new way of conveninently mutating data enabled by app router
+1. Server components: fetch data and pass it as props. RSCs run only on the back end and are a good place to fetch data without leaking API keys.
+1. Server actions: a new way of conveniently mutate data. Server actions are only available in app router.
 1. API routes: Next.js applications have always supported API routes for data fetching and mutations
 
-**Server components** call backend services asynchronously behind a firewall in your cluster and pass that data to child components.
+Instead of using React Context (which is not available on the server) or passing data as props, you can **use fetch or React's cache function to fetch the same data in the components that need it**, without worrying about making duplicate requests for the same data. This is because React extends fetch to automatically memoize data requests, and the cache function can be used when fetch is not available.
+
+### Server components
+
+Server components call backend services asynchronously in a secure environment and pass that data to child components.
 The data fetched from BE services can be cached.
 Server components should be stateless and not call into state management libraries.
 What about mutations? Are these inadvisable from server components?
 It's important not to work around this, because Next.js does heavy caching of rendered components.
-The `use cache` experimental directive from Next.js that can be added to routes, components, and queries that are slow, e.g. sloe network requests, database queries.
+The `use cache` experimental directive from Next.js that can be added to routes, components, and queries that are slow, e.g. slow network requests, database queries.
 By default the revalidation period is 15 minutes, but can be customised with the `cacheLife` and `cacheTag` APIs.
 For fetching data, using server-side rendering and passing the data as props may often a better choice than using server actions.
 
 Data can't be fetched the same way as server components in client components since async client components [currently aren't supported](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md#why-cant-client-components-be-async-functions), and so request data can't be awaited; instead a useEffect hook needs to be used.
-This means that if useEffect to load your data, the hook won't run on the server because hooks can only be used in client components.
+Since the `useEffect` doesn't run on the server, a `useEffect` won't fetch data on the server.
 
-**Server Actions (SAs)** are special functions you define that are specifically run on the server.
-Whenever you call a server function from a client component, Next.js handles fetch and data retrieval from the server.
-The `use server` directive is what indicates that the function is a server action that should be executed on the server when called from the client.
-SAs can be call from both server and client components.
+### Server actions
+
+Server Actions (SAs) are special functions called on the client that are specifically run on the Next.js server.
+Whenever you call a server function from a client component, Next.js handles the POST request to the server.
+The `use server` directive indicates that the function is a server action that should be executed on the server.
+Server actions can be called from both server and client components and return promises.
+
 Making GET requests to the server using server actions will always result in POST requests.
 A POST means we can't cache the request.
 Since SAs are generally mutation requests, revalidating or updating the component on data change is necessary.
 One approach is to use the `revalidatePath` function, which tells Next.js to invalidate the data at the specified path and refetch it on the next request.
-However this couples the server action to the route.
+However this can couple the server action to the route.
 Another approach is to use `revalidateTag` to invalidate a specific data fetch.
-Remember, server actions return promises.
 
 An **API route** let's the verb GET/PUT/POST be specified.
 API routes expose endpoints other clients can use.
@@ -167,28 +195,38 @@ API routes expose endpoints other clients can use.
 The blurring of the server and component boundaries can make it easier for sensitive data to accidentally leak to the client.
 React offers experimental [utils to "taint" objects and values](https://react.dev/reference/react/experimental_taintObjectReference#prevent-user-data-from-unintentionally-reaching-the-client) so that they through errors if accidentally passed through to the client.
 **Tainting** can also avoid whole kitchen sink pass through of user objects.
-
 > In Next.js One of the biggest advantages of the App Router system over the Pages Router system comes down to managing laggy components with **Suspense**. With the Pages Router system, it was far more involved. You'd have to bail out of getServerSideProps, make requests off the client, open up APIs, and so on. It required a lot of work, potentially opening up a host of security issues.
 
 ## Components
 
-Server component code is only executed on the server and is not part of the payload downloaded to the client. The advantages of this are
+### Server component
 
-- Reduced Bundle Size: the bundle size is smaller because server component code is not sent to the client, speeding up the application.
-- Security: Server component code only runs on the server, avoiding leakage of secrets to the client.
-- Data Loading: Server components make it easy to load data from backend services.
+Main characteristics:
 
+- Secure and convenient data Fetching: Server components make it easy to load data from backend services. Server component code only runs on the server, avoiding leakage of secrets to the client.
+- Performance:
+  - Streaming: Server Components allow you to split the rendering work into chunks and stream them to the client as they become ready
+  - Reduced Bundle Size: the bundle size is smaller because server component code is not sent to the client, speeding up the application.
+
+By default, Next.js uses Server Components.
+Server component code is only executed on the server and is not part of the payload downloaded to the client.
+The advantages of this are
 Server components are rendered on the server and their state and props are serialized and sent to the client.
 Functions, however, cannot be serialized and sent over the network.
 For this reason, "functions cannot be passed directly to Client Components (for server components) unless it is explicitly exposed by marking it with "use server" as a server action.
 
+### Client components
+
+Main characteristics:
+
+Interactivity: Client Components can use state, effects, and event listeners, meaning they can provide immediate feedback to the user and update the UI.
+Use of browser APIs: Client Components have access to browser APIs, like geolocation or localStorage.
+
 To also execute code on the client, mark it as `use client`.
 Hooks can only be used in client components.
-Client component code and data it is passed from server components is serialised, and included in the SSR payload sent to the browser.
-The SSR payload is executed on the client during rehydration.
-
 Components without `use client` are not necessarily always server components.
-Non `use client` components are be "promoted" to client components if they are rendered from client components (provided they are not async, since async components cannot be used within client components).
+By defining a "use client" in a file, all other modules imported into it, including child components, are considered part of the client bundle.
+Components without the `use client` directive are be "promoted" to client components if they are rendered from client components (provided they are not async, since async components cannot be used within client components).
 Restated, when a client component invokes another component, that component automatically becomes a client component.
 The `use client` marker essentially creates a zone inside of the client component where any component that is invoked is promoted to a client component.
 This is how hooks can be used from within client components have haven't been marked as client components for instance.
@@ -208,9 +246,12 @@ Note that in dev mode caching behaviour may not match the prod mode caching beha
 
 There are two different kinds of routes, the **static route** and **dynamic route**. Static routes are statically generated when the application is built and are saved. When the route is accessed, the static page is returned. A dynamic route is always rerendered at request time by the server. Though generally undesirable for performance, it is possible to force a static route to be rendered dynamically.
 
-The route cache behaviour changed from Next.js 14 to 15.
+The route cache behaviour changed from Next.js 14 to 15, but it's not entirely clear what the default behaviour is.
 Next.js 14 cached routes aggressively which required you to "force dynamic" to fetch data on route reload.
-In Next.js 15 app router the page is dynamic by default now and data fetching will happen at runtime  unless otherwise specified in parts of the application.
+In Next.js 15 app router the page is dynamic by default now and data fetching will happen at runtime unless otherwise specified in parts of the application.
+> As a developer, you do not need to choose between static and dynamic rendering as Next.js will automatically choose the best rendering strategy for each route based on the features and APIs used. Instead, you choose when to cache or revalidate specific data, and you may choose to stream parts of your UI.
+
+
 Note, it might be necessary to opt into "dynamicIO" behaviour for the following:
 Caching behaviour can be defined with `use cache` at the page, function, or component level.
 It is expected to use `use cache` in conjunction with `cacheLife`, `connection()`, and `Suspense`.
@@ -260,12 +301,6 @@ Server actions and API requests that contain revalidation instructions include h
 Most of the time the router cache "just works":
 
 > When a server action is executed, the Next.js client sends a request to the server with a special next-action-id header. The server recognizes this header and executes the corresponding server action. If this action includes revalidatePath or revalidateTag, the server's response will include a x-nextjs-revalidate header. This header tells the Next.js client to invalidate its cache for the specified route or tags, which will trigger a revalidation on the next navigation.
-
-## Styling
-
-Use `global.css` to add CSS rules to all the routes in your application.
-`global.css` is where to put CSS reset rules, and any site-wide styles for HTML elements like links.
-The file can be imported in any component, but the best practise is to import it at the top level root layout.
 
 ## Authentication
 

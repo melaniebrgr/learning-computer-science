@@ -41,7 +41,7 @@
 
 - [x] Introduction
 - [x] Getting Started
-- [ ] CSS Styling
+- [x] CSS Styling
 - [ ] Optimizing Fonts and Images
 - [ ] Creating Layouts and Pages
 - [ ] Navigating Between Pages
@@ -57,6 +57,19 @@
 - [ ] Adding Authentication
 - [ ] Adding Metadata
 - [ ] Next Steps
+
+## [Next.js 2024 conf](https://nextjs.org/conf)
+
+- [ ] Keynote
+- [x] AMA: Next.js Team
+- [ ] Prose and cons: Migrating The New York Public Library’s digital collections to Next.js
+- [x] React Server Components: Elevating speed, interactivity, and user experience
+- [x] The long and winding road: CSR to static export to SSG
+- [ ] Building user interfaces in the age of AI
+- [ ] Next level product velocity with Next.js
+- [ ] Live by default
+- [ ] Optimizing LCP: Partial Prerendering deep dive
+- [ ] A fireside chat with Guillermo Rauch and Sahil Lavingia
 
 ## [Jack Herrington: Pro Next.js](https://www.pronextjs.dev/)
 
@@ -92,17 +105,37 @@
     - [x] Implement Streaming AI responses
   - [x] What you've learned so far
 
-- [ ] Next.js Production Project Setup and Infrastructure
-  - [ ] Building a Strong Foundation
-  - [ ] Code Quality From the Start
-    - [ ] Setting up ESLint and Prettier
-  - [ ] Project Structure
-    - [ ] Organizing Component Files
-    - [ ] Organizing Components into Directories
-    - [ ] Importing Component Files
-    - [ ] Component Locations
+- [x] Next.js Production Project Setup and Infrastructure
+  - [x] Building a Strong Foundation
+  - [x] Code Quality From the Start
+    - [x] Setting up ESLint and Prettier
+  - [x] Project Structure
+    - [x] Organizing Component Files
+    - [x] Organizing Components into Directories
+    - [x] Importing Component Files
+    - [x] Component Locations
+  - [x] Storybook
+    - [x] Setting up Storybook with Next.js
+  - [x] Unit Testing
+    - [x] Testing with Jest
+    - [x] Testing Async RSCs with Jest
+    - [x] Testing Async RSCs with Jest
+    - [x] Testing Async RSCs with Vitest
+  - [x] End-to-End Testing
+    - [x] End-to-End Testing with Cypress
+    - [x] E2E Testing with Playwright
+  - [x] Automated Quality Enforcement
+    - [x] Check Bundle Size with GitHub Actions and Husky
+  - [x] Monorepos
+    - [x] Should You Use a Monorepo?
+    - [x] Creating a Next.js App in a Turborepo Monorepo
+    - [x] Storybook in a Turborepo Monorepo
+  - [x] Advanced Component Structure
+    - [x] Naming and Organizing Server and Client Components
+    - [x] Lego Components
+    - [x] Embrace the JS, Next.js, and React Ecosystem
 
-- [ ] Workshops / Next.js React Server Component (RSC) Architecture
+- [x] Workshops / Next.js React Server Component (RSC) Architecture
   - [x] Caching in Depth
     - [x] Caching with the Next.js App Router
     - [x] The Full Route Cache
@@ -112,30 +145,30 @@
     - [x] Data Caching and Revalidation with React Server Components
     - [x] Cache-busting with Tags
     - [x] The Next.js Router Cache
-  - [ ] Application Architecture Options
-    - [ ] Understanding the Example Monorepo Structure
-    - [ ] Intro to Systems Architecture
-  - [ ] Local Architectures
-    - [ ] The API Route Variant of Local Systems
-    - [ ] Building with Local Server Actions in Next.js
-  - [ ] BFF Architectures
-    - [ ] BFF Architecture with GraphQL
-    - [ ] Backend-for-Frontend (BFF) Architecture with Server Actions
-    - [ ] The API Variant of Backend-for-Frontend Architecture
-    - [ ] BFF Pattern with gRPC (TwirpScript)
-    - [ ] BFF Architecture with tRPC
-  - [ ] External Architectures
-    - [ ] Server Architecture with an External API Domain
-    - [ ] Proxying External Systems with Next.js
-    - [ ] Token Variation of the External Systems Architecture
-  - [ ] Streaming and Suspense
-    - [ ] Intro to Suspense and Streaming in Next.js
-    - [ ] Adding Suspense to the Application
-    - [ ] Granular Suspense in React
-  - [ ] Advanced Topics
-    - [ ] DIY Streaming with Server Actions
-    - [ ] Cached Server Actions in Next.js
-    - [ ] File Uploads in Next.js App Router Apps
+  - [x] Application Architecture Options
+    - [x] Understanding the Example Monorepo Structure
+    - [x] Intro to Systems Architecture
+  - [x] Local Architectures
+    - [x] The API Route Variant of Local Systems
+    - [x] Building with Local Server Actions in Next.js
+  - [ x] BFF Architectures
+    - [x] BFF Architecture with GraphQL
+    - [x] Backend-for-Frontend (BFF) Architecture with Server Actions
+    - [x] The API Variant of Backend-for-Frontend Architecture
+    - [x] BFF Pattern with gRPC (TwirpScript)
+    - [x] BFF Architecture with tRPC
+  - [x] External Architectures
+    - [x] Server Architecture with an External API Domain
+    - [x] Proxying External Systems with Next.js
+    - [x] Token Variation of the External Systems Architecture
+  - [x] Streaming and Suspense
+    - [x] Intro to Suspense and Streaming in Next.js
+    - [x] Adding Suspense to the Application
+    - [x] Granular Suspense in React
+  - [x] Advanced Topics
+    - [x] DIY Streaming with Server Actions
+    - [x] Cached Server Actions in Next.js
+    - [x] File Uploads in Next.js App Router Apps
   - [x] NextJS 15 Caching
     - [x] Date Caching Behavior
     - [x] Implementing NextJS 15's Cache Features
