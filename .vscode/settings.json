@@ -5,6 +5,7 @@
         "comp",
         "rust",
         "wasm",
-        "sys"
+        "sys",
+        "godot"
     ]
 }
