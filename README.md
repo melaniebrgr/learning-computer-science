@@ -1,6 +1,6 @@
 # The Debug Diaries
 
-## Mel's computer learning journey
+## Mel's compsci learning journey
 
 ## Chapters
 
@@ -18,6 +18,7 @@
 4. [Rust](./04-rust/)
 5. [System design](./05-system-design)
 6. [Go](./06-go/)
+7. [Godot](./07-godot/)
 
 ## Resources
 

@@ -159,7 +159,7 @@ There are three points of data interaction
 1. Server actions: a new way of conveniently mutate data. Server actions are only available in app router.
 1. API routes: Next.js applications have always supported API routes for data fetching and mutations
 
-Instead of using React Context (which is not available on the server) or passing data as props, you can **use fetch or React's cache function to fetch the same data in the components that need it**, without worrying about making duplicate requests for the same data. This is because React extends fetch to automatically memoize data requests, and the cache function can be used when fetch is not available.
+Instead of using React Context (which is not available on the server) or passing data as props, you can **use fetch or React's cache function to fetch the same data in the components that need it**, without worrying about making duplicate requests for the same data. This is because React extends fetch to automatically memoize data requests, and the cache function can be used when fetch is not available. (Only if not using fetch, and  using an ORM or database directly, would you need to wrap the data fetch with the React `cache` function. This will de-duplicate and only make one query.)
 
 ### Server components
 
@@ -199,6 +199,9 @@ React offers experimental [utils to "taint" objects and values](https://react.de
 
 ## Components
 
+Whether a component is a server or client component can be checked by looking where console statements appear.
+If they appear in only in the terminal it's a server components, if they appear in the terminal and in the browser console its a client components.
+
 ### Server component
 
 Main characteristics:
@@ -214,6 +217,8 @@ The advantages of this are
 Server components are rendered on the server and their state and props are serialized and sent to the client.
 Functions, however, cannot be serialized and sent over the network.
 For this reason, "functions cannot be passed directly to Client Components (for server components) unless it is explicitly exposed by marking it with "use server" as a server action.
+To prevent unintended client usage of server code, use the `server-only` package to give other developers a build-time error if they ever accidentally import one of these modules into a Client Component.
+he corresponding package client-only can be used to mark modules that contain client-only code – for example, code that accesses the window object.
 
 ### Client components
 
@@ -230,12 +235,14 @@ Components without the `use client` directive are be "promoted" to client compon
 Restated, when a client component invokes another component, that component automatically becomes a client component.
 The `use client` marker essentially creates a zone inside of the client component where any component that is invoked is promoted to a client component.
 This is how hooks can be used from within client components have haven't been marked as client components for instance.
-
 By passing the server component as a child to the client component the server component remains a server component, while the client component acts as a container a.k.a. donut component composition, e.g. Providers.
 Providers are client components that pass data to child components as props, because they take server components as props, server components remain components.
 
-Whether something is or is not a server component can be verified by checking where console log statements appear.
-`console.log` statements appear in the terminal and in the browser console for client components, and only in the terminal for server components.
+### Composition
+
+To reduce the Client JavaScript bundle size, it is recommend moving Client Components down your component tree.
+Since Client Components are rendered after Server Components, you cannot import a Server Component into a Client Component module (since it would require a new request back to the server).
+Instead, Server Components can be passed as a prop to a Client Component.
 
 ## Caching
 

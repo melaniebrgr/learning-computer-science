@@ -22,20 +22,23 @@
   - [ ] Layouts and Pages
   - [ ] Images and Fonts
   - [ ] CSS and Styling
+  - [ ] Fetching data and streaming
+- [ ] Examples
 - [ ] Building Your Application
-  - [ ] Layouts and Templates
-  - [x] Linking and Navigating
-  - [ ] Error Handling
-  - [ ] Loading UI and Streaming
-  - [ ] Redirecting
-  - [ ] Route Groups
-  - [ ] Dynamic Routes
-  - [ ] Parallel Routes
-  - [ ] Intercepting Routes
-  - [ ] Route Handlers
-  - [ ] Middleware
-  - [ ] Internationalization
+  - [ ] Routing
+  - [ ] Data Fetching
+  - [x] Rendering
+  - [ ] Caching
+  - [ ] Styling
+  - [ ] Optimizing
+  - [ ] Configuring
+  - [ ] Testing
+  - [ ] Authentication
+  - [ ] Deploying
+  - [ ] Upgrading
 - [ ] API reference
+- [ ] Architecture
+- [ ] Community
 
 ## [Learn Next.js v15](https://nextjs.org/learn)
 
@@ -66,9 +69,9 @@
 - [x] React Server Components: Elevating speed, interactivity, and user experience
 - [x] The long and winding road: CSR to static export to SSG
 - [ ] Building user interfaces in the age of AI
-- [ ] Next level product velocity with Next.js
+- [x] Next level product velocity with Next.js (PayPal)
 - [ ] Live by default
-- [ ] Optimizing LCP: Partial Prerendering deep dive
+- [x] Optimizing LCP: Partial Prerendering deep dive
 - [ ] A fireside chat with Guillermo Rauch and Sahil Lavingia
 
 ## [Jack Herrington: Pro Next.js](https://www.pronextjs.dev/)
