@@ -2,12 +2,7 @@ export function BlogIndexPage({ postSlugs, postContents }) {
   return (
     <BlogLayout>
       {postSlugs.map((postSlug, index) => (
-        <section key={postSlug}>
-          <h2>
-            <a href={"/" + postSlug}>{postSlug}</a>
-          </h2>
-          <article>{postContents[index]}</article>
-        </section>
+        <Post postSlug={postSlug} postContent={postContents[index]} />
       ))}
     </BlogLayout>
   );
@@ -38,14 +33,20 @@ export function BlogLayout({ children }) {
 export function BlogPostPage({ postContent, postSlug }) {
   return (
     <BlogLayout>
-      <section>
-        <h2>
-            <a href={"/" + postSlug}>{postSlug}</a>
-        </h2>
-        <article>{postContent}</article>
-      </section>
+      <Post postSlug={postSlug} postContent={postContent} />
     </BlogLayout>
   );
+}
+
+function Post({ postSlug, postContent }) {
+  return (
+    <section>
+      <h2>
+          <a href={"/" + postSlug}>{postSlug}</a>
+      </h2>
+      <article>{postContent}</article>
+    </section>
+  )
 }
 
 function Footer({ author}) {
