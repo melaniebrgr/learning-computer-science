@@ -28,10 +28,10 @@ export async function matchRoute(url) {
         const postSlug = sanitizeFilename(url.pathname.slice(1));
         let postContent;
         try {
-        postContent = await readFile("./posts/" + postSlug + ".txt", "utf8");
-        return <BlogPostPage postSlug={postSlug} postContent={postContent} />;
+            postContent = await readFile("./posts/" + postSlug + ".txt", "utf8");
+            return <BlogPostPage postSlug={postSlug} postContent={postContent} />;
         } catch (err) {
-        throw new Error("Error reading post content");
+            throw new Error("Error reading post content");
         }
     }
 }

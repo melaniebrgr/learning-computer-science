@@ -15,5 +15,5 @@ createServer(async (req, res) => {
 
   const page = await matchRoute(url);
   res.setHeader("Content-Type", "text/html");
-  res.end(renderJSXToHTML(page));
+  res.end(await renderJSXToHTML(page));
 }).listen(8080);

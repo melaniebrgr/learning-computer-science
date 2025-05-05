@@ -1,4 +1,4 @@
-export function BlogIndexPage({ postSlugs, postContents }) {
+export async function BlogIndexPage({ postSlugs, postContents }) {
   return (
     <BlogLayout>
       {postSlugs.map((postSlug, index) => (
@@ -38,7 +38,7 @@ export function BlogPostPage({ postContent, postSlug }) {
   );
 }
 
-function Post({ postSlug, postContent }) {
+async function Post({ postSlug, postContent }) {
   return (
     <section>
       <h2>
