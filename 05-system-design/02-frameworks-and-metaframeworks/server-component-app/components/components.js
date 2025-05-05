@@ -1,8 +1,15 @@
-export async function BlogIndexPage({ postSlugs, postContents }) {
+import { readFile, readdir } from 'fs/promises';
+
+export async function BlogIndexPage() {
+  // We're on the index route which shows every blog post one by one.
+  // Read all the files in the posts folder, and load their contents.
+  const postFiles = await readdir("./posts");
+  const postSlugs = postFiles.map((file) => file.slice(0, file.lastIndexOf(".")));
+
   return (
     <BlogLayout>
-      {postSlugs.map((postSlug, index) => (
-        <Post postSlug={postSlug} postContent={postContents[index]} />
+      {postSlugs.map((postSlug) => (
+        <Post postSlug={postSlug} />
       ))}
     </BlogLayout>
   );
@@ -30,15 +37,19 @@ export function BlogLayout({ children }) {
   );
 }
   
-export function BlogPostPage({ postContent, postSlug }) {
+export function BlogPostPage({ postSlug }) {
   return (
     <BlogLayout>
-      <Post postSlug={postSlug} postContent={postContent} />
+      <Post postSlug={postSlug} />
     </BlogLayout>
   );
 }
 
-async function Post({ postSlug, postContent }) {
+async function Post({ postSlug }) {
+  // We're showing an individual blog post.
+  // Read the corresponding file from the posts folder.
+  const postContent = await readFile("./posts/" + postSlug + ".txt", "utf8");
+  
   return (
     <section>
       <h2>
