@@ -9,8 +9,8 @@ const babelOptions = {
 export async function load(url, context, defaultLoad) {
   const result = await defaultLoad(url, context, defaultLoad);
   if (result.format === "module") {
-    const opt = Object.assign({ filename: url }, babelOptions);
-    const newResult = await babel.transformAsync(result.source, opt);
+    const options = Object.assign({ filename: url }, babelOptions);
+    const newResult = await babel.transformAsync(result.source, options);
     if (!newResult) {
       if (typeof result.source === "string") {
         return result;

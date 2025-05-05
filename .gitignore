@@ -11,4 +11,5 @@ rust-project.json
 *.o
 public/
 .direnv/
-05-system-design/02-frameworks-and-metaframeworks/server-component-app/node_modules
+**/node_modules/**
+**/node_modules/@types/escape-html/README.md
