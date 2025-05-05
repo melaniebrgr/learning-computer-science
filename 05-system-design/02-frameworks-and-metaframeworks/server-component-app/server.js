@@ -13,7 +13,7 @@ createServer(async (req, res) => {
     return;
   }
 
-  const page = await matchRoute(url);
+  const page = matchRoute(url);
   res.setHeader("Content-Type", "text/html");
   res.end(await renderJSXToHTML(page));
 }).listen(8080);

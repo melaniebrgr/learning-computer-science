@@ -194,3 +194,8 @@ So, stepwise what happens is,
 3. HTML is served to our client.
 
 Also, _that_ was SSR: "Turning JSX into an HTML string is usually known as "Server-Side Rendering" (SSR)".
+After this we added some polish and turned it into a "real app" by adding routes, and refactoring into custom components.
+
+## Create ~server~ async components
+
+Actually not a big deal. It's just making the utility that does the SSR, `renderJSXToHTML`, support async  so we can have async custom components (functions) that can await data within their function bodies. Then instead of having an async router that fetched the page data and prop drilled that data down (sounds like pages router, no?), the teach the SSR util to await individual components. It simplidies the router A LOT, and data fetch is localised to component that needs it.

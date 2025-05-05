@@ -1,7 +1,7 @@
 import sanitizeFilename from 'sanitize-filename';
 import { BlogIndexPage, BlogPostPage } from './components/components.js';
 
-export async function matchRoute(url) {
+export function matchRoute(url) {
     if (url.pathname === "/") {
         return <BlogIndexPage />;
     }
