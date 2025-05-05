@@ -2,11 +2,14 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
     "escape-html": "^1.0.3",
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.10",
+    "react": "^19.1.0"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon -- --experimental-loader ./node-jsx-loader.js ./server.js"
   },
   "devDependencies": {
     "@types/node": "^20.11.1"
