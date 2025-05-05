@@ -6,7 +6,8 @@
     "@babel/plugin-transform-react-jsx": "^7.27.1",
     "escape-html": "^1.0.3",
     "nodemon": "^3.1.10",
-    "react": "^19.1.0"
+    "react": "^19.1.0",
+    "sanitize-filename": "^1.6.3"
   },
   "scripts": {
     "start": "nodemon -- --experimental-loader ./node-jsx-loader.js ./server.js"

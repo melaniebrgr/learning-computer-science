@@ -1,0 +1,2 @@
+When we start the server use the flag `--experimental-loader` which specifies a
+the custom module loader, `node-jsx-loader.js`. A module loader, "controls how the module is loaded by the Node JS application". Illuminating. I take that to mean, that this code processes the file before Node _executes_ it. Typically it is used to transform code, i.e. to support non-standard syntax like JSX, or apply custom module resolution. Logging the output, babel and the `@babel/plugin-transform-react-jsx` babel plugin transform the `server.js` file content

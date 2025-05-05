@@ -181,16 +181,16 @@ I assume that _when_ the jsx functions are called, the output is that JSON struc
 };
 ```
 
-So, stepwise this is,
+## Server-side rendering
 
-1. Loading
-    1. Execute `server.js` node file with a custom loader with plugin, `@babel/plugin-transform-react-jsx`.
-    2. Applying`@babel/plugin-transform-react-jsx` inserts a jsx module import, removes the <> brackets and replaces them with jsx function calls with children objects.
-2. Executing
+So, stepwise what happens is,
+
+1. **Step 1: Loading**
+    1. Execute `server.js` node file with a custom loader with plugin, `@babel/plugin-transform-react-jsx`, which
+    2. applies`@babel/plugin-transform-react-jsx`. The plugin inserts a jsx module import, removes the <> brackets and replaces them with jsx function calls with children objects.
+2. **Step 3: Executing**
     1. When node executes our transformed file, `jsx` function calls produce the JSON structure of the component tree.
     2. Our custom `renderJSXToHTML` then converts this to HTML.
 3. HTML is served to our client.
 
-## Server-side rendering
-
-Also, that was SSR. Ha. "Turning JSX into an HTML string is usually known as "Server-Side Rendering" (SSR)".
+Also, _that_ was SSR: "Turning JSX into an HTML string is usually known as "Server-Side Rendering" (SSR)".

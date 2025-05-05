@@ -9,7 +9,8 @@ export function renderJSXToHTML(jsx) {
       return jsx.map((child) => renderJSXToHTML(child)).join("");
     } else if (typeof jsx === "object") {
       if (jsx.$$typeof === Symbol.for("react.element") || jsx.$$typeof === Symbol.for("react.transitional.element")) {
-        if (typeof jsx.type === "function") { // Is it a component like <BlogPostPage>?
+        if (typeof jsx.type === "function") {
+          // Is it a component like <BlogPostPage>?
           // Call the component with its props, and turn its returned JSX into HTML.
           const Component = jsx.type;
           const props = jsx.props;
