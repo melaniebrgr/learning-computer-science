@@ -7,24 +7,34 @@ createServer(async (req, res) => {
   const postContent = await readFile("./posts/hello-world.txt", "utf8");
 
   res.setHeader("Content-Type", "text/html");
-  res.end(
-    renderJSXToHTML(
-      <html>
-        <head>
-          <title>My blog</title>
-        </head>
-        <body>
-          <nav>
-            <a href="/">Home</a>
-            <hr />
-          </nav>
-          <article>
-            {postContent}
-          </article>
-          <footer>
-          <hr />
-          <p><i>(c) {author}, {new Date().getFullYear()}</i></p>
-        </footer>
-        </body>
-      </html>));
+  res.end(renderJSXToHTML(<BlogPostPage postContent={postContent} author={author} />));
 }).listen(8080);
+
+function BlogPostPage({ postContent, author }) {
+  return (
+    <html>
+      <head>
+        <title>My blog</title>
+      </head>
+      <body>
+        <nav>
+          <a href="/">Home</a>
+          <hr />
+        </nav>
+        <article>
+          {postContent}
+        </article>
+        <Footer author={author} />
+      </body>
+    </html>
+  );
+}
+
+function Footer({ author}) {
+  return (
+    <footer>
+      <hr />
+      <p><i>(c) {author}, {new Date().getFullYear()}</i></p>
+    </footer>
+  )
+}
