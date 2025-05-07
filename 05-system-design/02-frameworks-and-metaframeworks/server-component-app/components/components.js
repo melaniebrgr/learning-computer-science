@@ -24,14 +24,16 @@ export function BlogLayout({ children }) {
         <title>My blog</title>
       </head>
       <body>
-        <nav>
-          <a href="/">Home</a>
-          <hr />
-        </nav>
-        <main>
-          {children}
-        </main>
-        <Footer author={author} />
+      <nav>
+        <a href="/">Home</a>
+        <hr />
+        <input />
+        <hr />
+      </nav>
+      <main>
+        {children}
+      </main>
+      <Footer author={author} />
       </body>
     </html>
   );
