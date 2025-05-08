@@ -130,11 +130,18 @@
 
 ## 06 Documentation
 
-## 07 Datascience & AI
+## 07 AI
 
-- [ ] LLMs
-- [ ] openai
-  - [ ] assistants
+- [ ] LLM APIs
+  - Tokenization
+  - Prompting
+- [ ] Workflows
+- [ ] Agents
+- [ ] Context
+- [ ] RAG
+- [ ] Self-hosted models
+- [ ] Optimization and monitoring
+- [ ] Fine tuning RLHF & DPO
 
 ## 08 Version control
 
