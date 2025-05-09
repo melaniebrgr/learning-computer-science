@@ -1,7 +1,22 @@
+let currentPathname = window.location.pathname;
+
 async function navigate(pathname) {
-    // TODO
-    console.log("Navigating to: ", pathname);
-  }
+    console.log(`Navigating from ${currentPathname}`);
+    console.log(`Navigating to ${pathname}`);
+    
+    currentPathname = pathname;
+    // Fetch HTML for the route we're navigating to.
+    const response = await fetch(pathname);
+    const html = await response.text();
+
+    // Get the part of HTML inside the <body> tag.
+    const bodyStartIndex = html.indexOf("<body>") + "<body>".length;
+    const bodyEndIndex = html.lastIndexOf("</body>");
+    const bodyHTML = html.slice(bodyStartIndex, bodyEndIndex);
+
+    // Replace the content on the page.
+    document.body.innerHTML = bodyHTML;
+}
   
 window.addEventListener("click", (e) => {
     // Only listen to link clicks.
