@@ -49,7 +49,7 @@
   - [ ] Tree-shaking
   - [ ] Pagination
   - [ ] Virtualisation
-  - [ ] Browser cache
+  - [x] [Browser cache](./06-performance.md) (2025-05-10)
   - [ ] Bf cache
 - [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-04)
   - [ ] Service workers
