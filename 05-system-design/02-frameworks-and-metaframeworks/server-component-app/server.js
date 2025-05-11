@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import { readFile } from 'fs/promises';
-import { renderJSXToHTML } from './utils/renderJsx.js';
+import { renderJSXToHTML, renderJSXToClientJSX } from './utils/renderJsx.js';
 import { Router } from './components/router.js';
 
 createServer(async (req, res) => {
@@ -20,23 +20,24 @@ createServer(async (req, res) => {
 
 async function sendScript(res, filename) {
   const content = await readFile(filename, "utf8");
-  res.setHeader("Content-Type", "text/javascript");
   res.setHeader("Cache-Control", "no-store"); 
+  res.setHeader("Content-Type", "text/javascript");
   res.end(content);
 }
 
 async function sendJSX(res, url) {
   const jsx = <Router url={url} />;
-  const pageJsxString = JSON.stringify(jsx, null, 2); // Indent with two spaces.
+  const clientJsx = await renderJSXToClientJSX(jsx);
+  const clientJsxString = JSON.stringify(clientJsx, null, 2); // Indent with two spaces.
   res.setHeader("Content-Type", "application/json");
-  res.end(pageJsxString);
+  res.end(clientJsxString);
 }
 
 async function sendHTML(res, url) {
   const jsx = <Router url={url} />
   const html = await renderJSXToHTML(jsx) + `<script type="module" src="/client.js"></script>`;
-  res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "no-store"); 
+  res.setHeader("Content-Type", "text/html");
   res.end(html);
 }
 
