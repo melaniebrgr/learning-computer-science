@@ -31,7 +31,7 @@
   - [ ] WebGL
   - [ ] WebGPU
   - [ ] Images
-  - [ ] canvas
+  - [ ] Canvas
   - [ ] SVG
   - [ ] Video
   - [ ] Audio

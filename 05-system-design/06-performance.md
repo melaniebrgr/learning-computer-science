@@ -8,7 +8,10 @@ The client (a browser) looks for the resources in the browser cache. If it's fou
 - saves server computation, and
 - saves money, e.g. mobile users.
 
-The browser cache is a **private cache** because it is tied to a specific client, and contain response personalised to that user. Most web applications also use a CDN, a "globally distributed type of reverse proxy", to server resources closer to the user's location. A CDN is a public cache is shared among users.
+A browser cache is a **private cache** because it is tied to a specific client, and contain response personalised to that user. Most web applications also use a CDN, a "globally distributed type of reverse proxy", to server resources closer to the user's location. A CDN is a public cache shared among users.
+
+A browser can load resources from disk-cache or memory cache. **Disk Cache** stores resources (e.g., scripts, images) on the hard drive (or SSD) in the browser’s cache directory. It is slower to access compared to memory but persistent across browser sessions (until cleared or expired).
+Disk cache is used for resources that are cached but not immediately needed or when memory cache is full. Memory cache stores resources in RAM, making access extremely fast. **Memory cache** is temporary and cleared when the browser tab or session closes (or memory is needed elsewhere). It is prioritized for frequently accessed or recently used resources, like scripts loaded multiple times in a session.
 
 The `Cache-Control` header defines directives that control caching behavior for both clients (like browsers) and intermediary caches (like CDNs, proxies). A `Cache-Control` header contains a list of policies (directives) to specify the browser caching. If conflicting directives are present, the most restrictive typically applies (e.g., `no-store` overrides `max-age`). Directives can be combined (e.g., `Cache-Control: public, max-age=3600, must-revalidate`) to fine-tune behavior. It cannot be set on the client, e.g. with JS.
 
@@ -17,8 +20,8 @@ The `Cache-Control` header defines directives that control caching behavior for 
 | max-age | Specifies the maximum time in seconds a response is considered fresh. A response is "fresh" until its `max-age` or `s-maxage` expires (or based on heuristics if unspecified). Fresh responses can be served without contacting the server. | Use to cache an image for a fixed time, e.g., `max-age=86400` or 1 day. |
 | s-maxage | Like `max-age`, but applies only to shared (proxy) caches, overriding `max-age`. | Used by CDNs to cache content longer than browsers (e.g., `s-maxage=31536000`). |
 | no-store | Prohibits storing the response in any cache. | Sensitive data like banking transactions or private user data. |
-| no-cache | Allows storing the response but requires revalidation with the server before use. | Cache dynamic content that needs freshness checks, e.g., news articles. |
-| must-revalidate | Forces caches to revalidate stale responses with the server before serving. | Ensure critical resources (e.g., legal documents) are fresh after expiration. |
+| no-cache | Allows storing the response but requires revalidation with the server before use. Ensures users get the latest content without completely bypassing caching, useful for resources that may change frequently but can still benefit from conditional requests. | Cache dynamic content that needs freshness checks, e.g. news articles. |
+| must-revalidate | Forces caches to revalidate stale responses with the server before serving. If the cache cannot reach the server or the response is invalid, it _must not_ serve the stale content and should return an error (e.g., 504 Gateway Timeout). | Ensure critical resources (e.g., legal documents) are fresh after expiration. |
 | proxy-revalidate | Like `must-revalidate`, but applies only to shared (proxy) caches. | Enforce revalidation for CDNs while allowing browser flexibility. |
 | public | Indicates the response can be cached by any cache (browser or proxy). | Publicly accessible resources like homepage assets. |
 | private | Restricts caching to private (browser) caches, not shared (proxy) caches. | User-specific data like personalized dashboards. |
