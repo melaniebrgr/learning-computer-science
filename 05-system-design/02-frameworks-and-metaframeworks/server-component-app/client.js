@@ -1,9 +1,12 @@
 let currentPathname = window.location.pathname;
 
 async function navigate(pathname) {
-    console.log(`Navigating from ${currentPathname}`);
-    console.log(`Navigating to ${pathname}`);
     currentPathname = pathname;
+
+    // Fetch the JSX (object tree produced by JSX, not the syntax)
+    const responseJsx = await fetch(pathname + "?jsx");
+    const jsonString = await responseJsx.text();
+    alert(jsonString);
 
     // Fetch HTML for the route we're navigating to.
     const response = await fetch(pathname);

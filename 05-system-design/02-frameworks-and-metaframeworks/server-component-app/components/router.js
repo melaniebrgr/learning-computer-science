@@ -1,11 +1,11 @@
 import sanitizeFilename from 'sanitize-filename';
-import { BlogIndexPage, BlogPostPage } from './components/components.js';
+import { BlogIndexPage, BlogPostPage } from './components.js';
 
-export function matchRoute(url) {
+export function Router({ url }) {
     if (url.pathname === "/") {
         return <BlogIndexPage />;
     }
-
+    
     if (url.pathname.startsWith("/") && url.pathname.length > 1
         && !url.pathname.includes("favicon.ico") && !url.pathname.includes("client.js")) {
         // If matchRoute doesn't explicitly handle paths like /favicon.ico, it would default to treating

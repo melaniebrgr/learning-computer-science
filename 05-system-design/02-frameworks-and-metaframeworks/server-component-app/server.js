@@ -1,8 +1,7 @@
 import { createServer } from 'http';
 import { readFile } from 'fs/promises';
 import { renderJSXToHTML } from './utils/renderJsx.js';
-
-import { matchRoute } from './router.js';
+import { Router } from './components/router.js';
 
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
@@ -11,6 +10,9 @@ createServer(async (req, res) => {
     await sendNothing(res);
   } else if (url.pathname === "/client.js") {
     await sendScript(res, "client.js");
+  } else if (url.searchParams.has("jsx")) {
+    url.searchParams.delete("jsx"); // Keep the url passed to the <Router> clean
+    await sendJSX(res, url);
   } else {
     await sendHTML(res, url);
   }
@@ -23,10 +25,16 @@ async function sendScript(res, filename) {
   res.end(content);
 }
 
+async function sendJSX(res, url) {
+  const jsx = <Router url={url} />;
+  const pageJsxString = JSON.stringify(jsx, null, 2); // Indent with two spaces.
+  res.setHeader("Content-Type", "application/json");
+  res.end(pageJsxString);
+}
+
 async function sendHTML(res, url) {
-  const pageJsx = matchRoute(url);
-  const html = await renderJSXToHTML(pageJsx)
-    + `<script type="module" src="/client.js"></script>`;
+  const jsx = <Router url={url} />
+  const html = await renderJSXToHTML(jsx) + `<script type="module" src="/client.js"></script>`;
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "no-store"); 
   res.end(html);

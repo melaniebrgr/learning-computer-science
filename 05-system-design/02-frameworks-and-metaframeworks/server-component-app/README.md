@@ -2,12 +2,12 @@
 
 ## Server simple HTML from machine
 
-I have a simple server with Node HTTP server. I make request to "localhost:8080" from my machine, and the server that I'm running locally responds. The Node server exposes as arguments request and response objects. The request object representing the details of the inbound request. The response object the response that the server is sending to the client. `nodemon` automatically restarts the server when file changes in the directory are detected.
+I have a simple server with Node HTTP server. I make request to "localhost:8080" from my machine, and the server that I'm running locally responds. The Node server exposes as arguments request and response objects. The request object representing the details of the inbound request. The response object is the response that the server is sending to the client. `nodemon` automatically restarts the server when file changes in the directory are detected.
 
 ## Custom node module loader
 
 When we start the server use the flag `--experimental-loader` which specifies a
-the custom module loader, `node-jsx-loader.js`. A module loader, "controls how the module is loaded by the Node JS application". Illuminating. I take that to mean, that this code processes the file before Node _executes_ it. Typically it is used to transform code, i.e. to support non-standard syntax like JSX, or apply custom module resolution. Logging the output, babel and the `@babel/plugin-transform-react-jsx` babel plugin transform the `server.js` file content to,
+the custom module loader, `node-jsx-loader.js`. A module loader, "controls how the module is loaded by the Node JS application". Illuminating. This code processes the file before Node _executes_ it. Typically loaders are used to transform code, i.e. to support non-standard syntax like JSX, or apply custom module resolution. I logged the output from the `@babel/plugin-transform-react-jsx` babel plugin, and it transforms the `server.js` file content to,
 
 ```txt
 "import { createServer } from 'http';\n" +
@@ -43,11 +43,11 @@ the custom module loader, `node-jsx-loader.js`. A module loader, "controls how t
     '}).listen(8080);'
 ```
 
-Notice how it adds even the jsx function imports to the file. This is also why react had to be installed as a dependency, even though the file I made didn't use it directly, is is required when Node executes it later. Pretty wild. Babel was meant to transpile modern JS features that weren't in browsers yet to a base, broadly supported syntax, but with its plugin architecture, basically the sky is the limit for code modifications before execution.
+Notice how it even added a jsx function import to the file. This is why React had to be installed as a dependency, even though the file I made didn't use it directly: it is required when Node executes it later. Pretty cool. Babel was meant to transpile modern JS features that weren't in browsers yet to a more broadly supported syntax, but with its plugin architecture, basically the sky is the limit for code modifications before execution.
 
 ## Executing the transformed code
 
-I assume that _when_ the jsx functions are called, the output is that JSON structure describing the React component tree. Yes it does, indeed. I logged out what the `renderJSXToHTML` function produces. It recursively processes through the following input JSON structure,
+I assume that _when_ the jsx functions are called, the output is a JSON structure describing the React component tree. Yes it does, indeed. I logged out what the `renderJSXToHTML` function produces. It recursively processes the childen to produce the following input JSON structure,
 
 ```js
 {
@@ -187,10 +187,10 @@ So, stepwise what happens is,
 
 1. **Step 1: Loading**
     1. Execute `server.js` node file with a custom loader with plugin, `@babel/plugin-transform-react-jsx`, which
-    2. applies`@babel/plugin-transform-react-jsx`. The plugin inserts a jsx module import, removes the <> brackets and replaces them with jsx function calls with children objects.
+    2. Apply `@babel/plugin-transform-react-jsx`, to insert a jsx module import, remove the <> brackets and replace them with jsx function calls with children objects arguments.
 2. **Step 3: Executing**
-    1. When node executes our transformed file, `jsx` function calls produce the JSON structure of the component tree.
-    2. Our custom `renderJSXToHTML` then converts this to HTML.
+    1. Execute the transformed file in Node. The `jsx` function calls produce the JSON structure of the component tree.
+    2. A custom `renderJSXToHTML` then converts this to HTML.
 3. HTML is served to our client.
 
 Also, _that_ was SSR: "Turning JSX into an HTML string is usually known as "Server-Side Rendering" (SSR)".
@@ -198,8 +198,8 @@ After this we added some polish and turned it into a "real app" by adding routes
 
 ## Creating ~server~ async components
 
-It's not serve components yet, but the essense is starting to shape and it was actually not a big deal to do. It's "just" making the utility that does the SSR, `renderJSXToHTML`, support async functions so we can have async custom components (functions) that can `await` their data within their function bodies. Then instead of having an async router that fetched the page data and prop drilled that data down (sounds like pages router, no?), the teach the SSR util to await individual components. It simplidies the router A LOT, and data fetch is localised to component that needs it.
+It's not server components yet, but the essense is starting to take shape and it was actually not a big deal to do. It's "just" making the utility that does the SSR, `renderJSXToHTML`, support async functions so we can have async custom components (functions) that can `await` data within their function bodies. Then instead of having an async router that fetched the page data and prop drilled that data down (sounds like pages router, no?), the teach the SSR util to await individual components. It simplidies the router a lot, and the data fetch is localised to component that needs it.
 
 ## Avoiding full page refreshes
 
-So now we have a multipage application. On click we make a server request
+So now we have a multipage application. On click we make a server request for the full page HTML.
