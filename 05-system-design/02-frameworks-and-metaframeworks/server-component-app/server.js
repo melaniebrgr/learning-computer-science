@@ -35,7 +35,17 @@ async function sendJSX(res, url) {
 
 async function sendHTML(res, url) {
   const jsx = <Router url={url} />
-  const html = await renderJSXToHTML(jsx) + `<script type="module" src="/client.js"></script>`;
+  let html = await renderJSXToHTML(jsx);
+  html += `
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@canary",
+          "react-dom/client": "https://esm.sh/react-dom@canary/client"
+        }
+      }
+    </script>
+    <script type="module" src="/client.js"></script>`;
   res.setHeader("Cache-Control", "no-store"); 
   res.setHeader("Content-Type", "text/html");
   res.end(html);

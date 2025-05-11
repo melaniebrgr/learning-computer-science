@@ -1,17 +1,34 @@
+import { hydrateRoot } from "react-dom/client";
+
+const root = hydrateRoot(document, getInitialClientJSX());
 let currentPathname = window.location.pathname;
 
 async function navigate(pathname) {
     currentPathname = pathname;
 
     // Fetch the JSX (object tree produced by JSX, not the syntax)
-    const responseJsx = await fetch(pathname + "?jsx");
-    const jsonString = await responseJsx.text();
-    alert(jsonString);
+    const responseJsx = await fetchClientJSX(pathname);
+    console.log("responseJsx", responseJsx);
+    // root.render(responseJsx);
 
     // Fetch HTML for the route we're navigating to.
-    const response = await fetch(pathname);
-    const html = await response.text();
+    const responseHtml = await fetch(pathname);
+    const html = await responseHtml.text(responseHtml);
+    setClientHTML(html);
+}
 
+function getInitialClientJSX() {
+    return null; // TODO
+}
+
+async function fetchClientJSX(pathname) {
+    const response = await fetch(pathname + "?jsx");
+    const clientJSXString = await response.text();
+    const clientJSX = JSON.parse(clientJSXString);
+    return clientJSX;
+}
+
+function setClientHTML(html) {
     // Get the title from the HTML.
     const titleStartIndex = html.indexOf("<title>") + "<title>".length;
     const titleEndIndex = html.indexOf("</title>");

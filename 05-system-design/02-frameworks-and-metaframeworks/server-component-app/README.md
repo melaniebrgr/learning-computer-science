@@ -202,4 +202,4 @@ It's not server components yet, but the essense is starting to take shape and it
 
 ## Avoiding full page refreshes
 
-So now we have a multipage application. On click we make a server request for the full page HTML.
+Now we have a multipage application. On click we make a server request for the full page HTML.
