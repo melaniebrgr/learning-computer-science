@@ -3,11 +3,19 @@ let currentPathname = window.location.pathname;
 async function navigate(pathname) {
     console.log(`Navigating from ${currentPathname}`);
     console.log(`Navigating to ${pathname}`);
-    
     currentPathname = pathname;
+
     // Fetch HTML for the route we're navigating to.
     const response = await fetch(pathname);
     const html = await response.text();
+
+    // Get the title from the HTML.
+    const titleStartIndex = html.indexOf("<title>") + "<title>".length;
+    const titleEndIndex = html.indexOf("</title>");
+    const title = html.slice(titleStartIndex, titleEndIndex);
+    
+    // Set the title of the page.
+    document.title = title;
 
     // Get the part of HTML inside the <body> tag.
     const bodyStartIndex = html.indexOf("<body>") + "<body>".length;

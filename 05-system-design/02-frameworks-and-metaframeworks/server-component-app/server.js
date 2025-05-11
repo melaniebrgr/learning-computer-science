@@ -19,6 +19,7 @@ createServer(async (req, res) => {
 async function sendScript(res, filename) {
   const content = await readFile(filename, "utf8");
   res.setHeader("Content-Type", "text/javascript");
+  res.setHeader("Cache-Control", "no-store"); 
   res.end(content);
 }
 
@@ -27,10 +28,13 @@ async function sendHTML(res, url) {
   const html = await renderJSXToHTML(pageJsx)
     + `<script type="module" src="/client.js"></script>`;
   res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "no-store"); 
   res.end(html);
 }
 
 async function sendNothing(res) {
-  res.writeHead(204); // No Content
+  res.writeHead(204, {
+    "Cache-Control": "no-store"
+  });
   res.end();
 }

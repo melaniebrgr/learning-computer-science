@@ -7,7 +7,7 @@ export async function BlogIndexPage() {
   const postSlugs = postFiles.map((file) => file.slice(0, file.lastIndexOf(".")));
 
   return (
-    <BlogLayout>
+    <BlogLayout title="My blog: Home">
       {postSlugs.map((postSlug) => (
         <Post postSlug={postSlug} />
       ))}
@@ -15,13 +15,13 @@ export async function BlogIndexPage() {
   );
 }
 
-export function BlogLayout({ children }) {
+export function BlogLayout({ children, title }) {
   const author = "Jane Doe";
   
   return (
     <html>
       <head>
-        <title>My blog</title>
+        <title>{title}</title>
       </head>
       <body>
       <nav>
@@ -41,7 +41,7 @@ export function BlogLayout({ children }) {
   
 export function BlogPostPage({ postSlug }) {
   return (
-    <BlogLayout>
+    <BlogLayout title={`My blog: ${postSlug}`}>
       <Post postSlug={postSlug} />
     </BlogLayout>
   );
