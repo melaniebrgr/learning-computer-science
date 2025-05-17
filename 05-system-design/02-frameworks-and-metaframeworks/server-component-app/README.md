@@ -1,5 +1,7 @@
 # Describing what's happening
 
+While following along with, <https://github.com/reactwg/server-components/discussions/5>
+
 ## A simple application server
 
 I have a simple server with Node HTTP server. I make request to "localhost:8080" from my machine, and the server that I'm running locally responds. The Node server exposes request and response objects as arguments. The request object represents the details of the inbound request. The response object is the response that the server sends to the client. `nodemon` automatically restarts the server when file changes are detected in the directory.
@@ -211,4 +213,4 @@ At this point we have an app that ships the full HTML payload for the entire pag
 3. On the click intercept programmatically update browser history and call a function to fetch the JSX JSON for the route.
 4. Apply JSX updates without destroying the whole DOM.
 
-// Step 5.3.2
+// Step 6

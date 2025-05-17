@@ -51,12 +51,12 @@ async function sendJSX(res, url) {
 
 async function sendHTML(res, url) {
   const jsx = <Router url={url} />
-  let [html, clientJsx] = await Promise.all([
-    renderJSXToHTML(jsx),
-    renderJSXToClientJSX(jsx)
-  ]);
-   const clientJSXString = JSON.stringify(clientJsx, stringifyJSX);
+  const clientJsx = await renderJSXToClientJSX(jsx);
+  const clientJSXString = JSON.stringify(clientJsx, stringifyJSX);
+  
+  let html = await renderJSXToHTML(clientJsx);
   html += `<script>window.__INITIAL_CLIENT_JSX_STRING__ = `;
+  // The redundant appearing JSON.stringify transforms `{"$$typeof":"$RTE","type":"html"...` to `"{\"$$typeof\":\"$RTE\",\"type\":\"html\"...`
   html += JSON.stringify(clientJSXString).replace(/</g, "\\u003c");
   html += `</script>`;
   html += `
