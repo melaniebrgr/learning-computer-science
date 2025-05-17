@@ -20,6 +20,7 @@
   - [ ] Vue
   - [ ] Solid
   - [x] [Next.js](./02-nextjs.md) (2023-05-07)
+    - [x] [Caching](./02-nextjs.md) (2025-05-12)
 - [ ] Web APIs
   - [ ] Compression streams
   - [ ] DOM & DOM interfaces
