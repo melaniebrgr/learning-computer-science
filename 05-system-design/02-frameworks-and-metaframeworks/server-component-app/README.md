@@ -1,10 +1,10 @@
 # Describing what's happening
 
-## Server simple HTML from machine
+## A simple application server
 
 I have a simple server with Node HTTP server. I make request to "localhost:8080" from my machine, and the server that I'm running locally responds. The Node server exposes request and response objects as arguments. The request object represents the details of the inbound request. The response object is the response that the server sends to the client. `nodemon` automatically restarts the server when file changes are detected in the directory.
 
-## Custom node module loader
+## A custom node module loader
 
 When we start the server use the flag `--experimental-loader` which specifies a
 the custom module loader, `node-jsx-loader.js`. A module loader, "controls how the module is loaded by the Node JS application". Illuminating. This code processes the file before Node _executes_ it. Typically loaders are used to transform code, i.e. to support non-standard syntax like JSX, or apply custom module resolution. I logged the output from the `@babel/plugin-transform-react-jsx` babel plugin, and it transforms the `server.js` file content to,
@@ -45,7 +45,7 @@ the custom module loader, `node-jsx-loader.js`. A module loader, "controls how t
 
 Notice how it even added a jsx function import to the file. This is why React had to be installed as a dependency, even though the file I made didn't use it directly: it is required when Node executes the loaded code later. Pretty cool. Babel was meant to transpile modern JS features that weren't in browsers yet to a more broadly supported syntax, but with its plugin architecture, basically the sky is the limit in terms of code modifications before execution.
 
-## Executing the transformed code
+## Transforming JSX and shipping HTML
 
 I assume that _when_ the jsx function is called, the output is a JSON structure describing the React component tree. Yes it does, indeed. I logged out what the value of the `renderJSXToHTML` function accepts as an argument. It receivs something like the following input JSON structure, i.e. this is what jsx syntax is transformed to by the jsx runtime:
 
@@ -198,18 +198,17 @@ So, stepwise what happens is,
 Also, _that_ was SSR: "Turning JSX into an HTML string is usually known as "Server-Side Rendering" (SSR)".
 After this we added some polish and turned it into a "real app" by adding routes, and refactoring into custom components.
 
-## Async ~server~ components
+## Async serverish components
 
 It's not server components yet, but the essense is starting to take shape and it was actually not a big deal to do. It's "just" making the utility that does the SSR, `renderJSXToHTML`, support async functions so we can have async custom components (functions) that can `await` data within their function bodies. Then instead of having an async router that fetched the page data and prop drilled that data down (sounds like pages router), we teach the SSR util to await individual components. It simplidies the router a lot, and the data fetch is localised to component that needs it. TL;DR make `renderJSXToHTML` async so custom components can be awaited. The current implementation is all-or-nothing, serially awaiting async components, but a more optimal solution can be implemented where async components are awaited in parallel, and/or sent to the client later.
 
 ## Client side routing
 
-At this point we have an app that ships the full HTML payload for the entire page on navigation. How can we make this more efficient and only change what needs to be updated though?
+At this point we have an app that ships the full HTML payload for the entire page on navigation. On any route change, we completey blow away the current DOM state. How can we make this more efficient and only change what needs to be updated though? Add client-side JS to intercept navigations so we can refetch content manually without reloading the page:
 
-1. Add client-side JS to intercept navigations so we can refetch content manually without reloading the page:
-    - apply a click event listener to the global window object that intercepts links to internal routes only
-    - programmatically update browser history
-    - call a function
-2. Teach our server to serve JSX over the wire instead of HTML for subsequent navigations.
-3. Teach the client to apply JSX updates without destroying the whole DOM
+1. In the initial HTML payload include a script tag to load the client-side script.
+2. In the client-side script, apply a click event listener to the global window object that intercepts links to internal routes only.
+3. On the click intercept programmatically update browser history and call a function to fetch the JSX JSON for the route.
+4. Apply JSX updates without destroying the whole DOM.
 
+// Step 5.3.2

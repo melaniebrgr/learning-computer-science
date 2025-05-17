@@ -5,69 +5,58 @@ let currentPathname = window.location.pathname;
 
 async function navigate(pathname) {
     currentPathname = pathname;
-
-    // Fetch the JSX (object tree produced by JSX, not the syntax)
-    const responseJsx = await fetchClientJSX(pathname);
-    console.log("responseJsx", responseJsx);
-    // root.render(responseJsx);
-
-    // Fetch HTML for the route we're navigating to.
-    const responseHtml = await fetch(pathname);
-    const html = await responseHtml.text(responseHtml);
-    setClientHTML(html);
+    const clientJSX = await fetchClientJSX(pathname);
+    if (pathname === currentPathname) {
+        root.render(clientJSX);
+    }
 }
 
 function getInitialClientJSX() {
-    return null; // TODO
+    const clientJSX = JSON.parse(window.__INITIAL_CLIENT_JSX_STRING__, parseJSX);
+    return clientJSX;
 }
 
 async function fetchClientJSX(pathname) {
     const response = await fetch(pathname + "?jsx");
     const clientJSXString = await response.text();
-    const clientJSX = JSON.parse(clientJSXString);
+    const clientJSX = JSON.parse(clientJSXString, parseJSX);
     return clientJSX;
 }
 
-function setClientHTML(html) {
-    // Get the title from the HTML.
-    const titleStartIndex = html.indexOf("<title>") + "<title>".length;
-    const titleEndIndex = html.indexOf("</title>");
-    const title = html.slice(titleStartIndex, titleEndIndex);
-    
-    // Set the title of the page.
-    document.title = title;
-
-    // Get the part of HTML inside the <body> tag.
-    const bodyStartIndex = html.indexOf("<body>") + "<body>".length;
-    const bodyEndIndex = html.lastIndexOf("</body>");
-    const bodyHTML = html.slice(bodyStartIndex, bodyEndIndex);
-
-    // Replace the content on the page.
-    document.body.innerHTML = bodyHTML;
+function parseJSX(key, value) {
+  if (value === "$RE") {
+    // This is our special marker we added on the server.
+    // Restore the Symbol to tell React that this is valid JSX.
+    return Symbol.for("react.element");
+  } else if (value === "$RTE") {
+    // This is our special marker we added on the server.
+    // Restore the Symbol to tell React that this is valid JSX.
+    return Symbol.for("react.transitional.element");
+  } else if (typeof value === "string" && value.startsWith("$$")) {
+    // This is a string starting with $. Remove the extra $ added by the server.
+    return value.slice(1);
+  } else {
+    return value;
+  }
 }
   
 window.addEventListener("click", (e) => {
-    // Only listen to link clicks.
-    if (e.target.tagName !== "A") {
-        return;
-    }
-    // Ignore "open in a new tab".
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
-        return;
-    }
-    // Ignore external URLs.
+    // Ignore clicks on anything that is not a link
+    if (e.target.tagName !== "A") return;
+    // Ignore clicks that open a new tab
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    
+    // Ignore links that are not internal
     const href = e.target.getAttribute("href");
-    if (!href.startsWith("/")) {
-        return;
-    }
-    // Prevent the browser from reloading the page but update the URL.
+    if (!href.startsWith("/")) return;
+    // Prevent the default action of reloading the page
     e.preventDefault();
+    // Still update the browser history
     window.history.pushState(null, null, href);
-    // Call our custom logic.
+    // Call our custom navigation logic
     navigate(href);
-    }, true);
+}, true);
 
-    window.addEventListener("popstate", () => {
-    // When the user presses Back/Forward, call our custom logic too.
-    navigate(window.location.pathname);
+window.addEventListener("popstate", () => {
+  navigate(window.location.pathname);
 });

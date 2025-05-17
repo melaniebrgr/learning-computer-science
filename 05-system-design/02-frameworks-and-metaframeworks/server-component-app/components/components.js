@@ -1,72 +1,66 @@
 import { readFile, readdir } from 'fs/promises';
 
 export async function BlogIndexPage() {
-  // We're on the index route which shows every blog post one by one.
-  // Read all the files in the posts folder, and load their contents.
   const postFiles = await readdir("./posts");
-  const postSlugs = postFiles.map((file) => file.slice(0, file.lastIndexOf(".")));
-
+  const postSlugs = postFiles.map((file) =>
+    file.slice(0, file.lastIndexOf("."))
+  );
   return (
-    <BlogLayout title="My blog: Home">
-      {postSlugs.map((postSlug) => (
-        <Post postSlug={postSlug} />
-      ))}
-    </BlogLayout>
+    <section>
+      <h1>Welcome to my blog</h1>
+      <div>
+        {postSlugs.map((slug) => (
+          <Post key={slug} slug={slug} />
+        ))}
+      </div>
+    </section>
   );
 }
 
-export function BlogLayout({ children, title }) {
-  const author = "Jane Doe";
-  
+export function BlogPostPage({ postSlug }) {
+  return <Post slug={postSlug} />;
+}
+
+export async function Post({ slug }) {
+  const content = await readFile("./posts/" + slug + ".txt", "utf8");
+
+  return (
+    <section>
+      <h2>
+        <a href={"/" + slug}>{slug}</a>
+      </h2>
+      <article>{content}</article>
+    </section>
+  );
+}
+
+export function BlogLayout({ children }) {
+  const author = "Jae Doe";
   return (
     <html>
-      <head>
-        <title>{title}</title>
-      </head>
       <body>
-      <nav>
-        <a href="/">Home</a>
-        <hr />
-        <input />
-        <hr />
-      </nav>
-      <main>
-        {children}
-      </main>
-      <Footer author={author} />
+        <nav>
+          <a href="/">Home</a>
+          <hr />
+          <input />
+          <hr />
+        </nav>
+        <main>{children}</main>
+        <Footer author={author} />
       </body>
     </html>
   );
 }
-  
-export function BlogPostPage({ postSlug }) {
-  return (
-    <BlogLayout title={`My blog: ${postSlug}`}>
-      <Post postSlug={postSlug} />
-    </BlogLayout>
-  );
-}
 
-async function Post({ postSlug }) {
-  // We're showing an individual blog post.
-  // Read the corresponding file from the posts folder.
-  const postContent = await readFile("./posts/" + postSlug + ".txt", "utf8");
-  
-  return (
-    <section>
-      <h2>
-          <a href={"/" + postSlug}>{postSlug}</a>
-      </h2>
-      <article>{postContent}</article>
-    </section>
-  )
-}
-
-function Footer({ author}) {
+function Footer({ author }) {
   return (
     <footer>
       <hr />
-      <p><i>(c) {author}, {new Date().getFullYear()}</i></p>
+      <p>
+        <i>
+          (c) {author} {new Date().getFullYear()}
+        </i>
+      </p>
     </footer>
-  )
+  );
 }

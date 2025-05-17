@@ -9,7 +9,21 @@ export async function renderJSXToHTML(jsx) {
     const childHtmls = await Promise.all(
       jsx.map((child) => renderJSXToHTML(child))
     );
-    return childHtmls.join("");
+    /* This code ensures that when rendering an array of JSX children, adjacent text
+     nodes are separated by a comment node, preserving their identity for React’s
+     reconciliation and preventing browser merging of text nodes.*/
+    let html = "";
+    let wasTextNode = false;
+    let isTextNode = false;
+    for (let i = 0; i < jsx.length; i++) {
+      isTextNode = typeof jsx[i] === "string" || typeof jsx[i] === "number";
+      if (wasTextNode && isTextNode) {
+        html += "<!-- -->";
+      }
+      html += childHtmls[i];
+      wasTextNode = isTextNode;
+    }
+    return html;
   } else if (typeof jsx === "object") {
     if (jsx.$$typeof === Symbol.for("react.element") || jsx.$$typeof === Symbol.for("react.transitional.element")) {
       if (typeof jsx.type === "string") {
@@ -26,8 +40,7 @@ export async function renderJSXToHTML(jsx) {
         html += await renderJSXToHTML(jsx.props.children);
         html += "</" + jsx.type + ">";
         return html;
-      }
-      if (typeof jsx.type === "function") {
+      } else if (typeof jsx.type === "function") {
         const Component = jsx.type;
         const props = jsx.props;
         const returnedJsx = await Component(props);
@@ -36,6 +49,7 @@ export async function renderJSXToHTML(jsx) {
     } else throw new Error("Cannot render an object.");
   } else throw new Error("Not implemented.");
 }
+
 
 export async function renderJSXToClientJSX(jsx) {
   if (
@@ -79,4 +93,19 @@ export async function renderJSXToClientJSX(jsx) {
       );
     }
   } else throw new Error("Not implemented");
+}
+
+export function stringifyJSX(key, value) {
+  if (value === Symbol.for("react.element")) {
+    // We can't pass a symbol, so pass our magic string instead.
+    return "$RE"; // Could be arbitrary. I picked RE for React Element.
+  } else if (value === Symbol.for("react.transitional.element")) {
+    return "$RTE";
+  }
+  else if (typeof value === "string" && value.startsWith("$")) {
+    // To avoid clashes, prepend an extra $ to any string already starting with $.
+    return "$" + value;
+  } else {
+    return value;
+  }
 }
