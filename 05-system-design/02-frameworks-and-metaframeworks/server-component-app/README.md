@@ -2,7 +2,7 @@
 
 ## Server simple HTML from machine
 
-I have a simple server with Node HTTP server. I make request to "localhost:8080" from my machine, and the server that I'm running locally responds. The Node server exposes as arguments request and response objects. The request object representing the details of the inbound request. The response object is the response that the server is sending to the client. `nodemon` automatically restarts the server when file changes in the directory are detected.
+I have a simple server with Node HTTP server. I make request to "localhost:8080" from my machine, and the server that I'm running locally responds. The Node server exposes request and response objects as arguments. The request object represents the details of the inbound request. The response object is the response that the server sends to the client. `nodemon` automatically restarts the server when file changes are detected in the directory.
 
 ## Custom node module loader
 
@@ -43,11 +43,11 @@ the custom module loader, `node-jsx-loader.js`. A module loader, "controls how t
     '}).listen(8080);'
 ```
 
-Notice how it even added a jsx function import to the file. This is why React had to be installed as a dependency, even though the file I made didn't use it directly: it is required when Node executes it later. Pretty cool. Babel was meant to transpile modern JS features that weren't in browsers yet to a more broadly supported syntax, but with its plugin architecture, basically the sky is the limit for code modifications before execution.
+Notice how it even added a jsx function import to the file. This is why React had to be installed as a dependency, even though the file I made didn't use it directly: it is required when Node executes the loaded code later. Pretty cool. Babel was meant to transpile modern JS features that weren't in browsers yet to a more broadly supported syntax, but with its plugin architecture, basically the sky is the limit in terms of code modifications before execution.
 
 ## Executing the transformed code
 
-I assume that _when_ the jsx functions are called, the output is a JSON structure describing the React component tree. Yes it does, indeed. I logged out what the `renderJSXToHTML` function produces. It recursively processes the childen to produce the following input JSON structure,
+I assume that _when_ the jsx function is called, the output is a JSON structure describing the React component tree. Yes it does, indeed. I logged out what the value of the `renderJSXToHTML` function accepts as an argument. It receivs something like the following input JSON structure, i.e. this is what jsx syntax is transformed to by the jsx runtime:
 
 ```js
 {
@@ -181,13 +181,15 @@ I assume that _when_ the jsx functions are called, the output is a JSON structur
 };
 ```
 
+The this JSX JSON (JSX AST?) is transformed to HTML output and sent over the wire.
+
 ## Server-side rendering (SSR)
 
 So, stepwise what happens is,
 
 1. **Step 1: Loading**
-    1. Execute `server.js` node file with a custom loader with plugin, `@babel/plugin-transform-react-jsx`, which
-    2. Apply `@babel/plugin-transform-react-jsx`, to insert a jsx module import, remove the <> brackets and replace them with jsx function calls with children objects arguments.
+    1. Execute the `server.js` node file with a custom loader with plugin, `@babel/plugin-transform-react-jsx`
+    2. Apply `@babel/plugin-transform-react-jsx`, to insert a jsx-runtime module import, remove the <> brackets and replace them with jsx function calls with children objects arguments.
 2. **Step 3: Executing**
     1. Execute the transformed file in Node. The `jsx` function calls produce the JSON structure of the component tree.
     2. A custom `renderJSXToHTML` then converts this to HTML.
@@ -196,10 +198,18 @@ So, stepwise what happens is,
 Also, _that_ was SSR: "Turning JSX into an HTML string is usually known as "Server-Side Rendering" (SSR)".
 After this we added some polish and turned it into a "real app" by adding routes, and refactoring into custom components.
 
-## Creating ~server~ async components
+## Async ~server~ components
 
-It's not server components yet, but the essense is starting to take shape and it was actually not a big deal to do. It's "just" making the utility that does the SSR, `renderJSXToHTML`, support async functions so we can have async custom components (functions) that can `await` data within their function bodies. Then instead of having an async router that fetched the page data and prop drilled that data down (sounds like pages router, no?), the teach the SSR util to await individual components. It simplidies the router a lot, and the data fetch is localised to component that needs it.
+It's not server components yet, but the essense is starting to take shape and it was actually not a big deal to do. It's "just" making the utility that does the SSR, `renderJSXToHTML`, support async functions so we can have async custom components (functions) that can `await` data within their function bodies. Then instead of having an async router that fetched the page data and prop drilled that data down (sounds like pages router), we teach the SSR util to await individual components. It simplidies the router a lot, and the data fetch is localised to component that needs it. TL;DR make `renderJSXToHTML` async so custom components can be awaited. The current implementation is all-or-nothing, serially awaiting async components, but a more optimal solution can be implemented where async components are awaited in parallel, and/or sent to the client later.
 
-## Avoiding full page refreshes
+## Client side routing
 
-Now we have a multipage application. On click we make a server request for the full page HTML.
+At this point we have an app that ships the full HTML payload for the entire page on navigation. How can we make this more efficient and only change what needs to be updated though?
+
+1. Add client-side JS to intercept navigations so we can refetch content manually without reloading the page:
+    - apply a click event listener to the global window object that intercepts links to internal routes only
+    - programmatically update browser history
+    - call a function
+2. Teach our server to serve JSX over the wire instead of HTML for subsequent navigations.
+3. Teach the client to apply JSX updates without destroying the whole DOM
+

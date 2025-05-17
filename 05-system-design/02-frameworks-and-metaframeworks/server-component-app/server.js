@@ -3,18 +3,29 @@ import { readFile } from 'fs/promises';
 import { renderJSXToHTML, renderJSXToClientJSX } from './utils/renderJsx.js';
 import { Router } from './components/router.js';
 
+const ROUTE_LIST = [
+  // This could be generated from the file system...
+  "/",
+  "/simple-http-server",
+  "/hello-world",
+  "/custom-node-module-loader",
+];
+
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  if (url.pathname.endsWith('/favicon.ico')) {
-    await sendNothing(res);
-  } else if (url.pathname === "/client.js") {
+  if (url.pathname === "/client.js") {
     await sendScript(res, "client.js");
   } else if (url.searchParams.has("jsx")) {
     url.searchParams.delete("jsx"); // Keep the url passed to the <Router> clean
     await sendJSX(res, url);
-  } else {
+  } else if (ROUTE_LIST.includes(url.pathname)) {
     await sendHTML(res, url);
+  } else {
+    /* Chrome dev tools and extensions send requests to the server that
+      are not part of the app. We only want to handle known requests for supported
+      routes and don't want to send an 404 error response for others. */
+    await sendNothing(res)
   }
 }).listen(8080);
 
