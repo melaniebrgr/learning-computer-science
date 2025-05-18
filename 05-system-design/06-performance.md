@@ -1,5 +1,7 @@
 # Performance
 
+Instead of solving the performance problem, try to remove it first, that is, ask what what logic and data is not really needed and remove it first from the application. Of course without some data and logic there is not application...
+
 ## Caching
 
 "Storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. There are a few additional concepts that come along with caching:
@@ -11,6 +13,13 @@
   - state while revalidate, works with time invalidation where the stale version is served while the fresh version is fetched in the background
   - force fresh values, e.g. in admin mode always force fetch latest values
   - soft-purge when data is updated but cache headers would persist the stale data for quite some longer period of time, mark the data as stale so on the next request it is fetched in the background
+- **cache size**: E.g. should you cache a video buffer in memory?
+  - least recently used (LRU) have a fixed cache size where the least recently used value is purged when the cache reaches a certain size
+  - file-system cache, e.g. `./node_modules/.cache`
+  - redis
+- **cache warming**: when bringing up a brand new cache or switching CDNs a few problems can result until the cache is warm, e.g. API rate-limiting as all of a sudden a requests are getting re-made, or running out of resources--maybe you want a beefier CPU temporarily. Soft purge is a good solution to this.
+- **cache value validation**: if the cache client changes what is uses the cached data shape could no longer be suitable, so validating with something like zod is a good idea.
+- **cache request deduplication**: if there are two requests for the same resource, make one wait until the other completed.
 
 ### Browser cache (HTTP cache)
 
@@ -60,3 +69,7 @@ Cache-Control: public, max-age=3600, no-transform
 ### Static-site generation (SSG)
 
 SSG is just "build time" caching that uses a CDN and Cache-Control headers. It maybe have no performance benefits compared to a server-rendered site with a proper CDN and Cache-Control headers. SSG is limited as product evolves to have dynamic requirements.
+
+## Resources
+
+1. <https://www.npmjs.com/package/@epic-web/cachified>

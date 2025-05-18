@@ -49,7 +49,7 @@ Notice how it even added a jsx function import to the file. This is why React ha
 
 ## Transforming JSX and shipping HTML
 
-I assume that _when_ the jsx function is called, the output is a JSON structure describing the React component tree. Yes it does, indeed. I logged out what the value of the `renderJSXToHTML` function accepts as an argument. It receivs something like the following input JSON structure, i.e. this is what jsx syntax is transformed to by the jsx runtime:
+I assume that _when_ the jsx function is called, the output is a JSON structure describing the React component tree. Yes it does, indeed. I logged out what the value of the `renderJSXToHTML`/`renderToString` function accepts as an argument. It receives something like the following input JSON structure, i.e. this is what jsx syntax is transformed to by the jsx runtime:
 
 ```js
 {
