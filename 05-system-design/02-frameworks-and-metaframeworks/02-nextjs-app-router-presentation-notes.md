@@ -2,24 +2,23 @@
 
 ## Opening
 
-Whoami: background in scientific visual communication who wrote a server components implementation from scratch. At the end of this presentation you will understand
+I have a background in scientific visual communication and wrote a server components implementation from scratch. At the end of this presentation you will understand.
 
-- Use case for Server and Client Components, when to use each for what and how  
-- How to structure the application to use RSCs, e.g. component composition  
-- Common errors, what they mean and how to resolve them
+- The use case of Server vs. Client Components: when to use each for what and how  
+- How to structure the application to for RSCs: component composition  
+- Common errors: what they mean and how to solve them
 
-The intent is to be less theoretical and focus on the practicalities of working with Server and Client Components in app router. While there will be no hands on key keyboard sections, there will be code samples and a Kahoot at the end, so stay sharp.
+The intent is to be less theoretical and more practical. At the end of this presentation you will have the foundations for working with Server and Client Components in app router. While there will be no hands on key keyboard sections, there will be code samples and a Kahoot at the end. Stay sharp!
 
-## Review
+## The use case of Server vs. Client Components: when to use each for what and how  
 
-### Key Concepts
+Recall what we have in Pages Router:
 
 - Traditional Server-Side Rendering (SSR) renders entire pages and rehydrates them in the browser  
 - React Server Components (RSC) render components on the server without sending their JavaScript to the client. Serve static or non-interactive elements as plain HTML, reduce client-side bundle sizes, accelerate initial page loads, and cleanly separate concerns.  
-- RSC also supports asynchronous data fetching directly within server components, significantly improving the developer experience compared to Next.js’s older getServerSideProps API.  
 - Developers seamlessly mix server components (no hydration, no JS on the client) with client components (interactive, hydrated), creating an “islands architecture” where each UI element uses the most appropriate rendering method.
 
-### Key Tech Details
+The fundamental technical implementation is straight forward:
 
 - A real RSC implementation encodes the JSX in the HTML payload.  
 - A production-ready RSC setup sends JSX chunks as they're being produced instead of a single large blob at the end.  
@@ -27,20 +26,24 @@ The intent is to be less theoretical and focus on the practicalities of working 
 - RSC also lets you mark some components as Client components, which means they still get SSR'd into HTML, but their code is included in the bundle.  
 - For Client components, only JSON of their props gets serialized.
 
-## Server Components (SCs)
+### Server Components (SCs)
 
 React Server Components *only run on the server*.  
 Because they run *only on the server*, Server Components can use secret keys and access backend resources directly.
 
-Because they run *only on the server*, Server Components do not increase the size of the JS bundle size shipped to the client, so import large libraries, like react-markdown, without fear of increasing the bundle size the end user needs to download.  
+Because they run *only on the server*, Server Components do not increase the size of the JS bundle size shipped to the client, so import large libraries, like react-markdown, without fear of increasing the bundle size the end user needs to download.
+RSC also supports asynchronous data fetching directly within server components, significantly improving the developer experience compared to Next.js’s older getServerSideProps API.
 This is true for initial page load and page transitions, “Server Components allow your application code to be automatically code-split by route segments. This means only the code needed for the current route is loaded on navigation.” (25)
 
 We said though that Server Components only render on the server.  
-When a user interacts with an application they trigger state changes and side effects though, which would require a component to rerender.  That is, Server Components code is *not- available on the client for a rerender. This is where Client Components come in.
+When a user interacts with an application they trigger state changes and side effects though, which would require a component to rerender.  That is, Server Components code is _not_ available on the client for a rerender. This is where Client Components come in.
 
-Generally use Server Components for server-side data fetching, computation, wherever you can, reasonably for improved performance from caching.
+#### Usage
 
-## Client Components (CCs)
+- Generally use Server Components for server-side data fetching, computation, wherever you can, reasonably for improved performance from caching.
+- **How to make a Server Component** (a component the runs only on the server): do nothing. In app router, all components are Server Components by default.  
+
+### Client Components (CCs)
 
 Are “traditional” React components that are server-side rendered.  
 They are executed on the server and in the browser.  
@@ -49,54 +52,46 @@ They can use state, effects, and browser-specific APIs.
 It’s only in Client Components that can we **use lifecycle hooks**, such as useEffect or useState (15).  
 That’s because Client Components are SSR’d like we are used to: rendered on the server, hydrated on the client.
 
+#### Usage
+
 Use Client Components for interactivity (15).  
 As an analogy, SCs are the stage that you set up ahead of time and are fixed during a performance.  
 CCs are like actors on the stage during the play, they interact with the audience and change over time.  
 We want to use Server Components as much as possible, but a stage without actors is not a play.
 
+**How to make a Client Component** (a component that runs on the server and client, SSR): add a `use client` directive to the top of the component file, or import it into another Client Component. Anything rendered by a Client Component becomes a Client Component. It’s a point of infection. Imagine an invisible server-client boundary is created whenever a Client Component is encountered in the component hierarchy.
+
+(How to make a Client-only Component: with React.lazy)
+
+### Summary
+
 “What React Server Components do is give you optionality to decide where you want your code to run: the server, the client, or both. And when: build-time or run-time (27).”
 
-**In app router, all components are Server Components by default**.  
-A Server Component is turned into a Client Components by
-
-- adding a `use client` directive to the top of the component file  
-- *importing- any component into another Client Component
-
 The DX implications RSC enables fine-grained control: where our code runs is explicitly defined: the server, the client, or both.
-Because we not only *can be- explicit about where our code runs, i.e. if it’s a client or server component, but we always *should be- aware of it.
+Because we not only can be explicit about where our code runs, i.e. if it’s a client or server component, but we always should be aware of it.
 
-What is an SC and what is a CC can be tricky to architect. Sometimes a component silently executes on both the client and server, or loudly complain and require manually restructuring of the component tree.
-
-By following these patterns, development felt refreshingly straightforward. The application architecture was clean, and the initial performance metrics were impressive (26).
-
-## Rules
-
-Rules of ~~hooks~~ components:
+#### Rules of ~~hooks~~ components
 
 1. Server Components can render both Server Components and Client Components  
 2. Client Component can render only other Client Components  
 3. Server Components can only pass some types of data to Client Components as props
 
-Anything rendered by a Client Component becomes a Client Component. It’s a point of infection. Imagine an invisible server-client boundary is created whenever a Client Component is encountered in the component hierarchy.
+“When it comes to deciding server-client boundaries the parent/child relationship doesn't matter.” What matters is the import relationship and **who is passing the props**.
 
-“When it comes to deciding server-client boundaries the parent/child relationship doesn't matter.” What matters is the **import relationship*- and **who is passing the props***.- 
+Need to think about component composition management, can’t just import anywhere, can’t just pass anything. All code written for Server Components **must be serializable**. Functions or classes cannot be passed from Server Components to Client.
 
-All code written for Server Components **must be serializable**. Functions or classes cannot be passed from Server Components to Client.
+What is an SC and what is a CC can be tricky to architect. Sometimes a component silently executes on both the client and server, or loudly complain and require manually restructuring of the component tree.
 
-Need to think about component composition management, can’t just import anywhere, can’t just pass anything.
-
-## Patterns
-
-### Key Concepts
+## How to structure the application to for RSCs: component composition  
 
 Created client components only at necessary interaction boundaries  
-Passed server-generated props to client components   
+Passed server-generated props to client components
 Implemented forms with server functions that revalidated API calls  
 Placed React hooks strategically in leaf components or lower in the component tree
 
-### Pattern 1: Data locality with Server Components
+### Pattern 1: Data locality
 
-Only Server Components **can be*- **asynchronous**, so we can await data `fetch`ing on the server before returning JSX to the client.
+Only Server Components **can be asynchronous**, so we can await data `fetch`ing on the server before returning JSX to the client.
 
 Any Server Component can just… fetch data directly using a node library or using the fetch (22).  
 No more using a library or using useEffect to manage complex loading states (react-query I still love you), and no more fetching a bunch of data at the page level with getServerSideProps and then drilling it down to the component that needs it (22).
@@ -113,7 +108,7 @@ For fetching data, using server-side rendering and passing the data as props may
 Data can't be fetched the same way as server components in client components since async client components \[currently aren't supported\](https://github.com/acdlite/rfcs/blob/first-class-promises/text/0000-first-class-support-for-promises.md\#why-cant-client-components-be-async-functions), and so request data can't be awaited; instead a useEffect hook needs to be used.  
 Since the \`useEffect\` doesn't run on the server, a \`useEffect\` won't fetch data on the server.
 
-### Pattern 2: Weaving interactivity with Client Components
+### Pattern 2: Weaving interactivity
 
 “What if I need to useState high up in the application? Does that mean everything needs to become a Client Component? It turns out that in many cases, we can work around this limitation by restructuring our application so that the owner changes. (12)” The key is, Server Components can be passed to Client Components as props.
 
@@ -123,11 +118,20 @@ If you follow the doughnut pattern strictly, it upsets encapsulation we enjoyed 
 Even if something can be a Server Component it doesn’t mean it must be.  
 Don’t turn components inside out to achieve maximum server-only rendering.
 
-### Naming
+### Pattern 3: Naming
 
 - const HeaderServer, const HeaderClient  
 - Header.Client  
-- Header.server.tsx, Header.client.tsx (or Header.Server.tsx, Header.Client.tsx) 
+- Header.server.tsx, Header.client.tsx (or Header.Server.tsx, Header.Client.tsx)
+
+### Pattern 4: How to improve TTFB
+
+TTFB or Time to First Byte measures how long it takes for a user’s browser to **receive the first byte of data*- from the server after making an HTTP request. Therefore it includes 1\. sending the request, 2\. server processing like DB querying, 3\. streaming the first byte of the response. Our domain is 2, cloud infra’s is 1 and 3\.
+
+- `useStaticData`: we want to slowly remove component dependency on useStaticData in favour of doing more data fetching on the server  
+  - Can the data be passed down?  
+  - Can you adjust the component composition so the data can be passed in?  
+  - else apply `use client`
 
 ### Summary
 
@@ -139,7 +143,7 @@ Don’t turn components inside out to achieve maximum server-only rendering.
 6. Move client functionality down component hierarchy to get as much server-side rendering as possible to get the most benefit (server-client boundary negotiation.) \<fig 3\. client server boundaries\>  
 7. Split up client and server concerns into separate components
 
-## Common errors
+## Common errors: what they mean and how to solve them
 
 ### Error: You’re importing a component that needs `useState`. This react hook only works in a client component. To fix, mark the file (or its parent) with the “useClient” directive.
 
@@ -161,18 +165,8 @@ The React Server Component Payload is a compact binary representation of the ren
 
 Encountered when trying to pass the whole context object to a client component because the cookie manager is a class. Resolved by removing the cookie manager from the object.
 
-## Common refactorings
-
-How to improve TTFB. TTFB or Time to First Byte measures how long it takes for a user’s browser to **receive the first byte of data*- from the server after making an HTTP request. Therefore it includes 1\. sending the request, 2\. server processing like DB querying, 3\. streaming the first byte of the response. Our domain is 2, cloud infra’s is 1 and 3\.
-
-- `useStaticData`: we want to slowly remove component dependency on useStaticData in favour of doing more data fetching on the server  
-  - Can the data be passed down?  
-  - Can you adjust the component composition so the data can be passed in?  
-  - else apply `use client`
-
 ## Tooling
 
-- (Lighthouse)  
 - [RSC Devtools](https://chromewebstore.google.com/detail/rsc-devtools/jcejahepddjnppkhomnidalpnnnemomn?pli=1)
 
 ## Kahoot
