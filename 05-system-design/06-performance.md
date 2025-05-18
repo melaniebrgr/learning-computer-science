@@ -1,6 +1,18 @@
 # Performance
 
-## Browser cache (HTTP cache)
+## Caching
+
+"Storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. There are a few additional concepts that come along with caching:
+
+- **cache keys**: the cache key must contain all inputs that determine the result, e.g. using `useMemo` but not missing a dependency in the array. Getting the cache key itself can sometimes be costly.
+- **cache invalidation**: strategies
+  - proactive update of the cache, e.g. on PUT, POST, DELETE of a resource
+  - timed invalication, e.g. HTTP cache control header directives like `max-age`
+  - state while revalidate, works with time invalidation where the stale version is served while the fresh version is fetched in the background
+  - force fresh values, e.g. in admin mode always force fetch latest values
+  - soft-purge when data is updated but cache headers would persist the stale data for quite some longer period of time, mark the data as stale so on the next request it is fetched in the background
+
+### Browser cache (HTTP cache)
 
 The client (a browser) looks for the resources in the browser cache. If it's found (a hit), use it, else (a miss), go to the server. A "hit" means that the asset was in the cache. A "**miss**" means it can either be there or too old. This
 
@@ -30,7 +42,7 @@ The `Cache-Control` header defines directives that control caching behavior for 
 | stale-while-revalidate | Allows serving stale content while revalidating in the background. Revalidation involves checking with the server (e.g., via `If-Modified-Since` or `If-None-Match`) to confirm if the cached response is still valid. | Improve performance for slightly outdated content, e.g., `stale-while-revalidate=60`. |
 | stale-if-error | Allows serving stale content if the server returns an error (e.g., 500). | Provide fallback content during server outages, e.g., `stale-if-error=86400` |
 
-### Example
+#### Example
 
 ```http
 Cache-Control: public, max-age=3600, no-transform
@@ -40,7 +52,11 @@ Cache-Control: public, max-age=3600, no-transform
 - `max-age=3600`: Fresh for 1 hour.
 - `no-transform`: No modifications allowed.
 
-### Misc.
+#### Misc.
 
 - Heuristic caching is when no caching header is set but the browser still caches based on a heuristic, liek 10% of the last modified date.
 - `if-modified-since` is a date cache header that can be sent with the request, but since time zones make things difficult, so has been replaced with ETags instead, which is a hash based on the content. The cache bust the ETag the content needs be changed somehow, e.g. by renaming the name of a script href.
+
+### Static-site generation (SSG)
+
+SSG is just "build time" caching that uses a CDN and Cache-Control headers. It maybe have no performance benefits compared to a server-rendered site with a proper CDN and Cache-Control headers. SSG is limited as product evolves to have dynamic requirements.

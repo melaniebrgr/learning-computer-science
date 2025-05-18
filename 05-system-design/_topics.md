@@ -16,7 +16,7 @@
   - [x] [TypeScript](./02-typescript.md) (2022-09-12)
   - [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
 - [ ] Frameworks & metaframeworks
-  - [ ] React
+  - [~] [React](./02-react.md) (2025-05-18)
   - [ ] Vue
   - [ ] Solid
   - [x] [Next.js](./02-nextjs.md) (2023-05-07)
@@ -50,9 +50,9 @@
   - [ ] Tree-shaking
   - [ ] Pagination
   - [ ] Virtualisation
-  - [x] [Browser cache](./06-performance.md) (2025-05-10)
+  - [x] [Caching](./06-performance.md) (2025-05-10)
   - [ ] Bf cache
-- [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-04)
+- [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-18)
   - [ ] Service workers
 - [ ] Security
   - [ ] XSS
@@ -99,7 +99,6 @@
   - [ ] Django
   - [ ] Express
 - [ ] Proxies
-- [ ] Caching
 - [ ] Web servers
 - [ ] Messaging systems
 - [ ] REST
@@ -179,8 +178,7 @@
 - FE: <https://frontendmasters.com/guides/front-end-handbook/2024/>
 - Design patterns: <https://dev.to/superviz/design-pattern-5-adapter-pattern-4gif?context=digest>
 - Next.js: <https://frontendmasters.com/courses/intermediate-next-js>
-- FE system design
-  - <https://frontendmasters.com/courses/frontend-system-design/>
-  - <https://frontendatscale.com/courses/frontend-architecture/>
+- FE system design: <https://frontendmasters.com/courses/frontend-system-design/>
+- FE system design: <https://frontendatscale.com/courses/frontend-architecture/>
 - Javascript: <https://frontendmasters.com/courses/pro-js-features/>
 - <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
