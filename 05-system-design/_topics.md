@@ -94,7 +94,7 @@
 - [ ] Languages
   - [~] [Rust](../04-rust/) (2024-02-14)
   - [~] [Go](../02-programming/go-for-js-devs/) (2022-11-06)
-  - [ ] JS (Node)
+  - [~] [Node (JS)](./03-node.md) (2025-05-20)
 - [ ] Web frameworks
   - [ ] Django
   - [ ] Express

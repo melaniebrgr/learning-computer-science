@@ -59,7 +59,7 @@ As an analogy, SCs are the stage that you set up ahead of time and are fixed dur
 CCs are like actors on the stage during the play, they interact with the audience and change over time.  
 We want to use Server Components as much as possible, but a stage without actors is not a play.
 
-**How to make a Client Component** (a component that runs on the server and client, SSR): add a `use client` directive to the top of the component file, or import it into another Client Component. Anything rendered by a Client Component becomes a Client Component. It’s a point of infection. Imagine an invisible server-client boundary is created whenever a Client Component is encountered in the component hierarchy.
+**How to make a Client Component** (a component that runs on the server and client, SSR): add a `use client` directive to the top of the component file, or import it into another Client Component. Anything rendered by a Client Component becomes a Client Component. It’s a point of infection. Imagine an invisible server-client boundary is created whenever a Client Component is encountered in the component hierarchy. "A "use client" directive at the top of a file defines that it's a boundary between server and client."
 
 (How to make a Client-only Component: with React.lazy)
 
@@ -76,7 +76,7 @@ Because we not only can be explicit about where our code runs, i.e. if it’s a 
 2. Client Component can render only other Client Components  
 3. Server Components can only pass some types of data to Client Components as props
 
-“When it comes to deciding server-client boundaries the parent/child relationship doesn't matter.” What matters is the import relationship and **who is passing the props**.
+“When it comes to deciding server-client boundaries the parent/child relationship doesn't matter.” What matters is the import relationship and **who is passing the props**. 
 
 Need to think about component composition management, can’t just import anywhere, can’t just pass anything. All code written for Server Components **must be serializable**. Functions or classes cannot be passed from Server Components to Client.
 
@@ -124,14 +124,18 @@ Don’t turn components inside out to achieve maximum server-only rendering.
 - Header.Client  
 - Header.server.tsx, Header.client.tsx (or Header.Server.tsx, Header.Client.tsx)
 
-### Pattern 4: How to improve TTFB
+### Pattern 4: Improve TTFB with streaming with caution
 
-TTFB or Time to First Byte measures how long it takes for a user’s browser to **receive the first byte of data*- from the server after making an HTTP request. Therefore it includes 1\. sending the request, 2\. server processing like DB querying, 3\. streaming the first byte of the response. Our domain is 2, cloud infra’s is 1 and 3\.
+TTFB or Time to First Byte measures how long it takes for a user’s browser to **receive the first byte of data*- from the server after making an HTTP request. Therefore it includes 1. sending the request, 2. server processing like DB querying, 3. streaming the first byte of the response. Our domain is 2, cloud infra’s is 1 and 3.
 
 - `useStaticData`: we want to slowly remove component dependency on useStaticData in favour of doing more data fetching on the server  
   - Can the data be passed down?  
   - Can you adjust the component composition so the data can be passed in?  
   - else apply `use client`
+
+If suspended components are only visible after hydration (29), then it sounds like we should never suspend the largest contentful area, or LCP will degrade.
+
+It also sounds like there is some healthy doubt about whether streamed content is available to Google Bot, since JS is required to swap out the loading state. I would probably default to "plain SSR" without stream for content that must be crawlable to be on the safe side.
 
 ### Summary
 
@@ -140,7 +144,7 @@ TTFB or Time to First Byte measures how long it takes for a user’s browser to 
 3. BE services can be called directly in RSCs. Move blocking data fetching from BE services down to not block page rendering  
 4. If you have some server-side state that you want to share across server components, Next.js recommends using either the cache or fetch APIs to do so. Use fetch when you want to share a resource like the response of a REST API call across server components.  
 5. Use cache when fetch is not an option—for instance, to share the result of a database query.  
-6. Move client functionality down component hierarchy to get as much server-side rendering as possible to get the most benefit (server-client boundary negotiation.) \<fig 3\. client server boundaries\>  
+6. Move client functionality down component hierarchy to get as much server-side rendering as possible to get the most benefit (server-client boundary negotiation.) \<fig 3. client server boundaries\>  
 7. Split up client and server concerns into separate components
 
 ## Common errors: what they mean and how to solve them
@@ -188,30 +192,32 @@ Encountered when trying to pass the whole context object to a client component b
 
 ## References
 
-- [ ] 1\. [https://www.plasmic.app/blog/how-react-server-components-work](https://www.plasmic.app/blog/how-react-server-components-work)  
-- [ ] 2\. [https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)  
-- [ ] 3\. [https://apidiagram.com/](https://apidiagram.com/)  
-- [ ] 4\. [Data Fetching with React Server Components](https://www.youtube.com/watch?v=TQQPAU21ZUw)  
-- [ ] 5\. [https://github.com/reactwg/server-components/discussions/5](https://github.com/reactwg/server-components/discussions/5)  
-- [x] 6\. [React Server Components, Worth Your Time?](https://www.youtube.com/watch?v=c0E_gh1yeRA&t=464s)
-- [x] 7\. [Nik Sumeiko (LinkedIn)](https://www.linkedin.com/feed/update/share:7298319833580892161/?midToken=AQG_eKV1tBRWhQ&midSig=1-Q7Hv7LezOrE1&trk=eml-email_career_insights_01-network~post-0-wrapper~link&trkEmail=eml-email_career_insights_01-network~post-0-wrapper~link-null-3b6y0p~m7ut2ho4~x8-null-null&eid=3b6y0p-m7ut2ho4-x8&otpToken=MTAwNTFlZTExYjI2Y2FjNmJkMjQwNGVkNDIxZmU2YjU4ZWM3ZDE0MzlmYWM4ZjYxNzdjNTAwNmU0YjU4NThmYmYyZGZiMWIxNDZmOGYxYzY0MWZjZmJhYzBkZTlmZjdkYjI2MmU4YmVhYzIyZWEyNDEzYTAsMSwx)~~  
-- [ ] 8\. [https://www.patterns.dev/react/react-server-components/](https://www.patterns.dev/react/react-server-components/)\-  
-- [ ] 9\. [https://github.com/reactjs/rfcs/blob/bf51f8755ddb38d92e23ad415fc4e3c02b95b331/text/0000-server-components.md](https://github.com/reactjs/rfcs/blob/bf51f8755ddb38d92e23ad415fc4e3c02b95b331/text/0000-server-components.md)  
-- [ ] 10\. [https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components)  
-- [ ] 11\. [React Server Components: A Comprehensive Breakdown](https://www.youtube.com/watch?v=VIwWgV3Lc6s)  
-- [x] 12\. [https://www.joshwcomeau.com/react/server-components/](https://www.joshwcomeau.com/react/server-components/)
-- [x] 13\. [https://parceljs.org/blog/v2-14-0?ck\_subscriber\_id=1774022056](https://parceljs.org/blog/v2-14-0?ck_subscriber_id=1774022056)
-- [ ] 14\. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)  
-- [ ] 15\. [https://vercel.com/blog/understanding-react-server-components](https://vercel.com/blog/understanding-react-server-components)  
-- [ ] 16\. [https://frontendatscale.com/blog/donut-components/](https://frontendatscale.com/blog/donut-components/)  
-- [ ] 17\. [https://nextjs.org/learn/dashboard-app/streaming](https://nextjs.org/learn/dashboard-app/streaming)  
-- [ ] 18\. [https://react.dev/blog/2024/12/05/react-19\#whats-new-in-react-19](https://react.dev/blog/2024/12/05/react-19#whats-new-in-react-19)  
-- [ ] 19\. [https://react.dev/reference/rsc/use-server\#serializable-parameters-and-return-values](https://react.dev/reference/rsc/use-server#serializable-parameters-and-return-values)  
-- [x] 20\. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)
-- [ ] 21\. [https://www.youtube.com/watch?v=eO51VVCpTk0](https://www.youtube.com/watch?v=eO51VVCpTk0)  
-- [ ] 22\. [https://www.mux.com/blog/what-are-react-server-components](https://www.mux.com/blog/what-are-react-server-components)  
-- [ ] 23\. [https://github.com/aurorascharff/next15-filterlist](https://github.com/aurorascharff/next15-filterlist)  
-- [ ] 24\. [https://nextjs.org/learn/dashboard-app/getting-started](https://nextjs.org/learn/dashboard-app/getting-started)  
-- [ ] 25\. [https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating\#1-code-splitting](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#1-code-splitting)  
-- [ ] 26\. [https://www.nirtamir.com/articles/the-limits-of-rsc-a-practitioners-journey?ck\_subscriber\_id=1774022056](https://www.nirtamir.com/articles/the-limits-of-rsc-a-practitioners-journey?ck_subscriber_id=1774022056)  
-- [ ] 27\. [https://saewitz.com/server-components-give-you-optionality?ck\_subscriber\_id=2782443989\&utm\_source=convertkit\&utm\_medium=email\&utm\_campaign=%E2%9A%9B%EF%B8%8F%20This%20Week%20In%20React%20\#233:%20RSC,%20Next.js,%20Compiler,%20Unhead,%20Shadcn,%20Relay,%20Mantine%20%7C%20Expo,%20WebGPU,%20Skia,%20Apple%20fees,%20Reanimated,%20Fragment%20Refs%20%7C%20Node.js,%20TS,%20Prisma,%20Deno,%20GSAP%20-%2017536483](https://saewitz.com/server-components-give-you-optionality?ck_subscriber_id=2782443989&utm_source=convertkit&utm_medium=email&utm_campaign=%E2%9A%9B%EF%B8%8F%20This%20Week%20In%20React%20#233:%20RSC,%20Next.js,%20Compiler,%20Unhead,%20Shadcn,%20Relay,%20Mantine%20%7C%20Expo,%20WebGPU,%20Skia,%20Apple%20fees,%20Reanimated,%20Fragment%20Refs%20%7C%20Node.js,%20TS,%20Prisma,%20Deno,%20GSAP%20-%2017536483)
+- [ ] 1. [https://www.plasmic.app/blog/how-react-server-components-work](https://www.plasmic.app/blog/how-react-server-components-work)  
+- [ ] 2. [https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)  
+- [ ] 3. [https://apidiagram.com/](https://apidiagram.com/)  
+- [ ] 4. [Data Fetching with React Server Components](https://www.youtube.com/watch?v=TQQPAU21ZUw)  
+- [ ] 5. [https://github.com/reactwg/server-components/discussions/5](https://github.com/reactwg/server-components/discussions/5)  
+- [x] 6. [React Server Components, Worth Your Time?](https://www.youtube.com/watch?v=c0E_gh1yeRA&t=464s)
+- [x] 7. [Nik Sumeiko (LinkedIn)](https://www.linkedin.com/feed/update/share:7298319833580892161/?midToken=AQG_eKV1tBRWhQ&midSig=1-Q7Hv7LezOrE1&trk=eml-email_career_insights_01-network~post-0-wrapper~link&trkEmail=eml-email_career_insights_01-network~post-0-wrapper~link-null-3b6y0p~m7ut2ho4~x8-null-null&eid=3b6y0p-m7ut2ho4-x8&otpToken=MTAwNTFlZTExYjI2Y2FjNmJkMjQwNGVkNDIxZmU2YjU4ZWM3ZDE0MzlmYWM4ZjYxNzdjNTAwNmU0YjU4NThmYmYyZGZiMWIxNDZmOGYxYzY0MWZjZmJhYzBkZTlmZjdkYjI2MmU4YmVhYzIyZWEyNDEzYTAsMSwx)~~  
+- [ ] 8. [https://www.patterns.dev/react/react-server-components/](https://www.patterns.dev/react/react-server-components/)\-  
+- [ ] 9. [https://github.com/reactjs/rfcs/blob/bf51f8755ddb38d92e23ad415fc4e3c02b95b331/text/0000-server-components.md](https://github.com/reactjs/rfcs/blob/bf51f8755ddb38d92e23ad415fc4e3c02b95b331/text/0000-server-components.md)  
+- [ ] 10. [https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components)  
+- [ ] 11. [React Server Components: A Comprehensive Breakdown](https://www.youtube.com/watch?v=VIwWgV3Lc6s)  
+- [x] 12. [https://www.joshwcomeau.com/react/server-components/](https://www.joshwcomeau.com/react/server-components/)
+- [x] 13. [https://parceljs.org/blog/v2-14-0?ck\_subscriber\_id=1774022056](https://parceljs.org/blog/v2-14-0?ck_subscriber_id=1774022056)
+- [ ] 14. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)  
+- [ ] 15. [https://vercel.com/blog/understanding-react-server-components](https://vercel.com/blog/understanding-react-server-components)  
+- [ ] 16. [https://frontendatscale.com/blog/donut-components/](https://frontendatscale.com/blog/donut-components/)  
+- [ ] 17. [https://nextjs.org/learn/dashboard-app/streaming](https://nextjs.org/learn/dashboard-app/streaming)  
+- [ ] 18. [https://react.dev/blog/2024/12/05/react-19\#whats-new-in-react-19](https://react.dev/blog/2024/12/05/react-19#whats-new-in-react-19)  
+- [ ] 19. [https://react.dev/reference/rsc/use-server\#serializable-parameters-and-return-values](https://react.dev/reference/rsc/use-server#serializable-parameters-and-return-values)  
+- [x] 20. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)
+- [ ] 21. [https://www.youtube.com/watch?v=eO51VVCpTk0](https://www.youtube.com/watch?v=eO51VVCpTk0)  
+- [ ] 22. [https://www.mux.com/blog/what-are-react-server-components](https://www.mux.com/blog/what-are-react-server-components)  
+- [ ] 23. [https://github.com/aurorascharff/next15-filterlist](https://github.com/aurorascharff/next15-filterlist)  
+- [ ] 24. [https://nextjs.org/learn/dashboard-app/getting-started](https://nextjs.org/learn/dashboard-app/getting-started)  
+- [ ] 25. [https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating\#1-code-splitting](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#1-code-splitting)  
+- [ ] 26. [https://www.nirtamir.com/articles/the-limits-of-rsc-a-practitioners-journey?ck\_subscriber\_id=1774022056](https://www.nirtamir.com/articles/the-limits-of-rsc-a-practitioners-journey?ck_subscriber_id=1774022056)  
+- [ ] 27. [https://saewitz.com/server-components-give-you-optionality](https://saewitz.com/server-components-give-you-optionality)
+- [ ] 28. <https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md>
+- [ ] 29. <https://github.com/vercel/next.js/issues/50150#issuecomment-2184934191>

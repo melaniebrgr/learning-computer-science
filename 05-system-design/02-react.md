@@ -1,5 +1,72 @@
 # React
 
+## Hooks
+
+### useOptimistic
+
+Optimistically update the UI as you wait for the mutation request (PUT, POST, DELETE) to complete, assuming that in most cases the request is successful. The case where the request errors does need to be handle however. One way to do this is to wrap the request in a try catch and its its successful or unsuccessful, calling a revalidate method to trigger the component render with the "source of truth" data from the database.
+
+```tsx
+import { useOptimistic, useState, useRef, startTransition } from "react";
+import { deliverMessage } from "./actions.js";
+
+function Thread({ messages, sendMessageAction }) {
+  const formRef = useRef();
+  function formAction(formData) {
+    addOptimisticMessage(formData.get("message"));
+    formRef.current.reset();
+    startTransition(async () => {
+      await sendMessageAction(formData);
+    });
+  }
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+    messages,
+    (state, newMessage) => [
+      {
+        text: newMessage,
+        sending: true
+      },
+      ...state,
+    ]
+  );
+
+  return (
+    <>
+      <form action={formAction} ref={formRef}>
+        <input type="text" name="message" placeholder="Hello!" />
+        <button type="submit">Send</button>
+      </form>
+      {optimisticMessages.map((message, index) => (
+        <div key={index}>
+          {message.text}
+          {!!message.sending && <small> (Sending...)</small>}
+        </div>
+      ))}
+      
+    </>
+  );
+}
+
+export default function App() {
+  const [messages, setMessages] = useState([
+    { text: "Hello there!", sending: false, key: 1 }
+  ]);
+  async function sendMessageAction(formData) {
+    const sentMessage = await deliverMessage(formData.get("message"));
+    startTransition(() => {
+      setMessages((messages) => [{ text: sentMessage }, ...messages]);
+    })
+  }
+  return <Thread messages={messages} sendMessageAction={sendMessageAction} />;
+}
+```
+
+## useTransition
+
+Unbatch a state update so that it does not slow down the component render. Usually a loading message or style is displayed instead. Overall, experience is less laginess in the UI.
+
+## Components
+
 ## Suspense
 
 React's way of declaratively managing the component UI while we wait for data or if the request fails is using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
