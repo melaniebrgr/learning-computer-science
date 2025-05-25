@@ -27,12 +27,22 @@
 - client: The computer sending the request. The fetch API is built into the browser and Node _clients_ for making HTTP requests.
 - server: The computer sending the response. A server is optimised for handling server loads.
 
-
-
 > **ℹ️ Info:**
 > A daemon is a type of computer program that runs in the background, performing tasks without direct user interaction. It’s commonly used in Unix-like operating systems (e.g., Linux, macOS) to handle system-level services or processes. The term "daemon" comes from Greek mythology, referring to a guiding spirit, and was chosen to describe these programs that quietly "guide" system functions.
 >
 > Daemons typically run continuously in the background and are triggered by events, handling tasks like network services, logging, or scheduling without a user interface. They often manage critical functions, such as DNS resolution, web hosting, or email delivery.
+
+## Input/Output (I/O)
+
+A rough comparison of relative speeds of different types of I/O:
+
+| Component | Speed | Example Process | Sync/Async |
+|-----------|-------|-----------------|------------|
+| **CPU** | 1 nanosecond (ns) | Basic arithmetic operations, cache access | Sync |
+| **RAM** | 100 nanoseconds (ns) | Loading variables, accessing arrays | Sync |
+| **SSD** | 1 millisecond (ms) | Reading files, database queries | Async |
+| **HDD** | 10 milliseconds (ms) | Large file operations, boot sequences | Async |
+| **Network** | 100 milliseconds (ms) | HTTP requests, downloading files | Async |
 
 ## Internet Protocol (IP)
 
@@ -138,8 +148,8 @@ A URL is made up of several components, each serving a specific purpose:
 3. **Password**: An optional password for authentication (e.g. `pwn3d`).
 4. **Host**: The domain name or IP address of the server (e.g. `www.example.com`). This is _required_ to locate the server on the internet.
 5. **Port**: The port number on the server (e.g., `:80` for HTTP, `:443` for HTTPS) is optional and often omitted. Ports are "virtual little hubs" managed by the operating system that segment incoming internet traffic to different applications on the same server at the same time. An OS allows for about 65,535 ports, but only 1-1024 are reserved for well-known services. The rest are available for applications to use.
-6. **Path**: The specific resource on the server (e.g. `/path/to/resource`). The default path is `/` if not provided, which is the root of the server.
-7. **Query**: A set of key-value pairs for additional parameters (e.g. `?key1=value1&key2=value2`).
+6. **Path**: The specific resource on the server (e.g. `/path/to/resource`). The default path is `/` if not provided, which is the root of the server. The path typically changes something big, like serving a whole page or resource.
+7. **Query**: A set of key-value pairs for additional parameters (e.g. `?key1=value1&key2=value2`). Tends to be smaller changes to the resource, like filtering or sorting data. The query string is optional and can be empty.
 8. **Fragment**: A specific section within the resource (e.g. `#section1`).
 
 ```js
