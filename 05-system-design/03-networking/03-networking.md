@@ -27,6 +27,13 @@
 - client: The computer sending the request. The fetch API is built into the browser and Node _clients_ for making HTTP requests.
 - server: The computer sending the response. A server is optimised for handling server loads.
 
+
+
+> **ℹ️ Info:**
+> A daemon is a type of computer program that runs in the background, performing tasks without direct user interaction. It’s commonly used in Unix-like operating systems (e.g., Linux, macOS) to handle system-level services or processes. The term "daemon" comes from Greek mythology, referring to a guiding spirit, and was chosen to describe these programs that quietly "guide" system functions.
+>
+> Daemons typically run continuously in the background and are triggered by events, handling tasks like network services, logging, or scheduling without a user interface. They often manage critical functions, such as DNS resolution, web hosting, or email delivery.
+
 ## Internet Protocol (IP)
 
 A protocol is an agreed on standard of communication--a set of rules and commands both sides have agreed to. The Internet Protocol (IP) is like the rules for addressing and delivering internet mail.
@@ -161,3 +168,8 @@ console.log(url);
 > A **URI** (Uniform Resource Identifier) is a string of characters that identifies a particular resource. A URL (Uniform Resource Locator) is a specific type of URI that provides the means to locate the resource by describing its primary access mechanism, typically its network location. All URLs are URIs. A URN (Uniform Resource Name) is another type of URI that identifies a resource by name in a particular namespace, but does not provide a means to locate it.
 >
 > A **HREF** (Hypertext Reference) is an _attribute_ in HTML to specify the URL of a linked resource. It is commonly used in anchor (`<a>`) tags to create hyperlinks. It can be relative or absolute. A relative URL is a partial URL that is relative to the current page, while an absolute URL includes the full path to the resource, including the protocol and domain name.
+
+## Resources
+
+1. [Mediocre Engineer’s guide to HTTPS](https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https)
+2. [Full HTTP Networking Course](https://www.youtube.com/watch?v=2JYT5f2isg4)

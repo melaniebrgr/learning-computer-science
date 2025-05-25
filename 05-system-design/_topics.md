@@ -19,8 +19,8 @@
   - [~] [React](./02-react.md) (2025-05-18)
   - [ ] Vue
   - [ ] Solid
-  - [x] [Next.js](./02-nextjs.md) (2023-05-07)
-    - [x] [Caching](./02-nextjs.md) (2025-05-12)
+  - [x] [Next.js](./02-frameworks/02-nextjs.md) (2023-05-07)
+    - [x] [Caching](./02-frameworks/02-nextjs.md) (2025-05-12)
 - [ ] Web APIs
   - [ ] Compression streams
   - [ ] DOM & DOM interfaces
@@ -80,7 +80,7 @@
 ## 03 Backend
 
 - [~] Networking & Communication protocols
-  - [x] [Hypertext Transfer Protocol (HTTP)](./03-networking.md) (2025-05-25)
+  - [x] [Hypertext Transfer Protocol (HTTP)](./03-networking/03-networking.md) (2025-05-25)
   - [ ] Hypertext Transfer Protocol Secure (HTTPS)
   - [ ] WebSockets
   - [ ] Transmission Control Protocol (TCP)
@@ -93,7 +93,7 @@
   - [ ] protocol buffs
 - [ ] Languages
   - [~] [Rust](../04-rust/) (2024-02-14)
-  - [~] [Go](../02-programming/go-for-js-devs/) (2022-11-06)
+  - [~] [Go](../06-go/go-for-js-devs/) (2022-11-06)
   - [~] [Node (JS)](./03-node.md) (2025-05-20)
 - [ ] Web frameworks
   - [ ] Django
