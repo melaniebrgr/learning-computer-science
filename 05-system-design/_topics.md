@@ -79,8 +79,8 @@
 
 ## 03 Backend
 
-- [ ] Communication protocols
-  - [ ] Hypertext Transfer Protocol (HTTP)
+- [~] Networking & Communication protocols
+  - [x] [Hypertext Transfer Protocol (HTTP)](./03-networking.md) (2025-05-25)
   - [ ] Hypertext Transfer Protocol Secure (HTTPS)
   - [ ] WebSockets
   - [ ] Transmission Control Protocol (TCP)
@@ -181,4 +181,4 @@
 - FE system design: <https://frontendmasters.com/courses/frontend-system-design/>
 - FE system design: <https://frontendatscale.com/courses/frontend-architecture/>
 - Javascript: <https://frontendmasters.com/courses/pro-js-features/>
-- <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
+- Networking: <https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https>
