@@ -1,6 +1,7 @@
 # Networking
 
-```md
+> Networked systems are appearing at all granularities, from planetary scale web services such as Google and Akamai, to distributed databases for managing large corporations, to massively parallel multiplayer games, to large scale sensor networks ... Networked computing is increasingly integral to all aspects of society. Countering this trend, networked systems face challenges at every level of the protocol stack, e.g., the frequent misconfigurations and "brownouts" observed in the Internet, the disruption of service by both overt state actors (e.g., censorship) and non-state actors (e.g., DDoS attacks by botnets and traffic filtering by ISPs) (3).
+
 +----------------+
 |     Client     | E.g. browser, Node.js client
 +----------------+
@@ -9,7 +10,7 @@
         | The only part of the URL that is necessary to find and IP address is the domain name.
         v
 +----------------+
-|   DNS Server   | E.g. Google, OpenDNS, or Cloudflare DNS servers. DNS server addresses (e.g., 8.8.8.8 for Google or 1.1.1.1 for Cloudflare).
+|   DNS Server   | E.g. Google (8.8.8.8), OpenDNS, or Cloudflare (1.1.1.1) DNS servers.
 +----------------+
         |
         v
@@ -22,7 +23,6 @@
 +----------------+
 |     Server     |
 +----------------+
-```
 
 - client: The computer sending the request. The fetch API is built into the browser and Node _clients_ for making HTTP requests.
 - server: The computer sending the response. A server is optimised for handling server loads.
@@ -139,6 +139,46 @@ A DNS registrar like GoDaddy or Namecheap provide an interface to search an purc
 
 HTTP is the internet communication protocol. URLs are not specific to HTTP--if they were we wouldn't need to prefix URLs with `http://`. The prefix (scheme) tells the computer _which_ protocol to use. There are many protocols that can be used with URLs, such as `ftp://` for file transfer, `mailto:` for email, and `https://` for secure HTTP. Each protocol has a default port number that it uses to communicate. For example, **HTTP uses port 80 by default**, while HTTPS uses port 443. This is why you don't see the port number in most URLs, as the browser assumes the default port for the protocol.
 
+### HTTP Headers
+
+HTTP headers are key-value pairs sent in the request and response messages. HTTP headers let the client and the server pass additional information with a message in a request or response to control how the client and server communicate and handle the data being transferred.
+
+Headers are grouped according to context:
+
+- **General Headers**: These headers apply to both request and response messages, like the `Request URL`, `Request Method`, `Status Code`.
+- **Request Headers**: Contain more information about the resource to be fetched, or about the client requesting the resource, e.g. 
+- **Response Headers**: Hold additional information about the response, like its location or about the server providing it, e.g.
+- **Representational Headers**: Contain information about the body of the resource, like its MIME type, or encoding/compression applied, e.g.
+- **Payload Headers**: Contain representation-independent information about payload data, including content length and the encoding used for transport, e.g.
+
+### HTTP Methods
+
+"HTTP defines a set of request methods to indicate the purpose of the request and what is expected if the request is successful." Methods can differ in whether they are safe, idempotent or cacheable. The most commonly used HTTP methods are:
+
+- `GET`: The GET method requests a representation of the specified resource. Requests using GET should only retrieve data and should not contain a request content.
+- `POST`: The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server, e.g. POST /users to create a new user with a server-generated ID. When to Use:
+  - Creating a new resource, e.g., adding a new user, post, or order.
+  - When the client doesn't control the resource's identifier.
+- `PUT`: The PUT method replaces all current representations of the target resource with the request payload, e.g. PUT /users/123 to replace the user with ID 123. PUT is typically used to update existing resources. When to Use:
+  - Updating an entire resource when you know its URI.
+  - Creating a resource at a specific URI (less common).
+- `PATCH`: The PATCH method applies partial modifications to a resource, e.g. PATCH /users/123 to update only specific fields of the user with ID 123. When to Use:
+  - Updating specific fields of a resource without affecting others.
+  - When bandwidth is a concern, as PATCH sends less data than PUT.
+- `DELETE`: The DELETE method deletes the specified resource. It is idempotent, meaning that multiple identical requests should have the same effect as a single request.
+
+Less commonly used HTTP methods are `CONNECT`, `HEAD`, `OPTIONS`, and `TRACE`.
+
+### HTTP Status Codes
+
+HTTP status codes are three-digit numbers returned by the server to indicate the outcome of a request. They are grouped into five classes:
+
+- **1xx (Informational)**: These codes indicate that the request was received and understood, and that the server is continuing to process it. They are rarely used in practice.
+- **2xx (Success)**: These codes indicate that the request was successful and that the server has returned the requested resource. The most common success code is `200 OK`, which means the request was successful and the server has returned the requested resource.
+- **3xx (Redirection)**: These codes indicate that the requested resource has been moved to a different URL, and the client should follow the redirection to access it. The most common redirection code is `301 Moved Permanently`, which means the resource has been permanently moved to a new URL.
+- **4xx (Client Error)**: These codes indicate that the client has made an error in the request, such as requesting a resource that does not exist or providing invalid input. The most common client error code is `404 Not Found`, which means the requested resource could not be found on the server.
+- **5xx (Server Error)**: These codes indicate that the server has encountered an error while processing the request. The most common server error code is `500 Internal Server Error`, which means the server encountered an unexpected condition that prevented it from fulfilling the request.
+
 ## Uniform Resource Locator (URL)
 
 A URL is made up of several components, each serving a specific purpose:
@@ -183,3 +223,7 @@ console.log(url);
 
 1. [Mediocre Engineer’s guide to HTTPS](https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https)
 2. [Full HTTP Networking Course](https://www.youtube.com/watch?v=2JYT5f2isg4)
+    - <https://youtu.be/2JYT5f2isg4?si=aPYb_EimpviNUTRT&t=7786>
+3. [CSE 561: Computer Networks](https://courses.cs.washington.edu/courses/cse561/12wi/)
+4. [HTTP Networking in JavaScript – Handbook for Beginners](https://www.freecodecamp.org/news/http-full-course/)
+5. [HTTP Headers and Cookies](https://youtu.be/DxeSGUM16_4?si=Fa0Rnz-iWKeO8uae&t=372)
