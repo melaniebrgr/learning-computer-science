@@ -28,7 +28,6 @@
   - [ ] File and directory entries
   - [ ] Popover
   - [ ] Server sent events
-  - [ ] View transitions
   - [ ] WebGL
   - [ ] WebGPU
   - [ ] Images
@@ -36,6 +35,13 @@
   - [ ] SVG
   - [ ] Video
   - [ ] Audio
+- [ ] Animations
+  - [ ] CSS transitions
+  - [ ] CSS animations
+  - [ ] Web animations API
+  - [ ] Request animation frame
+  - [ ] View transitions
+  - [ ] Libraries (GSAP, Framer)
 - [ ] Storage
   - [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
   - [ ] LocalStorage
@@ -79,7 +85,7 @@
 
 ## 03 Backend
 
-- [~] Networking & Communication protocols
+- [ ] Networking & Communication protocols
   - [x] [Hypertext Transfer Protocol (HTTP)](./03-networking/03-networking.md) (2025-05-25)
   - [ ] Hypertext Transfer Protocol Secure (HTTPS)
   - [ ] WebSockets
@@ -101,7 +107,7 @@
 - [ ] Proxies
 - [ ] Web servers
 - [ ] Messaging systems
-- [ ] REST
+- [x] [REST](./03-networking/03-networking.md) (2025-05-29)
 - [ ] GraphQL
 - [ ] Streaming
 - [ ] APIs

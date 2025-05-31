@@ -1,6 +1,6 @@
 # Game loop pattern
 
-The object of all video games is to present the player with a situation, get their input, interpret those input signals into actions, and calculate a new situation resulting from those actions. I.e.
+The object of all video games is to present the player with a situation, get their input, interpret those input signals into actions, and calculate a new situation resulting from those actions, i.e.
 
 1. process input,
 2. update,

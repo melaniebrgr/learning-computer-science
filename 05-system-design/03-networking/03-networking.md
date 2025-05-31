@@ -139,9 +139,11 @@ A DNS registrar like GoDaddy or Namecheap provide an interface to search an purc
 
 HTTP is the internet communication protocol. URLs are not specific to HTTP--if they were we wouldn't need to prefix URLs with `http://`. The prefix (scheme) tells the computer _which_ protocol to use. There are many protocols that can be used with URLs, such as `ftp://` for file transfer, `mailto:` for email, and `https://` for secure HTTP. Each protocol has a default port number that it uses to communicate. For example, **HTTP uses port 80 by default**, while HTTPS uses port 443. This is why you don't see the port number in most URLs, as the browser assumes the default port for the protocol.
 
+HTTP verbs (methods) and status codes are part of the HTTP (Hypertext Transfer Protocol) specification, maintained by the Internet Engineering Task Force (IETF) and the World Wide Web Consortium (W3C). They are defined in a series of RFCs.
+
 ### HTTP Headers
 
-HTTP headers are key-value pairs sent in the request and response messages. HTTP headers let the client and the server pass additional information with a message in a request or response to control how the client and server communicate and handle the data being transferred.
+HTTP headers are key-value pairs sent in the request and response messages. HTTP headers let the client and the server pass additional information with a message in a request or response to control how the client and server communicate and handle the data being transferred. A common use for Headers is authentication, where the client sends a token in the `Authorization` header or API token to prove its identity to the server.
 
 Headers are grouped according to context:
 
@@ -219,11 +221,29 @@ console.log(url);
 >
 > A **HREF** (Hypertext Reference) is an _attribute_ in HTML to specify the URL of a linked resource. It is commonly used in anchor (`<a>`) tags to create hyperlinks. It can be relative or absolute. A relative URL is a partial URL that is relative to the current page, while an absolute URL includes the full path to the resource, including the protocol and domain name.
 
+## API Design Architectures
+
+"REST" and "GraphQL" are both API design architectures used for building and querying web services, enabling communication between clients and servers.
+
+### REST (Representational State Transfer)
+
+Representational State Transfer (REST) is a set of guiding architectural constraints for building APIs. It is not a protocol or standard.
+
+> When a client request is made via a RESTful API, it transfers a representation of the state of the resource to the requester or endpoint.
+
+In order for an API to be considered RESTful, it has to conform to these criteria:
+
+- A client-server architecture made up of clients, servers, and resources, with requests managed through HTTP.
+- Stateless client-server communication, meaning no client information is stored between get requests and each request is separate and unconnected.
+- Cacheable data that streamlines client-server interactions.
+- A uniform interface between components so that information is transferred in a standard form.
+
 ## Resources
 
 1. [Mediocre Engineer’s guide to HTTPS](https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https)
 2. [Full HTTP Networking Course](https://www.youtube.com/watch?v=2JYT5f2isg4)
-    - <https://youtu.be/2JYT5f2isg4?si=aPYb_EimpviNUTRT&t=7786>
+    - <https://youtu.be/2JYT5f2isg4?si=K-4PRUlE6mquTZaT&t=13137>
 3. [CSE 561: Computer Networks](https://courses.cs.washington.edu/courses/cse561/12wi/)
 4. [HTTP Networking in JavaScript – Handbook for Beginners](https://www.freecodecamp.org/news/http-full-course/)
 5. [HTTP Headers and Cookies](https://youtu.be/DxeSGUM16_4?si=Fa0Rnz-iWKeO8uae&t=372)
+6. [What is a REST API?](https://www.redhat.com/en/topics/api/what-is-a-rest-api)
