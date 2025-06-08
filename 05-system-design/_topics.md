@@ -132,7 +132,9 @@
 - [ ] Data maintance / management
 - [ ] Database caching
 
-## 05 Testing
+## 05 Cross-cutting concerns
+
+- [ ] Error handling
 
 ## 06 Documentation
 
