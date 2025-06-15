@@ -19,6 +19,8 @@ Basically I will try something for a week, document my learning, judge its succe
 - 403: failure was my fault
 - 503: failure was not my fault
 
+## 2024
+
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
 |   8  | Rust command line game: guess the pinyin | 403 | Had to learn the language basics first |
@@ -67,34 +69,35 @@ Basically I will try something for a week, document my learning, judge its succe
 |  51  | - | 403 |  |
 |  52  | Jack Herrington Workshop: Next.js foundations for Professional Web Development | 102 |  |
 
-## Topic ideas
+## 2025
 
-- Grafana
-- How to profile memory usage in Next.js
-- What happens when a file is uploaded?
-- CORS
-- Create a website with Leptos
-- Deploying a wasm app
-- SQLite/SQLX and wasm
-- Godot
-- Build a game in Rust, e.g. a maze explorer
-- Any FE systems topics (polling, workers, caching)
-- SpacetimeDB <https://spacetimedb.com/>
-- Debugging wasm
-- How does the modern VCS work, e.g. Jujutsu <https://github.com/martinvonz/jj>
-- Git, mercurial, graphite
-- Create a book from my notes with <https://rust-lang.github.io/mdBook/>
-- Write myself a git in Rust <https://wyag.thb.lt/#intro>
-- System retrosynthetic analysis methodology
-- Any open system design topic
-- VPN - how does it work, how is it detected?
-- Using WASI in Node, <https://nodejs.org/api/wasi.html>
-- A Chrome extension
-- A Chrome side panel feature
-- Wasm by example: <https://wasmbyexample.dev/home.en-us.html#>
-- Record audio content with web assembly: <https://wasmbyexample.dev/examples/reading-and-writing-audio/reading-and-writing-audio.rust.en-us.html>
-- Content renderer in Rust
-- Does streaming HTML make critical CSS generation unnecessary?
-- Error handling design
-  - https://www.youtube.com/watch?v=xyxrB2Aa7KE
-  - Toyoto Full Send was an error handling bug
+| week | topic                                                | status | comments |
+| ---- | ---------------------------------------------------- | ------ | -------- |
+|  25  | Overview of machine learning | 000 |  |
+|  26  | - | 000 |  |
+|  27  | - | 000 |  |
+|  28  | - | 000 |  |
+|  29  | - | 000 |  |
+|  30  | - | 000 |  |
+|  31  | - | 000 |  |
+|  32  | - | 000 |  |
+|  33  | - | 000 |  |
+|  34  | - | 000 |  |
+|  35  | - | 000 |  |
+|  36  | - | 000 |  |
+|  37  | - | 000 |  |
+|  38  | - | 000 |  |
+|  39  | - | 000 |  |
+|  40  | - | 000 |  |
+|  41  | - | 000 |  |
+|  42  | - | 000 |  |
+|  43  | - | 000 |  |
+|  44  | - | 000 |  |
+|  45  | - | 000 |  |
+|  46  | - | 000 |  |
+|  47  | - | 000 |  |
+|  48  | - | 000 |  |
+|  49  | - | 000 |  |
+|  50  | - | 000 |  |
+|  51  | - | 000 |  |
+|  52  | - | 000 |  |
