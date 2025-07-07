@@ -6,6 +6,7 @@
         "rust",
         "wasm",
         "sys",
-        "godot"
+        "godot",
+        "lang"
     ]
 }
