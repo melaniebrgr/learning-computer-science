@@ -1,6 +1,6 @@
 # The Debug Diaries
 
-## Mel's compsci learning journey
+## Momo's learning journey
 
 ## Chapters
 
@@ -15,9 +15,9 @@
     - programs
     - design patterns
 3. [Web Assembly](./03-web-assembly/)
-4. [Rust](./04-rust/)
+4. [Languages](./04-languages/)
 5. [System design](./05-system-design)
-6. [Go](./06-go/)
+6. [AI](./06-ai/)
 7. [Godot](./07-godot/)
 
 ## Resources
