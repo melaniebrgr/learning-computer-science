@@ -58,9 +58,33 @@ long_string = (
 ### 1.3 Variables and Assignment
 
 - Variable naming conventions
-- Dynamic typing
-- Multiple assignment
 - Constants (by convention)
+- Multiple assignment
+- Dynamic typing
+
+Python variables follow the conventions outlined in PEP 8. CamelCase is typically used for class names, while snake_case is preferred for variable and function names. Variable names can include letters, numbers, and underscores but cannot start with a number. Python does not have built-in support for constants, but by convention constants are defined with uppercase variables indicate they should not be changed.
+
+Python allows you to assign values to multiple variables in a single line. This can be useful for initializing variables or swapping values. Python is a dynamically typed language. The type is inferred based on the value assigned to the variable.
+
+```python
+# Variable names
+validVariable = 1
+another_valid_Variable = 2
+2invalid-variable-name = 3  # syntax error
+PI = 3.14159
+GRAVITY = 9.8
+
+# Multiple assignment
+a, b, c = 1, 2, 3
+print(a, b, c)  # Output: 1 2 3
+
+# Swapping values
+x, y = y, x
+
+# Dynamic typing
+x = 10  # x is an integer
+x = "Hello"  # Now x is a string
+```
 
 ## 2. Data Types and Literals
 
@@ -69,8 +93,34 @@ long_string = (
 - Integers (`int`)
 - Floating-point numbers (`float`)
 - Complex numbers (`complex`)
-- Boolean (`bool`)
-- Numeric operations and operators
+
+```python
+# Integer example
+x = 10
+print(type(x))  # Output: <class 'int'>
+
+# Arithmetic operations with integers
+y = x + 5 # Output: 15
+
+# Float example
+pi = 3.14159
+print(type(pi))  # Output: <class 'float'>
+
+# Arithmetic operations with floats
+radius = 5.0
+area = pi * (radius ** 2) # Output: 78.53975
+
+# Complex number example
+z = 2 + 3j
+print(type(z))  # Output: <class 'complex'>
+
+# Arithmetic operations with complex numbers
+z_conjugate = z.conjugate()
+print(z_conjugate)  # Output: (2-3j)
+
+magnitude = abs(z)
+print(magnitude)  # Output: 3.605551275463989
+```
 
 ### 2.2 Strings
 
@@ -80,10 +130,10 @@ long_string = (
 - Escape sequences
 - Raw strings
 
-### 2.3 None Type
+### 2.3 Misc. Types
 
+- Boolean (`bool`)
 - `None` keyword
-- Usage and comparison
 
 ## 3. Collections and Data Structures
 
