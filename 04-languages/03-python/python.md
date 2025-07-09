@@ -364,6 +364,65 @@ print(magnitude)  # Output: 3.605551275463989
 - `typing` module
 - Generic types
 
+**Variable annotations** are used to specify the expected type of a variable, improving readability and enabling static type checking tools like `mypy`. Python does not enforce these types at runtime however, they serve as documentation only. Optional **function annotations** clarify the expected input and output of a function. The **`typing` module** provides advanced type hints for complex data structures and scenarios. The module includes types like `List`, `Dict`, `Tuple`, `Union`, and more.
+
+**Generic types** allow you to define functions and classes that work with multiple types. This is useful for creating reusable and type-safe code. Generics are commonly used in libraries and frameworks to provide flexibility while maintaining type safety.
+
+```python
+# Variable annotations
+x: int = 10
+name: str = "Alice"
+
+# Function annotations
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+# Using the typing module for complex types
+from typing import List, Dict
+
+def process_data(data: List[int]) -> Dict[str, int]:
+    return {"sum": sum(data), "count": len(data)}
+
+# Generic types
+from typing import TypeVar, Generic
+
+T = TypeVar('T')
+
+class Stack(Generic[T]):
+    def __init__(self):
+        self.items: List[T] = []
+
+    def push(self, item: T):
+        self.items.append(item)
+
+    def pop(self) -> T:
+        return self.items.pop()
+```
+
+Python type hints are not used for runtime validation by default. They are primarily intended for static type checking with, e.g. `mypy`, which catch type-related errors during development. However, **third-party libraries like pydantic or typeguard** can be used to perform runtime validation based on type hints.
+
+```python
+# Using typeguard for runtime type checking
+from typeguard import typechecked
+
+@typechecked
+def add_numbers(a: int, b: int) -> int:
+    return a + b
+
+add_numbers(1, 2)  # Works fine
+add_numbers("1", 2)  # Raises a TypeError
+
+# Using pydantic for data validation
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    age: int
+
+user = User(name="Alice", age=30)  # Works fine
+user = User(name="Alice", age="30")  # Raises a ValidationError
+```
+
 ## 13. Best Practices and Style
 
 ### 13.1 Code Style
