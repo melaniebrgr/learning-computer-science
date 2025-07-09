@@ -2,8 +2,6 @@
 
 ## Momo's learning journey
 
-## Chapters
-
 0. [Everyweeks](./00-everyweeks/)
 1. [Computers](./01-computers/)
     - computer architecture
