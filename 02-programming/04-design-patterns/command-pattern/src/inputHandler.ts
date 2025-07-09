@@ -10,28 +10,51 @@ export class KeyboardInputHandler {
     [BUTTON.Q]: new Command(),
   }
 
-  constructor(buttons?: Record<TButton, Command>) {
+  #validatedButton(button: string) {
+    // @ts-expect-error
+    if (!Object.values(BUTTON).includes(button)) {
+      throw new RangeError("Invalid button key");
+    }
+    return button as TButton
+  }
+
+  #validatedCommand(command: unknown) {
+    if (!(command instanceof Command)) {
+      throw new RangeError("Invalid button value");
+    }
+    return command as Command;
+  }
+
+  constructor(buttons?: Record<string, unknown>) {
     if (buttons instanceof Object) {
       for (const button in buttons) {
-        this.setHandler(button, buttons[button])
+        const vButton = this.#validatedButton(button);
+        const vCommand = this.#validatedCommand(buttons[vButton])
+        this.#button[vButton] = vCommand
       }
     }
   }
 
-  setHandler(button: string, command: Command) {
-    // @ts-expect-error
-    if (!Object.values(BUTTON).includes(button)) {
-      throw new RangeError(`Invalid button key '${button}'`);
-    }
-
-    if (!(command instanceof Command)) {
-      throw new RangeError(`Invalid button value '${command}'`);
-    }
-
-    this.#button[button] = command;
+  setHandler(button: TButton, command: Command) {
+    const vButton = this.#validatedButton(button);
+    const vCommand = this.#validatedCommand(command)
+    this.#button[vButton] = vCommand;
   }
 
   handle(input: string) {
-    this.#button[input].execute();
+    switch (input) {
+      case BUTTON.W:
+        this.#button.w.execute();
+        break;
+      case BUTTON.S:
+        this.#button.s.execute();
+        break;
+      case BUTTON.A:
+        this.#button.a.execute();
+        break;
+      case BUTTON.D:
+        this.#button.d.execute();
+        break;
+    }
   }
 }
