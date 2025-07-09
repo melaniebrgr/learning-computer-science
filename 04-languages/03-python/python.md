@@ -294,6 +294,8 @@ print(magnitude)  # Output: 3.605551275463989
 
 ## 9. Modules and Packages
 
+`%pip install` is the recommended approach for installing packages in Jupyter notebooks because it installs directly into the same Python environment that's running your notebook kernel, ensuring packages are immediately available. In contrast, `!pip install` runs as a shell command and may install into a different Python environment than your notebook is using, potentially causing issues where packages appear installed but aren't accessible in your current session. The `%pip` magic command was introduced specifically to solve the common problem of packages being installed but not found in notebook environments.
+
 ### 9.1 Modules
 
 - Creating modules
