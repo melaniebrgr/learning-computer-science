@@ -401,6 +401,10 @@ class Stack(Generic[T]):
 
 Python type hints are not used for runtime validation by default. They are primarily intended for static type checking with, e.g. `mypy`, which catch type-related errors during development. However, **third-party libraries like pydantic or typeguard** can be used to perform runtime validation based on type hints.
 
+`typechecked` works at the function level. It checks types for function arguments and return values during execution. It is lightweight and simple and does not support complex validation rules or transformations. It raises a `TypeError` if a type mismatch is detected.
+
+`pydantic` works at the object level. It validates attributes of data models and can also parse and transform input data into the desired format. It supports complex validation rules, default values, and can parse various formats, e.g. JSON. It raises a `ValidationError` with detailed information about the validation failure.
+
 ```python
 # Using typeguard for runtime type checking
 from typeguard import typechecked
