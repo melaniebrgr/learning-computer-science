@@ -159,6 +159,65 @@ print(magnitude)  # Output: 3.605551275463989
 - Dictionary comprehensions
 - Nested dictionaries
 
+**Dictionaries** are Python's key-value pair data stores. Create dictionaries with curly braces `{}` and colon-separated key-value pairs, or with the `dict()` constructor. Methods for manipulation and access include
+
+- `get()` for safe key retrieval with optional default values,
+- `keys()` to access all dictionary keys,
+- `values()` to retrieve all values, and
+- `items()` to get key-value pairs as tuples for iteration.
+
+**Dictionary comprehensions** provide a concise way to create new dictionaries by applying expressions to existing iterables, similar to list comprehensions but with key-value syntax.
+
+For complex data structures, dictionaries can be **nested** within other dictionaries, allowing you to represent hierarchical data like JSON-like structures.
+
+```python
+# Creating dictionaries
+person = {"name": "Alice", "age": 30, "city": "New York"}
+empty_dict = {}
+dict_constructor = dict(name="Bob", age=25)
+
+# Dictionary methods
+print(person.get("name"))  # Output: Alice
+print(person.get("country", "Unknown"))  # Output: Unknown (default value)
+
+print(person.keys())    # Output: dict_keys(['name', 'age', 'city'])
+print(person.values())  # Output: dict_values(['Alice', 30, 'New York'])
+print(person.items())   # Output: dict_items([('name', 'Alice'), ('age', 30), ('city', 'New York')])
+
+# Iterating through dictionary items
+for key, value in person.items():
+    print(f"{key}: {value}")
+
+# Dictionary comprehensions
+squares = {x: x**2 for x in range(1, 6)}
+print(squares)  # Output: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Filter even numbers and square them
+even_squares = {x: x**2 for x in range(1, 11) if x % 2 == 0}
+print(even_squares)  # Output: {2: 4, 4: 16, 6: 36, 8: 64, 10: 100}
+
+# Nested dictionaries
+students = {
+    "Alice": {
+        "grades": [85, 92, 78],
+        "major": "Computer Science",
+        "year": 3
+    },
+    "Bob": {
+        "grades": [90, 88, 95],
+        "major": "Mathematics",
+        "year": 2
+    }
+}
+
+# Accessing nested dictionary values
+print(students["Alice"]["major"])  # Output: Computer Science
+print(students["Bob"]["grades"][0])  # Output: 90
+
+# Adding to nested dictionary
+students["Alice"]["gpa"] = 3.8
+```
+
 ### 3.4 Sets
 
 - Creating sets
@@ -214,6 +273,62 @@ print(magnitude)  # Output: 3.605551275463989
 - Pattern matching syntax
 - Guard conditions
 - Structural patterns
+
+```python
+# Basic pattern matching syntax
+def process_data(data):
+    match data:
+        case 0:
+            return "Zero"
+        case int() if data > 0:  # Guard condition
+            return f"Positive integer: {data}"
+        case int() if data < 0:
+            return f"Negative integer: {data}"
+        case str() if len(data) > 0:
+            return f"Non-empty string: {data}"
+        case []:
+            return "Empty list"
+        case [x] if isinstance(x, int):
+            return f"List with one integer: {x}"
+        case [x, y]:
+            return f"List with two items: {x}, {y}"
+        case [x, *rest]:  # Structural pattern
+            return f"List starting with {x}, rest: {rest}"
+        case {"name": str(name), "age": int(age)}:  # Dictionary pattern
+            return f"Person: {name}, age {age}"
+        case _:  # Default case
+            return f"Unknown type: {type(data)}"
+
+# Examples
+print(process_data(42))             # Positive integer: 42
+print(process_data(-5))             # Negative integer: -5
+print(process_data("hello"))        # Non-empty string: hello
+print(process_data([1, 2, 3]))      # List starting with 1, rest: [2, 3]
+print(process_data({"name": "Alice", "age": 30}))  # Person: Alice, age 30
+
+# Pattern matching with classes
+class Point:
+    def __init__(self, x, y):
+        self.x, self.y = x, y
+
+def analyze_point(point):
+    match point:
+        case Point(x=0, y=0):
+            return "Origin"
+        case Point(x=0, y=y):
+            return f"On Y-axis at {y}"
+        case Point(x=x, y=0):
+            return f"On X-axis at {x}"
+        case Point(x=x, y=y) if x == y:
+            return f"On diagonal at ({x}, {y})"
+        case Point(x=x, y=y):
+            return f"Point at ({x}, {y})"
+        case _:
+            return "Not a point"
+
+print(analyze_point(Point(0, 0)))    # Origin
+print(analyze_point(Point(3, 3)))    # On diagonal at (3, 3)
+```
 
 ## 6. Functions
 
