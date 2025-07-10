@@ -28,4 +28,3 @@ LangGraph is a low-level orchestration framework for building, managing, and dep
 - reflection agent
 
 ![Agent Patterns](agent-patterns.png)
-

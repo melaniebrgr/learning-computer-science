@@ -229,7 +229,7 @@ students["Alice"]["gpa"] = 3.8
 
 ### 4.1 Arithmetic Operators
 
-- `+`, `-`, `*`, `/`, `//`, `%`, `**`
+`+`, `-`, `*`, `/`, `//`, `%`, `**`
 
 ### 4.2 Comparison Operators
 
