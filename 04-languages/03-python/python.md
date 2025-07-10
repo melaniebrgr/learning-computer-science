@@ -145,6 +145,58 @@ print(magnitude)  # Output: 3.605551275463989
 - List comprehensions
 - Nested lists
 
+**Lists** are ordered, mutable collections that can store elements of different types and allow duplicates. **List indexing** uses square brackets with zero-based indices, while **slicing** extracts subsequences using start:stop:step notation. **List methods** provide built-in functionality for adding, removing, and manipulating elements efficiently. **List comprehensions** offer a concise way to create new lists by applying expressions and filters to existing iterables. **Nested lists** allow you to create multi-dimensional data structures like matrices or tables.
+
+```python
+# Creating lists
+fruits = ["apple", "banana", "orange"]
+numbers = [1, 2, 3, 4, 5]
+mixed = [1, "hello", 3.14, True]
+empty_list = []
+list_constructor = list("hello")  # Creates ['h', 'e', 'l', 'l', 'o']
+
+# List indexing and slicing
+print(fruits[0])        # Output: apple (first element)
+print(fruits[-1])       # Output: orange (last element)
+print(numbers[1:4])     # Output: [2, 3, 4] (slicing)
+print(numbers[::2])     # Output: [1, 3, 5] (every second element)
+print(numbers[::-1])    # Output: [5, 4, 3, 2, 1] (reverse)
+
+# List methods
+colors = ["red", "green"]
+colors.append("blue")           # Add single element: ["red", "green", "blue"]
+colors.extend(["yellow", "purple"])  # Add multiple elements
+colors.insert(1, "orange")     # Insert at specific index
+colors.remove("green")         # Remove first occurrence
+popped = colors.pop()          # Remove and return last element
+colors.sort()                  # Sort in place
+colors.index("red")     # Find index of element
+colors.count("blue")    # Count occurrences
+
+# List comprehensions
+squares = [x**2 for x in range(1, 6)]
+print(squares)  # Output: [1, 4, 9, 16, 25]
+
+# Filter even numbers and square them
+even_squares = [x**2 for x in range(1, 11) if x % 2 == 0] # Output: [4, 16, 36, 64, 100]
+
+# Nested lists
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+students_grades = [
+    ["Alice", [85, 92, 78]],
+    ["Bob", [90, 88, 95]],
+    ["Charlie", [87, 91, 89]]
+]
+
+# Accessing nested list elements
+print(matrix[1][2])              # Output: 6 (row 1, column 2)
+print(students_grades[0][1][0])  # Output: 85 (Alice's first grade)
+
+# Modifying nested lists
+matrix[0][0] = 10               # Change first element
+students_grades[1][1].append(92)  # Add grade to Bob's list
+```
+
 ### 3.2 Tuples
 
 - Creating tuples
