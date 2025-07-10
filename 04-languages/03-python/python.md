@@ -225,6 +225,54 @@ students["Alice"]["gpa"] = 3.8
 - Set methods
 - Set comprehensions
 
+Python sets are more similar to JavaScript sets. Python lists are much closer JavaScript arrays.
+
+**Sets** are unordered collections of unique elements that provide fast membership testing and automatic duplicate elimination. Sets are created using curly braces `{}` or the `set()` constructor. Sets support mathematical operations like union, intersection, and difference for comparing and combining datasets.
+
+**Set methods** provide additional functionality for adding, removing, and testing elements. **Set comprehensions** offer a concise way to create new sets by filtering and transforming existing iterables.
+
+```python
+# Creating sets
+fruits = {"apple", "banana", "orange"}
+empty_set = set()  # Note: {} creates an empty dict, not set
+numbers = set([1, 2, 3, 3, 4])  # Duplicates automatically removed
+print(numbers)  # Output: {1, 2, 3, 4}
+
+# Set operations (union, intersection, difference)
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+union = set1 | set2          # or set1.union(set2)
+print(union)                 # Output: {1, 2, 3, 4, 5, 6}
+
+intersection = set1 & set2   # or set1.intersection(set2)
+print(intersection)          # Output: {3, 4}
+
+difference = set1 - set2     # or set1.difference(set2)
+print(difference)            # Output: {1, 2}
+
+symmetric_diff = set1 ^ set2 # or set1.symmetric_difference(set2)
+print(symmetric_diff)        # Output: {1, 2, 5, 6}
+
+# Set methods
+colors = {"red", "green", "blue"}
+colors.add("yellow")         # Add single element
+colors.update(["purple", "orange"])  # Add multiple elements
+colors.remove("red")         # Remove element (raises KeyError if not found)
+colors.discard("pink")       # Remove element (no error if not found)
+
+print("green" in colors)     # Output: True (membership testing)
+print(len(colors))           # Output: 5
+
+# Set comprehensions
+squares = {x**2 for x in range(1, 6)}
+print(squares)  # Output: {1, 4, 9, 16, 25}
+
+# Filter even numbers from a list and create a set
+even_set = {x for x in range(1, 11) if x % 2 == 0}
+print(even_set)  # Output: {2, 4, 6, 8, 10}
+```
+
 ## 4. Operators
 
 ### 4.1 Arithmetic Operators
