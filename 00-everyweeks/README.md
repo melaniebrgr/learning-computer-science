@@ -24,26 +24,26 @@ Basically I will try something for a week, document my learning, judge its succe
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
 |   8  | Rust command line game: guess the pinyin | 403 | Had to learn the language basics first |
-|   9  | [Rust CLI: guess the pinyin](./week09/) | 200 | It runs |
+|   9  | [Rust CLI: guess the pinyin](./2024/week09/) | 200 | It runs |
 |  10  | Rust in JavaScript | 403 | Learned more about wasm, but didn't finish in time |
-|  11  | [Rust in JavaScript](./week11/) | 200 | Too much wasm and not enough Rust programming |
-|  12  | [Guess-the-pinyin (feat Rustlings)](./week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted |
-|  13  | [Wasm game of life](./week13) | 206 | A setback |
-|  14  | [Magic cookies](./week14/) | 200 | A 🍪 break from Rust |
-|  15  | [Web performance & the CWVs](./week15/) | 200 |  |
+|  11  | [Rust in JavaScript](./2024/week11/) | 200 | Too much wasm and not enough Rust programming |
+|  12  | [Guess-the-pinyin (feat Rustlings)](./2024/week12) | 206 | Made some refactorings based on new knowledge of Rust, but didn't not get as far as I wanted |
+|  13  | [Wasm game of life](./2024/week13) | 206 | A setback |
+|  14  | [Magic cookies](./2024/week14/) | 200 | A 🍪 break from Rust |
+|  15  | [Web performance & the CWVs](./2024/week15/) | 200 |  |
 |  16  | Service workers | 501 | too busy on vacation |
-|  17  | [Service workers](./week17/) | 400 | too busy with back-to-work, and learned just enough about this topic to probably be dangerous |
-|  18  | [OpenAI Assistant](./week18-20) | 102 |  |
-|  19  | [OpenAI Assistant](./week18-20) | 102 |  |
-|  20  | [OpenAI Assistant](./week18-20) | 206 | Completed but unpublished |
+|  17  | [Service workers](./2024/week17/) | 400 | too busy with back-to-work, and learned just enough about this topic to probably be dangerous |
+|  18  | [OpenAI Assistant](./2024/week18-20) | 102 |  |
+|  19  | [OpenAI Assistant](./2024/week18-20) | 102 |  |
+|  20  | [OpenAI Assistant](./2024/week18-20) | 206 | Completed but unpublished |
 |  21  | File handling on the Web | 403 | Too focussed on the AI project |
 |  22  | - | 503 | Conference and travelling |
 |  23  | - | 503 | Travelling |
-|  24  | [AWS](../05-system-design/03-cloud-services.md) | 303 | Taking an AWS Cloud Practioner course with a colleague |
-|  25  | [AWS](../05-system-design/03-cloud-services.md) | 303 | AWS Cloud Practioner course ongoing |
-|  26  | [Iterators, Generators, and their async versions oh my](./week26) | 200 | Learned and solved a problem I was having |
+|  24  | [AWS](../05-system-design/03-backend/) | 303 | Taking an AWS Cloud Practioner course with a colleague |
+|  25  | [AWS](../05-system-design/03-backend/) | 303 | AWS Cloud Practioner course ongoing |
+|  26  | [Iterators, Generators, and their async versions oh my](./2024/week26) | 200 | Learned and solved a problem I was having |
 |  27  | - | 403 | Read up on promises but did not write about it. |
-|  28  | [File input security](./week28/) | 200 | Considers various file upload security risks. |
+|  28  | [File input security](./2024/week28/) | 200 | Considers various file upload security risks. |
 |  29  | - | 503 | Shipping AI notes @ Studocu |
 |  30  | - | 503 | Shipping AI notes @ Studocu |
 |  31  | - | 503 | Shipping AI notes @ Studocu |
@@ -59,7 +59,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  41  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  42  | [Game design patterns](../02-programming/04-design-patterns/) | 102 | Implementing game design patterns in JS |
 |  43  | Try Godot | 403 | Got bored by the tutorial and petered out |
-|  44  | [Beginner's guide to IndexedDB](./week44/) | 200 | A small website with a vanilla JS IBD usage example |
+|  44  | [Beginner's guide to IndexedDB](./2024/week44/) | 200 | A small website with a vanilla JS IBD usage example |
 |  45  | Padel | 403 |  |
 |  46  | Padel | 403 |  |
 |  47  | Try anything in Godot | 206 | Did not finish the official tutorial |
@@ -73,12 +73,12 @@ Basically I will try something for a week, document my learning, judge its succe
 
 | week | topic                                                | status | comments |
 | ---- | ---------------------------------------------------- | ------ | -------- |
-|  25  | Overview of machine learning | 000 |  |
+|  25  | [Overview of machine learning](../06-ai/02-ml.md) | 200 |  |
 |  26  | - | 000 |  |
 |  27  | - | 000 |  |
-|  28  | - | 000 |  |
+|  28  | [LangGraph](../06-ai/examples) | 200 |  |
 |  29  | - | 000 |  |
-|  30  | - | 000 |  |
+|  30  | [Journalling](./2025/week30.md) | 102 |  |
 |  31  | - | 000 |  |
 |  32  | - | 000 |  |
 |  33  | - | 000 |  |
