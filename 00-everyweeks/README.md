@@ -19,6 +19,39 @@ Basically I will try something for a week, document my learning, judge its succe
 - 403: failure was my fault
 - 503: failure was not my fault
 
+## 2025
+
+| week | topic                                                | status | comments |
+| ---- | ---------------------------------------------------- | ------ | -------- |
+|  25  | [Overview of machine learning](../06-ai/02-ml.md) | 200 |  |
+|  26  | - | 000 |  |
+|  27  | - | 000 |  |
+|  28  | [LangGraph](../06-ai/examples) | 200 |  |
+|  29  | - | 000 |  |
+|  30  | [Journalling](./2025/week30.md) | 200 |  |
+|  31  | [YJS](../05-system-design/07-data-syncing/02-yjs.ts) | 102 |  |
+|  32  | - | 000 |  |
+|  33  | - | 000 |  |
+|  34  | - | 000 |  |
+|  35  | - | 000 |  |
+|  36  | - | 000 |  |
+|  37  | - | 000 |  |
+|  38  | - | 000 |  |
+|  39  | - | 000 |  |
+|  40  | - | 000 |  |
+|  41  | - | 000 |  |
+|  42  | - | 000 |  |
+|  43  | - | 000 |  |
+|  44  | - | 000 |  |
+|  45  | - | 000 |  |
+|  46  | - | 000 |  |
+|  47  | - | 000 |  |
+|  48  | - | 000 |  |
+|  49  | - | 000 |  |
+|  50  | - | 000 |  |
+|  51  | - | 000 |  |
+|  52  | - | 000 |  |
+
 ## 2024
 
 | week | topic                                                | status | comments |
@@ -68,36 +101,3 @@ Basically I will try something for a week, document my learning, judge its succe
 |  50  | - | 403 |  |
 |  51  | - | 403 |  |
 |  52  | Jack Herrington Workshop: Next.js foundations for Professional Web Development | 102 |  |
-
-## 2025
-
-| week | topic                                                | status | comments |
-| ---- | ---------------------------------------------------- | ------ | -------- |
-|  25  | [Overview of machine learning](../06-ai/02-ml.md) | 200 |  |
-|  26  | - | 000 |  |
-|  27  | - | 000 |  |
-|  28  | [LangGraph](../06-ai/examples) | 200 |  |
-|  29  | - | 000 |  |
-|  30  | [Journalling](./2025/week30.md) | 102 |  |
-|  31  | - | 000 |  |
-|  32  | - | 000 |  |
-|  33  | - | 000 |  |
-|  34  | - | 000 |  |
-|  35  | - | 000 |  |
-|  36  | - | 000 |  |
-|  37  | - | 000 |  |
-|  38  | - | 000 |  |
-|  39  | - | 000 |  |
-|  40  | - | 000 |  |
-|  41  | - | 000 |  |
-|  42  | - | 000 |  |
-|  43  | - | 000 |  |
-|  44  | - | 000 |  |
-|  45  | - | 000 |  |
-|  46  | - | 000 |  |
-|  47  | - | 000 |  |
-|  48  | - | 000 |  |
-|  49  | - | 000 |  |
-|  50  | - | 000 |  |
-|  51  | - | 000 |  |
-|  52  | - | 000 |  |

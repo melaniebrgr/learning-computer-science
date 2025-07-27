@@ -12,15 +12,15 @@
 - [ ] Languages
   - [ ] HTML
   - [ ] CSS
-  - [~] [JavaScript](./02-javascript.md) (2024-10-05)
-  - [x] [TypeScript](./02-typescript.md) (2022-09-12)
-  - [x] [WebAssembly](../00-everyweeks/week13/README.md) (2024-03-29)
+  - [~] [JavaScript](../04-languages/04-javascript.md) (2024-10-05)
+  - [x] [TypeScript](../04-languages/05-typescript.md) (2022-09-12)
+  - [x] [WebAssembly](../00-everyweeks/2024/week13/README.md) (2024-03-29)
 - [ ] Frameworks & metaframeworks
-  - [~] [React](./02-react.md) (2025-05-18)
+  - [~] [React](./02-frontend/02-react.md) (2025-05-18)
   - [ ] Vue
   - [ ] Solid
-  - [x] [Next.js](./02-frameworks/02-nextjs.md) (2023-05-07)
-    - [x] [Caching](./02-frameworks/02-nextjs.md) (2025-05-12)
+  - [x] [Next.js](./02-frontend/02-frameworks/02-nextjs.md) (2023-05-07)
+    - [x] [Caching](./02-frontend/02-frameworks/02-nextjs.md) (2025-05-12)
 - [ ] Web APIs
   - [ ] Compression streams
   - [ ] DOM & DOM interfaces
@@ -43,9 +43,9 @@
   - [ ] View transitions
   - [ ] Libraries (GSAP, Framer)
 - [ ] Storage
-  - [x] [Cookies](../00-everyweeks/week14/README.md) (2024-04-07)
+  - [x] [Cookies](../00-everyweeks/2024/week14/README.md) (2024-04-07)
   - [ ] LocalStorage
-  - [x] [IndexedDB](../00-everyweeks/week44/README.md) (2024-11-01)
+  - [x] [IndexedDB](../00-everyweeks/2024/week44/README.md) (2024-11-01)
   - [ ] File System
 - [ ] Design systems
 - [ ] SEO
@@ -58,13 +58,13 @@
   - [ ] Virtualisation
   - [x] [Caching](./06-performance.md) (2025-05-10)
   - [ ] Bf cache
-- [x] [Web workers](../00-everyweeks/week17/README.md) (2024-05-18)
+- [x] [Web workers](../00-everyweeks/2024/week17/README.md) (2024-05-18)
   - [ ] Service workers
 - [ ] Security
   - [ ] XSS
   - [ ] CORS
-  - [x] [CSRF](../00-everyweeks/week14/README.md) (2024-04-07)
-- [x] [Core Web Vitals](../00-everyweeks/week15/README.md) (2024-04-15)
+  - [x] [CSRF](../00-everyweeks/2024/week14/README.md) (2024-04-07)
+- [x] [Core Web Vitals](../00-everyweeks/2024/week15/README.md) (2024-04-15)
 - [ ] Accessibility
 - [ ] Internationalisation
   - [ ] Localisation
@@ -81,12 +81,12 @@
 - [ ] Bundlers
 - [ ] Frontend System Design
   - [ ] Component architecture
-  - [x] [Rendering patterns: SSG, SSR, CSR, server components](./02-rendering.md) (2024-05-02)
+  - [x] [Rendering patterns: SSG, SSR, CSR, server components](./02-frontend/02-rendering.md) (2024-05-02)
 
 ## 03 Backend
 
 - [ ] Networking & Communication protocols
-  - [x] [Hypertext Transfer Protocol (HTTP)](./03-networking/03-networking.md) (2025-05-25)
+  - [x] [Hypertext Transfer Protocol (HTTP)](./03-backend/03-networking/03-networking.md) (2025-05-25)
   - [ ] Hypertext Transfer Protocol Secure (HTTPS)
   - [ ] WebSockets
   - [ ] Transmission Control Protocol (TCP)
@@ -98,16 +98,16 @@
   - [ ] JSON
   - [ ] protocol buffs
 - [ ] Languages
-  - [~] [Rust](../04-rust/) (2024-02-14)
-  - [~] [Go](../06-go/go-for-js-devs/) (2022-11-06)
-  - [~] [Node (JS)](./03-node.md) (2025-05-20)
+  - [~] [Rust](../04-languages/02-rust) (2024-02-14)
+  - [~] [Go](../04-languages/01-go/) (2022-11-06)
+  - [~] [Node (JS)](./03-backend/03-node.md) (2025-05-20)
 - [ ] Web frameworks
   - [ ] Django
   - [ ] Express
 - [ ] Proxies
 - [ ] Web servers
 - [ ] Messaging systems
-- [x] [REST](./03-networking/03-networking.md) (2025-05-29)
+- [x] [REST](./03-backend/03-networking/03-networking.md) (2025-05-29)
 - [ ] GraphQL
 - [ ] Streaming
 - [ ] APIs
@@ -115,8 +115,8 @@
 - [ ] Security
 - [ ] Authentication
 - [ ] Authorisation
-- [x] [Cloud computing](./03-cloud-services/03-cloud-computing.md) (2024-05-09)
-  - [x] [Amazon web servvices](./03-cloud-services/03-aws.md) (2024-05-09)
+- [x] [Cloud computing](./03-backend/03-cloud-services/03-cloud-computing.md) (2024-05-09)
+  - [x] [Amazon web servvices](./03-backend/03-cloud-services/03-aws.md) (2024-05-09)
   - [ ] Design patterns
 
 ## 04 Databases
@@ -129,12 +129,13 @@
 - [x] [Search](./04-databases.md) (2023-04-12)
 - [x] [Graph](./04-databases.md) (2023-04-12)
 - [ ] Schema design
-- [ ] Data maintance / management
+- [ ] Data maintenance / management
 - [ ] Database caching
+- [~] [Data synchronization / sync engine](./07-data-syncing.md)
 
 ## 05 Cross-cutting concerns
 
-- [ ] Error handling
+- [~] [Error handling](./05-error-handling.md) (2025-05-01)
 
 ## 06 Documentation
 

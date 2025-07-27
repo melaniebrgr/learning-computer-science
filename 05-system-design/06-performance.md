@@ -73,3 +73,4 @@ SSG is just "build time" caching that uses a CDN and Cache-Control headers. It m
 ## Resources
 
 1. <https://www.npmjs.com/package/@epic-web/cachified>
+2. <https://jakearchibald.com/2016/caching-best-practices/>
