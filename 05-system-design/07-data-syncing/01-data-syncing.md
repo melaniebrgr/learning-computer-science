@@ -1,18 +1,25 @@
 # Data synchronization / sync engine
 
+git is a manual collaboration software. Updates from others are pulled in manually, conflicts are resolved manually, and your updates are pushed manually. By constrast, software like Yjs provides automatic updates and conflict resolution.
+
 ## Yjs
 
-YJs was designed to solve the hard problem of collaborative editing on the web. It is based on a sequence CRDT.
+Yjs was designed to solve the hard problem of collaborative editing on the web.
 
-There are two parts to Yjs: **documents and providers**. A Yjs document holds all the state. Documents receive updates using providers. Usually, that involves wrapping a network technology like WebSockets in order to send documents between clients, like the Hocuspocus provider. Under the hood, Yjs uses a binary format with some extra metadata so that it can reliably sync documents.
+Yjs is based on a sequence CRDT. The YJs core library only handles concurrency, conflict resolution through its data types. In terms of using Yjs in a project there are two main parts: **documents and providers**. A Yjs document holds all the state. A Yjs provider sends and receives document updates. Usually, a provider involves wrapping a network technology like WebSockets in order to send the document between clients, like the Hocuspocus provider. Under the hood, Yjs uses a binary format with some extra metadata so that it can efficiently and reliably sync documents. What the Yjs core library doesn't do:
 
-Yjs has types that are manipulated and synced automatically, these features  are called shared types. Shared types are similar to JavaScript data structures such as Map but automatically sync between clients.
+- communication to other servers
+- storing data updates in a database
+- data bindings to editors and UI frameworks like React
+
+There are separate modules for this in the Yjs ecosystem.
+
+### Document & Data structure
 
 One important piece of metadata is the client ID. It’s a random number that uniquely identifies a client for a session. **Every time you create a Yjs document, you get a new client ID**.
 
-### Document
+Yjs has types that are manipulated and synced automatically, these features are called shared types. Shared types are similar to JavaScript data structures such as Map but automatically sync between clients.
 
-### Data structure
 
 A YDoc document is basically a collection of types. Everyone who defines the a type in the collection in the same way shares it between them.
 
@@ -21,6 +28,18 @@ Everything in YJs is built on a linked list. In fact, the linked list links mode
 The CRDT model consists of these "Items objects". Each of the Shared Types, like YText, are views on the Items and are responsible for extracting information from the Item structure and representing it to a user. That is, each type, e.g. Text Type, is a _view_ of the CRDT object model.
 
 YText accepts a number of content types, e.g. binary, strings, JSON for encoding. YText implements an Abstract Type. The Abstract Types always defines a list CRDT with a start, end, and list of Items. An item is a representation of the linked list, and is how the sequence CRDT is built.
+
+### Awareness
+
+Awareness is a broad topic and area of research with it's own dedicated journals. There are many different levels of awarenss, for example:
+
+- video conferencing: awareness of who is in the room, what their doing, their body language, how they migh be feeling. This is a very high level of awareness.
+- WhatsApp: awareness of whether your messages was delivered, if it was read, who is online, and therefore when you can expect a reply. This is a moderate level of awareness.
+- version control systems: awareness only comes after, when you pull in changes you can then see what others have done, what files they worked on, etc. This is a low level of awareness.
+
+In short, awareness fosters collaboration. Awareness also helps with conflict resolution: if you see someone editing a part of the document you will be inclined to wait for then to finish before making your own changes.
+
+Awareness is part of the Yjs ecosystem. It has it's own protocol. A cursor is displayed after a character where the enxt ext will be inserted.
 
 ### Data synchronization
 
