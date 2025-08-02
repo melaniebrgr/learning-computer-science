@@ -29,8 +29,8 @@ Basically I will try something for a week, document my learning, judge its succe
 |  28  | [LangGraph](../06-ai/examples) | 200 |  |
 |  29  | - | 000 |  |
 |  30  | [Journalling](./2025/week30.md) | 200 |  |
-|  31  | [YJS](../05-system-design/07-data-syncing/02-yjs.ts) | 102 |  |
-|  32  | - | 000 |  |
+|  31  | [YJS](../05-system-design/07-data-syncing/01-data-syncing.md) | 200 |  |
+|  32  | AI assisted continuous static personal deployment | 102 |  |
 |  33  | - | 000 |  |
 |  34  | - | 000 |  |
 |  35  | - | 000 |  |
