@@ -30,9 +30,9 @@ Basically I will try something for a week, document my learning, judge its succe
 |  29  | - | 000 |  |
 |  30  | [Journalling](./2025/week30.md) | 200 |  |
 |  31  | [YJS](../05-system-design/07-data-syncing/01-data-syncing.md) | 200 |  |
-|  32  | AI assisted continuous static personal deployment | 102 |  |
-|  33  | - | 000 |  |
-|  34  | - | 000 |  |
+|  32  | [AI assisted continuous static personal development](./2025/week32.md) | 200 |  |
+|  33  | [AI assisted continuous static personal deployment](./2025/week33.md) | 303 |  |
+|  34  | [~~AI assisted~~ continuous static personal deployment](./2025/week33.md) | 200 |  |
 |  35  | - | 000 |  |
 |  36  | - | 000 |  |
 |  37  | - | 000 |  |
