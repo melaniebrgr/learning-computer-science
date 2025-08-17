@@ -1,8 +1,9 @@
 # AI assisted continuous static personal deployment
 
-Some background. I built a portfolio website at the conclusion of a bootcamp, "Thinkful" in 2016 in order to market myself and land my first web development position. I sparsely updated the landing page content and linked CV in 2020, but was too lazy to reinvest time to modernise the stack. So my portfolio wite remained a time capsule of 2016 web development trends: Angular 1, gulp, and bower. Now in 2025, we have AI. I want to see if, with AI, I can update the stack quickly and conveniently. What follows is back and forth between me and Cursor AI.
+Some background. I built a portfolio website at the conclusion of a bootcamp, "Thinkful" in 2016 in order to market myself and land my first web development position. I sparsely updated the landing page content and linked CV in 2020, but was too lazy to modernise the stack and my portfolio site remained a time capsule of 2016 web development trends: Angular 1, gulp, and bower. Now in 2025, we have AI. I want to see if, with AI, I can update the stack quickly and conveniently. What follows is back and forth between me and Cursor AI.
 
-> ℹ️ **Info:** Let's start with the analysis.
+## ℹ️ Let's start with the analysis
+
 > Prompt: "Analyse this repo"
 
 ---
@@ -18,8 +19,6 @@ I'll analyze this repository by examining its structure, files, and configuratio
 - Read file: `app/sass/app.scss`
 - Ran tool
 - Read file: `app/views/home/home.html`
-
-## Repository Analysis
 
 This is a **personal portfolio website** for Melanie Burger, a front-end developer. Here's a comprehensive analysis:
 
@@ -95,9 +94,8 @@ The project requires:
 
 This is a well-structured portfolio that demonstrates both technical skills and professional growth, though it uses somewhat outdated technologies by current standards.
 
----
+## ℹ️ **Info:** My turn again
 
-> ℹ️ **Info:** My turn again
 > Prompt: "what technologies should be updated in this project to meet current standards?"
 
 ---
@@ -237,9 +235,9 @@ Based on my analysis of the codebase, here are the key technologies that should 
 
 The most impactful changes would be updating Node.js, replacing Gulp with Vite, and migrating from AngularJS to a modern framework. This would provide immediate benefits in development experience, performance, and maintainability.
 
----
+## ℹ️ **Info:** Planning
 
-> ℹ️ **Info:** This seemed reasonable, so let's start with planning the first phase.
+This seems reasonable, so let's start with planning the first phase.
 > Prompt: "Make a plan updating Node.js and package management"
 
 ---
@@ -249,11 +247,11 @@ I'll create a detailed plan for updating Node.js and package management. Let me 
 Read file: package.json
 Now I'll create a comprehensive plan for updating Node.js and package management:
 
-## **Node.js and Package Management Update Plan**
+### **Node.js and Package Management Update Plan**
 
-### **Phase 1: Node.js Version Update**
+#### **Phase 1: Node.js Version Update**
 
-#### **Step 1: Check Current Environment**
+##### **Step 1: Check Current Environment**
 
 ```bash
 # Check current Node.js version
@@ -264,7 +262,7 @@ npm --version
 nvm --version
 ```
 
-#### **Step 2: Install Node Version Manager (nvm)**
+##### **Step 2: Install Node Version Manager (nvm)**
 
 ```bash
 # Install nvm if not present
@@ -274,7 +272,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 source ~/.bashrc  # or ~/.zshrc
 ```
 
-#### **Step 3: Install and Use Modern Node.js**
+##### **Step 3: Install and Use Modern Node.js**
 
 ```bash
 # Install LTS version (recommended: 20.x)
@@ -287,7 +285,7 @@ node --version  # Should show v20.x.x
 npm --version   # Should show 10.x.x
 ```
 
-#### **Step 4: Update package.json**
+##### **Step 4: Update package.json**
 
 ```json
 {
@@ -298,9 +296,9 @@ npm --version   # Should show 10.x.x
 }
 ```
 
-### **Phase 2: Package Management Modernization**
+#### **Phase 2: Package Management Modernization**
 
-#### **Step 1: Remove Bower Dependencies**
+##### **Step 1: Remove Bower Dependencies**
 
 ```bash
 # Remove bower globally
@@ -311,7 +309,7 @@ rm bower.json
 rm -rf app/bower_components
 ```
 
-#### **Step 2: Migrate Bower Dependencies to npm**
+##### **Step 2: Migrate Bower Dependencies to npm**
 
 Current bower dependencies:
 
@@ -331,7 +329,7 @@ New package.json dependencies:
 }
 ```
 
-#### **Step 3: Update HTML to Use npm Packages**
+##### **Step 3: Update HTML to Use npm Packages**
 
 Replace bower references in `app/index.html`:
 
@@ -347,9 +345,9 @@ Replace bower references in `app/index.html`:
 <script src="node_modules/angular-route/angular-route.min.js"></script>
 ```
 
-### **Phase 3: Update Gulp Dependencies**
+#### **Phase 3: Update Gulp Dependencies**
 
-#### **Step 1: Update package.json with Modern Versions**
+##### **Step 1: Update package.json with Modern Versions**
 
 ```json
 {
@@ -370,7 +368,7 @@ Replace bower references in `app/index.html`:
 }
 ```
 
-#### **Step 2: Update Gulpfile.js for Gulp 4**
+##### **Step 2: Update Gulpfile.js for Gulp 4**
 
 Key changes needed:
 
@@ -378,9 +376,9 @@ Key changes needed:
 - Update task syntax for Gulp 4
 - Update sass compilation for newer versions
 
-### **Phase 4: Implementation Steps**
+#### **Phase 4: Implementation Steps**
 
-#### **Step 1: Backup Current State**
+##### **Step 1: Backup Current State**
 
 ```bash
 # Create backup branch
@@ -392,7 +390,7 @@ git commit -m "Backup legacy Node.js and package setup"
 git checkout main
 ```
 
-#### **Step 2: Update Node.js**
+##### **Step 2: Update Node.js**
 
 ```bash
 # Install new Node.js version
@@ -403,7 +401,7 @@ nvm use 20
 npm cache clean --force
 ```
 
-#### **Step 3: Update Dependencies**
+##### **Step 3: Update Dependencies**
 
 ```bash
 # Remove old node_modules and package-lock.json
@@ -416,7 +414,7 @@ npm install
 npm install jquery@^3.7.0 angular@^1.8.3 angular-route@^1.8.3
 ```
 
-#### **Step 4: Update Build Process**
+##### **Step 4: Update Build Process**
 
 ```bash
 # Test build process
@@ -426,9 +424,9 @@ npm run build
 npm start
 ```
 
-### **Phase 5: Verification and Testing**
+#### **Phase 5: Verification and Testing**
 
-#### **Step 1: Test Build Process**
+##### **Step 1: Test Build Process**
 
 ```bash
 # Clean build
@@ -442,14 +440,14 @@ npm start
 # Open http://localhost:8080
 ```
 
-#### **Step 2: Test All Routes**
+##### **Step 2: Test All Routes**
 
 - Home page
 - All portfolio project pages
 - Navigation functionality
 - Responsive design
 
-#### **Step 3: Performance Check**
+##### **Step 3: Performance Check**
 
 ```bash
 # Check bundle sizes
@@ -459,15 +457,15 @@ du -sh build/
 # Use browser dev tools to check performance
 ```
 
-### **Phase 6: Optional - Consider pnpm**
+#### **Phase 6: Optional - Consider pnpm**
 
-#### **Step 1: Install pnpm**
+##### **Step 1: Install pnpm**
 
 ```bash
 npm install -g pnpm
 ```
 
-#### **Step 2: Migrate to pnpm**
+##### **Step 2: Migrate to pnpm**
 
 ```bash
 # Remove node_modules and package-lock.json
@@ -477,7 +475,7 @@ rm -rf node_modules package-lock.json
 pnpm install
 ```
 
-#### **Step 3: Update scripts**
+##### **Step 3: Update scripts**
 
 ```json
 {
@@ -487,7 +485,7 @@ pnpm install
 }
 ```
 
-### **Timeline Estimate**
+#### **Timeline Estimate**
 
 - **Phase 1-2**: 2-3 hours
 - **Phase 3**: 1-2 hours  
@@ -497,14 +495,14 @@ pnpm install
 
 **Total**: 6-10 hours
 
-### **Risk Mitigation**
+#### **Risk Mitigation**
 
 1. **Backup everything** before starting
 2. **Test incrementally** after each phase
 3. **Keep legacy branch** for rollback if needed
 4. **Document all changes** for future reference
 
-### **Success Criteria**
+#### **Success Criteria**
 
 - [ ] Node.js 20+ installed and working
 - [ ] All npm dependencies installed successfully
@@ -516,9 +514,10 @@ pnpm install
 
 This plan provides a safe, incremental approach to modernizing the Node.js and package management setup while maintaining the existing functionality.
 
----
+## ℹ️ **Info:** Node version management
 
-> ℹ️ **Info:** I have fnm installed and consider it the successor to nvm, but let's check that assumption with a quick comparison. This time I used Warp terminal with Claude Sonnet 4:
+I have fnm installed and consider it the successor to nvm, but let's check that assumption with a quick comparison. This time I used Warp terminal with Claude Sonnet 4:
+
 > Prompt: "compare fnm and nvm"
 
 ---
@@ -571,10 +570,9 @@ Recommendation
 
 Would you like me to help you install or migrate between either of these tools?
 
----
+## ℹ️ **Info:** Node.js and Package Management Update Plan: Phase 1
 
-> ℹ️ **Info:** Node.js and Package Management Update Plan: Phase 1
-> I assume Cursor's response surfaced nvm because of broader community adoption and documentation, but I want to stick with fnm. I skipped the nvm instructions and installed the latest version of Node, v24.5.0, with fnm. v24 isn't the active LTS version yet but should be soon. I then specified these version in package.json.
+I assume Cursor's response surfaced nvm because of broader community adoption and documentation, but I want to stick with fnm. I skipped the nvm instructions and installed the latest version of Node, v24.5.0, with fnm. v24 isn't the active LTS version yet but should be soon. I then specified these version in package.json.
 
 ```bash
 fnm install 24.5.0
@@ -593,11 +591,11 @@ npm --version
 
 I had changed machines a few times since I built my porfolio website, so bower was no longer installed. I removed the bower.json file and shifted the depencies to package.json as Cursor AI suggested. I consider fuzzy package versioning (e.g. `^3.7.0`) to be anathema now, so I changed to use the exact version.
 
-On running `npm install` a litany of deprecation warnings appeared in console, and then an error, "npm error path /Users/melanie/Development/personal-website/node_modules/node-sass". I asked Cursor AI to diagnose the issue.
+On running `npm install` a litany of deprecation warnings appeared in console, and then an error, "npm error path personal-website/node_modules/node-sass". I asked Cursor AI to diagnose the issue.
 
-> ℹ️ **Info:** Node.js and Package Management Update Plan: Phase 2
 > Prompt, "what's going wrong when I `npm install`?"
-> Warp AI then asked to run the command and examine the error and the package.json file, which I allowed.
+
+Warp AI then asked to run the command and examine the error and the package.json file, which I allowed.
 
 ---
 
@@ -618,10 +616,11 @@ Solutions
 Quick Fix (Recommended)
 Replace the problematic gulp-sass dependency:
 
----
+...
 
-> ℹ️ **Info:** The plan derails
-> Gulp won't build. Downgrading from Node v24 to 16 to 14 doesn't help. The flaw in my execution is that I didn't try to ensure I could successfully build the project before making changes, but I didn't want to install bower globally or install a downgraded Node v6 temporarily. I also am less inclide to make an incremental upgrade approach. Fighting versioning issues and build errors doesn't seem worth the effort. I'll try a different approach. Let's stat with clean project.
+## ℹ️ **Info:** The plan derails
+
+Gulp won't build. Downgrading from Node 24 to 16 to 14 doesn't help. A flaw in my execution was that I didn't try to ensure I could successfully build the project before making changes to it, but I didn't want to install bower globally or install a downgraded Node v6 temporarily (the version the original site used). I am less inclide now to make an incremental upgrade approach, since fighting versioning issues and build errors doesn't seem worth the effort. I'll try a different approach, starting with a clean project.
 
 ---
 
