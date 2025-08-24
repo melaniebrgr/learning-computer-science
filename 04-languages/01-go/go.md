@@ -1,8 +1,61 @@
 # Go
 
-## Control flow
+## Variables and assignments
 
-### if, switch, looping, functions
+- string: string
+- boolean: bool
+- numeric: int8, uint8 (byte), int16, uint16, int32 (rune), uint32, int64, uint64, int, uint, uintptr, float32, float64, complex64, complex128
+
+```go
+// variable declaration and assignment
+var firstName, lastName string
+
+// variable declaration and assignment
+var name string = "Name"
+var name = "Name"
+name := "Name"
+```
+
+### Examples: Variables and assignments
+
+1. [hello world](./go-for-js-devs/01-hello-world.go)
+2. [entering and printing your name](./go-for-js-devs/02-entering-and-printing-your-name.go)
+
+## Arrays, slice, map
+
+```go
+// initialize an empty array with default values (it can only contain 5 elements of type float)
+var myArray [5]float64
+
+// initialize a filled array
+myArray := [5]float64{9, 1.5, 4.5, 7, 8}
+myArray := [...]float64{9, 1.5, 4.5, 7, 8}
+
+// looping over an array
+for _, value := range myArray {
+    fmt.Println(value)
+}
+
+// variable length arrays (slices) must be initialized to some length
+var mySlice []int = make([]int, 5)
+
+// a maximum length (capacity) can be optionally specified
+var mySlice []int = make([]int, 5, 10)
+
+// get array length
+len(mySlice) // 5
+
+// get array capacity
+cap(mySlice) // 10
+
+// slice a section of another array
+splicedFruit := fruitArray[1:3]
+
+// add more elements to a slice
+moreFruit := append(splicedFruit, "cherries", "lemon")
+```
+
+## Control flow
 
 ```go
 // if statements
@@ -82,6 +135,6 @@ func printAges(ages ...int) int {
 }
 ```
 
-### Examples
+### Examples: Control flow
 
-3. paying off credit card debt, [problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/), [solution](./03-paying-off-credit-card-debt.go)
+- paying off credit card debt, [problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/), [solution](./go-for-js-devs/03-paying-off-credit-card-debt.go)

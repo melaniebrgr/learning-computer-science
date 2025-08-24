@@ -20,27 +20,6 @@ Alan Turing showed that there were six primitive instructions with which you cou
 
 Interpreted languages give errors in the language of the source code (that you wrote in), whereas compiled languages give errors in the compiled object code, which is harder to debug. However, compiled languages tend to be more efficient.
 
-## Go syntax: variables and assignments
-
-- string: string
-- boolean: bool
-- numeric: int8, uint8 (byte), int16, uint16, int32 (rune), uint32, int64, uint64, int, uint, uintptr, float32, float64, complex64, complex128
-
-```go
-// variable declaration and assignment
-var firstName, lastName string
-
-// variable declaration and assignment
-var name string = "Name"
-var name = "Name"
-name := "Name"
-```
-
-### Examples
-
-1. [hello world](./01-hello.go)
-2. [entering and printing your name](./02-entering-and-printing-your-name.go)
-
 ## The great big world of applications
 
 ### Cloud Native
