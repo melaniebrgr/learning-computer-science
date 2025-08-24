@@ -2,14 +2,13 @@
 
 ## Programs
 
-- [ ] [MIT 6.00SC Introduction to Computer Science and Programming - John Guttag (now archived)](https://dspace.mit.edu/handle/1721.1/150601)
+- [~] [MIT 6.00SC Introduction to Computer Science and Programming - John Guttag (now archived)](https://dspace.mit.edu/handle/1721.1/150601)
   - [x] Lecture 1
   - [x] Lecture 2
   - [x] Lecture 3
   - [x] Lecture 4
   - [x] Lecture 5
   - [x] Lecture 6
-  - [ ] Lecture 7
 - [ ] Structure and Interpretation of Computer Programs
 - [ ] [Professional Programming](https://github.com/charlax/professional-programming)
 
@@ -28,3 +27,9 @@
 - <https://frontendmasters.com/courses/algorithms/>
 - <https://frontendmasters.com/courses/advanced-algorithms/>
 - <https://frontendmasters.com/courses/algorithms-practice/>
+- [ ] [The Ultimate DSA Course for 2025](https://www.youtube.com/watch?v=DMeD8trbj6A)
+- [ ] [The Last Algorithms Course You'll Need](https://frontendmasters.com/courses/algorithms/arrays-data-structure/)
+  - [x] Bio O Time Complexity
+  - [ ] Arrays Data Structure
+  - [ ] Linear Search
+  - [ ] Binary Search

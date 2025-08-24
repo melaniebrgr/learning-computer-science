@@ -33,7 +33,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  32  | [AI assisted continuous static personal development](./2025/week32.md) | 200 |  |
 |  33  | [AI assisted continuous static personal deployment](./2025/week33.md) | 303 |  |
 |  34  | [~~AI assisted~~ continuous static personal deployment](./2025/week33.md) | 200 |  |
-|  35  | - | 000 |  |
+|  35  | D&A (Data structures and algorithms) | 102 |  |
 |  36  | - | 000 |  |
 |  37  | - | 000 |  |
 |  38  | - | 000 |  |

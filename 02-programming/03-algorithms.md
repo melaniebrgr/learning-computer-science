@@ -1,125 +1,165 @@
 # Algorithms
 
-## Types of algorithms
+## What is an algorithm?
 
-An algorithm contains imperative steps on how to perform a computation until it “converges” (a fancy way to say that it’s halted). The recipe of an algorithm:
+A algorthm is a set of instructions carried out to solve a problem. An algorithm:
 
-- it converges,
-- has instructions and flow controls, and
-- a termination of control.
+- has instructions and flow controls,
+- converges (a fancy way to say that it concludes), and
+- has a termination of control, usually when it converges.
 
-Assuming no static semantic errors, there are three types of errors a program can have:
+In the context of computer science, an algorithm contains well-defined implementable instructions on how to perform a computation until it converges. We call this programs.
 
-- it crashes
-- it never terminates
-- it gives an incorrect result (the worst possible outcome)
+Assuming no static semantic errors, a program can have three types of errors:
 
-How do we know if **looping program**, e.g. a "for" loop or a "while" loop, will terminate? A looping function that has all the following features will always terminate:
+1. a crashes,
+2. a failure to terminate,
+3. an incorrect result (the worst possible outcome).
+
+## Algorithm termination
+
+How do we know if **looping program**, e.g. a "for" loop or a "while" loop, will terminate? A looping function with all of the following features will always terminate:
 
 1. it maps a set of program variables to an integer
 2. it starts with a non-negative value
 3. a value is decreased on each iteration
 4. the loop terminates when it reaches 0
 
-This is a **decrementing function**. A decrementing function guarantees to stop a loop execution. It can be a useful pattern for "searching for a solution". The solution must be within the search space of the looping program however, or the program will run forever. When writing a loop, think carefully about the conditions for termination mentioned above. Loops can be used for exhaustive enumeration.
+This is a **decrementing function**. A decrementing function guarantees to stop a loop execution. It can be a useful pattern for "searching for a solution". The solution must be within the search space of the looping program however, or the program will never converge. When writing a loop, think carefully about the conditions for termination.
 
-**Exhaustive enumeration** or "guess and check" is a type of algorithm. The guessing is not actually random, the space of possible answers is exhausted systematically. A program that relies on this is called a **brute force algorithm**, and despite its name it is often the correct way to solve a problem because today's computers are _fast_. There are however some circumstances under which a brute force algorithm will start to take too long.
+Loops can be used for exhaustive enumeration. **Exhaustive enumeration** or "guess and check" is a type of algorithm. The guessing is not random. The space of possible answers is exhausted systematically. A program that relies on this is called a **brute force algorithm**, and despite its name it is often the correct way to solve a problem because today's computers are _fast_. However, there are _some_ circumstances under which a brute force algorithm will start to take too long.
 
-### Go syntax: if, switch, looping, functions
+## Big O analysis
 
-```go
-// if statements
-num := -1
+Big O analysis is just a way for computer scientists to categorize different algorithms by how they slow down as the input size to the algorithm grows. It enables us to talk about how slow or how fast algorithms can run. And to be very specific, it is the worst-case runtime. In short,
 
-if num > 0 {
-    fmt.Println(quote.Go())
-} else {
-    fmt.Println(quote.Hello())
-}
+- Predict how an algorithm will perform as data size increases.
+- Compare the efficiency of different algorithms.
+- Identify potential bottlenecks in code.
 
-// if statements with assignment
-if err := someFunction(); err != nil {
-    fmt.Println(err.Error())
-}
+### Constant time, O(1)
 
-// switch statements
-var city string = "c"
+![graph of constant time](./assets/bigo--constant.png "Constant time")
 
-switch city {
-case "a":
-    fmt.Println("A")
-case "b", "c":
-    fmt.Println("B or C")
-default:
-    fmt.Println("Z")
-}
+- No matter how big the input is, the algorithm takes the same time.
+- Always 1 step, even if the array has 10 or 10 million elements.
+- The graph is a flat line, constant regardless of input.
 
-// switch statements with conditionals
-var i int = 1
-
-switch {
-case 1 != 10:
-    fmt.Println("! 10")
-    fallthrough
-case i > 10:
-    fmt.Println("> 10")
-case i < 10:
-    fmt.Println("< 10")
-default:
-    fmt.Println("= 10")
-}
-
-// for loop
-for i := 1; i <= 10; i++ {
-    fmt.Println(i)
-}
-
-// while loop
-i := 1
-
-for i <= 100 {
-    fmt.Println(i)
-    i++
-}
-
-// looping over ranges
-sentence := "Today we are going sailing."
-
-for i, letter := range sentence {
-    fmt.Println(i, " ", string(letter))
-}
-
-// functions
-func add(a int, b int) int {
-    return a + b
-}
-
-func printAge(age int) (ageOfSally int, ageOfBob int) {
-    ageOfBob = 21
-    ageOfSally = 16
-    return
-}
-
-func printAges(ages ...int) int {
-    return
-}
-
+```python
+def get_first_element(arr):
+    return arr[0]
 ```
 
-### Examples
+### Linear time, O(n)
 
-3. paying off credit card debt, [problem](https://ocw.mit.edu/courses/6-00sc-introduction-to-computer-science-and-programming-spring-2011/resources/mit6_00scs11_ps1/), [solution](./03-paying-off-credit-card-debt.go)
+![graph of linear time](./assets/bigo--linear.png "Linear time")
+
+- The running time grows directly with the input size.
+- If array has 5 elements it has 5 operations. If it has 1,000 elements, 1,000 operations.
+- The graph is a straight line, and grows proportionally with input size.
+- If there is a loop in the algorithm, it is a clue that has linear complexity.
+
+```python
+def print_all_elements(arr):
+    for x in arr:
+        print(x)
+```
+
+### Quadratic time, O(n²)
+
+![graph of quadratic time](./assets/bigo--quadratic.png "Quadratic time")
+
+- For each element, the algorithm loops over all elements again.
+- If array has 10 elements, it has ~100 steps. If 1,000, it has ~1,000,000 steps.
+- The graph curves upward quickly. It is inefficient for large inputs.
+
+```python
+def print_all_pairs(arr):
+    for x in arr:
+        for y in arr:
+            print(x, y)
+```
+
+### Logarithmic time, O(log n)
+
+![graph of logarithmic time](./assets/bigo--logarithmic.png "Logarithmic time")
+
+- Each step cuts the problem in half (common in binary search).
+- Searching in 1,000,000 elements takes only ~20 steps.
+- Slightly steeper than linear initially, but grows much slower for large inputs.
+
+```python
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+```
+
+### Linearithmic time, O(n log n)
+
+- Splits a problem into parts and then process each (common in sorting algorithms, Merge Sort, and QuickSort).
+
+```python
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr)//2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+```
+
+### Exponential time, O(2^n)
+
+- Each call spawns 2 more calls resulting in exponential growth.
+
+```python
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
+```
+
+### Factorial time, O(n!)
+
+- Explores every possible ordering of inputs (permutations).
+- Grows faster than exponential — completely impractical for even modest n (e.g., 20! ≈ 2.4 quintillion).
+
+```js
+function permute(arr) {
+  if (arr.length === 0) return [[]];
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    let rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
+    let perms = permute(rest);
+    for (let p of perms) {
+      result.push([arr[i], ...p]);
+    }
+  }
+  return result;
+}
+```
+
+![graph summary of big O](./assets/bigo--summary.png "Summary")
 
 ## Speeding up algorithms
 
-Can we figure out how long an algorithm will take to run (algorithmic analysis)? Yes, we can look at what the run time depends on:
+Can we figure out how long an algorithm will take to run (algorithmic analysis), by looking at what the run time depends on:
 
 - desired answer precision
-- how big the steps are that we take through the algorithm are
+- how big the steps are that we take through the algorithm
 
-We can change both of these levers to adjust the run speed. Taking bigger steps allows us to more rapidly cut through the search space. One algorithmic technique to change the step size is called, "**bisection search**", where the step is half the search space. With algorithmic analysis we can actually know how long a computation will take to run, which permits us to decide if it's worth the time.
+We can change both of these levers to adjust the run speed. Taking bigger steps allows us to more rapidly cut through the search space. One algorithmic technique to change the step size is called, "bisection search", where the step is half the search space. With algorithmic analysis we can actually know how long a computation will take to run, which permits us to decide if it's worth the time.
 
-Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Goor programmers "write less code". When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
+Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, **we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Good programmers "write less code".** When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
 
 - decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and hopefully coherent.
 - abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
