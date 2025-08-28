@@ -57,27 +57,12 @@ def get_first_element(arr):
 - The running time grows directly with the input size.
 - If array has 5 elements it has 5 operations. If it has 1,000 elements, 1,000 operations.
 - The graph is a straight line, and grows proportionally with input size.
-- If there is a loop in the algorithm, it is a clue that has linear complexity.
+- If there is a single loop in the algorithm, it is a clue that has linear complexity.
 
 ```python
 def print_all_elements(arr):
     for x in arr:
         print(x)
-```
-
-### Quadratic time, O(n²)
-
-![graph of quadratic time](./assets/bigo--quadratic.png "Quadratic time")
-
-- For each element, the algorithm loops over all elements again.
-- If array has 10 elements, it has ~100 steps. If 1,000, it has ~1,000,000 steps.
-- The graph curves upward quickly. It is inefficient for large inputs.
-
-```python
-def print_all_pairs(arr):
-    for x in arr:
-        for y in arr:
-            print(x, y)
 ```
 
 ### Logarithmic time, O(log n)
@@ -104,7 +89,7 @@ def binary_search(arr, target):
 
 ### Linearithmic time, O(n log n)
 
-- Splits a problem into parts and then process each (common in sorting algorithms, Merge Sort, and QuickSort).
+- Split a problem into parts and then process each part (common in sorting algorithms, Merge Sort, and QuickSort).
 
 ```python
 def quicksort(arr):
@@ -115,6 +100,21 @@ def quicksort(arr):
     middle = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
     return quicksort(left) + middle + quicksort(right)
+```
+
+### Quadratic time, O(n²)
+
+![graph of quadratic time](./assets/bigo--quadratic.png "Quadratic time")
+
+- For each element, the algorithm loops over all elements again.
+- If array has 10 elements, it has ~100 steps. If 1,000, it has ~1,000,000 steps.
+- The graph curves upward quickly. It is inefficient for large inputs.
+
+```python
+def print_all_pairs(arr):
+    for x in arr:
+        for y in arr:
+            print(x, y)
 ```
 
 ### Exponential time, O(2^n)
@@ -131,7 +131,8 @@ def fib(n):
 ### Factorial time, O(n!)
 
 - Explores every possible ordering of inputs (permutations).
-- Grows faster than exponential — completely impractical for even modest n (e.g., 20! ≈ 2.4 quintillion).
+- For example, `!5 = 5 * 4 * 3 * 2 * 1 = 120`.
+- Grows faster than exponential and is completely impractical for even modest n (e.g., 20! ≈ 2.4 quintillion).
 
 ```js
 function permute(arr) {
