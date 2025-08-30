@@ -178,3 +178,9 @@ One great technique for divide and conquer algorithms is recursion.
 Recursion provides an framework for describing a problem and also implementing a solution. How can you progressively solve smaller versions of the same or similar problem until a base case is reached.
 
 When the interpreter calls a function the formal parameter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
+
+## Search algorithms
+
+The simplest search implementation is to just iterate through the list from the beginning and check each value in turn. This a `LinearSearch` and has a `O(N)`. However, if the array is ordered, it's not necessary to start searching from the beginning. Instead we can divide the array by two, check the middle value, determine if larger or smaller, and then divide the left or right side by two until there are no halves left and the value is found.
+
+Mathematically it's like going N/2, N/4, N/8 and so on, or N/2^x. To solve for x we do, `log2(N) = x`. Therefore finding the value in an array 4096 elements long takes _12 steps_, `log2(4096) = 12`. This is a `BinarySearch` and has a `O(log n)`. Note that is we were scanning the input after halving the search space we would have `O(n log n)`.
