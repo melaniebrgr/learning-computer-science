@@ -2,7 +2,7 @@
 
 ## What is an algorithm?
 
-A algorthm is a set of instructions carried out to solve a problem. An algorithm:
+An algorithm is a set of instructions carried out to solve a problem. An algorithm:
 
 - has instructions and flow controls,
 - converges (a fancy way to say that it concludes), and
@@ -31,11 +31,11 @@ Loops can be used for exhaustive enumeration. **Exhaustive enumeration** or "gue
 
 ## Big O analysis
 
-Big O analysis is just a way for computer scientists to categorize different algorithms by how they slow down as the input size to the algorithm grows. It enables us to talk about how slow or how fast algorithms can run. And to be very specific, it is the worst-case runtime. In short,
+Big O analysis is a way for computer scientists to categorize different algorithms by how they slow down as the input size to the algorithm grows. It enables us to talk about how slow or how fast an algorithm can run. To be very specific, it is the worst-case runtime. In short Big O
 
-- Predict how an algorithm will perform as data size increases.
-- Compare the efficiency of different algorithms.
-- Identify potential bottlenecks in code.
+- predicts how an algorithm will perform as data size increases,
+- compares the efficiency of different algorithms,
+- identifies potential bottlenecks in code.
 
 ### Constant time, O(1)
 
@@ -54,7 +54,7 @@ def get_first_element(arr):
 
 ![graph of linear time](./assets/bigo--linear.png "Linear time")
 
-- The running time grows directly with the input size.
+- The running time grows directly proportionally with the input size.
 - If array has 5 elements it has 5 operations. If it has 1,000 elements, 1,000 operations.
 - The graph is a straight line, and grows proportionally with input size.
 - If there is a single loop in the algorithm, it is a clue that has linear complexity.
@@ -69,7 +69,7 @@ def print_all_elements(arr):
 
 ![graph of logarithmic time](./assets/bigo--logarithmic.png "Logarithmic time")
 
-- Each step cuts the problem in half (common in binary search).
+- Each step cuts the problem in half (1/2, then 1/4, then 1/16 and so on, common in binary search)
 - Searching in 1,000,000 elements takes only ~20 steps.
 - Slightly steeper than linear initially, but grows much slower for large inputs.
 
@@ -186,4 +186,25 @@ The simplest search implementation is to just iterate through the list from the 
 
 For example, when searching if a value is in an array, we can divide the array by two, check the middle value, determine if larger or smaller, and then divide the left or right side by two until there are no halves left and the value is found. Mathematically it's like going N/2, N/4, N/8 and so on, or N/2^x. To solve for x we do, `log2(N) = x`. Therefore finding the value in an array 4096 elements long takes _12 steps_, `log2(4096) = 12`. This is a `BinarySearch` and has a `O(log n)`.
 
-In the 2 crystal balls problem example (given two crystal balls, how to find the height the ball breaks at), you also technically have a sorted list of `[false, false, false, true, ... ]`. The general strategy is to make sequential jumps and when it breaks, walk back to the last known good point. Jumping by N gives a O(N), whereas jumping by the square root of N gives, O(√N), which
+In the 2 crystal balls problem example (given two crystal balls, how to find the height the ball breaks at), you also technically have a sorted list of `[false, false, false, true, ... ]`. The general strategy is to make sequential jumps and when it breaks, walk back to the last known good point. Jumping by N gives a O(N), whereas jumping by the square root of N gives, O(√N).
+
+## Sorting algorithms
+
+The mathematical definition of a sorted list is where `Xi <= Xi+1`. **Bubble sort** is one of the simplest sorting algorithms to understand. In each iteration left and right elements are compared and swapped if the left is greater than the right. The largest value of the array bubbles up to the end of the array, which means that it is not necessary to traverse to the end of the array each time:
+
+```js
+// Bubble sort bubbling, 5 elements
+[3,1,7,4,2] // 4 operations
+[1,3,4,2,7] // 3 operations
+[1,3,2,4,7] // 2 operations 
+[1,2,3,4,7] // 1 operation 
+// Total 10 operations
+
+// Bubble sort bubbling, 3 elements
+[3,2,1]
+[2,1,3]
+[1,2,3]
+```
+
+The implementaiton of bubble sort reveals a loop with in a loop. Nested loops are a clue that the time complexity is quadratic, `O(n²)`.
+
