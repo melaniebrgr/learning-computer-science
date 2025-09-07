@@ -13,6 +13,63 @@ At a Biotech/AI startup, the frontend will likely:
 
 ---
 
+## Table of contents
+
+1) React Ecosystem (Data-heavy UI & State Management)
+
+✅ a. How do you prevent unnecessary re-renders in React components when visualizing large datasets?
+b. How do you handle global state in a large React application (e.g., Redux vs. React Query vs. Zustand)?
+c. What is code splitting in React, and how would you use it to optimize a data-heavy dashboard?
+d. How does React handle server-side rendering (SSR), and why might it be useful in a biotech/AI app?
+e. How would you integrate React with data visualization libraries like D3 or Recharts efficiently?
+✅ f. How would you manage complex forms (e.g., clinical trial data input) in React?
+
+⸻
+
+2) Modern JavaScript / TypeScript (Scalability & Reliability)
+
+a. What are the benefits of using TypeScript in a large-scale scientific/AI project?
+b. How do TypeScript generics improve type safety in reusable data visualization components?
+c. Can you explain structural typing in TypeScript and why it matters for API contracts?
+d. How does the event loop and task queue affect performance in a UI rendering heavy data streams?
+e. What is tree shaking, and why is it important when bundling large frontend apps?
+f. How do you handle deep copying vs. shallow copying when working with immutable scientific datasets?
+
+⸻
+
+3) Security Concepts (Medical/Research Data Protection)
+
+a. What is Cross-Site Scripting (XSS), and how do you prevent it in a React app displaying untrusted input (e.g., research notes)?
+b. Why is it dangerous to store JWTs in localStorage, and what’s a safer alternative?
+c. How do Content Security Policies (CSP) protect sensitive data applications?
+d. How would you securely handle user-uploaded files (e.g., genetic data, medical scans)?
+e. What are the risks of exposing API keys in frontend code, and how do you avoid it?
+f. How would you ensure compliance with GDPR/HIPAA from a frontend perspective?
+
+⸻
+
+4) Frontend Best Practices (Performance, Accessibility, UX for Researchers)
+
+a. What strategies would you use to optimize performance when rendering thousands of data points in charts or tables?
+b. How do you ensure accessibility (a11y) in complex data visualizations (e.g., screen readers, colorblind users)?
+c. What is lazy loading, and how would you apply it to reduce initial load times for dashboards?
+d. How do you measure and optimize page load time in a data-heavy app?
+e. How do design systems help maintain consistency in a fast-growing biotech startup?
+f. What are Progressive Web Apps (PWAs), and would they be useful in a biotech/AI context?
+
+⸻
+
+5) System Design & Architecture Decisions (Scalability, Real-time Data)
+
+a. How would you design a frontend architecture for a real-time data-heavy biotech dashboard?
+b. What are the trade-offs between REST and GraphQL when querying large scientific datasets?
+c. How would you decide whether to use client-side caching (React Query, Apollo) for AI predictions or lab results?
+d. How would you handle real-time data updates (e.g., experiment progress, live patient monitoring)?
+e. How would you structure a frontend to support internationalization (i18n) in scientific collaboration tools?
+f. How would you design error handling and logging for a production-grade biotech web app?
+
+---
+
 ## 1. React Ecosystem (Data-heavy UI & State Management)
 
 ### a. How do you prevent unnecessary re-renders in React components when visualizing large datasets?
@@ -37,12 +94,59 @@ React compiler simplifies handling of memoization--the performance optimizations
 
 ### b. How do you handle global state in a large React application (e.g., Redux vs. React Query vs. Zustand)?
 
-What is a "large React application"? Does it mean llike lots of users, a thousand components, or millions lines of code? When we're talking about state management at scale it isn't really _size_. It's all about maintainability and iteration speed as your app evolves.
+What is a "large React application"? Does it mean llike lots of users, a thousand components, or millions lines of code? When we're talking about state management at scale it isn't really _size_. It's all about maintainability and iteration speed as your app evolves. Applications then to have incidental and accidental complexity. Incidental complexity is inherit to the domain. We want to minimise accidental complexity.
+
+**ERD-like diagrams** are a good way to visualise the data relationships in an application. For this, [dbdiagram.io](https://dbdiagram.io/home) is a good tool with a good DSL. **Sequense diagrams** are a good way to visualise the flow of data through an application; [swimlanes.io](https://swimlanes.io/) is another good tool with a DSL. **State diagrams** are useful for documenting flows as a finite state machine ([stately.ai](https://stately.ai/)). As the application grows it is a good way to visualise the possible transitions. Keeping these documents inside the codebase can also provide good context to AI agents.
+
+Reach for third-party libraries when React's internal APIs don't scale. Some signs are,
+
+- Nested context providers (context that change often causing re-rending issues; you want to use context for things that don't change too often like theme, that really need to be passed down to all children)
+- Scattered state logic (no central place)
+- Extensize prop drilling
+
+Or you experience state synchronisation issues. There are two global state management paradigms:
 
 ### c. What is code splitting in React, and how would you use it to optimize a data-heavy dashboard?
 ### d. How does React handle server-side rendering (SSR), and why might it be useful in a biotech/AI app?
 ### e. How would you integrate React with data visualization libraries like D3 or Recharts efficiently?
+
 ### f. How would you manage complex forms (e.g., clinical trial data input) in React?
+
+#### Form state
+
+You don't need `useState` to manage form data, the form element holds it's own state. The **Form Data API** can be used collect, validate (with zod), and send information from web forms. **Zod** is a great library for validating form data. 
+
+Since React 19 there is a new hook, `useActionState`, that is syntactic sugar for the boilerplate, `useState`, `useEffect` and `useRef` React code previously necessary to manage forms. In an action you don’t get or need the event as the argument. To display the submit status of a form in the UI, the `useFormStatus` hook from react DOM can be used. The `useFormStatus` hook must be paired with `useActionState`, is used within a form component and reads the form status like it is context. The `useOptimistic` hook provides a way to optimistically update the user interface before a background operation, like a network request, completes. In the context of forms, when a user submits a form the interface is immediately updated with the expected outcome instead of waiting for the server response to reflect the changes.
+
+Together these hooks should replace the need for react-hook-form (RHF) for most forms. RHF is still a great option for complex forms, but check its React 19 integration first.
+
+```ts
+const [data, action, isPending] = useActionState(onSubmitAction, initialState);
+
+const onSubmitAction = async (formData: FormData) => {
+    const payload = Object.fromEntries(formData.entries());
+    const validatedData = zodSchema.safeParse(payload);
+    if (!validatedData.success) {
+        console.error(validatedData.error);
+        return;
+    }
+    // POST the form data
+    const response = await fetch('/api/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: validatedData.data,
+    });
+
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+
+    return response.json();
+}
+```
+
 ### g. What is the benefit of some new React features, e.g. Actions, Directives, Document Metadata, and Asset Loading?
 
 ## 2. Modern JavaScript / TypeScript (Scalability & Reliability)
