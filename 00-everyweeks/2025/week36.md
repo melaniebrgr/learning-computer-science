@@ -15,7 +15,7 @@ At a Biotech/AI startup, the frontend will likely:
 
 ## Table of contents
 
-1. React Ecosystem (Data-heavy UI & State Management) ✅✅
+1. React Ecosystem (Data-heavy UI & State Management) ✅✅✅✅
 2. Modern JavaScript / TypeScript (Scalability & Reliability)
 3. Security Concepts (Medical/Research Data Protection)
 4. Frontend Best Practices (Performance, Accessibility, UX for Researchers)
@@ -23,9 +23,9 @@ At a Biotech/AI startup, the frontend will likely:
 
 ---
 
-## 1. React Ecosystem (Data-heavy UI & State Management)
+## 1. React Ecosystem (Data-heavy UI & State Management) ✅
 
-### a. How do you prevent unnecessary re-renders in React components when visualizing large datasets?
+### a. How do you prevent unnecessary re-renders in React components when visualizing large datasets? ✅
 
 When does rerendering happen in react? React’s rendering model is built around the idea that UI is a function of  state, and triggering a state change (props, state, and context) triggers a UI render. There are 4 reasons a component will rerender:
 
@@ -45,14 +45,14 @@ React compiler simplifies handling of memoization--the performance optimizations
 1. [Nadia Makarevich – How React Compiler Performs on Real Code, React Advanced 2024](https://www.youtube.com/watch?v=T-rHmWSZajc)
 2. [React Compiler Docs](https://react.dev/learn/react-compiler/introduction)
 
-### b. How do you handle global state in a large React application (e.g., Redux vs. React Query vs. Zustand)?
+### b. How do you handle global state in a large React application (e.g., Redux vs. React Query vs. Zustand)? ✅
 
 Modern web applications combined different types of state depending on where the data is coming from.
 
 - server state: react-query
 - form state: useActionState, react hook form
 - sync state: Yjs / SyncedStore
-- remaining application state: useState / useReducer; URL / query params; or one of redux, zustand, jotai, mobx, xstate
+- remaining application state: useState -> useReducer; URL / query params; or one of redux, zustand, jotai, mobx, xstate
 
 Generally you want to start simple with React's built in state management. One heuristic: fo you want the modal/UI to be preserved on page refresh? Put it in a URL. Otherwise, reach for a third-party library when React's internal APIs and URL methods don't scale. Some signs are,
 
@@ -76,6 +76,7 @@ Redux has a centralized store, with predictable updates via actions and reducers
 
 - Hook-based approach (no context providers).
 - Tiny, 1KB bundle size for small to medium apps.
+- Typescript typing not ideal.
 - 40k GH stars / 2M weekly downloads.
 
 [Zustand](https://zustand-demo.pmnd.rs/), the "bear necessities" of state management. Zustand can have seperate stores per resource or a central store, strong typing and state modifers (like in redux) but has a hooks-based API. Note that the update functions are stable but the data changes up every update causing component to rerender. It is suitable for small to medium size applications. As the application scales you starte need to create and manage multiple stores.
@@ -84,7 +85,14 @@ Fun fact: “Zustand” is named after the German word for “state” or “con
 
 ##### XState
 
-- state machine library for managing complex state transitions and behavior in applications.
+- State machine.
+- Stronger TypeScript inference.
+- API similar to Redux.
+- Nice dev tools (visual editor extension for VSCode)
+
+You tend to have more nuanced state transitions and want something to untangle and manage these. Even logged in toe logge dout flows can start to get complex though. Different actions can be tied to different transitions.
+
+Fun fact: "XState" is created by David Khourshid.
 
 #### Signal/atomic-based
 
@@ -119,16 +127,26 @@ Fun fact: The original name “MOBservable” combined “M” for member and �
 
 **ERD-like diagrams** are a good way to visualise the data relationships in an application. For this, [dbdiagram.io](https://dbdiagram.io/home) is a good tool with a good DSL. **Sequense diagrams** are a good way to visualise the flow of data through an application; [swimlanes.io](https://swimlanes.io/) is another good tool with a DSL. **State diagrams** are useful for documenting flows as a finite state machine ([stately.ai](https://stately.ai/)). As the application grows it is a good way to visualise the possible transitions. Keeping these documents inside the codebase can also provide good context to AI agents.
 
+### c. What is code splitting in React, and how would you use it to optimize a data-heavy dashboard? ✅
 
-### c. What is code splitting in React, and how would you use it to optimize a data-heavy dashboard?
+Both code splitting and tree shaking have the impact of reducing the bundle size and therefore initial load time. However, they differ in intent. Tree shaking is about removing unused code, code splitting is about loading code only when it is needed.
+
+In single page applications route-based code splitting is typically handled automatout of the box, i.e. on route change only the page code is loaded. For example, with React Router's framework features, the application is automatically code split to improve the performance of initial load times when users visit your application. Code splitting can also be implemented manually with React's `lazy` and `Suspense` components.
+
+React.lazy can be called outside your components to declare a lazy-loaded React component, "This code relies on dynamic import(), which might require support from your bundler or framework. Using this pattern requires that the lazy component you’re importing was exported as the default export." (1), "Now that your component’s code loads on demand, you also need to specify what should be displayed while it is loading. You can do this by wrapping the lazy component or any of its parents into a <Suspense> boundary"
+
+#### 1.c. References
+
+1. [lazy](https://react.dev/reference/react/lazy)
+
 ### d. How does React handle server-side rendering (SSR), and why might it be useful in a biotech/AI app?
 ### e. How would you integrate React with data visualization libraries like D3 or Recharts efficiently?
 
-### f. How would you manage complex forms (e.g., clinical trial data input) in React?
+### f. How would you manage complex forms (e.g., clinical trial data input) in React? ✅
 
 #### Form state
 
-You don't need `useState` to manage form data, the form element holds it's own state. The **Form Data API** can be used collect, validate (with zod), and send information from web forms. **Zod** is a great library for validating form data. 
+You don't need `useState` to manage form data, the form element holds it's own state. The **Form Data API** can be used collect, validate (with zod), and send information from web forms. **Zod** is a great library for validating form data.
 
 Since React 19 there is a new hook, `useActionState`, that is syntactic sugar for the boilerplate, `useState`, `useEffect` and `useRef` React code previously necessary to manage forms. In an action you don’t get or need the event as the argument. To display the submit status of a form in the UI, the `useFormStatus` hook from react DOM can be used. The `useFormStatus` hook must be paired with `useActionState`, is used within a form component and reads the form status like it is context. The `useOptimistic` hook provides a way to optimistically update the user interface before a background operation, like a network request, completes. In the context of forms, when a user submits a form the interface is immediately updated with the expected outcome instead of waiting for the server response to reflect the changes.
 
@@ -161,7 +179,7 @@ const onSubmitAction = async (formData: FormData) => {
 }
 ```
 
-### g. What is the benefit of some new React features, e.g. Actions, Directives, Document Metadata, and Asset Loading?
+### g. What styling libraries would you use for a data-heavy biotech/AI dashboard?
 
 ## 2. Modern JavaScript / TypeScript (Scalability & Reliability)
 
@@ -169,11 +187,18 @@ const onSubmitAction = async (formData: FormData) => {
 ### b. How do TypeScript generics improve type safety in reusable data visualization components?
 ### c. Can you explain structural typing in TypeScript and why it matters for API contracts?
 ### d. How does the event loop and task queue affect performance in a UI rendering heavy data streams?
-### e. What is tree shaking, and why is it important when bundling large frontend apps?
-### f. What are some new and exciting JavaScript language features that are useful for large-scale scientific/AI projects?
 
-1. Local-first architecture
-2. AI Engineering
+### e. What is tree shaking, and why is it important when bundling large frontend apps? ✅
+
+Tree shaking is a code optimisation technique. It is not JS specific but a "dead code elimination" technique implemented in bundlers Webpack, Rollup and Vite so that unused code does not get shipped with the application code, reducing the bundle size. Vite uses Rollup under the hood to bundle and optimize code for deployment. Bundlers do this by statically analysing the imports and exports of an application and only including specifically imported modules. Adding a visualisation tool can be added to rollup to visualise this.
+
+"Tree Shaking helps us to reduce the weight of the application. For example, if we just want to create a “Hello World” Application in AngularJs 2 then it will take around 2.5MB, but by tree shaking we can bring down the size to just few hundred KBs, or maybe a few MBs."
+
+#### 2.e. References
+
+1. [What is Tree Shaking and Why Would I Need It?](https://stackoverflow.com/questions/45884414/what-is-tree-shaking-and-why-would-i-need-it)
+
+### f. What are some new and exciting JavaScript language features that are useful for large-scale scientific/AI projects?
 
 ## 3. Security Concepts (Medical/Research Data Protection)
 
@@ -183,6 +208,24 @@ const onSubmitAction = async (formData: FormData) => {
 ### d. How would you securely handle user-uploaded files (e.g., genetic data, medical scans)?
 ### e. What are the risks of exposing API keys in frontend code, and how do you avoid it?
 ### f. How would you ensure compliance with GDPR/HIPAA from a frontend perspective?
+### g. What is CORS?
+
+CORS is designed to prevent malicious website from accessing resources on anoother domain without permission. The Same-Origin Policy (SoP) and CORS are the two main mechanisms built into browsers that enforce this policy.
+
+By default, the browser "same-origin policy" or SoP blocks websites from making requests to a domain other than the one that served the page. CORS or "Cross-Origin Resource Sharing"  provides a way for servers to tell browsers, via HTTP headers, that it’s okay to share resources cross-origin. Servers do this by including the `Access-Control-Allow-Origin` header specifying which domains are allowed to access their resources. The server opt-ins to requests by responding to a preflight request. Effectively this is a way to whitelist origins. (Note, an "origin" is not the URL, it is the scheme, domain and port). This pattern of the Origin and Access-Control-Allow-Origin headers is the simplest use of the access control protocol.
+
+What requests _are NOT_ subject to CORS? "Simple requests":
+
+GET, HEAD and POST requests with content type `application/x-www-form-urlencoded`, `multipart/form-data` (which is not AJAX), and `text/plain`. A.k.a form submissions (because CORS can after forms and we can't break the web), which is why we have to worry about CSRF and why nonces are a thing for forms.
+
+What requests _are_ subject to CORS?
+
+- AJAX requests
+- Requests with content type `application/json`
+
+#### 3.g. References
+
+1. (Cross-Origin Resource Sharing (CORS))[https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS]
 
 ## 4. Frontend Best Practices (Performance, Accessibility, UX for Researchers)
 
@@ -215,3 +258,9 @@ What is a "large React application"? Does it mean llike lots of users, a thousan
 There may also just not be time for the simpler solution. The added effort defining a clean abstraction and structure takes time and there is an opportunity cost to taking longer on something, maybe through losing business revenue when the feature is delivered later, or through the cost of not working on the next feature. There are tradeoffs to be made.
 
 - [Incidental vs Accidental Complexity](https://coder-mike.com/blog/2021/09/24/incidental-vs-accidental-complexity/)
+
+## Topics I find interesting
+
+1. Local-first architecture
+2. AI Engineering
+3. Penetration testing
