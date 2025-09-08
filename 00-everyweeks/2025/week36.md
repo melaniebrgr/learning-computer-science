@@ -203,16 +203,33 @@ Tree shaking is a code optimisation technique. It is not JS specific but a "dead
 ## 3. Security Concepts (Medical/Research Data Protection)
 
 ### a. What is Cross-Site Scripting (XSS), and how do you prevent it in a React app displaying untrusted input (e.g., research notes)?
+
+"The call is coming from _inside_ the house." With cross-site scripting code has been injected into the application while CSRF the attack is coming form the outside world. There are three types of XSS:
+
+- Stored XSS
+- Reflected XSS
+- DOM-based XSS
+
+XSS attacks are harder to create, but often worse than the CSRF attacks, because at the point the browser thinks it's you--same origin. To avoide XSS attacks sanitise inputs, not only form inputs but also URL segments/search params. Don't directly reflects those on the page.
+
 ### b. Why is it dangerous to store JWTs in localStorage, and what’s a safer alternative?
 ### c. How do Content Security Policies (CSP) protect sensitive data applications?
 ### d. How would you securely handle user-uploaded files (e.g., genetic data, medical scans)?
 ### e. What are the risks of exposing API keys in frontend code, and how do you avoid it?
 ### f. How would you ensure compliance with GDPR/HIPAA from a frontend perspective?
-### g. What is CORS?
 
-CORS is designed to prevent malicious website from accessing resources on anoother domain without permission. The Same-Origin Policy (SoP) and CORS are the two main mechanisms built into browsers that enforce this policy.
+### g. What is CORS? ✅
 
-By default, the browser "same-origin policy" or SoP blocks websites from making requests to a domain other than the one that served the page. CORS or "Cross-Origin Resource Sharing"  provides a way for servers to tell browsers, via HTTP headers, that it’s okay to share resources cross-origin. Servers do this by including the `Access-Control-Allow-Origin` header specifying which domains are allowed to access their resources. The server opt-ins to requests by responding to a preflight request. Effectively this is a way to whitelist origins. (Note, an "origin" is not the URL, it is the scheme, domain and port). This pattern of the Origin and Access-Control-Allow-Origin headers is the simplest use of the access control protocol.
+**CORS is designed to prevent malicious website from accessing resources on another domain without permission.** "The call is coming from outside the house." It's an HTTP request that you didn't want to come in. The Same-Origin Policy (SoP) and CORS are the two main mechanisms built into browsers that enforce this policy. This complement of Origin and Access-Control-Allow-Origin headers is the simplest use of the access control protocol.
+
+By default, the browser "same-origin policy" or SoP blocks websites from making requests to a domain other than the one that served the page. CORS or "Cross-Origin Resource Sharing"  provides a way for servers to tell browsers, via HTTP headers, that it’s okay to share resources cross-origin. Servers do this by including,
+
+- an `Access-Control-Allow-Origin` header specifying to the browser that that domain is allowed (or `*` wildcard) to access their resources,
+- what methods are allowed with `Access-Control-Allow-Methods`, and
+- what HTTP headers are allowed when making the request, `Access-Control-Allow-Headers`,
+- if cookies and authorisation headers are allowed with `Access-Control-Allow-Credentials`.
+
+Note, the server doesn't respond with a list of allowed domains just if that one is. The server opt-ins to requests by responding to a preflight requests. Effectively this is a way to whitelist origins. (Note, an "origin" is not the URL, it is the scheme, domain and port). 
 
 What requests _are NOT_ subject to CORS? "Simple requests":
 
@@ -220,6 +237,7 @@ GET, HEAD and POST requests with content type `application/x-www-form-urlencoded
 
 What requests _are_ subject to CORS?
 
+- PATCH, PUT, DELETE(?)
 - AJAX requests
 - Requests with content type `application/json`
 
@@ -231,15 +249,243 @@ What requests _are_ subject to CORS?
 
 ### a. What strategies would you use to optimize performance when rendering thousands of data points in charts or tables?
 ### b. How do you ensure accessibility (a11y) in complex data visualizations (e.g., screen readers, colorblind users)?
-### c. What is lazy loading, and how would you apply it to reduce initial load times for dashboards?
-### d. How do you measure and optimize page load time in a data-heavy app?
+
+### c. What is lazy loading, and how would you apply it to reduce initial load times for dashboards? ✅
+
+See code splitting.
+
+### d. How do you measure and optimize page load time in a data-heavy app? ✅
+
+There are many performance profiling tools that be used to measure and optimise page load time. The top three are Google Lighthouse, PageSpeed Insights (PSI) and the CrUX Report.
+
+|Tool      |Data Type  |Focus/Use Case               |Metrics Reported       |
+|----------|-----------|-----------------------------|-----------------------|
+|PSI       |Lab + Field|User experience & suggestions|Core Web Vitals, others|
+|Lighthouse|Lab        |Debugging & audits           |Performance, SEO, etc. |
+|CrUX      |Field      |Real-world user experience   |Core Web Vitals, TTFB  |
+
+#### Lighthouse Engine
+
+Lighthouse is an open-source automated tool developed by Google for auditing web pages on performance, accessibility, SEO, and best practices. It simulates page loads in controlled environments and generates reports with actionable recommendations. The **Lighthouse Panel in Chrome DevTools** runs Lighthouse audits directly in the browser, providing reports on performance, accessibility, best practices, SEO, and progressive web apps for the current page.
+
+**Recommended Use Cases:**
+
+- Initial audits during development to identify optimization opportunities.
+- Continuous integration in CI/CD pipelines to prevent regressions.
+- Benchmarking site improvements before deployment.
+- Educational purposes for learning web best practices.
+
+**Pros:**
+
+- Free and open-source with strong community support.
+- Comprehensive audits covering multiple aspects beyond just speed (e.g., accessibility, SEO).
+- Integrates easily into DevTools, CLI, and Node.js, GitHub Actions for flexible usage.
+- Provides detailed, actionable insights with scoring and explanations.
+
+**Cons:**
+
+- Lab-based data may not capture real-world variability like network conditions or user interactions.
+- Scores can fluctuate due to test environment differences; requires multiple runs for accuracy.
+- Resource-intensive for large sites or frequent runs without optimization.
+- Limited to Chrome emulation; may not reflect performance in other browsers accurately.
+
+**When to Use and How:** Use Lighthouse early in development for quick feedback or in production for periodic checks. In DevTools: Open Chrome, navigate to your site, go to Lighthouse tab, and run an audit. Via CLI: Install via npm (`npm install -g lighthouse`), then run `lighthouse https://example.com --output=html --output-path=report.html`. For Node.js: Import the module (`const lighthouse = require('lighthouse')`) and execute audits programmatically to integrate into scripts or servers.
+
+#### PageSpeed Insights (tool + API)
+
+PageSpeed Insights (PSI) is a free Google tool that analyzes web pages for performance using Lighthouse lab data and real-user field data from Chrome UX Report (CrUX), providing scores and optimization suggestions. web.dev is Google's developer resource site that includes the Measure tool (powered by PSI/Lighthouse) for auditing pages, plus guides on performance, accessibility, and best practices. The PSI API provides programmatic access to PSI's Lighthouse audits and CrUX data, enabling automated performance testing and integration into workflows.
+
+**Recommended Use Cases:**
+
+- Quick performance checks for individual pages.
+- SEO audits, as it ties into Google's ranking signals.
+- Benchmarking against competitors' sites.
+- Initial optimization guidance before deeper tools.
+- Automated testing in build processes.
+- Custom dashboards or alerts for performance regressions.
+- Competitive analysis via scripts.
+- Integrating with monitoring tools.
+
+**Pros:**
+
+- Combines lab (simulated) and field (real-user) data for balanced insights.
+- Easy-to-use web interface; no setup required + free with API access for automation (automatable for CI/CD pipelines or bulk testing.)
+- Provides Core Web Vitals assessments tied to SEO rankings.
+- Returns JSON for easy parsing and custom reporting.
+- Free with high daily limits (25,000 requests).
+
+**Cons:**
+
+- Lab data uses simulated throttling, which may not match real-world accuracy.
+- Field data has delays (28-day aggregation) and requires sufficient traffic.
+- Limited to single URLs; no bulk testing without API.
+- Scores can vary due to test location/network variability.
+- Requires coding knowledge for implementation.
+- Simulated throttling may introduce inaccuracies.
+- 28-day field data delay; no real-time monitoring.
+- Limited to public URLs; no authenticated pages.
+
+**When to Use and How:** Use for spot-checks or SEO-focused reviews. Visit pagespeed.web.dev, enter a URL, and click "Analyze." For automation, get an API key from Google Cloud Console, then fetch via URL (e.g., `https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed?url=example.com&key=yourKey`). Parse JSON response for metrics; integrate into Node.js scripts for scheduled runs.
+
+#### Google Search Console
+
+Google Search Console (GSC) provides performance reports on search traffic, impressions, CTR, and Core Web Vitals, helping optimize for SEO.
+
+**Pros:**
+
+- Free with direct Google data integration.
+- Tracks real-user performance via CrUX.
+- Identifies SEO-impacting issues like slow pages.
+- Historical trends for long-term analysis.
+
+**Cons:**
+
+- Limited to search-related data; no full audits.
+- 28-day delays in Core Web Vitals reports.
+- Requires site verification; no competitor analysis.
+- Aggregates data at page-group level, which can be imprecise.
+
+**Recommended Use Cases:**
+
+- Monitoring SEO performance and rankings.
+- Identifying slow pages affecting search visibility.
+- Long-term trend analysis for traffic/CTR.
+- Combining with PSI for SEO-speed optimizations.
+
+**When to Use and How:** Use post-verification for SEO monitoring. Verify your site in GSC, then navigate to the Performance report for metrics. For Core Web Vitals, go to that section; filter by device/country for targeted insights.
+
+#### CrUX Dashboard
+
+The CrUX Dashboard visualizes Chrome UX Report data in Looker Studio, showing historical Core Web Vitals trends. Use for trends. Create in Looker Studio with CrUX connector, enter origin (e.g., https://example.com). Filter by month/device; refresh for updates.
+
+**Recommended Use Cases:**
+
+- Long-term SEO/performance tracking.
+- Competitor benchmarking.
+- Monthly reports for stakeholders.
+- Validating optimizations over time.
+
+**Pros:**
+
+- Free, easy-to-use visualizations.
+- Historical data for trend analysis.
+- Segments by device/connection.
+- Customizable for specific origins.
+
+**Cons:**
+
+- Monthly updates; no real-time data.
+- Origin-level only; no URL granularity.
+- Requires traffic threshold for data.
+- Limited to CrUX metrics.
+
+#### Chrome UX Report (CrUX)
+
+CrUX is Google's public dataset of real-user UX metrics from Chrome, powering tools like PSI and GSC. Use via tools like PSI or BigQuery. Query CrUX API for metrics (`fetch('https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=yourKey', {method: 'POST', body: JSON.stringify({origin: 'https://example.com'})})`); analyze distributions.
+
+**Recommended Use Cases:**
+
+- Real-world performance validation.
+- SEO optimization for rankings.
+- Industry benchmarking.
+- Data-driven decisions on UX.
+
+**Pros:**
+
+- Real-user data for accurate insights.
+- Free via APIs/BigQuery.
+- Powers SEO rankings (Core Web Vitals).
+- Global, segmented by device/country.
+
+**Cons:**
+
+- 28-day aggregation; delayed reporting.
+- Requires sufficient traffic for data.
+- Origin/URL-level only; anonymized.
+- No causation analysis; needs tools for debugging.
+
+#### Chrome Usage Statistics
+
+Chrome usage statistics refer to aggregated data on browser adoption, often from sources like HTTP Archive or CrUX, used for performance benchmarking. Use for planning. Access via HTTP Archive or StatCounter; query CrUX for field data. Analyze in spreadsheets or tools like BigQuery for custom reports.
+
+**Recommended Use Cases:**
+
+- Device/browser targeting in development.
+- Competitive analysis.
+- Trend forecasting for tech adoption.
+- Validating assumptions on user base.
+
+**Pros:**
+
+- Helps prioritize optimizations for common devices.
+- Free via public datasets.
+- Informs cross-browser strategies.
+- Trends for long-term planning.
+
+**Cons:**
+
+- Aggregate; not site-specific.
+- Biased toward Chrome users.
+- Historical; may lag current trends.
+- Requires analysis tools.
+
+#### Web Performance APIs
+
+Web Performance APIs are browser interfaces (e.g., Navigation Timing, Resource Timing) for measuring real-user timings like load events and resource fetches. Use in scripts. Access `performance.timing` for navigation metrics; implement observers like `PerformanceObserver` for entries. Send to server for analysis.
+
+**Recommended Use Cases:**
+
+- Custom RUM in apps.
+- Debugging specific timings.
+- Integrating with analytics.
+- Real-user monitoring setups.
+
+**Pros:**
+
+- Real-time, client-side metrics.
+- Built-in; no external tools needed.
+- Granular for custom monitoring.
+- Works across browsers.
+
+**Cons:**
+
+- Requires JavaScript implementation.
+- Limited to supported metrics.
+- Privacy concerns with user data.
+- No aggregation; needs backend processing.
+
+#### WebPageTest
+
+WebPageTest is a free, open-source tool for detailed performance testing with waterfalls, filmstrips, and experiments. Use for detailed tests. Visit webpagetest.org, enter URL, configure (e.g., location/browser), run. Analyze waterfalls/filmstrips for bottlenecks.
+
+**Recommended Use Cases:**
+
+- Deep debugging of load issues.
+- Cross-browser/device testing.
+- Optimization experiments.
+- Free audits for small sites.
+
+**Pros:**
+
+- Highly configurable (locations, browsers).
+- Free with API for automation.
+- Visual comparisons/experiments.
+- Open-source; community-driven.
+
+**Cons:**
+
+- Complex interface for beginners.
+- Queues for free tests.
+- No built-in monitoring; manual runs.
+- Limited real-user data.
+
 ### e. How do design systems help maintain consistency in a fast-growing biotech startup?
 ### f. What are Progressive Web Apps (PWAs), and would they be useful in a biotech/AI context?
 
 ## 5. System Design & Architecture Decisions (Scalability, Real-time Data)
 
 ### a. How would you design a frontend architecture for a real-time data-heavy biotech dashboard?
-### b. What are the trade-offs between REST and GraphQL when querying large scientific datasets?
+### b. What are the trade-offs between REST, GraphQL and gRPCwhen querying large scientific datasets?
 ### c. How would you decide whether to use client-side caching (React Query, Apollo) for AI predictions or lab results?
 ### d. How would you handle real-time data updates (e.g., experiment progress, live patient monitoring)?
 ### e. How would you structure a frontend to support internationalization (i18n) in scientific collaboration tools?
