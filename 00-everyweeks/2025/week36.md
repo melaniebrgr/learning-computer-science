@@ -2,6 +2,12 @@
 
 > I'm applying for a Front End Software Engineer role at Biotech/AI startup. For the interview I was told to "expect technical questions about the 1) React ecosystem, 2) modern JavaScript/TypeScript, 3) security concepts, 4) frontend best practices, and 5) system design and architecture decisions. You will not be asked to write code, but we may ask you to explain concepts given a code example." For each of the five topics provide 10 example questions number 1) a., b. and so on. Do not provide the answers yet. I will ask later to check the answers for each question.
 
+> - Be ready to explain CORS and how browsers handle cross-origin requests.
+> - Understand how authentication in frontend apps works (tokens, headers, cookies).
+> - Refresh on core concepts: state vs props, lifecycle/hooks, context, controlled components.
+> - Be able to explain these clearly with a simple example.
+> - Mention specific tools you’ve worked with (e.g. Redux, Tailwind, Jest, Webpack).
+
 ---
 
 At a Biotech/AI startup, the frontend will likely:
@@ -210,13 +216,85 @@ Tree shaking is a code optimisation technique. It is not JS specific but a "dead
 - Reflected XSS
 - DOM-based XSS
 
-XSS attacks are harder to create, but often worse than the CSRF attacks, because at the point the browser thinks it's you--same origin. To avoide XSS attacks sanitise inputs, not only form inputs but also URL segments/search params. Don't directly reflects those on the page.
+XSS attacks are harder to create, but often worse than the CSRF attacks, because at the point the browser thinks it's you--same origin. To avoid XSS attacks sanitise inputs, not only form inputs but also URL segments/search params. Don't directly reflects those on the page. In most modern FE frameworks and templating languages you have to actively opt out of sanitisation, e.g. dangerouslySetInnerHTML, else use a library like DOM purify.
+
+- Input sanitisation: validate and sanitise all user inputs
+- Output encoding: escape UGC before rendering it in the browser
+- Content Security Policy: use CSP headers/meta to restrict loading scripts, styles, images and other resources to trusted sources
+- Use safe methods: avoid using functions the allow raw HTML input
+- Leverage libs/frameworks that have built in protections
 
 ### b. Why is it dangerous to store JWTs in localStorage, and what’s a safer alternative?
 ### c. How do Content Security Policies (CSP) protect sensitive data applications?
 ### d. How would you securely handle user-uploaded files (e.g., genetic data, medical scans)?
 ### e. What are the risks of exposing API keys in frontend code, and how do you avoid it?
-### f. How would you ensure compliance with GDPR/HIPAA from a frontend perspective?
+
+### f. How would you ensure compliance with GDPR/HIPAA from a frontend perspective? ✅
+
+#### Principles
+
+- Data minimization & purpose limitation: Only collect the fields strictly needed for the current task; gate optional fields behind explicit explanation/consent.
+- Privacy by design/default: Build consent and privacy controls into flows up-front
+- Defense in depth: Assume anything rendered or logged by the client could leak—avoid putting sensitive data (protected health information or personally identifiable information) on the client.
+
+#### Dev practices
+
+1. Consent and transparency
+
+    - Granular consent UI (e.g., analytics vs. marketing vs. functional cookies), with opt-in defaults in the EU
+    - Clear inline explanations: why a field is needed, retention, and who sees it; link to privacy policy and DPO/contact
+    - Build flows for GDPR rights: access/export (portable formats), rectification, deletion, restriction, objection, and withdraw consent.
+    - Always-available “Manage privacy” panel, e.g. in account settings.
+    - Record client-side consent state and sync to server; make it resilient (e.g., consent survives device/browser changes).
+
+2. Personally identifiable and protected health information (PII/PHI) handling
+
+    - Never put PHI/PII in URLs (paths or query params) or in front-end routing state.
+    - No PHI in logs/analytics/error reports: redact patterns (names, emails, IDs, free-text), disable keystroke/session replay on sensitive screens.
+    - No PHI in localStorage/sessionStorage. Prefer short-lived, HttpOnly, Secure, SameSite cookies for auth; treat any cached client state as non-secure.
+    - No PHI in caches: Mark responses that could embed PHI with Cache-Control: no-store and avoid rendering PHI in static assets. Consider disabling BFCache for ultra-sensitive flows if necessary.
+    - Uploads: Strip EXIF, warn about unintended content, and avoid previewing sensitive files via third-party CDNs.
+
+3. Third-party code & supply chain
+
+    - Minimize third-party scripts; for HIPAA, don’t send PHI to vendors without a BAA—ideally no third-party analytics/trackers on authenticated PHI pages.
+    - Load assets from trusted origins; CSP, subresource integrity hashes, iframe sandboxing, and tight permission policies to reduce data exfil risk.
+    - Host fonts/icons locally to avoid outbound requests from protected screens.
+
+4. Secure UX around authentication & sessions
+
+    - OAuth/OIDC with PKCE, short-lived access tokens + silent refresh; rotate keys.
+    - Step-up auth or re-auth before showing very sensitive data; idle and absolute session timeouts with clear warnings.
+    - Prevent token leakage: no tokens in URL fragments after redirects; scrub referrers.
+
+5. Form & UI details that prevent over-collection
+
+    - Client-side validation that doesn’t transmit partial/invalid PHI.
+    - Use HTML attributes (autocomplete, inputmode) to reduce mistakes; disable autofill where inappropriate.
+    - Mask/redact on screen (e.g., show partial MRN) and in copy-to-clipboard; warn before copying/downloading PHI.
+
+6. Error states & telemetry
+
+    - Generic error messages—no PHI echoes.
+    - Centralized error boundary that redacts before reporting; block stack traces that include user inputs.
+
+7. Testing & proof
+
+    - Privacy unit tests (no PII in URLs/logs), e2e tests for consent gates and data-subject right flows.
+    - Lint rules/CI checks to ban console.log on sensitive modules and to detect PHI patterns in telemetry.
+    - Data-flow diagrams from UI to APIs; keep them current for DPIAs and audits.
+
+8. Collaboration (frontend’s role in the whole)
+
+    - Work with legal/security on data classification (what counts as PHI/PII), retention, and BAAs.
+    - Ensure backend enforces access control and audit trails; FE never relies on hidden controls for authorization—UI hints only.
+
+Example: Context: Patient portal with labs and messaging.
+• Implemented a consent manager with opt-in categories; consent state synced to a server ledger.
+• Replaced session replay and error tooling on PHI routes with a HIPAA-eligible, self-hosted stack and field-level redaction.
+• Moved auth from localStorage to HttpOnly cookies; added step-up auth before showing PDFs with PHI.
+• Added no-store on lab result responses and removed PHI from all URLs; built “Download my data” (JSON/CSV) and account deletion flows.
+• Locked down third-party scripts via CSP and SRI; hosted fonts locally.
 
 ### g. What is CORS? ✅
 
