@@ -146,7 +146,21 @@ React.lazy can be called outside your components to declare a lazy-loaded React 
 1. [lazy](https://react.dev/reference/react/lazy)
 
 ### d. How does React handle server-side rendering (SSR), and why might it be useful in a biotech/AI app?
-### e. How would you integrate React with data visualization libraries like D3 or Recharts efficiently?
+### e. Describe React rendering behaviour.
+
+Since React 16 React used "Fiber" data structures that keep track of component instances, and their children and the previous iterations of them. The virtual DOM is less and less true with this structure.
+
+#### Render Phase
+
+In response to a change in state, e.g. useState, React asks components to describe UI from current props/state. JSX becomes React elements (plain objects) that represent intended UI structure. This tree of objects describing the HTML elements is the **virtual DOM**. When a parent renders, all of its children render recursively, regardless of prop equality, unless the child is memoised. In React 18, this render work can be paused, resumed, or discarded; multiple renders may be thrown away before commit (concurrency). During **reconciliation**, react diffs element types/keys to decide reuse vs replace.
+
+#### Commit Phase
+
+All calculated changes are applied synchronously. `useEffect` runs shortly after via a separate “Passive Effects” step.
+
+#### Cleanup Phase
+
+Cleanup effects.
 
 ### f. How would you manage complex forms (e.g., clinical trial data input) in React? ✅
 
@@ -300,14 +314,14 @@ Example: Context: Patient portal with labs and messaging.
 
 **CORS is designed to prevent malicious website from accessing resources on another domain without permission.** "The call is coming from outside the house." It's an HTTP request that you didn't want to come in. The Same-Origin Policy (SoP) and CORS are the two main mechanisms built into browsers that enforce this policy. This complement of Origin and Access-Control-Allow-Origin headers is the simplest use of the access control protocol.
 
-By default, the browser "same-origin policy" or SoP blocks websites from making requests to a domain other than the one that served the page. CORS or "Cross-Origin Resource Sharing"  provides a way for servers to tell browsers, via HTTP headers, that it’s okay to share resources cross-origin. Servers do this by including,
+**By default, the browser "same-origin policy" or SoP blocks websites from making requests to a domain other than the one that served the page.** CORS or "Cross-Origin Resource Sharing"  provides a way for servers to tell browsers, via HTTP headers, that it’s okay to share resources cross-origin. Servers do this by including,
 
 - an `Access-Control-Allow-Origin` header specifying to the browser that that domain is allowed (or `*` wildcard) to access their resources,
 - what methods are allowed with `Access-Control-Allow-Methods`, and
 - what HTTP headers are allowed when making the request, `Access-Control-Allow-Headers`,
 - if cookies and authorisation headers are allowed with `Access-Control-Allow-Credentials`.
 
-Note, the server doesn't respond with a list of allowed domains just if that one is. The server opt-ins to requests by responding to a preflight requests. Effectively this is a way to whitelist origins. (Note, an "origin" is not the URL, it is the scheme, domain and port). 
+Note, the server doesn't respond with a list of allowed domains just if that one is. The server opt-ins to requests by responding to a preflight requests. Effectively this is a way to whitelist origins. (Note, an "origin" is not the URL, it is the scheme, domain and port).
 
 What requests _are NOT_ subject to CORS? "Simple requests":
 

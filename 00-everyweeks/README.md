@@ -34,8 +34,8 @@ Basically I will try something for a week, document my learning, judge its succe
 |  33  | [AI assisted continuous static personal deployment](./2025/week33.md) | 303 |  |
 |  34  | [~~AI assisted~~ continuous static personal deployment](./2025/week33.md) | 200 |  |
 |  35  | D&A (Data structures and algorithms) | 200 | [Finished up to the workshop up to quicksort](https://frontendmasters.com/courses/algorithms/) |
-|  36  | FE Interview Prep for a Biotech | 102 |  |
-|  37  | - | 000 |  |
+|  36  | FE Interview Prep for a Biotech | 200 | "Won the third set with Leentje, Jo, and Domi" |
+|  37  | Tanstack query with suspense deepdive (prep for onsite) | 102 |  |
 |  38  | - | 000 |  |
 |  39  | - | 000 |  |
 |  40  | - | 000 |  |
