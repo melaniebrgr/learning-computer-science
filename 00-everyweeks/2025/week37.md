@@ -72,25 +72,20 @@ How to start using Cradle:
 
 Potential Architectural characteristics:
 
-- Diligent authn/authz: "A workspace is the home for all protein design projects within your organization. Administrators can invite members and manage their access permissions."
-- ...: There is a need for flexibility in Assay description, that may not be provided by forms, e.g. assay name, unit on measurement, "the protein characteristic you are measuring, such as activity, stability, or expression", "Property: the specific metric used to measure the Task. For example, for activity, this could be the Michaelis constant (Km) or the catalytic rate constant (kcat)."
-- ...: Similary, result date type can vary widely and it is likely that slight errors in formatting can lead to frustration. Scientists are the target audience, which tend to be atavistic (apologies) and short on time. UX/UI will need to be carefully designed with this in mind.
-- ...: Good working knowledge of the ML model is required to design the UI effectively for processing by the model.
+- Diligent **authn/authz**: "A workspace is the home for all protein design projects within your organization. Administrators can invite members and manage their access permissions."
+- **Configurability**: There is a need for flexibility in Assay description, that may not be provided by forms, e.g. assay name, unit on measurement, "the protein characteristic you are measuring, such as activity, stability, or expression", "Property: the specific metric used to measure the Task. For example, for activity, this could be the Michaelis constant (Km) or the catalytic rate constant (kcat)." Similary, result date type can vary widely and it is likely that slight errors in formatting can lead to frustration. Scientists are the target audience, which tend to be atavistic (apologies) and short on time. UX/UI will need to be carefully designed with this in mind.
+- **Usability/achievability**: Good working knowledge of the ML model is not required for users to effectively use the platform.
 
 ### Prepare 2–3 strong personal stories (teamwork, learning, conflict resolution)
 
-Use STAR (Situation, Task, Action, Result) for 2–3 examples that show teamwork, problem-solving, and resilience.
+Use **STAR (Situation, Task, Action, Result)** for 2–3 examples that show teamwork, problem-solving, and resilience.
 
-**AI Notes V1**
-
-Example of problem solving, resilience:
+**AI Notes V1**: Example of problem solving, resilience:
 
 - AI Notes PoC using OpenAI Assistants API, used as initial "V0" version of the application for the first 6 months.
 - Assumed EM and PM hats in the final 2 weeks before launch
 
-**App router enablement on Next.js**
-
-Example of team building, project management
+**App router enablement on Next.js**: Example of team building, project management
 
 "App Router epic leadership. You steered a complex initiative, mobilising senior engineers in multiple teams, balancing your and theirs other priorities with pushing the work through."
 
@@ -105,13 +100,9 @@ I drove a cross-team, app router enablement effort. The project benefitted from 
 - If it's a technical project, expect focus fragmentation
 - Get support from outside the team for non-core/blocking tasks
 
-**L&D team, tech clubs, regular padel matches**
+**L&D team, tech clubs, regular padel matches**: Example of continuous learning, interpersonal development, and giving back
 
-Example of continuous learning, interpersonal development, and giving back
-
-**PR Review pushback**
-
-Example of conflict resolution
+**PR Review pushback**: Example of conflict resolution
 
 **Other projects I've delivered/am delivering:**
 

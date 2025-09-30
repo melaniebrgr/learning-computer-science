@@ -35,10 +35,10 @@ Basically I will try something for a week, document my learning, judge its succe
 |  34  | [~~AI assisted~~ continuous static personal site deployment](./2025/week33.md) | 200 |  |
 |  35  | D&A (Data structures and algorithms) | 200 | [Finished up to the workshop up to quicksort](https://frontendmasters.com/courses/algorithms/) |
 |  36  | FE Interview Prep for a Biotech | 200 | "Won the third set with Leentje, Jo, and Domi" |
-|  37  | Onsite interview prep | 102 |  |
-|  38  | - | 000 |  |
-|  39  | - | 000 |  |
-|  40  | - | 000 |  |
+|  37  | Onsite interview prep | 206 | ⻤ |
+|  38  | Data fetching in React: React Query | 503 | Company trip |
+|  39  | State management in React feat. XState | 403 | Reread K.M. Shea and the Viking Run |
+|  40  | " | 000 |  |
 |  41  | - | 000 |  |
 |  42  | - | 000 |  |
 |  43  | - | 000 |  |
