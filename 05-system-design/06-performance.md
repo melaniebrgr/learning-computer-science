@@ -1,35 +1,35 @@
 # Performance
 
-Instead of solving the performance problem, try to remove it first, that is, ask what what logic and data is not really needed and remove it first from the application. Of course without some data and logic there is not application...
+Instead of solving the performance problem, try to remove the module first, that is, question if the logic and data is needed in the application.
+
+There a many topics related to performance:
+
+- caching
+- bundle size
 
 ## Caching
 
-"Storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. There are a few additional concepts that come along with caching:
+Caching is "storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. Caching brings a few additional concepts:
 
-- **cache keys**: the cache key must contain all inputs that determine the result, e.g. using `useMemo` but not missing a dependency in the array. Getting the cache key itself can sometimes be costly.
-- **cache invalidation**: strategies
+- **cache keys**: the cache key must contain all inputs that determine the result, e.g. using `useMemo` but missing a dependency in the dependency array. Getting the cache key itself can sometimes be costly.
+- **cache invalidation**: there are difference approaches to cache invalidation:
   - proactive update of the cache, e.g. on PUT, POST, DELETE of a resource
   - timed invalication, e.g. HTTP cache control header directives like `max-age`
-  - state while revalidate, works with time invalidation where the stale version is served while the fresh version is fetched in the background
-  - force fresh values, e.g. in admin mode always force fetch latest values
+  - stale while revalidate, works with time invalidation where the stale version is served while the fresh version is fetched in the background
+  - force fresh values, e.g. in admin mode always force fetches latest values
   - soft-purge when data is updated but cache headers would persist the stale data for quite some longer period of time, mark the data as stale so on the next request it is fetched in the background
 - **cache size**: E.g. should you cache a video buffer in memory?
   - least recently used (LRU) have a fixed cache size where the least recently used value is purged when the cache reaches a certain size
   - file-system cache, e.g. `./node_modules/.cache`
-  - redis
 - **cache warming**: when bringing up a brand new cache or switching CDNs a few problems can result until the cache is warm, e.g. API rate-limiting as all of a sudden a requests are getting re-made, or running out of resources--maybe you want a beefier CPU temporarily. Soft purge is a good solution to this.
 - **cache value validation**: if the cache client changes what is uses the cached data shape could no longer be suitable, so validating with something like zod is a good idea.
 - **cache request deduplication**: if there are two requests for the same resource, make one wait until the other completed.
 
 ### Browser cache (HTTP cache)
 
-The client (a browser) looks for the resources in the browser cache. If it's found (a hit), use it, else (a miss), go to the server. A "hit" means that the asset was in the cache. A "**miss**" means it can either be there or too old. This
+Browsers check for the resources in the browser cache. If it's a hit use it, but for a miss, go to the server. A "hit" means that the asset was in the cache. A "**miss**" means it can either be there or too old. This makes page requests faster, and saves server computation and cost.
 
-- makes page requests faster,
-- saves server computation, and
-- saves money, e.g. mobile users.
-
-A browser cache is a **private cache** because it is tied to a specific client, and contain response personalised to that user. Most web applications also use a CDN, a "globally distributed type of reverse proxy", to server resources closer to the user's location. A CDN is a public cache shared among users.
+A browser cache is a **private cache** because it is tied to a specific client, and contains response personalised to that user. Most web applications also use a CDN, a "globally distributed type of reverse proxy", to server resources closer to the user's location. A CDN is a **public cache** shared among users.
 
 A browser can load resources from disk-cache or memory cache. **Disk Cache** stores resources (e.g., scripts, images) on the hard drive (or SSD) in the browser’s cache directory. It is slower to access compared to memory but persistent across browser sessions (until cleared or expired).
 Disk cache is used for resources that are cached but not immediately needed or when memory cache is full. Memory cache stores resources in RAM, making access extremely fast. **Memory cache** is temporary and cleared when the browser tab or session closes (or memory is needed elsewhere). It is prioritized for frequently accessed or recently used resources, like scripts loaded multiple times in a session.
@@ -70,7 +70,69 @@ Cache-Control: public, max-age=3600, no-transform
 
 SSG is just "build time" caching that uses a CDN and Cache-Control headers. It maybe have no performance benefits compared to a server-rendered site with a proper CDN and Cache-Control headers. SSG is limited as product evolves to have dynamic requirements.
 
-## Resources
+### Resources
 
 1. <https://www.npmjs.com/package/@epic-web/cachified>
 2. <https://jakearchibald.com/2016/caching-best-practices/>
+
+## Bundle size
+
+When evaluating whether to split a third party library, consider:
+
+- [] Should it be split? Depands on the size.
+- [] When should it be loaded? On page load, on demand with greedy criteria, on demand with rigid criteria
+- [] Should it be stored in a custom cache?
+
+### Size analysis
+
+The amount of javascript code that is downloaded and executed by the browser can greatly impact the TTFB, and TTI. The compressed file is what is downloaded over the wire and impacts TTFB. The minified size is what the browser must parse and impacts TTI. As a rule of thumb, over 200–300 kB minified + gzip for initial-load JS starts to be too large. Consequently, both values are useful to consider. The following two bundles are being included on the FE, `rehype-katex` and `remark-math`:
+
+- [rehype-katex](https://bundlephobia.com/package/rehype-katex@7.0.1)
+  - 465.5 kB minified, 133.9 kB minified + gzip
+  - 2.68s download slow 3G, 152ms emerging 4G (estimated)
+- [remark-math](https://bundlephobia.com/package/remark-math@6.0.0)
+  - 6.6 kB minified, 2.4kB minified + gzip
+  - 49ms download slow 3G, 3ms emerging 4G (estimated)
+- md-math (This is a custom chunk configuration to load `remark-math` and `rehype-katex` on demand.)
+  - 302 kB minified, 75 kB minified + brotli, 90 kB minified + gzip
+  - ~1.5s download slow 3G, ~100ms emerging 4G (estimated)
+
+In the rollup configuration, a custom chunk is manually configured, `'md-math': ['remark-math', 'rehype-katex']`. The real size of the bundles can be measured by running `yarn build`. After running the build, there is a `md-math-B2bkDCMt.js` chunk 302 kB with a size of (75 kB minified + brotli).
+
+When the website is built, JS files are usually minified and potentially optimized but not compressed. The web server or CDN compresses files depending on the Accept-Encoding header in the request. For example, for a request with `Accept-Encoding: gzip, deflate, br, zstd` the server can respond with `Content-Encoding: br`, explicitly stating that the content was compressed with Brotli.
+
+Together, rehype-katex and remark-math are 90 kB minified + gzip, which does not push the upper boundary of the initial-load. So, the decision to bundle split is neutral.
+
+### Conditional import
+
+To note, in JS we have static and dynamic import statements. Static import statements (`import x from ‘./foo.js’`), are top-level, compile-time imports that are resolved and bundled at build time.
+
+Dynamic imports are runtime, on-demand imports (`const x = await import("./foo.js")`) that return a Promise. Both static and dynamic imports follow ES modeuls syntax here (we are ignore CJS).
+
+At parse time, the browser collects all these specifiers to build a dependency graph. Dynamic imports () are noted but only executed at runtime.
+
+Vite uses Rollup under the hood. By default, React-Router applications produces a single entry chunk per HTML entry, and Rollup’s code-splitting kicks in automatically: any modules imported via dynamic import become separate chunks, and static imports that are used by multiple entry points or large subgraphs are lifted into shared “vendor” chunks
+
+### PR review notes
+
+- manual cache not required (in memory when imported, browser cache)
+- Promise.all alternatives
+- hasMath exectution,
+
+"Every time content changes, hasMath will execute, even if the content previously passed in already had math an triggered dynamic import."
+
+- requestIdleCallback, is it the right place to load the math libs? If could be after all the content has loaded.
+
+Idle periods are moments when the main thread isn’t busy with high‑priority tasks.
+
+In the context of requestIdleCallback, an idle period is a slice of time when the browser’s main thread has no urgent work queued—no layout or style recalculations, no painting, no input handling, and no animation frames pending. During these gaps, the browser can safely run low‑priority tasks without increasing user‑perceived latency.
+
+Practically, these windows often occur:
+ • Between animation frames when the next frame deadline hasn’t arrived.
+ • After handling events (like clicks or key presses) and before the next task is scheduled.
+ • When network callbacks or timers aren’t firing and the event loop has breathing room.
+
+- unified devDep
+- Math libs loaded after content load? Would create flash of unstyled math content (FOUC); maybe we want libs to load with assurnce that they're needed.
+
+1. <https://bundlephobia.com/>

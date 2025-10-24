@@ -2,6 +2,42 @@
 
 ## Hooks
 
+### useState, useReducer
+
+```tsx
+const [state, setState] = useState(initialState);
+```
+
+`useState` and `useReducer` create values that are preserved across renders and triggers a re-render when the change. The only different is that `useReducer` follows the reducer pattern.
+
+### useRef
+
+```tsx
+const ref = useRef(initialValue);
+```
+
+create a value that is preserved across renders, but won't trigger a re-render when it changes.
+
+### useEffect, useLayoutEffect
+
+```tsx
+useEffect(didUpdate);
+```
+
+In React, both `useEffect` and `useLayoutEffect` hooks synchronize synchronize components with external systems, but their timing differs. useEffect fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging, and anything that doesn’t need to affect the initial layout.
+
+useLayoutEffect fires in the same commit phase, right after React mutates the DOM but before the browser paints. It blocks painting until it finishes, making it suitable for reading layout (measurements) and synchronously applying DOM writes that must be reflected immediately, preventing visual flicker or layout shift. Overuse can hurt performance because it delays rendering.
+
+A practical rule: prefer useEffect by default; reach for useLayoutEffect only when you must measure or adjust layout synchronously to avoid visible jumps.
+
+### useMemo, useCallback
+
+```tsx
+const memoizedValue = useMemo(calculateValue, dependencies);
+```
+
+`useMemo` and `useCallback` cache values between renders. The former caches the result of a calculation, the latter caches a function.
+
 ### useOptimistic
 
 Optimistically update the UI as you wait for the mutation request (PUT, POST, DELETE) to complete, assuming that in most cases the request is successful. The case where the request errors does need to be handle however. One way to do this is to wrap the request in a try catch and its its successful or unsuccessful, calling a revalidate method to trigger the component render with the "source of truth" data from the database.
@@ -61,13 +97,13 @@ export default function App() {
 }
 ```
 
-## useTransition
+### useTransition
 
 Unbatch a state update so that it does not slow down the component render. Usually a loading message or style is displayed instead. Overall, experience is less laginess in the UI.
 
 ## Components
 
-## Suspense
+### Suspense
 
 Suspense provide out-of-order streaming behavior.
 On page request, everything that isn't wrapped in Suspense is sent back first, and the connection is held open until all boundaries are resolved.
@@ -111,7 +147,7 @@ function ShipFallback() {
 }
 ```
 
-## `use`
+### `use`
 
 The idiomatic way to do this is React is to use the `use` hook. "use is a React API that lets you read the value of a resource like a Promise or context." The implementation of `use` is something like,
 

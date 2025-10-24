@@ -1,0 +1,1051 @@
+56303
+[[229,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/gpt-engineer-390607/databases/(default)/documents/projects/b4710620-71e3-40cd-ad4c-d81059c8f5ba/edits/edt-7e64bdb1-5239-47f0-bd97-010b4f1876e1",
+      "fields": {
+        "number": {
+          "integerValue": "1"
+        },
+        "type": {
+          "stringValue": "ai_update"
+        },
+        "screenshot_url": {
+          "stringValue": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9e9a59f5-2abc-4777-a5de-72d3f3728498/id-preview-390b3a48--b4710620-71e3-40cd-ad4c-d81059c8f5ba.lovable.app-1760786683404.png"
+        },
+        "commit_message": {
+          "stringValue": "feat: Create mock exam"
+        },
+        "pages": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "name": {
+                      "stringValue": "Index"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "status": {
+          "stringValue": "completed"
+        },
+        "bookmarked": {
+          "booleanValue": false
+        },
+        "build_errors": {
+          "nullValue": null
+        },
+        "id": {
+          "stringValue": "edt-7e64bdb1-5239-47f0-bd97-010b4f1876e1"
+        },
+        "commit_sha": {
+          "stringValue": "390b3a489c86a315defc0fd4bc42d6179301dbea"
+        },
+        "created_at": {
+          "timestampValue": "2025-10-18T11:24:33.541553Z"
+        },
+        "diff": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "action": {
+                      "stringValue": "new"
+                    },
+                    "file_path": {
+                      "stringValue": "src/components/ExamProgress.tsx"
+                    },
+                    "old_content": {
+                      "stringValue": ""
+                    },
+                    "new_content": {
+                      "stringValue": "import { Progress } from \"@/components/ui/progress\";\n\ninterface ExamProgressProps {\n  currentQuestion: number;\n  totalQuestions: number;\n  score: number;\n}\n\nexport const ExamProgress = ({ currentQuestion, totalQuestions, score }: ExamProgressProps) =\u003e {\n  const progressPercentage = ((currentQuestion - 1) / totalQuestions) * 100;\n\n  return (\n    \u003cdiv className=\"w-full space-y-2\"\u003e\n      \u003cdiv className=\"flex justify-between items-center text-sm\"\u003e\n        \u003cspan className=\"text-muted-foreground\"\u003e\n          Question {currentQuestion} of {totalQuestions}\n        \u003c/span\u003e\n        \u003cspan className=\"font-semibold text-primary\"\u003e\n          Score: {score}/{totalQuestions}\n        \u003c/span\u003e\n      \u003c/div\u003e\n      \u003cProgress value={progressPercentage} className=\"h-2\" /\u003e\n    \u003c/div\u003e\n  );\n};\n"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "old_content": {
+                      "stringValue": ""
+                    },
+                    "new_content": {
+                      "stringValue": "import { Card } from \"@/components/ui/card\";\nimport { Button } from \"@/components/ui/button\";\nimport { CheckCircle2, XCircle } from \"lucide-react\";\n\ninterface ExamQuestionProps {\n  question: string;\n  options: string[];\n  correctAnswer: number;\n  selectedAnswer: number | null;\n  onSelectAnswer: (index: number) =\u003e void;\n  showFeedback: boolean;\n}\n\nexport const ExamQuestion = ({\n  question,\n  options,\n  correctAnswer,\n  selectedAnswer,\n  onSelectAnswer,\n  showFeedback,\n}: ExamQuestionProps) =\u003e {\n  return (\n    \u003cCard className=\"p-8 shadow-lg border-border\"\u003e\n      \u003ch2 className=\"text-2xl font-semibold text-foreground mb-6\"\u003e{question}\u003c/h2\u003e\n      \u003cdiv className=\"space-y-3\"\u003e\n        {options.map((option, index) =\u003e {\n          const isSelected = selectedAnswer === index;\n          const isCorrect = index === correctAnswer;\n          const showCorrect = showFeedback && isCorrect;\n          const showIncorrect = showFeedback && isSelected && !isCorrect;\n\n          return (\n            \u003cButton\n              key={index}\n              onClick={() =\u003e !showFeedback && onSelectAnswer(index)}\n              disabled={showFeedback}\n              variant=\"outline\"\n              className={`w-full justify-start text-left h-auto py-4 px-6 transition-all ${\n                showCorrect\n                  ? \"bg-success/10 border-success text-success-foreground hover:bg-success/20\"\n                  : showIncorrect\n                  ? \"bg-destructive/10 border-destructive text-destructive-foreground\"\n                  : isSelected\n                  ? \"bg-primary/10 border-primary\"\n                  : \"hover:bg-secondary\"\n              }`}\n            \u003e\n              \u003cdiv className=\"flex items-center justify-between w-full\"\u003e\n                \u003cspan className=\"flex-1\"\u003e{option}\u003c/span\u003e\n                {showCorrect && \u003cCheckCircle2 className=\"h-5 w-5 ml-2 flex-shrink-0\" /\u003e}\n                {showIncorrect && \u003cXCircle className=\"h-5 w-5 ml-2 flex-shrink-0\" /\u003e}\n              \u003c/div\u003e\n            \u003c/Button\u003e\n          );\n        })}\n      \u003c/div\u003e\n    \u003c/Card\u003e\n  );\n};\n"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "file_path": {
+                      "stringValue": "src/components/ExamQuestion.tsx"
+                    },
+                    "action": {
+                      "stringValue": "new"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "file_path": {
+                      "stringValue": "src/components/ExamResults.tsx"
+                    },
+                    "old_content": {
+                      "stringValue": ""
+                    },
+                    "action": {
+                      "stringValue": "new"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "new_content": {
+                      "stringValue": "import { Card } from \"@/components/ui/card\";\nimport { Button } from \"@/components/ui/button\";\nimport { Trophy, RotateCcw } from \"lucide-react\";\n\ninterface ExamResultsProps {\n  score: number;\n  totalQuestions: number;\n  onRestart: () =\u003e void;\n}\n\nexport const ExamResults = ({ score, totalQuestions, onRestart }: ExamResultsProps) =\u003e {\n  const percentage = Math.round((score / totalQuestions) * 100);\n  const isPassing = percentage \u003e= 70;\n\n  return (\n    \u003cCard className=\"p-8 shadow-lg border-border text-center\"\u003e\n      \u003cdiv className=\"mb-6\"\u003e\n        \u003cTrophy\n          className={`h-20 w-20 mx-auto mb-4 ${\n            isPassing ? \"text-success\" : \"text-muted-foreground\"\n          }`}\n        /\u003e\n        \u003ch2 className=\"text-3xl font-bold text-foreground mb-2\"\u003eExam Complete!\u003c/h2\u003e\n        \u003cp className=\"text-muted-foreground\"\u003eHere are your results\u003c/p\u003e\n      \u003c/div\u003e\n\n      \u003cdiv className=\"space-y-4 mb-8\"\u003e\n        \u003cdiv className=\"bg-secondary rounded-lg p-6\"\u003e\n          \u003cp className=\"text-sm text-muted-foreground mb-1\"\u003eYour Score\u003c/p\u003e\n          \u003cp className=\"text-5xl font-bold text-primary\"\u003e\n            {score}/{totalQuestions}\n          \u003c/p\u003e\n        \u003c/div\u003e\n\n        \u003cdiv className=\"bg-secondary rounded-lg p-4\"\u003e\n          \u003cp className=\"text-sm text-muted-foreground mb-1\"\u003ePercentage\u003c/p\u003e\n          \u003cp\n            className={`text-3xl font-semibold ${\n              isPassing ? \"text-success\" : \"text-destructive\"\n            }`}\n          \u003e\n            {percentage}%\n          \u003c/p\u003e\n        \u003c/div\u003e\n\n        \u003cdiv className=\"pt-2\"\u003e\n          \u003cp\n            className={`text-lg font-medium ${\n              isPassing ? \"text-success\" : \"text-destructive\"\n            }`}\n          \u003e\n            {isPassing\n              ? \"Congratulations! You passed the exam.\"\n              : \"Keep practicing to improve your score.\"}\n          \u003c/p\u003e\n        \u003c/div\u003e\n      \u003c/div\u003e\n\n      \u003cButton onClick={onRestart} size=\"lg\" className=\"w-full\"\u003e\n        \u003cRotateCcw className=\"mr-2 h-5 w-5\" /\u003e\n        Retake Exam\n      \u003c/Button\u003e\n    \u003c/Card\u003e\n  );\n};\n"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "file_path": {
+                      "stringValue": "src/data/examQuestions.ts"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "action": {
+                      "stringValue": "new"
+                    },
+                    "old_content": {
+                      "stringValue": ""
+                    },
+                    "new_content": {
+                      "stringValue": "export interface Question {\n  id: number;\n  question: string;\n  options: string[];\n  correctAnswer: number;\n}\n\nexport const examQuestions: Question[] = [\n  {\n    id: 1,\n    question: \"What is the capital city of France?\",\n    options: [\"London\", \"Berlin\", \"Paris\", \"Madrid\"],\n    correctAnswer: 2,\n  },\n  {\n    id: 2,\n    question: \"Which planet is known as the Red Planet?\",\n    options: [\"Venus\", \"Mars\", \"Jupiter\", \"Saturn\"],\n    correctAnswer: 1,\n  },\n  {\n    id: 3,\n    question: \"What is the largest ocean on Earth?\",\n    options: [\"Atlantic Ocean\", \"Indian Ocean\", \"Arctic Ocean\", \"Pacific Ocean\"],\n    correctAnswer: 3,\n  },\n  {\n    id: 4,\n    question: \"Who painted the Mona Lisa?\",\n    options: [\"Vincent van Gogh\", \"Leonardo da Vinci\", \"Pablo Picasso\", \"Michelangelo\"],\n    correctAnswer: 1,\n  },\n  {\n    id: 5,\n    question: \"What is the smallest prime number?\",\n    options: [\"0\", \"1\", \"2\", \"3\"],\n    correctAnswer: 2,\n  },\n  {\n    id: 6,\n    question: \"In which year did World War II end?\",\n    options: [\"1943\", \"1944\", \"1945\", \"1946\"],\n    correctAnswer: 2,\n  },\n  {\n    id: 7,\n    question: \"What is the chemical symbol for gold?\",\n    options: [\"Go\", \"Gd\", \"Au\", \"Ag\"],\n    correctAnswer: 2,\n  },\n  {\n    id: 8,\n    question: \"Which programming language is known for its use in web development?\",\n    options: [\"Python\", \"JavaScript\", \"C++\", \"Java\"],\n    correctAnswer: 1,\n  },\n  {\n    id: 9,\n    question: \"What is the tallest mammal in the world?\",\n    options: [\"Elephant\", \"Giraffe\", \"Blue Whale\", \"Ostrich\"],\n    correctAnswer: 1,\n  },\n  {\n    id: 10,\n    question: \"How many continents are there on Earth?\",\n    options: [\"5\", \"6\", \"7\", \"8\"],\n    correctAnswer: 2,\n  },\n];\n"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "new_content": {
+                      "stringValue": "\u003c!doctype html\u003e\n\u003chtml lang=\"en\"\u003e\n  \u003chead\u003e\n    \u003cmeta charset=\"UTF-8\" /\u003e\n    \u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /\u003e\n    \u003ctitle\u003eMock Exam - Test Your Knowledge\u003c/title\u003e\n    \u003cmeta name=\"description\" content=\"Take a practice exam with multiple choice questions. Test your knowledge and track your progress with instant feedback.\" /\u003e\n    \u003cmeta name=\"author\" content=\"Lovable\" /\u003e\n\n    \u003cmeta property=\"og:title\" content=\"Mock Exam - Test Your Knowledge\" /\u003e\n    \u003cmeta property=\"og:description\" content=\"Take a practice exam with multiple choice questions. Test your knowledge and track your progress with instant feedback.\" /\u003e\n    \u003cmeta property=\"og:type\" content=\"website\" /\u003e\n    \u003cmeta property=\"og:image\" content=\"https://lovable.dev/opengraph-image-p98pqg.png\" /\u003e\n\n    \u003cmeta name=\"twitter:card\" content=\"summary_large_image\" /\u003e\n    \u003cmeta name=\"twitter:site\" content=\"@lovable_dev\" /\u003e\n    \u003cmeta name=\"twitter:image\" content=\"https://lovable.dev/opengraph-image-p98pqg.png\" /\u003e\n  \u003c/head\u003e\n\n  \u003cbody\u003e\n    \u003cdiv id=\"root\"\u003e\u003c/div\u003e\n    \u003cscript type=\"module\" src=\"/src/main.tsx\"\u003e\u003c/script\u003e\n  \u003c/body\u003e\n\u003c/html\u003e\n"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "old_content": {
+                      "stringValue": "\u003c!doctype html\u003e\n\u003chtml lang=\"en\"\u003e\n  \u003chead\u003e\n    \u003cmeta charset=\"UTF-8\" /\u003e\n    \u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /\u003e\n    \u003ctitle\u003eqwizzy-creator\u003c/title\u003e\n    \u003cmeta name=\"description\" content=\"Lovable Generated Project\" /\u003e\n    \u003cmeta name=\"author\" content=\"Lovable\" /\u003e\n\n    \u003cmeta property=\"og:title\" content=\"qwizzy-creator\" /\u003e\n    \u003cmeta property=\"og:description\" content=\"Lovable Generated Project\" /\u003e\n    \u003cmeta property=\"og:type\" content=\"website\" /\u003e\n    \u003cmeta property=\"og:image\" content=\"https://lovable.dev/opengraph-image-p98pqg.png\" /\u003e\n\n    \u003cmeta name=\"twitter:card\" content=\"summary_large_image\" /\u003e\n    \u003cmeta name=\"twitter:site\" content=\"@lovable_dev\" /\u003e\n    \u003cmeta name=\"twitter:image\" content=\"https://lovable.dev/opengraph-image-p98pqg.png\" /\u003e\n  \u003c/head\u003e\n\n  \u003cbody\u003e\n    \u003cdiv id=\"root\"\u003e\u003c/div\u003e\n    \u003cscript type=\"module\" src=\"/src/main.tsx\"\u003e\u003c/script\u003e\n  \u003c/body\u003e\n\u003c/html\u003e\n"
+                    },
+                    "file_path": {
+                      "stringValue": "index.html"
+                    },
+                    "action": {
+                      "stringValue": "edit"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "action": {
+                      "stringValue": "edit"
+                    },
+                    "old_content": {
+                      "stringValue": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. \nAll colors MUST be HSL.\n*/\n\n@layer base {\n  :root {\n    --background: 0 0% 100%;\n    --foreground: 222.2 84% 4.9%;\n\n    --card: 0 0% 100%;\n    --card-foreground: 222.2 84% 4.9%;\n\n    --popover: 0 0% 100%;\n    --popover-foreground: 222.2 84% 4.9%;\n\n    --primary: 222.2 47.4% 11.2%;\n    --primary-foreground: 210 40% 98%;\n\n    --secondary: 210 40% 96.1%;\n    --secondary-foreground: 222.2 47.4% 11.2%;\n\n    --muted: 210 40% 96.1%;\n    --muted-foreground: 215.4 16.3% 46.9%;\n\n    --accent: 210 40% 96.1%;\n    --accent-foreground: 222.2 47.4% 11.2%;\n\n    --destructive: 0 84.2% 60.2%;\n    --destructive-foreground: 210 40% 98%;\n\n    --border: 214.3 31.8% 91.4%;\n    --input: 214.3 31.8% 91.4%;\n    --ring: 222.2 84% 4.9%;\n\n    --radius: 0.5rem;\n\n    --sidebar-background: 0 0% 98%;\n\n    --sidebar-foreground: 240 5.3% 26.1%;\n\n    --sidebar-primary: 240 5.9% 10%;\n\n    --sidebar-primary-foreground: 0 0% 98%;\n\n    --sidebar-accent: 240 4.8% 95.9%;\n\n    --sidebar-accent-foreground: 240 5.9% 10%;\n\n    --sidebar-border: 220 13% 91%;\n\n    --sidebar-ring: 217.2 91.2% 59.8%;\n  }\n\n  .dark {\n    --background: 222.2 84% 4.9%;\n    --foreground: 210 40% 98%;\n\n    --card: 222.2 84% 4.9%;\n    --card-foreground: 210 40% 98%;\n\n    --popover: 222.2 84% 4.9%;\n    --popover-foreground: 210 40% 98%;\n\n    --primary: 210 40% 98%;\n    --primary-foreground: 222.2 47.4% 11.2%;\n\n    --secondary: 217.2 32.6% 17.5%;\n    --secondary-foreground: 210 40% 98%;\n\n    --muted: 217.2 32.6% 17.5%;\n    --muted-foreground: 215 20.2% 65.1%;\n\n    --accent: 217.2 32.6% 17.5%;\n    --accent-foreground: 210 40% 98%;\n\n    --destructive: 0 62.8% 30.6%;\n    --destructive-foreground: 210 40% 98%;\n\n    --border: 217.2 32.6% 17.5%;\n    --input: 217.2 32.6% 17.5%;\n    --ring: 212.7 26.8% 83.9%;\n    --sidebar-background: 240 5.9% 10%;\n    --sidebar-foreground: 240 4.8% 95.9%;\n    --sidebar-primary: 224.3 76.3% 48%;\n    --sidebar-primary-foreground: 0 0% 100%;\n    --sidebar-accent: 240 3.7% 15.9%;\n    --sidebar-accent-foreground: 240 4.8% 95.9%;\n    --sidebar-border: 240 3.7% 15.9%;\n    --sidebar-ring: 217.2 91.2% 59.8%;\n  }\n}\n\n@layer base {\n  * {\n    @apply border-border;\n  }\n\n  body {\n    @apply bg-background text-foreground;\n  }\n}\n"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "new_content": {
+                      "stringValue": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. \nAll colors MUST be HSL.\n*/\n\n@layer base {\n  :root {\n    --background: 220 20% 97%;\n    --foreground: 230 25% 15%;\n\n    --card: 0 0% 100%;\n    --card-foreground: 230 25% 15%;\n\n    --popover: 0 0% 100%;\n    --popover-foreground: 230 25% 15%;\n\n    --primary: 238 65% 52%;\n    --primary-foreground: 0 0% 100%;\n\n    --secondary: 220 15% 92%;\n    --secondary-foreground: 230 25% 15%;\n\n    --muted: 220 15% 94%;\n    --muted-foreground: 230 12% 45%;\n\n    --accent: 238 65% 60%;\n    --accent-foreground: 0 0% 100%;\n\n    --success: 142 72% 45%;\n    --success-foreground: 0 0% 100%;\n\n    --destructive: 0 72% 51%;\n    --destructive-foreground: 0 0% 100%;\n\n    --border: 220 13% 88%;\n    --input: 220 13% 88%;\n    --ring: 238 65% 52%;\n\n    --radius: 0.5rem;\n\n    --sidebar-background: 0 0% 98%;\n\n    --sidebar-foreground: 240 5.3% 26.1%;\n\n    --sidebar-primary: 240 5.9% 10%;\n\n    --sidebar-primary-foreground: 0 0% 98%;\n\n    --sidebar-accent: 240 4.8% 95.9%;\n\n    --sidebar-accent-foreground: 240 5.9% 10%;\n\n    --sidebar-border: 220 13% 91%;\n\n    --sidebar-ring: 217.2 91.2% 59.8%;\n  }\n\n  .dark {\n    --background: 230 25% 8%;\n    --foreground: 220 20% 95%;\n\n    --card: 230 22% 12%;\n    --card-foreground: 220 20% 95%;\n\n    --popover: 230 22% 12%;\n    --popover-foreground: 220 20% 95%;\n\n    --primary: 238 65% 60%;\n    --primary-foreground: 0 0% 100%;\n\n    --secondary: 230 18% 18%;\n    --secondary-foreground: 220 20% 95%;\n\n    --muted: 230 18% 16%;\n    --muted-foreground: 220 12% 60%;\n\n    --accent: 238 65% 65%;\n    --accent-foreground: 0 0% 100%;\n\n    --success: 142 72% 50%;\n    --success-foreground: 0 0% 100%;\n\n    --destructive: 0 72% 56%;\n    --destructive-foreground: 0 0% 100%;\n\n    --border: 230 18% 18%;\n    --input: 230 18% 18%;\n    --ring: 238 65% 60%;\n    --sidebar-background: 240 5.9% 10%;\n    --sidebar-foreground: 240 4.8% 95.9%;\n    --sidebar-primary: 224.3 76.3% 48%;\n    --sidebar-primary-foreground: 0 0% 100%;\n    --sidebar-accent: 240 3.7% 15.9%;\n    --sidebar-accent-foreground: 240 4.8% 95.9%;\n    --sidebar-border: 240 3.7% 15.9%;\n    --sidebar-ring: 217.2 91.2% 59.8%;\n  }\n}\n\n@layer base {\n  * {\n    @apply border-border;\n  }\n\n  body {\n    @apply bg-background text-foreground;\n  }\n}\n"
+                    },
+                    "file_path": {
+                      "stringValue": "src/index.css"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "action": {
+                      "stringValue": "edit"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "new_content": {
+                      "stringValue": "import { useState } from \"react\";\nimport { ExamQuestion } from \"@/components/ExamQuestion\";\nimport { ExamProgress } from \"@/components/ExamProgress\";\nimport { ExamResults } from \"@/components/ExamResults\";\nimport { Button } from \"@/components/ui/button\";\nimport { examQuestions } from \"@/data/examQuestions\";\nimport { ArrowRight } from \"lucide-react\";\n\nconst Index = () =\u003e {\n  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);\n  const [selectedAnswers, setSelectedAnswers] = useState\u003c(number | null)[]\u003e(\n    new Array(examQuestions.length).fill(null)\n  );\n  const [showFeedback, setShowFeedback] = useState(false);\n  const [isExamComplete, setIsExamComplete] = useState(false);\n  const [score, setScore] = useState(0);\n\n  const currentQuestion = examQuestions[currentQuestionIndex];\n  const isLastQuestion = currentQuestionIndex === examQuestions.length - 1;\n\n  const handleSelectAnswer = (answerIndex: number) =\u003e {\n    const newSelectedAnswers = [...selectedAnswers];\n    newSelectedAnswers[currentQuestionIndex] = answerIndex;\n    setSelectedAnswers(newSelectedAnswers);\n    setShowFeedback(true);\n\n    if (answerIndex === currentQuestion.correctAnswer) {\n      setScore((prev) =\u003e prev + 1);\n    }\n  };\n\n  const handleNext = () =\u003e {\n    if (isLastQuestion) {\n      setIsExamComplete(true);\n    } else {\n      setCurrentQuestionIndex((prev) =\u003e prev + 1);\n      setShowFeedback(false);\n    }\n  };\n\n  const handleRestart = () =\u003e {\n    setCurrentQuestionIndex(0);\n    setSelectedAnswers(new Array(examQuestions.length).fill(null));\n    setShowFeedback(false);\n    setIsExamComplete(false);\n    setScore(0);\n  };\n\n  if (isExamComplete) {\n    return (\n      \u003cdiv className=\"min-h-screen bg-background flex items-center justify-center p-4\"\u003e\n        \u003cdiv className=\"w-full max-w-2xl\"\u003e\n          \u003cExamResults\n            score={score}\n            totalQuestions={examQuestions.length}\n            onRestart={handleRestart}\n          /\u003e\n        \u003c/div\u003e\n      \u003c/div\u003e\n    );\n  }\n\n  return (\n    \u003cdiv className=\"min-h-screen bg-background py-8 px-4\"\u003e\n      \u003cdiv className=\"max-w-3xl mx-auto space-y-8\"\u003e\n        \u003cdiv className=\"text-center space-y-2\"\u003e\n          \u003ch1 className=\"text-4xl font-bold text-foreground\"\u003eMock Exam\u003c/h1\u003e\n          \u003cp className=\"text-muted-foreground\"\u003eTest your knowledge with this practice exam\u003c/p\u003e\n        \u003c/div\u003e\n\n        \u003cExamProgress\n          currentQuestion={currentQuestionIndex + 1}\n          totalQuestions={examQuestions.length}\n          score={score}\n        /\u003e\n\n        \u003cExamQuestion\n          question={currentQuestion.question}\n          options={currentQuestion.options}\n          correctAnswer={currentQuestion.correctAnswer}\n          selectedAnswer={selectedAnswers[currentQuestionIndex]}\n          onSelectAnswer={handleSelectAnswer}\n          showFeedback={showFeedback}\n        /\u003e\n\n        {showFeedback && (\n          \u003cdiv className=\"flex justify-end\"\u003e\n            \u003cButton onClick={handleNext} size=\"lg\"\u003e\n              {isLastQuestion ? \"View Results\" : \"Next Question\"}\n              \u003cArrowRight className=\"ml-2 h-5 w-5\" /\u003e\n            \u003c/Button\u003e\n          \u003c/div\u003e\n        )}\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default Index;\n"
+                    },
+                    "old_content": {
+                      "stringValue": "// Update this page (the content is just a fallback if you fail to update the page)\n\nconst Index = () =\u003e {\n  return (\n    \u003cdiv className=\"flex min-h-screen items-center justify-center bg-background\"\u003e\n      \u003cdiv className=\"text-center\"\u003e\n        \u003ch1 className=\"mb-4 text-4xl font-bold\"\u003eWelcome to Your Blank App\u003c/h1\u003e\n        \u003cp className=\"text-xl text-muted-foreground\"\u003eStart building your amazing project here!\u003c/p\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  );\n};\n\nexport default Index;\n"
+                    },
+                    "file_path": {
+                      "stringValue": "src/pages/Index.tsx"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "old_content": {
+                      "stringValue": "import type { Config } from \"tailwindcss\";\n\nexport default {\n  darkMode: [\"class\"],\n  content: [\"./pages/**/*.{ts,tsx}\", \"./components/**/*.{ts,tsx}\", \"./app/**/*.{ts,tsx}\", \"./src/**/*.{ts,tsx}\"],\n  prefix: \"\",\n  theme: {\n    container: {\n      center: true,\n      padding: \"2rem\",\n      screens: {\n        \"2xl\": \"1400px\",\n      },\n    },\n    extend: {\n      colors: {\n        border: \"hsl(var(--border))\",\n        input: \"hsl(var(--input))\",\n        ring: \"hsl(var(--ring))\",\n        background: \"hsl(var(--background))\",\n        foreground: \"hsl(var(--foreground))\",\n        primary: {\n          DEFAULT: \"hsl(var(--primary))\",\n          foreground: \"hsl(var(--primary-foreground))\",\n        },\n        secondary: {\n          DEFAULT: \"hsl(var(--secondary))\",\n          foreground: \"hsl(var(--secondary-foreground))\",\n        },\n        destructive: {\n          DEFAULT: \"hsl(var(--destructive))\",\n          foreground: \"hsl(var(--destructive-foreground))\",\n        },\n        muted: {\n          DEFAULT: \"hsl(var(--muted))\",\n          foreground: \"hsl(var(--muted-foreground))\",\n        },\n        accent: {\n          DEFAULT: \"hsl(var(--accent))\",\n          foreground: \"hsl(var(--accent-foreground))\",\n        },\n        popover: {\n          DEFAULT: \"hsl(var(--popover))\",\n          foreground: \"hsl(var(--popover-foreground))\",\n        },\n        card: {\n          DEFAULT: \"hsl(var(--card))\",\n          foreground: \"hsl(var(--card-foreground))\",\n        },\n        sidebar: {\n          DEFAULT: \"hsl(var(--sidebar-background))\",\n          foreground: \"hsl(var(--sidebar-foreground))\",\n          primary: \"hsl(var(--sidebar-primary))\",\n          \"primary-foreground\": \"hsl(var(--sidebar-primary-foreground))\",\n          accent: \"hsl(var(--sidebar-accent))\",\n          \"accent-foreground\": \"hsl(var(--sidebar-accent-foreground))\",\n          border: \"hsl(var(--sidebar-border))\",\n          ring: \"hsl(var(--sidebar-ring))\",\n        },\n      },\n      borderRadius: {\n        lg: \"var(--radius)\",\n        md: \"calc(var(--radius) - 2px)\",\n        sm: \"calc(var(--radius) - 4px)\",\n      },\n      keyframes: {\n        \"accordion-down\": {\n          from: {\n            height: \"0\",\n          },\n          to: {\n            height: \"var(--radix-accordion-content-height)\",\n          },\n        },\n        \"accordion-up\": {\n          from: {\n            height: \"var(--radix-accordion-content-height)\",\n          },\n          to: {\n            height: \"0\",\n          },\n        },\n      },\n      animation: {\n        \"accordion-down\": \"accordion-down 0.2s ease-out\",\n        \"accordion-up\": \"accordion-up 0.2s ease-out\",\n      },\n    },\n  },\n  plugins: [require(\"tailwindcss-animate\")],\n} satisfies Config;\n"
+                    },
+                    "new_content": {
+                      "stringValue": "import type { Config } from \"tailwindcss\";\n\nexport default {\n  darkMode: [\"class\"],\n  content: [\"./pages/**/*.{ts,tsx}\", \"./components/**/*.{ts,tsx}\", \"./app/**/*.{ts,tsx}\", \"./src/**/*.{ts,tsx}\"],\n  prefix: \"\",\n  theme: {\n    container: {\n      center: true,\n      padding: \"2rem\",\n      screens: {\n        \"2xl\": \"1400px\",\n      },\n    },\n    extend: {\n      colors: {\n        border: \"hsl(var(--border))\",\n        input: \"hsl(var(--input))\",\n        ring: \"hsl(var(--ring))\",\n        background: \"hsl(var(--background))\",\n        foreground: \"hsl(var(--foreground))\",\n        primary: {\n          DEFAULT: \"hsl(var(--primary))\",\n          foreground: \"hsl(var(--primary-foreground))\",\n        },\n        secondary: {\n          DEFAULT: \"hsl(var(--secondary))\",\n          foreground: \"hsl(var(--secondary-foreground))\",\n        },\n        destructive: {\n          DEFAULT: \"hsl(var(--destructive))\",\n          foreground: \"hsl(var(--destructive-foreground))\",\n        },\n        muted: {\n          DEFAULT: \"hsl(var(--muted))\",\n          foreground: \"hsl(var(--muted-foreground))\",\n        },\n        accent: {\n          DEFAULT: \"hsl(var(--accent))\",\n          foreground: \"hsl(var(--accent-foreground))\",\n        },\n        success: {\n          DEFAULT: \"hsl(var(--success))\",\n          foreground: \"hsl(var(--success-foreground))\",\n        },\n        popover: {\n          DEFAULT: \"hsl(var(--popover))\",\n          foreground: \"hsl(var(--popover-foreground))\",\n        },\n        card: {\n          DEFAULT: \"hsl(var(--card))\",\n          foreground: \"hsl(var(--card-foreground))\",\n        },\n        sidebar: {\n          DEFAULT: \"hsl(var(--sidebar-background))\",\n          foreground: \"hsl(var(--sidebar-foreground))\",\n          primary: \"hsl(var(--sidebar-primary))\",\n          \"primary-foreground\": \"hsl(var(--sidebar-primary-foreground))\",\n          accent: \"hsl(var(--sidebar-accent))\",\n          \"accent-foreground\": \"hsl(var(--sidebar-accent-foreground))\",\n          border: \"hsl(var(--sidebar-border))\",\n          ring: \"hsl(var(--sidebar-ring))\",\n        },\n      },\n      borderRadius: {\n        lg: \"var(--radius)\",\n        md: \"calc(var(--radius) - 2px)\",\n        sm: \"calc(var(--radius) - 4px)\",\n      },\n      keyframes: {\n        \"accordion-down\": {\n          from: {\n            height: \"0\",\n          },\n          to: {\n            height: \"var(--radix-accordion-content-height)\",\n          },\n        },\n        \"accordion-up\": {\n          from: {\n            height: \"var(--radix-accordion-content-height)\",\n          },\n          to: {\n            height: \"0\",\n          },\n        },\n      },\n      animation: {\n        \"accordion-down\": \"accordion-down 0.2s ease-out\",\n        \"accordion-up\": \"accordion-up 0.2s ease-out\",\n      },\n    },\n  },\n  plugins: [require(\"tailwindcss-animate\")],\n} satisfies Config;\n"
+                    },
+                    "action": {
+                      "stringValue": "edit"
+                    },
+                    "is_image": {
+                      "booleanValue": false
+                    },
+                    "file_path": {
+                      "stringValue": "tailwind.config.ts"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "preview_build_status": {
+          "stringValue": "successful"
+        },
+        "reverted": {
+          "booleanValue": false
+        },
+        "created_by": {
+          "stringValue": "mPf55efA8Feod54RhHpQi8nqu6G2"
+        },
+        "user_id": {
+          "stringValue": "mPf55efA8Feod54RhHpQi8nqu6G2"
+        }
+      },
+      "createTime": "2025-10-18T11:24:33.580816Z",
+      "updateTime": "2025-10-18T11:24:43.818300Z"
+    },
+    "targetIds": [
+      10
+    ]
+  }
+}
+]],[230,[{
+  "targetChange": {
+    "resumeToken": "CgkIvOLBxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.818300Z"
+  }
+}
+]],[231,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/gpt-engineer-390607/databases/(default)/documents/projects/b4710620-71e3-40cd-ad4c-d81059c8f5ba",
+      "fields": {
+        "remix_count": {
+          "integerValue": "0"
+        },
+        "created_by": {
+          "stringValue": "mPf55efA8Feod54RhHpQi8nqu6G2"
+        },
+        "user_message_count": {
+          "integerValue": "1"
+        },
+        "status": {
+          "stringValue": "completed"
+        },
+        "is_published": {
+          "booleanValue": false
+        },
+        "id": {
+          "stringValue": "b4710620-71e3-40cd-ad4c-d81059c8f5ba"
+        },
+        "preview_build_commit_sha": {
+          "stringValue": "390b3a489c86a315defc0fd4bc42d6179301dbea"
+        },
+        "is_protected": {
+          "booleanValue": false
+        },
+        "workspace_id": {
+          "stringValue": "98xJof3rxWllIG99COQV"
+        },
+        "tech_stack": {
+          "stringValue": "vite_react_shadcn_ts_20250728_minor"
+        },
+        "available_project_migrations": {
+          "nullValue": null
+        },
+        "creation_options": {
+          "mapValue": {
+            "fields": {
+              "initial_message": {
+                "mapValue": {
+                  "fields": {
+                    "Files": {
+                      "arrayValue": {}
+                    },
+                    "View": {
+                      "nullValue": null
+                    },
+                    "ProjectMigrationIDs": {
+                      "nullValue": null
+                    },
+                    "RedactPII": {
+                      "nullValue": null
+                    },
+                    "DebugMode": {
+                      "booleanValue": false
+                    },
+                    "Message": {
+                      "stringValue": "Create a mock exam with multiple choice questions."
+                    },
+                    "UserMessageID": {
+                      "stringValue": "umsg_01k7vgxxg0fk19bh4bdy0p55y1"
+                    },
+                    "Model": {
+                      "nullValue": null
+                    },
+                    "ErrorIDs": {
+                      "nullValue": null
+                    },
+                    "ViewDescription": {
+                      "nullValue": null
+                    },
+                    "SelectedElements": {
+                      "nullValue": null
+                    },
+                    "RuntimeErrors": {
+                      "nullValue": null
+                    },
+                    "IntegrateSupabaseProjectID": {
+                      "nullValue": null
+                    },
+                    "BuilderToken": {
+                      "nullValue": null
+                    },
+                    "ContainsError": {
+                      "booleanValue": false
+                    },
+                    "RunSQLInMessageWithID": {
+                      "nullValue": null
+                    },
+                    "Images": {
+                      "nullValue": null
+                    },
+                    "NetworkRequests": {
+                      "nullValue": null
+                    },
+                    "AIMessageID": {
+                      "stringValue": "aimsg_01k7vgxxg0fk19bh4jkpycscsr"
+                    },
+                    "IsCreation": {
+                      "nullValue": null
+                    },
+                    "UserInput": {
+                      "nullValue": null
+                    },
+                    "PrevSessionID": {
+                      "nullValue": null
+                    },
+                    "ChatOnly": {
+                      "booleanValue": false
+                    },
+                    "SessionReplay": {
+                      "nullValue": null
+                    },
+                    "CurrentPage": {
+                      "nullValue": null
+                    },
+                    "IntegrateSupabaseOrgID": {
+                      "nullValue": null
+                    },
+                    "ClientLogs": {
+                      "nullValue": null
+                    },
+                    "Intent": {
+                      "nullValue": null
+                    }
+                  }
+                }
+              },
+              "description": {
+                "stringValue": "Create a mock exam with multiple choice questions."
+              },
+              "tech_stack": {
+                "stringValue": ""
+              },
+              "visibility": {
+                "stringValue": "public"
+              }
+            }
+          }
+        },
+        "user_id": {
+          "stringValue": "mPf55efA8Feod54RhHpQi8nqu6G2"
+        },
+        "updated_at": {
+          "timestampValue": "2025-10-18T11:24:43.840Z"
+        },
+        "hide_badge": {
+          "nullValue": null
+        },
+        "name": {
+          "stringValue": "qwizzy-creator"
+        },
+        "created_at": {
+          "timestampValue": "2025-10-18T11:22:57.143Z"
+        },
+        "edit_count": {
+          "integerValue": "1"
+        },
+        "git_on_s3": {
+          "booleanValue": true
+        },
+        "visibility": {
+          "stringValue": "public"
+        },
+        "latest_commit_sha": {
+          "stringValue": "390b3a489c86a315defc0fd4bc42d6179301dbea"
+        },
+        "description": {
+          "stringValue": "Create a mock exam with multiple choice questions."
+        },
+        "is_github": {
+          "booleanValue": false
+        },
+        "backend_total_used_in_billing_period": {
+          "doubleValue": 0
+        },
+        "use_project_id_as_repo_identifier": {
+          "booleanValue": true
+        },
+        "unused_code": {
+          "arrayValue": {
+            "values": [
+              {
+                "stringValue": "src/components/ui/accordion.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/alert-dialog.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/alert.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/aspect-ratio.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/avatar.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/badge.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/breadcrumb.tsx       "
+              },
+              {
+                "stringValue": "src/components/ui/calendar.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/carousel.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/chart.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/checkbox.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/collapsible.tsx      "
+              },
+              {
+                "stringValue": "src/components/ui/command.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/context-menu.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/dialog.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/drawer.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/dropdown-menu.tsx    "
+              },
+              {
+                "stringValue": "src/components/ui/form.tsx             "
+              },
+              {
+                "stringValue": "src/components/ui/hover-card.tsx       "
+              },
+              {
+                "stringValue": "src/components/ui/input-otp.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/input.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/label.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/menubar.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/navigation-menu.tsx  "
+              },
+              {
+                "stringValue": "src/components/ui/pagination.tsx       "
+              },
+              {
+                "stringValue": "src/components/ui/popover.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/radio-group.tsx      "
+              },
+              {
+                "stringValue": "src/components/ui/resizable.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/scroll-area.tsx      "
+              },
+              {
+                "stringValue": "src/components/ui/select.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/separator.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/sheet.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/sidebar.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/skeleton.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/slider.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/switch.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/table.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/tabs.tsx             "
+              },
+              {
+                "stringValue": "src/components/ui/textarea.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/toggle-group.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/toggle.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/use-toast.ts         "
+              },
+              {
+                "stringValue": "src/hooks/use-mobile.tsx"
+              }
+            ]
+          }
+        }
+      },
+      "createTime": "2025-10-18T11:22:57.174030Z",
+      "updateTime": "2025-10-18T11:24:43.862496Z"
+    },
+    "targetIds": [
+      14
+    ]
+  }
+}
+]],[232,[{
+  "targetChange": {
+    "targetIds": [
+      14
+    ],
+    "resumeToken": "CgkInPvFxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.887004Z"
+  }
+}
+]],[233,[{
+  "targetChange": {
+    "targetIds": [
+      2,
+      14
+    ],
+    "resumeToken": "CgkInPvFxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.887004Z"
+  }
+}
+]],[234,[{
+  "targetChange": {
+    "targetIds": [
+      12
+    ],
+    "resumeToken": "CgkInPvFxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.887004Z"
+  }
+}
+]],[235,[{
+  "filter": {
+    "targetId": 8,
+    "count": 1,
+    "unchangedNames": {
+      "bits": {
+        "bitmap": "e24B",
+        "padding": 7
+      },
+      "hashCount": 12
+    }
+  }
+}
+]],[236,[{
+  "targetChange": {
+    "targetIds": [
+      8
+    ],
+    "resumeToken": "CgkInPvFxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.887004Z"
+  }
+}
+]],[237,[{
+  "filter": {
+    "targetId": 10,
+    "count": 1,
+    "unchangedNames": {
+      "bits": {
+        "bitmap": "taoA",
+        "padding": 7
+      },
+      "hashCount": 12
+    }
+  }
+}
+]],[238,[{
+  "targetChange": {
+    "resumeToken": "CgkInPvFxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.887004Z"
+  }
+}
+]],[239,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/gpt-engineer-390607/databases/(default)/documents/projects/b4710620-71e3-40cd-ad4c-d81059c8f5ba",
+      "fields": {
+        "edit_count": {
+          "integerValue": "1"
+        },
+        "status": {
+          "stringValue": "completed"
+        },
+        "visibility": {
+          "stringValue": "public"
+        },
+        "is_protected": {
+          "booleanValue": false
+        },
+        "backend_total_used_in_billing_period": {
+          "doubleValue": 0
+        },
+        "is_published": {
+          "booleanValue": false
+        },
+        "latest_screenshot_url": {
+          "stringValue": "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9e9a59f5-2abc-4777-a5de-72d3f3728498/id-preview-390b3a48--b4710620-71e3-40cd-ad4c-d81059c8f5ba.lovable.app-1760786683404.png"
+        },
+        "git_on_s3": {
+          "booleanValue": true
+        },
+        "preview_build_commit_sha": {
+          "stringValue": "390b3a489c86a315defc0fd4bc42d6179301dbea"
+        },
+        "latest_commit_sha": {
+          "stringValue": "390b3a489c86a315defc0fd4bc42d6179301dbea"
+        },
+        "created_by": {
+          "stringValue": "mPf55efA8Feod54RhHpQi8nqu6G2"
+        },
+        "tech_stack": {
+          "stringValue": "vite_react_shadcn_ts_20250728_minor"
+        },
+        "unused_code": {
+          "arrayValue": {
+            "values": [
+              {
+                "stringValue": "src/components/ui/accordion.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/alert-dialog.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/alert.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/aspect-ratio.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/avatar.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/badge.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/breadcrumb.tsx       "
+              },
+              {
+                "stringValue": "src/components/ui/calendar.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/carousel.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/chart.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/checkbox.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/collapsible.tsx      "
+              },
+              {
+                "stringValue": "src/components/ui/command.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/context-menu.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/dialog.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/drawer.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/dropdown-menu.tsx    "
+              },
+              {
+                "stringValue": "src/components/ui/form.tsx             "
+              },
+              {
+                "stringValue": "src/components/ui/hover-card.tsx       "
+              },
+              {
+                "stringValue": "src/components/ui/input-otp.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/input.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/label.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/menubar.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/navigation-menu.tsx  "
+              },
+              {
+                "stringValue": "src/components/ui/pagination.tsx       "
+              },
+              {
+                "stringValue": "src/components/ui/popover.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/radio-group.tsx      "
+              },
+              {
+                "stringValue": "src/components/ui/resizable.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/scroll-area.tsx      "
+              },
+              {
+                "stringValue": "src/components/ui/select.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/separator.tsx        "
+              },
+              {
+                "stringValue": "src/components/ui/sheet.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/sidebar.tsx          "
+              },
+              {
+                "stringValue": "src/components/ui/skeleton.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/slider.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/switch.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/table.tsx            "
+              },
+              {
+                "stringValue": "src/components/ui/tabs.tsx             "
+              },
+              {
+                "stringValue": "src/components/ui/textarea.tsx         "
+              },
+              {
+                "stringValue": "src/components/ui/toggle-group.tsx     "
+              },
+              {
+                "stringValue": "src/components/ui/toggle.tsx           "
+              },
+              {
+                "stringValue": "src/components/ui/use-toast.ts         "
+              },
+              {
+                "stringValue": "src/hooks/use-mobile.tsx"
+              }
+            ]
+          }
+        },
+        "has_screenshot": {
+          "booleanValue": true
+        },
+        "created_at": {
+          "timestampValue": "2025-10-18T11:22:57.143Z"
+        },
+        "creation_options": {
+          "mapValue": {
+            "fields": {
+              "tech_stack": {
+                "stringValue": ""
+              },
+              "description": {
+                "stringValue": "Create a mock exam with multiple choice questions."
+              },
+              "visibility": {
+                "stringValue": "public"
+              },
+              "initial_message": {
+                "mapValue": {
+                  "fields": {
+                    "RedactPII": {
+                      "nullValue": null
+                    },
+                    "IsCreation": {
+                      "nullValue": null
+                    },
+                    "CurrentPage": {
+                      "nullValue": null
+                    },
+                    "ProjectMigrationIDs": {
+                      "nullValue": null
+                    },
+                    "PrevSessionID": {
+                      "nullValue": null
+                    },
+                    "UserMessageID": {
+                      "stringValue": "umsg_01k7vgxxg0fk19bh4bdy0p55y1"
+                    },
+                    "DebugMode": {
+                      "booleanValue": false
+                    },
+                    "Files": {
+                      "arrayValue": {}
+                    },
+                    "UserInput": {
+                      "nullValue": null
+                    },
+                    "SessionReplay": {
+                      "nullValue": null
+                    },
+                    "SelectedElements": {
+                      "nullValue": null
+                    },
+                    "Intent": {
+                      "nullValue": null
+                    },
+                    "BuilderToken": {
+                      "nullValue": null
+                    },
+                    "ViewDescription": {
+                      "nullValue": null
+                    },
+                    "Images": {
+                      "nullValue": null
+                    },
+                    "ChatOnly": {
+                      "booleanValue": false
+                    },
+                    "ClientLogs": {
+                      "nullValue": null
+                    },
+                    "IntegrateSupabaseOrgID": {
+                      "nullValue": null
+                    },
+                    "RuntimeErrors": {
+                      "nullValue": null
+                    },
+                    "Model": {
+                      "nullValue": null
+                    },
+                    "Message": {
+                      "stringValue": "Create a mock exam with multiple choice questions."
+                    },
+                    "View": {
+                      "nullValue": null
+                    },
+                    "RunSQLInMessageWithID": {
+                      "nullValue": null
+                    },
+                    "AIMessageID": {
+                      "stringValue": "aimsg_01k7vgxxg0fk19bh4jkpycscsr"
+                    },
+                    "ErrorIDs": {
+                      "nullValue": null
+                    },
+                    "ContainsError": {
+                      "booleanValue": false
+                    },
+                    "NetworkRequests": {
+                      "nullValue": null
+                    },
+                    "IntegrateSupabaseProjectID": {
+                      "nullValue": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "remix_count": {
+          "integerValue": "0"
+        },
+        "description": {
+          "stringValue": "Create a mock exam with multiple choice questions."
+        },
+        "workspace_id": {
+          "stringValue": "98xJof3rxWllIG99COQV"
+        },
+        "user_message_count": {
+          "integerValue": "1"
+        },
+        "name": {
+          "stringValue": "qwizzy-creator"
+        },
+        "id": {
+          "stringValue": "b4710620-71e3-40cd-ad4c-d81059c8f5ba"
+        },
+        "available_project_migrations": {
+          "nullValue": null
+        },
+        "user_id": {
+          "stringValue": "mPf55efA8Feod54RhHpQi8nqu6G2"
+        },
+        "updated_at": {
+          "timestampValue": "2025-10-18T11:24:43.900Z"
+        },
+        "is_github": {
+          "booleanValue": false
+        },
+        "use_project_id_as_repo_identifier": {
+          "booleanValue": true
+        },
+        "hide_badge": {
+          "nullValue": null
+        }
+      },
+      "createTime": "2025-10-18T11:22:57.174030Z",
+      "updateTime": "2025-10-18T11:24:43.924093Z"
+    },
+    "targetIds": [
+      14
+    ]
+  }
+}
+]],[240,[{
+  "targetChange": {
+    "targetIds": [
+      14
+    ],
+    "resumeToken": "CgkI25jLxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.972699Z"
+  }
+}
+]],[241,[{
+  "targetChange": {
+    "targetIds": [
+      12
+    ],
+    "resumeToken": "CgkI25jLxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.972699Z"
+  }
+}
+]],[242,[{
+  "filter": {
+    "targetId": 8,
+    "count": 1,
+    "unchangedNames": {
+      "bits": {
+        "bitmap": "e24B",
+        "padding": 7
+      },
+      "hashCount": 12
+    }
+  }
+}
+]],[243,[{
+  "targetChange": {
+    "targetIds": [
+      8
+    ],
+    "resumeToken": "CgkI25jLxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.972699Z"
+  }
+}
+]],[244,[{
+  "filter": {
+    "targetId": 10,
+    "count": 1,
+    "unchangedNames": {
+      "bits": {
+        "bitmap": "taoA",
+        "padding": 7
+      },
+      "hashCount": 12
+    }
+  }
+}
+]],[245,[{
+  "targetChange": {
+    "targetIds": [
+      10
+    ],
+    "resumeToken": "CgkI25jLxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.972699Z"
+  }
+}
+]],[246,[{
+  "targetChange": {
+    "resumeToken": "CgkI25jLxtGtkAM=",
+    "readTime": "2025-10-18T11:24:43.972699Z"
+  }
+}
+]]]

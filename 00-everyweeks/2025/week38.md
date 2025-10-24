@@ -1,4 +1,4 @@
-# Data fetching in React
+# Data fetching
 
 Web applications need to handle the three main states of Network requests: loading, success, and error. We can have race conditions from triggering multiple requests at the same time that can cause flashes of content from request that were already in flight before the next request triggered. Another issue is request and data duplication. "By default, the fetched data is only ever local to the component that fetched it – that's how React works. That means, for every component that needs the same data, we have to refetch it."
 
@@ -62,20 +62,13 @@ export default function App () {
 }
 ```
 
-In summary, data fetching utilities should handle
+In summary, a data fetching utility should handle
 
 - network states (loading, success, error)
-- request race conditions (multiple requests from the same component that return different data)
-- request deduplication (multiple requests from the same component that should return the same data)
-
-- request deduplication
-- request batching
-- request cancellation
-- request polling
-- request caching
-- request error handling
-- request timeout handling
-- request retry handling
-- request cancellation handling
-- request polling handling
-- request caching handling
+- retry and polling
+- caching and invalidaton
+- race conditions (multiple requests from the same component that return different data, often from multiple near simultaneous user interaction)
+- deduplication (multiple requests from the same component that should return the same data)
+- batching and parallelisation (avoid request waterfalls, which is when a request for data is trapped inside a conditionally rendered component only kicks off when another completely irrelevant request has finished)
+- cancellation
+- optimistic updating
