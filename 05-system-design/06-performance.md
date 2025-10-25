@@ -85,7 +85,7 @@ When evaluating whether to split a third party library, consider:
 
 ### Size analysis
 
-The amount of javascript code that is downloaded and executed by the browser can greatly impact the TTFB, and TTI. The compressed file is what is downloaded over the wire and impacts TTFB. The minified size is what the browser must parse and impacts TTI. As a rule of thumb, over 200–300 kB minified + gzip for initial-load JS starts to be too large. Consequently, both values are useful to consider. The following two bundles are being included on the FE, `rehype-katex` and `remark-math`:
+The amount of javascript code that is downloaded and executed by the browser can greatly impact the TTFB, and TTI. The compressed file is what is downloaded over the wire and impacts TTFB. The minified size is what the browser must parse and impacts TTI. As a rule of thumb, over 500 kB minified starts to be too large. Consequently, both values are useful to consider. The following two bundles are being included on the FE, `rehype-katex` and `remark-math`:
 
 - [rehype-katex](https://bundlephobia.com/package/rehype-katex@7.0.1)
   - 465.5 kB minified, 133.9 kB minified + gzip
@@ -93,7 +93,7 @@ The amount of javascript code that is downloaded and executed by the browser can
 - [remark-math](https://bundlephobia.com/package/remark-math@6.0.0)
   - 6.6 kB minified, 2.4kB minified + gzip
   - 49ms download slow 3G, 3ms emerging 4G (estimated)
-- md-math (This is a custom chunk configuration to load `remark-math` and `rehype-katex` on demand.)
+- md-math (from local build)
   - 302 kB minified, 75 kB minified + brotli, 90 kB minified + gzip
   - ~1.5s download slow 3G, ~100ms emerging 4G (estimated)
 
@@ -105,13 +105,10 @@ Together, rehype-katex and remark-math are 90 kB minified + gzip, which does not
 
 ### Conditional import
 
-To note, in JS we have static and dynamic import statements. Static import statements (`import x from ‘./foo.js’`), are top-level, compile-time imports that are resolved and bundled at build time.
 
-Dynamic imports are runtime, on-demand imports (`const x = await import("./foo.js")`) that return a Promise. Both static and dynamic imports follow ES modeuls syntax here (we are ignore CJS).
 
-At parse time, the browser collects all these specifiers to build a dependency graph. Dynamic imports () are noted but only executed at runtime.
+#### References
 
-Vite uses Rollup under the hood. By default, React-Router applications produces a single entry chunk per HTML entry, and Rollup’s code-splitting kicks in automatically: any modules imported via dynamic import become separate chunks, and static imports that are used by multiple entry points or large subgraphs are lifted into shared “vendor” chunks
 
 ### PR review notes
 
@@ -134,5 +131,12 @@ Practically, these windows often occur:
 
 - unified devDep
 - Math libs loaded after content load? Would create flash of unstyled math content (FOUC); maybe we want libs to load with assurnce that they're needed.
-
-1. <https://bundlephobia.com/>
+- ""remark-math" cannot be included in manualChunks because it is resolved as an external module by the "external" option or plugins.
+    at getRollupError (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at ModuleLoader.loadEntryModule (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/node-entry.js:21517:20)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async Promise.all (index 0) {
+  code: 'EXTERNAL_MODULES_CANNOT_BE_INCLUDED_IN_MANUAL_CHUNKS'
+    }"
