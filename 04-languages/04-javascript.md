@@ -15,19 +15,29 @@
 
 ## Modules
 
-### Import statements
+### Importing modules
 
-In JS we have two types of module importing: static and dynamic. oth static and dynamic imports follow ES module syntax.
+In JS we have two types of module importing: static and dynamic. Static import and dynamic import() are both useful. Each have their own, very distinct, use cases. Use static imports for initial paint dependencies, especially for above-the-fold content. In other cases, consider loading dependencies on-demand with dynamic import().
 
-Static import statements (`import x from ‘./foo.js’`), can only be used at the top-level of the file. Dynamic imports are runtime, on-demand imports (`const x = await import("./foo.js")`) that return a Promise. 
+Static import statements (`import x from ‘./foo.js’`), can only be used at the top-level of the file. Static import enable important use cases such as
+
+- static analysis,
+- bundling with bundlers like Rollup, and
+- tree-shaking.
+
+Dynamic imports are runtime, on-demand imports (`const x = await import("./foo.js")`) that return a Promise. (Although import() looks like a function call, it is specified as syntax that just happens to use parentheses, which means that import doesn’t inherit from Function.prototype.) Dynamic imports are useful for:
+
+- importing a module on-demand or conditionally,
+- computing a module specifier at runtime, and
+- importing a module from within a regular script (as opposed to a module).
+
+### Resolving modules
 
 Modules are resolved via a pre-runtime “linking” process. In an application with a bundler they are used to create the application bundle chunks. During pre-runtime linking, bindings are introduced into the local scope. At parse time, the browser collects all these specifiers to build a dependency graph. Dynamic imports are noted but only executed at runtime.
 
 By default, React Router and Vite (using Rollup) applications produce a single entry chunk per HTML entry, and Rollup’s code-splitting kicks in automatically: any modules imported via dynamic import become separate chunks, and static imports that are used by multiple entry points or large subgraphs are lifted into shared “vendor” chunks
 
-### Module graph
-
-A module graph is the network of ES modules linked by their import dependencies.
+A module graph is the network of ES modules linked by their import dependencies. 
 
 A module graph is the structured web of modules the runtime builds by following import statements. Starting from an entry module, the browser resolves each specifier, fetches the referenced module, and repeats this for its imports, forming a directed graph where nodes are modules and edges are import relationships.
 
@@ -38,3 +48,4 @@ In short, a module graph is constructure on demand at the runtime’s map of all
 #### References
 
 - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import>
+- <https://v8.dev/features/dynamic-import>
