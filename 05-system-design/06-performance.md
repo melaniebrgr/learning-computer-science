@@ -114,7 +114,7 @@ Together, rehype-katex and remark-math are 90 kB minified + gzip, which does not
 
 - manual cache not required (in memory when imported, browser cache)
 - Promise.all alternatives
-- hasMath exectution,
+- hasMath execution,
 
 "Every time content changes, hasMath will execute, even if the content previously passed in already had math an triggered dynamic import."
 
@@ -129,7 +129,7 @@ Practically, these windows often occur:
  • After handling events (like clicks or key presses) and before the next task is scheduled.
  • When network callbacks or timers aren’t firing and the event loop has breathing room.
 
-- unified devDep
+- unified move to devDep
 - Math libs loaded after content load? Would create flash of unstyled math content (FOUC); maybe we want libs to load with assurnce that they're needed.
 - ""remark-math" cannot be included in manualChunks because it is resolved as an external module by the "external" option or plugins.
     at getRollupError (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
@@ -140,3 +140,4 @@ Practically, these windows often occur:
     at async Promise.all (index 0) {
   code: 'EXTERNAL_MODULES_CANNOT_BE_INCLUDED_IN_MANUAL_CHUNKS'
     }"
+- rolldown used in a future Vite version?
