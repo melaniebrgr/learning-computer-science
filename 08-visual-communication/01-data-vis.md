@@ -1,4 +1,4 @@
-# InfoVis 1
+# InfoVis
 
 ## LECTURE 1
 

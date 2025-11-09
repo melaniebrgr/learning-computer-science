@@ -23,4 +23,4 @@ Finally, the **Link** component is used to navigate to a different route. The `t
 
 ## References
 
-1. (history library)[https://github.com/remix-run/history]
+1. [history library](https://github.com/remix-run/history)
