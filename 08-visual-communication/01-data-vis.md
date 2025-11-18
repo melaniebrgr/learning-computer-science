@@ -1,5 +1,7 @@
 # InfoVis
 
+The basic principles of information design, including the clear, concise and truthful presentation of data in the form of tables, graphs, maps, academic posters, presentations, and user interfaces.
+
 ## LECTURE 1
 
 The course is about the design of numbers.

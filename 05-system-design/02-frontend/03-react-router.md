@@ -17,6 +17,12 @@ Then, the **Route** component maps a path to a component. The Route component al
 
 Finally, the **Link** component is used to navigate to a different route. The `to` prop accepts a string or an object with `pathname`, `search`, and `state` properties.
 
+Use URL parameters for dynamic route segments.
+
+Think of URL parameters like function parameters, but instead of creating a placeholder for a function value, a placeholder for a portion of a URL is created.
+
+In React Router, dynamic segments are denoted with a `:` colon and accessed with the `useParams()` hook.
+
 ## Questions
 
 [] BrowserRouter is not explicitely used on StudocuAI, instead routes are configuder in a route.ts file. Unclear is the BrowserRouter component is used inside.
