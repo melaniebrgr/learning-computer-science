@@ -1,7 +1,5 @@
 # The Debug Diaries
 
-## Momo's learning journey
-
 0. [Everyweeks](./00-everyweeks/)
 1. [Computers](./01-computers/)
     - computer architecture

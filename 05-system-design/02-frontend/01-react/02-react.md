@@ -110,9 +110,13 @@ Unbatch a state update so that it does not slow down the component render. Usual
 - Tradeoff?
 - Suspense boundaries
 
+Suspense is a rendering primitive
+
 #### Technically
 
-Children are allowed to “suspend” by throwing a promise during render. React intercepts that throw in the Fiber reconciler, marks the nearest Suspense boundary as pending, renders its fallback subtree, and retries the suspended subtree once the promise resolves. This is not exceptions-as-errors; it’s control flow. The thrown promise is treated as a continuation token.
+Children are allowed to “suspend” by throwing a promise during render.
+React intercepts that throw in the Fiber reconciler, marks the nearest Suspense boundary as pending, renders its fallback subtree, and retries the suspended subtree once the promise resolves.
+This is not exceptions-as-errors; it’s control flow. The thrown promise is treated as a continuation token.
 
 A continuation token is a unique string used for pagination, allowing applications to resume a query or process a large set of data from where it left off. When a request returns a partial set of results, it includes a continuation token; the application then sends this token back to the server to get the next page of results until all data has been retrieved. (MB: this has SSR implications.)
 
