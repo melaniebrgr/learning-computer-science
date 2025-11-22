@@ -55,6 +55,20 @@ Because of Next.js server-centric nature, the Studocu AI frontend was migrated t
 The decision was taken early, while the codebase was still small.
 The technical implementation can be [followed in the GitHub PR](https://github.com/StuDocu/studocu-alpha-project/pull/143).
 
+### Real-time collaboration (multiplayer)
+
+Studocu AI aimed to provide real-time, multi-user collaboration on generated study materials.
+
+With the decision of using TipTap as our editor, the choice primarily falls between using TipTap cloud and the self-hosting option of hocuspocus.
+
+
+Yjs CRDT (Conflict-free Replicated Data Type) for collaborative editing
+@hocuspocus/provider 3.4.0 - WebSocket provider for Yjs synchronization
+TipTap 3.0.7 - Rich text editor built on ProseMirror
+Includes collaboration extensions
+AI suggestion capabilities
+Table, mathematics (KaTeX), and YouTube embed support
+
 ### State management
 
 @tanstack/react-query 5.82.0 - Server state management
@@ -66,15 +80,6 @@ Zustand instroduced for Chat message state management
 
 @studocu/theme 2.149.0 - Internal design system
 Framer Motion 12.23.12 - Animation library
-
-### Real-time collaboration (multiplayer)
-
-Yjs 13.6.27 - CRDT (Conflict-free Replicated Data Type) for collaborative editing
-@hocuspocus/provider 3.4.0 - WebSocket provider for Yjs synchronization
-TipTap 3.0.7 - Rich text editor built on ProseMirror
-Includes collaboration extensions
-AI suggestion capabilities
-Table, mathematics (KaTeX), and YouTube embed support
 
 ### Monitoring & Analytics
 

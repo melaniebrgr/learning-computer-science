@@ -1,15 +1,14 @@
 # Performance
 
-Instead of solving the performance problem, try to remove the module first, that is, question if the logic and data is needed in the application.
+Golden rules of performance:
 
-There a many topics related to performance:
+1. not executing logic is always faster than executing logic. Instead of solving the performance problem, try to remove the module first, that is, question if the logic and data is needed in the application.
 
-- caching
-- bundle size
+2. Feeling fast is almost as goof as actually being fast, e.g. optimistically updating the UI doesn't make the server response faster, but makes it feel faster. You also need to pick and choose which is correct and right for the situation, e.g. if the intention is
 
 ## Caching
 
-Caching is "storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. Caching brings a few additional concepts:
+Caching is "storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. A simple idea that brings along a lot factors to consider:
 
 - **cache keys**: the cache key must contain all inputs that determine the result, e.g. using `useMemo` but missing a dependency in the dependency array. Getting the cache key itself can sometimes be costly.
 - **cache invalidation**: there are difference approaches to cache invalidation:
@@ -63,7 +62,7 @@ Cache-Control: public, max-age=3600, no-transform
 
 #### Misc.
 
-- Heuristic caching is when no caching header is set but the browser still caches based on a heuristic, liek 10% of the last modified date.
+- Heuristic caching is when no caching header is set but the browser still caches based on a heuristic, like 10% of the last modified date.
 - `if-modified-since` is a date cache header that can be sent with the request, but since time zones make things difficult, so has been replaced with ETags instead, which is a hash based on the content. The cache bust the ETag the content needs be changed somehow, e.g. by renaming the name of a script href.
 
 ### Static-site generation (SSG)
@@ -77,11 +76,11 @@ SSG is just "build time" caching that uses a CDN and Cache-Control headers. It m
 
 ## Bundle size
 
-When evaluating whether to split a third party library, consider:
+When evaluating whether to split a third party library:
 
-- [] Should it be split? Depands on the size.
-- [] When should it be loaded? On page load, on demand with greedy criteria, on demand with rigid criteria
-- [] Should it be stored in a custom cache?
+- Should it be split? Depends on the size.
+- When should it be loaded? On page load, on demand with "greedy" criteria, on demand with stringent criteria
+- Should it be stored in a custom cache
 
 ### Size analysis
 
@@ -102,42 +101,3 @@ In the rollup configuration, a custom chunk is manually configured, `'md-math': 
 When the website is built, JS files are usually minified and potentially optimized but not compressed. The web server or CDN compresses files depending on the Accept-Encoding header in the request. For example, for a request with `Accept-Encoding: gzip, deflate, br, zstd` the server can respond with `Content-Encoding: br`, explicitly stating that the content was compressed with Brotli.
 
 Together, rehype-katex and remark-math are 90 kB minified + gzip, which does not push the upper boundary of the initial-load. So, the decision to bundle split is neutral.
-
-### Conditional import
-
-
-
-#### References
-
-
-### PR review notes
-
-- manual cache not required (in memory when imported, browser cache)
-- Promise.all alternatives
-- hasMath execution,
-
-"Every time content changes, hasMath will execute, even if the content previously passed in already had math an triggered dynamic import."
-
-- requestIdleCallback, is it the right place to load the math libs? If could be after all the content has loaded.
-
-Idle periods are moments when the main thread isn’t busy with high‑priority tasks.
-
-In the context of requestIdleCallback, an idle period is a slice of time when the browser’s main thread has no urgent work queued—no layout or style recalculations, no painting, no input handling, and no animation frames pending. During these gaps, the browser can safely run low‑priority tasks without increasing user‑perceived latency.
-
-Practically, these windows often occur:
- • Between animation frames when the next frame deadline hasn’t arrived.
- • After handling events (like clicks or key presses) and before the next task is scheduled.
- • When network callbacks or timers aren’t firing and the event loop has breathing room.
-
-- unified move to devDep
-- Math libs loaded after content load? Would create flash of unstyled math content (FOUC); maybe we want libs to load with assurnce that they're needed.
-- ""remark-math" cannot be included in manualChunks because it is resolved as an external module by the "external" option or plugins.
-    at getRollupError (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
-    at error (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
-    at ModuleLoader.loadEntryModule (file:///Volumes/Dev/devenv/studocu-alpha-project/node_modules/rollup/dist/es/shared/node-entry.js:21517:20)
-    at processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Promise.all (index 0)
-    at async Promise.all (index 0) {
-  code: 'EXTERNAL_MODULES_CANNOT_BE_INCLUDED_IN_MANUAL_CHUNKS'
-    }"
-- rolldown used in a future Vite version?

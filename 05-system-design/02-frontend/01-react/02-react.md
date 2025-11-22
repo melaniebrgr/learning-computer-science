@@ -105,10 +105,18 @@ Unbatch a state update so that it does not slow down the component render. Usual
 
 ### Suspense
 
-Suspense provide out-of-order streaming behavior.
-On page request, everything that isn't wrapped in Suspense is sent back first, and the connection is held open until all boundaries are resolved.
-The output of the Suspense boundaries are streamed to the client.
-The client updates that content anywhere on the page based on its own schedule.
+- What are the differences in Suspense in client-side vs. server-side rendering
+- What are the main benefits, really
+- Tradeoff?
+- Suspense boundaries
+
+#### Technically
+
+Children are allowed to “suspend” by throwing a promise during render. React intercepts that throw in the Fiber reconciler, marks the nearest Suspense boundary as pending, renders its fallback subtree, and retries the suspended subtree once the promise resolves. This is not exceptions-as-errors; it’s control flow. The thrown promise is treated as a continuation token.
+
+A continuation token is a unique string used for pagination, allowing applications to resume a query or process a large set of data from where it left off. When a request returns a partial set of results, it includes a continuation token; the application then sends this token back to the server to get the next page of results until all data has been retrieved. (MB: this has SSR implications.)
+
+#### UX
 
 React's way of declaratively managing the component UI while we wait for data or if the request fails is using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
 
@@ -147,7 +155,7 @@ function ShipFallback() {
 }
 ```
 
-### `use`
+#### `use`
 
 The idiomatic way to do this is React is to use the `use` hook. "use is a React API that lets you read the value of a resource like a Promise or context." The implementation of `use` is something like,
 
@@ -178,6 +186,29 @@ function use<Value>(promise: Promise<Value>): Value {
 ```
 
 I.e. the state and throwing behaviour is encapsulated.
+
+#### Tradeoffs
+
+- Intentionality of the fallabck loading state.
+
+## (React) Server Components (RSC)
+
+Next.js v12 has a “classic” rehydration model compared to island based, but Next 13 is moving to server components.
+The only stable way to use React Server Components is with the Next.js App Router (1, 3).
+By default, every component in the Next.js App Router is a Server Component.
+Currently my company is on Next.js 14.2.3, and React 18.3.1 (latest stable versions) but uses the page router not the app router (4).
+
+React Server Components are the latest advancement in pre-rendering content on the web, are pages that span both server and client.
+Server rendering happens at the component level, and does not wait for an entire webpage to render on the server.
+Component logic such as data fetching and database mutations can be colocated within UI component logic and is executed exclusively on the server.
+The generated HTML template is seamlessly streamed into the client-side React tree.
+
+Server components never re-render and are not hydrated (no JS is shipped later).
+Server components can contain client components; client and server components are interweaved.
+To import a Server Component into a Client Component correctly pass it as a prop, else it is treated as a client component.
+
+To be clear, server and client components are server-side rendered, but client components are hydrated with JS and can re-render on the client, whereas server components are not hydrated and only render on the server.
+Because only client components can re-render on the client, only they can contain _mutable_ state, listen to DOM events, and access browser APIs, i.e. use `useState` and `useEffect` (2).
 
 ## References
 

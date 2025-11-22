@@ -99,47 +99,6 @@ Overall flow:
 2. the client loads JS from script tag, the JS runs and starts fetching data and creating the DOM
 3. all the data returns and page rendering completes.
 
-## (React) Server Components (RSC)
-
-Next.js v12 has a “classic” rehydration model compared to island based, but Next 13 is moving to server components.
-The only stable way to use React Server Components is with the Next.js App Router (1, 3).
-By default, every component in the Next.js App Router is a Server Component.
-Currently my company is on Next.js 14.2.3, and React 18.3.1 (latest stable versions) but uses the page router not the app router (4).
-
-React Server Components are the latest advancement in pre-rendering content on the web, are pages that span both server and client.
-Server rendering happens at the component level, and does not wait for an entire webpage to render on the server.
-Component logic such as data fetching and database mutations can be colocated within UI component logic and is executed exclusively on the server.
-The generated HTML template is seamlessly streamed into the client-side React tree.
-
-Server components never re-render and are not hydrated (no JS is shipped later).
-Server components can contain client components; client and server components are interweaved.
-To import a Server Component into a Client Component correctly pass it as a prop, else it is treated as a client component.
-
-To be clear, server and client components are server-side rendered, but client components are hydrated with JS and can re-render on the client, whereas server components are not hydrated and only render on the server.
-Because only client components can re-render on the client, only they can contain _mutable_ state, listen to DOM events, and access browser APIs, i.e. use `useState` and `useEffect` (2).
-
-### Suspense
-
-To be used in conjunction with RSC.
-React Suspense allows us to pause a component’s rendering within the React tree and display a loading component as a placeholder while content is fetched in the background and streamed in chunks to the client.
-
-```jsx
-import { Suspense } from 'react'
-import SkeletonScreen from './loading'
-
-export const async function Home(){
-  const posts = await getPosts()
-
-  return (
-    <Suspense fallback={SkeletonScreen}>
-      {videos.map(post => (
-        // posts UI...
-      ))}
-    </Suspense>
-  )
-}
-```
-
 ## References
 
 1. <https://blog.logrocket.com/react-server-components-comprehensive-guide/>
