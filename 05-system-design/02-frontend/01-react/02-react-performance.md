@@ -4,23 +4,17 @@ Performance issues can be slotted into two types: the big bottlenecks that are a
 
 How to balance avoiding performance pitfalls (prevention is the best medicine) with good architecture, and premature optimisation (only fix it when it becomes an issue). React has changed a lot over the years (react Fiber, Transitions) and performance improvement strategies have changed; sometimes dropping into vanilla JS with refs will still be necessary.
 
-## Render cycle
+Performance optimisation done poorly is worse than none at all.
 
-UI is a function of state in react. Three things that trigger a re-render: state changes, the parent changes (if the component is memoised, it checks if the props changed), and context changes.
+## React performance principles
 
-### 1. Render phase
+1. First, "do nothing". Not executing logic is always faster than executing logic. Instead of solving the performance problem ask if the logic and data is needed in the application. State management and component hierarchy optimisationcan also help _skip_ needing to execute logic like component re-rendering. As an example of a bad architecture, is using a single context provider for all application state. Any change to the context triggers a re-render in all components hooked into that context.
 
-In response to a change in state, e.g. useState, React asks components to describe UI from current props/state. JSX becomes React elements (plain objects) that represent intended UI structure. The in-memory tree of objects describing the HTML elements is the **virtual DOM**. When a parent renders, all of its children render recursively, regardless of prop equality, unless the child is memoised. From React 18, this render work can be paused, resumed, or discarded; multiple renders may be thrown away before being committed (concurrency). During **reconciliation**, react diffs element types/keys to decide what to reuse or replace.
+2. Second, "pretend". Feeling fast is almost as goof as actually being fast, e.g. **optimistically updating** the UI doesn't make the server response faster, but makes it feel faster. You also need to pick and choose which is correct and right for the situation, e.g. for some long-lived apps, considering downloading everything upfront.
 
-Since React 16 React used "Fiber" data structures that keep track of component instances, and their children and the previous iterations of them. The virtual DOM is less and less true with this structure.
+3. Third, "check if you can skip it". Skipping logic is _sometimes_ faster than executing it, but not always. Caching, **memoisation**, **React compiler** have their own overhead. For instance,**React.memo** checks previous with current prop values to check if props have changed instead of rendering to check if the output changed. A simple mental model of React's renderig strategy is that any state change will trigger the rerender of the entire state tree beneath it. Therefore in general we want to "skip it" by iether stopping rendering higher up, or start it lower down. It's a simplication because now with React Fiber rendering can be paused and resumed based on priority.
 
-### 2. Commit Phase
-
-All calculated changes are applied synchronously. `useEffect` runs shortly after via a separate “Passive Effects” step.
-
-### 3. Cleanup Phase
-
-Cleanup effects.
+4. Fourth, "delay it". Use **Suspense** to tell the React reconciler, we're suspended right now, waiting for a promise to resolve, check later. Is easier and more reliable than doing yourself, and more performant, also given the underlying React architecture, while also being less work for you. With **lazy loading** and **bundle optimisation** load only as much as you need, and "as little as you can get away with".
 
 ## References
 

@@ -1,5 +1,44 @@
 # React
 
+## The render cycle
+
+UI is a function of state in react. Three "state changes" that trigger a re-render: state changes, the parent changes (if the component is memoised, it checks if the props changed), and context changes.
+
+### 1. Render phase
+
+The render phase is when React figures out what the changes meant by working with the virtual DOM.
+
+- virtual DOM is built
+- virtual DOM is reconciled with the real DOM
+
+In response to a change in state, e.g. useState, React asks components to describe UI from current props/state. JSX becomes React elements (plain objects) that represent intended UI structure. The in-memory tree of objects describing the HTML elements is the **virtual DOM**. When a parent renders, all of its children render recursively, regardless of prop equality, unless the child is memoised. From React 18, this render work can be paused, resumed, or discarded; multiple renders may be thrown away before being committed (concurrency). During **reconciliation**, react diffs element types/keys to decide what to reuse or replace.
+
+Since React 16 React used "Fiber" data structures that keep track of component instances, and their children and the previous iterations of them. The virtual DOM is less and less true with this structure.
+
+### 2. Commit Phase
+
+The commit phase is when React actually makes those changes happen to the real DOM.
+
+- Necessary changes are applied to the real DOM
+
+All calculated changes are applied synchronously. `useEffect` runs shortly after via a separate “Passive Effects” step.
+
+### 3. Cleanup Phase
+
+## Fiber
+
+Under the hood, React Fiber is
+
+- plain functions,
+- a linked list tree,
+- and a small scheduler
+
+Earlier version of React handled DOM changes by starting at the top and processing the entire component tree in a blocking manner.
+
+With React Fiber, work can be paused and prioritized more urgent updates. React Fiber "comes up for air" approximately every 16.6 milliseconds. React Fiber is described as a cooperatively scheduled rendering engine. It allows React to be smarter about rendering by being able to pause, interrupt, or restart work based on priority, rather than blocking the main thread until completion.
+
+Basically React Fiber maintains two trees in memory: the current tree (which is what is referenced in the DOM) and a work-in-progress tree (which is what React is in the middle of updating). This allows React to work through the assembly-line (linked list) of fibers but swap back to the current tree if it needs to abandon work in progress when something more important comes along.
+
 ## Hooks
 
 ### useState, useReducer

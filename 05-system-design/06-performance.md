@@ -1,11 +1,5 @@
 # Performance
 
-Golden rules of performance:
-
-1. not executing logic is always faster than executing logic. Instead of solving the performance problem, try to remove the module first, that is, question if the logic and data is needed in the application.
-
-2. Feeling fast is almost as goof as actually being fast, e.g. optimistically updating the UI doesn't make the server response faster, but makes it feel faster. You also need to pick and choose which is correct and right for the situation, e.g. if the intention is
-
 ## Caching
 
 Caching is "storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. A simple idea that brings along a lot factors to consider:
