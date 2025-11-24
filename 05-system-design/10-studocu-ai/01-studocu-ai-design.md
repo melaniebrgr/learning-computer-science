@@ -1,6 +1,27 @@
 # Studocu AI
 
-Some decision predate my arrival and involvement as FE lead. This is my best understanding. Also, the main focus of this overview will be the FE.
+ℹ️ Some decision predate my arrival and involvement as FE lead. This is my best understanding. The main focus of this overview will be my bias, the FE.
+
+## Useful links
+
+- [Gitbook](https://app.gitbook.com/o/-LnXMuXaeacEDOswz_RF/s/dkxc3Hh6t5cJHN8AaC0x/): main documentation portal
+- [Repo docs directory](https://github.com/StuDocu/studocu-alpha-project/blob/9b081d77f4595ac11c9ddf0bfc6c1dfab3ae405b/docs/adr/Adr-001-image-extraction/001-image-extraction-from-documents.md): not widely adopted
+- [Google drive folder](https://drive.google.com/drive/u/1/folders/1qHRhH3SzXrk_ZiUbAW2Bz4XgctWzWRfc): Sharing portal for misc. files
+- [Initial project Alpha R&D](https://docs.google.com/document/d/1ZlC3R-TYJGliCzf5D75epUlgEVdQxKRtx3ITDYzcUYU/edit?tab=t.llgq8uu1iuho#heading=h.aui3mqjkalj): additional background context
+- [Technical Roadmap](https://linear.app/studocu/initiative/ai-tech-roadmap-9594647ea676/overview): The planned and prioritised technical work. It is overseen and prioritised by Raf. It should be reviewed for next quarter.
+
+## Introduction
+
+The Studocu AI project kicked on in June 2025, following an [executive decision](https://docs.google.com/document/d/1x4-0pE7WXT6pb9uQvMdACXjO213x6DMmiNwXc0x35dg/edit?tab=t.0) to "redistribu[te] resources to deliver a grander vision with StudocuAI (name to come later) and become the best product in the space" technical leadership drafted an "RFC: AI Platform Foundation" that proposed "an immersive, AI-first study companion that continuously improves as we add tools and as underlying foundation models get better."
+
+The 6 production apps contained in the monorepo are:
+
+1. Laravel REST API (`api`)
+2. Hocus Pocus websocket server (`hocuspocus-server`)
+3. LangGraph agentic service (`langgraph-server`)
+4. Document text extraction service (`text-extraction-server`)
+5. Express REST API (`yjs-api-server`)
+6. React app (`web`)
 
 ## Topics
 
@@ -13,7 +34,7 @@ Some decision predate my arrival and involvement as FE lead. This is my best und
 7. Long term: how can we start sharing components between repos effectively
 8. Reflection: wrong decisions & learnings
 
-## The tech stack and decisions around it
+## 1. The tech stack and decisions around it
 
 ### Monorepo
 
@@ -22,9 +43,11 @@ Turborepo was selected instead of Nx, which is used on studocu-frontend, due to 
 
 > Nx introduced the "NX Powerpack" for remote caching, which costs \(\$26.00\) per seat per month. This change was accompanied by the removal of previous third-party library integrations that handled remote caching, meaning that to use on-site remote caching, teams must now subscribe to this new service.
 
-To note, Turborepo was not considered for studocu-frontend when the project was set up, only because it wasn't mature and full-featured enough at the time. "And in the case of the temporary, PoC ... that Studocu AI is/was [Turborepo] allowed us to easily setup and run stuff without much hassle."
+Nx later reversed that decision but the project was already set up with Turborepo.
 
 In general now, "everything you can accomplish with Nx, you can also accomplish with Turborepo. It's just that Turborepo is originally made for frontend apps, as you can see from the requirement that each app/packaged has a package.json file."
+
+Turborepo was not considered for studocu-frontend when the project was set up, only because it wasn't mature and full-featured enough at the time. "And in the case of the temporary, PoC ... that Studocu AI is/was [Turborepo] allowed us to easily setup and run stuff without much hassle."
 
 When to choose Nx:
 
@@ -42,8 +65,8 @@ When to choose Turborepo:
 
 Because SEO or document viewer integration was not a requirement for Studocu AI and the application didn't benefit from SSR, the decision was taken omit the webserver setup, and opt for a client-side oriented SPA setup, simplifying development and deployment.
 Static chunks could be hosting on a CDN, making initial loads extremely fast.
-Next.js was selected for a framework--devs were familiar with it, since it supported SPA mode.
-It was only later that Next.js server-centric nature became more of a problem and SPA mode limitations became apparent.
+"Next.js App Router, Static" was selected for a framework--devs were familiar with it, since it supported SPA mode.
+It was only later that limitations due to Next.js' server-centric nature became apparent.
 
 To elaborat, Next.js didn't support dynamic client-side routing required for Studocu AI.
 On Studocu AI, the main user journey is to upload sources, create and navigate to a new project with those sources, then generate study artifacts, like summaries and quizzes.
@@ -57,57 +80,42 @@ The technical implementation can be [followed in the GitHub PR](https://github.c
 
 ### Real-time collaboration (multiplayer)
 
-Studocu AI aimed to provide real-time, multi-user collaboration on generated study materials.
+Studocu AI aimed to provide a rich real-time, collarborative study experience. With the decision of using TipTap as the text editor (because it was ful featured and already in used on studocu-frontend) several other decision fell into place:
 
-With the decision of using TipTap as our editor, the choice primarily falls between using TipTap cloud and the self-hosting option of hocuspocus.
-
-
-Yjs CRDT (Conflict-free Replicated Data Type) for collaborative editing
-@hocuspocus/provider 3.4.0 - WebSocket provider for Yjs synchronization
-TipTap 3.0.7 - Rich text editor built on ProseMirror
-Includes collaboration extensions
-AI suggestion capabilities
-Table, mathematics (KaTeX), and YouTube embed support
+- `Yjs` CRDT (Conflict-free Replicated Data Type): TipTap is backed by the Yjs "document format"
+- `HocusPocus` server: the choice for websocket server was between TipTap cloud and the self-hosted option of [Hocuspocus](https://www.npmjs.com/package/@hocuspocus/server). (Hocuspocus is an opinionated collaborative editing backend for Tiptap).
+- `[SyncedStore](https://syncedstore.org/docs/react)`: An API for React Applications to interact with Yjs documents (real-time data) using familiar react functions, like hooks.
 
 ### State management
 
-@tanstack/react-query 5.82.0 - Server state management
-@syncedstore/core 0.6.0 - Shared state with Yjs
-Custom React Context for auth and project state
-Zustand instroduced for Chat message state management
+For an overview of the current state management, see [Gitbook](https://app.gitbook.com/o/-LnXMuXaeacEDOswz_RF/s/dkxc3Hh6t5cJHN8AaC0x/architecture/application-state-management).
+
+- react-query and Context - Server state management
+- syncedstore - "Sync state", the shared state with Yjs management at the moment. There is `useYjsStatusObserver` hook that I'm not sure is necessary (replacable with SyncedStore hooks)
+- Local state - Ad hoc.
+- Zustand - newly instroduced for Chat message state management
+
+The vision was for all data to pass to be managed in sync state, but the vision was not realised in favour of expendience ("we have PHP developers") and a Laravel API was spun up to handle project CRUD. Data locality and uncertainty about where state should be stored (server or sync state) became a reocurring question.
+
+Following initial public release of Studocu AI, Juampi spearheaded a discussion to reset [data structure management](https://docs.google.com/document/d/18S6rlB_bnyJB-CSTBbE7JqFzal5wlMYLju-vIpUAVGI/edit?tab=t.0#heading=h.c2ilyq8xjm0a). Work for this is underway.
 
 ### UI/Styling
 
-@studocu/theme 2.149.0 - Internal design system
-Framer Motion 12.23.12 - Animation library
+- studocu theme library: Some duplication of components however, e.g. the document tumbnail component was duplicated twice as there were import issues before (Ruby has context). I assume this is resolved now and this tech debt can be cleaned.
+- Framer Motion animation library: Marcos PoC
 
-### Monitoring & Analytics
+### Quality & Testing
 
-@sentry/react 10.5.0 - Error tracking
-@opentelemetry/api - Distributed tracing
+- `jest` (consider Vitest in future)
+- sonarqube: Testing & Quality tech roadmap item. Ruby is setting up Sonarqube, I was working on a playwright smoke test
+- sentry: (also performance)
 
-### FE-Laravel API integration
+### FE-BE integration
 
-For communicating with the "legacy REST API", `packages/api-client/`.
-Needs to be replaced with API client package.
-[ ] What is the status of this again? Ticket?
+#### Laravel API
+
+One for communicating with the "legacy REST API", `packages/api-client/`, one for the internal API.
 Maissen added standalone API client for communication with the Studocu AI Laravel API.
-[ ] Check Maissen's RFC on the topic and link
-
-### FE-LangGraph integration
-
-`packages/schemas/` shares JSON schemas for validation and documentation.
-Automatic type generation
-
-### Applications
-
-The 6 production apps are:
-
-1. Laravel REST API (`api`), "because we have PHP developers" - Juampi (but Maissen and Marcos contributed the most to it)
-2. Hocus Pocus websocket server (`hocuspocus-server`)
-3. LangGraph agentic service (`langgraph-server`)
-4. Document text extraction service (`text-extraction-server`)
-5. Express REST API (`yjs-api-server`)
-6. React app (`web`)
-
-[ ] We may also be adding an image processing service (check with Anustup).
+Needs to be consolidated and replaced with API client package.
+`packages/schemas/` shares JSON schemas for validation and documentation but is also needs automatic type generation.
+Maissen has ADR for [automating API client generation](https://docs.google.com/document/d/1xT8_DeICDKX0JPxy-bEpPf8uWoYxOGq28WJTxygnABE/edit?tab=t.0#heading=h.a0uu52tbuo52).

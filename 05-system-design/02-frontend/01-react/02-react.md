@@ -17,8 +17,6 @@ Since React 16 React used "Fiber" data structures that keep track of component i
 
 ### 2. Commit Phase
 
-The commit phase is when React actually makes those changes happen to the real DOM.
-
 - Necessary changes are applied to the real DOM
 
 All calculated changes are applied synchronously. `useEffect` runs shortly after via a separate “Passive Effects” step.
@@ -33,11 +31,15 @@ Under the hood, React Fiber is
 - a linked list tree,
 - and a small scheduler
 
-Earlier version of React handled DOM changes by starting at the top and processing the entire component tree in a blocking manner.
+Earlier version of React handled DOM changes by starting at the top and processing the entire component tree in a blocking manner. In April 2017, Facebook announced React Fiber, a new set of internal algorithms for rendering, to replace React's old rendering algorithm, a stack-based reconciliation algorithm that compelled the entire tree to be rendered at once.
 
-With React Fiber, work can be paused and prioritized more urgent updates. React Fiber "comes up for air" approximately every 16.6 milliseconds. React Fiber is described as a cooperatively scheduled rendering engine. It allows React to be smarter about rendering by being able to pause, interrupt, or restart work based on priority, rather than blocking the main thread until completion.
+React Fiber, by contrast, is described as a cooperatively scheduled rendering engine. It allows React to be smarter about rendering by being able to pause, interrupt, or restart work based on priority, rather than blocking the main thread until completion.
 
-Basically React Fiber maintains two trees in memory: the current tree (which is what is referenced in the DOM) and a work-in-progress tree (which is what React is in the middle of updating). This allows React to work through the assembly-line (linked list) of fibers but swap back to the current tree if it needs to abandon work in progress when something more important comes along.
+With React Fiber, work can be paused and prioritized more urgent updates. React Fiber aims to check approximately every 5 milliseconds to determine if it should pause and let other things happen. However, this timing can vary if there's something expensive happening that blocks it.
+
+React Fiber breaks work into small chunks and checks in periodically so that if something more important comes along, it can pause or abandon the current work. This allows the browser to handle other tasks like CSS animations or check for new state changes, preventing the application from becoming unresponsive.
+
+React Fiber maintains two trees in memory: the current tree (which is what is referenced in the DOM) and a work-in-progress tree (which is what React is in the middle of updating). This allows React to work through the assembly-line (linked list) of fibers but be able to swap back to the unmodified, current tree if it needs to abandon work in progress when something more important comes along, like updated state of a CSS animation.
 
 ## Hooks
 
@@ -57,7 +59,7 @@ const ref = useRef(initialValue);
 
 create a value that is preserved across renders, but won't trigger a re-render when it changes.
 
-### useEffect, useLayoutEffect
+### useLayoutEffect, useEffect
 
 ```tsx
 useEffect(didUpdate);
@@ -149,7 +151,9 @@ Unbatch a state update so that it does not slow down the component render. Usual
 - Tradeoff?
 - Suspense boundaries
 
-Suspense is a rendering primitive
+Suspense is a rendering primitive.
+
+> All right, finally, once we have shown the user everything that they need to show,then we will call useEffect. UseLayoutEffect happens before we render the DOM,which means we could gum up the entire works.UseEffect happens after we've done it.And we've shown them everything and then we can go ahead and, you know,call any APIs and this is important.The reason I bring this up now versus otherwise I was going to have to pepper these things the entireday and it felt awkward, which is why if we're using something likeuseEffect for making API calls, it gets you into a pretty weird situation because you have to renderthe entire DOM. Then you call useEffect to go get your APIs so that you can go renderthe DOM again, right? And for a while, if you're like,I do that on my app, and now I feel bad, don't feel bad.You didn't have a choice for a while. It was the effectivelyblessed way to do it. But now there are better ways,which is why we're spending this time together.Now, you might consider doing something like suspense, where,hey, on that render, as we were kind of going through the tree,I hit a suspense point.All of those API calls will fire off immediately and they'll show the suspended DOM nodes,like the loading or whatever, will finish up.They've already started and then they can come back.And if they come back before React is done rendering and it can decide that it can do it fastenough, you'll get it immediately and not see that flash of nothing, and then all your stuff,right? And so ideally, stuff that was the best practice at one point is not thebest practice anymore. You didn't do anything wrong.Things just got better, right?And if you don't opt into these things, you get the same experience you always had.It's not like things are worse, but there is a better life,and we will talk about it today. So useEffect will always be called after the rendering phase when wehave an empty dependency array.Typically examples calling APIs in a useEffect with the empty useEffect always happens after we've committedeverything to the DOM, right? So if it is like that useEffect with no dependencies that you only wantto run once at the beginning, it will have rendered the component and all the children and committedthat all to DOM and then call you useEffect, right?And the goal there is not like, well, now I have incomplete data.The goal was like, let's get something on the page.Let's not show them nothing, right, and not render,right, because suspense did not exist at that point,right? And so you didn't really have much of a choice.It was like a trade-off that no one felt great about,and there are now other ways to do this as well.And there's nothing wrong, like, I'm not saying tomorrow you need to go refactor your entire codebasebut there are probably placeswhere you can have some niceties because asynchronous stuff in a UI is the worstright? Especially when you bringin TypeScript, but you don't really know if that's null or the actual value yet,and then you've got to pass down, it could be null or the actual value everywhere.
 
 #### Technically
 
@@ -200,7 +204,7 @@ function ShipFallback() {
 
 #### `use`
 
-The idiomatic way to do this is React is to use the `use` hook. "use is a React API that lets you read the value of a resource like a Promise or context." The implementation of `use` is something like,
+The idiomatic way to suspend in React is to use the `use` hook. "use is a React API that lets you read the value of a resource like a Promise or context." The implementation of `use` is something like,
 
 ```tsx
 function use<Value>(promise: Promise<Value>): Value {
