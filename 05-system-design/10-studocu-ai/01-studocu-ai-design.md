@@ -23,18 +23,7 @@ The 6 production apps contained in the monorepo are:
 5. Express REST API (`yjs-api-server`)
 6. React app (`web`)
 
-## Topics
-
-1. The tech stack and decisions around it
-2. What is reused from the other repos
-3. How the project is structured
-4. What processes are different from Studocu, Studocu Frontend
-5. How is it deployed to staging, to production?
-6. Long term: what is the plan on how to maintain it (increase test coverage? refactor? summary of complaints)
-7. Long term: how can we start sharing components between repos effectively
-8. Reflection: wrong decisions & learnings
-
-## 1. The tech stack and decisions around it
+## The tech stack and decisions around it
 
 ### Monorepo
 
@@ -88,12 +77,14 @@ Studocu AI aimed to provide a rich real-time, collarborative study experience. W
 
 ### State management
 
+TODO: rephrase this section, react query uses Context, server state implies SSR to some, React caching API. Will need replacements if they need to ne migrated.
+
 For an overview of the current state management, see [Gitbook](https://app.gitbook.com/o/-LnXMuXaeacEDOswz_RF/s/dkxc3Hh6t5cJHN8AaC0x/architecture/application-state-management).
 
-- react-query and Context - Server state management
+- react-query - Server state management
 - syncedstore - "Sync state", the shared state with Yjs management at the moment. There is `useYjsStatusObserver` hook that I'm not sure is necessary (replacable with SyncedStore hooks)
 - Local state - Ad hoc.
-- Zustand - newly instroduced for Chat message state management
+- Zustand - newly instroduced for Chat message state management, but look into it for replacing Sources Context usage at the root. TODO More details from akos
 
 The vision was for all data to pass to be managed in sync state, but the vision was not realised in favour of expendience ("we have PHP developers") and a Laravel API was spun up to handle project CRUD. Data locality and uncertainty about where state should be stored (server or sync state) became a reocurring question.
 
@@ -101,14 +92,15 @@ Following initial public release of Studocu AI, Juampi spearheaded a discussion 
 
 ### UI/Styling
 
-- studocu theme library: Some duplication of components however, e.g. the document tumbnail component was duplicated twice as there were import issues before (Ruby has context). I assume this is resolved now and this tech debt can be cleaned.
-- Framer Motion animation library: Marcos PoC
+- studocu theme library: Some duplication of components however, e.g. the document thumbnail component was duplicated twice as there were import issues before (Ruby has context). I assume this is resolved now and this tech debt can be cleaned.
+- Framer Motion animation library was in included in the application scaffold, and was since tried and adopted
 
-### Quality & Testing
+### Quality, Performance, Testing
 
 - `jest` (consider Vitest in future)
-- sonarqube: Testing & Quality tech roadmap item. Ruby is setting up Sonarqube, I was working on a playwright smoke test
-- sentry: (also performance)
+- sonarqube: "Testing & Quality" tech roadmap item. Ruby is setting up Sonarqube, I was working on a playwright smoke test
+- sentry: also covers performance monitoring
+- CWV improvements: "FE | Performance" tech roadmap item. LCP is a problem.
 
 ### FE-BE integration
 
@@ -118,4 +110,4 @@ One for communicating with the "legacy REST API", `packages/api-client/`, one fo
 Maissen added standalone API client for communication with the Studocu AI Laravel API.
 Needs to be consolidated and replaced with API client package.
 `packages/schemas/` shares JSON schemas for validation and documentation but is also needs automatic type generation.
-Maissen has ADR for [automating API client generation](https://docs.google.com/document/d/1xT8_DeICDKX0JPxy-bEpPf8uWoYxOGq28WJTxygnABE/edit?tab=t.0#heading=h.a0uu52tbuo52).
+Maissen has ADR for [automating API client generation](https://docs.google.com/document/d/1xT8_DeICDKX0JPxy-bEpPf8uWoYxOGq28WJTxygnABE/edit?tab=t.0#heading=h.a0uu52tbuo52), (incoming [commit](https://github.com/StuDocu/studocu-alpha-project/pull/778/files#diff-587048bad52f91e1992c02731feb4b6beed01556596f0697714877f58beb7094)).
