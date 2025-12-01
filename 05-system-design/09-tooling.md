@@ -19,8 +19,6 @@ For uses cases from client-side SPA to server-side rendered app.
 
 ## Production build tool
 
-
-
 ## References
 
 1. [ViteConf 2025](https://www.youtube.com/watch?v=tVd0JeSr8kg)

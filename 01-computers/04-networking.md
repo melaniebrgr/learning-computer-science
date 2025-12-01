@@ -1,5 +1,7 @@
 # Networking
 
+> The Internet is “just” a network of interconnected computer networks. The term "Internet" literally means "between networks." It operates as a packet-switched mesh network  with best-effort delivery, meaning there are no guarantees on whether a packet will be delivered or how long it will take. The reason why the internet appears to operate so smoothly (at least from a technical perspective) is the layers of abstraction that handle retries, ordering, deduplication, security and so many other things behind the scenes. - Devon Peroutky (1)
+
 ## Lesson Plan: Networking Foundations for Front-End Developers
 
 ### 1. Introduction to Computer Networking
@@ -7,9 +9,56 @@
 - Overview of the Internet and how networks interconnect globally.
 - Key terminology: IP addresses, packets, protocols.
 
+How the web works hasn't changed much in the past 20 years.
+Web sockets when you break it down is based on the TCP protocol.
 There is a client and a server and they "communicate" with each other using HTTP or HTTPS.
 How computers communicate is described by a standaradised reference model called the OSI (Open Systems Interconnection) model.
-The model has 7 layers. Each layer is "it's own domain", receives data from the previous layer, and passes data to the next layer.
+The model has 7 layers. Each layer is "it's own domain", receives data from the previous layer, and passes data to the next layer (only interacts with the layer above or below).
+
+7. Application layer: end user application protocols, e.g. HTTP
+6. Presentation layer: translates data into suitablee formats
+5. Session layer: "connection maintainance"
+4. Transport layer: TCP, UDP
+3. Network layer: IP
+2. Data link layer: routes, switches, ethernet
+1. Physical layer: fiber, wire, wireless
+
+#### Layer 7: Application layer
+
+The applicaiton layers initiates the network request.
+The application layer is not the applications themselve but the foundational technologies that they use.
+- A browser making a request to a web server using the HTTP protocol.
+- An email app using the SMTP protocol to send and receive emails.
+- Typing google.com instead of 142.250.150.138 thanks to the DNS protocol
+
+#### Layer 6: Presentation layer
+
+Once the client makes the HTTP request the request itself is passed to the presentation layer.
+The presentation layer standardises the data representation before handing data to or from the application layer.
+
+Functions attributed to the presentation layer include 
+- data format translation (e.g., different character sets),
+- lossless compression, and 
+- encryption/decryption
+
+#### Layer 5: Session layer
+
+The session layer is used for
+
+- opening connections
+- keeping connections alive, and
+- closing connections.
+
+"In real life this pretty much does not exist and is part of the Transport Layer."
+
+#### Layer 7: Transport Layer
+
+The transport layer is usually defined based on the protocol that's being used.
+
+The two most popular ones are:
+
+Transmission Control Protocol (TCP)
+User Datagram Protocol (UDP)
 
 ### 2. OSI Model Overview (Open Systems Interconnection)
 - Purpose and importance of OSI as a conceptual framework.
@@ -51,3 +100,4 @@ This structured plan gives you a solid foundation in networking concepts that di
 [8](https://dev.to/flynnjones/networking-for-developers-what-you-should-know-beyond-coding-1cji)
 [9](https://www.science.smith.edu/~jcardell/Courses/EGR328/Readings/KuroseRoss%20Ch1.pdf)
 [10](https://en.wikipedia.org/wiki/OSI_model)
+[11](https://devonperoutky.super.site/blog-posts/mediocre-engineers-guide-to-https)
