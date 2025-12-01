@@ -1,76 +1,4 @@
-# Python Syntax Learning Outline
-
-## Table of Contents
-
-- ✅ 1. Python Basics
-  - ✅ 1.1 Introduction
-  - ✅ 1.2 Basic Syntax
-  - ✅ 1.3 Variables and Assignment
-
-- 2. Data Types and Literals
-  - ✅ 2.1 Numeric Types
-  - 2.2 Strings
-  - 2.3 Misc. Types
-
-- 3. Collections and Data Structures
-  - ✅ 3.1 Lists
-  - 3.2 Tuples
-  - ✅ 3.3 Dictionaries
-  - ✅ 3.4 Sets
-
-- 4. Operators
-  - 4.1 Arithmetic Operators
-  - 4.2 Comparison Operators
-  - 4.3 Logical Operators
-  - 4.4 Assignment Operators
-  - 4.5 Bitwise Operators
-
-- 5. Control Flow
-  - 5.1 Conditional Statements
-  - 5.2 Loops
-  - ✅ 5.3 Match Statement (Python 3.10+)
-
-- 6. Functions
-  - 6.1 Function Definition
-  - 6.2 Return Values
-  - 6.3 Scope and Namespaces
-  - 6.4 Advanced Function Concepts
-
-- 7. Object-Oriented Programming
-  - 7.1 Classes and Objects
-  - 7.2 Special Methods
-  - 7.3 Inheritance
-  - 7.4 Class Features
-
-- 8. Exception Handling
-  - 8.1 Basic Exception Handling
-  - 8.2 Exception Types
-  - 8.3 Raising Exceptions
-
-- 9. Modules and Packages
-  - 9.1 Modules
-  - 9.2 Packages
-  - 9.3 Standard Library Overview
-
-- 10. File I/O and Context Managers
-  - 10.1 File Operations
-  - 10.2 Context Managers
-
-- 11. Iterators and Generators
-  - 11.1 Iterators
-  - 11.2 Generators
-
-- 12. Advanced Topics
-  - 12.1 Comprehensions
-  - 12.2 Built-in Functions
-  - ✅ 12.3 Type Hints (Optional)
-
-- 13. Best Practices and Style
-  - 13.1 Code Style
-  - 13.2 Documentation
-  - 13.3 Error Handling
-
----
+# Python
 
 ## 1. Python Basics
 
@@ -81,40 +9,34 @@
 - Installing Python and setting up environment
 - Python interpreter and REPL
 
-Python is a simple interpreted programming language commonly used for data analysis, artificial intelligence, and scientific computing. Python follows the philosophy of "The Zen of Python," which emphasizes readability and simplicity. PEP 8 is the official style guide for Python code, providing conventions for writing clean code.
+Python is a multi-paradigm programming language. It has a small core language with a large standard library with an easily extensible interpreter, was intended by Van Rossum from the very start. Python follows the philosophy of "The Zen of Python," which emphasizes readability and simplicity. PEP 8 is the official style guide for Python code, providing conventions for writing clean code.
 
-To install Python, visit [python.org](https://www.python.org/) and download the latest version. Tools like `pyenv` or Anaconda can help manage Python versions and environments. The Python interpreter executes Python code interactively. You can access the REPL (Read-Eval-Print Loop) by typing `python` or `python3` in your terminal. The REPL is useful for testing small code snippets and learning Python syntax.
+To install Python, visit [python.org](https://www.python.org/) and download the latest version. Tools like `pyenv` or Anaconda can help manage Python versions and environments. The Python interpreter executes Python code interactively. You can access the REPL (Read-Eval-Print Loop) by typing `python3` in your terminal. The REPL is useful for testing small code snippets and learning Python syntax.
 
 ### 1.2 Basic Syntax
 
 - Indentation and code blocks
 - Comments (single-line `#` and multi-line `"""`)
-- Statements and expressions
 - Line continuation with `\`
+- Statements and expressions
 
-Python uses indentation to define code blocks instead of braces or keywords. Indentation is mandatory, and inconsistent indentation results in a syntax error. Single-line comments start with `#`, while multi-line comments are enclosed in triple quotes (`"""`). Comments are ignored by the Python interpreter.
-
-For long statements, Python provides a line continuation character (`\`). This allows you to split a statement across multiple lines for better readability. Alternatively, you can use parentheses, brackets, or braces.
+Python uses whitespace indentation, rather than curly braces or keywords, to delimit blocks (a feature also known as the off-side rule). An increase in indentation comes after certain statements; a decrease in indentation signifies the end of the current block. Indentation is mandatory, and inconsistent indentation results in a syntax error.
 
 ```python
 # Correct indentation
 if True:
     print("Indented block")
+```
 
+Single-line comments start with `#`, while multi-line comments are enclosed in triple quotes (`"""`). Triple-quoted strings, which begin and end with a series of three single or double quotation marks, may span multiple lines and function like here-documents.
+Comments are ignored by the Python interpreter. For long statements, Python provides a line continuation character (`\`). This allows you to split a statement across multiple lines for better readability. Alternatively, you can use parentheses, brackets, or braces.
+
+```python
 # This is a single-line comment
 """
 This is a multi-line comment
 spanning multiple lines.
 """
-
-# Statement
-x = 5
-
-# Expression
-result = x + 10
-
-# Multiple statements on one line (not recommended)
-x = 5; y = 10; print(x + y)
 
 # Using \ for line continuation
 long_string = "This is a very long string " \
@@ -127,6 +49,17 @@ long_string = (
 )
 ```
 
+```py
+# Statement
+x = 5
+
+# Expression
+result = x + 10
+
+# Multiple statements on one line (not recommended)
+x = 5; y = 10; print(x + y)
+```
+
 ### 1.3 Variables and Assignment
 
 - Variable naming conventions
@@ -136,23 +69,28 @@ long_string = (
 
 Python variables follow the conventions outlined in PEP 8. CamelCase is typically used for class names, while snake_case is preferred for variable and function names. Variable names can include letters, numbers, and underscores but cannot start with a number. Python does not have built-in support for constants, but by convention constants are defined with uppercase variables indicate they should not be changed.
 
-Python allows you to assign values to multiple variables in a single line. This can be useful for initializing variables or swapping values. Python is a dynamically typed language. The type is inferred based on the value assigned to the variable.
-
-```python
+```py
 # Variable names
-validVariable = 1
-another_valid_Variable = 2
+valid_variable = 2
 2invalid-variable-name = 3  # syntax error
 PI = 3.14159
 GRAVITY = 9.8
+```
 
+Python allows you to assign values to multiple variables in a single line. This can be useful for initializing variables or swapping values.
+
+```py
 # Multiple assignment
 a, b, c = 1, 2, 3
-print(a, b, c)  # Output: 1 2 3
+print(a, b, c)  # 1 2 3
 
 # Swapping values
 x, y = y, x
+```
 
+Python is a dynamically typed language. The type is inferred based on the value assigned to the variable.
+
+```py
 # Dynamic typing
 x = 10  # x is an integer
 x = "Hello"  # Now x is a string
@@ -166,25 +104,29 @@ x = "Hello"  # Now x is a string
 - Floating-point numbers (`float`)
 - Complex numbers (`complex`)
 
-```python
-# Integer example
+```py
+# Integers
 x = 10
-print(type(x))  # Output: <class 'int'>
+print(type(x))  # <class 'int'>
 
 # Arithmetic operations with integers
-y = x + 5 # Output: 15
+y = x + 5 # 15
+```
 
-# Float example
+```py
+# Floats
 pi = 3.14159
 print(type(pi))  # Output: <class 'float'>
 
 # Arithmetic operations with floats
 radius = 5.0
-area = pi * (radius ** 2) # Output: 78.53975
+area = pi * (radius ** 2) # 78.53975
+```
 
+```py
 # Complex number example
 z = 2 + 3j
-print(type(z))  # Output: <class 'complex'>
+print(type(z))  # <class 'complex'>
 
 # Arithmetic operations with complex numbers
 z_conjugate = z.conjugate()
@@ -202,10 +144,14 @@ print(magnitude)  # Output: 3.605551275463989
 - Escape sequences
 - Raw strings
 
+Strings are delimited by single or double quotation marks. 
+
 ### 2.3 Misc. Types
 
 - Boolean (`bool`)
 - `None` keyword
+
+Python uses the words and, or, not for its boolean operators. Both kinds of strings use the backslash (\) as an escape character and there is no implicit string interpolation such as "$foo".
 
 ## 3. Collections and Data Structures
 
@@ -217,8 +163,6 @@ print(magnitude)  # Output: 3.605551275463989
 - List comprehensions
 - Nested lists
 
-**Lists** are ordered, mutable collections that can store elements of different types and allow duplicates. **List indexing** uses square brackets with zero-based indices, while **slicing** extracts subsequences using start:stop:step notation. **List methods** provide built-in functionality for adding, removing, and manipulating elements efficiently. **List comprehensions** offer a concise way to create new lists by applying expressions and filters to existing iterables. **Nested lists** allow you to create multi-dimensional data structures like matrices or tables.
-
 ```python
 # Creating lists
 fruits = ["apple", "banana", "orange"]
@@ -226,16 +170,25 @@ numbers = [1, 2, 3, 4, 5]
 mixed = [1, "hello", 3.14, True]
 empty_list = []
 list_constructor = list("hello")  # Creates ['h', 'e', 'l', 'l', 'o']
+```
 
+**Lists** are ordered, mutable collections that can store elements of different types and allow duplicates. **List indexing** uses square brackets with zero-based indices, while **slicing** extracts subsequences using start:stop:step notation.
+
+```python
 # List indexing and slicing
 print(fruits[0])        # Output: apple (first element)
 print(fruits[-1])       # Output: orange (last element)
 print(numbers[1:4])     # Output: [2, 3, 4] (slicing)
 print(numbers[::2])     # Output: [1, 3, 5] (every second element)
 print(numbers[::-1])    # Output: [5, 4, 3, 2, 1] (reverse)
+```
+
+**List methods** provide built-in functionality for adding, removing, and manipulating elements efficiently.
+
+```py
+colors = ["red", "green"]
 
 # List methods
-colors = ["red", "green"]
 colors.append("blue")           # Add single element: ["red", "green", "blue"]
 colors.extend(["yellow", "purple"])  # Add multiple elements
 colors.insert(1, "orange")     # Insert at specific index
@@ -244,14 +197,22 @@ popped = colors.pop()          # Remove and return last element
 colors.sort()                  # Sort in place
 colors.index("red")     # Find index of element
 colors.count("blue")    # Count occurrences
+```
 
+**List comprehensions** offer a concise way to create new lists by applying expressions and filters to existing iterables.
+
+```py
 # List comprehensions
 squares = [x**2 for x in range(1, 6)]
 print(squares)  # Output: [1, 4, 9, 16, 25]
 
 # Filter even numbers and square them
 even_squares = [x**2 for x in range(1, 11) if x % 2 == 0] # Output: [4, 16, 36, 64, 100]
+```
 
+**Nested lists** allow you to create multi-dimensional data structures like matrices or tables.
+
+```py
 # Nested lists
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 students_grades = [
@@ -275,6 +236,8 @@ students_grades[1][1].append(92)  # Add grade to Bob's list
 - Tuple unpacking
 - Named tuples
 - Immutability
+
+Python makes a distinction between lists and tuples. Lists, written as [1, 2, 3], are mutable, and cannot be used as the keys of dictionaries (dictionary keys must be immutable in Python). Tuples, written as (1, 2, 3), are immutable and thus can be used as the keys of dictionaries, provided all elements of the tuple are immutable. The parentheses around the tuple are optional in some contexts. Tuples can appear on the left side of an equal sign; hence a statement like x, y = y, x can be used to swap two variables.
 
 ### 3.3 Dictionaries
 
@@ -403,11 +366,20 @@ print(even_set)  # Output: {2, 4, 6, 8, 10}
 
 `+`, `-`, `*`, `/`, `//`, `%`, `**`
 
+In Python 3, the result of the division operator / with integer operands is always a floating-point value. The result of the division operator // is an integer value.
+
+```py
+4/2 # 2.0
+4//2 # 2
+```
+
 ### 4.2 Comparison Operators
 
 - `==`, `!=`, `<`, `>`, `<=`, `>=`
 - `is` and `is not`
 - `in` and `not in`
+
+In Python, == compares by value. Python's `is` operator may be used to compare object identities (comparison by reference). Comparisons may be chained, for example a <= b <= c.
 
 ### 4.3 Logical Operators
 
