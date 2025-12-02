@@ -1,0 +1,39 @@
+# Arrays
+
+**Arrays are contiguous memory space**. Contiguous means it is an unbreaking sequence of memory of a fixed amount of bytes. 
+
+How the contiguous memory is interpreted depends on the instructions to the compiler, e.g. an array of integers, or an array of strings. When we access an element of an array with, `array[index]` we are telling the computer to go to the memory addess of the array start offset by `index * size_of_element` bytes. In short, we have zero or more pieces of memory in a row, of a specific type.
+
+A "true array" cannot be grown or broken up. Arrays elements
+
+- can't be deleted (only zero'd out),
+- can't inserted into (only overwritten), and
+- can't be grown (only reallocated).
+
+JS arrays, which permit these operations, are not true arrays. Considering this, true arrays almost seem not like a _real_ data structure but a primitive of computing.
+
+An **ArrayBuffer** is an object that represents a fixed-size sequence of bytes in memory. It provides a standardized API for working with raw memory. ArrayBuffers can not be directly read or written to. Instead, views need to be created to read/write data in ArrayBuffers.
+
+```js
+const a = new ArrayBuffer(6);  // Create a buffer of 6 bytes
+const a8 = new Uint8Array(a); // Create a view of the buffer as an array of 8-bit unsigned integers
+
+a8[0] = 45; // Write the value 45 to the first element of the view
+a8[2] = 45; // Write the value 45 to the third element of the view
+
+const a16 = new Uint16Array(a); // Create a view of the buffer as an array of 16-bit unsigned integers
+a16[2] = 0x4545; // Write the value 0x4545 to the third element of the view
+
+a16; // -> Uint16Array(3) [45, 0, 17733]
+a8; // -> Uint8Array(6) [45, 0, 45, 0, 69, 69]
+```
+
+A `Uint8Array` is an array of 8-bit unsigned integers. 1 bit = the smallest unit of data (0 or 1) and 1 byte = 8 bits. Therefore, 1 byte can represent values from 0 to 255 `(2^8 - 1)`. `Uint8Array` and `Uint16Array` provide different views of the same memory:
+
+Memory bytes:    [45,  0, 45,  0, 69, 69]
+                  └─────┘       └─────┘
+Uint16Array:      [  45,   0,   17733  ]
+                              (0x4545)
+
+- `Uint16Array` sees 0x4545 as one 16-bit value = 17733,
+- `Uint8Array` sees the same memory as two separate 8-bit values = 69, 69

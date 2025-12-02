@@ -31,7 +31,7 @@ Loops can be used for exhaustive enumeration. **Exhaustive enumeration** or "gue
 
 ## Big O analysis
 
-Big O analysis is a way for computer scientists to categorize different algorithms by how they slow down as the input size to the algorithm grows. It enables us to talk about how slow or how fast an algorithm can run. To be very specific, it is the worst-case runtime. In short Big O
+Big O analysis is a way for computer scientists to **categorize algorithms by how they slow down as the input size to the algorithm grows**. It enables us to talk about how slow or how fast an algorithm can run. Specifically, it is the worst-case runtime. Big O
 
 - predicts how an algorithm will perform as data size increases,
 - compares the efficiency of different algorithms,
@@ -39,11 +39,11 @@ Big O analysis is a way for computer scientists to categorize different algorith
 
 ### Constant time, O(1)
 
-![graph of constant time](./assets/bigo--constant.png "Constant time")
-
 - No matter how big the input is, the algorithm takes the same time.
 - Always 1 step, even if the array has 10 or 10 million elements.
 - The graph is a flat line, constant regardless of input.
+
+![graph of constant time](./assets/bigo--constant.png "Constant time")
 
 ```python
 def get_first_element(arr):
@@ -52,12 +52,12 @@ def get_first_element(arr):
 
 ### Linear time, O(n)
 
-![graph of linear time](./assets/bigo--linear.png "Linear time")
-
-- The running time grows directly proportionally with the input size.
-- If array has 5 elements it has 5 operations. If it has 1,000 elements, 1,000 operations.
+- The running time grows directly proportionally with input size.
+- If array has 5 elements the algorithm has 5 operations. 1,000 elements has 1,000 operations.
 - The graph is a straight line, and grows proportionally with input size.
 - If there is a single loop in the algorithm, it is a clue that has linear complexity.
+
+![graph of linear time](./assets/bigo--linear.png "Linear time")
 
 ```python
 def print_all_elements(arr):
@@ -67,11 +67,12 @@ def print_all_elements(arr):
 
 ### Logarithmic time, O(log n)
 
-![graph of logarithmic time](./assets/bigo--logarithmic.png "Logarithmic time")
-
-- Each step cuts the problem in half (1/2, then 1/4, then 1/16 and so on, common in binary search)
+- Each step cuts the problem in half (1/2, then 1/4, then 1/16 and so on)
 - Searching in 1,000,000 elements takes only ~20 steps.
-- Slightly steeper than linear initially, but grows much slower for large inputs.
+- Slightly steeper than linear initially but grows much slower for large inputs.
+- The inverse of an exponential function.
+
+![graph of logarithmic time](./assets/bigo--logarithmic.png "Logarithmic time")
 
 ```python
 def binary_search(arr, target):
@@ -89,7 +90,7 @@ def binary_search(arr, target):
 
 ### Linearithmic time, O(n log n)
 
-- Typically achived by split a problem into parts and then process each part.
+- Typically achieved by splitting a problem into parts and then process each part.
 - A similar curve, `O(√N)` function
 
 ```python
@@ -105,11 +106,11 @@ def quicksort(arr):
 
 ### Quadratic time, O(n²)
 
-![graph of quadratic time](./assets/bigo--quadratic.png "Quadratic time")
-
 - For each element, the algorithm loops over all elements again.
-- If array has 10 elements, it has ~100 steps. If 1,000, it has ~1,000,000 steps.
+- If array has 10 elements, it has 100 steps. If 1,000, it has 1,000,000 steps.
 - The graph curves upward quickly. It is inefficient for large inputs.
+
+![graph of quadratic time](./assets/bigo--quadratic.png "Quadratic time")
 
 ```python
 def print_all_pairs(arr):
@@ -121,6 +122,7 @@ def print_all_pairs(arr):
 ### Exponential time, O(2^n)
 
 - Each call spawns 2 more calls resulting in exponential growth.
+- The inverse of a quadratic function.
 
 ```python
 def fib(n):
@@ -163,9 +165,8 @@ We can change both of these levers to adjust the run speed. Taking bigger steps 
 
 Most of the time we want to make the code shorter, not longer. Afterall, the more code we have, the harder it is to get it to work. Therefore, **we measure productivity in terms of the amount of functionality introduced with _less_ code, rather than the number of lines written. Good programmers "write less code".** When a computation in a program needs to be repeated many times, we can use introduce a language mechanism that provides decomposition and abstraction in order to reuse that computation.
 
-- decomposition: creates structure, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and hopefully coherent.
-- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
-A function is effectively provides new language primitives, and for modular abstraction.
+- decomposition: **creates structure**, by allowing us to break our program into modules (functions, classes, etc.), that are self-contained, reusable, and, hopefully, coherent.
+- abstraction: suppresses detail, allows us to use a piece of code as if it were a black box and reuse it easily. A function provides new language primitives for modular abstraction. "Where ignorance is bliss, Tis folly to be wise" - Thomas Gray
 
 We can make most problems simpler by breaking them into small problems:
 
@@ -182,7 +183,7 @@ When the interpreter calls a function the formal parameter is bound to the value
 
 ## Search algorithms
 
-The simplest search implementation is to just iterate through the list from the beginning and check each value in turn. This a `LinearSearch` and has a `O(N)`, which is. However, if the array is ordered, it's not necessary to start searching from the beginning. In fact it often allows us to find clever ways to split up the search of the array.
+The simplest search implementation is to just iterate through the list from the beginning and check each value in turn. This a `LinearSearch` and has a `O(N)`. However, if the array is ordered, it's not necessary to start searching from the beginning. In fact it often allows us to find clever ways to split up the search of the array.
 
 For example, when searching if a value is in an array, we can divide the array by two, check the middle value, determine if larger or smaller, and then divide the left or right side by two until there are no halves left and the value is found. Mathematically it's like going N/2, N/4, N/8 and so on, or N/2^x. To solve for x we do, `log2(N) = x`. Therefore finding the value in an array 4096 elements long takes _12 steps_, `log2(4096) = 12`. This is a `BinarySearch` and has a `O(log n)`.
 

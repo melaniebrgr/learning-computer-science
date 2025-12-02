@@ -20,8 +20,8 @@
 
 - 4. Operators
   - 4.1 Arithmetic Operators
-  - 4.2 Comparison Operators
-  - 4.3 Logical Operators
+  - ✅ 4.2 Comparison Operators
+  - ✅ 4.3 Logical Operators
   - 4.4 Assignment Operators
   - 4.5 Bitwise Operators
 
@@ -37,10 +37,9 @@
   - 6.4 Advanced Function Concepts
 
 - 7. Object-Oriented Programming
-  - 7.1 Classes and Objects
-  - 7.2 Special Methods
-  - 7.3 Inheritance
-  - 7.4 Class Features
+  - ✅ 7.1 Classes and Objects
+  - 7.2 Inheritance
+  - 7.3 Class Features
 
 - 8. Exception Handling
   - 8.1 Basic Exception Handling
@@ -73,3 +72,4 @@
 ## References
 
 - <https://wiki.python.org/moin/HowToEditPythonCode>
+- <https://wiki.python.org/moin/BeginnersGuide/Programmers>

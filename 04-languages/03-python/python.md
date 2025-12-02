@@ -376,15 +376,66 @@ In Python 3, the result of the division operator / with integer operands is alwa
 ### 4.2 Comparison Operators
 
 - `==`, `!=`, `<`, `>`, `<=`, `>=`
-- `is` and `is not`
 - `in` and `not in`
+- `is` and `is not`
 
-In Python, == compares by value. Python's `is` operator may be used to compare object identities (comparison by reference). Comparisons may be chained, for example a <= b <= c.
+In Python, `==` and `<` compare by value.
+(Variable assignment is done using a single equals operator "=", whereas comparison between two variables is done using the double equals operator "==".)
+Comparisons may be chained, for example a <= b <= c.
+
+```py
+x = 2
+print(x == 2) # True
+print(x == 3) # False
+print(x < 3) # True
+```
+
+The "in" operator could be used to check if a specified object exists within an iterable object container,
+
+```py
+name = "Mel"
+if name not in ["John", "Rick"]:
+    print("Your name is neither John or Rick.")
+else:
+    print("Your name might be John or Rick.")
+```
+
+Use is / is not mainly for None, singletons, or identity checks; use == / != for value equality.
+Unlike the double equals operator "==", the "is" operator does not match the values of the variables, but the instances themselves.
+
+```py
+x = [1,2,3]
+y = [1,2,3]
+print(x == y) # Prints out True
+print(x is y) # Prints out False
+print(x is x) # Prints out True
+
+result = None
+if result is None:
+    print("No result yet")
+if result is not None:
+    print("We have a result:", result)
+```
 
 ### 4.3 Logical Operators
 
 - `and`, `or`, `not`
 - Short-circuit evaluation
+
+The "and" and "or" boolean operators allow building complex boolean expressions.
+Using "not" before a boolean expression inverts it:
+
+```py
+name = "John"
+age = 23
+if name == "John" and age == 23:
+    print("Your name is John, and you are also 23 years old.")
+
+if name == "John" or name == "Rick":
+    print("Your name is either John or Rick.")
+```
+
+Short-circuit evaluation is when Python stops evaluating a boolean expression as soon as the final result is known, without checking the rest. For example with `and` if the left side is False, Python doesn’t evaluate the right side.
 
 ### 4.4 Assignment Operators
 
@@ -401,6 +452,24 @@ In Python, == compares by value. Python's `is` operator may be used to compare o
 - `if`, `elif`, `else`
 - Ternary operator (`x if condition else y`)
 - Nested conditions
+
+A statement is evaulated as true if one of the following is correct: 1. The "True" boolean variable is given, or calculated using an expression, such as an arithmetic comparison. 2. An object which is not considered "empty" is passed.
+
+Here are some examples for objects which are considered as empty: 1. An empty string: "" 2. An empty list: [] 3. The number zero: 0 4. The false boolean variable: False
+
+```py
+statement = False
+another_statement = True
+if statement is True:
+    # do something
+    pass
+elif another_statement is True: # else if
+    # do something else
+    pass
+else:
+    # do another thing
+    pass
+```
 
 ### 5.2 Loops
 
@@ -511,21 +580,29 @@ print(analyze_point(Point(3, 3)))    # On diagonal at (3, 3)
 - Instance creation
 - Instance variables and methods
 - `self` parameter
-
-### 7.2 Special Methods
-
 - `__init__` constructor
 - `__str__` and `__repr__`
-- Other magic methods
 
-### 7.3 Inheritance
+Like in JavaScript, classes in Python are templates for object creation.
+First you define the class with the variables and methods it should contain, then instantiate an object from it. A `new` keyword is not required.
+
+The __init__() function is a special function that is called when the class is being initiated. It's used for assigning values in a class. It's like a constructor in JS.
+It takes `self` as the first argument which is useful for assigning values in a class.
+
+In Python, names that start and end with double underscores like __repr__ are “special” or “dunder” methods that the language itself looks for to implement built-in behavior such as printing, arithmetic, iteration, comparisons, and more. They let your class integrate smoothly with Python syntax and built-ins 
+
+__repr__ defines the “official” string representation used by repr(obj), interactive shells, and when objects appear inside containers like lists and dicts.​
+
+The usual convention is that __repr__ returns an unambiguous, information-rich string that ideally could be used to recreate the object, such as "ClassName(field1=value1, field2=value2)", which is especially helpful for debugging and logging.
+
+### 7.2 Inheritance
 
 - Single inheritance
 - Method overriding
 - `super()` function
 - Multiple inheritance and MRO
 
-### 7.4 Class Features
+### 7.3 Class Features
 
 - Class variables vs instance variables
 - Static methods (`@staticmethod`)
