@@ -173,6 +173,8 @@ We can make most problems simpler by breaking them into small problems:
 > "divide and rule" - Julia Caesar
 > "We must all hang together, or assuradely we will hang seperately" - Ben Franklin
 
+## Recursion
+
 One great technique for divide and conquer algorithms is recursion.
 
 > it is legal for one function to call another ... it is also legal for a function to call itself. It may not be obvious why that is a good thing, but it turns out to be one of the most magical and interesting things a program can do
@@ -180,6 +182,19 @@ One great technique for divide and conquer algorithms is recursion.
 Recursion provides an framework for describing a problem and also implementing a solution. How can you progressively solve smaller versions of the same or similar problem until a base case is reached.
 
 When the interpreter calls a function the formal parameter is bound to the value of actual parameter. Upon entry into the function a new scope is created. A scope is a mapping from names to values in memory. When executing a program the interpreter creates a main scope, and scopes for each function. Each of these scopes is called a stack frame because each scope gets added to the top of a stack during execution, then removed from it when execution is complete. "Last in first out" (LIFO) is the definition of a stack.
+
+When analysing a problem to solve with recursion, you want to nail the base and recursive cases. Base cases are when the recursion stops, and recursive cases are when the recursion continues. The recursive cases should be simpler than the original problem. The base cases should be the simplest possible input.
+
+For example, the factorial function can be written as:
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n-1)
+```
+
+Really think about all possible bases cases, when the recursion should end. Identify those first, then focus on the possible recursive cases. In the implementation, do the base case then the recursive case. There are three steps in the recursive case: pre, recurse and post.
 
 ## Search algorithms
 
@@ -208,4 +223,3 @@ The mathematical definition of a sorted list is where `Xi <= Xi+1`. **Bubble sor
 ```
 
 The implementaiton of bubble sort reveals a loop with in a loop. Nested loops are a clue that the time complexity is quadratic, `O(n²)`.
-

@@ -45,4 +45,4 @@ interface LinkedList<T> {
 }
 ```
 
-To find a value in a linked list, you move forward one node at a time, a Big O(n).
+Many operations of a singly linked list are linear time (O(n).), e.g. finding a value, appending a new value (at the end).

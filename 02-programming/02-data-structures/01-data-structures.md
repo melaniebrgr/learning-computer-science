@@ -29,18 +29,3 @@ With an array list random access at a index is much faster compared to a linked 
 A ring buffer, also known as a circular buffer, is a data structure that operates like an array but with a fixed size, where the ends are connected to form a "ring." It uses index-based head and tail pointers to track the start and end of the data. Unlike an ArrayList, where the head is at index 0 and the tail is at the length, a ring buffer allows the head and tail to be anywhere in the array, wrapping around using the modulo operator if they exceed the array's bounds. This enables efficient O(1) operations for adding (push, unshift) or removing (pop, shift) elements from either end, making it ideal for scenarios like queues or log batching.
 
 When the buffer fills (tail meets head), it requires resizing by copying elements into a larger buffer while maintaining order. Ring buffers are fast, maintain order, and are useful for performance-critical applications like log batching or object pooling, though they may need careful handling to avoid issues with concurrent access.
-
-## Recursion
-
-When analysing a problem to solve with recursion, you want to nail the base and recursive cases. Base cases are when the recursion stops, and recursive cases are when the recursion continues. The recursive cases should be simpler than the original problem. The base cases should be the simplest possible input.
-
-For example, the factorial function can be written as:
-
-```python
-def factorial(n):
-    if n == 0:
-        return 1
-    return n * factorial(n-1)
-```
-
-Really think about all possible bases cases, when the recursion should end. Identify those first, then focus on the possible recursive cases. In the implementation, do the base case then the recursive case. There are three steps in the recursive case: pre, recurse and post.
