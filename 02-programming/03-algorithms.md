@@ -44,7 +44,7 @@ Big O
 - compares the efficiency of different algorithms,
 - identifies potential bottlenecks in code.
 
-![graph summary of big O](./assets/bigo--summary.png "Summary")
+![graph summary of big O](./_assets/bigo--summary.png "Summary")
 
 ### Constant time, O(1)
 
@@ -52,7 +52,7 @@ Big O
 - Always 1 step, even if the array has 10 or 10 million elements.
 - The graph is a flat line, constant regardless of input.
 
-![graph of constant time](./assets/bigo--constant.png "Constant time")
+![graph of constant time](./_assets/bigo--constant.png "Constant time")
 
 ```python
 def get_first_element(arr):
@@ -66,7 +66,7 @@ def get_first_element(arr):
 - Slightly steeper than linear initially but grows much slower for large inputs.
 - The inverse of an exponential function.
 
-![graph of logarithmic time](./assets/bigo--logarithmic.png "Logarithmic time")
+![graph of logarithmic time](./_assets/bigo--logarithmic.png "Logarithmic time")
 
 ```python
 def binary_search(arr, target):
@@ -89,7 +89,7 @@ def binary_search(arr, target):
 - The graph is a straight line, and grows proportionally with input size.
 - If there is a single loop in the algorithm, it is a clue that has linear complexity.
 
-![graph of linear time](./assets/bigo--linear.png "Linear time")
+![graph of linear time](./_assets/bigo--linear.png "Linear time")
 
 ```python
 def print_all_elements(arr):
@@ -119,7 +119,7 @@ def quicksort(arr):
 - If array has 10 elements, it has 100 steps. If 1,000, it has 1,000,000 steps.
 - The graph curves upward quickly. It is inefficient for large inputs.
 
-![graph of quadratic time](./assets/bigo--quadratic.png "Quadratic time")
+![graph of quadratic time](./_assets/bigo--quadratic.png "Quadratic time")
 
 ```python
 def print_all_pairs(arr):
