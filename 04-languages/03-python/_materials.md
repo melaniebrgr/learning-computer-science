@@ -1,5 +1,27 @@
 # Materials
 
+## [The Zen of Python](https://peps.python.org/pep-0020/#the-zen-of-python)
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one -- and preferably only one -- obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+
 ## Table of Contents
 
 - ✅ 1. Python Basics
@@ -71,6 +93,8 @@
 
 ## References
 
-- <https://wiki.python.org/moin/HowToEditPythonCode>
-- <https://wiki.python.org/moin/BeginnersGuide/Programmers>
-- <https://www.youtube.com/watch?v=vBY_q7zw3qo>
+- Quick history: <https://wiki.python.org/moin/HowToEditPythonCode>
+- A list of python learning resources: <https://wiki.python.org/moin/BeginnersGuide/Programmers>
+- Learn Python in 10 minutes: <https://www.stavros.io/tutorials/python/>
+- Basic syntax with easy examples: <https://www.learnpython.org/>
+- Data structures in python: <https://www.youtube.com/watch?v=vBY_q7zw3qo>

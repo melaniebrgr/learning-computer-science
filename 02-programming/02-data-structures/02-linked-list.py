@@ -57,7 +57,7 @@ class LinkedList:
             else:
                 last = self.head
                 for i in range(index-1):
-                    if last.next == None:
+                    if last.next is None:
                         raise ValueError("Index is out of bounds")
                     last = last.next
                 node = Node(value)
@@ -65,20 +65,49 @@ class LinkedList:
                 last.next = node
 
     def remove(self, value):
-        pass
+        count = 0
+        last = self.head
+        while last is not None:
+            if last.value == value:
+                return self.pop(count)
+            count += 1
+            last = last.next
+        return -1
 
     def pop(self, index):
-        pass
+        last = self.head
+        for i in range(index-1):
+            if last.next is None:
+                raise ValueError("Index is out of bounds")
+            last = last.next
+        current = last.next
+        next = current.next
+        last.next = next
+        return current.value
 
     def get(self, index):
-        pass
+        last = self.head
+        for i in range(index):
+            if last.next is None:
+                raise ValueError("Index is out of bounds")
+            last = last.next
+        return last.value
 
     def print(self):
-        pass
+        last = self.head
+        str = ''
+        while last is not None:
+            str += last.value + ' '
+            last = last.next
+        return str.strip()
 
 
 linked_list = LinkedList()
 linked_list.append('1')
-linked_list.append('2')
 linked_list.append('3')
-print(linked_list.__len__())
+linked_list.insert(1, '2')
+linked_list.append('4')
+linked_list.insert(4, '5')
+print(linked_list.print())
+print(linked_list.remove('2'))
+print(linked_list.print())

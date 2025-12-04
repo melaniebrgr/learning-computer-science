@@ -400,8 +400,8 @@ else:
     print("Your name might be John or Rick.")
 ```
 
-Use is / is not mainly for None, singletons, or identity checks; use == / != for value equality.
-Unlike the double equals operator "==", the "is" operator does not match the values of the variables, but the instances themselves.
+In Python, == asks “do these have the same value?”, while is asks “are these literally the same object in memory?” Use `==` for almost all normal comparisons (numbers, strings, lists, etc.).
+Use `is` / `is not` to compare with None, if x is None, to check identity on purpose (like singletons).
 
 ```py
 x = [1,2,3]
@@ -552,12 +552,36 @@ print(analyze_point(Point(3, 3)))    # On diagonal at (3, 3)
 - Default parameters
 - Variable-length arguments (`*args`, `**kwargs`)
 - Keyword-only arguments
+- lambda functions
+
+Functions are a convenient way to divide your code into useful blocks. Functions in python are defined using the block keyword "def", followed with the function's name as the block's name. (Other block keywords in python are "if", "for", and "while".)
+
+```py
+def my_function_with_args(username, greeting):
+    print("Hello %s, From My Function! I wish you %s"%(username, greeting))
+    
+my_function_with_args('mel', 'well')
+```
+
+Lambda functions are ad hoc functions that are comprised of a single statement.
+
+```py
+funcvar = lambda x: x + 1
+funcvar(1) # 2
+```
 
 ### 6.2 Return Values
 
 - `return` statement
 - Multiple return values
 - Functions without explicit return
+
+Use the return keyword to return a value to the caller,
+
+```py
+def sum_two_numbers(a, b):
+    return a + b
+```
 
 ### 6.3 Scope and Namespaces
 
