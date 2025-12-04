@@ -31,11 +31,20 @@ Loops can be used for exhaustive enumeration. **Exhaustive enumeration** or "gue
 
 ## Big O analysis
 
-Big O analysis is a way for computer scientists to **categorize algorithms by how they slow down as the input size to the algorithm grows**. It enables us to talk about how slow or how fast an algorithm can run. Specifically, it is the worst-case runtime. Big O
+Big O analysis is a way for computer scientists to **categorize algorithms by how they slow down as the input size to the algorithm grows**. 
+Big O categorises algorithms by computation time or memory based on the input to help us make decisions on which data structures to use or not use.
+It enables us to talk about how slow or how fast an algorithm can run.
+Specifically, it is _the worst-case_ runtime. 
+Constants are dropped because Big O focuses on the algorithm's growth trend as input size increases. The relative growth of different complexity classes (like N vs N²) becomes more significant than small constant multipliers.
+TL;DR growth is with respect to input, constants are dropped, is the worst case.
+
+Big O
 
 - predicts how an algorithm will perform as data size increases,
 - compares the efficiency of different algorithms,
 - identifies potential bottlenecks in code.
+
+![graph summary of big O](./assets/bigo--summary.png "Summary")
 
 ### Constant time, O(1)
 
@@ -48,21 +57,6 @@ Big O analysis is a way for computer scientists to **categorize algorithms by ho
 ```python
 def get_first_element(arr):
     return arr[0]
-```
-
-### Linear time, O(n)
-
-- The running time grows directly proportionally with input size.
-- If array has 5 elements the algorithm has 5 operations. 1,000 elements has 1,000 operations.
-- The graph is a straight line, and grows proportionally with input size.
-- If there is a single loop in the algorithm, it is a clue that has linear complexity.
-
-![graph of linear time](./assets/bigo--linear.png "Linear time")
-
-```python
-def print_all_elements(arr):
-    for x in arr:
-        print(x)
 ```
 
 ### Logarithmic time, O(log n)
@@ -86,6 +80,21 @@ def binary_search(arr, target):
         else:
             right = mid - 1
     return -1
+```
+
+### Linear time, O(n)
+
+- The running time grows directly proportionally with input size.
+- If array has 5 elements the algorithm has 5 operations. 1,000 elements has 1,000 operations.
+- The graph is a straight line, and grows proportionally with input size.
+- If there is a single loop in the algorithm, it is a clue that has linear complexity.
+
+![graph of linear time](./assets/bigo--linear.png "Linear time")
+
+```python
+def print_all_elements(arr):
+    for x in arr:
+        print(x)
 ```
 
 ### Linearithmic time, O(n log n)
@@ -119,6 +128,8 @@ def print_all_pairs(arr):
             print(x, y)
 ```
 
+### Cubic time, O(n³)
+
 ### Exponential time, O(2^n)
 
 - Each call spawns 2 more calls resulting in exponential growth.
@@ -151,8 +162,6 @@ function permute(arr) {
   return result;
 }
 ```
-
-![graph summary of big O](./assets/bigo--summary.png "Summary")
 
 ## Speeding up algorithms
 
