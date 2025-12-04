@@ -41,3 +41,18 @@ However, this is a source of confusion because in the International System of Un
 
 - 1024 bytes = 1 kibibyte (KiB), fitting binary-based computing
 - 1000 bytes = 1 kilobyte (KB), the SI decimal standard
+
+## Endianness
+
+Endianness refers to the order in which bytes of a multi-byte data type, such as an integer, are stored in computer memory or transmitted over a network.
+
+Each memory storage location has an index or address. Every byte can store an 8-bit number (i.e., between 0x00 and 0xff), so you must reserve more than one byte to store a larger number. 
+
+By far the most common ordering of multiple bytes in one number is the **little-endian**, which is used on all Intel processors. Little-endian means storing bytes in order of least-to-most-significant (where the least significant byte takes the first or lowest address), comparable to a common European way of writing dates e.g. 31 December 2050.
+
+Naturally, **big-endian** is the opposite order, comparable to an ISO date (2050-12-31). Big-endian is also often called "network byte order", because Internet standards usually require data to be stored big-endian.
+
+Examples with the number 0x12345678 (i.e., 305 419 896 in decimal):
+
+- little-endian: 0x78 0x56 0x34 0x12
+- big-endian: 0x12 0x34 0x56 0x78
