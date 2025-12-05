@@ -47,9 +47,9 @@ Namespaces are one honking great idea -- let's do more of those!
   - 4.4 Assignment Operators
   - 4.5 Bitwise Operators
 
-- 5. Control Flow
-  - 5.1 Conditional Statements
-  - 5.2 Loops
+- ✅ 5. Control Flow
+  - ✅ 5.1 Conditional Statements
+  - ✅ 5.2 Loops
   - ✅ 5.3 Match Statement (Python 3.10+)
 
 - 6. Functions

@@ -453,7 +453,7 @@ Short-circuit evaluation is when Python stops evaluating a boolean expression as
 - Ternary operator (`x if condition else y`)
 - Nested conditions
 
-A statement is evaulated as true if one of the following is correct: 1. The "True" boolean variable is given, or calculated using an expression, such as an arithmetic comparison. 2. An object which is not considered "empty" is passed.
+A statement is evaluated as true if one of the following is correct: 1. The "True" boolean variable is given, or calculated using an expression, such as an arithmetic comparison. 2. An object which is not considered "empty" is passed.
 
 Here are some examples for objects which are considered as empty: 1. An empty string: "" 2. An empty list: [] 3. The number zero: 0 4. The false boolean variable: False
 
@@ -471,15 +471,216 @@ else:
     pass
 ```
 
+The ternary operator (x if condition else y) is a one-line conditional expression that returns one of two values based on a condition. It evaluates the condition; if true, it returns x, otherwise y. It's a concise alternative to an if-else block when assigning a value or returning from an expression.
+
+```py
+# Ternary operator vs if-else block (equivalent)
+# Using ternary operator:
+value = 10
+absolute = value if value >= 0 else -value
+
+# Equivalent if-else block:
+if value >= 0:
+    absolute = value
+else:
+    absolute = -value
+
+# Basic ternary operator syntax
+age = 20
+status = "adult" if age >= 18 else "minor" # Output: adult
+
+# Ternary operator in return statements
+def get_max(a, b):
+    return a if a > b else b # Output: 10
+
+# Ternary operator with expressions
+x = 5
+result = x * 2 if x > 0 else x * -2
+print(result)  # Output: 10
+
+# Ternary operator in list comprehensions
+numbers = [1, -2, 3, -4, 5]
+abs_values = [x if x >= 0 else -x for x in numbers] # Output: [1, 2, 3, 4, 5]
+
+# Ternary operator for default values
+name = None
+display_name = name if name else "Guest"
+
+# Ternary operator for string formatting
+count = 1
+message = f"You have {count} item" if count == 1 else f"You have {count} items" # Output: You have 1 item
+```
+
 ### 5.2 Loops
 
-- `for` loops
+- `for in` loops
   - Iterating over sequences
   - `range()` function
   - `enumerate()` and `zip()`
 - `while` loops
 - Loop control: `break`, `continue`, `pass`
 - `else` clause with loops
+
+use `for` loops iterate over sequences (lists, strings, tuples, dictionaries, sets, iterables) and execute a block for each item.
+
+enumerate() returns (index, value) pairs. zip() pairs elements from multiple iterables.
+
+The `range()` function generates sequences of numbers, e.g. range(stop), range(start, stop), range(start, stop, step) that becomes seful for numeric loops and indexing.
+
+`while` loops repeat while a condition is true. Check the condition before each iteration.
+
+- break: Exits the loop immediately.
+- continue: Skips the rest of the iteration and continues with the next.
+- pass: A no-op placeholder.
+
+#### for in loops
+
+```py
+# Iterating over sequences
+fruits = ["apple", "banana", "orange"]
+for fruit in fruits:
+    print(f"  - {fruit}")
+
+# Iterating over a string
+for char in "Python":
+    print(f"  {char}", end=" ")
+print()
+
+# Iterating over a dictionary
+student_grades = {"Alice": 85, "Bob": 92, "Charlie": 78}
+print("\nIterating over a dictionary:")
+for name, grade in student_grades.items():
+    print(f"  {name}: {grade}")
+
+# range() function
+print("  range(5):", list(range(5)))  # [0, 1, 2, 3, 4]
+print("  range(2, 6):", list(range(2, 6)))  # [2, 3, 4, 5]
+print("  range(0, 10, 2):", list(range(0, 10, 2)))  # [0, 2, 4, 6, 8]
+
+# Using range() in a for loop
+for i in range(1, 4):
+    print(f"  Count: {i}")
+
+# enumerate() - getting index and value
+colors = ["red", "green", "blue"]
+for index, color in enumerate(colors):
+    print(f"  Index {index}: {color}")
+
+# enumerate() with custom start
+for index, color in enumerate(colors, start=1):
+    print(f"  Position {index}: {color}")
+
+# zip() - iterating over multiple sequences simultaneously
+print("\nUsing zip():")
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 35]
+cities = ["NYC", "LA", "Chicago"]
+
+for name, age, city in zip(names, ages, cities):
+    print(f"  {name} is {age} years old and lives in {city}")
+
+# zip() with different length sequences (stops at shortest)
+short_list = [1, 2]
+for num, name in zip(short_list, names):
+    print(f"  {num}: {name}")  # Only prints first two
+```
+
+#### while loops
+
+```py
+# Basic while loop
+countdown = 5
+while countdown > 0:
+    print(f"  {countdown}...")
+    countdown -= 1
+print("  Blast off!")
+
+# While loop with user input simulation
+print("\nSearching for a number:")
+target = 7
+attempts = 0
+current = 0
+
+while current != target:
+    current += 1
+    attempts += 1
+    if attempts > 10:  # Safety check
+        break
+```
+
+#### loop control
+
+```py
+# break - exit loop early
+print("\nUsing break to exit early:")
+for num in range(1, 10):
+    if num == 5:
+        print(f"  Found {num}, breaking!")
+        break
+    print(f"  {num}", end=" ")
+print()
+
+# continue - skip current iteration
+print("\nUsing continue to skip even numbers:")
+for num in range(1, 11):
+    if num % 2 == 0:
+        continue  # Skip even numbers
+    print(f"  {num}", end=" ")
+print()
+
+# pass - placeholder (does nothing)
+print("\nUsing pass as placeholder:")
+for num in range(1, 4):
+    if num == 2:
+        pass  # Placeholder for future code
+    else:
+        print(f"  {num}")
+
+# else with for loop - executes if loop completes normally
+numbers = [1, 3, 5, 7, 9]
+search_value = 4
+
+for num in numbers:
+    if num == search_value:
+        print(f"  Found {search_value}!")
+        break
+else:
+    print(f"  {search_value} not found in the list")
+
+# else executes when search_value is found
+search_value = 7
+for num in numbers:
+    if num == search_value:
+        print(f"  Found {search_value}!")
+        break
+else:
+    print(f"  {search_value} not found")  # Won't execute
+
+# else with while loop
+print("\nSearching with while loop (with else):")
+target = 5
+counter = 0
+max_attempts = 10
+
+while counter < max_attempts:
+    counter += 1
+    if counter == target:
+        print(f"  Found target {target} at attempt {counter}!")
+        break
+else:
+    print(f"  Target {target} not found after {max_attempts} attempts")
+
+# else doesn't execute when break is called
+target = 3
+counter = 0
+while counter < 10:
+    counter += 1
+    if counter == target:
+        print(f"  Found target {target}!")
+        break
+else:
+    print("  This won't print")  # Won't execute because break was called
+```
 
 ### 5.3 Match Statement (Python 3.10+)
 
