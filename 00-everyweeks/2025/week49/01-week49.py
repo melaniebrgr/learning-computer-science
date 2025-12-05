@@ -1,5 +1,9 @@
 # Day 1: Secret Entrance
+from pathlib import Path
 
+file_path = Path(__file__).parent / 'input.txt'
+with open(file_path, 'r') as file:
+    lines = file.read().splitlines()
 
 class NodeRing:
     # Define a doubly linked node list class
@@ -40,24 +44,26 @@ def instruction_dialer(instruction_split: tuple[str, int], node: NodeRing) -> No
     # E.g. ("right", 48) -> rotate right 48 clicks
     match instruction_split:
         case ("left", distance):
-            print(f"Rotating left {distance} clicks")
             for _ in range(distance):
                 node = node.previous
         case ("right", distance):
-            print(f"Rotating right {distance} clicks")
             for _ in range(distance):
                 node = node.next
     return node
 
-pos_1 = instruction_dialer(instruction_splitter("L2"), node_1)
-print(pos_1.value) # 3
-pos_2 = instruction_dialer(instruction_splitter("R1"), pos_1)
-print(pos_2.value) # 4
-
-def instructions_exector(instructions: [str]) -> int:
+def instructions_executor(instructions: [str], node: NodeRing) -> int:
     # given a list of strings
     # iterate through the list
-    # for each item call the instruction dialer
+    # for each item call the instruction splitter then the instruction dialer
     # if the dial value is 0, increment the count
     # return the count
-    pass
+    count = 0
+    next_node = node
+    for instruction_raw in instructions:
+        instruction_split = instruction_splitter(instruction_raw)
+        next_node = instruction_dialer(instruction_split, next_node)
+        if next_node.value == 0:
+            count += 1
+    return count
+
+print(instructions_executor(['R1', 'L1'], node_1)) # 2
