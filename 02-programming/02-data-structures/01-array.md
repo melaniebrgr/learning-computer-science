@@ -1,6 +1,6 @@
 # Arrays
 
-**Arrays are contiguous memory space**. Contiguous means it is an unbreaking sequence of memory of a fixed amount of bytes. A "true array" cannot be grown or broken up.
+**Arrays are a fixed size contiguous memory space**. Contiguous means it is an unbroken and adjacent sequence of memory of a fixed amount of bytes. A "true array" cannot be grown or broken up.
 
 How the contiguous memory is interpreted depends on the instructions to the compiler, e.g. an array of integers, or an array of strings. When we access an element of an array with, `array[index]` we are telling the computer to go to the memory addess of the array start, offset by the index multiplied by the memory sie of the data type, `index * size_of_element` bytes. In short, we have zero or more pieces of memory in a row, of a specific type.
 
