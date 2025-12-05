@@ -29,7 +29,4 @@
 - <https://frontendmasters.com/courses/algorithms-practice/>
 - [ ] [The Ultimate DSA Course for 2025](https://www.youtube.com/watch?v=DMeD8trbj6A)
 - [ ] [The Last Algorithms Course You'll Need](https://frontendmasters.com/courses/algorithms/arrays-data-structure/)
-  - [x] Bio O Time Complexity
-  - [ ] Arrays Data Structure
-  - [ ] Linear Search
-  - [ ] Binary Search
+- [ ] [kata-machine](https://github.com/ThePrimeagen/kata-machine)
