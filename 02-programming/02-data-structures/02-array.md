@@ -12,6 +12,8 @@ How the contiguous memory is interpreted depends on the instructions to the comp
 
 JS arrays, which permit these operations, and therefore JS arrays are not true arrays. Considering this, true arrays almost seem not like a _real_ data structure but a primitive of computing.
 
+Comparing arrays and lists, if you want to random access a value you tend to want an array (O(1)). If you want to append or pop from a head or tail, you tend to want a list.
+
 ## ArrayBuffer
 
 Node does have something like an array, an **ArrayBuffer**.

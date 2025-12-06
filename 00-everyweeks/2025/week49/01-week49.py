@@ -5,7 +5,7 @@ file_path = Path(__file__).parent / 'input.txt'
 with open(file_path, 'r') as file:
     lines = file.read().splitlines()
 
-class NodeRing:
+class DoublyLinkedNode:
     # Define a doubly linked node list class
     def __init__(self, value):
         self.value = value
@@ -13,22 +13,12 @@ class NodeRing:
         self.previous = None
 
 # Create a doubly linked list ring example
-node_1 = NodeRing(0)
-node_2 = NodeRing(1)
-node_3 = NodeRing(2)
-node_4 = NodeRing(3)
-node_5 = NodeRing(4)
-
-node_1.next = node_2
-node_1.previous = node_5
-node_2.next = node_3
-node_2.previous = node_1
-node_3.next = node_4
-node_3.previous = node_2
-node_4.next = node_5
-node_4.previous = node_3
-node_5.next = node_1
-node_5.previous = node_4
+def create_node_ring(size: int, initial_position: int) -> DoublyLinkedNode:
+    # Given a size
+    # Create a doubly linked node ring list of given size
+    # the "first" node should point to the "last" node and vice versa
+    # the node at the initial position should be returned
+    pass
 
 def instruction_splitter(instruction_raw: str) -> tuple[str, int]:
     # Split direction and distance
@@ -38,7 +28,7 @@ def instruction_splitter(instruction_raw: str) -> tuple[str, int]:
     distance = int(instruction_raw[1:])
     return direction, distance
 
-def instruction_dialer(instruction_split: tuple[str, int], node: NodeRing) -> None:
+def instruction_dialer(instruction_split: tuple[str, int], node: DoublyLinkedNode) -> None:
     # Execute the instruction
     # E.g. ("left", 68) -> rotate left 68 clicks
     # E.g. ("right", 48) -> rotate right 48 clicks
@@ -51,7 +41,7 @@ def instruction_dialer(instruction_split: tuple[str, int], node: NodeRing) -> No
                 node = node.next
     return node
 
-def instructions_executor(instructions: [str], node: NodeRing) -> int:
+def instructions_executor(instructions: [str], node: DoublyLinkedNode) -> int:
     # given a list of strings
     # iterate through the list
     # for each item call the instruction splitter then the instruction dialer
@@ -66,4 +56,4 @@ def instructions_executor(instructions: [str], node: NodeRing) -> int:
             count += 1
     return count
 
-print(instructions_executor(['R1', 'L1'], node_1)) # 2
+print(instructions_executor(['R1', 'L1', 'R2', 'R3'], node_1)) # 2
