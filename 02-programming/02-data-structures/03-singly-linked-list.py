@@ -69,10 +69,10 @@ class LinkedList:
         last = self.head
         while last is not None:
             if last.value == value:
-                return self.pop(count)
+                self.pop(count)
+                break
             count += 1
             last = last.next
-        return -1
 
     def pop(self, index):
         last = self.head
@@ -87,6 +87,8 @@ class LinkedList:
 
     def get(self, index):
         last = self.head
+        if last is None:
+            raise ValueError("Index is out of bounds")
         for i in range(index):
             if last.next is None:
                 raise ValueError("Index is out of bounds")

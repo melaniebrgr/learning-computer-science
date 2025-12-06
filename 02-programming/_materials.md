@@ -44,7 +44,7 @@
   - [x] Basics
   - [ ] Search
   - [ ] Sort
-  - [ ] Arrays
+  - [x] Arrays
   - [ ] Recursion
   - [ ] Quick sort
   - [ ] Doubly linked list
