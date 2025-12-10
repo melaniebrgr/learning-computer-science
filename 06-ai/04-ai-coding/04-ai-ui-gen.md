@@ -18,11 +18,6 @@ Divide LLM usage into “cheap” and “smart” use cases and use models accor
 - Cheap: project naming, chat naming, and follow up questions are just basic prompts using gpt-4o-mini.
 - Smart: full-file coding.
 
-What is shipped the browser is where things get potentially interesting.
-
-- JSON payload: component type and (static) props, FE reconstructs the exam on the fly everytime.
-- JS bundles: the browser downloads the JS chunks, and React hydrates them (attaches event handlers, runs useState, etc.).
-
 ### Implementation
 
 What's in a exam? Instructions and metadata about the exam, like the time allowed, how much it's worth. Questions that can consist of numbered paragraph text and each question may have subsections, explanatory images and equations, and a how much it's worth. There are also other question categories beyond short answer, like multiple choice, fill in the blank, essay, matching. Answers might be sketches, text, or equations. Designers are designing a library of composable exam components.

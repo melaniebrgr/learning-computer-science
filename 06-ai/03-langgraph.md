@@ -1,6 +1,6 @@
 # LangGraph
 
-LangGraph is a low-level orchestration framework for building, managing, and deploying long-running, stateful agents.
+LangGraph is a low-level orchestration framework for building, managing, and deploying long-running, stateful agents. OpenAI has a "low code " solution for building agentic systems like you would with LangGraph.
 
 ## Elements
 
