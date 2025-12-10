@@ -10,7 +10,12 @@ class LinkedList:
         self.head = None
 
     def __repr__(self):
-        pass
+        values = []
+        current = self.head
+        while current is not None:
+            values.append(repr(current.value))
+            current = current.next
+        return f"LinkedList([{', '.join(values)}])"
 
     # O(n) - linear time (best is constant, worst is linear, and average is n/2)
     def __contains__(self, value):
@@ -69,8 +74,7 @@ class LinkedList:
         last = self.head
         while last is not None:
             if last.value == value:
-                self.pop(count)
-                break
+                return self.pop(count)
             count += 1
             last = last.next
 
@@ -119,6 +123,6 @@ linked_list.append('3')
 linked_list.insert(1, '2')
 linked_list.append('4')
 linked_list.insert(4, '5')
-print(linked_list.print())
+print(linked_list.__repr__())
 print(linked_list.remove('2'))
-print(linked_list.print())
+print(linked_list.__repr__())

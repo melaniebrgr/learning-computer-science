@@ -24,3 +24,15 @@ Another analogy for an operating system is a government: OSs create and enforce 
 ## History
 
 OSs began as a standard library providing common functionality to applications and the applications ran one at a time. They evolved into a system that provides greater security (it has more priviledges than the programs that call it) and isolation and can run multiple programs concurrently.
+
+## Input/Output (I/O)
+
+A rough comparison of relative speeds of different types of I/O:
+
+| Component | Speed | Example Process | Sync/Async |
+|-----------|-------|-----------------|------------|
+| **CPU** | 1 nanosecond (ns) | Basic arithmetic operations, cache access | Sync |
+| **RAM** | 100 nanoseconds (ns) | Loading variables, accessing arrays | Sync |
+| **SSD** | 1 millisecond (ms) | Reading files, database queries | Async |
+| **HDD** | 10 milliseconds (ms) | Large file operations, boot sequences | Async |
+| **Network** | 100 milliseconds (ms) | HTTP requests, downloading files | Async |

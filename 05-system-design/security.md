@@ -31,9 +31,9 @@ XSS attacks are harder to create, but often worse than the CSRF attacks, because
 
 Note, the server doesn't respond with a list of allowed domains just if that one is. The server opt-ins to requests by responding to a preflight requests. Effectively this is a way to whitelist origins. (Note, an "origin" is not the URL, it is the scheme, domain and port).
 
-What requests _are NOT_ subject to CORS? "Simple requests":
+What requests _are NOT_ subject to CORS?
 
-GET, HEAD and POST requests with content type `application/x-www-form-urlencoded`, `multipart/form-data` (which is not AJAX), and `text/plain`. A.k.a form submissions (because CORS can after forms and we can't break the web), which is why we have to worry about CSRF and why nonces are a thing for forms.
+"Simple requests" like GET and HEAD requestions, and POST requests with content type `application/x-www-form-urlencoded`, `multipart/form-data` (which is not AJAX), and `text/plain` a.k.a form submissions (because CORS can after forms and we can't break the web), which is why we have to worry about CSRF and why nonces are a thing for forms.
 
 What requests _are_ subject to CORS?
 
@@ -41,6 +41,27 @@ What requests _are_ subject to CORS?
 - AJAX requests
 - Requests with content type `application/json`
 
+For these an options request is sent first to check if the request is allowed.
+
+> The browser becomes your mom: "Wait. Before you go, WHERE are you going? Who’s going with you? When will you come back???”
+
+## Same origin vs. cross origin
+
+The origin of a URL is just three parts together: the scheme, the host, and the port (if non‑default). For a URL like `https://example.com:8080/path?x=1#hash`, the origin is:
+
+- Scheme: `https`
+- Host: `example.com`
+- Port: `8080` (or the default for that scheme, like 80 for http, 443 for https)
+
+Two URLs have the same origin only if all three of these match: same scheme, same host (the hostname is the full domain name, including both the subdomain and the top‑level domain), and same port (considering default ports).
+
+Examples:
+
+- `https://example.com/app` and `https://example.com/api` → same origin (only path differs)
+- `http://example.com` and `https://example.com` → different origins (scheme differs)
+- `https://api.example.com` and `https://example.com` → different origins (host differs)
+
 ### References
 
 1. (Cross-Origin Resource Sharing (CORS))[https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS]
+2. ("Same-site" and "same-origin")[https://web.dev/articles/same-site-same-origin]
