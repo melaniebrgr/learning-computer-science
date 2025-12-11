@@ -1,13 +1,14 @@
 {
     "conventionalCommits.scopes": [
         "ew",
-        "prog",
         "comp",
+        "prog",
         "rust",
         "wasm",
-        "sys",
-        "godot",
         "lang",
-        "ai"
+        "sys",
+        "ai",
+        "godot",
+        "vis"
     ]
 }
