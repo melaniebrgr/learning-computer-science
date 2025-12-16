@@ -12,11 +12,26 @@ Few-shot prompting provides multiple examples. Rules files can be used when add 
 
 ## Coding Tools
 
+### IDEs
+
 - Cursor: A fork of VS Code that provides a superset of each features.
 - Claude Code: a terminal application
 - Kiro
 - Windsurf
 - Tidewave
+- Antigravity
+
+### Component/UI generation
+
+- [Bit](https://bit.dev/blog/building-software-in-the-ai-era): Help AI avoid creating a new component every time by "registering" and reusing components with Bit MCP.
+- v0
+- Bolt
+- Replit
+- Lovable
+
+### Test generation
+
+### PR review
 
 ## Cursor
 

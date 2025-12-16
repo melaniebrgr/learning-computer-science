@@ -1,37 +1,22 @@
 # AI Coding Cheatsheet
 
-Structure AI usage into phases:
+Setup codebases for AI
 
-1) Brainstorming (planning and thinking through the problem)
-2) Executing (implementing the solution)
-3) Verifying (reviewing and checking the work)
-4) Updating rules and configuration
+1. Select and purchase and AI coding tool
+2. Privacy: enable privacy so that data is not retained by the model provider
+3. Create coding standards context documents
+4. Audit AI configuration weekly
 
-Generally,
+During development structure AI usage into phases:
 
-- Select and purchase and AI coding tool
-- Audit AI configuration weekly
-- Follow the phases when completing with using AI (this should also help manage the context window)
-- Privacy: enable privacy so that data is not retained by the model provider
-
-## IDE
-
-## Testing
-
-## Code review
-
-Bug bot PR review tool.
-
-## UI generation
-
-- v0
-- Bolt
-- Replit
-- Lovable
+1. Brainstorming (planning and thinking through the problem)
+2. Executing (implementing the solution)
+3. Verifying (reviewing and checking the work)
+4. Updating rules and configuration
 
 ## Misc. thoughts
 
-Design repos for AI / Architecting codebases for AI
+### Good, semantic structuring
 
 When building context, Cursor does a semantic codebase search and including that in the context. The implication being that semantic phrasing is important and therefore the adoption of consistent domain specific terminology
 
