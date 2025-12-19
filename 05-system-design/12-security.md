@@ -107,30 +107,28 @@ The value of the Sec-Fetch-Site header can be reasonably trusted, because HTTP h
 
 >  Linguistically, the term is commonly explained as deriving from Arabic شَيْء خُلُود (shayʾ khulūd), which translates to something like “thing of eternity”
 
-On September 15, 2025, access to the maintainer account for [the `@crtl/tinycolor` package](https://www.npmjs.com/package/@ctrl/tinycolor) was gained.
-The credentials may have been stolen in a prior harvesting attack, e.g. the "S1ngularity" or via a phishing campaign where an email is used to impersonate an npm registry staff member, for example. As far as Scott, the package maintainer, is aware though it wasn't a phishing attack.
+On September 15, 2025 access was gained to the maintainer account for [the `@crtl/tinycolor` package](https://www.npmjs.com/package/@ctrl/tinycolor).
+The credentials may have been stolen in a prior harvesting attack, such as the "S1ngularity" or via a phishing campaign where an email impersonating an npm registry staff member. At least the initial compromise did require social engineering of the victim.
 
 > We don't know how the maintainer, Scott Cooper, was hacked, but Scott verified that he had been compromised and was working with NPM to fix it.
 
-Using the stolen credentials, two malicious versions of the @ctrl/tinycolor package were published: 4.1.1 at UTC 2025-09-15 T19:52:46.624Z and 4.1.2 about 20 minutes later.
-The patch version update contained a large payload, a ~3.6MB minified JavaScript, `bundle.js` , and a postinstall script update to execute it.
+Using the stolen credentials, two malicious versions of the @ctrl/tinycolor package were published: 4.1.1 at UTC 2025-09-15 T19:52:46.624Z and 4.1.2 about 20 minutes later. The patch version update contained a large, ~3.6MB minified JavaScript, payload `bundle.js`, and a postinstall script update to execute it.
 
-A short lesson on npm scripts: "pre" and "post" can be prepended to any npm scripts keys in the `package.json` file in order to run thme automatically whenever the "root" script is executed, e.g. "precompress" and "postcompress" executes before and after `npm run compress`, respectively.
-In addition to these custom pre and post scripts, there are "special lifecycle scripts" that are run automatically for certain commands.
-For example, behind the scenes `npm ci` and `npm install` actually run the following in order: preinstall, install, postinstall, prepublish, preprepare, postprepare.
-Adding a postinstall script to `package.json` takes advantage of this implicit behaviour without your being aware of it.
+"pre" and "post" can be prepended to any npm scripts keys in a `package.json` file in order to run them automatically whenever the root script is executed, e.g. "precompress" and "postcompress" executes before and after `npm run compress`, respectively.
 
-So when clients automatically upgraded their dependency patch versions, bundle.js was exectuted on installation. On execution, bundle.js did three main things:
+In addition to these custom pre and post scripts, there are "special lifecycle scripts" run automatically for certain commands. For example, behind the scenes `npm ci` and `npm install` actually run the following in order: preinstall, install, postinstall, prepublish, preprepare, postprepare.
 
-- credential harvesting
-- credential exfiltration
-- worm propagation
+Adding a postinstall script to `package.json` took advantage of this implicit behaviour. When a `tinycolor` consumer upgraded their dependency patch versions, which can happen automatically, bundle.js was executed. It did three main things:
+
+1. credential harvesting
+2. credential exfiltration
+3. worm propagation
 
 #### credential harvesting
 
 > Wiz estimates that 73% of organizations using private GitHub Action Secrets repositories store cloud service provider (CSP) credentials within them. When PATs, which allow developers and automation bots to interact with GitHub repositories and workflows, are exploited, attackers can easily move laterally to CSP control planes.
 
-The malware attempts to vaccuum all the secrets it can. It dumps the entire process.env, downloads the Trufflehog tool and scans the filesystem for secrets, tries to detect if it's executing within AWS or GCP and loads the appropriate SDK to steal credentials and data. Specifically targetting,
+The malware attempted to vaccuum all the secrets it could and placing them in a data.json file. It dumped the entire process.env, downloaded Trufflehog and used it to scan the filesystem for secrets, tried to detect if it was executing within AWS or GCP and loaded the appropriate SDK for the cloud environment to steal credentials and data. Specifically targetted were
 
 - GitHub personal access tokens (PATs),
 - NPM authentication tokens,
@@ -143,13 +141,28 @@ The malware attempts to vaccuum all the secrets it can. It dumps the entire proc
 
 #### credential exfiltration
 
-With the PATs the malware found, a bash script embedded in the `bundle.js` then updates those repositories, creating a branch named `shai-hulud`. To this branch a GitHub Actions workflow file, `.github/workflows/shai-hulud-workflow.yml`, is committed.
+With the PATs the malware found, a bash script embedded in the `bundle.js` then updated those repositories, flipping private repos to public ones and creating a branch named `shai-hulud`.
+
+The branch was created byt first querying the default branch via the GitHub API to get its latest commit SHA. Then the malware called GitHub’s `/git/refs` endpoint to create a new ref `refs/heads/shai-hulud` that points at that same commit, forking the default branch into a new branch.​ By creating the shai-hulud ref directly, the attacker does not need a normal merge or PR.
+
+To this branch a GitHub Actions workflow file, `.github/workflows/shai-hulud-workflow.yml`, and data.json file containing the secrets were committed. On push, the webhook sent the secrets payload to a public webhook. Incidentally, the request limit of the webhook was exceeded (it was a free guest account) but data exfiltration was still made possible by changing the description of the infected repos to "Shai-Hulud migration" making them easily searchable.
 
 #### worm propagation
 
+> About 187 packages were compromised during the shai-hulud attack
 
+Using the stolen NPM token the malware queried for and published updates to 20 of the victims NPM packages. Anyone updating patch version of the package were subsequently infected, in a cascade effect.
 
-> About 187 packages compromised during the shai-hulud attack
+```js
+async updatePackage(pkg) {
+  // Patch package.json (add self as dep?) and publish
+  await exec(`npm version patch --force && npm publish --access public --token ${token}`);
+}
+```
+
+The `shai-hulud` branch did not need to be merged into a release branch for new package versions to be published containing malicious code. As long as the attacker runs `npm publish` from whatever branch they control, the newly published version on npm will contain the malicious payload, regardless of whether a `shai-hulud` branch exists or is merged. (The `shai-hulud` branch was used as a GitHub Actions backdoor, carrying the `.github/workflows/shai-hulud-workflow.yml`, which exfiltrates secrets on push.)
+
+---
 
 ## Security practises to follow (with a bias for the FE)
 
@@ -158,12 +171,14 @@ With the PATs the malware found, a bash script embedded in the `bundle.js` then 
 
 ### Securing the supply chain
 
-Supply chain attacks are having a moment since early Fall 2025.
+Supply chain attacks are having a moment in Fall 2025.
 
-- Pin dependency versions: Pinning versions in package JSON by removing fuzzy version prefixes like ~, ^, and * leads to more explicit control of version upgrades, and the assurance that all environments are using the same version regardless of whether they run `npm install` or `npm ci`.
+- Pin dependency versions: Pinning versions in package JSON by removing fuzzy version prefixes like ~, ^, and * for explicit control of version upgrades, and ensuring that all environments are using the same version regardless of whether they run `npm install` or `npm ci`.
+- Use `npm ci` in CI builds: it is designed for CI/automated environments where deterministic, repeatable installs matter. It deletes node_modules and installs exactly what is in package-lock.json, without modifying it, and fails if a lock file isn't present. By contrast, `npm install` reads package.json (and package-lock.json if present) and installs dependencies, updating the lock file as needed.
 - Setup dependency upgrade automation and uuto update dependency versions _only_ after they’ve been published a week.
 - Clean and prune project dependencies: remove unused packages and internalise others.
-- Secure secrets: Setup secret detection and leak prevention, e.g. with TruffleHog. Attackers are using TruffleHog to find secrets, so find and secure them yourself first.
+- Scan for secrets: Setup secret detection and leak prevention, e.g. with TruffleHog. Attackers are using TruffleHog to find secrets, so find and secure them yourself first.
+- Scan packages when upgrading dependencies, e.g. https://www.getsafety.com/
 
 ### Staying informed of vulnerabilities
 
