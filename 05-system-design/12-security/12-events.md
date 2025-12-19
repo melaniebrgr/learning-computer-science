@@ -1,17 +1,15 @@
-# Notable events
+# Some events
 
 1. <https://deepstrike.io/blog/most-common-web-vulnerabilities-2025>
+2. [xyzeva](https://kibty.town)
 
-## Shai-Hulud worm (1.0), 2025-09-15
+## Shai-Hulud 1.0, 2025-09-15
 
-1. <https://securitylabs.datadoghq.com/articles/shai-hulud-2.0-npm-worm/>
-2. <https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem>
-3. <https://www.getsafety.com/blog-posts/shai-hulud-npm-attack>
+supply chain - phishing
 
 >  Linguistically, the term is commonly explained as deriving from Arabic شَيْء خُلُود (shayʾ khulūd), which translates to something like “thing of eternity”
 
-On September 15, 2025 access was gained to the maintainer account for [the `@crtl/tinycolor` package](https://www.npmjs.com/package/@ctrl/tinycolor).
-The credentials may have been stolen in a prior harvesting attack, such as the "S1ngularity" or via a phishing campaign where an email impersonating an npm registry staff member. At least the initial compromise did require social engineering of the victim.
+Researchers believe that the starting point of the attack was the `rxnt-authentication` package, a malicious version of which was published on npm on September 14, 2025. NPM credentials for it may have been stolen in a prior harvesting attack, such as the "S1ngularity" or via a phishing campaign where an email impersonating an npm registry staff member. The attack was noticed on September 15, 2025 when the popular [`@crtl/tinycolor` package](https://www.npmjs.com/package/@ctrl/tinycolor) was compromised.
 
 > We don't know how the maintainer, Scott Cooper, was hacked, but Scott verified that he had been compromised and was working with NPM to fix it.
 
@@ -52,7 +50,7 @@ To this branch a GitHub Actions workflow file, `.github/workflows/shai-hulud-wor
 
 ### worm propagation
 
-> About 187 packages were compromised during the shai-hulud attack
+> the compromise affected at least 187 packages. Notably, the affected set includes several packages published by the cybersecurity company CrowdStrike’s npmjs account
 
 Using the stolen NPM token the malware queried for and published updates to 20 of the victims NPM packages. Anyone updating patch version of the package were subsequently infected, in a cascade effect.
 
@@ -64,3 +62,20 @@ async updatePackage(pkg) {
 ```
 
 The `shai-hulud` branch did not need to be merged into a release branch for new package versions to be published containing malicious code. As long as the attacker runs `npm publish` from whatever branch they control, the newly published version on npm will contain the malicious payload, regardless of whether a `shai-hulud` branch exists or is merged. (The `shai-hulud` branch was used as a GitHub Actions backdoor, carrying the `.github/workflows/shai-hulud-workflow.yml`, which exfiltrates secrets on push.)
+
+1. <https://securitylabs.datadoghq.com/articles/shai-hulud-2.0-npm-worm/>
+2. <https://www.cisa.gov/news-events/alerts/2025/09/23/widespread-supply-chain-compromise-impacting-npm-ecosystem>
+3. <https://www.getsafety.com/blog-posts/shai-hulud-npm-attack>
+4. <https://hackmag.com/news/shai-hulud>
+
+## Shai-Hulud 2.0, 2025-11-24
+
+> Shai-Hulud 2.0 has successfully taken over and backdoored 796 unique npm packages ... Based on publicly available sources, we estimate that the data of over 500 unique GitHub users was successfully exfiltrated, belonging to over 150 unique GitHub organizations. This should be interpreted as a lower bound.
+
+## Mintlify, 2025-11-27
+
+**type: supply chain, xss**
+
+
+
+1. <https://gist.github.com/hackermondev/5e2cdc32849405fff6b46957747a2d28>
