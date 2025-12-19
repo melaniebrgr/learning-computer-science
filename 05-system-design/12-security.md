@@ -153,6 +153,9 @@ With the PATs the malware found, a bash script embedded in the `bundle.js` then 
 
 ## Security practises to follow (with a bias for the FE)
 
+- Logging and monitoring: Catching security issues when they happen can be a matter of noticing when there are sudden, unexpected spikes in activity (API hits, error rates, etc.) because production logs with sensible alerting is in place. Easier said than done. Also raises the question of what scale should you be when good logging practises are put in place? Should you already focus on this when you only have a handful of users?
+- Efficient software delivery: If it takes only 20 minutes to push a change intro production, if any incident unfolds you will be able to respond quickly. So make it fast, and well documented.
+
 ### Securing the supply chain
 
 Supply chain attacks are having a moment since early Fall 2025.
@@ -172,7 +175,7 @@ Supply chain attacks are having a moment since early Fall 2025.
 - Audit exposure when incidents occur, e.g. search for organisation user names in affected GitHub logs
 - SearchGithub usernames to
 
-### Auditing regularly
+### Auditing continuously, regularly
 
 - Form a security group with FE, BE, and Ops team members
 - Be aware of what are our non-human identities are how are they being made available programmatically
