@@ -1,15 +1,14 @@
 # Some events
 
-1. <https://deepstrike.io/blog/most-common-web-vulnerabilities-2025>
-2. [xyzeva](https://kibty.town)
+The web ecosystem supply chain is extremely vulnerable. Some are even building companies ontop of it, e.g. [Chainguard](https://www.chainguard.dev/).
 
-## Shai-Hulud 1.0, 2025-09-15
+## Shai-Hulud, 2025-09-15
 
-supply chain - phishing
+supply chain
 
 >  Linguistically, the term is commonly explained as deriving from Arabic شَيْء خُلُود (shayʾ khulūd), which translates to something like “thing of eternity”
 
-Researchers believe that the starting point of the attack was the `rxnt-authentication` package, a malicious version of which was published on npm on September 14, 2025. NPM credentials for it may have been stolen in a prior harvesting attack, such as the "S1ngularity" or via a phishing campaign where an email impersonating an npm registry staff member. The attack was noticed on September 15, 2025 when the popular [`@crtl/tinycolor` package](https://www.npmjs.com/package/@ctrl/tinycolor) was compromised.
+Researchers believe that the starting point of the attack was the `rxnt-authentication` package, a malicious version of which was published on npm on September 14, 2025. NPM credentials for it may have been stolen in a prior harvesting attack, such as the "S1ngularity" or via a phishing campaign where an email impersonating an npm registry staff member, "The attack may originate from a credential-harvesting phishing campaign spoofing npm and asking developers to “update” their multi-factor authentication (MFA) login options". The attack was noticed on September 15, 2025 when the popular [`@crtl/tinycolor` package](https://www.npmjs.com/package/@ctrl/tinycolor) was compromised.
 
 > We don't know how the maintainer, Scott Cooper, was hacked, but Scott verified that he had been compromised and was working with NPM to fix it.
 
@@ -68,14 +67,53 @@ The `shai-hulud` branch did not need to be merged into a release branch for new 
 3. <https://www.getsafety.com/blog-posts/shai-hulud-npm-attack>
 4. <https://hackmag.com/news/shai-hulud>
 
-## Shai-Hulud 2.0, 2025-11-24
+## Shai-Hulud 2.0, 2025-11-23
+
+pwn request - supply chain - repository confusion
 
 > Shai-Hulud 2.0 has successfully taken over and backdoored 796 unique npm packages ... Based on publicly available sources, we estimate that the data of over 500 unique GitHub users was successfully exfiltrated, belonging to over 150 unique GitHub organizations. This should be interpreted as a lower bound.
+
+The infection point of Shai-Hulud 2.0 was the repo `asyncapi/asyncapi-preview`, which executed a compromised GitHub Action (GA), i.e. the attack specifically targetted OSS software with a vulnerable GA configuration.
+
+A script in `.github/workflows/changeset-utils/index.js` was modified in a fork by `UnknownWonderer1` which executed during the PR workflow in the context of the official repo, with that repo’s secrets available and exfiltrated the secrets. If a project’s GitHub Actions are misconfigured, a fork PR can be used to run attacker‑controlled code in the main repo context and exfiltrate secrets. The core bug is: **trusted** workflow + **untrusted** code from a fork + **secrets exposed in that job**:
+
+1. The repo allows workflows to run on pull requests from forks (common for OSS).
+2. Secrets are available in that PR context.
+3. The workflow checks out and executes code from the untrusted fork, not just the base repo, before the code is reviewed or merged
+
+Some orgs disable Actions for forks entirely, or require manual approval before running workflows from first‑time contributors.
+
+With the exfiltrated GitHub tokens, the attacker published a version of the repo that, when installed, installed from a commit in his fork. This commit contained the worm, a `setup_bun.js` file, a `bun_environment.js` file and a hijacked npm preinstall script. The main flow was the same a Shai-Hulud 1.0:
+
+1. Credential harvesting
+2. Credential exfiltration: to a public repository with “Sha1-Hulud: The Second Coming.” in the description for easy searching
+3. Propagation: by infecting any packages
+
+1. https://www.aikido.dev/blog/shai-hulud-2-0-unknown-wonderer-supply-chain-attack
+2. https://www.chainguard.dev/unchained/what-the-fork-imposter-commits-in-github-actions-and-ci-cd
+3. https://www.wiz.io/blog/shai-hulud-2-0-ongoing-supply-chain-attack
+
+## React2Shell (CVE-2025-55182), 2025-12-03
+
+remote code execution
+
+JSK serialised with `renderToPipeableStream` then deserialised on the client with `createFromFetch`.
+On the server, JSX -> React flight payload the on the client React flight payload -> HTML.
+The React Flight communication protocol was invented to overcome the limitations of JSON response streaming.
+
+
+1. Wes Bos crashing out, https://www.youtube.com/watch?v=kmlMNtjFgoY
+2. Shruti Kapoor, https://www.youtube.com/watch?v=bAC3eG0cFAs
+3. Gitnation, https://gitnation.com/contents/meet-react-flight-and-become-a-rsc-expert
+
 
 ## Mintlify, 2025-11-27
 
 **type: supply chain, xss**
 
-
-
 1. <https://gist.github.com/hackermondev/5e2cdc32849405fff6b46957747a2d28>
+
+## Sources
+
+1. <https://deepstrike.io/blog/most-common-web-vulnerabilities-2025>
+2. [xyzeva](https://kibty.town)

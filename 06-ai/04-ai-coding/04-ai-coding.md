@@ -1,27 +1,12 @@
 # AI Coding
 
-## Code prompting guidelines
-
-Combining traditional coding practises with AI to get better results. Vibe coding is about exploring possibilities and generating ideas, whereas we are building a methhodology for developing production applications.
-
-Zero-shot prompting is requesting a task or question without any examples or context. The model uses its pre-trained knowledge to generate a response based on the input. One-shot prompting provides a single example or context to tune the model's response. 
-
-Few-shot prompting provides multiple examples. Rules files can be used when add few-shot example becomes repetitive. Cursor uses these by default. Limited, sequential scope requests typically work a lot better.
-
-**Set up the system so that good patterns are in place for the AI to follow** and maintain them.
+>  84% of developers now use or plan to use AI coding tools, up from 76% last year. The market is projected to hit $25 billion by 2030. Cursor crossed $1 billion in annualized revenue. Claude Code went from zero to $400 million in five months. And yet, trust is declining. Nearly half of developers actively distrust AI-generated outputs, which is up from 31% in 2024. Only 3% say they "highly trust" the code.
 
 ## Coding Tools
 
-### IDEs
+> The market has split into scaffolders, autonomous refactor agents, repo-native visual tools, and agentic IDEs.
 
-- Cursor: A fork of VS Code that provides a superset of each features.
-- Claude Code: a terminal application
-- Kiro
-- Windsurf
-- Tidewave
-- Antigravity
-
-### Component/UI generation
+### Component/UI scaffolding
 
 - [Bit](https://bit.dev/blog/building-software-in-the-ai-era): Help AI avoid creating a new component every time by "registering" and reusing components with Bit MCP.
 - v0
@@ -29,9 +14,73 @@ Few-shot prompting provides multiple examples. Rules files can be used when add 
 - Replit
 - Lovable
 
+### Agentic IDEs
+
+- Cursor: A fork of VS Code that provides a superset of each features.
+- Kiro
+- Windsurf
+- Tidewave
+- Antigravity
+
+### Agents
+
+> The future isn't just a coder, and they aren't just a prompt writer. They're an Orchestrator managing a team of specialized agents.
+
+- Devin
+- Replit Agent
+- Manus
+- Cursor Agent
+- Claude Code: a terminal application
+
 ### Test generation
 
-### PR review
+### Code review
+
+<https://dev.to/zak_mandhro/github-copilot-crushed-every-code-review-startup-40m-pr-analysis-2no6>
+
+## Code prompting
+
+**Vibe coding** is useful for exploring possibilities and generating ideas. Development of production applications with AI, or **AI engineering** is more methodical, where the developer provides technical direction. It combines traditional coding practises with AI to get better results more efficiently. In brief, run the AI software development loop: **prepare → spec → onboard → verify**.
+
+1. Prepare the codebase for patterns for the AI to follow and maintain them
+2. Spec the highest leveraged work to build/fix (impact > effort)
+3. Onboard the agent like it is a new intern
+4. Verify
+
+### 1. How to prepare the codebase
+
+### 2. How to spec work (few shot prompt)
+
+Zero-shot prompting is requesting a task or question without any examples or context. The model uses its pre-trained knowledge to generate a response based on the input. One-shot prompting provides a single example or context to tune the model's response. 
+
+Few-shot prompting provides multiple examples. Rules files can be used when add few-shot example becomes repetitive. Cursor uses these by default. Limited, sequential scope requests typically work a lot better.
+
+- Break into a small, verifiable slice (one PR-sized unit)
+- Each slice should clearly define the deliverable (“open a PR,” “include tests,” “add screenshots,” “note tradeoffs in the description”)
+- Write acceptance criteria (inputs/outputs, edge cases, UX constraints)
+- Call out risks (perf hotspots, security boundaries, migration concerns)
+- Defining constraints (what not to touch, what must stay backward compatible, e.g. “don’t change API shape,” “keep this behavior,” “no new deps”)
+- Provide examples
+
+### 3. How to onboard an agent
+
+Point it to
+
+- repo conventions (CONTRIBUTING.md, lint rules, test commands)
+- component system (e.g. shadcn/ui), design tokens, and patterns
+
+### 4. How to review the generated code
+
+Review agent output like junior engineer’s, but with extra paranoia:
+
+- correctness (edge cases, race conditions, error handling)
+- performance (N+1 queries, unnecessary re-renders, overfetching)
+- security (auth boundaries, injection, secrets, SSRF)
+- tests (new coverage for the changed behavior, not just snapshots)
+
+I never thought about it, but each PR can be viewed from the lens of each core architecture characteristic as well, e.g. usability, performance, installability, etc.
+
+---
 
 ## Cursor
 
@@ -86,3 +135,4 @@ Different models have different outcomes and costs.
   - [ ] Core
   - [ ] Context
   - [ ] Integrations
+- <https://www.builder.io/blog/ai-software-engineer>

@@ -4,6 +4,9 @@ In web development, the Network Boundary is a conceptual line that separates the
 As web developers we choose where to place the client-server network boundary wherever it makes the most sense.
 For example, in React the "use client" and "use server" convention is used to tell React to do some computational work on the client and server, respectively.
 
+Patterns:
+- SPA + REST API
+
 ## static site generation (SSG)
 
 SSG occurs at build time, meaning it takes place when the application is initially deployed on the server.
