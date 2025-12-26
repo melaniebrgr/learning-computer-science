@@ -38,3 +38,9 @@ E.g. health, finance
 - prior agreement on lines we don't cross, e.g. a flaw that allows client's to access each other's data
 
 > It’s a habit of making those trade-offs visible and deliberate, week after week
+
+## Timeline negotiation
+
+> So I began doing a simple private check before big calls, especially when the room was pushing for speed. I’d write down who carries the cost if we’re wrong, in plain language. I’d think about the engineer who gets paged at 2 a.m. because we accepted known failure modes. I’d think about the support team that absorbs confusion we could have prevented. I’d think about the end user who doesn’t realize the trade-off until it bites them. Then I’d ask myself whether the people paying had meaningful choice. That one question changes the bar for what “good enough” means.
+
+In the Darknet Diaries podcast, the interviewee did the same, presentating options to the business, "I can get us back from backups in about 5 days, but if you want to best solution and we will build it back to how it should have been done in the first place."

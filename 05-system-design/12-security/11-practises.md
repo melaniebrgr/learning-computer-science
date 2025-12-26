@@ -19,6 +19,7 @@ Supply chain attacks are having a moment in Fall 2025.
 - Clean and prune project dependencies: remove unused packages and internalise others.
 - Scan packages when upgrading dependencies, e.g. https://www.getsafety.com/
 - Consider tools like https://www.chainguard.dev/
+- Consider adopting CycloneDx: it will add overhead to the process but also transparency, automation tools are available to compensate, https://cyclonedx.org/tool-center/
 
 ## Good hygiene
 
@@ -53,3 +54,4 @@ Supply chain attacks are having a moment in Fall 2025.
 - Have and incideent disclosure and notification policy: Disclose breaches to users immediately, transparently
     - [firebase vs. arc](https://arc.net/blog/CVE-2024-45489-incident-response)
     - <https://tailscale.com/security-policies/incident-disclosure>
+

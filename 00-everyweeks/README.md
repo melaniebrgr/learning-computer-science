@@ -10,7 +10,7 @@ The idea is stolen from [beeple](https://www.beeple-crap.com/everydays) and [cod
 - Saturday: share
 - Sunday: rest and choose the next topic
 
-Basically I will try something for a week, document my learning, judge its success then move on to the next thing. There are 52 weeks in a year, I already missed the first few in 2024, so starting today, which is week 8. Status codes will signal how well I think it went:
+Basically I will try something for a week, document my learning, judge its success then move on to the next thing. Status codes will signal how well I think it went:
 
 - 102: processing
 - 200: successful
@@ -101,3 +101,7 @@ Basically I will try something for a week, document my learning, judge its succe
 |  50  | - | 403 |  |
 |  51  | - | 403 |  |
 |  52  | Jack Herrington Workshop: Next.js foundations for Professional Web Development | 102 |  |
+
+If in need of inspiration:
+
+- <https://exploringjs.com/js/api.html>

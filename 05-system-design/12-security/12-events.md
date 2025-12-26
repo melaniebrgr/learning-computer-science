@@ -1,6 +1,4 @@
-# Some events
-
-The web ecosystem supply chain is extremely vulnerable. Some are even building companies ontop of it, e.g. [Chainguard](https://www.chainguard.dev/).
+# Events
 
 ## Shai-Hulud, 2025-09-15
 
@@ -69,7 +67,7 @@ The `shai-hulud` branch did not need to be merged into a release branch for new 
 
 ## Shai-Hulud 2.0, 2025-11-23
 
-pwn request - supply chain - repository confusion
+supply chain - repository confusion
 
 > Shai-Hulud 2.0 has successfully taken over and backdoored 796 unique npm packages ... Based on publicly available sources, we estimate that the data of over 500 unique GitHub users was successfully exfiltrated, belonging to over 150 unique GitHub organizations. This should be interpreted as a lower bound.
 
