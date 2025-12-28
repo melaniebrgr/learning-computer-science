@@ -4,9 +4,11 @@
 
 ## Coding Tools
 
-> The market has split into scaffolders, autonomous refactor agents, repo-native visual tools, and agentic IDEs.
+> The market has split into scaffolders, autonomous agents, repo-native visual tools, and agentic IDEs.
 
 ### Component/UI scaffolding
+
+> Tools like Replit Agent or Lovable are your “0 to 1" sprinters. They handle the messy setup—database (Supabase), auth, and deployment—before you’ve even finished your coffee.
 
 - [Bit](https://bit.dev/blog/building-software-in-the-ai-era): Help AI avoid creating a new component every time by "registering" and reusing components with Bit MCP.
 - v0
@@ -14,23 +16,22 @@
 - Replit
 - Lovable
 
+### Headless and autonomous refactorer/solvers
+
+- Devin
+- OpenHands: An open-source, model-agnostic version of Devin
+- Manus
+- Claude Code: a terminal application
+
 ### Agentic IDEs
+
+> The future isn't just a coder, and they aren't just a prompt writer. They're an Orchestrator managing a team of specialized agents.
 
 - Cursor: A fork of VS Code that provides a superset of each features.
 - Kiro
 - Windsurf
 - Tidewave
 - Antigravity
-
-### Agents
-
-> The future isn't just a coder, and they aren't just a prompt writer. They're an Orchestrator managing a team of specialized agents.
-
-- Devin
-- Replit Agent
-- Manus
-- Cursor Agent
-- Claude Code: a terminal application
 
 ### Test generation
 

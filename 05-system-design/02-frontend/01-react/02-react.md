@@ -1,19 +1,25 @@
 # React
 
+The core principle of React: **UI is a function of state**. In response to a change in state, e.g. useState, React asks components to describe UI from current props/state. 
+
+JSX becomes React elements (plain objects) that represent intended UI structure. The in-memory tree of objects describing the HTML elements is the **virtual DOM**. Note, since React 16 React used "Fiber" data structures that keep track of component instances, and their children and the previous iterations of them. When a parent renders, instead all of its children render recursively, regardless of prop equality, unless the child is memoised, with Fiber this render work can be paused, resumed, or discarded; multiple renders may be thrown away before being committed (concurrency). During **reconciliation**, react diffs element types/keys to decide what to reuse or replace.
+
 ## The render cycle
 
-UI is a function of state in react. Three "state changes" that trigger a re-render: state changes, the parent changes (if the component is memoised, it checks if the props changed), and context changes.
+Three things that trigger a re-render: 
+
+1. the state changes,
+3. the parent changes (or the props passed from the parent changes if the component is memoised), or 
+4. context changes.
+
+React has three phases it goes through during a rerender cycle,
 
 ### 1. Render phase
 
-The render phase is when React figures out what the changes meant by working with the virtual DOM.
+The render phase is when React figures out what the changes meant by comparing with the virtual DOM.
 
 - virtual DOM is built
 - virtual DOM is reconciled with the real DOM
-
-In response to a change in state, e.g. useState, React asks components to describe UI from current props/state. JSX becomes React elements (plain objects) that represent intended UI structure. The in-memory tree of objects describing the HTML elements is the **virtual DOM**. When a parent renders, all of its children render recursively, regardless of prop equality, unless the child is memoised. From React 18, this render work can be paused, resumed, or discarded; multiple renders may be thrown away before being committed (concurrency). During **reconciliation**, react diffs element types/keys to decide what to reuse or replace.
-
-Since React 16 React used "Fiber" data structures that keep track of component instances, and their children and the previous iterations of them. The virtual DOM is less and less true with this structure.
 
 ### 2. Commit Phase
 
@@ -23,7 +29,7 @@ All calculated changes are applied synchronously. `useEffect` runs shortly after
 
 ### 3. Cleanup Phase
 
-## Fiber
+## React Fiber
 
 Under the hood, React Fiber is
 
@@ -65,11 +71,15 @@ create a value that is preserved across renders, but won't trigger a re-render w
 useEffect(didUpdate);
 ```
 
-In React, both `useEffect` and `useLayoutEffect` hooks synchronize synchronize components with external systems, but their timing differs. useEffect fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging, and anything that doesn’t need to affect the initial layout.
+In React, both `useEffect` and `useLayoutEffect` hooks synchronize components with external systems, but their timing differs. useEffect fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging, and anything that doesn’t need to affect the initial layout.
 
 useLayoutEffect fires in the same commit phase, right after React mutates the DOM but before the browser paints. It blocks painting until it finishes, making it suitable for reading layout (measurements) and synchronously applying DOM writes that must be reflected immediately, preventing visual flicker or layout shift. Overuse can hurt performance because it delays rendering.
 
 A practical rule: prefer useEffect by default; reach for useLayoutEffect only when you must measure or adjust layout synchronously to avoid visible jumps.
+
+> Once we have shown the user everything that they need to show, then we will call useEffect. UseLayoutEffect happens before we render the DOM, which means we could gum up the entire works. UseEffect happens after we've done it. If we're using something like useEffect for making API calls, it gets you into a pretty weird situation because you have to render the entire DOM. Then you call useEffect to go get your APIs so that you can go render the DOM again, right? And for a while, if you're like, I do that on my app, and now I feel bad. You didn't have a choice for a while. It was the effectively blessed way to do it. But now there are better ways. Now, you might consider doing something like Suspense.
+>
+> So useEffect will always be called after the rendering phase when we have an empty dependency array. Typically examples calling APIs after we've committed everything to the DOM. So if it is like that useEffect with no dependencies that you only want to run once at the beginning, it will have rendered the component and all the children and committed that all to DOM and then call you useEffect. The goal with that was like, let's get something on the page. Let's not show them nothing and not render. It was like a trade-off that no one felt great about, and there are now other ways to do this as well, like Suspense. And there's nothing wrong, like, I'm not saying tomorrow you need to go refactor your entire codebase but there are probably places where you can have some niceties and remove the fallback UI logic, because asynchronous stuff in a UI is the worst, right? Especially when you bring in TypeScript, and you don't really know if that's null or the actual value yet, and then you've got to pass that down and it could be null or the actual value everywhere.
 
 ### useMemo, useCallback
 
@@ -81,7 +91,7 @@ const memoizedValue = useMemo(calculateValue, dependencies);
 
 ### useOptimistic
 
-Optimistically update the UI as you wait for the mutation request (PUT, POST, DELETE) to complete, assuming that in most cases the request is successful. The case where the request errors does need to be handle however. One way to do this is to wrap the request in a try catch and its its successful or unsuccessful, calling a revalidate method to trigger the component render with the "source of truth" data from the database.
+Optimistically update the UI as you wait for the mutation request (PUT, POST, DELETE) to complete, assuming that in most cases the request is successful. The request error case must be handled additionally, e.g. by wrapping the request in a try catch and its unsuccessful, calling a revalidate method to trigger the component render with the "source of truth" data from the database.
 
 ```tsx
 import { useOptimistic, useState, useRef, startTransition } from "react";
@@ -89,13 +99,7 @@ import { deliverMessage } from "./actions.js";
 
 function Thread({ messages, sendMessageAction }) {
   const formRef = useRef();
-  function formAction(formData) {
-    addOptimisticMessage(formData.get("message"));
-    formRef.current.reset();
-    startTransition(async () => {
-      await sendMessageAction(formData);
-    });
-  }
+  
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
     (state, newMessage) => [
@@ -106,6 +110,14 @@ function Thread({ messages, sendMessageAction }) {
       ...state,
     ]
   );
+
+  function formAction(formData) {
+    addOptimisticMessage(formData.get("message"));
+    formRef.current.reset();
+    startTransition(async () => {
+      await sendMessageAction(formData);
+    });
+  }
 
   return (
     <>
@@ -128,46 +140,54 @@ export default function App() {
   const [messages, setMessages] = useState([
     { text: "Hello there!", sending: false, key: 1 }
   ]);
+  
   async function sendMessageAction(formData) {
     const sentMessage = await deliverMessage(formData.get("message"));
     startTransition(() => {
       setMessages((messages) => [{ text: sentMessage }, ...messages]);
     })
   }
+  
   return <Thread messages={messages} sendMessageAction={sendMessageAction} />;
 }
 ```
 
 ### useTransition
 
-Unbatch a state update so that it does not slow down the component render. Usually a loading message or style is displayed instead. Overall, experience is less laginess in the UI.
+`useTransition` marks some state updates as “non-urgent” so the UI stays responsive while heavier work happens in the background.
 
+Call useTransition at the top of a component, just like useState, when handling an event that triggers an expensive update like switching tabs, filtering a big list, searching, or recomputing derived data. Wrap the state update in startTransition:
+
+```
+const [isPending, startTransition] = useTransition();
+startTransition(() => setTab(nextTab));.
+```
+
+Use `isPending` to render a loading hint while the transition is running, for example by dimming content or showing a “loading…” label on the active control. Do not use `useTransition` for user feedback that should be treated synchronously.
+​
 ## Components
 
 ### Suspense
 
-- What are the differences in Suspense in client-side vs. server-side rendering
-- What are the main benefits, really
-- Tradeoff?
-- Suspense boundaries
+Suspense is a rendering primitive and successor to `useEffect` for data fetching. It obviates the need for creating loading variables to display
 
-Suspense is a rendering primitive.
+> On that render, as we were kind of going through the tree, I hit a suspense point. All of those API calls will fire off immediately and they'll show the suspended DOM nodes, like the loading or whatever. They've already started and then they can come back, and if they come back _before_ React is done rendering and it can decide that it can do it fast enough, it's display immediately and not see that flash of nothing, and then all your stuff. So stuff that was the best practice at one point (useEFfect) is not the best practice anymore. You didn't do anything wrong. Things just got better, and if you don't opt into these things, you get the same experience you always had. It's not like things are worse, but there is a better life.
 
-> All right, finally, once we have shown the user everything that they need to show,then we will call useEffect. UseLayoutEffect happens before we render the DOM,which means we could gum up the entire works.UseEffect happens after we've done it.And we've shown them everything and then we can go ahead and, you know,call any APIs and this is important.The reason I bring this up now versus otherwise I was going to have to pepper these things the entireday and it felt awkward, which is why if we're using something likeuseEffect for making API calls, it gets you into a pretty weird situation because you have to renderthe entire DOM. Then you call useEffect to go get your APIs so that you can go renderthe DOM again, right? And for a while, if you're like,I do that on my app, and now I feel bad, don't feel bad.You didn't have a choice for a while. It was the effectivelyblessed way to do it. But now there are better ways,which is why we're spending this time together.Now, you might consider doing something like suspense, where,hey, on that render, as we were kind of going through the tree,I hit a suspense point.All of those API calls will fire off immediately and they'll show the suspended DOM nodes,like the loading or whatever, will finish up.They've already started and then they can come back.And if they come back before React is done rendering and it can decide that it can do it fastenough, you'll get it immediately and not see that flash of nothing, and then all your stuff,right? And so ideally, stuff that was the best practice at one point is not thebest practice anymore. You didn't do anything wrong.Things just got better, right?And if you don't opt into these things, you get the same experience you always had.It's not like things are worse, but there is a better life,and we will talk about it today. So useEffect will always be called after the rendering phase when wehave an empty dependency array.Typically examples calling APIs in a useEffect with the empty useEffect always happens after we've committedeverything to the DOM, right? So if it is like that useEffect with no dependencies that you only wantto run once at the beginning, it will have rendered the component and all the children and committedthat all to DOM and then call you useEffect, right?And the goal there is not like, well, now I have incomplete data.The goal was like, let's get something on the page.Let's not show them nothing, right, and not render,right, because suspense did not exist at that point,right? And so you didn't really have much of a choice.It was like a trade-off that no one felt great about,and there are now other ways to do this as well.And there's nothing wrong, like, I'm not saying tomorrow you need to go refactor your entire codebasebut there are probably placeswhere you can have some niceties because asynchronous stuff in a UI is the worstright? Especially when you bringin TypeScript, but you don't really know if that's null or the actual value yet,and then you've got to pass down, it could be null or the actual value everywhere.
+#### How is Suspense implemented? 
 
-#### Technically
+Children are allowed to “suspend” by throwing a promise during render. React intercepts that throw in the Fiber reconciler, marks the nearest Suspense boundary as pending, renders its fallback subtree, and retries the suspended subtree once the promise resolves.
 
-Children are allowed to “suspend” by throwing a promise during render.
-React intercepts that throw in the Fiber reconciler, marks the nearest Suspense boundary as pending, renders its fallback subtree, and retries the suspended subtree once the promise resolves.
 This is not exceptions-as-errors; it’s control flow. The thrown promise is treated as a continuation token.
 
-A continuation token is a unique string used for pagination, allowing applications to resume a query or process a large set of data from where it left off. When a request returns a partial set of results, it includes a continuation token; the application then sends this token back to the server to get the next page of results until all data has been retrieved. (MB: this has SSR implications.)
+A continuation token is a unique string used for pagination, allowing applications to resume a query or process a large set of data from where it left off. When a request returns a partial set of results, it includes a continuation token; the application then sends this token back to the server to get the next page of results until all data has been retrieved.
 
-#### UX
+#### The UX of Suspense
 
-React's way of declaratively managing the component UI while we wait for data or if the request fails is using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
+React's new way of declaratively managing the component UI while we wait for data or if the request fails is using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
 
-How does a component suspend? Promise execution begins eagerly. If the promise value isn't returned by the time the component renders the promise is thrown synchronously. The `Suspense` boundary catches the throw and renders the fallback component instead. Under the hood it awaits the promise result and when it does return the real component is rendered instead. The same principle works for error boundaries. When the data for the Suspended component is available, it is streamed over the Network.
+How does a component suspend? Promise execution begins eagerly. If the promise value isn't returned by the time the component renders the promise is thrown synchronously. The `Suspense` boundary catches the throw and renders the fallback component instead. Under the hood it awaits the promise result and when it does return the real component is rendered instead. The same principle works for error boundaries.
+
+When the data for the Suspended component is available, it is streamed over the network.
 
 Conceptually,
 
@@ -209,6 +229,7 @@ The idiomatic way to suspend in React is to use the `use` hook. "use is a React 
 ```tsx
 function use<Value>(promise: Promise<Value>): Value {
   const usePromise = promise as UsePromise<Value>
+
   if (usePromise.status === 'fulfilled') {
     return usePromise.value
   } else if (usePromise.status === 'rejected') {
@@ -232,15 +253,9 @@ function use<Value>(promise: Promise<Value>): Value {
 }
 ```
 
-I.e. the state and throwing behaviour is encapsulated.
-
-#### Tradeoffs
-
-- Intentionality of the fallabck loading state.
-
 ## React Server Components (RSC)
 
-Next.js v12 has a “classic” rehydration model compared to island based, but Next 13 is moving to server components.
+Next.js v12 has a “classic” rehydration model compared to island-based, but Next 13 is moving to server components.
 The only stable way to use React Server Components is with the Next.js App Router (1, 3).
 By default, every component in the Next.js App Router is a Server Component.
 Currently my company is on Next.js 14.2.3, and React 18.3.1 (latest stable versions) but uses the page router not the app router (4).

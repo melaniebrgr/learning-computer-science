@@ -1,5 +1,19 @@
 # JavaScript
 
+Modern browsers and JS runtimes each ship with their own named JavaScript engine, though some share the same engine family across different products.
+
+- Google Chrome / Chromium-based (including new Edge, Opera, Brave, Vivaldi): V8 engine
+- Mozilla Firefox: SpiderMonkey
+- Apple Safari (and other WebKit-based browsers): JavaScriptCore, whose JIT is often referred to as Nitro
+- Node.js, Deno, most server-side JS runtimes: V8
+- Some embedded runtimes: QuickJS, JerryScript
+
+Anything that is part of the ECMAScript language itself, like Temporal must be implemented by JavaScript engines like V8, SpiderMonkey, and JavaScriptCore.
+
+## Temporal
+
+Temporal is specified as a new global object Temporal in the ECMAScript spec (like Math or Intl), with a large set of built‑in classes and methods. Only supported in Spidermonkey so far, with V8 integration (using the Rust temporal_rs library under the hood) release planned for early 2026. Until engines ship full support, a polyfill can provide a userland implementation.
+
 ## Classes
 
 ### Static
