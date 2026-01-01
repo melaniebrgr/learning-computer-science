@@ -49,7 +49,7 @@ React Fiber maintains two trees in memory: the current tree (which is what is re
 
 ## Hooks
 
-### useState, useReducer
+### useState, useReducer (server + client)
 
 ```tsx
 const [state, setState] = useState(initialState);
@@ -57,7 +57,7 @@ const [state, setState] = useState(initialState);
 
 `useState` and `useReducer` create values that are preserved across renders and triggers a re-render when the change. The only different is that `useReducer` follows the reducer pattern.
 
-### useRef
+### useRef (server + client)
 
 ```tsx
 const ref = useRef(initialValue);
@@ -65,13 +65,19 @@ const ref = useRef(initialValue);
 
 create a value that is preserved across renders, but won't trigger a re-render when it changes.
 
-### useLayoutEffect, useEffect
+### useInsertionEffect (client only)
+
+The `setup` function for `useInsertionEffect` is called after the component is added to the DOM and before layout effects (`useLayoutEffect`) fire. This inserts any `<style>` tags so that layout effects see the final **styles**.
+
+On component re-render, React first runs the previous cleanup, then immediately runs the new `setup` for that component’s `useInsertionEffect`. Cleanup and setup are interleaved per component (cleanup then setup for one component, then the next), rather than “all cleanups then all setups” like other effects.
+
+### useLayoutEffect, useEffect (client only)
 
 ```tsx
 useEffect(didUpdate);
 ```
 
-In React, both `useEffect` and `useLayoutEffect` hooks synchronize components with external systems, but their timing differs. useEffect fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging, and anything that doesn’t need to affect the initial layout.
+In React, both `useEffect` and `useLayoutEffect` hooks synchronize components with external systems and are only called on the client, but their timing differs. useEffect fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging, and anything that doesn’t need to affect the initial layout.
 
 useLayoutEffect fires in the same commit phase, right after React mutates the DOM but before the browser paints. It blocks painting until it finishes, making it suitable for reading layout (measurements) and synchronously applying DOM writes that must be reflected immediately, preventing visual flicker or layout shift. Overuse can hurt performance because it delays rendering.
 
@@ -81,7 +87,7 @@ A practical rule: prefer useEffect by default; reach for useLayoutEffect only wh
 >
 > So useEffect will always be called after the rendering phase when we have an empty dependency array. Typically examples calling APIs after we've committed everything to the DOM. So if it is like that useEffect with no dependencies that you only want to run once at the beginning, it will have rendered the component and all the children and committed that all to DOM and then call you useEffect. The goal with that was like, let's get something on the page. Let's not show them nothing and not render. It was like a trade-off that no one felt great about, and there are now other ways to do this as well, like Suspense. And there's nothing wrong, like, I'm not saying tomorrow you need to go refactor your entire codebase but there are probably places where you can have some niceties and remove the fallback UI logic, because asynchronous stuff in a UI is the worst, right? Especially when you bring in TypeScript, and you don't really know if that's null or the actual value yet, and then you've got to pass that down and it could be null or the actual value everywhere.
 
-### useMemo, useCallback
+### useMemo, useCallback (server + client)
 
 ```tsx
 const memoizedValue = useMemo(calculateValue, dependencies);
@@ -89,7 +95,7 @@ const memoizedValue = useMemo(calculateValue, dependencies);
 
 `useMemo` and `useCallback` cache values between renders. The former caches the result of a calculation, the latter caches a function.
 
-### useOptimistic
+### useOptimistic (server + client)
 
 Optimistically update the UI as you wait for the mutation request (PUT, POST, DELETE) to complete, assuming that in most cases the request is successful. The request error case must be handled additionally, e.g. by wrapping the request in a try catch and its unsuccessful, calling a revalidate method to trigger the component render with the "source of truth" data from the database.
 
@@ -158,20 +164,26 @@ export default function App() {
 
 Call useTransition at the top of a component, just like useState, when handling an event that triggers an expensive update like switching tabs, filtering a big list, searching, or recomputing derived data. Wrap the state update in startTransition:
 
-```
+```tsx
 const [isPending, startTransition] = useTransition();
-startTransition(() => setTab(nextTab));.
+startTransition(() => setTab(nextTab));
 ```
 
 Use `isPending` to render a loading hint while the transition is running, for example by dimming content or showing a “loading…” label on the active control. Do not use `useTransition` for user feedback that should be treated synchronously.
 ​
 ## Components
 
+### Context
+
+React Context is a mechanism for passing **values** through a component tree without manually threading props at every level; it is essentially a scoped value transport mechanism. While some describe Context as a form of dependency injection, because Context itself does not manage creation or lifecycle of those values unlike traditional dependency injection (DI) containers it is not a formal DI framwwork. So, Context is best thought of as a simple DI **transport** mechanism.
+
+What is DI? A technique where a piece of code is given the dependencies it needs from the outside instead of creating them itself, reducing coupling and improving testability. A DI framework is responsible constructing and providing services to a client (function, object or component) instead of creating them internally.
+
 ### Suspense
 
-Suspense is a rendering primitive and successor to `useEffect` for data fetching. It obviates the need for creating loading variables to display
+Suspense is a rendering primitive and successor to `useEffect` for data fetching. It obviates the need for creating loading variables to display.
 
-> On that render, as we were kind of going through the tree, I hit a suspense point. All of those API calls will fire off immediately and they'll show the suspended DOM nodes, like the loading or whatever. They've already started and then they can come back, and if they come back _before_ React is done rendering and it can decide that it can do it fast enough, it's display immediately and not see that flash of nothing, and then all your stuff. So stuff that was the best practice at one point (useEFfect) is not the best practice anymore. You didn't do anything wrong. Things just got better, and if you don't opt into these things, you get the same experience you always had. It's not like things are worse, but there is a better life.
+> On that render, as we were kind of going through the tree, I hit a suspense point. All of those API calls will fire off immediately and they'll show the suspended DOM nodes, like the loading or whatever. They've already started and then they can come back, and if they come back _before_ React is done rendering and it can decide that it can do it fast enough, it's display immediately and not see that flash of nothing, and then all your stuff. So stuff that was the best practice at one point (useEffect) is not the best practice anymore. You didn't do anything wrong. Things just got better, and if you don't opt into these things, you get the same experience you always had. It's not like things are worse, but there is a better life.
 
 #### How is Suspense implemented? 
 

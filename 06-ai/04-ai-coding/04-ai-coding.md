@@ -2,6 +2,16 @@
 
 >  84% of developers now use or plan to use AI coding tools, up from 76% last year. The market is projected to hit $25 billion by 2030. Cursor crossed $1 billion in annualized revenue. Claude Code went from zero to $400 million in five months. And yet, trust is declining. Nearly half of developers actively distrust AI-generated outputs, which is up from 31% in 2024. Only 3% say they "highly trust" the code.
 
+> I've never felt this much behind as a programmer. The profession is being dramatically refactored as the bits contributed by the programmer are increasingly sparse and between. I have a sense that I could be 10X more powerful if I just properly string together what has become available over the last ~year and a failure to claim the boost feels decidedly like skill issue. There's a new programmable layer of abstraction to master (in addition to the usual layers below) involving agents, subagents, their prompts, contexts, memory, modes, permissions, tools, plugins, skills, hooks, MCP, LSP, slash commands, workflows, IDE integrations, and a need to build an all-encompassing mental model for strengths and pitfalls of fundamentally stochastic, fallible, unintelligible and changing entities suddenly intermingled with what used to be good old fashioned engineering. Clearly some powerful alien tool was handed around except it comes with no manual and everyone has to figure out how to hold it and operate it, while the resulting magnitude 9 earthquake is rocking the profession. Roll up your sleeves to not fall behind. - [Karpathy](https://x.com/karpathy/status/2004607146781278521?s=20])
+
+Teams that "master" AI accelerate productivity gains with the gap widening over time, from 5% in April 2023 to 20% in July 2025 ([Yegor Denis-Blance](https://www.youtube.com/watch?v=JvosMkuNxF8&list=PPSV&t=11s)). So the sooner teams normalise AI coding tool adoption the more ahead of the curve they are. What contributes to AI productivity gains?
+
+- Simple token usage is not correlated, i.e. more tokens spent does not lead to better outcomes.
+- Codebase cleanliness (tests, types, documentation, modularity, static code analysis) is correlated with improved gains. There is a natural tension between AI usage and cleanliness--AI can suggest changes that add a lot of entropy to the system that humans need to counterebalance.
+- Simple access to AI tools does not guarantee usage--what does? Leadership endorsement? Setup support? Training?
+
+Productivy gains aren't guaranteed either. For one example enterprise AI adoption cames with tradeoffs: PR numbers increased over time (+14%), code quality dropped (-9%) and became more erratic, and more refactoring occured (2.5x). The effective output was negligeable.
+
 ## Coding Tools
 
 > The market has split into scaffolders, autonomous agents, repo-native visual tools, and agentic IDEs.
@@ -83,6 +93,10 @@ I never thought about it, but each PR can be viewed from the lens of each core a
 
 ---
 
+## Claude
+
+> Claude Code dominated the CLI coding product experience this year and all the CLI products like Codex, OpenCode, Amp CLI, Vibe CLI and even Cursor have heavily taken inspiration from it. This means learning how things work in Claude Code directly transfers to other tools both in terms of personal usage and production grade engineering.
+
 ## Cursor
 
 ### Context
@@ -137,3 +151,4 @@ Different models have different outcomes and costs.
   - [ ] Context
   - [ ] Integrations
 - <https://www.builder.io/blog/ai-software-engineer>
+- <https://sankalp.bearblog.dev/my-experience-with-claude-code-20-and-how-to-get-better-at-using-coding-agents>

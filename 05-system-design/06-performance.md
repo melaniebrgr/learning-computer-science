@@ -1,5 +1,31 @@
 # Performance
 
+Performance issues generally come in two types: the big bottlenecks that are a clear and present danger, and the gradual accumulation of minor problems that build over time. Getting permission for big refactors is harder to do than small regular imprrovements.
+
+Balancing avoiding performance pitfalls (prevention is the best medicine) with good architecture, and premature optimisation (only fix it when it becomes an issue) is a challenge. React has changed a lot over the years (react Fiber, Transitions) and performance improvement strategies have changed; sometimes dropping into vanilla JS with refs will still be necessary.
+
+Performance optimisation done poorly is worse than none at all.
+
+## DOM size, featuring React
+
+- <https://frontendmasters.com/courses/react-performance-v2/>
+- <https://stevekinney.com/courses/react-performance>
+
+There is a limit to the number of DOM nodes that can be rendered to a page, i.e. 10,000 will probably have a bad time.
+
+1. Do nothing (do you really need this or this code?)
+2. Pretend to do something (fake it fast while the real thing slowly goes)
+3. Skip it (cache it)
+4. Delay it (come back later when it's ready)
+
+1. First, "do nothing". Not executing logic is always faster than executing logic. Instead of solving the performance problem ask if the logic and data is needed in the application. State management and component hierarchy optimisationcan also help _skip_ needing to execute logic like component re-rendering. As an example of a bad architecture, is using a single context provider for all application state. Any change to the context triggers a re-render in all components hooked into that context.
+
+2. Second, "pretend". Feeling fast is almost as goof as actually being fast, e.g. **optimistically updating** the UI doesn't make the server response faster, but makes it feel faster. You also need to pick and choose which is correct and right for the situation, e.g. for some long-lived apps, considering downloading everything upfront.
+
+3. Third, "check if you can skip it". Skipping logic is _sometimes_ faster than executing it, but not always. Caching, **memoisation**, **React compiler** have their own overhead. For instance,**React.memo** checks previous with current prop values to check if props have changed instead of rendering to check if the output changed. A simple mental model of React's renderig strategy is that any state change will trigger the rerender of the entire state tree beneath it. Therefore in general we want to "skip it" by iether stopping rendering higher up, or start it lower down. It's a simplication because now with React Fiber rendering can be paused and resumed based on priority.
+
+4. Fourth, "delay it". Use **Suspense** to tell the React reconciler, we're suspended right now, waiting for a promise to resolve, check later. Is easier and more reliable than doing yourself, and more performant, also given the underlying React architecture, while also being less work for you. With **lazy loading** and **bundle optimisation** load only as much as you need, and "as little as you can get away with".
+
 ## Caching
 
 Caching is "storing the result of a computation _somewhere_ and returning the stored value instead of recomputing it again later." The caching strategy depends on the nature of the value being cached. A simple idea that brings along a lot factors to consider:
@@ -44,15 +70,29 @@ The `Cache-Control` header defines directives that control caching behavior for 
 | stale-while-revalidate | Allows serving stale content while revalidating in the background. Revalidation involves checking with the server (e.g., via `If-Modified-Since` or `If-None-Match`) to confirm if the cached response is still valid. | Improve performance for slightly outdated content, e.g., `stale-while-revalidate=60`. |
 | stale-if-error | Allows serving stale content if the server returns an error (e.g., 500). | Provide fallback content during server outages, e.g., `stale-if-error=86400` |
 
-#### Example
+#### Examples
+
+##### https://en.wikipedia.org/wiki/JSON_streaming
 
 ```http
-Cache-Control: public, max-age=3600, no-transform
+Cache-Control: private, s-maxage=0, max-age=0, must-revalidate, no-transform
 ```
 
-- `public`: Cacheable by all caches.
-- `max-age=3600`: Fresh for 1 hour.
-- `no-transform`: No modifications allowed.
+- private: Allow caching only in a private cache (typically the browser), and forbid storage by shared proxies or CDNs.
+- s-maxage=0: Override max-age but only for shared caches, consider the response immediately stale and must be revalidated on every use.
+- max-age=0: Consider the response immediately stale in all caches and any reuse requires revalidation with the origin.
+- must-revalidate: Once the response is stale, caches must not serve it without successfully revalidating with the origin. They are not allowed to serve stale data even if offline.
+- no-transform: Disallows intermediaries (proxies, CDNs) from modifying the representation, such as recompressing images, changing formats, or minifying responses before delivery.
+
+Overall, this combination yields: browser-only caching, always revalidated, never served stale, and never altered in transit, which is suitable for highly dynamic, user-specific responses where correctness matters more than cache hit ratio.
+
+##### 
+https://en.wikipedia.org/w/load.php?lang=en&modules=jquery&skin=vector-2022&version=r2z40
+
+```http
+Cache-Control: 
+public, max-age=2592000, s-maxage=2592000, stale-while-revalidate=60
+```
 
 #### Misc.
 
