@@ -17,9 +17,13 @@ That's simple enough, but no matter how fast your server is, you need to think a
 
 React has a nice way to manage loading and error states declaratively in components using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
 
+## Tanstack Query
+
 **Tanstack (React) Query** is described as a **async state management library**. The QueryClient contains a global, in-memory JS cache. A global cache means that every component subscribing to the same key will receive the same value, and the query function will not be reinvoked by every component.
 
 The query client instantiated outside of React (so the reference is stable) and provided to the React component tree via with Context. Because a static object is provided, Query can be interacted with without causing rerenders.
+
+### useQuery: data
 
 The `useQuery` hook is the main method of interaction with Query. When invoking `useQuery`, it's almost always given two things: a `queryKey` and a `queryFn` that takes a promise. If there's data associated with the query key, it's returned, else the query promise is resolved and the value placed in the cache.
 
@@ -44,6 +48,10 @@ export default function App() {
   return <QueryClientProvider client={queryClient}><Book /></QueryClientProvider>;
 }
 ```
+
+### useQuery: status
+
+Recall that when fetching data the status of the fetch can be in three states: loading, success and error and although Query lets you write synchronous looking code, asynchronous states still need to be handled. Query exposes status via the status property or the derived boolean flags, `isPending` (the default status, meaning simply that no data is available yet) etc.
 
 ## References
 
