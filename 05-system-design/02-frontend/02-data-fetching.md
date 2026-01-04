@@ -37,9 +37,11 @@ What this means is that a dynamic value in the queryKey ensures the correct data
 
 ### useQuery: data
 
-The `useQuery` hook is the main method of interaction with Query. When invoking `useQuery`, it's almost always given two things: a `queryKey` and a `queryFn` that takes a promise. If there's data associated with the query key, it's returned, else the query promise is resolved and the value placed in the cache.
+The `useQuery` hook is the main method of interaction with Query. When invoking `useQuery`, it's almost always given two things: a `queryKey` (some array of any values) and a `queryFn` (a promise). If there's data associated with the queryKey, it's returned, else the queryFn is resolved and the value placed in the cache.
 
-When a component mounts, React Query creates an observer for each call to `useQuery`, and _subscribes_ the component to that specific query key and triggering a re-render of the component whenever the cache updates. Data is _only_ fetched when it is initially accessed by the initial component. From there on unless the value is invalidated that initial value is returnd.
+Note, if a queryFn fails, it is silently retried 3 times, with an exponential backoff delay before capturing and displaying an error to the UI. Retry behaviour can be customised with the `retry` and `retryDelay` properties.
+
+When a component mounts, React Query creates an observer for each `useQuery` call, and _subscribes_ the component to that specific queryKey, triggering a re-render of the component whenever the cache updates. Data is _only_ fetched when it is initially accessed by the first component. From there on, that initial value is returned in all components accessing that queryKey (until it is refetched, see staleTime).
 
 ```js
 import {
@@ -61,11 +63,37 @@ export default function App() {
 }
 ```
 
+When are qeries cleaned? When a query result has no more active instances of useQuery, useInfiniteQuery or query observers, it is labeled as "inactive" but remains in the cache. By default, after 5 minutes inactive queries are garbage collected. This time can be customised with the `gcTime` property.
+
 ### useQuery: status
 
 Recall that when fetching data the status of the fetch can be in three states: loading, success and error and although Query lets you write synchronous looking code, asynchronous states still need to be handled. Query exposes status via the status property or the derived boolean flags, `isPending` (the default status, meaning simply that no data is available yet) etc.
+
+### useQuery: staleTime and refetch triggers
+
+> Out of the box, TanStack Query is configured with aggressive but sane defaults
+
+One of these defaults is a staleTime of 0 ms. That is, as soon as data is cached in Query it is considered stale. This means that whenever a refetch _trigger_ occurs, the data will be refetched. (This doesn't necessarily mean a full server round trip if HTTP Cache-Control headers have been configured.) There are 5 "types" of staleTime values in milliseconds, staleTime of
+
+1. 0: never fresh
+2. 60_000: fresh for 60s (for example, but can be any number) 
+3. Infinity: never refetched unless manually invalidated
+4. 'static': never refetched _even if_ manually invalidated
+5. dynamic: as of Query v5 staleTime takes a function that is passed the query so that staleTime can be dynamic, i.e. depending on the Cache-Control HTTP header
+
+It is important to note that a stale value is not automatically refetched. Query refetches stale data (must be marked as stale first) only when specific triggers occurs:
+
+- **mount** (refetchOnMount): a new instance of the query mounted
+- **window focus** (refetchOnWindowFocus): the application window is refocused
+- **reconnect** (refetchOnReconnect): the network is reconnected
+- **interval**: the refetchInterval expires
+- **manual invalidation**: `queryClient.invalidateQueries()` marks queries stale and refetches active ones immediately
+- **manual refetch**: Query exposes a `refetch` method for manual refetch
+
+`isFetching` indicates if a background fetch is happening. (`isPending` is about whether the query has any data yet (initial load), while `isFetching` is about whether a network request is in flight, regardless of whether there is already cached data).
 
 ## References
 
 1. https://github.com/epicweb-dev/react-suspense/tree/main/exercises/01.fetching
 2. https://ui.dev/c/query
+3. https://tkdodo.eu/blog/react-query-as-a-state-manager
