@@ -181,9 +181,16 @@ What is DI? A technique where a piece of code is given the dependencies it needs
 
 ### Suspense
 
-Suspense is a rendering primitive and successor to `useEffect` for data fetching. It obviates the need for creating loading variables to display.
+Often times when you're managing loading UI in a component based architecture, it's nice to have a broader, higher level loading handler that can manage loading states that occur anywhere in your app.
+That is, instead of managing loading states component by component, have a primitive that encapsulates all the granular loading states.
+Suspense is a React component that allows you to coordinate loading states for asynchronous operations.
+In a way, Suspense is to loading states as Error Boundaries is to errors – and they operate in a similar way.
+Suspense is a rendering primitive and successor to `useEffect` for data fetching.
 
 > On that render, as we were kind of going through the tree, I hit a suspense point. All of those API calls will fire off immediately and they'll show the suspended DOM nodes, like the loading or whatever. They've already started and then they can come back, and if they come back _before_ React is done rendering and it can decide that it can do it fast enough, it's display immediately and not see that flash of nothing, and then all your stuff. So stuff that was the best practice at one point (useEffect) is not the best practice anymore. You didn't do anything wrong. Things just got better, and if you don't opt into these things, you get the same experience you always had. It's not like things are worse, but there is a better life.
+
+With Suspense, loading variables are no longer necessary.
+Anywhere in your application where you want to have a higher-level loading boundary, you can wrap your children in a Suspense component.
 
 #### How is Suspense implemented? 
 
