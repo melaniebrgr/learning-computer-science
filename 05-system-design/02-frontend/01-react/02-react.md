@@ -158,6 +158,15 @@ export default function App() {
 }
 ```
 
+### useDeferredValue
+
+Use deferred value is like using a debounce for component rendering, except the debounce is not based on time but of capacity.
+First, React re-renders with the new data value but with the old (deferred) value. The deferred value, is deferred or “lags behind” the query value. In the background, both current and defered value are updated and if it succeeds the new component is displayed. However if it suspends it the render is retried later when data is ready.
+
+> During the initial render, the deferred value will be the same as the value you provided. During updates, the deferred value will “lag behind” the latest value. In particular, React will first re-render without updating the deferred value, and then try to re-render with the newly received value in the background.
+
+`useDeferredValue` is only necessary in specific UI‑performance cases.
+
 ### useTransition
 
 `useTransition` marks some state updates as “non-urgent” so the UI stays responsive while heavier work happens in the background.
@@ -181,15 +190,14 @@ What is DI? A technique where a piece of code is given the dependencies it needs
 
 ### Suspense
 
-Often times when you're managing loading UI in a component based architecture, it's nice to have a broader, higher level loading handler that can manage loading states that occur anywhere in your app.
-That is, instead of managing loading states component by component, have a primitive that encapsulates all the granular loading states.
-Suspense is a React component that allows you to coordinate loading states for asynchronous operations.
-In a way, Suspense is to loading states as Error Boundaries is to errors – and they operate in a similar way.
-Suspense is a rendering primitive and successor to `useEffect` for data fetching.
+Suspense is in the general successor to `useEffect` for data fetching. With Suspense, loading variables are no longer necessary.
 
 > On that render, as we were kind of going through the tree, I hit a suspense point. All of those API calls will fire off immediately and they'll show the suspended DOM nodes, like the loading or whatever. They've already started and then they can come back, and if they come back _before_ React is done rendering and it can decide that it can do it fast enough, it's display immediately and not see that flash of nothing, and then all your stuff. So stuff that was the best practice at one point (useEffect) is not the best practice anymore. You didn't do anything wrong. Things just got better, and if you don't opt into these things, you get the same experience you always had. It's not like things are worse, but there is a better life.
 
-With Suspense, loading variables are no longer necessary.
+But it's also more than that. Suspense is a React component that allows you to coordinate loading states.
+Often when you're managing loading UI in a component based architecture, a broader, higher level loading handler is needed to manage the loading states of many child components as a whole.
+That is, instead of have each component display multiple loading spinners, use Suspense to encapsulates all the granular loading states and roll them up into a single one.
+In a way, Suspense is to loading states as Error Boundaries are to errors--a catch all.
 Anywhere in your application where you want to have a higher-level loading boundary, you can wrap your children in a Suspense component.
 
 #### How is Suspense implemented? 

@@ -7,14 +7,23 @@ const response = await fetch('https://api.example.com/data')
 const data = await response.json()
 ```
 
-That's simple enough, but no matter how fast your server is, you need to think about what the user's looking at while they wait and what happens if the request fails. You don't get to control the user's network connection. You can't control the user's connection relability either. Production applications should handle
+The concept of triggering a fetch directly from a component is known as "fetch-on-render" and it's not ideal.
+Instead, aim to fetch as early as possible which often means as high up in your component tree as you can.
+It's a good idea to "render-as-you-fetch" by prefetching a Query before React gets a chance to render the component, e.g.
+trigger prefetching are
+
+- event handlers (when transitioning from one page to the next),
+- route loaders (when integrating with a router) or
+- server components
+- with TanStack Query `usePrefetchQuery` in client side apps
+
+No matter how fast your server is, you need to think about what the user's looking at while they wait and what happens if the request fails. You don't get to control the user's network connection. You can't control the user's connection relability either. Production applications should handle
 
 - success states
 - loading states
 - error states
 
-`useEffect` was the most common way to to fetc data in React applications but has limitations in that it's not easy to share states between components and URLs.
-
+`useEffect` was the most common way to to fetch data in React applications but has limitations in that it's not easy to share states between components and URLs.
 React has a nice way to manage loading and error states declaratively in components using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
 
 ## Tanstack Query
@@ -112,6 +121,29 @@ Recall that when fetching data the status of the fetch can be in three states: l
 
 When a query is refetched in the background, Query continues to render the cached data while `isFetching` is true, and _only_ updates the UI if the new response differs.
 Displaying a loading indicator for isFetching is optional, and useful for cases where it is desirable to display a subtle loading indicator while background data is refetched.
+
+### useSuspenseQuery, useSuspenseQueries
+
+An alternative to granular use of isLoading and status indicators returned in a query is `useSuspenseQuery`.
+React will see the Promise returned from the queryFn and will show the fallback from the Suspense component until the Promise resolves.
+If it rejects, it will forward the error to the nearest ErrorBoundary.
+We no longer have to check for isLoading or status.
+
+If there's multiple children that suspend within a suspense boundary, the Queries fire off in parallel and React "collects" all the Promises that it receives and shows the unified fallback until they're all settled.
+
+Importantly for request parallelisation, a component "suspends" as a whole as soon as one async resource (in our case, a Query) is requested.
+If a single component fires off multiple Queries by calling useSuspenseQuery multiple times the requests will not run in parallel. Instead, the component will suspend until the first fetch has finished, then it will continue, just to suspend again until the second Query is completed.
+
+In this case the solution is to use component composition and `useSuspenseQueries`.
+
+There are two key differences between `useQuery` and `useSuspenseQuery`
+
+1. `enabled` is not supported
+2. `placeholderData` is not supported
+
+Because the hook must either suspend (throw a Promise) until the data is ready, or return a ready data value the enable property is irrelevant. Instead, queries with data dependencies "just work": queries are run serially when called in the same component. (What about sibling components in one suspence boundary? Are they fetch serially or in parallel?)
+
+Instead of placeholder data, the build in React.useTransition can be deployed. `startTransition`, returnd from `useTransition`, wraps the state update.
 
 ## References
 
