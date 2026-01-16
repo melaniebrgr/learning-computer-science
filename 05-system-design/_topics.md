@@ -112,9 +112,6 @@
 - [ ] Streaming
 - [ ] APIs
 - [ ] Component architecture
-- [ ] Security
-- [ ] Authentication
-- [ ] Authorisation
 - [x] [Cloud computing](./03-backend/03-cloud-services/03-cloud-computing.md) (2024-05-09)
   - [x] [Amazon web servvices](./03-backend/03-cloud-services/03-aws.md) (2024-05-09)
   - [ ] Design patterns
@@ -136,6 +133,9 @@
 ## 05 Cross-cutting concerns
 
 - [~] [Error handling](./05-error-handling.md) (2025-05-01)
+- [~] [Security](./12-security/) (2025-12-01)
+- [ ] Authentication
+- [~] [Authorisation](./10-authorisation.md)
 
 ## 06 Documentation
 
