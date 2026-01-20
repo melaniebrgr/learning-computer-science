@@ -64,7 +64,7 @@ Note it is good practise to only render the "data-ful" component when the status
 
 When are queries cleaned? When a query result has no more active instances of `useQuery`, `useInfiniteQuery` or query observers, it is labeled as "inactive" but remains in the cache for 5 minutes. After 5 minutes inactive queries are garbage collected by default. This time can be customised with the `gcTime` property.
 
-For fetching multiple queries in parallel but treat them as a single unit, use `useQueries`. It still saves each query result to a single cache key. It can also be set up handle multiple dynamic queries. Multiple singe instances of useQuery in a component will also execute the request in parallel, but require you to manage each loading state and error state individually. With `useQueries` the the status is combined and you won't have loading spinners everywhere. `useQueries` also comes with a combine option built in for conveniently combining the data returned from all the queries.
+For fetching multiple queries in parallel but treat them as a single unit, use `useQueries`. The queries property of the useQueries hook accept and array of query objects. It still saves each query result to a single cache key. It can also be set up handle multiple dynamic queries. Multiple singe instances of useQuery in a component will also execute the request in parallel, but require you to manage each loading state and error state individually. With `useQueries` the the status is combined and you won't have loading spinners everywhere. `useQueries` also comes with a combine option built in for conveniently deriving a result frrom combining the data returned from all the queries.
 
 ### useQuery property: queryKey
 
