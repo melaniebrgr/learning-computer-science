@@ -21,6 +21,7 @@
 - [x] `useEffect`
 - [x] `useLayoutEffect`
 - [ ] `useInsertionEffect`
+- [x] `useEffectEvent`
 
 ### Performance hooks
 

@@ -71,21 +71,27 @@ The `setup` function for `useInsertionEffect` is called after the component is a
 
 On component re-render, React first runs the previous cleanup, then immediately runs the new `setup` for that component’s `useInsertionEffect`. Cleanup and setup are interleaved per component (cleanup then setup for one component, then the next), rather than “all cleanups then all setups” like other effects.
 
+### useEffectEvent
+
+`useEffectEvent` for stable effect callbacks.
+
+When you have a useEffect that should retrigger when some input changes (and make a new network request for example), but within it calls another handler, previously you would be forced to still add this to the dependency array and jump through hoops to memoise it and the data it in turn uses or ignore the lint warning. Now that handler can be wrapped with useEffectEvent. It can then be safely omitted from the dependency array. The intended use of this hook is for event-like callback functions used in the useEffect.
+
 ### useLayoutEffect, useEffect (client only)
 
 ```tsx
 useEffect(didUpdate);
 ```
 
-In React, both `useEffect` and `useLayoutEffect` hooks synchronize components with external systems and are only called on the client, but their timing differs. useEffect fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging, and anything that doesn’t need to affect the initial layout.
+In React, both `useEffect` and `useLayoutEffect` hooks synchronize components with external systems and are only called on the client, but their timing differs. `useEffect` fires after the browser has painted the screen. It’s non-blocking, letting the UI render first, then running side effects. This is ideal for data fetching, subscriptions, logging--anything that doesn’t need to affect the initial layout. Only useEffects for actual side effects: is this driven by something external (network, DOM, subscriptions), things that touch the outside world? If no derived it during render and consider `useMemo` and `useCallback`.
 
-useLayoutEffect fires in the same commit phase, right after React mutates the DOM but before the browser paints. It blocks painting until it finishes, making it suitable for reading layout (measurements) and synchronously applying DOM writes that must be reflected immediately, preventing visual flicker or layout shift. Overuse can hurt performance because it delays rendering.
+> Once we have shown the user everything that they need to show, then we will call useEffect. UseLayoutEffect happens before we render the DOM, which means we could gum up the entire works. UseEffect happens after we've done it. If we're using something like useEffect for making API calls, it gets you into a pretty weird situation because you have to render the entire DOM. Then you call useEffect to go get your APIs so that you can go render the DOM again, right? And for a while, if you're like, I do that on my app, and now I feel bad. You didn't have a choice for a while. It was the effectively blessed way to do it. But now there are better ways. Now, you might consider doing something like Suspense.
+
+`useLayoutEffect` fires in the same commit phase, right after React mutates the DOM but before the browser paints. It blocks painting until it finishes, making it suitable for reading layout (measurements) and synchronously applying DOM writes that must be reflected immediately, preventing visual flicker or layout shift. Overuse can hurt performance because it delays rendering.
 
 A practical rule: prefer useEffect by default; reach for useLayoutEffect only when you must measure or adjust layout synchronously to avoid visible jumps.
 
-> Once we have shown the user everything that they need to show, then we will call useEffect. UseLayoutEffect happens before we render the DOM, which means we could gum up the entire works. UseEffect happens after we've done it. If we're using something like useEffect for making API calls, it gets you into a pretty weird situation because you have to render the entire DOM. Then you call useEffect to go get your APIs so that you can go render the DOM again, right? And for a while, if you're like, I do that on my app, and now I feel bad. You didn't have a choice for a while. It was the effectively blessed way to do it. But now there are better ways. Now, you might consider doing something like Suspense.
->
-> So useEffect will always be called after the rendering phase when we have an empty dependency array. Typically examples calling APIs after we've committed everything to the DOM. So if it is like that useEffect with no dependencies that you only want to run once at the beginning, it will have rendered the component and all the children and committed that all to DOM and then call you useEffect. The goal with that was like, let's get something on the page. Let's not show them nothing and not render. It was like a trade-off that no one felt great about, and there are now other ways to do this as well, like Suspense. And there's nothing wrong, like, I'm not saying tomorrow you need to go refactor your entire codebase but there are probably places where you can have some niceties and remove the fallback UI logic, because asynchronous stuff in a UI is the worst, right? Especially when you bring in TypeScript, and you don't really know if that's null or the actual value yet, and then you've got to pass that down and it could be null or the actual value everywhere.
+> So if it is like that useEffect with no dependencies that you only want to run once at the beginning, it will have rendered the component and all the children and committed that all to DOM and then call you useEffect. The goal with that was like, let's get something on the page. Let's not show them nothing and not render. It was like a trade-off that no one felt great about, and there are now other ways to do this as well, like Suspense. And there's nothing wrong, like, I'm not saying tomorrow you need to go refactor your entire codebase but there are probably places where you can have some niceties and remove the fallback UI logic, because asynchronous stuff in a UI is the worst, right? Especially when you bring in TypeScript, and you don't really know if that's null or the actual value yet, and then you've got to pass that down and it could be null or the actual value everywhere.
 
 ### useMemo, useCallback (server + client)
 
@@ -161,7 +167,7 @@ export default function App() {
 ### useDeferredValue
 
 Use deferred value is like using a debounce for component rendering, except the debounce is not based on time but of capacity.
-First, React re-renders with the new data value but with the old (deferred) value. The deferred value, is deferred or “lags behind” the query value. In the background, both current and defered value are updated and if it succeeds the new component is displayed. However if it suspends it the render is retried later when data is ready.
+First, React re-renders with the new data value but with the old (deferred) value. The deferred value, is deferred or “lags behind” the query value. In the background, both current and defered value are updated and if it succeeds the new component is displayed. However if it suspends it the render is retried later when data is ready. Use it on the value to "debounce" gently offset.
 
 > During the initial render, the deferred value will be the same as the value you provided. During updates, the deferred value will “lag behind” the latest value. In particular, React will first re-render without updating the deferred value, and then try to re-render with the newly received value in the background.
 
@@ -169,8 +175,10 @@ First, React re-renders with the new data value but with the old (deferred) valu
 
 ### useTransition
 
-`useTransition` marks some state updates as “non-urgent” so the UI stays responsive while heavier work happens in the background.
+- `startTransition(() => setState())` → defers state updates
+- `useDeferredValue(value)` → defers derived values
 
+`useTransition` marks some state updates as “non-urgent” so the UI stays responsive while heavier work happens in the background.
 Call useTransition at the top of a component, just like useState, when handling an event that triggers an expensive update like switching tabs, filtering a big list, searching, or recomputing derived data. Wrap the state update in startTransition:
 
 ```tsx
@@ -496,35 +504,9 @@ Encountered when trying to pass the whole context object to a client component b
 
 1. <https://github.com/epicweb-dev/react-suspense/blob/main/exercises/01.fetching/04.solution.util/index.tsx>
 2. <https://react.dev/reference/react/use>
-
----
-
-- [ ] 1. [https://www.plasmic.app/blog/how-react-server-components-work](https://www.plasmic.app/blog/how-react-server-components-work)  
-- [ ] 2. [https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)  
-- [ ] 3. [https://apidiagram.com/](https://apidiagram.com/)  
-- [ ] 4. [Data Fetching with React Server Components](https://www.youtube.com/watch?v=TQQPAU21ZUw)  
-- [ ] 5. [https://github.com/reactwg/server-components/discussions/5](https://github.com/reactwg/server-components/discussions/5)  
-- [x] 6. [React Server Components, Worth Your Time?](https://www.youtube.com/watch?v=c0E_gh1yeRA&t=464s)
-- [x] 7. [Nik Sumeiko (LinkedIn)](https://www.linkedin.com/feed/update/share:7298319833580892161/?midToken=AQG_eKV1tBRWhQ&midSig=1-Q7Hv7LezOrE1&trk=eml-email_career_insights_01-network~post-0-wrapper~link&trkEmail=eml-email_career_insights_01-network~post-0-wrapper~link-null-3b6y0p~m7ut2ho4~x8-null-null&eid=3b6y0p-m7ut2ho4-x8&otpToken=MTAwNTFlZTExYjI2Y2FjNmJkMjQwNGVkNDIxZmU2YjU4ZWM3ZDE0MzlmYWM4ZjYxNzdjNTAwNmU0YjU4NThmYmYyZGZiMWIxNDZmOGYxYzY0MWZjZmJhYzBkZTlmZjdkYjI2MmU4YmVhYzIyZWEyNDEzYTAsMSwx)~~  
-- [ ] 8. [https://www.patterns.dev/react/react-server-components/](https://www.patterns.dev/react/react-server-components/)\-  
-- [ ] 9. [https://github.com/reactjs/rfcs/blob/bf51f8755ddb38d92e23ad415fc4e3c02b95b331/text/0000-server-components.md](https://github.com/reactjs/rfcs/blob/bf51f8755ddb38d92e23ad415fc4e3c02b95b331/text/0000-server-components.md)  
-- [ ] 10. [https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components)  
-- [ ] 11. [React Server Components: A Comprehensive Breakdown](https://www.youtube.com/watch?v=VIwWgV3Lc6s)  
-- [x] 12. [https://www.joshwcomeau.com/react/server-components/](https://www.joshwcomeau.com/react/server-components/)
-- [x] 13. [https://parceljs.org/blog/v2-14-0?ck\_subscriber\_id=1774022056](https://parceljs.org/blog/v2-14-0?ck_subscriber_id=1774022056)
-- [ ] 14. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)  
-- [ ] 15. [https://vercel.com/blog/understanding-react-server-components](https://vercel.com/blog/understanding-react-server-components)  
-- [ ] 16. [https://frontendatscale.com/blog/donut-components/](https://frontendatscale.com/blog/donut-components/)  
-- [ ] 17. [https://nextjs.org/learn/dashboard-app/streaming](https://nextjs.org/learn/dashboard-app/streaming)  
-- [ ] 18. [https://react.dev/blog/2024/12/05/react-19\#whats-new-in-react-19](https://react.dev/blog/2024/12/05/react-19#whats-new-in-react-19)  
-- [ ] 19. [https://react.dev/reference/rsc/use-server\#serializable-parameters-and-return-values](https://react.dev/reference/rsc/use-server#serializable-parameters-and-return-values)  
-- [x] 20. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)
-- [ ] 21. [https://www.youtube.com/watch?v=eO51VVCpTk0](https://www.youtube.com/watch?v=eO51VVCpTk0)  
-- [ ] 22. [https://www.mux.com/blog/what-are-react-server-components](https://www.mux.com/blog/what-are-react-server-components)  
-- [ ] 23. [https://github.com/aurorascharff/next15-filterlist](https://github.com/aurorascharff/next15-filterlist)  
-- [ ] 24. [https://nextjs.org/learn/dashboard-app/getting-started](https://nextjs.org/learn/dashboard-app/getting-started)  
-- [ ] 25. [https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating\#1-code-splitting](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#1-code-splitting)  
-- [ ] 26. [https://www.nirtamir.com/articles/the-limits-of-rsc-a-practitioners-journey?ck\_subscriber\_id=1774022056](https://www.nirtamir.com/articles/the-limits-of-rsc-a-practitioners-journey?ck_subscriber_id=1774022056)  
-- [ ] 27. [https://saewitz.com/server-components-give-you-optionality](https://saewitz.com/server-components-give-you-optionality)
-- [ ] 28. <https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md>
-- [ ] 29. <https://github.com/vercel/next.js/issues/50150#issuecomment-2184934191>
+3. <https://allthingssmitty.com/2025/12/01/react-has-changed-your-hooks-should-too/>
+4. [New React useEffectEvent Hook Crash Course](https://www.youtube.com/watch?v=NZJUEzn10FI)
+6. [React Server Components, Worth Your Time?](https://www.youtube.com/watch?v=c0E_gh1yeRA&t=464s)
+12. [https://www.joshwcomeau.com/react/server-components/](https://www.joshwcomeau.com/react/server-components/)
+13. [https://parceljs.org/blog/v2-14-0?ck\_subscriber\_id=1774022056](https://parceljs.org/blog/v2-14-0?ck_subscriber_id=1774022056)
+14. [https://github.com/reactwg/react-18/discussions/37](https://github.com/reactwg/react-18/discussions/37)
