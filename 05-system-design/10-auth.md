@@ -24,13 +24,22 @@ Typically in a web application you want to centralise rules around authorisation
 The permission rules are called a policy.
 There are different ways rules can be set up, e.g. RBAC, ABAC.
 
+There are two main approaches to authorisation enforcement, BE and FE.
+A good and secure experience provides user with both:
+
+- Backend enforcement as your security foundation
+- Frontend toggling for improved user experience
+
+Regardless of what happens on the front end, the backend serves as the ultimate gatekeeper and therefore permissions need to be enforced at the API level, rejecting unauthorised requests.
+On the frontend UI elements that the user doesn't have permission to use can be removed.
+
 ## Role-based access control (RBAC)
 
 Typically where you would start, by setting up roles, e.g. viewer, editor, admin.
 Predefined roles (admin, editor, viewer) are allowed a set of actions (view, create, delete) on some resources (posts).
 The combination of role + action + resource is a policy.
 
-This can be encoded in JavaScript as `action : resource` as follows:
+This can be encoded in JavaScript as `action : resource` as follows (the policies can be structured to whatever makes the lookpu fastest):
 
 ```js
 const POLICIES = {
@@ -56,7 +65,8 @@ Then from the frontend the same permission can be checked, additionally passing 
 
 ## Relationship-based access control ReBAC
 
-Where you want to grant permissions hierarchically.
+When you want to grant permissions hierarchically.
+In any relationship based acces control system you start from the resource and move toward the subject.
 
 ## Fine-grained authorization (FGA)
 
@@ -64,8 +74,40 @@ FGA allows you to define permissions directly on resources.
 
 > Compared to ABAC, FGA is more flexible and easier to manage. ABAC relies on attributes to define access control policies, which can become cumbersome to handle as the number of attributes grows.
 
-For example, SpiceDB allows you to define permissions at the resource level, enabling you to specify exactly who can do what with each resource.
+> FGA is particularly powerful when dealing with dynamic or hierarchical permissions. For example, in a multi-tenant application, you might need to define permissions that vary not only by user but also by the organization they belong to, the specific project they’re working on, or even the status of the data they’re accessing. SpiceDB’s support for FGA allows you to model these complex scenarios with ease.
+
+### SpiceDB
+
+In SpiceDB, authorization is modeled using three core concepts: objects, relationships, and permissions.
+Together, they define who can do what within your application.
+
+- objects: Objects represent the resources that need to be protected. An object can be anything from a user, document, or project.
+- relationships: Relationships define how objects are associated. Often the indicate ownership or membersip type relationships and are used to determine access rights
+- permisssions: Permissions are the actions that can be performed on ojects based on the relationships.
+
+With the schema defined, next is the creation of specific relationship instances. For example for schema,
+
+```
+definition user {}
+
+definition task {
+  relation owner: user
+  relation editor: user
+  relation viewer: user
+
+  permission view = viewer + editor + owner
+  permission edit = editor + owner
+  permission delete = owner
+}
+```
+
+A relationship instance, `relationship create task:task-001 owner user:user-001` can be defined.
+
+Contexts in SpiceDB are used to manage connections to different servers. In this case, a context named local (an arbitrary name) is being set up to point to the local server.
 
 ## References
 
 - [Handle Permissions Like A Pro - Every Developer Should Know This](https://www.youtube.com/watch?v=wnSArmbI6qw)
+- [SpiceDB in Action](https://brunokrebs.com/2024-08-31-spicedb-in-action/)
+- [https://www.permit.io/blog/implementing-react-rbac-authorization](https://www.permit.io/blog/implementing-react-rbac-authorization)
+- [The Complete Guide to Fine-Grain Authorization with SpiceDB: Part 1](https://www.youtube.com/watch?v=AoK0LrkGFDY)
