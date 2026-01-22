@@ -105,6 +105,67 @@ A relationship instance, `relationship create task:task-001 owner user:user-001`
 
 Contexts in SpiceDB are used to manage connections to different servers. In this case, a context named local (an arbitrary name) is being set up to point to the local server.
 
+## Fetching and caching
+
+Within the FE application async data management layer everything is possible for caching strategies. We can consider the permissions to _never expire_ and only need to be updated when the user identity changes, or we can consider permissions _always and immediately expire_ and update them ASAP, e.g. whenever something that uses the permission in the UI updates, i.e. it's vibisibilty was toggled, or a new page that displays is was navigated to. We could also poll for them at regular intervals.
+
+Keeping in mind permissions are:
+- Read often
+- Change rarely
+- Security-sensitive
+
+Client-side permissions are only for UI convenience. The backend must always enforce authorization.
+So the real risk is: Showing UI incorrectly, not data leakage (if backend is correct).
+
+What is important to align on the right performance/security tradeoff. Refetching permissions incurs a network rountrip delay on UI rendering. Permissions gate UI rendering and can be overkill if they rarely change.
+
+### Strategy 1: staleTime: 0 (default)
+
+Best suited for frequently updating roles and permissions that can change mid-session.
+✅ Pros: Permissions are always up to date since permissions are refetched whenever a component that uses them mounts. Suitable for highly dynamic and security-critical apps.
+❌ Cons: More network requests and lead to more longer load times and sluggishness. Overkill if permissions almost never change.
+
+### Strategy 2: Short staleTime (e.g. 1–5 minutes)
+
+Suitable for me ost SaaS apps where Permissions change occasionally, not constantly
+✅ Pros: Is a balance between freshness and performance
+❌ Cons: a slightly large window where permissions may be outdated
+
+### Strategy 3: Long staleTime (e.g. 30 minutes – several hours, Infinity)
+
+Suitable when permissions rarely change or a role changes require re-login anyway. “load once and reuse everywhere”.
+✅ Pros: Minimal network traffic and fastest UI load.
+❌ Cons: Permissions potentially outdated for the longest time
+
+A common patterns
+
+1. long staleTime + manual invalidation. Then invalidate when needed, e.g. after role change, after switching organisations, after a refresh token.
+
+```js
+useQuery({
+  queryKey: ['permissions'],
+  queryFn: fetchPermissions,
+  staleTime: Infinity,
+})
+
+queryClient.invalidateQueries(['permissions'])
+```
+
+2. Tie permissions to auth state ensuring automatic refetch on login/logout. No permission leakage across users.
+
+```js
+queryKey: ['permissions', userId, orgId]
+```
+
+For most apps: Use a long or infinite staleTime for permissions, plus explicit invalidation when permissions can change.
+
+Quick comparison:
+
+- 0	❌✅ Low Highly dynamic permissions
+- 5 min	⚖️⚖️	Low–Medium	Most apps
+- 1 hr	✅❌	Medium	Stable permissions
+- Infinity	✅✅❌❌	High*	Login-scoped permissions
+
 ## References
 
 - [Handle Permissions Like A Pro - Every Developer Should Know This](https://www.youtube.com/watch?v=wnSArmbI6qw)
