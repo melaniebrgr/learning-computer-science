@@ -200,9 +200,33 @@ Because the hook suspends until all data is ready, enable property is just irrel
 
 Instead of `placeholderData`, the build in React.useTransition can be deployed. `startTransition`, returned from `useTransition`, wraps the state update.
 
-### prefetching data
+### useQueryClient: prefetching data
 
-A `prefetchQuery` method is exposed from the query client that takes the same query options shape as the object passed to useQuery, enabling reuse. `prefetchQuery` urespectsses the `staleTime`. When setting up prefetching, tehre are two additionally useful properties: `initialData` and `placeholderData` data. Keeping in mind that the cached data can always be looked up from the client, `queryClient.getQueryData`, it can be referenced when configuring initial and placeholder data.
+A `prefetchQuery` method is exposed from the query client that takes the same query options shape as the object passed to useQuery, enabling reuse. `prefetchQuery` is part of the `staleTime`. When setting up prefetching, there are two additionally useful properties that can paired with the `useQuery` hook setup: `initialData` and `placeholderData` data. Keeping in mind that the cached data can always be looked up from the client, `queryClient.getQueryData`, it can be referenced when configuring initial and placeholder data.
+
+```js
+const queryClient = useQueryClient()
+
+const prefetchTodos = async () => {
+  // The results of this query will be cached like a normal query
+  await queryClient.prefetchQuery({
+    queryKey: ['todos'],
+    queryFn: fetchTodos,
+  })
+}
+
+function usePost(path) {
+  const queryClient = useQueryClient()
+
+  return useQuery({
+    ...getPostQueryOptions(path),
+    placeholderData: () => {
+      return queryClient.getQueryData(['posts'])
+        ?.find((post) => post.path === path)
+    }
+  })
+}
+```
 
 - `initialData`: for when the complete initial data is available in the application (it is persisted to the cache and "counts" towards the staleTime)
 - `placeholderData`: for when only partial initial data is available in the application (it is _not_ persisted to the cache _not_ "counted" towards the staleTime)
