@@ -64,7 +64,38 @@ Note it is good practise to only render the "data-ful" component when the status
 
 When are queries cleaned? When a query result has no more active instances of `useQuery`, `useInfiniteQuery` or query observers, it is labeled as "inactive" but remains in the cache for 5 minutes. After 5 minutes inactive queries are garbage collected by default. This time can be customised with the `gcTime` property.
 
-For fetching multiple queries in parallel but treat them as a single unit, use `useQueries`. The queries property of the useQueries hook accept and array of query objects. It still saves each query result to a single cache key. It can also be set up handle multiple dynamic queries. Multiple singe instances of useQuery in a component will also execute the request in parallel, but require you to manage each loading state and error state individually. With `useQueries` the the status is combined and you won't have loading spinners everywhere. `useQueries` also comes with a combine option built in for conveniently deriving a result frrom combining the data returned from all the queries.
+#### parallel queries
+
+Calling `useQuery` multiple times is the simplest way to run queries in parallel, but will have "that SPA feel" of multiple spinners appearing at the same time which are replaced at different times. To wait until all queries are done, there are a few options.
+
+For fetching multiple queries in parallel but treat them as a single unit, use `useQueries`. The queries property of the useQueries hook accept and array of query objects. With `useQueries` the status can be combined and you won't have loading spinners everywhere. `useQueries` also comes with a combine option built in for conveniently deriving a result from combining the data returned from all the queries. 
+
+```js
+export const repoOptions = {
+  queryKey: ['repos'],
+  queryFn: fetchRepos,
+}
+
+export const membersOptions = {
+  queryKey: ['members'],
+  queryFn: fetchMembers,
+}
+
+const queries = useQueries({
+  queries: [repoOptions, membersOptions]
+  // queries: repos?.map((repo) => {}) can also be dynamic
+})
+
+const areAnyPending = queries.some(
+  query => query.status === 'pending'
+)
+```
+
+In summary,
+
+- call `useQuery` multiple times and have multiple independent loading states
+- return `Promise.all` form the queryFn (request will re/fetch and error together, and query is less reusable, results are cached together)
+- use `useQueries` for the flexibility to create an arbitrary number of queries in parallel, and then derive any value from all the queries as a whole
 
 ### useQuery property: queryKey
 
