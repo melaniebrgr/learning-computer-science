@@ -189,18 +189,23 @@ We no longer have to check for isLoading or status.
 If there's multiple children that suspend within a suspense boundary, the Queries fire off in parallel and React "collects" all the Promises that it receives and shows the unified fallback until they're all settled.
 
 Importantly for request parallelisation, a component "suspends" as a whole as soon as one async resource (in our case, a Query) is requested.
-If a single component fires off multiple Queries by calling useSuspenseQuery multiple times the requests will not run in parallel. Instead, the component will suspend until the first fetch has finished, then it will continue, just to suspend again until the second Query is completed.
-
-In this case the solution is to use component composition and `useSuspenseQueries`.
+If a single component fires off multiple Queries by calling useSuspenseQuery multiple times the requests will not run in parallel. Instead, the component will suspend until the first fetch has finished, then it will continue, just to suspend again until the second Query is completed. In this case the solution is to use component composition and `useSuspenseQueries`.
 
 There are two key differences between `useQuery` and `useSuspenseQuery`
 
 1. `enabled` is not supported
 2. `placeholderData` is not supported
 
-Because the hook must either suspend (throw a Promise) until the data is ready, or return a ready data value the enable property is irrelevant. Instead, queries with data dependencies "just work": queries are run serially when called in the same component. (What about sibling components in one suspence boundary? Are they fetch serially or in parallel?)
+Because the hook suspends until all data is ready, enable property is just irrelevant, and instead queries with data dependencies "just work"--queries are run serially when called in the same component. (What about sibling components in one suspence boundary? Are they fetch serially or in parallel?)
 
-Instead of placeholder data, the build in React.useTransition can be deployed. `startTransition`, returnd from `useTransition`, wraps the state update.
+Instead of `placeholderData`, the build in React.useTransition can be deployed. `startTransition`, returned from `useTransition`, wraps the state update.
+
+### prefetching data
+
+A `prefetchQuery` method is exposed from the query client that takes the same query options shape as the object passed to useQuery, enabling reuse. `prefetchQuery` urespectsses the `staleTime`. When setting up prefetching, tehre are two additionally useful properties: `initialData` and `placeholderData` data. Keeping in mind that the cached data can always be looked up from the client, `queryClient.getQueryData`, it can be referenced when configuring initial and placeholder data.
+
+- `initialData`: for when the complete initial data is available in the application (it is persisted to the cache and "counts" towards the staleTime)
+- `placeholderData`: for when only partial initial data is available in the application (it is _not_ persisted to the cache _not_ "counted" towards the staleTime)
 
 ## References
 
