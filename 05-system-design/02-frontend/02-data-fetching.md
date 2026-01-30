@@ -105,6 +105,17 @@ So it is important to use the query key effectively!
 
 In general, each combination of dependencies to the queryFn (sort: 'created', sort: 'updated', etc.) must get its own query key and therefore cache entry. The values are cached alongside each other, avoiding overwrites and race conditions. So a dynamic value in the queryKey ensures the correct data is fetched and accessed by the component. The `@tanstack/eslint-plugin-query` plugin can help statically check that everything used inside the queryFn also appears in the queryKey.
 
+NB: to support paginated requests, simply pass the "page" as a parameter to the query function, e.g.
+
+```js
+function useRepos(sort, page) {
+  return useQuery({
+    queryKey: ['repos', { sort, page }],
+    queryFn: () => fetchRepos(sort, page),
+  })
+}
+```
+
 TL;DR dynamic values that would form part of the request much be part of the key
 
 ### useQuery property: queryFn
@@ -229,7 +240,7 @@ function usePost(path) {
 ```
 
 - `initialData`: for when the complete initial data is available in the application (it is persisted to the cache and "counts" towards the staleTime)
-- `placeholderData`: for when only partial initial data is available in the application (it is _not_ persisted to the cache _not_ "counted" towards the staleTime)
+- `placeholderData`: for when only partial initial data or old/previous is available in the application (it is _not_ persisted to the cache _not_ "counted" towards the staleTime). `placeholderData` also accepts a function which is passed the previous state of the query in order to display in the application while new data is fetching, which can be useful for pagination. `isPlaceholderData` is exposed as a property to apply condition logic / styling when the placehold cache is in use.
 
 ## References
 
