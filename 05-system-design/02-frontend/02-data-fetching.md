@@ -244,6 +244,67 @@ function usePost(path) {
 - `initialData`: for when the complete initial data is available in the application (it is persisted to the cache and "counts" towards the staleTime)
 - `placeholderData`: for when only partial initial data or old/previous is available in the application (it is _not_ persisted to the cache _not_ "counted" towards the staleTime). `placeholderData` also accepts a function which is passed the previous state of the query in order to display in the application while new data is fetching, which can be useful for pagination (or use `keepPreviousData`). `isPlaceholderData` is exposed as a property to apply condition logic / styling when the placehold cache is in use.
 
+### infinite scrolling (`useInfiniteQuery`)
+
+The main difference between useQuery and useInfiniteQuery is how they manage data. useQuery is designed to manage data for a single page or a single request, while useInfiniteQuery is designed to manage data for multiple pages that can be appended over time, e.g. for infinite scrolling applications.
+
+Infinite scrolling is supported with the `useInfiniteQuery` hook that sets up a cache that can be appended to by managing a "page" count. (Instead of it needing to be managed seperately with useState as with simple pagination.) The configuration takes a few additional parameters: `initialPageParam`, `getNextPageParam`, `getPreviousPageParam`, and `maxPages`; and the hook returns `fetchNextPage` and `data` with `pages`, `pageParam` and `isFetchingNextPage` properties. Combining with an intersection observer gives infinite scrolling:
+
+```js
+function usePosts() {
+  return useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: ({ pageParam }) => fetchPosts(pageParam),
+    staleTime: 5000,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (lastPage.length === 0) {
+        return undefined
+      }
+
+      return lastPageParam + 1
+    }
+  })
+}
+
+export default function Blog() {
+  const { status, data, fetchNextPage, hasNextPage, isFetchingNextPage } = usePosts()
+
+  const [ref, entry] = useIntersectionObserver();
+
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
+    }
+  }, [entry?.isIntersecting, hasNextPage, isFetchingNextPage])
+
+  if (status === 'pending') {
+    return <div>...</div>
+  }
+
+  if (status === 'error') {
+    return <div>Error fetching posts</div>
+  }
+
+  return (
+    <div>
+      {data.pages.flat().map((post, index, pages) => (
+        <p key={post.id}>
+          <b>{post.title}</b>
+          <br />
+          {post.description}
+          {index === pages.length - 3
+              ? <div ref={ref} />
+              : null}
+        </p>
+      ))}
+    </div>
+  )
+}
+```
+
+Note that the useInfiniteQuery hook refetches data for all pages in the cache for consistency. If only some pages were rrefetched, inconsistent states could be produced.
+
 ## References
 
 1. https://github.com/epicweb-dev/react-suspense/tree/main/exercises/01.fetching
