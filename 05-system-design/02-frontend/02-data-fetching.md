@@ -137,7 +137,7 @@ It is important to note that a stale value is not immediately refetched. Query r
 - **window focus** (refetchOnWindowFocus): the application window is refocused
 - **reconnect** (refetchOnReconnect): the network is reconnected
 - **interval**: the `refetchInterval` expires if set.
-- **manual invalidation**: `queryClient.invalidateQueries()` marks queries stale and refetches active ones immediately
+- **manual invalidation**: `queryClient.invalidateQueries()` marks queries stale and refetches _active_ ones immediately
 - **manual refetch**: the fetch method is called (Query exposes a `refetch` method for manual refetch)
 
 ### query cache cleaning (`gcTime` and garbage collection)
@@ -304,6 +304,23 @@ export default function Blog() {
 ```
 
 Note that the useInfiniteQuery hook refetches data for all pages in the cache for consistency. If only some pages were rrefetched, inconsistent states could be produced.
+
+### mutation core (`useMutation`)
+
+There is another hook, `useMutation` available to run side effects that we want to run imperatively and not trigger automatically or more than once. `useMutation` returns a `mutate` method that is triggered when the mutation occurs:
+
+```js
+const { mutate, status } = useMutation({ mutationFn, onSuccess })
+```
+
+`onSuccess` callbacks can be registered on the `mutate` method and `useMutation`. They server different purposes
+
+- useMutation's onSuccess: Is where you typically put “global” side effects for that mutation (e.g. invalidating queries, shared optimistic updates) and runs for every successful mutation call. It fires even if multiple mutations are in flight; each completed mutation triggers it.
+- mutate's onSuccess: Is an additional, component-scoped side-effect that fires once per call and useful for very local behavior (e.g. “after this specific mutate, close this dialog”). It is called only if the component is still mounted when that mutation resolves and only the last call’s per-mutate onSuccess is guaranteed; earlier ones can be “replaced” because the observer is resubscribed each time.
+
+To update the querry cache after a mutation there are two options, imperatively set the updated cache in onSuccess, `queryClient.setQueryData(['key'], data`, or imperatively invalidate the relevant queryCaches, `queryClient.invalidateQueries({ queryKey: ['todos', 'list'] })` using hierarchichal, fuzzy query matching rules or passing a predicate fn.
+
+Direct cache updates work well if we have only one cache entry that you want to write to, but it gets more complicated once you have multiple cache entries where your data could live in.
 
 ## References
 
