@@ -322,6 +322,20 @@ To update the querry cache after a mutation there are two options, imperatively 
 
 Direct cache updates work well if we have only one cache entry that you want to write to, but it gets more complicated once you have multiple cache entries where your data could live in.
 
+### optimist updates
+
+"If you already know what the final UI should look like after the mutation, show the user the result of their action immediately"
+
+Optimistic UI updates can be imperatively configured with TanStack query:
+
+1. Configure a `onMutate` option on `useMutation` that sets the cached value to the optimistic version (`queryClient.setQueryData`). `onMutate` should also cancel (`queryClient.cancelQueries`) any ongoing fetches so as not to lead to an inconsistent state.
+2. Setup rollback to the previous state on error by creating a snapshot of the current state, returning it in closure from `onMutate`, and configuring the `onError` option on `useMutation` to call it.
+3. Configure `onSettled` to invalidate affected queries on success or error
+
+Since this can add a lot of boilerplate code, creating an abstraction, `useOptimisticMutation`.
+
+In summary, before the mutation occurs, we cancel any ongoing fetching, capture a snapshot of the cache, update the cache optimistically so the user gets instant feedback, and return a rollback function that will reset the cache to the snapshot if the mutation fails. And just in case, after the mutation has finished, we invalidate the query to make sure the cache is in sync with the server.
+
 ## References
 
 1. https://github.com/epicweb-dev/react-suspense/tree/main/exercises/01.fetching
