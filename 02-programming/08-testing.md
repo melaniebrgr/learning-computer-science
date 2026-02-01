@@ -7,6 +7,14 @@ Test because you're lazy
 - **develope faster**: It is _critical_ that writing and running tests be easier than the application so you can narrowly focus on a problem instead of getting the application into a state to validate the change.
 - **improve AI output**
 
+People don't test because they don't know how--because the codebase hasn't been deesigned to be testable. If you've made an untestable codebase it is likely so tightly coupled that it is immediately a legacy codebase because you're unwilling to make changes to it.
+
+## Kinds of tests by category
+
+- testing level: static analysis, unit, integration (functional), system (e2e), acceptance
+- functionailty: function, performance, security, usability, accessibility
+- automation: manual, automated
+- other: regression, smoke
 
 ## References
 

@@ -28,6 +28,10 @@ trigger prefetching are
 `useEffect` was the most common way to to fetch data in React applications but has limitations in that it's not easy to share states between components and URLs.
 React has a nice way to manage loading and error states declaratively in components using **Suspense** and **ErrorBoundary**. The trick to trigger these two things to happen when rendering the UI is the `use` hook.
 
+## Optimistic updates
+
+"If you already know what the final UI should look like after the mutation, show the user the result of their action immediately."
+
 ## Tanstack Query
 
 ### introduction
@@ -323,8 +327,6 @@ To update the querry cache after a mutation there are two options, imperatively 
 Direct cache updates work well if we have only one cache entry that you want to write to, but it gets more complicated once you have multiple cache entries where your data could live in.
 
 ### optimist updates
-
-"If you already know what the final UI should look like after the mutation, show the user the result of their action immediately"
 
 Optimistic UI updates can be imperatively configured with TanStack query:
 
