@@ -328,13 +328,27 @@ Direct cache updates work well if we have only one cache entry that you want to 
 
 Optimistic UI updates can be imperatively configured with TanStack query:
 
-1. Configure a `onMutate` option on `useMutation` that sets the cached value to the optimistic version (`queryClient.setQueryData`). `onMutate` should also cancel (`queryClient.cancelQueries`) any ongoing fetches so as not to lead to an inconsistent state.
-2. Setup rollback to the previous state on error by creating a snapshot of the current state, returning it in closure from `onMutate`, and configuring the `onError` option on `useMutation` to call it.
-3. Configure `onSettled` to invalidate affected queries on success or error
+1. Configure a `onMutate` option on `useMutation` that sets the cached value to the optimistic version (`queryClient.setQueryData`).
+2. Cancel any inflight queries (`queryClient.cancelQueries`) in `onMutate` because if a refetch is currently ongoing, and it resolves after the cache is optimistically written, it would overwrite the optimistic update.
+3. Setup rollback to the previous state on error by creating a snapshot of the current state, returning it in closure from `onMutate`, and configuring the `onError` option on `useMutation` to call it.
+4. Configure `onSettled` to invalidate affected queries on success or error
 
 Since this can add a lot of boilerplate code, creating an abstraction, `useOptimisticMutation`.
 
 In summary, before the mutation occurs, we cancel any ongoing fetching, capture a snapshot of the cache, update the cache optimistically so the user gets instant feedback, and return a rollback function that will reset the cache to the snapshot if the mutation fails. And just in case, after the mutation has finished, we invalidate the query to make sure the cache is in sync with the server.
+
+### Scaling TanStack Query
+
+1. Query keys should follow a hierarchical composite pattern so a reusable queryFn can be abstracted
+2. Set default query options like staleTime, queryFns
+3. Create a reusable useOptimisticMutation hook
+
+#### default query options
+
+...can be configured during QueryClient instantiation, such as staleTime, which can be condigured generally or by fuzzy-matched key.
+It is even possible to set a default queryFn. The queryFn is passed the queryKey which can be used to generate the path, which also helps ensure all necessary variables are passed to the queryKey. A composite key can be useful for building a url that has dynamic data, `queryKey: ["books", "search", `?q=${query}&page=${page}`]`.
+
+The order of options precendence (highest to lowest): `useQuery`, `setQueryDefaults`, `queryClientOptions`.
 
 ## References
 
