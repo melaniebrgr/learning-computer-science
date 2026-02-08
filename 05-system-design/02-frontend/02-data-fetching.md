@@ -70,6 +70,18 @@ Note it is good practise to only render the "data-ful" component when the status
 
 When are queries cleaned? When a query result has no more active instances of `useQuery`, `useInfiniteQuery` or query observers, it is labeled as "inactive" but remains in the cache for 5 minutes. After 5 minutes inactive queries are garbage collected by default. This time can be customised with the `gcTime` property.
 
+### query caching, React component rerendering and performance
+
+Whenever a query runs and the queryFn is invoked it will almost always give React Query back a new object, i.e from `res.json()`. However, instead of putting that object immediately in the query cache, React Query diffs the properties and values to see what has actually changed.
+
+If they have, React Query creates a new data object, saves it and the Observer is triggered, but if the properties and values haven't changed, React Query reuses the same object as before, keeping the reference the same, and the Observer is not triggered. This optimization allows the data object to be used with React.memo or included in the dependency array for useEffect or useMemo without worrying about unnecessary effects or calculations.
+
+If the query returns an object but only part of the data is used, using the `select` query property can help avoid unnecessary rerenders--Query becomes "smarter" about the actual data it depends on. `select` allows subscribing to a subset of the data, preventing re-renders when unused data changes.
+
+React query also tracks which properties are use from the query object and only rerender the component if those specific properties change.
+
+By default, React Query allows all queries to resolve when multiple rapid query changes occur, such as those triggered by a non-debounced search input. However, it also provides a way to cancel previous queries using the Abort Controller API. Under the hood when React Query invokes a queryFn, it will pass to it a `signal` as part of the QueryFunctionContext. This signal originates from an AbortController that React Query will create and if you pass it as an option to the fetch request, React Query can then cancel the request if the Query becomes unused.
+
 ### query cache key (`queryKey`)
 
 The `queryKey` is more than a cache lookup but part of the architecture avoiding race conditions and overwrites. `queryKeys` directly correspond to entries in the cache. They are the literal key of the cache's Map. When a value in the queryKey array changes, the observer changes what it's observing.
@@ -342,8 +354,9 @@ In summary, before the mutation occurs, we cancel any ongoing fetching, capture 
 ### Scaling TanStack Query
 
 1. Query keys should follow a hierarchical composite pattern so a reusable queryFn can be abstracted
-2. Set default query options like staleTime, queryFns
-3. Create a reusable useOptimisticMutation hook
+2. Query factories help centralize query keys and functions and reduce the risk of accidental typos or overlaps
+3. Set default query options like staleTime, queryFns
+4. Create a reusable useOptimisticMutation hook
 
 #### default query options
 
