@@ -76,7 +76,7 @@ Whenever a query runs and the queryFn is invoked it will almost always give Reac
 
 If they have, React Query creates a new data object, saves it and the Observer is triggered, but if the properties and values haven't changed, React Query reuses the same object as before, keeping the reference the same, and the Observer is not triggered. This optimization allows the data object to be used with React.memo or included in the dependency array for useEffect or useMemo without worrying about unnecessary effects or calculations.
 
-If the query returns an object but only part of the data is used, using the `select` query property can help avoid unnecessary rerenders--Query becomes "smarter" about the actual data it depends on. `select` allows subscribing to a subset of the data, preventing re-renders when unused data changes.
+If the query returns an object but only part of the data is used, using the `select` query property can help avoid unnecessary rerenders--Query becomes "smarter" about the actual data it depends on. `select` allows subscribing to a subset of the data, preventing re-renders when unused data changes. Note that if using `zod` schema, it will also strip out unused fields by default.
 
 React query also tracks which properties are use from the query object and only rerender the component if those specific properties change.
 
@@ -107,15 +107,66 @@ TL;DR dynamic values that would form part of the request much be part of the key
 
 Though commonly used for fetching data, Query can be used with any API that returns a promise. That is, React Query understands all and only fulfilled or rejected Promises.
 
-If a queryFn fails, it is silently retried 3 times, with an exponential backoff delay before capturing and displaying an error in the UI. Retry behaviour can be customised with the `retry` and `retryDelay` properties.
-
 Note that since the `fetch` API does not reject the Promise when the HTTP request fails, React Query will interpret this as a successful request and will not change the status of the query to error. So to handle failed HTTP requests that use fetch, throw an error or return a rejected Promise from the `queryFn`.
 
 In summary, a query function
 
 - must return a promise
-- are retried 3x with backoff in the background if they fail
+- are retried 3x with backoff in the background if they fail (and if React Query knows about it)
 - and must throw/reject to error
+
+### error handling
+
+If a queryFn fails, it is silently retried 3 times, with an exponential backoff delay before capturing and displaying an error in the UI. Retry behaviour can be customised with the `retry` and `retryDelay` properties which can be set to static numbers but also accept a function that gets passed `failureCount` and `failureReason` that can be used for logic. Note that `failureCount` is also returned on the query object so can be used for a cute message.
+
+What are the error handling options with React Query? Quite a few
+
+1. reject or throw an error in the query function: tells React Query that an error occurred and sets the status of the query to error so it can be handled at the component level where the query function is called.
+2. configure `throwOnError` on the query: tell React Query to throw an error when one occurs, so that an ErrorBoundary can catch it. (Error Boundaries can only catch errors that occur during rendering and event with React Query, data fetching happens outside of React's rendering flow.)
+3. configurre `throwOnError` globally: to omit catching errors in an error boundary that are thrown from background refetches, only throw them when the current query data is empty, `return typeof query.state.data === 'undefined'`. This allows you to handle errors globally for all queries.
+4. configure `QueryErrorResetBoundary` error boundary: `QueryErrorResetBoundary` passses a reset function as children that can be used to reset any query errors within the boundaries of the component. Call it within an handler to refetch data (see example below)
+5. pass a custom `onError` callback when instantiating the `queryCache`: if you don't want to display an error boundary, but a toast message globally on error. (Handling with a useEffect can lead to multiple toasts.)
+6. use `zod` to parse responses: it throws an error if the schema is invalidated
+
+```jsx
+// QueryErrorResetBoundary example
+
+export default function App() {
+  return (
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary
+          onReset={reset}
+          FallbackComponent={Fallback}
+        >
+          <TodoList />
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
+  )
+}
+```
+
+An opinionated setup: toasts on background fetches / when data is already in the cache otherwise show an error boundaries.
+
+```jsx
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      throwOnError: (error, query) => {
+        return typeof query.state.data === 'undefined'
+      }
+    }
+  },
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      if (typeof query.state.data !== 'undefined') {
+        toast.error(error.message)
+      }
+    }
+  })
+})
+```
 
 ### conditional querying (`enabled`)
 
