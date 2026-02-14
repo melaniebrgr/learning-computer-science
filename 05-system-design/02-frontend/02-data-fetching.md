@@ -420,6 +420,20 @@ The order of options precendence (highest to lowest): `useQuery`, `setQueryDefau
 
 The `networkMode` option controls React Queries offline behaviour. It is set to `online` by default which means that Querry pauses fetches and queues mutations until the device is back online. `always` can be used for queries that can run regardless of the network. If browser caching is enabled, `offlineFirst` can be configured which will fetch from cache until it expires. Catching up multiple mutations that trigger invalidations can cause jumoy UI, in which case a `mutationKey` and `isMutating` can be setup to invalidate only once at the the end of the mutation chain.
 
+Because React Query's cache is in-memory only reloading or closing the page loses the cache forever. React Query supports persisting data to a local cache like Localstorage or IndexedDB with `PersistQueryClientProvider`. By default all queries are persisted locally with it (fetches and mutations), but Query also supports selective query storage, e.g. if it contains sensitive data, with `shouldDehydrateQuery`. (In React Query, the term hydration is used whenever the Query Cache is restored from an external location, and the opposite, dehydration, describes the technique of making the Query Cache serializable into a string.) Whether the query should be de/hydrated can be determined via the query key or set on the query itself, e.g. `query.meta.persists`. Right now a new experimental `persister` can be configuree on the key itself. The `gcTime` also needs to be increased. Make sure that the gcTime of a query is the duration for which you want to keep the data around both in the cache as well as in the persistent storage and configure the `maxAge` on the persistor. Storage errors, e.g. if quota is reached, also need to be handled. Query also comes with some predefined retry strategies on storage failure.
+
+Asysnchonous fetching for local client cache will require a solution that delays rendering until the application code is loaded on the clinet. A `PersistGate` component is typically used for this.
+
+```js
+import { useIsRestoring } from '@tanstack/react-query'
+
+export function PersistGate({ children, fallback = null }) {
+  const isRestoring = useIsRestoring()
+
+  return isRestoring ? fallback : children
+}
+```
+
 ## References
 
 1. https://github.com/epicweb-dev/react-suspense/tree/main/exercises/01.fetching
