@@ -15,8 +15,8 @@ No matter how fast your server is, you need to think about what the user's looki
 - loading states
 - error states
 
-In React, the concept of triggering a fetch directly from a component is known as "fetch-on-render" and it's not ideal.
-Instead, aim to fetch as early as possible which often means as high up in your component tree as you can.
+In React, the concept of triggering a fetch directly from a component is known as "fetch-on-render" and it's not perfect.
+Generally we want to fetch as early as possible, which often means as high up in your component tree as you can.
 It's a good idea to "render-as-you-fetch" by prefetching a Query before React gets a chance to render the component, e.g.
 trigger prefetching are
 
