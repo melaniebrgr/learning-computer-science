@@ -107,7 +107,7 @@ Contexts in SpiceDB are used to manage connections to different servers. In this
 
 ## Fetching and caching
 
-Within the FE application async data management layer everything is possible for caching strategies. We can consider the permissions to _never expire_ and only need to be updated when the user identity changes, or we can consider permissions _always and immediately expire_ and update them ASAP, e.g. whenever something that uses the permission in the UI updates, i.e. it's vibisibilty was toggled, or a new page that displays is was navigated to. We could also poll for them at regular intervals.
+Within the FE application async data management layer everything is possible for caching strategies. We can consider the permissions to _never expire_ and only need to be updated when the user identity changes, or we can consider permissions _always and immediately expire_ and update them ASAP, e.g. whenever something that uses the permission in the UI updates, i.e. it's vibisibility was toggled, or a new page that displays is was navigated to. We could also poll for them at regular intervals.
 
 Keeping in mind permissions are:
 - Read often
@@ -165,6 +165,12 @@ Quick comparison:
 - 5 min	⚖️⚖️	Low–Medium	Most apps
 - 1 hr	✅❌	Medium	Stable permissions
 - Infinity	✅✅❌❌	High*	Login-scoped permissions
+
+## Centralisation
+
+Examples
+- https://tanstack.com/router/v1/docs/how-to/setup-rbac
+- _Not_ like [this](https://github.com/TanStack/query/discussions/2839).
 
 ## References
 

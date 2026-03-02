@@ -282,6 +282,8 @@ Instead of `placeholderData`, the build in React.useTransition can be deployed. 
 
 ### query prefetching feat. `queryClient`
 
+When you know or suspect that a certain piece of data will be needed, you can use prefetching to populate the cache with that data ahead of time, leading to a faster experience.
+
 A `prefetchQuery` method is exposed from the query client that takes the same query options shape as the object passed to useQuery, enabling reuse. `prefetchQuery` is part of the `staleTime`. When setting up prefetching, there are two additionally useful properties that can paired with the `useQuery` hook setup: `initialData` and `placeholderData` data. Keeping in mind that the cached data can always be looked up from the client, `queryClient.getQueryData`, it can be referenced when configuring initial and placeholder data.
 
 ```js

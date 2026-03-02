@@ -135,7 +135,7 @@
 - [~] [Error handling](./05-error-handling.md) (2025-05-01)
 - [~] [Security](./12-security/) (2025-12-01)
 - [ ] Authentication
-- [~] [Authorisation](./10-authorisation.md)
+- [~] [Authorisation](10-auth.md)
 
 ## 06 Documentation
 

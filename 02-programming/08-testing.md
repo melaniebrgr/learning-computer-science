@@ -1,5 +1,16 @@
 # Testing
 
+## Learning plan
+
+- [] https://github.com/kentcdodds/react-testing-library-course
+- [] QA Wolf
+- [] Vitest
+- [] MSW
+- [] Storybook component testing
+- [] Playwright 
+
+## Introduction
+
 Test because you're lazy
 
 - **confidence to refactor**: as the code grows or in a codebase that's not yours without tests you might not risk refactoring to fix an issue and implement some hack instead, which makes the overall problem worse.
