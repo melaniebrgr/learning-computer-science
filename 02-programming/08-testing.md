@@ -50,3 +50,12 @@ A challenge when testing mutations that invalidate queries is that static mock h
 ## References
 
 - <https://frontendmasters.com/courses/web-app-testing/introduction/>
+- [Unit Testing Principles, Practices, and Patterns](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/unit-testing-principles/9781617296277/Text/kindle_split_010.html)
+- [GenAI for QA](https://learning-oreilly-com.onlineresources.tpl.ca/course/genai-for-qa/9781806709939/)
+- [Practical Playwright Test: Next-Generation Web Testing and Automation](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/practical-playwright-test/9798868821608/)
+- [Full Stack Testing, 2nd Edition](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/full-stack-testing/9798341636934/)
+- [Software Testing Strategies](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/software-testing-strategies/9781837638024/)
+- [Testing JavaScript Applications](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/testing-javascript-applications/9781617297915/) <https://learning-oreilly-com.onlineresources.tpl.ca/videos/testing-javascript-applications/9781617297915AU/>
+- [A Frontend Web Developer's Guide to Testing](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/a-frontend-web/9781803238319/)
+- [Vitest](https://vitest.dev/guide/)
+- [Unit testing with Vitest](https://www.youtube.com/watch?v=9Op6lK4wnRE)
