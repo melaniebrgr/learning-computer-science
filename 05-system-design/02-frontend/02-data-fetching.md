@@ -411,14 +411,14 @@ In summary, before the mutation occurs, we cancel any ongoing fetching, capture 
 3. Set default query options like staleTime, queryFns
 4. Create a reusable useOptimisticMutation hook
 
-#### default query options
+#### Default query options
 
 ...can be configured during QueryClient instantiation, such as staleTime, which can be condigured generally or by fuzzy-matched key.
 It is even possible to set a default queryFn. The queryFn is passed the queryKey which can be used to generate the path, which also helps ensure all necessary variables are passed to the queryKey. A composite key can be useful for building a url that has dynamic data, `queryKey: ["books", "search", `?q=${query}&page=${page}`]`.
 
 The order of options precendence (highest to lowest): `useQuery`, `setQueryDefaults`, `queryClientOptions`.
 
-#### offline support
+#### Offline support
 
 The `networkMode` option controls React Queries offline behaviour. It is set to `online` by default which means that Querry pauses fetches and queues mutations until the device is back online. `always` can be used for queries that can run regardless of the network. If browser caching is enabled, `offlineFirst` can be configured which will fetch from cache until it expires. Catching up multiple mutations that trigger invalidations can cause jumoy UI, in which case a `mutationKey` and `isMutating` can be setup to invalidate only once at the the end of the mutation chain.
 
