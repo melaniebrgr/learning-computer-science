@@ -22,16 +22,16 @@ Naive libraries are typically constructed from IgM‑expressing B cells isolated
 
 ### In humans
 
-An antibody (immunoglobulin) is a Y-shaped protein made of four polypeptide chains: two identical heavy chains (~50 kDa each) and two identical light chains (~25 kDa each), held together by disulfide bonds. In the 1950s–60s proteolytic cleavage experiments were performed against antibodies, which digested antibodies into fragments. The naming of these fragments is carried forward to this day:
+An antibody (immunoglobulin) is a Y-shaped protein made of four polypeptide chains: two identical heavy chains (~50 kDa each) and two identical light chains (~25 kDa each), held together by disulfide bonds. In the 1950s–60s proteolytic cleavage experiments were performed against antibodies that digested antibodies into fragments that have since been well described in the literature:
 
 Papain digestion → 2 Fab fragments + 1 Fc fragment
 Pepsin digestion → 1 F(ab')₂ fragment (two arms still connected) + degraded Fc
 
-- **Fab (fragment antigen-binding)**: When antibodies are cleaved by papain, you get two identical Fab fragments that contain one complete antigen-binding site. Fab fragments are the "arms" of an antibody that bind specifically to antigens (epitopes). Each arm contains one part of light chain and one part of a heavy chain.
-- **Fc (fragment crystallizable)**: When antibodies are cleaved by papain, you get one relatively stable and uniform fragment that can be crystallized. This fragment doesn't bind antigen but interacts with immune cells.
+- **mAb (monoclonal antibody)**: A mAb is a monoclonal antibody: a population of identical antibodies that all come from one B‑cell clone and all recognize the same epitope on a single target antigen
+- **Fab (fragment antigen-binding)**: When antibodies are cleaved by papain, you get two identical Fab fragments that contain one complete antigen-binding site. Fab fragments are the "arms" of an antibody that bind specifically to antigens (epitopes). Each arm contains one part of light chain and one part of a heavy chain (VH-CH1-CL-VL).
+- **Fc (fragment crystallizable)**: When antibodies are cleaved by papain, you get one relatively stable and uniform fragment that can be crystallized. This fragment doesn't bind antigen but interacts with immune cells and is also refered to as the tail.
 - **Hinge region**: The	flexible tether connecting arms to stem that allows arms to move and bind antigens at varying distances.
-- **F(ab')₂**: When antibodies are cleaved by pepsin, the cleavage occurs beneath the hinge region producing two halves, one containing variable arms and the other the crystallizable constance region.
-- **pFc'**: When antibodies are cleaved by pepsin,
+- **F(ab')₂**: When antibodies are cleaved by pepsin, the cleavage occurs beneath the hinge region producing two halves, one containing variable arms and the other the crystallizable constant region (**pFc'**).
 - **Fab'**: The F(ab')2 fragment can be split into two Fab' fragments by mild reduction.
 - **VH (variable region of heavy chain)**
 - **VL (variable region of light chain)**
@@ -40,18 +40,18 @@ Pepsin digestion → 1 F(ab')₂ fragment (two arms still connected) + degraded 
 
 ### In camelids
 
-Humans only produce conventional antibodies with both heavy and light chains. Camelids and sharks produce heavy chain only antibodies by contrast.
+Humans only produce "conventional" antibodies with heavy and light chains. Camelids produce both conventional antibodies (VH genes) and heavy chain only antibodies (VHH genes).
 
 - **HcAb (heavy chain only antibodies)**: antibodies that are naturally produced by camelids and sharks
-- **VHH or nanobody (variable domain of heavy-chain of heavy-chain only antibody)**: A VHH is the antigen binding fragment of heavy chain only antibodies. This fragment is also sometimes called a nanobody. VHHs are sometimes prefered as a therapeutic biologic because they are very small, stable, and soluble, and tolerate heat and pH extremes better. Because they are single domains, they are easy to express in microbes, have good tissue penetration and ability to bind concave epitopes, and lend themselves well to constructions like bispecifics. VHHs are typically camelid-derived and then humanized (framework and surface residues engineered to look more human) to reduce immunogenicity (1).
+- **VHH or nanobody (variable domain of heavy-chain of heavy-chain only antibody)**: A VHH is the antigen binding fragment of a heavy chain only antibody. This fragment is also called a nanobody (trademark Sanofi). VHHs are sometimes prefered as a therapeutic biologics because they are relatively small, stable, soluble, and tolerate heat and pH extremes better. Because they are single domains, they are also easy to express in microbes, have good tissue penetration and ability to bind concave epitopes, and lend themselves well to constructions like bispecifics. VHHs are typically camelid-derived and then humanized (framework and surface residues engineered to look more human) to reduce immunogenicity (1).
 
-### Therapeutically relevant contructs of potentially mixed provenance
+### Therapeutically relevant artificial contructs
 
 - **bivalent VHH**: A bivalent VHH is a single-chain construct where two identical VHH domains are linked so that one molecule binds two identical targets, e.g. caplacizumab
-- **bispecific VHH**: A bispecific VHH is a single-chain construct where two different VHH domains are linked so that one molecule binds two distinct targets at the same time. The format is usually a “tandem VHH”: VHH1–linker–VHH2, where the linker is a flexible Gly‑Ser chain.
-- **scFv (single-chain variable fragment)**: A VH–linker–VL single‑chain variable fragment. An scFv is a small engineered antibody fragment that contains just the variable regions of the heavy and light chains joined together in a single polypeptide by a flexible linker. “Single‑chain” refers to VH and VL being encoded in one continuous chain. "Variable fragment" indicates that only the variable (V) regions of the antibody not the constant (C) regions are included. Together they recreate a full antigen‑binding site (paratope).
-- **BiTE (bispecific T‑cell engager)**: a single‑chain bispecific antibody format made of two linked binding domains that bring a T cell into contact with a target cell (usually a tumor cell). The binding domains could be VHHs or ScFvs.
-- **scFv-Fc**: scFv‑Fc fusions are recombinant antibodies where an scFv (the VH–linker–VL single‑chain variable fragment) is fused to the Fc region of an IgG, giving a “mini‑IgG” with one scFv arm and an Fc tail. The N‑terminus is an scFv (VH and VL joined by a flexible Gly‑Ser linker), and the C‑terminus is the Fc (hinge–CH2–CH3) from an IgG heavy chain; they dimerize via the Fc just like an IgG. Functionally, the scFv provides antigen binding, while the Fc contributes stability, solubility, and extended half‑life.
+- **bispecific VHH**: A bispecific VHH is a single-chain construct where two different VHH domains are linked so that one molecule binds two distinct targets. The format is usually a “tandem VHH”: `VHH1–linker–VHH2`, where the linker is a flexible Gly‑Ser chain.
+- **scFv (single-chain variable fragment)**: An scFv is a small engineered antibody fragment that contains just the variable regions of the heavy and light chains joined together in a single polypeptide by a flexible linker. It's a single‑chain construct with tandem VH and VL fragments: `VH–linker–VL`. Only the variable (V) regions of the antibody and not the constant (C) regions are included. Together they recreate a full antigen‑binding paratope site.
+- **BiTE (bispecific T‑cell engager)**: a single‑chain bispecific antibody format made of two linked binding domains that bring a T cell into contact with a target cell, usually a tumor cell. The binding domains could be VHHs or VHVLs, but the main characteristic is that one site engages a T-cell.
+- **scFv-Fc**: scFv‑Fc fusions are recombinant antibodies where a scFv is fused to the Fc region of an IgG, giving a “mini‑IgG” conformation. The N‑terminus is an scFv (VH and VL joined by a flexible Gly‑Ser linker), and the C‑terminus is the Fc (hinge–CH2–CH3) from an IgG heavy chain. The halves can dimerize via the Fc just like an IgG. Functionally, the scFv provides antigen binding, while the Fc contributes stability, solubility, and extended half‑life.
 - **APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
 
 ## References
