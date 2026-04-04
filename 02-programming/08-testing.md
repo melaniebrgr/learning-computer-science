@@ -65,7 +65,6 @@ Metrics that are commonly used to monitor application testing (2). For example, 
 - (Quality) Risk coverage percent (?)
 - (Cost) Cost of test maintenance: Open to ideas on how to measure this, but it’s important to track. When tests are flaky, hard to debug, or hard to fix, trust in them drops, people start skipping them or ignoring failing tests when they shouldn’t. Maybe something defect rejection is easier. A measure of false positives, tests skipped/ignored.
 
-
 ## Testing with Vitest
 
 ### Faster test execution
@@ -125,6 +124,8 @@ A challenge when testing mutations that invalidate queries is that static mock h
 
 ## Testing with Playwright
 
+
+
 ## References
 
 - <https://frontendmasters.com/courses/web-app-testing/introduction/>
@@ -135,6 +136,7 @@ A challenge when testing mutations that invalidate queries is that static mock h
 - [Software Testing Strategies](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/software-testing-strategies/9781837638024/)
 - [Testing JavaScript Applications](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/testing-javascript-applications/9781617297915/) <https://learning-oreilly-com.onlineresources.tpl.ca/videos/testing-javascript-applications/9781617297915AU/>
 - [A Frontend Web Developer's Guide to Testing](https://learning-oreilly-com.onlineresources.tpl.ca/library/view/a-frontend-web/9781803238319/)
-  - [ ] Chapter 6: Map the Pillars of a Dev Testing Strategy for Web Applications
+  - [x] Chapter 4: Matching Personas and Use Cases to Testing Frameworks
+  - [x] Chapter 6: Map the Pillars of a Dev Testing Strategy for Web Applications
 - [Vitest](https://vitest.dev/guide/)
 - [Unit testing with Vitest](https://www.youtube.com/watch?v=9Op6lK4wnRE)
