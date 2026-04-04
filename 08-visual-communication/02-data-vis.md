@@ -8,10 +8,10 @@
 
 The type of data is important because encoding techniques apply better so some data types more than others e.g. colour is better for nominal data. **When presented with a visualization problem, ask what is the type of data, how many dimensions does it have? Is it a narrative or can it be?**
 
-- Nominal: name, type, category, e.g. types of mammals, republican vs. democrat
-- Ordinal: integer sequences (whole integers only), e.g. first, second, third
-- Interval: gap in values, e.g. every three months
-- Ratio: real numbers with zero as a reference, is a huge catch all for every other kind of data, eg. 47 out of 100
+- **Nominal**: name, type, category, e.g. types of mammals, republican vs. democrat
+- **Ordinal**: integer sequences (whole integers only), e.g. first, second, third
+- **Interval**: gap in values, e.g. every three months
+- **Ratio**: real numbers with zero as a reference, is a huge catch all for every other kind of data, eg. 47 out of 100
 
 ### Kinds of information
 

@@ -72,7 +72,7 @@ When are queries cleaned? When a query result has no more active instances of `u
 
 ### query caching, React component rerendering and performance
 
-Whenever a query runs and the queryFn is invoked it will almost always give React Query back a new object, i.e from `res.json()`. However, instead of putting that object immediately in the query cache, React Query diffs the properties and values to see what has actually changed.
+Whenever a query runs and the `queryFn` is invoked it will almost always give React Query back a new object, i.e from `res.json()`. However, instead of putting that object immediately in the query cache, React Query diffs the properties and values to see what has actually changed.
 
 If they have, React Query creates a new data object, saves it and the Observer is triggered, but if the properties and values haven't changed, React Query reuses the same object as before, keeping the reference the same, and the Observer is not triggered. This optimization allows the data object to be used with React.memo or included in the dependency array for useEffect or useMemo without worrying about unnecessary effects or calculations.
 
@@ -393,16 +393,116 @@ Direct cache updates work well if we have only one cache entry that you want to 
 
 ### optimist updates
 
-Optimistic UI updates can be imperatively configured with TanStack query:
+Optimistic updates is the next level of polish you apply to mutation requests.
+As a guiding principle in web development, if you know what the final UI should look like after the mutation, you almost always want to show them the result of the action immediately.
 
-1. Configure a `onMutate` option on `useMutation` that sets the cached value to the optimistic version (`queryClient.setQueryData`).
-2. Cancel any inflight queries (`queryClient.cancelQueries`) in `onMutate` because if a refetch is currently ongoing, and it resolves after the cache is optimistically written, it would overwrite the optimistic update.
-3. Setup rollback to the previous state on error by creating a snapshot of the current state, returning it in closure from `onMutate`, and configuring the `onError` option on `useMutation` to call it.
-4. Configure `onSettled` to invalidate affected queries on success or error
+#### Naive approach 1
 
-Since this can add a lot of boilerplate code, creating an abstraction, `useOptimisticMutation`.
+Update the state in the UI to reflect the successful result (the UI state will not match what is in the cache)
+If the request succeeds the cache is updated and the UI will not change during rerender
+If the request fails the cache is not updated the UI is naturally rolled back
+Problem: If the cache is invalidated or the UI is somehow updated before the mutation request has returned the UI could show an inconsistent state (race condition)
 
-In summary, before the mutation occurs, we cancel any ongoing fetching, capture a snapshot of the cache, update the cache optimistically so the user gets instant feedback, and return a rollback function that will reset the cache to the snapshot if the mutation fails. And just in case, after the mutation has finished, we invalidate the query to make sure the cache is in sync with the server.
+#### Full approach 2
+
+Update the state in the cache to reflect the successful result (UI will be updated to match)
+If the request succeeds the cache is updated and the UI will not change during rerender (also there might not be a rerender because react query is diffing the cached value)
+If the request fails reset the cache to a snapshot of the cache data taken just before it was optimistically updated.
+
+Implementation: Remove the success callback as it's no longer needed (and on success is too late to do anything with)
+The `onMutate` callback becomes quite useful since it's executed before the mutation is sent to the server
+`onMutate`
+- cancel other ongoing queries (if there are other ongoing refetches that are happening before the cache is updated it'll override the change resulting in a UI that's inconsistent with the BE)
+- save a snapshot of the data
+- update the query cache as if the mutation has been successful
+- return a rollback function closing over the snaphot.
+React query makes the value returned from `onMutate` available in all of the other callbacks.
+`onError`, call the rollback function.
+`onSettled` invalidate the query to be sure that the cache is definitely in sync with the server--just in case the successful server response returns a value other than expected, invalidating the query ensures we get the cache back in sync.
+
+What the final example code looks like:
+
+```tsx
+function useToggleTodo(id, sort) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: () => toggleTodo(id),
+    onMutate: async () => {
+      // onMutate is called before the mutation occurs and is responsible for
+      // (1) Canceling ongoing requests that can cause inconsistent UI
+      await queryClient.cancelQueries({
+        queryKey: ['todos', 'list', { sort }]
+      })
+
+      // (2) Taking a snapshot of the data in case we need to rollback to the previous state
+      const snapshot = queryClient.getQueryData(
+        ['todos', 'list', { sort }]
+      )
+
+      // (3) Optimistically updating the UI
+      queryClient.setQueryData(
+        ['todos', 'list', { sort }],
+        (previousTodos) => previousTodos?.map((todo) =>
+          todo.id === id ? { ...todo, done: !todo.done } : todo
+        )
+      )
+
+      // (4) Returning a rollback fn that closes over the snapshot
+      return () => {
+        queryClient.setQueryData(
+          ['todos', 'list', { sort }],
+          snapshot
+        )
+      }
+    },
+    onError: (error, variables, rollback) => {
+      console.log('error', error)
+      // Call the rollback fn on error
+      rollback?.()
+    },
+    onSettled: () => {
+      // Revalidate just to be sure the UI reflects the server data correctly
+      return queryClient.invalidateQueries({
+        queryKey: ['todos', 'list']
+      })
+    }
+  })
+}
+```
+
+Since this can add a lot of boilerplate, encode it in a convenient abstraction, `useOptimisticMutation`:
+
+```tsx
+export const useOptimisticMutation = ({ mutationFn, queryKey, updater, invalidates }) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn,
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey,
+      })
+
+      const snapshot = queryClient.getQueryData(queryKey)
+
+      queryClient.setQueryData(queryKey, updater)
+
+      return () => {
+        queryClient.setQueryData(queryKey, snapshot)
+      }
+    },
+    onError: (err, variables, rollback) => {
+      rollback?.()
+    },
+    onSettled: () => {
+      return queryClient.invalidateQueries({
+        queryKey: invalidates,
+      })
+    }
+  })
+}
+```
 
 ### Scaling TanStack Query
 
