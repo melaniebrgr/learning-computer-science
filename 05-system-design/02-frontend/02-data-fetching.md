@@ -391,31 +391,37 @@ To update the querry cache after a mutation there are two options, imperatively 
 
 Direct cache updates work well if we have only one cache entry that you want to write to, but it gets more complicated once you have multiple cache entries where your data could live in.
 
-### optimist updates
+### Optimistic updates
 
-Optimistic updates is the next level of polish you apply to mutation requests.
+Optimistic updates (5) is the next level of polish you apply to mutation requests.
 As a guiding principle in web development, if you know what the final UI should look like after the mutation, you almost always want to show them the result of the action immediately.
 
-#### Naive approach 1
+#### Approach 1: "via the UI"
 
-Update the state in the UI to reflect the successful result (the UI state will not match what is in the cache)
-If the request succeeds the cache is updated and the UI will not change during rerender
-If the request fails the cache is not updated the UI is naturally rolled back
-Problem: If the cache is invalidated or the UI is somehow updated before the mutation request has returned the UI could show an inconsistent state (race condition)
+**The main idea**:
+- Update the state in the UI to reflect the successful result (the UI state will not match what is in the cache) while the mutation `isPending`.
+- If the request succeeds the cache is updated and the UI will not change during rerender
+- If the request fails the cache is not updated the UI is naturally rolled back
+- On error, the optimistic UI can continue to be shown with a retry button, because `variables` are not cleared when the mutation errors (assuming `variables` is used to display the UI)
 
-#### Full approach 2
+**Implementation**: Leverage the returned `variables` to update the UI from the `useMutation` result (5) while the request `isPending`. This approach works if the mutation and the query live in the same component. To get access to all mutations in other components use the dedicated `useMutationState` hook.
 
-Update the state in the cache to reflect the successful result (UI will be updated to match)
-If the request succeeds the cache is updated and the UI will not change during rerender (also there might not be a rerender because react query is diffing the cached value)
-If the request fails reset the cache to a snapshot of the cache data taken just before it was optimistically updated.
+**Problem**: If the UI updates while the mutation request is in flight the UI be in an inconsistent state (race condition).
 
-Implementation: Remove the success callback as it's no longer needed (and on success is too late to do anything with)
-The `onMutate` callback becomes quite useful since it's executed before the mutation is sent to the server
-`onMutate`
+#### Approach 2: "via the cache"
+
+- Update the state in the cache to reflect the successful result (UI will be updated to match)
+- If the request succeeds the cache is updated and the UI will not change during rerender (also there might not be a rerender because react query is diffing the cached value)
+- If the request fails reset the cache to a snapshot of the cache data taken just before it was optimistically updated.
+
+**Implementation**: Remove the success callback as it's no longer needed (and on success is too late to do anything with)
+The `onMutate` callback becomes quite useful since it's executed before the mutation is sent to the server. `onMutate`:
+
 - cancel other ongoing queries (if there are other ongoing refetches that are happening before the cache is updated it'll override the change resulting in a UI that's inconsistent with the BE)
 - save a snapshot of the data
 - update the query cache as if the mutation has been successful
 - return a rollback function closing over the snaphot.
+
 React query makes the value returned from `onMutate` available in all of the other callbacks.
 `onError`, call the rollback function.
 `onSettled` invalidate the query to be sure that the cache is definitely in sync with the server--just in case the successful server response returns a value other than expected, invalidating the query ensures we get the cache back in sync.
@@ -542,3 +548,4 @@ export function PersistGate({ children, fallback = null }) {
 2. https://ui.dev/c/query
 3. https://tkdodo.eu/blog/react-query-as-a-state-manager
 4. https://github.com/TanStack/query/discussions/4252
+5. [optimistic updates](https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates)
