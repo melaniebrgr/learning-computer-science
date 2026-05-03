@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Service Worker Demo</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Service Worker Demo</h1>
+	</header>
+	<main>
+		<p id="status">Registering service worker...</p>
+	</main>
+
+	<script>
+		const statusElement = document.getElementById("status");
+
+		const registerServiceWorker = async () => {
+			if ("serviceWorker" in navigator) {
+				try {
+					const registration = await navigator.serviceWorker.register("./02-sw.js", {
+						scope: "05-system-design/02-frontend/02-service-workers/",
+					});
+					if (registration.installing) {
+						console.log("Service worker installing");
+					} else if (registration.waiting) {
+						console.log("Service worker installed");
+					} else if (registration.active) {
+						console.log("Service worker active");
+					}
+				} catch (error) {
+					console.error(`Registration failed with ${error}`);
+				}
+			}
+		};
+
+		registerServiceWorker();
+	</script>
+</body>
+
+</html>
