@@ -59,7 +59,7 @@
   - [x] [Caching](./06-performance.md) (2025-05-10)
   - [ ] Bf cache
 - [x] [Web workers](../00-everyweeks/2024/week17/README.md) (2024-05-18)
-  - [ ] Service workers
+  - [~] [Service workers](./02-frontend/02-service-workers-and-msw.md) (2026-05-03)
 - [ ] Security
   - [ ] XSS
   - [ ] CORS
