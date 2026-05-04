@@ -42,8 +42,38 @@ A SW can also be updated when an event is fired on it, such as a lifecycle event
 The Service Worker's has a cache storage API that is a global object on the service worker that allows the storage of assets delivered by responses keyed by their requests.
 Items in "Cache storage" can be inspected with devtools.
 
+## [Mock service worker](https://mswjs.io/docs/quick-start) (MSW)
+
+Setup steps
+
+1. Install
+2. Define mock handlers with `http` and `HttpResponse`.
+3. Integrate handlers into server process or browser, e.g. `setupServer(...handlers)` or `setupWorker(...handlers)` respectively.
+4. Enable mocking, e.g. in tests `beforeAll(() => server.listen())`, or in the browser `worker.start()`, which registers and activates the SW. (4)
+5. Adapt during runtime as needed, e.g. `worker.use()` and `worker.resetHandlers()`.
+
+Once MSW is integrated into the Vitest setup it will control the network as defined by the handlers.
+In the browser, Vitest browser mode and Storybook, MSW works by registering a Service Worker responsible for request interception on the network level.
+If your application registers a Service Worker it must host and serve it.
+
+```ts
+// mock HTTP GET request-response
+export const handlers = [
+  http.get('https://api.example.com/user', () => {
+    return HttpResponse.json({
+      id: 'abc-123',
+      firstName: 'John',
+      lastName: 'Maverick',
+    })
+  }),
+]
+```
+
 ## References
 
 1. https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
 2. https://developer.mozilla.org/en-US/docs/Web/API/Window
 3. https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+4. https://mswjs.io/docs/
+    [x] - quick start
+    [x] - browser integration
