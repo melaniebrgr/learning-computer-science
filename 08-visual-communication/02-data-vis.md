@@ -13,6 +13,8 @@ The type of data is important because encoding techniques apply better so some d
 - **Interval**: gap in values, e.g. every three months
 - **Ratio**: real numbers with zero as a reference, is a huge catch all for every other kind of data, eg. 47 out of 100
 
+For another list of data type categories, see [](https://vega.github.io/vega-lite/docs/type.html)
+
 ### Kinds of information
 
 - Spatial: e.g. maps and scalar fields
