@@ -4,7 +4,7 @@
 
 > Web Workers are a simple means for web content to run scripts in background threads. The worker thread can perform tasks without interfering with the user interface. In addition, they can make network requests using the `fetch()` or `XMLHttpRequest` API. Once created, a worker can send messages to the JavaScript code that created it by posting messages to an event handler specified by that code (and vice versa). (1)
 
-In the background, a worker runs a named JavaScript file containing the code to be executed. The global context that the worker runs in is not the same as the Window global. The Window is the global execution context for JavaScript code in that tab.
+In the background, a worker runs a named JavaScript file containing the code to be executed. The global context that the worker runs in a special kind of worker context, off the main script execution thread with no DOM access. The Window is the global execution context for JavaScript code in that tab.
 
 > The Window interface inherits from EventTarget, making it capable of handling events. It provides access to web APIs such as the CacheStorage object for offline asset storage, the Navigator object that represents the state and the identity of the user agent, and properties indicating window state itself like "closed". (2)
 
@@ -16,33 +16,32 @@ Code executed by the worker cannot manipulate the DOM or use some methods and pr
 
 ### Introduction 
 
-A service worker is a special type of of web worker.
-Service workers were intended for the creation of offline experiences.
-It is like a proxy server: it can intercept, modify and cache navigation and resource request responses.
-An app can be set up to use cached assets first with SWs, providing a default experience even when offline (Note, offline first is how native apps operate).
-The background sync API can also defer tasks for execution by a SW when a device has regained a stable network connection.
+A service worker is a special type of of web worker. Service workers were intended for the creation of offline experiences. It is like a proxy server: it can intercept, modify and cache navigation and resource request responses. An app can be set up to use cached assets first with SWs, providing a default experience even when offline (Note, offline first is how native apps operate). The background sync API can also defer tasks for execution by a SW when a device has regained a stable network connection. Documents will have to be reloaded to actually be controlled because a document starts life with or without a service worker and maintains that for its lifetime.
 
-Setting up a SW consists of steps:
+### Setup steps
 
-1. Fetching the SW code and registering the worker
-2. caching the contents
-3. doing something with the cached contents
+1. **Registration** - The SW code is fetched and the SW is registered.
+2. **Installation** - The first event, an `install` event fires. The even can be used to populate IDB, cache, etc. The new SW is now installed. An installed worked does not mean that it's active, however.
+3. **Activation** - Once pages using the previous SW close and it's safe to retire, an `activate` event fires that can be used to clean resources by the previous SW. It can be skipped by the incoming SW if it calls `skipWaiting`. Only newly opened pages (after the old SW is closed) will be controlled by the new one. To adopt open pages, call `clients.claim`.
 
-The service worker is immediately downloaded when a user first accesses a service worker–controlled site/page.
-A service worker is then registered using the `ServiceWorkerContainer.register()` method.
-This applies the SW to the entire origin or a subset of specified URLs.
-Pages within this registered area are considered "in-scope" pages.
-Once registered, the SW is executed in the `ServiceWorkerGlobalScope`.
+Summary of the available service worker events:
 
-Service workers can import other JS modules statically, but not dynamically.
+- install
+- activate
+- message
+- fetch
+- sync
+- push
 
-The SW is updated when a user navigates to a web page that falls within the service worker's registered scope.
+A SW is downloaded when a user navigates to a web page that falls within the service worker's registered scope.
 For example is SW is registered with scope `/app/`, then navigating to `/app/dashboard` or `/app/settings` would be in-scope navigations that trigger an update check.
+The SW can apply to the entire origin or a subset of specified URLs based on the registered scope. Pages within this registered area are considered "in-scope" pages.
 A SW can also be updated when an event is fired on it, such as a lifecycle event (install, activate), or a functional event (message, push, sync).
 
 > A single service worker can control many pages. Each time a page within your scope is loaded, the service worker is installed against that page and operates on it. Bear in mind therefore that you need to be careful with global variables in the service worker script: each page doesn't get its own unique worker. (3)
 
 The Service Worker has a cache storage API that is a global object on the service worker that allows the storage of assets delivered by responses keyed by their requests.
+This API works in a similar way to the browser's standard cache, but it is specific to your domain. The contents of the cache are kept until you clear them.
 Items in "Cache storage" can be inspected with devtools.
 
 ## [Mock service worker](https://mswjs.io/docs/quick-start) (MSW)

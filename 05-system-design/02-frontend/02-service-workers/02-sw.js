@@ -1,8 +1,14 @@
-self.addEventListener("install", (event) => {
-    event.waitUntil(async () => {
-        const cache = await caches.open("v1");
-        await cache.addAll([
-            "style.css"
-        ]);
-    });
+addResourcesToCache = async (resources) => {
+	const cache = await caches.open('v2');
+	await cache.addAll(resources);
+};
+
+
+self.addEventListener('install', (event) => {
+	event.waitUntil(
+		addResourcesToCache([
+			'index.html',
+			'style.css',
+		])
+	);
 });
