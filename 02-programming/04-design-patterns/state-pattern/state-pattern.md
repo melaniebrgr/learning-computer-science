@@ -1,5 +1,12 @@
 # State pattern
 
+The state pattern allows objects to change behaviour when their internal state changes. And example is a document that could be in a draft, moderation and published states that have different behavioural affordances. Other examples
+
+- An account (new, unverified, verified, suspended, deleted)
+- A product in marketplace (pending, shipped, delivered, returned)
+
+These sgtate changes can trigger emails, notifications.
+
 A Finite State Machine (FSM)
 
 - has a finite number of states
@@ -27,7 +34,7 @@ Example: a traffic light 🔴🟡🟢
 ## Implementation
 
 The simplest way to implement a FSM is with an enum and a switch statement.
-A more complicated implimentation: each state contains the logic to decide which state it transitions to next.
+A more complicated implementation: each state contains the logic to decide which state it transitions to next.
 
 ## Resources
 

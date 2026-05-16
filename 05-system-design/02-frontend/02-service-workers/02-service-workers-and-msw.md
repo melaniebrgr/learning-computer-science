@@ -18,20 +18,22 @@ Code executed by the worker cannot manipulate the DOM or use some methods and pr
 
 A service worker is a special type of of web worker. Service workers were intended for the creation of offline experiences. It is like a proxy server: it can intercept, modify and cache navigation and resource request responses. An app can be set up to use cached assets first with SWs, providing a default experience even when offline (Note, offline first is how native apps operate). The background sync API can also defer tasks for execution by a SW when a device has regained a stable network connection. Documents will have to be reloaded to actually be controlled because a document starts life with or without a service worker and maintains that for its lifetime.
 
-### Setup steps
+### 3 steps in SW setup
 
-1. **Registration** - The SW code is fetched and the SW is registered.
-2. **Installation** - The first event, an `install` event fires. The even can be used to populate IDB, cache, etc. The new SW is now installed. An installed worked does not mean that it's active, however.
-3. **Activation** - Once pages using the previous SW close and it's safe to retire, an `activate` event fires that can be used to clean resources by the previous SW. It can be skipped by the incoming SW if it calls `skipWaiting`. Only newly opened pages (after the old SW is closed) will be controlled by the new one. To adopt open pages, call `clients.claim`.
+1. **registration**: The SW code is fetched and the SW is registered.
+2. **installation**: The SW is installed and setup actions liked IDB and cache prefilling occur. An installed worked _does not mean that it's active_.
+3. **activation**: Once it's safe for the previous SW to be retired (all pages using it are closed), the new SW is activated on the new page, and cleanup actions like removing resources from the previous SW occur.
+
+The default activation behaviour can be bypassed with `skipWaiting` and `clients.claim()`. When `skipWaiting`is invoked, the new service worker receives the activate event right away and takes over any open pages. While `skipWaiting()` moves the new worker from waiting to active status, clients.claim() ensures that the newly active worker immediately controls existing open pages rather than waiting for them to reload. Without `clients.claim()`, even after `skipWaiting()` activates the new service worker, open pages would continue using the old service worker (or no service worker) until they're reloaded.
 
 Summary of the available service worker events:
 
-- install
-- activate
-- message
-- fetch
-- sync
-- push
+- **install**: Always the first event sent to a service worker when it's downloaded and registered. Used to prepare the service worker by creating a cache and storing assets for offline use. The service worker won't install until code inside event.waitUntil() successfully completes.
+- **activate**: Fired when the service worker becomes active after installation. Primarily used to clean up resources from previous service worker versions, such as deleting old caches. 
+- **message**: Fired when a channel message is received on the service worker from another context. Allows communication between the service worker and other parts of your application.
+- **fetch**: Fires every time any resource controlled by the service worker is fetched, including documents within scope and resources they reference. Allows the service worker to intercept HTTP requests and provide custom responses using event.respondWith(), such as returning cached content.
+- **sync**: Fired when background synchronization is triggered. Enables the service worker to sync data when network connectivity is restored after being offline
+- **push**: Fired when the service worker receives a push message from a server. Allows sending notifications to users even when they're not actively using the site.
 
 A SW is downloaded when a user navigates to a web page that falls within the service worker's registered scope.
 For example is SW is registered with scope `/app/`, then navigating to `/app/dashboard` or `/app/settings` would be in-scope navigations that trigger an update check.
