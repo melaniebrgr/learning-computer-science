@@ -57,3 +57,4 @@ Humans only produce "conventional" antibodies with heavy and light chains. Camel
 ## References
 
 1. (VHH antibodies: Emerging reagents for the analysis of environmental chemicals)[https://pmc.ncbi.nlm.nih.gov/articles/PMC4983233/]
+2. https://notebooklm.google.com/notebook/190c839c-a65e-40ca-8b80-9785de8bef78
