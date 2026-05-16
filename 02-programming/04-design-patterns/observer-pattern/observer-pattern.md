@@ -10,6 +10,10 @@ Has two parts: a observable and it's observer. The observable notifies all its o
 
 There are variations on the implementation of the pattern. For example, a reference _could_ be passed into the observer on instantiation, so that on notify the observer can get the state of the observable directly. However, this couples the observable to the observer. In another variation, the observer is a plain function and the observable passes data to the observer when they're called.
 
+## In Javascript
+
+Proxies can be useful way to epxress an observable, e.g. in the trap, call the change notification.
+
 ## References
 
 - [ ] Game Programming Patterns: Chapter 4, Observer
