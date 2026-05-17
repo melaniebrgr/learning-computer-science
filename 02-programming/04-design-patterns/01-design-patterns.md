@@ -14,24 +14,31 @@ GoF book was published in 1994, Java, python and C++ had just been invented. The
 ## Creational patterns
 These patterns provide object creation mechanisms.
 
-- Abstract factory
 - Builder
-- Factory method
+- [Factory method](./factory-pattern/factory-pattern.md)
+- Object pool
 - [Prototype](./prototype-pattern/prototype-pattern.md)
 - [Singleton](./singleton-pattern/singletone-pattern.md)
+- [Type object](./type-object-pattern/type-object-pattern.md)
 
 ## Behavioural patterns
 These patterns explain how to assemble objects and classes into larger structures.
 
+- [Bytecode](./bytecode-pattern/bytecode-pattern.md)
 - Chain of responsibility
 - [Command](./command-pattern/command-pattern.md)
+- Dirty flag
+- Event queue
+- [Game loop](./game-loop-pattern/game-loop.pattern.md)
 - Iterator
-- Mediator
-- Memento
+- [Mediator](./mediator-pattern/mediator-pattern.md)
+- [Memento](./memento-pattern/memento-pattern.md)
 - [Observer](./observer-pattern/observer-pattern.md)
 - [State](./state-pattern/state-pattern.md)
 - [Strategy](./strategy-pattern/strategy-pattern.md)
+- [Subclass sandbox](./subclass-sandbox-pattern/subclass-sandbox-pattern.md)
 - Template method
+- Update method
 - Visitor
 
 ## Structural patterns
@@ -39,26 +46,15 @@ These patterns are concerned with effective communication and assignment of resp
 
 - Adapter
 - Bridge
+- Component
 - Composite
+- Data locality
 - Decorator
+- [Double buffer](./double-buffer-pattern/double-buffer-pattern.md)
 - Facade
 - [Flyweight](./flyweight-pattern/flyweight-pattern.md)
 - [Proxy](./proxy-pattern/proxy-pattern.md)
-
-## To be classified / do
-
-- Bytecode
-- Component
-- Double buffer
-- Game loop
-- Subclass sandbox
-- Type object
-- Update method
-- Event queue
 - Service locator
-- Data locality
-- Dirty flag
-- Object pool
 - Spatial partition
 
 ## References

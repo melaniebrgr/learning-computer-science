@@ -2,6 +2,13 @@
 
 > A lack of standardized nomenclature turns the “zoo” of multi-specific antibodies into a stampede.
 
+## AC
+
+- Installable in web application clients
+- Portable to React, Svelte, Vanilla
+- Accessible for gov/edu clients
+- Testable for release reliability
+
 ## PRD
 
 - Supports formats:
@@ -13,13 +20,11 @@
 - Generates AbML nomenclature
 - Generates VERITAS nomenclature
 - PNG image export
-- User manual labelling
-- 
+- User manual labelling, e.g. residue numbers
 
 ## TRD
 
 - [Canvas and WebGPU](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for main editor
-- 
 - [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) for input sanitization
 
 ## Referencs

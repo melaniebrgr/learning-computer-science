@@ -2,7 +2,7 @@
 
 For example, we have smart home appliances
 
-- coffe machine makes coffee on weekday mornings but not weekends
+- coffee machine makes coffee on weekday mornings but not weekends
 - sprinklers turn on every 15 minutes unless it's rained
 - alarm that goes off in the morning and turns on the coffee machine
 - calendar checks appointments and sets alarm
