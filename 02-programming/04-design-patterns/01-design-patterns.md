@@ -41,11 +41,11 @@ These patterns are concerned with effective communication and assignment of resp
 - Bridge
 - Composite
 - Decorator
-- Facada
+- Facade
 - [Flyweight](./flyweight-pattern/flyweight-pattern.md)
 - [Proxy](./proxy-pattern/proxy-pattern.md)
 
-## To be classified
+## To be classified / do
 
 - Bytecode
 - Component
@@ -54,9 +54,16 @@ These patterns are concerned with effective communication and assignment of resp
 - Subclass sandbox
 - Type object
 - Update method
+- Event queue
+- Service locator
+- Data locality
+- Dirty flag
+- Object pool
+- Spatial partition
 
 ## References
 
-1. https://refactoring.guru/design-patterns/
-2. https://www.patterns.dev/#patterns
+1. Game design patterns book
+2. https://refactoring.guru/design-patterns/
+3. https://www.patterns.dev/#patterns
 
