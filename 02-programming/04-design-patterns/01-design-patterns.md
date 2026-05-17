@@ -12,37 +12,48 @@ Why are design patterns are useful?
 GoF book was published in 1994, Java, python and C++ had just been invented. They identified 23 common code patterns in OO software and classified them into three categories: creational, behavioural and structural. Today, many languages have language features built in that means you don't need to implement some patterns by hand anymore, e.g. builder pattern.
 
 ## Creational patterns
-
 These patterns provide object creation mechanisms.
 
-- [Prototype pattern](./prototype-pattern/prototype-pattern.md)
-- [Singleton pattern](./singleton-pattern/singletone-pattern.md)
+- Abstract factory
+- Builder
+- Factory method
+- [Prototype](./prototype-pattern/prototype-pattern.md)
+- [Singleton](./singleton-pattern/singletone-pattern.md)
 
 ## Behavioural patterns
-
 These patterns explain how to assemble objects and classes into larger structures.
 
-- [Command pattern](./command-pattern/command-pattern.md)
-- [Observer pattern](./observer-pattern/observer-pattern.md)
-- [State pattern](./state-pattern/state-pattern.md)
-- [Strategy pattern](./strategy-pattern/strategy-pattern.md)
+- Chain of responsibility
+- [Command](./command-pattern/command-pattern.md)
+- Iterator
+- Mediator
+- Memento
+- [Observer](./observer-pattern/observer-pattern.md)
+- [State](./state-pattern/state-pattern.md)
+- [Strategy](./strategy-pattern/strategy-pattern.md)
+- Template method
+- Visitor
 
 ## Structural patterns
-
 These patterns are concerned with effective communication and assignment of responsibilities between objects.
 
-- [Flyweight pattern](./flyweight-pattern/flyweight-pattern.md)
-- [Proxy pattern](./proxy-pattern/proxy-pattern.md)
+- Adapter
+- Bridge
+- Composite
+- Decorator
+- Facada
+- [Flyweight](./flyweight-pattern/flyweight-pattern.md)
+- [Proxy](./proxy-pattern/proxy-pattern.md)
 
 ## To be classified
 
-- Bytecode pattern
-- Component pattern
-- Double buffer pattern
-- Game loop pattern
-- Subclass sandbox pattern
-- Type object pattern
-- Update method pattern
+- Bytecode
+- Component
+- Double buffer
+- Game loop
+- Subclass sandbox
+- Type object
+- Update method
 
 ## References
 

@@ -1,6 +1,6 @@
 # Topics
 
-- Programming patterns
+- [ ] Programming patterns
   - [x] [Command](./04-design-patterns/command-pattern/) (2024-09-10)
   - [x] [Flyweight](./04-design-patterns/flyweight-pattern/) (2024-09-11)
   - [x] [Observer](./04-design-patterns/observer-pattern/) (2024-09-12)
