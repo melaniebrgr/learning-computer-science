@@ -13,3 +13,5 @@ The biggest risk of this pattern is the growing the complexity and coupling of t
 
 - only providing operations that a majority of subclasses actually use
 - clustering some of the methods over to other classes, e.g. a soundplayer class.
+
+...isn't this "just" the prototype pattern?

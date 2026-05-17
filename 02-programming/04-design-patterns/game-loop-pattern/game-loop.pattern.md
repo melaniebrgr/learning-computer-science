@@ -9,7 +9,7 @@ The object of all video games is to present the player with a situation, get the
 
 Games are looping through these stages over and over, until some end condition occurs like winning, losing, or exiting to go to bed. Not surprisingly, this pattern corresponds to how a game engine is programmed (1).
 
-With this model in mind, web applications are like old, turn-based games. The application waits for input, responds, then waits again. Instead of sleeping until the next user input, the UI in  most games keeps moving... ...the game loop keeps on dancing.
+With this model in mind, web applications are like old, turn-based games. The application waits for input, responds, then waits again. Instead of sleeping until the next user input, the UI in most games keeps moving... ...the game loop keeps on dancing.
 
 #### Applications a.k.a turn-based games
 
