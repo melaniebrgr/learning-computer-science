@@ -1,7 +1,8 @@
 # Observer pattern (or subject-observer, or publisher-subscriber)
 
-Useful when one or more components need to react to a change in state of another component.
-Has two parts: a observable and it's observer. The observable notifies all its observers that it has changed. The observer in turn does something about it.
+When one or more components need to react to a state change of another component.
+The pattern has two pieces, an observable and it's observer:
+The observable notifies its observers that it has changed and the observer in turn does something about it.
 
 > The observer pattern is a great way to let those mostly unrelated lumps (like physics and notifications) talk to each other without them merging into one big lump. It's less useful within a single lump of code dedicated to one feature or aspect.
 
@@ -16,5 +17,5 @@ Proxies can be useful way to epxress an observable, e.g. in the trap, call the c
 
 ## References
 
-- [ ] Game Programming Patterns: Chapter 4, Observer
-- [ ] [Observer Pattern Tutorial](https://www.youtube.com/watch?v=cR8P1HZAyP8)
+- Game Programming Patterns: Chapter 4, Observer
+- [Observer Pattern Tutorial](https://www.youtube.com/watch?v=cR8P1HZAyP8)

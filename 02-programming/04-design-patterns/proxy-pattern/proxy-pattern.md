@@ -7,6 +7,7 @@ Instead of clients speaking to the subject directly they speak to a proxy delega
 - **security (firewall) proxy**: Controls access to resources, protecting them from bad clients, e.g. seen with corporate firewalls, load balancers (reverse proxy)
 - **remote proxy**: Abstracts network communication so a client can speak to an object as if it were a local resource, but the resource is actually remote.
 - **caching proxy**: Temporary storage for expensive operations so that clients can share, reducing compute and network latency, e.g. seen in server reverse proxies for content management systems
+- **virtual proxy**: Acts as a surrogate object that is expensive to create, acting in its stead before and while the object is being created.
 
 ## In Javascript 
 

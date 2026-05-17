@@ -2,23 +2,7 @@
 
 How does the body detect "foreign invaders"? Pathogens like viruses and bacteria are coated with proteins and polysaccharides that are specific to these microorganisms, like fingerprints. In the blood small proteins called **antibodies** (particles that "act against bodies") circulate that are tuned to detect these fingerprints or **antigens** (antibody generators).
 
-## Antibody library design
-
-### 1. Naive B cell
-
-They are so called **“naive B‑cell” antibody libraries** because the antibody genes are taken from B cells that have not yet been activated or affinity‑matured by a specific immunization or infection, i.e., from the _naive_ repertoire. 
-
-Naive B cells are mature B lymphocytes that have undergone V(D)J recombination but have not yet encountered their cognate antigen, so their receptors have not been affinity matured in germinal centers. Antibody libraries built from these cells therefore capture the broad, primary repertoire rather than an immune response to a particular pathogen or vaccine.
-
-Naive libraries are typically constructed from IgM‑expressing B cells isolated from healthy, non‑immunized donors (often peripheral blood), so donors have “no known infection” at collection. The variable region (V) genes from these B cells are PCR‑amplified and cloned into display systems (e.g., phage, yeast), generating a large “single‑pot” or universal library that can, in principle, be panned against many different antigens.
-
-### 2. Immunized B cell
-
-### 3. Synthetic
-
-### 4. Semisynthetic
-
-## Antibody structure
+## Antibody formats
 
 ### In humans
 
@@ -54,7 +38,55 @@ Humans only produce "conventional" antibodies with heavy and light chains. Camel
 - **scFv-Fc**: scFv‑Fc fusions are recombinant antibodies where a scFv is fused to the Fc region of an IgG, giving a “mini‑IgG” conformation. The N‑terminus is an scFv (VH and VL joined by a flexible Gly‑Ser linker), and the C‑terminus is the Fc (hinge–CH2–CH3) from an IgG heavy chain. The halves can dimerize via the Fc just like an IgG. Functionally, the scFv provides antigen binding, while the Fc contributes stability, solubility, and extended half‑life.
 - **APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
 
+## Antibody library design
+
+> George Smith’s invention of phage display in 1985, along with its application to antibody engineering by Greg Winter and colleagues, signaled the advent of a new era in antibody engineering, leading to the landmark regulatory approval of the first monoclonal antibody drug derived from a display library in 2002. (3)
+
+### 1. Naive B cell
+
+They are so called **“naive B‑cell” antibody libraries** because the antibody genes are taken from B cells that have not yet been activated or affinity‑matured by a specific immunization or infection, i.e., from the _naive_ repertoire. 
+
+Naive B cells are mature B lymphocytes that have undergone V(D)J recombination but have not yet encountered their cognate antigen, so their receptors have not been affinity matured in germinal centers. Antibody libraries built from these cells therefore capture the broad, primary repertoire rather than an immune response to a particular pathogen or vaccine.
+
+Naive libraries are typically constructed from IgM‑expressing B cells isolated from healthy, non‑immunized donors (often peripheral blood), so donors have “no known infection” at collection. The variable region (V) genes from these B cells are PCR‑amplified and cloned into display systems (e.g., phage, yeast), generating a large “single‑pot” or universal library that can, in principle, be panned against many different antigens.
+
+### 2. Immunized B cell
+
+### 3. Synthetic
+
+In antibody therapeutic development researchers intentionally mimic the biological process of affinity maturation in the lab in order to optimize antibody candidates, driving their binding affinities into ranges required for clinical use.
+
+The in vitro affinity maturation process generally involves two main steps: **mutagenesis** (creating a library of variants from the lead candidate) and **selection** (isolating the tightest binders).
+
+Through iterative rounds of mutation and stringent selection, affinity maturation can yield massive functional improvements. While affinity increases of 10- to 100-fold are standard, specialized techniques can push this much further.
+
+For instance, by combining error-prone PCR with in vivo homologous recombination in yeast, researchers have achieved up to a 100,000-fold affinity increase over just three rounds of selection. Some engineered formats, such as an anti-fluorescein scFv, have been affinity-matured to reach ultra-high femtomolar (fM) affinities with dissociation half-times extending beyond five days.
+
+#### Mutagenesis
+
+To create a diverse library of antibody variants, engineers typically employ one of two mutagenesis strategies:
+
+1. **Going Big**: widespread random or directed mutagenesis across the entire variable region or CDRs to cast a wide net. Techniques can include error-prone PCR or DNA shuffling.
+2. **Staying Small**: a more targeted approach focusing on randomizing or directing mutations only at specific, known "hotspots" within the variable region or a specific CDR
+3. **Chain Shuffling**: keeping one chain (e.g., the heavy chain) constant while shuffling the sequence of the other chain (e.g., the light chain) to discover a pairing with naturally higher affinity
+
+#### Selection
+
+Once the mutated library is generated, the variants are expressed using display technologies—such as phage, yeast, ribosome, or mammalian display
+
+While various display technologies are used, yeast surface display is particularly renowned as a premier tool for affinity maturation. This is because yeast cells are large enough to be analyzed using Fluorescence-Activated Cell Sorting (FACS), researchers can conduct highly quantitative screening.
+
+With fluorescent tagged antigens, scientists can finely discriminate and sort yeast cells based directly on:
+
+- Equilibrium binding: Sorting clones based directly on their dissociation constant (affinity) by adjusting the antigen concentration in the labeling reaction
+- Kinetic competition: Sorting clones based on how slowly they let go of a target (dissociation rate or "off-rate") by saturating them with labeled antigen and then "chasing" them with an excess of unlabeled antigen
+
+The library is then subjected to stringent biopanning conditions to weed out weak binders. This is achieved by decreasing the concentration of the target antigen, introducing competing soluble antigens, or utilizing extensive washing steps.
+
+### 4. Semisynthetic
+
 ## References
 
 1. (VHH antibodies: Emerging reagents for the analysis of environmental chemicals)[https://pmc.ncbi.nlm.nih.gov/articles/PMC4983233/]
 2. https://notebooklm.google.com/notebook/190c839c-a65e-40ca-8b80-9785de8bef78
+3. https://www.sciencedirect.com/science/article/abs/pii/S0003986112001002?via%3Dihub
