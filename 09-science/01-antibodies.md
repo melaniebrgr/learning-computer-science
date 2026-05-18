@@ -2,6 +2,26 @@
 
 How does the body detect "foreign invaders"? Pathogens like viruses and bacteria are coated with proteins and polysaccharides that are specific to these microorganisms, like fingerprints. In the blood small proteins called **antibodies** (particles that "act against bodies") circulate that are tuned to detect these fingerprints or **antigens** (antibody generators).
 
+## Names, Abbreviations, Nomenclature, oh my
+
+- Monoclonal antibodies (mAbs)
+- Multispecific antibodies (MsAbs)
+
+For small-molecule drugs, 'Simplified Molecular-Input Line-Entry System' (SMILES) have been adopted as a standard for
+describing organic molecules (3).
+The Hierarchical Editing Language for Macromolecules
+(HELM)19 was introduced in 2012 as a general tool for describing biologics (including antibodies) and is promoted by the
+Pistoia Alliance.
+
+### AbML
+
+AbML is based on describing antibody domains, arranged in a string and separated by connectors, representing antibody chains from N-terminus to C-terminus.
+Each domain is separated by a ‘-’ character and is numbered sequentially in order of its appearance in the expression. In this respect, hinges and artificial linkers can be considered more like domains as they are numbered and are separated from neighboring domains with a ‘-’ character. Whitespace, including line breaks is ignored in AbML except for comments given in square brackets.
+AbML V1.1 also allows sequence information to be associated with each domain using ASEQ and DSEQ keywords for amino acid and DNA sequences, respectively.
+These are provided after the main AbML annotation.
+
+> In future, porting abYdraw to JavaScript would allow the full graphical user interface to be used via a web page with no need to install software locally.
+
 ## Antibody formats
 
 ### In humans
@@ -90,3 +110,5 @@ The library is then subjected to stringent biopanning conditions to weed out wea
 1. (VHH antibodies: Emerging reagents for the analysis of environmental chemicals)[https://pmc.ncbi.nlm.nih.gov/articles/PMC4983233/]
 2. https://notebooklm.google.com/notebook/190c839c-a65e-40ca-8b80-9785de8bef78
 3. https://www.sciencedirect.com/science/article/abs/pii/S0003986112001002?via%3Dihub
+4. https://pistoiaalliance.org/project/helm-project/
+5. https://github.com/PistoiaHELM/HELMAntibodyEditor
