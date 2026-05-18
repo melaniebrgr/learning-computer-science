@@ -28,10 +28,10 @@
   - [ ] File and directory entries
   - [ ] Popover
   - [ ] Server sent events
-  - [ ] WebGL
-  - [ ] WebGPU
+  - [x] ~~WebGL~~ (replaced by WebGPU)
+  - [~] [WebGPU](./02-frontend/09-webgpu.md)
   - [ ] Images
-  - [ ] Canvas
+  - [~] [Canvas](./02-frontend/10-canvas.md)
   - [ ] SVG
   - [ ] Video
   - [ ] Audio

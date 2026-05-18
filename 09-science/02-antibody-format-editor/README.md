@@ -38,8 +38,9 @@ Names: AbDraw, ImmunoDraw, AntibodyDraw
     - File export
     - Editor clearing
 - Editor implicit states of drawing, theming(?), deleting (state pattern)
-- [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [WebGPU](https://www.youtube.com/watch?v=dXPHLNovCjE&list=PLCnmpqh8sKKzxXoZwValac_tVwGa7l6Ax) for main editor
+- [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for the main editor
 - [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) for input sanitization
+- [Offscreen Canvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) for image and snapshotting
 
 ## Referencs
 
