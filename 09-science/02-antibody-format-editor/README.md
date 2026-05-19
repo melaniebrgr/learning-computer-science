@@ -41,6 +41,7 @@ Names: AbDraw, ImmunoDraw, AntibodyDraw
 - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for the main editor
 - [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) for input sanitization
 - [Offscreen Canvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) for image and snapshotting
+- [HTML in canvas](https://html-in-canvas.dev/) for the UI elements
 
 ## Referencs
 
