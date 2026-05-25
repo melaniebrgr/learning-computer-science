@@ -1,5 +1,5 @@
 import { CanvasCtx2D } from "./src/canvas.js";
-import { Fragment } from "./src/graphic.js"
+import { Fragment } from "./src/fragment.js"
 
 const ctx = CanvasCtx2D.getInstance("canvas");
 
