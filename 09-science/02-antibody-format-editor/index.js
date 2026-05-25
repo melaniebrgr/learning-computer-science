@@ -1,5 +1,6 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+import { CanvasCtx2D } from "./src/canvas.js";
+
+const ctx = CanvasCtx2D.getInstance("canvas");
 
 // VH
 ctx.beginPath();

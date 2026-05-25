@@ -28,8 +28,8 @@ Names: AbDraw, ImmunoDraw, AntibodyDraw
 ## TR
 
 - Event-based render loop: processInput, update, render (game loop)
-- Editor snapshotting for undo/redo operations (memento pattern) and file save
-- UI elements interact with the editor by actions (command pattern):
+- Editor snapshotting for undo/redo operations ([memento pattern](https://refactoring.guru/design-patterns/memento)) and file save
+- UI elements interact with the editor by actions ([command pattern](https://refactoring.guru/design-patterns/command)):
     - Common domain palette: VH, CH1, CH2, CH3, CH4, VL, CL, VHH
     - Switch between Immunoglobulin and T-cell receptor domains(?)
     - Common format presents, e.g. IgG, scFv, knobs in holes(?)
@@ -42,8 +42,9 @@ Names: AbDraw, ImmunoDraw, AntibodyDraw
 - [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) for input sanitization
 - [Offscreen Canvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) for image and snapshotting
 - [HTML in canvas](https://html-in-canvas.dev/) for the UI elements
+- Ab format construction with: [composite, builder, decorator (disulphide bonds?) and related patterns](https://refactoring.guru/design-patterns/composite)
 
-## Referencs
+## References
 
 1. http://www.bioinf.org.uk/software/abydraw/ (https://github.com/JamesSweetJones/abYdraw/)
 2. https://bioglyph.app/

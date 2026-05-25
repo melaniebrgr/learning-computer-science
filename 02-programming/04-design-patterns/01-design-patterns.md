@@ -14,7 +14,7 @@ GoF book was published in 1994, Java, python and C++ had just been invented. The
 ## Creational patterns
 These patterns provide object creation mechanisms.
 
-- Builder
+- [Builder](./builder-pattern/builder-pattern.md)
 - [Factory method](./factory-pattern/factory-pattern.md)
 - Object pool
 - [Prototype](./prototype-pattern/prototype-pattern.md)
