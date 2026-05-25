@@ -1,5 +1,7 @@
 # Mediator pattern
 
+Mostly applied in system architecture, e.g. in orchestrating workflows.
+
 For example, we have smart home appliances
 
 - coffee machine makes coffee on weekday mornings but not weekends

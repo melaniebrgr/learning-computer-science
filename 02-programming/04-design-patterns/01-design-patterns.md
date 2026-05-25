@@ -39,7 +39,7 @@ These patterns explain how to assemble objects and classes into larger structure
 - [Subclass sandbox](./subclass-sandbox-pattern/subclass-sandbox-pattern.md)
 - Template method
 - Update method
-- Visitor
+- [Visitor](./visitor-pattern/visitor-pattern.md)
 
 ## Structural patterns
 These patterns are concerned with effective communication and assignment of responsibilities between objects.
