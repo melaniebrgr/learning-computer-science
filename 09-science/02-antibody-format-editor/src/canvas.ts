@@ -1,9 +1,9 @@
 class Singleton {
   static #instance;
 
-  constructor() { }
+  private constructor() { }
 
-  static getInstance() {
+  public static getInstance() {
     if (!Singleton.#instance) {
       Singleton.#instance = new Singleton();
     }
@@ -11,13 +11,13 @@ class Singleton {
   }
 }
 
-class CanvasCtx2D extends Singleton {
-  static #instance;
+class CanvasCtx2D implements Singleton {
+  static #instance: CanvasRenderingContext2D | undefined;
 
-  static getInstance(canvasElementId) {
+  // TODO (multi-framework): generalise by passing in HTML node reference instead of element ID
+  public static getInstance(canvasElementId) {
     if (!this.#instance) {
-      // TODO (multi-framework): generalise by passing in Node ref
-      const canvas = document.getElementById(canvasElementId);
+      const canvas = document.getElementById(canvasElementId) as HTMLCanvasElement;
       const ctx = canvas.getContext("2d");
       this.#instance = ctx
       return this.#instance;
