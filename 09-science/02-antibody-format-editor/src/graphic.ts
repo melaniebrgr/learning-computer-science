@@ -9,7 +9,8 @@ class Graphic {
   }
 
   public move(x, y) {
-    this.x + x, this.y + y;
+    this.x += x
+    this.y += y
   }
 
   public draw() {
