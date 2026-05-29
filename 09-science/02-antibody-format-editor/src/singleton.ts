@@ -1,14 +1,9 @@
-class Singleton {
-  static #instance;
+abstract class Singleton<TInstance, TArgs extends unknown[] = []> {
+  protected instance: TInstance | null = null;
 
-  private constructor() { }
+  protected constructor() { }
 
-  public static getInstance() {
-    if (!Singleton.#instance) {
-      Singleton.#instance = new Singleton();
-    }
-    return Singleton.#instance;
-  }
+  public abstract getInstance(...args: TArgs): TInstance;
 }
 
 export { Singleton }

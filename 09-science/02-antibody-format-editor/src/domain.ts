@@ -1,19 +1,8 @@
 import { Graphic } from "./graphic";
+import type { DomainType } from "./domain.type";
 
-const FRAGMENT_TYPE = {
-  VH: "vh",
-  VL: "vl",
-  CH1: "ch1",
-  CH2: "ch2",
-  CH3: "ch3",
-  CH4: "ch4",
-  CL: "cl",
-} as const;
-
-type FragmentType = typeof FRAGMENT_TYPE[keyof typeof FRAGMENT_TYPE];
-
-class Fragment extends Graphic {
-  #type: FragmentType;
+class Domain extends Graphic {
+  #type: DomainType;
 
   public constructor(ctx, x, y, fillColour, type) {
     super(ctx, x, y, fillColour);
@@ -32,4 +21,4 @@ class Fragment extends Graphic {
   }
 }
 
-export { Fragment, type FragmentType, FRAGMENT_TYPE }
+export { Domain }

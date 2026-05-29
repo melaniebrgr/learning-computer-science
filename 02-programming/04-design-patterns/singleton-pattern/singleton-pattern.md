@@ -2,7 +2,7 @@
 
 > Ensure a class has a single instance and provide a global point of access to it.
 
-The Singleton pattern is acutally considered to be a code smell and best avoided for the reasons the we avoid globals in general:
+The Singleton pattern is actually considered to be a code smell and best avoided for the reasons the we avoid globals in general:
 
 1. They make it harder to reason about the code since we need to understand all the points that modify it when there's a bug
 2. Encourage coupling between modules
