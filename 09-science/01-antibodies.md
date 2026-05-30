@@ -2,7 +2,7 @@
 
 How does the body detect "foreign invaders"? Pathogens like viruses and bacteria are coated with proteins and polysaccharides that are specific to these microorganisms, like fingerprints. In the blood small proteins called **antibodies** (particles that "act against bodies") circulate that are tuned to detect these fingerprints or **antigens** (antibody generators).
 
-## Names, Abbreviations, Nomenclature, oh my
+## Naming
 
 - Monoclonal antibodies (mAbs)
 - Multispecific antibodies (MsAbs)
@@ -22,7 +22,7 @@ These are provided after the main AbML annotation.
 
 > In future, porting abYdraw to JavaScript would allow the full graphical user interface to be used via a web page with no need to install software locally.
 
-## Antibody formats
+## Formats
 
 ### In humans
 
@@ -31,12 +31,12 @@ An antibody (immunoglobulin) is a Y-shaped protein made of four polypeptide chai
 Papain digestion → 2 Fab fragments + 1 Fc fragment
 Pepsin digestion → 1 F(ab')₂ fragment (two arms still connected) + degraded Fc
 
-- **mAb (monoclonal antibody)**: A mAb is a monoclonal antibody: a population of identical antibodies that all come from one B‑cell clone and all recognize the same epitope on a single target antigen
+- **mAb (monoclonal antibody)**: A mAb is a monoclonal antibody, a population of identical antibodies that all come from one B‑cell clone and all recognize the same epitope on a single target antigen
 - **Fab (fragment antigen-binding)**: When antibodies are cleaved by papain, you get two identical Fab fragments that contain one complete antigen-binding site. Fab fragments are the "arms" of an antibody that bind specifically to antigens (epitopes). Each arm contains one part of light chain and one part of a heavy chain (VH-CH1-CL-VL).
+- **Fab'**: A Fab fragment that includes a portion of the hinge region. The F(ab')2 fragment can be split into two Fab' fragments by mild reduction.
+- **F(ab')₂**: Two Fab regions joined by a hinge; can be monospecific or bispecific. When antibodies are cleaved by pepsin, the cleavage occurs beneath the hinge region producing two halves, one containing variable arms and the other the crystallizable constant region (**pFc'**).
 - **Fc (fragment crystallizable)**: When antibodies are cleaved by papain, you get one relatively stable and uniform fragment that can be crystallized. This fragment doesn't bind antigen but interacts with immune cells and is also refered to as the tail.
 - **Hinge region**: The	flexible tether connecting arms to stem that allows arms to move and bind antigens at varying distances.
-- **F(ab')₂**: When antibodies are cleaved by pepsin, the cleavage occurs beneath the hinge region producing two halves, one containing variable arms and the other the crystallizable constant region (**pFc'**).
-- **Fab'**: The F(ab')2 fragment can be split into two Fab' fragments by mild reduction.
 - **VH (variable region of heavy chain)**
 - **VL (variable region of light chain)**
 - **CH (constant region of heavy chain)**
@@ -49,9 +49,11 @@ Humans only produce "conventional" antibodies with heavy and light chains. Camel
 - **HcAb (heavy chain only antibodies)**: antibodies that are naturally produced by camelids and sharks
 - **VHH or nanobody (variable domain of heavy-chain of heavy-chain only antibody)**: A VHH is the antigen binding fragment of a heavy chain only antibody. This fragment is also called a nanobody (trademark Sanofi). VHHs are sometimes prefered as a therapeutic biologics because they are relatively small, stable, soluble, and tolerate heat and pH extremes better. Because they are single domains, they are also easy to express in microbes, have good tissue penetration and ability to bind concave epitopes, and lend themselves well to constructions like bispecifics. VHHs are typically camelid-derived and then humanized (framework and surface residues engineered to look more human) to reduce immunogenicity (1).
 
-### Therapeutically relevant artificial contructs
+### Common
 
-**bivalent VHH**: A bivalent VHH is a single-chain construct where two identical VHH domains are linked so that one molecule binds two identical targets, e.g. caplacizumab
+**nanobody (VHH)**: A nanobody is the variable domain of heavy-chain-only antibodies (HCAbs) in camelids. These antibodies are devoid of light chains and bind their antigens exclusively via the variable domains of the heavy chain, also called VHHs. To compensate for the reduced repertoire of binding interfaces, VHHs utilize several mechanisms for diversification. For example, most VHHs have an elongated and structurally diverse complementarity-determining region 3 (CDR3), extensive somatic hypermutations in CDR1 and non-canonical disulfide bonds that stabilize elongated CDR3s.
+
+**bivalent VHH**: A bivalent VHH is a single-chain construct where two identical VHH domains are linked so that one molecule binds two identical targets, e.g. caplacizumab. VHHs are naturally monovalent.
 
 **bispecific VHH**: A bispecific VHH is a single-chain construct where two different VHH domains are linked so that one molecule binds two distinct targets. The format is usually a “tandem VHH”: `VHH1–linker–VHH2`, where the linker is a flexible Gly‑Ser chain.
 
@@ -59,9 +61,15 @@ Humans only produce "conventional" antibodies with heavy and light chains. Camel
 
 The length of the flexible DNA linker used to link both of the V domains is critical in yielding the correct folding of the polypeptide chain. Previously it has been estimated that the peptide linker must span 3.5 nm (35 Å) between the carboxy terminus of the variable domain and the amino terminus of the other domain without affecting the ability of the domains to fold and form an intact antigen-binding site (6). Nowadays, the most extensively used designs have sequences comprising stretches of Gly and Ser residues which meant for flexibility and or together with the charged residues such as Glu and Lys interspersed to enhance the solubility.
 
-**BiTE (bispecific T‑cell engager)**: a single‑chain bispecific antibody format made of two linked binding domains that bring a T cell into contact with a target cell, usually a tumor cell. The binding domains could be VHHs or VHVLs, but the main characteristic is that one site engages a T-cell.
+**dsFv**: An antibody fragment consisting of variable heavy (VH) and light (VL) chains linked together by a disulfide bond instead of a peptide bridge is no longer a single chain, and is therefore referred to as a dsFv.
 
 **scFv-Fc**: scFv‑Fc fusions are recombinant antibodies where a scFv is fused to the Fc region of an IgG, giving a “mini‑IgG” conformation. The N‑terminus is an scFv (VH and VL joined by a flexible Gly‑Ser linker), and the C‑terminus is the Fc (hinge–CH2–CH3) from an IgG heavy chain. The halves can dimerize via the Fc just like an IgG. Functionally, the scFv provides antigen binding, while the Fc contributes stability, solubility, and extended half‑life.
+
+**BiTE (bispecific T‑cell engager)**: A BiTE is a special bispecific antibody format constructed as a single polypeptide chain: One binding domain typically targets a specific antigen on a tumor cell, while the second domain targets a molecule on the T cell. Its primary biological function is to act as a molecular bridge, bringing a T cell into physical proximity with a target cell. Structurally, BiTEs are single-chain bispecific antibodies composed of two linked binding domains. The BiTE format links its functional components into a continuous sequence. While traditional BiTEs lack a tail region, newer iterations such as the Half-Life Extended (HLE) BiTE incorporate an Fc domain to improve therapeutic longevity. 
+
+**Fab**: The Fab fragment represents the "arms" of a parental antibody, containing the essential machinery for antigen recognition and binding. It is produced through the enzymatic cleavage of antibodies by papain. the Fab format provides a modular, high-affinity binding unit consisting of both variable and constant domains from the light and heavy chains.
+
+**scFab**: A single-chain Fab where elements are connected by a linker instead of a hinge.
 
 **APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
 

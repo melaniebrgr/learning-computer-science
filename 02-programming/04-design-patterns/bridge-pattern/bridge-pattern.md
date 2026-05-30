@@ -1,7 +1,7 @@
 # Bridge pattern
 
-This pattern is about decoupling things.
-Instead of exploding the combinatorial space of options.
+Use tbe bridge patternt to vary abstractions.
+This is when your not sure of the interface, except that it will change over time.
 
 ## References
 
