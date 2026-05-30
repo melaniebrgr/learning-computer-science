@@ -32,7 +32,7 @@ Papain digestion → 2 Fab fragments + 1 Fc fragment
 Pepsin digestion → 1 F(ab')₂ fragment (two arms still connected) + degraded Fc
 
 - **mAb (monoclonal antibody)**: A mAb is a monoclonal antibody, a population of identical antibodies that all come from one B‑cell clone and all recognize the same epitope on a single target antigen
-- **Fab (fragment antigen-binding)**: When antibodies are cleaved by papain, you get two identical Fab fragments that contain one complete antigen-binding site. Fab fragments are the "arms" of an antibody that bind specifically to antigens (epitopes). Each arm contains one part of light chain and one part of a heavy chain (VH-CH1-CL-VL).
+- **Fab (fragment antigen-binding)**: Fab stands for "Fragment Antigen-Binding". When antibodies are cleaved by papain, you get two identical Fab fragments that contain one complete antigen-binding site. Fab fragments are the "arms" of an antibody that bind specifically to antigens (epitopes). Each arm contains one part of light chain and one part of a heavy chain (VH-CH1-CL-VL). 
 - **Fab'**: A Fab fragment that includes a portion of the hinge region. The F(ab')2 fragment can be split into two Fab' fragments by mild reduction.
 - **F(ab')₂**: Two Fab regions joined by a hinge; can be monospecific or bispecific. When antibodies are cleaved by pepsin, the cleavage occurs beneath the hinge region producing two halves, one containing variable arms and the other the crystallizable constant region (**pFc'**).
 - **Fc (fragment crystallizable)**: When antibodies are cleaved by papain, you get one relatively stable and uniform fragment that can be crystallized. This fragment doesn't bind antigen but interacts with immune cells and is also refered to as the tail.
@@ -71,7 +71,44 @@ The length of the flexible DNA linker used to link both of the V domains is crit
 
 **scFab**: A single-chain Fab where elements are connected by a linker instead of a hinge.
 
+**Fab2**: The (Fab')₂ fragment (also referred to as Fab2) is a bivalent antibody format characterized by its "cleaving only" origin and the presence of two antigen-binding (Fab) regions joined by a hinge. This structure allows the molecule to maintain bivalent binding—allowing for the cross-linking of antigens—while being significantly smaller than a parental IgG.
+
 **APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
+
+### ADCs
+
+Discovery timeline:
+
+- In 1972, scientists isolated a highly potent tumor-killing compound called maytansine from an Ethiopian plant (Maytenus ovatus). While it was up to 270 times more powerful than standard chemotherapy, it was abandoned in early human trials because it severely damaged healthy tissue. 
+- Researchers cloned the HER2 gene in 1985 and discovered its role in driving aggressive breast cancers.
+- By 1998, the pharmaceutical company Genentech gained FDA approval for trastuzumab (Herceptin), a monoclonal antibody designed to track down and bind to these HER2 cancer cells.
+- Genentech collaborated with ImmunoGen to resurrect the discarded maytansine. By altering it into a derivative called DM1 (emtansine) and locking it to the antibody, they realized they could bypass healthy cells entirely.
+
+Chemical conjugation specificity is not achieved at a single amino acid level, and the drug does not attach to every lysine. Instead, the production of Trastuzumab emtansine (Kadcyla) relies on stochastic (random) chemical reaction kinetics controlled by precise manufacturing conditions. Out of the 88 total lysine amino acids on a standard trastuzumab antibody, roughly 40 are solvent-exposed on the surface and physically available for chemical reactions. Rather than targeting one specific lysine, the manufacturing process allows the drug to bind to a broad mix of these surface lysines, creating a highly complex statistical distribution.
+
+#### 1. The Result: A Statistical Mixture
+
+Because the reaction is mathematically random, a vial of Kadcyla is actually a mixture of millions of different positional isomers (variants where the drug is attached to different combinations of spots).
+
+* The DAR Range: Individual antibodies in the mixture will end up with anywhere from 0 to 8 emtansine molecules attached to them.
+* The Poison Distribution: When the reaction is run under strictly controlled conditions, the population follows a classic Poisson distribution curve.
+* The "Magic Number": The reaction parameters (like temperature, pH, and the exact concentration ratio of linker to antibody) are tightly calibrated so that the mathematical average across the entire batch is exactly 3.5 molecules of emtansine per antibody (DAR 3.5).
+
+#### 2. Factors Dictating "Micro-Specificity"
+
+While the reaction is considered random, not all 40 surface lysines are modified equally. A mild degree of chemical preference occurs naturally due to three main factors: [3, 5] 
+
+* Steric Hindrance: Lysine residues tucked into structural folds or surrounded by bulky sugar molecules (glycosylation zones) are physically shielded, making it harder for the chemical linker to bump into them.
+* Local Microenvironment (pKa Shift): For a lysine's amine group to react with the SMCC chemical linker, it must lose a proton (become deprotonated). Neighboring amino acids on the protein surface alter the local pH environment, making certain specific lysines naturally more reactive than others.
+* Process Consistency: Mass spectrometry testing shows that even though there are over 40 active reaction sites, the exact same sites get modified to the exact same percentages across different manufacturing batches, provided the mixing speed, time, and temperature remain identical.
+
+#### 3. The Future: "Site-Specific" Conjugation
+
+Because first-generation ADCs like Kadcyla are so heterogeneous, they are highly complex to manufacture and analyze. Modern targeted therapies being developed today often bypass lysine conjugation entirely. Instead, engineers use site-specific conjugation by:
+
+1. Genetic engineering: Mutating specific positions on the antibody to insert an artificial amino acid or a unique cysteine residue (known as ThiomAbs).
+2. Enzymatic locking: Using specialized enzymes (like transglutaminase) to paste the chemotherapy payload onto one—and only one—exact location.
+
 
 ## Antibody library design
 

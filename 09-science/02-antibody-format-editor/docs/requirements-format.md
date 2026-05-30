@@ -1,13 +1,14 @@
 # Format Requirements
 
-From "smallest" to "largest", in theory.
+From "smallest" to "largest", in theory:
 
-- ~~nanobody~~
-- ~~scFV~~
-- ~~BiTE~~
-- Fab
-- (Fab')₂
-- IgG
+- ~~nanobody~~: `VHH-Fc`
+- ~~scFV~~: `VL-linker-VH`
+- ~~BiTE~~: `Xaa-(VL-linker-VH)-linker-(VH-linker-VL)-Xaa`
+- ~~Fab~~: `VL-CL`,`VH-CH1` (1 x SS)
+- ~~(Fab')₂~~: `VL-CL`,`VH-CH1-hinge`,`hinge-CH1-VH`,`CL-VL` (4 x SS)
+- ~~IgG~~: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
+- ~~ADC~~: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x D)
 
 ## Nanobody
 
@@ -39,8 +40,7 @@ In scFv antibodies the genes of VH and VL are joined together with a ~10 aa pept
 It is administered via an injection directly into the eye to reduce abnormal blood vessel growth and excess fluid.  
 It is a small (approx. 26 kDa), humanized single-chain variable fragment (scFv) antibody fragment targeting VEGF-A.
 
-- `VL-linker-VH`
-- `VH-linker-VL`
+- `VL-linker-VH` or `VH-linker-VL`
 
 ```
 MEIVMTQSPS TLSASVGDRV IITCQASEII HSWLAWYQQK PGKAPKLLIY LASTLASGVP
@@ -93,14 +93,85 @@ HHHH
 
 ## Fab
 
-The Fab fragment is the "arms" of a parental antibody. Each Fab fragment is composed of four primary domains:
+The Fab fragment is an "arm" of a parental antibody. Each Fab fragment is composed of four primary domains:
 - Heavy Chain Portion: one variable domain (VH) and one constant domain (CH1)
 - Light Chain Portion: one variable domain (VL) and one constant domain (CL)
 
-Ranibizumab (Lucentis), certolizumab pegol (Cimzia), and abciximab (ReoPro) are all approved therapeutics utilizing the Fab format.
+Bevacizumab is a humanized anti-VEGF monoclonal antibody. It's primary Fab connection is a disulphide bond between CH1 Cys220 and CL Cys215.
+
+- `VH-CH1`, `VL-CL` (SS, CH1:C220-CL:215)
+
+```
+EVQLVESGGG LVQPGGSLRL SCAASGYTFT NYGMNWVRQA PGKGLEWVGW INTYTGEPTY
+AADFKRRFTF SLDTSKSTAY LQMNSLRAED TAVYYCAKYP HYYGSSHWYF DVWGQGTLVT
+VSSASTKGPS VFPLAPSSKS TSGGTAALGC LVKDYFPEPV TVSWNSGALT SGVHTFPAVL
+QSSGLYSLSS VVTVPSSSLG TQTYICNVNH KPSNTKVDKK VEPKSCDKTH T
+
+DIQMTQSPSS LSASVGDRVT ITCSASQDIS NYLNWYQQKP GKAPKVLIYF TSSLHSGVPS
+RFSGSGSGTD FTLTISSLQP EDFATYYCQQ YSTVPWTFGQ GTKVEIKRTV AAPSVFIFPP
+SDEQLKSGTA SVVCLLNNFY PREAKVQWKV DNALQSGNSQ ESVTEQDSKD STYSLSSTLT
+LSKADYEKHK VYACEVTHQG LSSPVTKSFN RGEC
+```
+
+| Domain                        | Position | Length | Sequence | Notes                         |
+| ----------------------------- | -------- | ------ | -------- | ----------------------------- |
+| VH    | 1–118    | 118    | EVQLVESGGGLVQPGGSLRLSCAASGFTFSNYTMNWVRQAPGKGLEWVAAIATPGGDTTYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCARGAFDI      |  |
+| CH1   | 119–220  | 102    | ASTKGPSVFPLAPCSRSTSGSTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVT VPPSLSQMSTQVDETNYFYT C                | Contains Cys220 for disulfide |
+| VL    | 1–107    | 107    | DIQMTQSPSSLSASVGDRVTITCRASQDINSYLMHWYQQKPGKAPKLLIYAASLQSGVPSRFSGSGSGTDFTLTISSLQPFEDFATYYCQQSYNVPWTFGQGTKVEIK |  |
+| CL    | 108–215  | 108    | RTVAAPSVFIFPPSDEQLKSGTASVCLLNNYFKPAKPKVTLTIMDTSSDTQVPTGVSVKLYLSLRGDLTIDVSQDPRQDYQVVLT C                      | Contains Cys215 for disulphide   |
+
+## (Fab')₂
+
+AKA two Fab' fragments from IgG1 digestion with disulphide bonds retained, so see IgG1 for representative sequence information.
+
+| Domain                 | Position | Length                                        | Sequence Reference                | Notes                              |
+| ---------------------- | -------- | --------------------------------------------- | --------------------------------- | ---------------------------------- |
+| Fab' Fragment #1       |          |                                               |                                   |                                    |
+| VH (Variable Heavy)    | 1–118    | 118                                           | EVQLVESGGGLVQPGGSLRLSCAASGFTFSNYTMNWVRQAPGKGLEWVAAIATPGGDTTYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCARGAFDI      | First Fab'                         |
+| CH1 (Constant Heavy 1) | 119–220  | 102                                           | ASTKGPSVFPLAPCSRSTSGSTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVT VPPSLSQMSTQVDETNYFYT C                | Cys220 for inter-chain             |
+| VL (Variable Light)    | 1–107    | 107                                           | DIQMTQSPSSLSASVGDRVTITCRASQDINSYLMHWYQQKPGKAPKLLIYAASLQSGVPSRFSGSGSGTDFTLTISSLQPFEDFATYYCQQSYNVPWTFGQGTKVEIK | First Fab'                         |
+| CL (Constant Light)    | 108–215  | 108                                           | RTVAAPSVFIFPPSDEQLKSGTASVCLLNNYFKPAKPKVTLTIMDTSSDTQVPTGVSVKLYLSLRGDLTIDVSQDPRQDYQVVLT C                      | Cys215 for inter-chain             |
+| Hinge Region           | 221–234  | 14                                            | EPKSCDKTHTCPPCP                     | Contains 2 Cys for Fab'-Fab' links |
+
+
+## IgG1
+
+Basic description:
+
+- The heavy chains have VH, CH1, CH2, and CH3 domains, and the light chains have VL and CL domains
+- The heavy and light chains are connected by a single Cys-Cys disulphide bride at Cys220
+- The heavy chains are connected by two Cys-Cys disulfide bridges at Cys226 and Cys229
+- The hinge region between the Fab and Fc fragments is composed of 23 residues (EPKSCDKTHTCPPCPAPELLGGP) between Val215 and Ser239
+
+Trastuzumab (Herceptin), is an IgG1κ antibody targeting HER2. Trastuzumab uses the human IgG1 constant regions (κ light chain, G1m17 allotype) with its specific variable domains.
+
+| Domain                 | Chain        | Residues          | Sequence                                                      |
+| ---------------------- | ------------ | ----------------- | ------------------------------------------------------------- |
+| VL (Variable Light)    | Light (κ)    | 1–107 (clone 4D5) | QSVLTQPPSASGTPGQRVTISCSGSSSNIGAGVNWYQQLPGTAPKLLIYDTSKLASGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQQWNSYPFTFGGGTKLTVL |
+| CL (Constant Light)    | Light (κ)    | 108–214           | GTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC  |
+| VH (Variable Heavy)    | Heavy        | 1–117 (clone 4D5) | EVQLVESGGGLVQPGGSLRLSCAASGFNIKDTYIHWVRQAPGKGLEWVARIYPTNGYTRYADSVKGRFTISADTSKNTAYLQMNSLRAEDTAVYYCSRWGGDGFYAMDYWGQGTLVTVSS  |
+| CH1 (Constant Heavy 1) | Heavy (IgG1) | 118–222           | ASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSC |
+| Hinge                  | Heavy (IgG1) | 223–245           | EPKSCDKTHTCPPCPAPELLGGP   |
+| CH2 (Constant Heavy 2) | Heavy (IgG1) | 246–347           | ASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAK |
+| CH3 (Constant Heavy 3) | Heavy (IgG1) | 348–447           | QRPREPKVEYDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK |
+
+| Bond Type  | Cysteine Residues (EU numbering) | Location                       | Function                                                         |
+| ---------- | -------------------------------- | ------------------------------ | ---------------------------------------------------------------- |
+| H–H bond 1 | Cys²²⁶–Cys²²⁶                    | Middle hinge                   | Connects the two heavy chains pmc.ncbi.nlm.nih                   |
+| H–H bond 2 | Cys²²⁹–Cys²²⁹                    | Middle hinge                   | Connects the two heavy chains pmc.ncbi.nlm.nih                   |
+| H–L bond 1 | Cys²²⁰ (HC) – Cys²¹⁴ (LC)        | Upper hinge / CH1-CL interface | Connects heavy chain to light chain (Fab arm 1) pmc.ncbi.nlm.nih |
+| H–L bond 2 | Cys²²⁰ (HC) – Cys²¹⁴ (LC)        | Upper hinge / CH1-CL interface | Connects heavy chain to light chain (Fab arm 2) pmc.ncbi.nlm.nih |
+
+## ADC
+
+Trastuzumab emtansine (T-DM1, brand name Kadcyla®) is one of the most well-characterized and successful antibody-drug conjugates approved by the FDA in 2013 for HER2-positive breast cancer.
+
+A synthetic, non-cleavable chemical linker (SMCC/MCC) is used as the bridge. The linker's succinimidyl end attaches to the lysine amino acids of the antibody, while its maleimide end fastens onto the DM1 payload. On average, the chemical process attaches exactly 3.5 molecules of DM1 to each individual trastuzumab antibody before it is purified into the final medicine.
+
 
 ## References
 
 1. [envafolimab](https://www.kegg.jp/entry/D13233)
 1. [beovu kegg](https://www.kegg.jp/entry/D11083)
 1. [blincyto kegg](https://www.kegg.jp/entry/D09325)
+1. [IgG1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4375494/)
