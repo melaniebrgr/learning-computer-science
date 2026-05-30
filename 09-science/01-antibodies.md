@@ -51,28 +51,23 @@ Humans only produce "conventional" antibodies with heavy and light chains. Camel
 
 ### Therapeutically relevant artificial contructs
 
-- **bivalent VHH**: A bivalent VHH is a single-chain construct where two identical VHH domains are linked so that one molecule binds two identical targets, e.g. caplacizumab
-- **bispecific VHH**: A bispecific VHH is a single-chain construct where two different VHH domains are linked so that one molecule binds two distinct targets. The format is usually a “tandem VHH”: `VHH1–linker–VHH2`, where the linker is a flexible Gly‑Ser chain.
-- **scFv (single-chain variable fragment)**: An scFv is a small engineered antibody fragment that contains just the variable regions of the heavy and light chains joined together in a single polypeptide by a flexible linker. It's a single‑chain construct with tandem VH and VL fragments: `VH–linker–VL`. Only the variable (V) regions of the antibody and not the constant (C) regions are included. Together they recreate a full antigen‑binding paratope site.
-- **BiTE (bispecific T‑cell engager)**: a single‑chain bispecific antibody format made of two linked binding domains that bring a T cell into contact with a target cell, usually a tumor cell. The binding domains could be VHHs or VHVLs, but the main characteristic is that one site engages a T-cell.
-- **scFv-Fc**: scFv‑Fc fusions are recombinant antibodies where a scFv is fused to the Fc region of an IgG, giving a “mini‑IgG” conformation. The N‑terminus is an scFv (VH and VL joined by a flexible Gly‑Ser linker), and the C‑terminus is the Fc (hinge–CH2–CH3) from an IgG heavy chain. The halves can dimerize via the Fc just like an IgG. Functionally, the scFv provides antigen binding, while the Fc contributes stability, solubility, and extended half‑life.
-- **APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
+**bivalent VHH**: A bivalent VHH is a single-chain construct where two identical VHH domains are linked so that one molecule binds two identical targets, e.g. caplacizumab
+
+**bispecific VHH**: A bispecific VHH is a single-chain construct where two different VHH domains are linked so that one molecule binds two distinct targets. The format is usually a “tandem VHH”: `VHH1–linker–VHH2`, where the linker is a flexible Gly‑Ser chain.
+
+**scFv (single-chain variable fragment)**: A scFv us small engineered antibody fragment that contains just the variable regions of the heavy and light chains joined together. The tandem VH and VL fragments are joined in a single polypeptide by a flexible linker or dislphide bond, e.g. `VH–linker–VL` or `VH-SS-VL`. Only the variable (Fv) regions of the antibody are included, the constant (C) regions are omitted--the Fv fragment is the smallest unit of immunoglobulin molecule with function in antigen-binding activities. Together, the Fv regions recreate a full antigen‑binding paratope site. The scFv has become an established technique used to produce a completely functional antigen-binding fragment in bacterial systems.
+
+The length of the flexible DNA linker used to link both of the V domains is critical in yielding the correct folding of the polypeptide chain. Previously it has been estimated that the peptide linker must span 3.5 nm (35 Å) between the carboxy terminus of the variable domain and the amino terminus of the other domain without affecting the ability of the domains to fold and form an intact antigen-binding site (6). Nowadays, the most extensively used designs have sequences comprising stretches of Gly and Ser residues which meant for flexibility and or together with the charged residues such as Glu and Lys interspersed to enhance the solubility.
+
+**BiTE (bispecific T‑cell engager)**: a single‑chain bispecific antibody format made of two linked binding domains that bring a T cell into contact with a target cell, usually a tumor cell. The binding domains could be VHHs or VHVLs, but the main characteristic is that one site engages a T-cell.
+
+**scFv-Fc**: scFv‑Fc fusions are recombinant antibodies where a scFv is fused to the Fc region of an IgG, giving a “mini‑IgG” conformation. The N‑terminus is an scFv (VH and VL joined by a flexible Gly‑Ser linker), and the C‑terminus is the Fc (hinge–CH2–CH3) from an IgG heavy chain. The halves can dimerize via the Fc just like an IgG. Functionally, the scFv provides antigen binding, while the Fc contributes stability, solubility, and extended half‑life.
+
+**APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
 
 ## Antibody library design
 
 > George Smith’s invention of phage display in 1985, along with its application to antibody engineering by Greg Winter and colleagues, signaled the advent of a new era in antibody engineering, leading to the landmark regulatory approval of the first monoclonal antibody drug derived from a display library in 2002. (3)
-
-### 1. Naive B cell
-
-They are so called **“naive B‑cell” antibody libraries** because the antibody genes are taken from B cells that have not yet been activated or affinity‑matured by a specific immunization or infection, i.e., from the _naive_ repertoire. 
-
-Naive B cells are mature B lymphocytes that have undergone V(D)J recombination but have not yet encountered their cognate antigen, so their receptors have not been affinity matured in germinal centers. Antibody libraries built from these cells therefore capture the broad, primary repertoire rather than an immune response to a particular pathogen or vaccine.
-
-Naive libraries are typically constructed from IgM‑expressing B cells isolated from healthy, non‑immunized donors (often peripheral blood), so donors have “no known infection” at collection. The variable region (V) genes from these B cells are PCR‑amplified and cloned into display systems (e.g., phage, yeast), generating a large “single‑pot” or universal library that can, in principle, be panned against many different antigens.
-
-### 2. Immunized B cell
-
-### 3. Synthetic
 
 In antibody therapeutic development researchers intentionally mimic the biological process of affinity maturation in the lab in order to optimize antibody candidates, driving their binding affinities into ranges required for clinical use.
 
@@ -82,7 +77,7 @@ Through iterative rounds of mutation and stringent selection, affinity maturatio
 
 For instance, by combining error-prone PCR with in vivo homologous recombination in yeast, researchers have achieved up to a 100,000-fold affinity increase over just three rounds of selection. Some engineered formats, such as an anti-fluorescein scFv, have been affinity-matured to reach ultra-high femtomolar (fM) affinities with dissociation half-times extending beyond five days.
 
-#### Mutagenesis
+### Mutagenesis
 
 To create a diverse library of antibody variants, engineers typically employ one of two mutagenesis strategies:
 
@@ -90,7 +85,15 @@ To create a diverse library of antibody variants, engineers typically employ one
 2. **Staying Small**: a more targeted approach focusing on randomizing or directing mutations only at specific, known "hotspots" within the variable region or a specific CDR
 3. **Chain Shuffling**: keeping one chain (e.g., the heavy chain) constant while shuffling the sequence of the other chain (e.g., the light chain) to discover a pairing with naturally higher affinity
 
-#### Selection
+#### Naive B cell
+
+They are so called **“naive B‑cell” antibody libraries** because the antibody genes are taken from B cells that have not yet been activated or affinity‑matured by a specific immunization or infection, i.e., from the _naive_ repertoire. 
+
+Naive B cells are mature B lymphocytes that have undergone V(D)J recombination but have not yet encountered their cognate antigen, so their receptors have not been affinity matured in germinal centers. Antibody libraries built from these cells therefore capture the broad, primary repertoire rather than an immune response to a particular pathogen or vaccine.
+
+Naive libraries are typically constructed from IgM‑expressing B cells isolated from healthy, non‑immunized donors (often peripheral blood), so donors have “no known infection” at collection. The variable region (V) genes from these B cells are PCR‑amplified and cloned into display systems (e.g., phage, yeast), generating a large “single‑pot” or universal library that can, in principle, be panned against many different antigens.
+
+### Selection
 
 Once the mutated library is generated, the variants are expressed using display technologies—such as phage, yeast, ribosome, or mammalian display
 
@@ -103,7 +106,10 @@ With fluorescent tagged antigens, scientists can finely discriminate and sort ye
 
 The library is then subjected to stringent biopanning conditions to weed out weak binders. This is achieved by decreasing the concentration of the target antigen, introducing competing soluble antigens, or utilizing extensive washing steps.
 
-### 4. Semisynthetic
+### Production
+
+Since 1975, Kohler and Milstein have introduced the **hybridoma** technology which enabled a defined specificity of monoclonal antibodies to be produced in consistent quality as well as in large quantities in the laboratory. Since then, monoclonal antibodies (mAbs) have been favored as they can be produced in unlimited quantities to practically bind to any antigen and are more easily standardized
+
 
 ## References
 
@@ -112,3 +118,4 @@ The library is then subjected to stringent biopanning conditions to weed out wea
 3. https://www.sciencedirect.com/science/article/abs/pii/S0003986112001002?via%3Dihub
 4. https://pistoiaalliance.org/project/helm-project/
 5. https://github.com/PistoiaHELM/HELMAntibodyEditor
+6. https://pmc.ncbi.nlm.nih.gov/articles/PMC3312285/
