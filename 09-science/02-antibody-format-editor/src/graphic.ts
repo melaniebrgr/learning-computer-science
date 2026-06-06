@@ -18,4 +18,18 @@ class Graphic {
   }
 }
 
-export { Graphic }
+class GraphicDomain extends Graphic {
+  public constructor(ctx, x, y, fillColour) {
+    super(ctx, x, y, fillColour)
+  }
+
+  public draw() {
+    this.ctx.beginPath();
+    this.ctx.fillStyle = this.fillColour;
+    this.ctx.ellipse(this.x, this.y, 20, 50, 0, 0, 2 * Math.PI);
+    this.ctx.fill();
+  }
+}
+
+export { GraphicDomain, Graphic }
+

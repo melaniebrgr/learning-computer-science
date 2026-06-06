@@ -1,6 +1,6 @@
 #  Building an Antibody Format Editor from scratch
 
-Names: AbDraw, ImmunoDraw, AntibodyDraw
+Names: abdraw, AbDraw, ImmunoDraw, AntibodyDraw, IgDraw
 
 > A lack of standardized nomenclature turns the “zoo” of multi-specific antibodies into a stampede.
 
