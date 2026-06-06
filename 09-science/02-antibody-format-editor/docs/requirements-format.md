@@ -166,12 +166,24 @@ Trastuzumab (Herceptin), is an IgG1κ antibody targeting HER2. Trastuzumab uses 
 
 Trastuzumab emtansine (T-DM1, brand name Kadcyla®) is one of the most well-characterized and successful antibody-drug conjugates approved by the FDA in 2013 for HER2-positive breast cancer.
 
-A synthetic, non-cleavable chemical linker (SMCC/MCC) is used as the bridge. The linker's succinimidyl end attaches to the lysine amino acids of the antibody, while its maleimide end fastens onto the DM1 payload. On average, the chemical process attaches exactly 3.5 molecules of DM1 to each individual trastuzumab antibody before it is purified into the final medicine.
+A synthetic, non-cleavable chemical linker (SMCC/MCC) is used as the bridge. The linker's succinimidyl end attaches to the lysine amino acids of the antibody, while its maleimide end fastens onto the DM1 payload (called the warhammer?). On average, the chemical process attaches exactly 3.5 molecules of DM1 to each individual trastuzumab antibody before it is purified into the final medicine.
 
+## Disulfide bonds
+
+Formation of the interchain disulfide bond is not an autonomous feature of the subunits, but is influenced by the cellular environment. Formation of disulfide bonds in Ig structure occurs in the lumen of the endoplasmic reticulum (ER), and as with other secreted proteins, disulfide bonds are considered to be formed by an obligatory pathway that involves a large array of ER thiol oxidoreductases.
+
+Two types of interchain disulfide bonds stabilize the tetrameric structure of functional Igs; one that links two HC to each other and another that bridges each HC to LC (5).
+
+[The] hydrophobic interaction between CL and CH1, the constant domains of LC and HC, respectively, which is eventually stabilized by a covalent interchain disulfide between these two constant domains. The CH1-CL interchain disulfide forms between Cys214 of λ CL (or Cys215 of κ CL) and the most N-terminal among three cysteines in CH1 (5).
+
+## Ig assembly
+
+The usual assembly pathway of IgG2b in Ig producing cells is HC-LC → HC2LC → HC2LC2 (Scharff et al. 1970). An alternative IgG2b assembly pathway, which predominates in COS-7 cells, is HC → HC2 → HC2LC → HC2LC2 (Elkabetz et al. 2005). This pathway is also followed during assembly of other Ig isotypes (Scharff et al. 1970).
 
 ## References
 
 1. [envafolimab](https://www.kegg.jp/entry/D13233)
-1. [beovu kegg](https://www.kegg.jp/entry/D11083)
-1. [blincyto kegg](https://www.kegg.jp/entry/D09325)
-1. [IgG1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4375494/)
+2. [beovu kegg](https://www.kegg.jp/entry/D11083)
+3. [blincyto kegg](https://www.kegg.jp/entry/D09325)
+4. [IgG1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4375494/)
+5. [S-S](https://pmc.ncbi.nlm.nih.gov/articles/PMC3443589/)
