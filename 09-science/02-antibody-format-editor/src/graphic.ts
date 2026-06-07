@@ -1,9 +1,4 @@
-interface GraphicOptions {
-  x: number;
-  y: number;
-  fillColour?: string;
-  lineColour?: string;
-}
+import type { GraphicOptions } from "./graphic.type";
 
 class Graphic {
   protected ctx: CanvasRenderingContext2D;
@@ -49,26 +44,5 @@ class Graphic {
   }
 }
 
-class GraphicDomain extends Graphic {
-  public constructor(ctx, {
-    x,
-    y,
-    fillColour,
-  }) {
-    super(ctx, {
-      x,
-      y,
-      fillColour,
-    })
-  }
-
-  protected entityDraw() {
-    this.ctx.fillStyle = this.fillColour;
-    this.ctx.beginPath();
-    this.ctx.ellipse(this.x, this.y, 20, 50, 0, 0, 2 * Math.PI);
-    this.ctx.fill();
-  }
-}
-
-export { GraphicDomain, Graphic }
+export { Graphic }
 

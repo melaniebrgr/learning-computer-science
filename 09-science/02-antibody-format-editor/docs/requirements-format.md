@@ -1,5 +1,7 @@
 # Format Requirements
 
+## Formats research
+
 From "smallest" to "largest", in theory:
 
 - ~~nanobody~~: `VHH-Fc`
@@ -10,7 +12,7 @@ From "smallest" to "largest", in theory:
 - ~~IgG~~: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
 - ~~ADC~~: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x D)
 
-## Nanobody
+### Nanobody
 
 A nanobody is the variable domain of heavy-chain-only antibodies (HCAbs) in camelids.
 
@@ -32,7 +34,7 @@ ENNYKTTPPV LDSDGSFFLY SKLTVDKSRW QQGNVFSCSV MHEALHNHYT QKSLSLSPGK
 | VHH     | 1–120    | 120    | QVQLVESGGGLVQPGGSLRLSCAASGKMSSRRCMAWFRQAPGKERERVAKLLTTSGSTYLADSVKGRFTISRDNSKNTVYLQMNSLRAEDTAVYYCAADSFEDPTCTLVTSSGAFQYWGQGTLVTVS |
 | Fc-like | 121–350  | 230    | SEPKSSDKTHTCPCPAPELLGGPSVFLFPPKPKDTLMISRTP EVTCVVVAVSHEDPEVKFNWYVDGVEVHN AKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAGIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK |
 
-## scFv
+### scFv
 
 In scFv antibodies the genes of VH and VL are joined together with a ~10 aa peptide linker
 
@@ -57,8 +59,7 @@ IWGQGTLVTV SS
 | Linker | 108–128  | 21 | GGGGSGGGGSGGGGSGGGGS                                                                                                     |
 | VH     | 129–222  | 94 | EVQLVESGGGLVQPGGSLRLSCTASGFSLTDYYYMTWVRQAPGKGLEWVGFIDPDDDPYYATWAKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCAGGDHNSGWGLDIWGQGTLVTVSS |
 
-
-## BiTE
+### BiTE
 
 The BiTE format is a tandem arrangement of single-chain Fragment Variable (scFv) units connected by a flexible peptide linker, without an Fc region.
 
@@ -91,7 +92,7 @@ HHHH
 | Anti-CD3 VL           | 369–473  | 105    | SGGSGGSGGSGGVDDIQLTQSPAIMSASPGEKVTMTCRASSSVSYMNWYQQKSGTSPKRWIYDTSKVASGVPYRFSGSGSGTSYSLTISSMEAEDAATYYCQQWSSNPLTFGAGTKLELK |
 | His-tag               | 499–504  | 6      | HHHHHH |
 
-## Fab
+### Fab
 
 The Fab fragment is an "arm" of a parental antibody. Each Fab fragment is composed of four primary domains:
 - Heavy Chain Portion: one variable domain (VH) and one constant domain (CH1)
@@ -120,7 +121,7 @@ LSKADYEKHK VYACEVTHQG LSSPVTKSFN RGEC
 | VL    | 1–107    | 107    | DIQMTQSPSSLSASVGDRVTITCRASQDINSYLMHWYQQKPGKAPKLLIYAASLQSGVPSRFSGSGSGTDFTLTISSLQPFEDFATYYCQQSYNVPWTFGQGTKVEIK |  |
 | CL    | 108–215  | 108    | RTVAAPSVFIFPPSDEQLKSGTASVCLLNNYFKPAKPKVTLTIMDTSSDTQVPTGVSVKLYLSLRGDLTIDVSQDPRQDYQVVLT C                      | Contains Cys215 for disulphide   |
 
-## (Fab')₂
+### (Fab')₂
 
 AKA two Fab' fragments from IgG1 digestion with disulphide bonds retained, so see IgG1 for representative sequence information.
 
@@ -133,8 +134,7 @@ AKA two Fab' fragments from IgG1 digestion with disulphide bonds retained, so se
 | CL (Constant Light)    | 108–215  | 108                                           | RTVAAPSVFIFPPSDEQLKSGTASVCLLNNYFKPAKPKVTLTIMDTSSDTQVPTGVSVKLYLSLRGDLTIDVSQDPRQDYQVVLT C                      | Cys215 for inter-chain             |
 | Hinge Region           | 221–234  | 14                                            | EPKSCDKTHTCPPCP                     | Contains 2 Cys for Fab'-Fab' links |
 
-
-## IgG1
+### IgG1
 
 Basic description:
 
@@ -162,13 +162,13 @@ Trastuzumab (Herceptin), is an IgG1κ antibody targeting HER2. Trastuzumab uses 
 | H–L bond 1 | Cys²²⁰ (HC) – Cys²¹⁴ (LC)        | Upper hinge / CH1-CL interface | Connects heavy chain to light chain (Fab arm 1) pmc.ncbi.nlm.nih |
 | H–L bond 2 | Cys²²⁰ (HC) – Cys²¹⁴ (LC)        | Upper hinge / CH1-CL interface | Connects heavy chain to light chain (Fab arm 2) pmc.ncbi.nlm.nih |
 
-## ADC
+### ADC
 
 Trastuzumab emtansine (T-DM1, brand name Kadcyla®) is one of the most well-characterized and successful antibody-drug conjugates approved by the FDA in 2013 for HER2-positive breast cancer.
 
 A synthetic, non-cleavable chemical linker (SMCC/MCC) is used as the bridge. The linker's succinimidyl end attaches to the lysine amino acids of the antibody, while its maleimide end fastens onto the DM1 payload (called the warhammer?). On average, the chemical process attaches exactly 3.5 molecules of DM1 to each individual trastuzumab antibody before it is purified into the final medicine.
 
-## Disulfide bonds
+### Ig disulfide bonds
 
 Formation of the interchain disulfide bond is not an autonomous feature of the subunits, but is influenced by the cellular environment. Formation of disulfide bonds in Ig structure occurs in the lumen of the endoplasmic reticulum (ER), and as with other secreted proteins, disulfide bonds are considered to be formed by an obligatory pathway that involves a large array of ER thiol oxidoreductases.
 
@@ -176,14 +176,26 @@ Two types of interchain disulfide bonds stabilize the tetrameric structure of fu
 
 [The] hydrophobic interaction between CL and CH1, the constant domains of LC and HC, respectively, which is eventually stabilized by a covalent interchain disulfide between these two constant domains. The CH1-CL interchain disulfide forms between Cys214 of λ CL (or Cys215 of κ CL) and the most N-terminal among three cysteines in CH1 (5).
 
-## Ig assembly
+### Ig assembly
 
 The usual assembly pathway of IgG2b in Ig producing cells is HC-LC → HC2LC → HC2LC2 (Scharff et al. 1970). An alternative IgG2b assembly pathway, which predominates in COS-7 cells, is HC → HC2 → HC2LC → HC2LC2 (Elkabetz et al. 2005). This pathway is also followed during assembly of other Ig isotypes (Scharff et al. 1970).
 
-## References
+### Formats references
 
 1. [envafolimab](https://www.kegg.jp/entry/D13233)
 2. [beovu kegg](https://www.kegg.jp/entry/D11083)
 3. [blincyto kegg](https://www.kegg.jp/entry/D09325)
 4. [IgG1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4375494/)
 5. [S-S](https://pmc.ncbi.nlm.nih.gov/articles/PMC3443589/)
+
+## Format test cases
+
+- `VHH-Fc`
+- `VL-linker-VH`
+- `Xaa-(VL-linker-VH)-linker-(VH-linker-VL)-Xaa`
+- `VL-CL`,`VH-CH1` (1 x SS)
+- `VL-CL`,`VH-CH1-hinge`,`hinge-CH1-VH`,`CL-VL` (4 x SS)
+- `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
+- `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x X-drug)
+
+Components: chains, domains, linkers, amino acid bridges (S-S, X-drug)

@@ -1,4 +1,4 @@
-import { Singleton } from "./singleton";
+import { Singleton } from "./lib/singleton";
 
 class CanvasCtx2D extends Singleton<CanvasRenderingContext2D, [canvasElementId: string]> {
   #instance: CanvasRenderingContext2D | null = null;

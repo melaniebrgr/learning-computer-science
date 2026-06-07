@@ -1,4 +1,4 @@
-#  Building an Antibody Format Editor from scratch
+#  abdraw requirements
 
 Names: abdraw, AbDraw, ImmunoDraw, AntibodyDraw, IgDraw
 
@@ -22,7 +22,7 @@ Names: abdraw, AbDraw, ImmunoDraw, AntibodyDraw, IgDraw
 
 ## Technical Ideation
 
-- Event-based render loop: processInput, update, render (game loop)
+- Event-based render loop: processInput, update, render (game loop with request animation frame)
 - Editor snapshotting for undo/redo operations ([memento pattern](https://refactoring.guru/design-patterns/memento)) and file save
 - UI elements interact with the editor by actions ([command pattern](https://refactoring.guru/design-patterns/command)):
 	- Common domain palette: VH, CH1, CH2, CH3, CH4, VL, CL, VHH
@@ -38,6 +38,8 @@ Names: abdraw, AbDraw, ImmunoDraw, AntibodyDraw, IgDraw
 - [Offscreen Canvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) for image and snapshotting
 - [HTML in canvas](https://html-in-canvas.dev/) for the UI elements
 - Ab format construction with: [composite, builder, decorator (disulphide bonds?) and related patterns](https://refactoring.guru/design-patterns/composite)
+- Ab format modelling: skip linked list, or linked list with common suffix
+- Graphics drawing, extracting the final sequence(s), nomenclature: composite, or iterator pattern
 
 ## References
 
