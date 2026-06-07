@@ -37,7 +37,7 @@ These patterns explain how to assemble objects and classes into larger structure
 11. [State](./state-pattern/state-pattern.md)
 12. [Strategy](./strategy-pattern/strategy-pattern.md)
 13. [Subclass sandbox](./subclass-sandbox-pattern/subclass-sandbox-pattern.md)
-14. Template method
+14. [Template method](./template-method-pattern/template-method-pattern.md)
 15. Update method
 16. [Visitor](./visitor-pattern/visitor-pattern.md)
 
