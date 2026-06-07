@@ -1,11 +1,28 @@
+interface GraphicOptions {
+  x: number;
+  y: number;
+  fillColour?: string;
+  lineColour?: string;
+}
+
 class Graphic {
   protected ctx: CanvasRenderingContext2D;
   protected x: number;
   protected y: number;
   protected fillColour: string;
+  protected lineColour: string;
 
-  public constructor(ctx, x, y, fillColour) {
-    this.ctx = ctx, this.x = x, this.y = y, this.fillColour = fillColour
+  public constructor(ctx, {
+    x,
+    y,
+    fillColour,
+    lineColour,
+  }: GraphicOptions) {
+    this.ctx = ctx
+    this.x = x
+    this.y = y
+    this.fillColour = fillColour
+    this.lineColour = lineColour
   }
 
   public move(x, y) {
@@ -13,19 +30,41 @@ class Graphic {
     this.y += y
   }
 
+  #preDraw() {
+    this.ctx.save();
+  }
+
+  protected entityDraw() {
+    throw new Error("Graphic: entityDraw method not implemented")
+  }
+
+  #postDraw() {
+    this.ctx.restore();
+  }
+
   public draw() {
-    throw new Error("Graphic: draw method not implemented")
+    this.#preDraw();
+    this.entityDraw();
+    this.#postDraw();
   }
 }
 
 class GraphicDomain extends Graphic {
-  public constructor(ctx, x, y, fillColour) {
-    super(ctx, x, y, fillColour)
+  public constructor(ctx, {
+    x,
+    y,
+    fillColour,
+  }) {
+    super(ctx, {
+      x,
+      y,
+      fillColour,
+    })
   }
 
-  public draw() {
-    this.ctx.beginPath();
+  protected entityDraw() {
     this.ctx.fillStyle = this.fillColour;
+    this.ctx.beginPath();
     this.ctx.ellipse(this.x, this.y, 20, 50, 0, 0, 2 * Math.PI);
     this.ctx.fill();
   }
