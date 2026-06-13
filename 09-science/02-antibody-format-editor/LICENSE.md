@@ -1,4 +1,4 @@
-# Antibody format editor (abdraw) license
+# abdraw: license
 
 This License governs your use of the accompanying Software. By using the Software, you accept the terms of this License. The abdraw software is copyrighted by Melanie Burger.
 
