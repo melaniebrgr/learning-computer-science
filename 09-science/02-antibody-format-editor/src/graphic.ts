@@ -29,7 +29,7 @@ class Graphic {
     this.ctx.save();
   }
 
-  protected tDraw() {
+  protected _draw() {
     throw new Error("Graphic: entityDraw method not implemented")
   }
 
@@ -39,7 +39,7 @@ class Graphic {
 
   public draw() {
     this.#preDraw();
-    this.tDraw();
+    this._draw();
     this.#postDraw();
   }
 }
