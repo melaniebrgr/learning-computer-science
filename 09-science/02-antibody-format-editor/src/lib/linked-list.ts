@@ -1,28 +1,20 @@
-// Implements partial LinkedList spec, https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#LinkedList--
+import { Node } from './node'
 
-/** Class representing a node in a linked list */
-class Node {
-  #data: any;
-  #pointer: null | Node = null;
-
-  constructor(data: any, pointer: null | Node) {
-    this.#data = data, this.#pointer = pointer;
-  }
-
-  public toString() {
-    return `Node: ${this.#data}`
-  }
-
-  get pointer() {
-    return this.#pointer
-  }
-
-  set pointer(node: Node) {
-    this.#pointer = node
-  }
-}
-
-/** Class representation a linked list */
+/** 
+ * Class representation a linked list
+ * inpired by https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#LinkedList--
+ * 
+ * To do:
+ * insert all nodes at index or tail, addAll
+ * get node at tail, getLast
+ * get node at index or tail, get
+ * update note at index or tail, set
+ * delete node at head, removeFirst
+ * delete node at tail, removeLast
+ * delete node at index or tail, remove
+ * delete all nodes, clear
+ * contains
+ */
 class LinkedList {
   #head: null | Node = null;
   #size: number = 0;
@@ -80,20 +72,15 @@ class LinkedList {
     }
   }
 
-  // insert all nodes at index or tail, addAll
-
-  // get node at head, getFirst
-  // get node at tail, getLast
-  // get node at index or tail, get
-
-  // update note at index or tail, set
-
-  // delete node at head, removeFirst
-  // delete node at tail, removeLast
-  // delete node at index or tail, remove
-  // delete all nodes, clear
-
-  // contains
+  /**
+   * Getter method: Get node at head.
+   */
+  public getFirst() {
+    if (this.size === 0) {
+      return null
+    }
+    return this.#head.data
+  }
 
   /**
    * Introspection method: Get the LinkedList length.
@@ -116,6 +103,8 @@ class LinkedList {
     }
     return `LinkedList (${this.#size}): ${str.join(', ')}`;
   }
+
+
 }
 
 export { LinkedList }
