@@ -118,13 +118,4 @@ class LinkedList {
   }
 }
 
-const ll = new LinkedList();
-ll.addLast(100) // 100
-ll.addLast(300) // 100, 300
-ll.addLast(500) // 100, 300, 500
-ll.add(200, 1) // 100, 200, 300, 500
-ll.add(400, 3) // 100, 200, 300, 400, 500
-ll.add(600) // 100, 200, 300, 400, 500, 600
-ll.add(700, 1_000) // 100, 200, 300, 400, 500, 600, 700
-
-console.log('>>', ll.toString())
+export { LinkedList }
