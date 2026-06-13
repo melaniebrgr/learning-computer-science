@@ -44,7 +44,7 @@ class LinkedList {
    * @param {any} data - The node data.
    */
   public addLast(data: any) {
-    if (!this.#head) {
+    if (this.size === 0) {
       this.addFirst(data)
     } else {
       const node = new Node(data, null)
@@ -58,31 +58,25 @@ class LinkedList {
   }
 
   /**
-   * Insertion method: Insert node at index position or at the tail.
+   * Insertion method: Insert node at the tail or at index position.
    * @param {any} data - The node data
    * @param {undefined | number} pos - The index position
   */
   public add(data: any, pos?: number) {
-    if (!this.#head) {
+    if (pos === 0) {
       this.addFirst(data)
-    } else if (!pos) {
+    } else if (this.size === 0 || this.size < pos || !pos) {
       this.addLast(data);
     } else {
       let current = this.#head;
-      if (pos === 0) {
-        const node = new Node(data, current);
-        this.#head = node;
+      let i = 0;
+      while (i < pos - 1) {
+        current = current.pointer
+        i++
       }
-
-      if (pos === 1) {
-        const node = new Node(data, current.pointer)
-        this.#head.pointer = node
-      }
-
-      if (pos === 2) {
-        const node = new Node(data, current.pointer.pointer)
-        this.#head.pointer.pointer = node
-      }
+      const node = new Node(data, current.pointer)
+      current.pointer = node
+      this.#size++;
     }
   }
 
@@ -125,11 +119,12 @@ class LinkedList {
 }
 
 const ll = new LinkedList();
-ll.addFirst(100)
-ll.addFirst(200)
-ll.addFirst(300)
-ll.addLast(-100)
-ll.add(-200)
-ll.add(250, 1)
+ll.addLast(100) // 100
+ll.addLast(300) // 100, 300
+ll.addLast(500) // 100, 300, 500
+ll.add(200, 1) // 100, 200, 300, 500
+ll.add(400, 3) // 100, 200, 300, 400, 500
+ll.add(600) // 100, 200, 300, 400, 500, 600
+ll.add(700, 1_000) // 100, 200, 300, 400, 500, 600, 700
 
 console.log('>>', ll.toString())
