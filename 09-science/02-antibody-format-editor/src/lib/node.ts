@@ -1,4 +1,4 @@
-/** Class representing a node in a linked list */
+/** Class representing a node */
 class Node {
   #pointer: null | Node = null;
   #data: any;
@@ -7,20 +7,36 @@ class Node {
     this.#data = data, this.#pointer = pointer;
   }
 
-  get pointer() {
-    return this.#pointer
-  }
-
+  /**
+   * Setter method: Set next node to pointer.
+   * @param {Node} node - The node.
+   */
   set pointer(node: Node) {
     this.#pointer = node
   }
 
+  /**
+   * Getter method: Get next node from pointer.
+   * @return {Node} The node.
+   */
+  get pointer() {
+    return this.#pointer
+  }
+
+  /**
+   * Getter method: Get data.
+   * @return {any} The data.
+   */
   get data() {
     return this.#data
   }
 
+  /**
+   * Introspection method: Get the node as a string.
+   * @return {string} The node.
+   */
   public toString() {
-    return `Node: ${this.#data}`
+    return `Node: ${this.data}`
   }
 }
 

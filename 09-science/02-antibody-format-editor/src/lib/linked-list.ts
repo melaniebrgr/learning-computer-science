@@ -13,6 +13,7 @@ import { Node } from './node'
  * delete node at tail, removeLast
  * delete node at index or tail, remove
  * delete all nodes, clear
+ * indexOf
  * contains
  */
 class LinkedList {
@@ -101,10 +102,8 @@ class LinkedList {
       str.push(`${current}`);
       current = current.pointer;
     }
-    return `LinkedList (${this.#size}): ${str.join(', ')}`;
+    return `LinkedList (${this.size}): ${str.join(', ')}`;
   }
-
-
 }
 
 export { LinkedList }
