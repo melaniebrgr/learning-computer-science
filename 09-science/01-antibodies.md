@@ -22,6 +22,24 @@ These are provided after the main AbML annotation.
 
 > In future, porting abYdraw to JavaScript would allow the full graphical user interface to be used via a web page with no need to install software locally.
 
+### Veritas (7)
+
+The verified Taxonomy for Antibodies (VERITAS) is a classification and nomenclature scheme "extensible to multispecific therapeutic formats and beyond".
+
+"These text-based names can therefore be inputs to machine learning algorithms or used for automated format classification because they are rooted in structure."
+VERITAS names are unambiguously correlated to format structure, a feature which is lacking in the current, colloquial names used to describe antibody formats. Colloquial nomenclature can lead to errors.
+"It is conceivable that such mistakes could become more prevalent as the MsAb format landscape expands and diversifies, which could be inconvenient or even costly for researchers and the biopharmaceutical industry. In contrast, VERITAS names describe the exact relationship between different modules in a format, including differentiation between different amino acid chains in a multimer, relative orientation of various modules on these chains, and noncovalent interactions between different chains. Therefore, VERITAS decreases the chances for errors arising from nomenclature because the structure of a format can be derived from its name."
+
+- The expansion of the “zoo” described by Brinkmann and Kontermann in 2017 is now stampeding over reliable scientific discourse between and within large research teams.
+- "schematic diagrams could be easily derived using the rules of the nomenclature system, and vice-versa, so that scientists who find it easier to communicate in images can do so with equivalent precision."
+- Formats are broken down into modular subunits and represented as a multimerization center plus N- and C-terminal appendages
+- this paradigm is formalised in text form with a simple set of symbols, leading to a systematic nomenclature scheme that is still easily understood
+- This scheme, VERITAS, is extensible beyond IgG-based formats and can theoretically produce systematic names for any multimer.
+- With the VERITAS scheme, all antibody-based formats can be broken down into various modules. The modules of every format can be classified as one of the following: 1) N-terminal appendages (e.g., VHH, VH, VL, CH1, CH2, CH3, CL, Fd, LC, scFv, scFab, protein); 2) C-terminal appendages (same as N-terminal appendages); and 3) Multimerization center (e.g., IgG, heteroIgG, Fc, heteroFc, Fab)
+- Multimerization center (e.g., IgG, heteroIgG, Fc, heteroFc, Fab). Formats have only one multimerization center, but this center can have one, multiple, or no modules attached at its N and C termini (appendages)
+- only module types which are multimeric can be considered the center of a format. For example, a single “VH” can never be the center of a format because a VH domain alone is not composed of multiple amino acid chains.
+- A dash (“-“) is used between modules (or sets of modules) that occur on the same amino acid chain, whereas an asterisk (“*”) is used between modules that are on separate chains.
+
 ## Formats
 
 ### In humans
@@ -164,3 +182,4 @@ Since 1975, Kohler and Milstein have introduced the **hybridoma** technology whi
 4. https://pistoiaalliance.org/project/helm-project/
 5. https://github.com/PistoiaHELM/HELMAntibodyEditor
 6. https://pmc.ncbi.nlm.nih.gov/articles/PMC3312285/
+7. https://pmc.ncbi.nlm.nih.gov/articles/PMC10173791/

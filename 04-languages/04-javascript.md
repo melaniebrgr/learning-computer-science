@@ -16,16 +16,136 @@ Temporal is specified as a new global object Temporal in the ECMAScript spec (li
 
 ## Classes
 
-### Static
+> Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JS are built on prototypes but also have some syntax and semantics that are unique to classes.
 
-- **Static members** cannot be directly accessed on instances of the class but on the class itself.
-- Static members are evaluated at class evaluation time synchronously and sequentially, so if they refer to each other the reference must precede the referer.
-- Static members are not directly accessible using the this keyword from non-static methods, they need to be called with the class name instead.
-- **Static fields** are useful for caches, fixed config, or data that doesn't need replicated across instances.
-- Static field names can be computed and their values initialised.
-- **Static methods** can be useful for utility functions.
-- **Static initialisation blocks** are more flexible than fields, e.g. `try...catch` can be used within them.
-- Like private members, if the static member is private only the class that defines it can access the field, which can cause unexpected behaviour when calling `this` in subclasses.
+Classes can be defined with class expressions, e.g. `const Rectangle = class { ... }` or class declarations e.g. `class Rectangle { ... }`, but class declarations are more common.
+Within the braces, class members, such as methods or constructor are defined.
+A **class element** can be characterized by four aspects:
+
+- **kind**: getter, setter, method, or field
+- **location**: static or instance
+- **visibility**: public or private
+- **usage**: extends
+
+TypeScript adds type annotations and other syntax to allow you to express relationships between classes and other types:
+
+- **kind**: getter, setter, method, or field
+- **location**: static or instance
+- **visibility**: public or private, _and_ readonly, protected
+- **usage**: extends, _and_ implements, abstract
+
+### Usage
+
+#### extends (JS, TS)
+
+The `extends` keyword is used in class declarations or class expressions to create a class as a child of another constructor.
+If there is a constructor present in the subclass, it needs to first call super() before using `this`.
+
+#### implements (TS)
+
+Use an implements clause to check that a class satisfies a particular interface.
+An error will be issued if a class fails to correctly implement it.
+Classes may also implement multiple interfaces, e.g. class `C implements A, B { ... }`
+
+#### abstract (TS)
+
+An abstract method or abstract field is one that hasn’t had an implementation provided. These members must exist inside an abstract class, which cannot be directly instantiated.
+The role of abstract classes is to serve as a base class for subclasses which do implement all the abstract members. When a class doesn’t have any abstract members, it is said to be concrete.
+
+
+### Kind
+
+The two basic kinds are methods and fields.
+
+#### method
+
+Methods can be plain functions, async functions, generator functions, or async generator functions.
+There is one special method, the constructor method is a special method for creating and initializing an object created with a class. A constructor can use the `super` method to call the constructor of its super class.
+
+Getters and setters are special properties that is defined like a function, but used like a field.
+The get syntax binds an object property to a function that will be called when that property is looked up.
+They can be defined on classes and also object instances:
+
+```js
+class ClassWithGetSet {
+  #msg = "hello world";
+  get msg() {
+    return this.#msg;
+  }
+  set msg(x) {
+    this.#msg = `hello ${x}`;
+  }
+}
+
+const instance = new ClassWithGetSet();
+console.log(instance.msg); // "hello world"
+instance.msg = "cake";
+console.log(instance.msg); // "hello cake"
+```
+
+#### field
+
+Class fields are similar to object properties.
+the fields can be declared with or without a default value.
+Fields without default values default to undefined.
+
+```js
+class Rectangle {
+  height = 0;
+  width;
+  ...
+}
+```
+
+### Location
+
+#### instance
+
+By default properties (fields and methods) are avaiable on each instance of the class.
+
+#### static
+
+Static features are declared using the `static` keyword.
+Static properties (fields and methods) are defined on the class itself instead of each instance.
+Static methods are useful for create utility functions, e.g. `Math.random()`.
+Static fields are useful for caches, fixed-configuration, or any other data that doesn't need to be replicated across instances.
+
+In **static initialisation blocks**, `static { ... }` are more flexible way to init static properties during initialisation than properties, for example `try...catch` can be used within them.
+
+### Visibility
+
+From least to most visible: readonly, private, protected, public.
+
+#### readonly (TS)
+
+`readonly` prevents assignments to the field outside of the constructor.
+
+#### private (JS, TS)
+
+Private elements use a special identifier syntax, `#`.
+It's an error to reference private fields from outside of the class; they can only be read or written within the class body.
+The only way to access a private element is via dot notation within the class that defines the private element.
+Private is like protected, but doesn’t allow access to the member even from subclasses.
+
+Most class elements have private counterparts:
+
+- Private fields
+- Private methods
+- Private static fields
+- Private static methods
+- Private getters
+- Private setters
+- Private static getters
+- Private static setters
+
+#### protected (TS)
+
+Protected members are only visible to subclasses of the class they’re declared in.
+
+#### public (JS, TS)
+
+No special syntax is required to declare a class element public in JS.
+Because public is already the default visibility modifier, it's not necessary to write it on a class member, but might choose to do so for style/readability reasons in TS.
 
 ## Modules
 

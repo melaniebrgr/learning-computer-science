@@ -4,13 +4,13 @@
 
 From "smallest" to "largest", in theory:
 
-- ~~nanobody~~: `VHH-Fc`
-- ~~scFV~~: `VL-linker-VH`
-- ~~BiTE~~: `Xaa-(VL-linker-VH)-linker-(VH-linker-VL)-Xaa`
-- ~~Fab~~: `VL-CL`,`VH-CH1` (1 x SS)
-- ~~(Fab')₂~~: `VL-CL`,`VH-CH1-hinge`,`hinge-CH1-VH`,`CL-VL` (4 x SS)
-- ~~IgG~~: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
-- ~~ADC~~: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x D)
+- nanobody Fc fusion: `VHH-Fc`
+- scFv: `VL-linker-VH`
+- BiTE: `Xaa-(VL-linker-VH)-linker-(VH-linker-VL)-Xaa`
+- Fab: `VL-CL`,`VH-CH1` (1 x SS)
+- (Fab')₂: `VL-CL`,`VH-CH1-hinge`,`hinge-CH1-VH`,`CL-VL` (4 x SS)
+- IgG: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
+- IgG-ADC: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x D)
 
 ### Nanobody
 

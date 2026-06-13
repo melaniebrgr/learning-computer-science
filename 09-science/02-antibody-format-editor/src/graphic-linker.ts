@@ -13,7 +13,7 @@ class GraphicLinker extends Graphic {
     })
   }
 
-  protected entityDraw() {
+  protected tDraw() {
     this.ctx.strokeStyle = this.lineColour;
     this.ctx.beginPath();
     this.ctx.moveTo(30, 50);
