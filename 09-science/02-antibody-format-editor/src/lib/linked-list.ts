@@ -11,6 +11,10 @@ class Node {
   public toString() {
     return `Node: ${this.#data}`
   }
+
+  get pointer() {
+    return this.#pointer
+  }
 }
 
 class LinkedList {
@@ -19,8 +23,15 @@ class LinkedList {
 
   constructor() { }
 
-  // insert node at head, addFirst
-  public addFirst(node: Node) { }
+  /**
+   * Insertion method: Insert node at head.
+   * @param {any} data - The node data.
+   */
+  public addFirst(data: any) {
+    const node = new Node(data, this.#head);
+    this.#head = node;
+    this.#size++;
+  }
   // insert node at tail, addLast
   // insert node at index or tail, add
   // insert all nodes at index or tail, addAll
@@ -38,4 +49,21 @@ class LinkedList {
 
   // contains
   // size
+
+  public toString() {
+    let current = this.#head;
+    let str = [];
+    while (current) {
+      str.push(`${current}`);
+      current = current.pointer;
+    }
+    return `LinkedList: ${str.join(', ')}`;
+  }
 }
+
+const ll = new LinkedList();
+ll.addFirst(100)
+ll.addFirst(200)
+ll.addFirst(300)
+
+console.log('>>', ll.toString())
