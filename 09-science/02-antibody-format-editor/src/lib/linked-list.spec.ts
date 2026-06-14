@@ -62,20 +62,27 @@ describe("LinkedList", () => {
   })
   describe("getters", () => {
     describe("getFirst", () => {
-      test("gets node at head (size = 0)", () => {
+      test("gets node data at head (size = 0)", () => {
         const l = new LinkedList();
         expect(l.getFirst()).toBeNull();
       })
-      test("gets node at head (size = 1)", () => {
-        const l = new LinkedList(), data = 1;
-        l.add(data)
-        expect(l.getFirst()).toBe(data);
-      })
-      test("gets node at head (size = 2)", () => {
+      test("gets node data at head (size = 2)", () => {
         const l = new LinkedList(), data = 1;
         l.add(data)
         l.add(2)
         expect(l.getFirst()).toBe(data);
+      })
+    })
+    describe("getLast", () => {
+      test("gets node data at tail (size = 0)", () => {
+        const l = new LinkedList();
+        expect(l.getLast()).toBeNull();
+      })
+      test("gets node data at tail (size = 2)", () => {
+        const l = new LinkedList(), data = 2;
+        l.add(1)
+        l.add(data)
+        expect(l.getLast()).toBe(data);
       })
     })
   })

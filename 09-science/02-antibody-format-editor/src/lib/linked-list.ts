@@ -3,11 +3,10 @@ import { Node } from './node'
 /** 
  * Class representation a linked list
  * inpired by https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#LinkedList--
+ * The LinkedList methods never expose the node itself. All operations to the linked list must done throuch class methods.
  * 
  * To do:
  * insert all nodes at index or tail, addAll
- * get node at tail, getLast
- * get node at index or tail, get
  * update note at index or tail, set
  * delete node at head, removeFirst
  * delete node at tail, removeLast
@@ -23,7 +22,24 @@ class LinkedList {
   constructor() { }
 
   /**
-   * Insertion method: Insert node at head.
+   * Utility method: Gets a list iterator of the nodes in the linked list in proper sequence, starting at the specified index position.
+   * @param {undefined | number} pos The start index position.
+   * @return {Iterator} The list iterator.
+   */
+  *#listIterator(pos: number = 0) {
+    if (this.size < pos) return;
+    let current = this.#head;
+    for (let i = 0; i < pos && current; i++) {
+      current = current.pointer;
+    }
+    while (current) {
+      yield current;
+      current = current.pointer;
+    }
+  }
+
+  /**
+   * Insertion method: Inserts node at head.
    * @param {any} data The node data.
    */
   public addFirst(data: any) {
@@ -33,7 +49,7 @@ class LinkedList {
   }
 
   /**
-   * Insertion method: Insert node at tail.
+   * Insertion method: Inserts node at tail.
    * @param {any} data The node data.
    */
   public addLast(data: any) {
@@ -51,7 +67,7 @@ class LinkedList {
   }
 
   /**
-   * Insertion method: Insert node at the tail or at index position.
+   * Insertion method: Inserts node at the tail or at index position.
    * @param {any} data The node data.
    * @param {undefined | number} pos The index position.
   */
@@ -62,10 +78,8 @@ class LinkedList {
       this.addLast(data);
     } else {
       let current = this.#head;
-      let i = 0;
-      while (i < pos - 1) {
+      for (let i = 0; i < pos - 1; i++) {
         current = current.pointer
-        i++
       }
       const node = new Node(data, current.pointer)
       current.pointer = node
@@ -74,49 +88,70 @@ class LinkedList {
   }
 
   /**
-   * Getter method: Get node at head.
+   * Getter method: Gets node at head.
+   * @return {null | Node} The first node's data.
    */
   public getFirst() {
     if (this.size === 0) {
-      return null
+      return null;
     }
     return this.#head.data
   }
 
   /**
-   * Utility method: Get a list iterator of the nodes in the linked list in proper sequence, starting at the specified list position.
-   * @param {undefined | number} pos The start position.
-   * @return {Iterator} The list iterator.
+   * Getter method: Gets node at tail.
+   * @return {null | Node} The last node's data.
    */
-  *#listIterator(pos: number = 0) {
-    if (this.size < pos) return;
+  public getLast() {
+    if (this.size === 0) {
+      return null
+    }
     let current = this.#head;
-    for (let i = 0; i < pos && current; i++) {
+    while (current.pointer) {
       current = current.pointer;
     }
-    while (current) {
-      yield current;
-      current = current.pointer;
-    }
+    return current.data;
   }
 
   /**
-   * Introspection method: Get the LinkedList length.
+   * Getter method: Gets node at the specified index position.
+   * @param {undefined | number} pos The position of the node data to return.
+   * @return {null | Node} The node data.
+   */
+  public get(pos: number = 0) {
+    const outOfRange = pos < 0 || this.size <= pos;
+    if (outOfRange) {
+      return null
+    }
+    const empty = this.size === 0;
+    if (empty) {
+      return null
+    }
+    let current = this.#head;
+    for (let i = 0; i < pos - 1; i++) {
+      current = current.pointer
+    }
+
+    return current.data;
+  }
+
+  /**
+   * Introspection method: Gets the number of nodes in the linked list.
    * @return {number} The size value.
    */
   public get size() {
-    return this.#size
+    return this.#size;
   }
 
   /**
-   * Introspection method: Get the LinkedList as a string.
-   * @return {string} The LinkedList.
+   * Introspection method: Gets the linked list as a string representation.
+   * @return {string} The linked list string.
    */
   public toString() {
     if (this.size === 0) return `LinkedList (${this.size})`;
     let str = [];
-    const iter = this.#listIterator()
-    for (const node of iter) {
+    const it = this.#listIterator()
+    for (const node of it) {
       str.push(`${node}`);
     }
     return `LinkedList (${this.size}): ${str.join(', ')}`;
