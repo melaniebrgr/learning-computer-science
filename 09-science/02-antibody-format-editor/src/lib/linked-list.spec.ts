@@ -2,6 +2,32 @@ import { describe, expect, test } from 'vitest'
 import { LinkedList } from "./linked-list";
 
 describe("LinkedList", () => {
+  describe("introspections", () => {
+    describe("toString", () => {
+      test("gets node data as a string representation (size = 0)", () => {
+        const l = new LinkedList();
+        expect(l.toString()).toBe('LinkedList (0)')
+      })
+      test("gets node data as a string representation (size = 2)", () => {
+        const l = new LinkedList();
+        l.addLast(1)
+        l.addLast(2)
+        expect(l.toString()).toBe('LinkedList (2): Node: 1, Node: 2')
+      })
+    })
+    describe("toArray", () => {
+      test("gets node data as an array representation (size = 0)", () => {
+        const l = new LinkedList();
+        expect(l.toArray()).toEqual([])
+      })
+      test("gets node data as an array representation (size = 2)", () => {
+        const l = new LinkedList();
+        l.addLast(1)
+        l.addLast(2)
+        expect(l.toArray()).toEqual([1, 2])
+      })
+    })
+  })
   describe("insertions", () => {
     describe("addFirst", () => {
       test("inserts node at head", () => {

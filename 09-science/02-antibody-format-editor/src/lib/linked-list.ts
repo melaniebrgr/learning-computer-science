@@ -15,20 +15,30 @@ import { Node } from './node'
  * indexOf
  * contains
  */
+
 class LinkedList {
   #head: null | Node = null;
   #size: number = 0;
 
   constructor() { }
 
+  *[Symbol.iterator]() {
+    let current = this.#head;
+    while (current) {
+      yield current.data;
+      current = current.pointer;
+    }
+  }
+
   /**
-   * Utility method: Gets a list iterator of the nodes in the linked list in proper sequence, starting at the specified index position.
+   * Utility method: Gets a list iterator of the nodes in the linked list in sequence, starting at the specified index position.
    * @param {undefined | number} pos The start index position.
    * @return {Iterator} The list iterator.
    */
   *#listIterator(pos: number = 0) {
-    if (this.size < pos) return;
+    if (this.size <= pos) throw new RangeError()
     let current = this.#head;
+    // Fast forwards to the start index position.
     for (let i = 0; i < pos && current; i++) {
       current = current.pointer;
     }
@@ -72,12 +82,15 @@ class LinkedList {
    * @param {undefined | number} pos The index position.
   */
   public add(data: any, pos?: number) {
-    if (pos === 0) {
+    const outOfRange = this.size < pos;
+    if (outOfRange) throw new RangeError()
+    if (pos === 0 || this.size === 0) {
       this.addFirst(data)
-    } else if (this.size === 0 || pos === undefined || this.size < pos) {
+    } else if (pos === undefined) {
       this.addLast(data);
     } else {
       let current = this.#head;
+      // Fast forwards to node before insertion index position.
       for (let i = 0; i < pos - 1; i++) {
         current = current.pointer
       }
@@ -155,6 +168,15 @@ class LinkedList {
       str.push(`${node}`);
     }
     return `LinkedList (${this.size}): ${str.join(', ')}`;
+  }
+
+  /**
+   * Introspection method: Gets the linked list as a array representation.
+   * It returns an array containing all node data in the linked list in proper sequence (from first to last).
+   * @return {array} The linked list array.
+   */
+  public toArray() {
+    return [...this]
   }
 }
 
