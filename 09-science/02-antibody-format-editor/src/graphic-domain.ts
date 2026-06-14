@@ -13,7 +13,7 @@ class GraphicDomain extends Graphic {
     })
   }
 
-  protected _draw() {
+  protected templateDraw() {
     this.ctx.fillStyle = this.fillColour;
     this.ctx.beginPath();
     this.ctx.ellipse(this.x, this.y, 20, 50, 0, 0, 2 * Math.PI);
