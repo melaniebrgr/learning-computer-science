@@ -22,8 +22,18 @@ class LinkedList {
 
   constructor() { }
 
-  *[Symbol.iterator]() {
+  /**
+   * Utility method: Gets a list iterator of the nodes in the linked list in sequence, starting at the specified index position.
+   * @param {undefined | number} pos The start index position.
+   * @return {Iterator} The list iterator.
+   */
+  *[Symbol.iterator](pos?: number) {
+    if (pos && this.size <= pos) throw new RangeError()
     let current = this.#head;
+    // Fast forwards to the start index position.
+    for (let i = 0; i < pos; i++) {
+      current = current.pointer;
+    }
     while (current) {
       yield current.data;
       current = current.pointer;
@@ -31,21 +41,28 @@ class LinkedList {
   }
 
   /**
-   * Utility method: Gets a list iterator of the nodes in the linked list in sequence, starting at the specified index position.
-   * @param {undefined | number} pos The start index position.
-   * @return {Iterator} The list iterator.
+   * Utility method: Gets the linked list as a string representation.
+   * @return {string} The linked list string.
    */
-  *#listIterator(pos: number = 0) {
-    if (this.size <= pos) throw new RangeError()
-    let current = this.#head;
-    // Fast forwards to the start index position.
-    for (let i = 0; i < pos && current; i++) {
-      current = current.pointer;
+  public toString() {
+    if (this.size === 0) return `LinkedList (${this.size})`;
+    let str = [];
+    const it = this[Symbol.iterator]()
+    for (const node of it) {
+      str.push(`${node}`);
     }
-    while (current) {
-      yield current;
-      current = current.pointer;
-    }
+    return `LinkedList (${this.size}): ${str.join(', ')}`;
+  }
+
+  /**
+   * Utility method: Gets the linked list as a array representation.
+   * It returns an array containing all node data in the linked list in proper sequence (from first to last).
+   * @param {undefined | number} pos The start index position.   
+   * @return {array} The linked list array.
+   */
+  public toArray(pos?: number) {
+    const it = this[Symbol.iterator](pos)
+    return [...it]
   }
 
   /**
@@ -154,29 +171,6 @@ class LinkedList {
    */
   public get size() {
     return this.#size;
-  }
-
-  /**
-   * Introspection method: Gets the linked list as a string representation.
-   * @return {string} The linked list string.
-   */
-  public toString() {
-    if (this.size === 0) return `LinkedList (${this.size})`;
-    let str = [];
-    const it = this.#listIterator()
-    for (const node of it) {
-      str.push(`${node}`);
-    }
-    return `LinkedList (${this.size}): ${str.join(', ')}`;
-  }
-
-  /**
-   * Introspection method: Gets the linked list as a array representation.
-   * It returns an array containing all node data in the linked list in proper sequence (from first to last).
-   * @return {array} The linked list array.
-   */
-  public toArray() {
-    return [...this]
   }
 }
 
