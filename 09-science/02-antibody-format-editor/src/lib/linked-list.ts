@@ -24,7 +24,7 @@ class LinkedList {
 
   /**
    * Insertion method: Insert node at head.
-   * @param {any} data - The node data.
+   * @param {any} data The node data.
    */
   public addFirst(data: any) {
     const node = new Node(data, this.#head);
@@ -34,7 +34,7 @@ class LinkedList {
 
   /**
    * Insertion method: Insert node at tail.
-   * @param {any} data - The node data.
+   * @param {any} data The node data.
    */
   public addLast(data: any) {
     if (this.size === 0) {
@@ -52,13 +52,13 @@ class LinkedList {
 
   /**
    * Insertion method: Insert node at the tail or at index position.
-   * @param {any} data - The node data
-   * @param {undefined | number} pos - The index position
+   * @param {any} data The node data.
+   * @param {undefined | number} pos The index position.
   */
   public add(data: any, pos?: number) {
     if (pos === 0) {
       this.addFirst(data)
-    } else if (this.size === 0 || this.size < pos || !pos) {
+    } else if (this.size === 0 || pos === undefined || this.size < pos) {
       this.addLast(data);
     } else {
       let current = this.#head;
@@ -84,6 +84,23 @@ class LinkedList {
   }
 
   /**
+   * Utility method: Get a list iterator of the nodes in the linked list in proper sequence, starting at the specified list position.
+   * @param {undefined | number} pos The start position.
+   * @return {Iterator} The list iterator.
+   */
+  *#listIterator(pos: number = 0) {
+    if (this.size < pos) return;
+    let current = this.#head;
+    for (let i = 0; i < pos && current; i++) {
+      current = current.pointer;
+    }
+    while (current) {
+      yield current;
+      current = current.pointer;
+    }
+  }
+
+  /**
    * Introspection method: Get the LinkedList length.
    * @return {number} The size value.
    */
@@ -96,11 +113,11 @@ class LinkedList {
    * @return {string} The LinkedList.
    */
   public toString() {
-    let current = this.#head;
+    if (this.size === 0) return `LinkedList (${this.size})`;
     let str = [];
-    while (current) {
-      str.push(`${current}`);
-      current = current.pointer;
+    const iter = this.#listIterator()
+    for (const node of iter) {
+      str.push(`${node}`);
     }
     return `LinkedList (${this.size}): ${str.join(', ')}`;
   }
