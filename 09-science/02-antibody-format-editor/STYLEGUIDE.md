@@ -26,6 +26,11 @@ Coding guidelines for the abdraw application inspired by https://tigerstyle.dev/
 - Input errors throw instead of falling back.
 - Errors are codified like TypeScript's.
 
+## Documentation
+
+- Code in `/lib` should use JSDocs (https://jsdoc.app/)
+
 ## Folder structure
 
-TK
+`/src` - root directory
+ ⎿ `/core` - core functionality

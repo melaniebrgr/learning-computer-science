@@ -6,12 +6,12 @@ import { Node } from './node'
  * The LinkedList methods never expose the node itself. All operations to the linked list must done throuch class methods.
  * 
  * To do:
- * insert all nodes at index or tail, addAll
- * update note at index or tail, set
- * delete node at head, removeFirst
- * delete node at tail, removeLast
- * delete node at index or tail, remove
- * delete all nodes, clear
+ * insert all nodes at index or tail - addAll
+ * update note at index or tail - set
+ * delete node at head - removeFirst
+ * delete node at tail - removeLast
+ * delete node at index or tail - remove
+ * delete all nodes - clear
  * indexOf
  * contains
  */
@@ -27,7 +27,7 @@ class LinkedList {
    * @param {undefined | number} pos The start index position.
    * @return {Iterator} The list iterator.
    */
-  *[Symbol.iterator](pos?: number) {
+  public *[Symbol.iterator](pos?: number) {
     if (pos && this.size <= pos) throw new RangeError()
     let current = this.#head;
     // Fast forwards to the start index position.
