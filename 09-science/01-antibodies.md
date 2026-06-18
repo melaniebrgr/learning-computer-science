@@ -1,17 +1,21 @@
 # Antibodies
 
-How does the body detect "foreign invaders"? Pathogens like viruses and bacteria are coated with proteins and polysaccharides that are specific to these microorganisms, like fingerprints. In the blood small proteins called **antibodies** (particles that "act against bodies") circulate that are tuned to detect these fingerprints or **antigens** (antibody generators).
+How does the body detect "foreign invaders"? Pathogens like viruses and bacteria are coated with proteins and polysaccharides that are specific to these microorganisms like fingerprints. In the blood, small proteins called **antibodies** (particles that "act against bodies") circulate and are tuned to detect these molecular fingerprints or **antigens** (antibody generators). Antibody binding to a target marks it for disposal by the immune response machinery of the body.
+
+Today, modern antibody designs have highly complex formats with large numbers of protein domains featuring ADCs, coupled proteins, bi/tri-specifics, cross-Mab technology, and scFv/scFab modules connected to the termini. New formats continue to appear almost every week.
 
 ## Naming
 
 - Monoclonal antibodies (mAbs)
 - Multispecific antibodies (MsAbs)
 
-For small-molecule drugs, 'Simplified Molecular-Input Line-Entry System' (SMILES) have been adopted as a standard for
-describing organic molecules (3).
-The Hierarchical Editing Language for Macromolecules
-(HELM)19 was introduced in 2012 as a general tool for describing biologics (including antibodies) and is promoted by the
-Pistoia Alliance.
+For small-molecule drugs, 'Simplified Molecular-Input Line-Entry System' (SMILES) have been adopted as a standard for describing organic molecules (3).
+Since 2021, non-canonical antibodies (e.g. bispecifics, multispecifics, antibody drug conjugates and immunoconjugates) account for nearly half of the antibodies entering first in human studies, and a third of those being granted marketing approval each year (9).
+
+### HELM
+
+The Hierarchical Editing Language for Macromolecules (HELM) was introduced in 2012 as a general tool for describing biologics (including antibodies) and is promoted by the Pistoia Alliance (8).
+HELM notation and the HELM Antibody Editor (HAbE) are being rolled out throughout Roche’s bio-therapeutics group ("Large Molecule Research").
 
 ### AbML
 
@@ -40,7 +44,7 @@ VERITAS names are unambiguously correlated to format structure, a feature which 
 - only module types which are multimeric can be considered the center of a format. For example, a single “VH” can never be the center of a format because a VH domain alone is not composed of multiple amino acid chains.
 - A dash (“-“) is used between modules (or sets of modules) that occur on the same amino acid chain, whereas an asterisk (“*”) is used between modules that are on separate chains.
 
-## Formats
+## Canonical formats
 
 ### In humans
 
@@ -49,27 +53,28 @@ An antibody (immunoglobulin) is a Y-shaped protein made of four polypeptide chai
 Papain digestion → 2 Fab fragments + 1 Fc fragment
 Pepsin digestion → 1 F(ab')₂ fragment (two arms still connected) + degraded Fc
 
+- **VH (variable region of heavy chain)**
+- **VL (variable region of light chain)**
+- **CH (constant region of heavy chain)**
+- **CL (constant region of light chain)**
 - **mAb (monoclonal antibody)**: A mAb is a monoclonal antibody, a population of identical antibodies that all come from one B‑cell clone and all recognize the same epitope on a single target antigen
 - **Fab (fragment antigen-binding)**: Fab stands for "Fragment Antigen-Binding". When antibodies are cleaved by papain, you get two identical Fab fragments that contain one complete antigen-binding site. Fab fragments are the "arms" of an antibody that bind specifically to antigens (epitopes). Each arm contains one part of light chain and one part of a heavy chain (VH-CH1-CL-VL). 
 - **Fab'**: A Fab fragment that includes a portion of the hinge region. The F(ab')2 fragment can be split into two Fab' fragments by mild reduction.
 - **F(ab')₂**: Two Fab regions joined by a hinge; can be monospecific or bispecific. When antibodies are cleaved by pepsin, the cleavage occurs beneath the hinge region producing two halves, one containing variable arms and the other the crystallizable constant region (**pFc'**).
 - **Fc (fragment crystallizable)**: When antibodies are cleaved by papain, you get one relatively stable and uniform fragment that can be crystallized. This fragment doesn't bind antigen but interacts with immune cells and is also refered to as the tail.
 - **Hinge region**: The	flexible tether connecting arms to stem that allows arms to move and bind antigens at varying distances.
-- **VH (variable region of heavy chain)**
-- **VL (variable region of light chain)**
-- **CH (constant region of heavy chain)**
-- **CL (constant region of light chain)**
 
 ### In camelids
 
 Humans only produce "conventional" antibodies with heavy and light chains. Camelids produce both conventional antibodies (VH genes) and heavy chain only antibodies (VHH genes).
 
 - **HcAb (heavy chain only antibodies)**: antibodies that are naturally produced by camelids and sharks
-- **VHH or nanobody (variable domain of heavy-chain of heavy-chain only antibody)**: A VHH is the antigen binding fragment of a heavy chain only antibody. This fragment is also called a nanobody (trademark Sanofi). VHHs are sometimes prefered as a therapeutic biologics because they are relatively small, stable, soluble, and tolerate heat and pH extremes better. Because they are single domains, they are also easy to express in microbes, have good tissue penetration and ability to bind concave epitopes, and lend themselves well to constructions like bispecifics. VHHs are typically camelid-derived and then humanized (framework and surface residues engineered to look more human) to reduce immunogenicity (1).
 
-### Common
+## Non-canonical formats
 
-**nanobody (VHH)**: A nanobody is the variable domain of heavy-chain-only antibodies (HCAbs) in camelids. These antibodies are devoid of light chains and bind their antigens exclusively via the variable domains of the heavy chain, also called VHHs. To compensate for the reduced repertoire of binding interfaces, VHHs utilize several mechanisms for diversification. For example, most VHHs have an elongated and structurally diverse complementarity-determining region 3 (CDR3), extensive somatic hypermutations in CDR1 and non-canonical disulfide bonds that stabilize elongated CDR3s.
+**VHH or nanobody (variable domain of heavy-chain of heavy-chain only antibody)**: A VHH is the antigen binding fragment of a heavy chain only antibody. This fragment is also called a nanobody (trademark Sanofi). VHHs are sometimes prefered as a therapeutic biologics because they are relatively small, stable, soluble, and tolerate heat and pH extremes better. Because they are single domains, they are also easy to express in microbes, have good tissue penetration and ability to bind concave epitopes, and lend themselves well to constructions like bispecifics. VHHs are typically camelid-derived and then humanized (framework and surface residues engineered to look more human) to reduce immunogenicity (1).
+
+A nanobody is the variable domain of heavy-chain-only antibodies (HCAbs) in camelids. These antibodies are devoid of light chains and bind their antigens exclusively via the variable domains of the heavy chain, also called VHHs. To compensate for the reduced repertoire of binding interfaces, VHHs utilize several mechanisms for diversification. For example, most VHHs have an elongated and structurally diverse complementarity-determining region 3 (CDR3), extensive somatic hypermutations in CDR1 and non-canonical disulfide bonds that stabilize elongated CDR3s.
 
 **bivalent VHH**: A bivalent VHH is a single-chain construct where two identical VHH domains are linked so that one molecule binds two identical targets, e.g. caplacizumab. VHHs are naturally monovalent.
 
@@ -90,6 +95,10 @@ The length of the flexible DNA linker used to link both of the V domains is crit
 **scFab**: A single-chain Fab where elements are connected by a linker instead of a hinge.
 
 **Fab2**: The (Fab')₂ fragment (also referred to as Fab2) is a bivalent antibody format characterized by its "cleaving only" origin and the presence of two antigen-binding (Fab) regions joined by a hinge. This structure allows the molecule to maintain bivalent binding—allowing for the cross-linking of antigens—while being significantly smaller than a parental IgG.
+
+**bispecific IgG**: The arms bind two different targets. Typically the Fc heavy chains are engineered with "knobs-into-holes" so that a bispecific dimer is favourably formed.
+
+**Xmab**: ...helps ensure paring of specific light chain to specific heavy chain?
 
 **APCs (antibody-peptide conjugates)**: (_Not_ an antigen presenting cell.)
 
@@ -126,7 +135,6 @@ Because first-generation ADCs like Kadcyla are so heterogeneous, they are highly
 
 1. Genetic engineering: Mutating specific positions on the antibody to insert an artificial amino acid or a unique cysteine residue (known as ThiomAbs).
 2. Enzymatic locking: Using specialized enzymes (like transglutaminase) to paste the chemotherapy payload onto one—and only one—exact location.
-
 
 ## Antibody library design
 
@@ -173,7 +181,6 @@ The library is then subjected to stringent biopanning conditions to weed out wea
 
 Since 1975, Kohler and Milstein have introduced the **hybridoma** technology which enabled a defined specificity of monoclonal antibodies to be produced in consistent quality as well as in large quantities in the laboratory. Since then, monoclonal antibodies (mAbs) have been favored as they can be produced in unlimited quantities to practically bind to any antigen and are more easily standardized
 
-
 ## References
 
 1. (VHH antibodies: Emerging reagents for the analysis of environmental chemicals)[https://pmc.ncbi.nlm.nih.gov/articles/PMC4983233/]
@@ -183,3 +190,5 @@ Since 1975, Kohler and Milstein have introduced the **hybridoma** technology whi
 5. https://github.com/PistoiaHELM/HELMAntibodyEditor
 6. https://pmc.ncbi.nlm.nih.gov/articles/PMC3312285/
 7. https://pmc.ncbi.nlm.nih.gov/articles/PMC10173791/
+8. https://www.youtube.com/watch?v=420GK8ibIO4
+9. https://pipebio.com/blog/standardizing-antibody-therapeutic-nomenclature-why-it-matters

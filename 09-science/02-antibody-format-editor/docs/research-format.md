@@ -1,16 +1,27 @@
-# Format Requirements
+# Format
 
-## Formats research
+## Domains
 
-From "smallest" to "largest", in theory:
+- variable, hinge, constant
+- germlines, isotypes
+- species, e.g. human
+- mutations (knob-into-hole)
+- peptides, linkers, payloads
+- cys-cys bonds: intra-domain, inter-domain, inter-chain (alert if free cys)
 
-- nanobody Fc fusion: `VHH-Fc`
+## Formats
+
+A sampling from roughly "smallest" to "largest":
+
 - scFv: `VL-linker-VH`
+- nanobody Fc fusion: `VHH-Fc`
 - BiTE: `Xaa-(VL-linker-VH)-linker-(VH-linker-VL)-Xaa`
 - Fab: `VL-CL`,`VH-CH1` (1 x SS)
 - (Fab')₂: `VL-CL`,`VH-CH1-hinge`,`hinge-CH1-VH`,`CL-VL` (4 x SS)
 - IgG: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
-- IgG-ADC: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x D)
+- IgG-ADC: `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x Drug)
+
+Components: chains, domains, linkers, amino acid bridges (S-S, X-drug)
 
 ### Nanobody
 
@@ -180,7 +191,7 @@ Two types of interchain disulfide bonds stabilize the tetrameric structure of fu
 
 The usual assembly pathway of IgG2b in Ig producing cells is HC-LC → HC2LC → HC2LC2 (Scharff et al. 1970). An alternative IgG2b assembly pathway, which predominates in COS-7 cells, is HC → HC2 → HC2LC → HC2LC2 (Elkabetz et al. 2005). This pathway is also followed during assembly of other Ig isotypes (Scharff et al. 1970).
 
-### Formats references
+### References
 
 1. [envafolimab](https://www.kegg.jp/entry/D13233)
 2. [beovu kegg](https://www.kegg.jp/entry/D11083)
@@ -188,14 +199,3 @@ The usual assembly pathway of IgG2b in Ig producing cells is HC-LC → HC2LC →
 4. [IgG1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4375494/)
 5. [S-S](https://pmc.ncbi.nlm.nih.gov/articles/PMC3443589/)
 
-## Format test cases
-
-- `VHH-Fc`
-- `VL-linker-VH`
-- `Xaa-(VL-linker-VH)-linker-(VH-linker-VL)-Xaa`
-- `VL-CL`,`VH-CH1` (1 x SS)
-- `VL-CL`,`VH-CH1-hinge`,`hinge-CH1-VH`,`CL-VL` (4 x SS)
-- `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS)
-- `VL-CL`,`VH-CH1-hinge-CH2-CH3`,`CH3-CH2-hinge-CH1-VH`,`CL-VL` (4 x SS, ~3.5 x X-drug)
-
-Components: chains, domains, linkers, amino acid bridges (S-S, X-drug)
