@@ -31,7 +31,7 @@
   - [x] ~~WebGL~~ (replaced by WebGPU)
   - [~] [WebGPU](./02-frontend/09-webgpu.md)
   - [ ] Images
-  - [~] [Canvas](./02-frontend/10-canvas.md)
+  - [~] [Canvas](./02-frontend/10-canvas.md) (2026-06-20)
   - [ ] SVG
   - [ ] Video
   - [ ] Audio

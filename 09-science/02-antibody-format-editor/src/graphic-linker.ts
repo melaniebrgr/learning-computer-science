@@ -1,12 +1,12 @@
 import { Graphic } from "./graphic";
 
 class GraphicLinker extends Graphic {
-  public constructor(ctx, {
+  public constructor(c, {
     x,
     y,
     lineColour,
   }) {
-    super(ctx, {
+    super(c, {
       x,
       y,
       lineColour,
@@ -14,11 +14,11 @@ class GraphicLinker extends Graphic {
   }
 
   protected templateDraw() {
-    this.ctx.strokeStyle = this.lineColour;
-    this.ctx.beginPath();
-    this.ctx.moveTo(30, 50);
-    this.ctx.lineTo(150, 100);
-    this.ctx.stroke();
+    this.c.strokeStyle = this.lineColour;
+    this.c.beginPath();
+    this.c.moveTo(30, 50);
+    this.c.lineTo(150, 100);
+    this.c.stroke();
   }
 }
 

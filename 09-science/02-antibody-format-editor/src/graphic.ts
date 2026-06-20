@@ -1,19 +1,19 @@
 import type { GraphicOptions } from "./graphic.type";
 
 class Graphic {
-  protected ctx: CanvasRenderingContext2D;
+  protected c: CanvasRenderingContext2D;
   protected x: number;
   protected y: number;
   protected fillColour: string;
   protected lineColour: string;
 
-  public constructor(ctx, {
+  public constructor(c, {
     x,
     y,
     fillColour,
     lineColour,
   }: GraphicOptions) {
-    this.ctx = ctx
+    this.c = c
     this.x = x
     this.y = y
     this.fillColour = fillColour
@@ -26,7 +26,7 @@ class Graphic {
   }
 
   #preDraw() {
-    this.ctx.save();
+    this.c.save();
   }
 
   protected templateDraw() {
@@ -34,7 +34,7 @@ class Graphic {
   }
 
   #postDraw() {
-    this.ctx.restore();
+    this.c.restore();
   }
 
   public draw() {

@@ -14,8 +14,8 @@ class CanvasCtx2D extends Singleton<CanvasRenderingContext2D, [canvasElementId: 
     if (!this.#instance) {
       const canvas = document.getElementById(canvasElementId) as HTMLCanvasElement | null;
       if (!canvas) throw new Error(`Canvas element not found: ${canvasElementId}`);
-      const ctx = canvas.getContext("2d");
-      this.#instance = ctx;
+      const c = canvas.getContext("2d");
+      this.#instance = c;
     }
 
     return this.#instance;
