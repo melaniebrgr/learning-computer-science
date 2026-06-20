@@ -14,10 +14,10 @@ class GraphicLinker extends Graphic {
   }
 
   protected templateDraw() {
-    this.c.strokeStyle = this.lineColour;
     this.c.beginPath();
     this.c.moveTo(30, 50);
     this.c.lineTo(150, 100);
+    this.c.strokeStyle = this.lineColour;
     this.c.stroke();
   }
 }

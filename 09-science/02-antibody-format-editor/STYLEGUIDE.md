@@ -21,6 +21,11 @@ Coding guidelines for the abdraw application inspired by https://tigerstyle.dev/
 - Utility methods in Classes should be private and only used by other methods in the class.
 - Utility methods in Classes should only depend on other private utility methods, never public methods.
 
+## Canvas drawing
+
+- Always open with a new path `beginPath()`.
+- Apply styles as close as possible, e.g. right before drawing.
+
 ## Errors
 
 - Input errors throw instead of falling back.
