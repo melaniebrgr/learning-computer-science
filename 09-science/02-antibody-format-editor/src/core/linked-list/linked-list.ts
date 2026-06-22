@@ -1,19 +1,9 @@
-import { Node } from './node'
+import { Node } from './linked-list-node'
 
 /** 
- * Class representation a linked list
+ * Class representation of a Linked List
+ * The LinkedList methods never expose the nodes directly, on their data. All operations to the linked list is throuch class methods.
  * inpired by https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#LinkedList--
- * The LinkedList methods never expose the node itself. All operations to the linked list must done throuch class methods.
- * 
- * To do:
- * insert all nodes at index or tail - addAll
- * update note at index or tail - set
- * delete node at head - removeFirst
- * delete node at tail - removeLast
- * delete node at index or tail - remove
- * delete all nodes - clear
- * indexOf
- * contains
  */
 
 class LinkedList {
@@ -23,16 +13,18 @@ class LinkedList {
   constructor() { }
 
   /**
-   * Utility method: Gets a list iterator of the nodes in the linked list in sequence, starting at the specified index position.
+   * Utility method: Gets a list iterator of the nodes in the linked list in sequence from the index position.
    * @param {undefined | number} pos The start index position.
    * @return {Iterator} The list iterator.
    */
   public *[Symbol.iterator](pos?: number) {
-    if (pos && this.size <= pos) throw new RangeError()
     let current = this.#head;
-    // Fast forwards to the start index position.
-    for (let i = 0; i < pos; i++) {
-      current = current.pointer;
+    if (pos) {
+      if (this.size <= pos) throw new RangeError()
+      // Fast forwards to the start index position.
+      for (let i = 0; i < pos; i++) {
+        current = current.pointer;
+      }
     }
     while (current) {
       yield current.data;
@@ -48,8 +40,8 @@ class LinkedList {
     if (this.size === 0) return `LinkedList (${this.size})`;
     let str = [];
     const it = this[Symbol.iterator]()
-    for (const node of it) {
-      str.push(`${node}`);
+    for (const data of it) {
+      str.push(`${data}`);
     }
     return `LinkedList (${this.size}): ${str.join(', ')}`;
   }

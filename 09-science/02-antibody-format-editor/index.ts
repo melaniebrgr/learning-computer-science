@@ -1,8 +1,8 @@
-import { canvasCtx2D } from "./src/canvas.js";
-import { GraphicDomain } from "./src/graphic-domain.js"
-import { Entity } from "./src/entity.js"
-import { ENTITY_TYPE } from "./src/entity.type.js";
-import { GraphicLinker } from "./src/graphic-linker.js";
+import { canvasCtx2D } from "./src/modules/canvas.js";
+import { GraphicDomain } from "./src/modules/graphic-domain.js"
+import { Entity } from "./src/modules/entity.js"
+import { ENTITY_TYPE } from "./src/modules/entity.type.js";
+import { GraphicLinker } from "./src/modules/graphic-linker.js";
 
 const c = canvasCtx2D.getInstance("canvas")
 

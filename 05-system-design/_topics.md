@@ -35,12 +35,11 @@
   - [ ] SVG
   - [ ] Video
   - [ ] Audio
-- [ ] Animations
-  - [ ] CSS transitions
-  - [ ] CSS animations
-  - [ ] Web animations API
-  - [ ] Request animation frame
-  - [ ] View transitions
+- [~] Animations
+  - [x] [CSS transitions](./02-frontend/05-animation.md) (2025-06-15)
+  - [x] [CSS animations](./02-frontend/05-animation.md) (2025-06-15)
+  - [~] [Web animations API, `requestAnimationFrame()`](./02-frontend/05-animation.md) (2026-06-21)
+  - [x] [View transitions](./02-frontend/05-animation.md) (2025-06-15)
   - [ ] Libraries (GSAP, Framer)
 - [ ] Storage
   - [x] [Cookies](../00-everyweeks/2024/week14/README.md) (2024-04-07)

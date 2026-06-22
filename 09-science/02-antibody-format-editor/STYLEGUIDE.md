@@ -39,3 +39,6 @@ Coding guidelines for the abdraw application inspired by https://tigerstyle.dev/
 
 `/src` - root directory
  ⎿ `/core` - core functionality
+ ⎿ `/modules` - domain specific functionality
+
+Modules can import from core, but core cannot import from modules.
