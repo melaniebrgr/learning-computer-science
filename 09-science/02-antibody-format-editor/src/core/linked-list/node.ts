@@ -1,9 +1,9 @@
 /** Class representing a node */
-class Node {
-  #pointer: null | Node = null;
-  #data: any;
+class Node<TData> {
+  #pointer: null | Node<TData> = null;
+  #data: TData;
 
-  constructor(data: any, pointer: null | Node) {
+  constructor(data: any, pointer: null | Node<TData>) {
     this.#data = data, this.#pointer = pointer;
   }
 
@@ -11,7 +11,7 @@ class Node {
    * Setter method: Set next node to pointer.
    * @param {Node} node - The node.
    */
-  set pointer(node: Node) {
+  set pointer(node: Node<TData>) {
     this.#pointer = node
   }
 
@@ -25,7 +25,7 @@ class Node {
 
   /**
    * Getter method: Get data.
-   * @return {any} The data.
+   * @return {TData} The data.
    */
   get data() {
     return this.#data

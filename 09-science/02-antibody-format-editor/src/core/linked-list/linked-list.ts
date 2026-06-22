@@ -1,4 +1,4 @@
-import { Node } from './linked-list-node'
+import { Node } from './node'
 
 /** 
  * Class representation of a Linked List
@@ -6,8 +6,8 @@ import { Node } from './linked-list-node'
  * inpired by https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#LinkedList--
  */
 
-class LinkedList {
-  #head: null | Node = null;
+class LinkedList<TData> {
+  #head: null | Node<TData> = null;
   #size: number = 0;
 
   constructor() { }
@@ -30,6 +30,16 @@ class LinkedList {
       yield current.data;
       current = current.pointer;
     }
+  }
+
+  /**
+   * Utility method: Gets a list iterator of the nodes in the linked list in sequence from the index position.
+   * @param {undefined | number} pos The start index position.
+   * @return {Iterator} The list iterator.
+   */
+  public values(pos?: number) {
+    const it = this[Symbol.iterator](pos)
+    return it;
   }
 
   /**
@@ -59,9 +69,9 @@ class LinkedList {
 
   /**
    * Insertion method: Inserts node at head.
-   * @param {any} data The node data.
+   * @param {TData} data The node data.
    */
-  public addFirst(data: any) {
+  public addFirst(data: TData) {
     const node = new Node(data, this.#head);
     this.#head = node;
     this.#size++;
@@ -69,13 +79,13 @@ class LinkedList {
 
   /**
    * Insertion method: Inserts node at tail.
-   * @param {any} data The node data.
+   * @param {TData} data The node data.
    */
-  public addLast(data: any) {
+  public addLast(data: TData) {
     if (this.size === 0) {
       this.addFirst(data)
     } else {
-      const node = new Node(data, null)
+      const node = new Node<TData>(data, null)
       let current = this.#head;
       while (current.pointer) {
         current = current.pointer;
@@ -87,10 +97,10 @@ class LinkedList {
 
   /**
    * Insertion method: Inserts node at the tail or at index position.
-   * @param {any} data The node data.
+   * @param {TData} data The node data.
    * @param {undefined | number} pos The index position.
   */
-  public add(data: any, pos?: number) {
+  public add(data: TData, pos?: number) {
     const outOfRange = this.size < pos;
     if (outOfRange) throw new RangeError()
     if (pos === 0 || this.size === 0) {
@@ -103,7 +113,7 @@ class LinkedList {
       for (let i = 0; i < pos - 1; i++) {
         current = current.pointer
       }
-      const node = new Node(data, current.pointer)
+      const node = new Node<TData>(data, current.pointer)
       current.pointer = node
       this.#size++;
     }
@@ -111,7 +121,7 @@ class LinkedList {
 
   /**
    * Getter method: Gets node at head.
-   * @return {null | Node} The first node's data.
+   * @return {null | Node<TData>} The first node's data.
    */
   public getFirst() {
     if (this.size === 0) {
@@ -122,7 +132,7 @@ class LinkedList {
 
   /**
    * Getter method: Gets node at tail.
-   * @return {null | Node} The last node's data.
+   * @return {null | Node<TData>} The last node's data.
    */
   public getLast() {
     if (this.size === 0) {
@@ -138,7 +148,7 @@ class LinkedList {
   /**
    * Getter method: Gets node at the specified index position.
    * @param {undefined | number} pos The position of the node data to return.
-   * @return {null | Node} The node data.
+   * @return {null | Node<TData>} The node data.
    */
   public get(pos: number = 0) {
     const outOfRange = pos < 0 || this.size <= pos;
