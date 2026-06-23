@@ -1,6 +1,6 @@
-import type { GraphicOptions } from "./graphic.type";
+import type { Drawable, GraphicOptions } from "./graphic.type";
 
-class Graphic {
+class Graphic implements Drawable {
   protected c: CanvasRenderingContext2D;
   protected x: number;
   protected y: number;
@@ -44,5 +44,5 @@ class Graphic {
   }
 }
 
-export { Graphic }
+export { Graphic, type Drawable }
 

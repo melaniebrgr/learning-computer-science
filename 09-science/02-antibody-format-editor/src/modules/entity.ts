@@ -1,15 +1,15 @@
-import { Graphic } from "./graphic";
+import type { Drawable } from "./graphic.type";
 import type { EntityType } from "./entity.type";
 
 class Entity {
   #id: string;
   #type: EntityType;
-  #graphic: Graphic;
+  #drawable: Drawable;
 
-  public constructor(type: EntityType, graphic: Graphic) {
+  public constructor(type: EntityType, drawable: Drawable) {
     this.#id = crypto.randomUUID();
     this.#type = type;
-    this.#graphic = graphic;
+    this.#drawable = drawable;
   }
 
   public get id() {
@@ -21,7 +21,7 @@ class Entity {
   }
 
   public draw() {
-    this.#graphic.draw();
+    this.#drawable.draw();
   }
 }
 
