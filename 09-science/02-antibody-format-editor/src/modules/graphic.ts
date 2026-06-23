@@ -44,5 +44,5 @@ class Graphic implements Drawable {
   }
 }
 
-export { Graphic, type Drawable }
+export { Graphic }
 
