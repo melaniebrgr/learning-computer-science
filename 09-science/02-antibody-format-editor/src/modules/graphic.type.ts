@@ -1,7 +1,3 @@
-interface Drawable {
-  draw(): void
-}
-
 interface GraphicOptions {
   x: number;
   y: number;
@@ -9,4 +5,4 @@ interface GraphicOptions {
   lineColour?: string;
 }
 
-export type { Drawable, GraphicOptions }
+export type { GraphicOptions }

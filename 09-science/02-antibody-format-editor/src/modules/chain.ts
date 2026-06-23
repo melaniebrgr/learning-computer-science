@@ -1,12 +1,18 @@
-import type { Drawable } from "./graphic.type";
+import { Domain } from "./domain";
+import type { Drawable } from "./traits.type";
 import { LinkedList } from "../core/linked-list/linked-list";
 
-class Chain<TData> extends LinkedList<TData> implements Drawable {
+class Chain extends LinkedList<Domain> implements Drawable {
   public constructor() {
     super()
   }
 
-  draw() { }
+  draw() {
+    const it = this.values()
+    for (const data of it) {
+      data.draw()
+    }
+  }
 }
 
 export { Chain }

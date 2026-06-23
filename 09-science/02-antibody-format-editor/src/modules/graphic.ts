@@ -1,4 +1,5 @@
-import type { Drawable, GraphicOptions } from "./graphic.type";
+import type { Drawable } from "./traits.type";
+import type { GraphicOptions } from "./graphic.type";
 
 class Graphic implements Drawable {
   protected c: CanvasRenderingContext2D;

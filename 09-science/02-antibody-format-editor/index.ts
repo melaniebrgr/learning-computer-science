@@ -25,17 +25,8 @@ const vl = new Domain(TYPE.VL, new GraphicDomain(c, {
   fillColour: "red",
 }));
 
-const lightChain = new Chain<Domain>();
+const lightChain = new Chain();
 lightChain.add(vh)
 lightChain.add(linker)
 lightChain.add(vl)
-
-// lightChain.draw()
-
-const iterator = lightChain.values()
-for (const data of iterator) {
-  data.draw()
-}
-
-
-
+lightChain.draw()

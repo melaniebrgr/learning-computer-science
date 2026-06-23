@@ -17,7 +17,7 @@ class LinkedList<TData> {
    * @param {undefined | number} pos The start index position.
    * @return {Iterator} The list iterator.
    */
-  public *[Symbol.iterator](pos?: number) {
+  *[Symbol.iterator](pos?: number) {
     let current = this.#head;
     if (pos) {
       if (this.size <= pos) throw new RangeError()
@@ -49,7 +49,7 @@ class LinkedList<TData> {
   public toString() {
     if (this.size === 0) return `LinkedList (${this.size})`;
     let str = [];
-    const it = this[Symbol.iterator]()
+    const it = this.values()
     for (const data of it) {
       str.push(`${data}`);
     }
@@ -63,7 +63,7 @@ class LinkedList<TData> {
    * @return {array} The linked list array.
    */
   public toArray(pos?: number) {
-    const it = this[Symbol.iterator](pos)
+    const it = this.values(pos)
     return [...it]
   }
 
