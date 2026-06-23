@@ -1,10 +1,13 @@
 import { Domain } from "./domain";
-import type { Drawable } from "./traits.type";
+import type { Drawable, Identifiable, UUID } from "./traits.type";
 import { LinkedList } from "../core/linked-list/linked-list";
 
-class Chain extends LinkedList<Domain> implements Drawable {
+class Chain extends LinkedList<Domain> implements Drawable, Identifiable {
+  #id: UUID;
+
   public constructor() {
     super()
+    this.#id = crypto.randomUUID();
   }
 
   draw() {
@@ -12,6 +15,10 @@ class Chain extends LinkedList<Domain> implements Drawable {
     for (const data of it) {
       data.draw()
     }
+  }
+
+  public get id() {
+    return this.#id;
   }
 }
 

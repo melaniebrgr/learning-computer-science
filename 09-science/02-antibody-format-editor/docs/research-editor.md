@@ -13,7 +13,7 @@ Antibody visualisation software spans the range from tool for illustration (BioR
 4. BioGlyphs
 5. abYdraw (from AbML)
   - https://github.com/JamesSweetJones/abYdraw
-6. PyMOL
+6. PyMOL/Mol*
   - https://zmactep.github.io/pymol-rs/#architecture
 
 ### HELM Antibody Editor (HAbE)
@@ -22,7 +22,7 @@ The Hierarchical Editing Language for Macromolecules (HELM) is a linear and mach
 It enables a uniform representation of biomolecules such as proteins, nucleotides, antibody-drug conjugates, and many more.
 HELM was developed in 2013 by Pfizer and the Pistoia Alliance (1).
 
-The HELM Antibody Editor allows the user to visualise and manipulate antibody structures.
+The HELM Antibody Editor was last updated and release allows the user to visualise and manipulate antibody structures.
 The HELM Antibody Editor is part of the HELM (Hierarchical Editing Language for Macromolecules) project.
 Documentation and user guides for HAbE are on the HELM wiki.
 HAbE2 is developed by Roche (Stefan Klostermann, Roche pREDi) was released on GitHub as an OS in January 2018 (1).
