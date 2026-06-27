@@ -9,11 +9,3 @@ We can empirically evaualte which type of data structure is used under the hood 
 ### First-class language citizen
 
 Not sure where else to put this. When something is a first-class citizen in a programming language, it means **it can be treated like any other ordinary value in that language**. It can assigned to variable, passed as a function argument, be returned from a function, be stored on an object, and another data structure does not need to constructed to use it, i.e. in Java to define a function, and object must be defined first.
-
-### Queue
-
-A common data structure is a queue. A queue is just a specific implementation of a linked list. A queue is a first in, first out (FIFO) structure, a.k.a a Canadian line at Tim Hortons. For a queue, a singly-linked list is sufficient to cover the requisit behaviour. The operations of a queue, (pop/dequeue and push/enqueue from the head and tail, respectively) are constant time.
-
-### Stack
-
-Another common data structure is a stack. A stack is another specific implementation of a linked list. A stack is a last in, first out structure (LIFO) structure, a.k.a a pile of dishes.

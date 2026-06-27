@@ -14,10 +14,9 @@
 
 ## Patterns
 
-- [ ] [JavaScript Patterns Workshop](https://javascriptpatterns.vercel.app/patterns)
-- [ ] [Game Programming Patterns - Robert Nystrom](https://gameprogrammingpatterns.com/)
+- [JavaScript Patterns Workshop](https://javascriptpatterns.vercel.app/patterns)
+- [Game Programming Patterns - Robert Nystrom](https://gameprogrammingpatterns.com/)
 - Design patterns: <https://refactoring.guru/design-patterns>
-- Design patterns: <https://gameprogrammingpatterns.com/>
 - Web app design patterns: <https://frontendmasters.com/courses/js-design-patterns/>
 
 ## Algorithms
@@ -53,6 +52,7 @@
   - [ ] Heap
   - [ ] Graphs
   - [ ] Maps & LRU
+- [Data and algorithms roadmap](https://roadmap.sh/datastructures-and-algorithms)
 - <https://github.com/ThePrimeagen/kata-machine>
 - <https://www.youtube.com/watch?v=SC5CX8drAtU&list=PL0m2JlLrCpA7IIpjNARcLQz0kx3BMObRT>
 - <https://frontendmasters.com/courses/algorithms/>

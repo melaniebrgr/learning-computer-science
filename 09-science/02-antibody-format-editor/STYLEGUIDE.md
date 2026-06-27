@@ -1,8 +1,12 @@
 # abdraw: style guide
 
-> "...simple and elegant systems tend to be easier and faster to design and get right, more efficient in execution, and much more reliable, [but] require hard work and discipline to achieve…” — Edsger Dijkstra
+> If method by which the biologic is created in the natural world can be reflected in data structure used to model it and the algorithms that operate on it in the digital world, then the system is more likely to be remain coherent and extensible in future, and be more intuitive to use by the scientific and scientifically minded operators. - me
 
-Coding guidelines for the abdraw application inspired by https://tigerstyle.dev/.
+> When design the data model, consider how nature designed the data model. If you see a reflection of the natural in your code, there's at least millions of years of evolutionary evidence that it can sustain the brief the brief lifespan of your application. - also me
+
+This is not that novel of an ideal, after all graphs are used to model social networks, but the challenge in science is that the domain is often well understood by the developers modelling it.
+
+> "...simple and elegant systems tend to be easier and faster to design and get right, more efficient in execution, and much more reliable, [but] require hard work and discipline to achieve…” — Edsger Dijkstra
 
 ## General
 
