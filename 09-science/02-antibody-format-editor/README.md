@@ -2,23 +2,14 @@
 
 ## Modules
 
-### Graphic
-
-A Graphic module is responsible for actually drawing the pixels. Anything capable of drawing pixels to canvas has a graphic component, for example, a Domain instance has a **graphic** module. Note that you'll want to extend the base Graphic class to create a Graphic object with custom drawing instructions, by defining a template draw method (`templateDraw`).
-
-### Domain
-
-An **domain** is the main building block of the abdraw canvas. It has a graphic component and a data component, for example a domain (VH), or a linker.
-
 ### Chain
 
 "A linked list is a sequences of nodes linked via pointers, which allow for efficient insertions and deletions without rearranging the entire sequence."
 
-## Patterns
+### Entity
 
-abdraw leverages several design patterns and datastructures:
+An **entity** is the main building block of the abdraw canvas. It has a graphic module and an id A domain (VH), a linker, and a drug conjugate are examples of entities.
 
-- [template method pattern](https://refactoring.guru/design-patterns/template-method): Graphic class and Graphic subclasses
-- [composite pattern](https://refactoring.guru/design-patterns/composite): drawing Domains in a Chain
-- linked list: Chain class
-- singleton: Canvas class
+### Graphic
+
+A graphic module is responsible for actually drawing the pixels. Anything capable of drawing pixels to canvas has a graphic component. For any new drawable, you'll want to extend the base graphic class to create a graphic subclass with custom drawing instructions. This is done by defining a template draw method, `templateDraw`.

@@ -11,11 +11,11 @@ const DOMAIN_TYPE = {
 const REGION_TYPE = {
   HINGE: "hinge",
   LINKER: "linker",
-  HIS: "his-tag",
-  BIOTIN: "biotin",
 }
 
 const DECORATOR_TYPE = {
+  HIS: "his-tag",
+  BIOTIN: "biotin",
   DRUG: "drug",
   GLYCO: "glycan",
 }

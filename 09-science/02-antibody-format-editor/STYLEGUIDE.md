@@ -46,3 +46,12 @@ This is not that novel of an ideal, after all graphs are used to model social ne
  ⎿ `/modules` - domain specific functionality
 
 Modules can import from core, but core cannot import from modules.
+
+## Patterns
+
+abdraw leverages several design patterns and datastructures. To work effective on the project you'll need to learn them:
+
+- [template method pattern](https://refactoring.guru/design-patterns/template-method): Graphic class and Graphic subclasses
+- [composite pattern](https://refactoring.guru/design-patterns/composite): drawing Domains in a Chain
+- linked list: Chain class
+- singleton: Canvas class
