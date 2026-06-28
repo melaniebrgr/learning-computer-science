@@ -1,9 +1,9 @@
-import { Graphic } from "./graphic";
-import type { Type } from "./domain.type";
-import type { Drawable, Identifiable, } from "./traits.type";
 import { type UUID, uuid } from "@core/uuid";
+import type { Type } from "./entity.type";
+import { Graphic } from "./graphic";
+import type { Drawable, Identifiable, } from "./traits.type";
 
-class Domain implements Drawable, Identifiable {
+class Entity implements Drawable, Identifiable {
   #id: UUID;
   #type: Type;
   #graphic: Graphic;
@@ -27,4 +27,4 @@ class Domain implements Drawable, Identifiable {
   }
 }
 
-export { Domain }
+export { Entity }

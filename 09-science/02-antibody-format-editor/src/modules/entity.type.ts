@@ -9,14 +9,21 @@ const DOMAIN_TYPE = {
 } as const;
 
 const REGION_TYPE = {
+  HINGE: "hinge",
   LINKER: "linker",
   HIS: "his-tag",
   BIOTIN: "biotin",
 }
 
+const DECORATOR_TYPE = {
+  DRUG: "drug",
+  GLYCO: "glycan",
+}
+
 const TYPE = {
   ...DOMAIN_TYPE,
   ...REGION_TYPE,
+  ...DECORATOR_TYPE,
 }
 
 type Type = typeof TYPE[keyof typeof TYPE];
