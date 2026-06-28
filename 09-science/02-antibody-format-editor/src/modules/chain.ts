@@ -1,7 +1,7 @@
 import { Domain } from "./domain";
 import type { Drawable, Identifiable } from "./traits.type";
-import { LinkedList } from "../core/linked-list/linked-list";
-import { type UUID, uuid } from "../core/uuid";
+import { LinkedList } from "@core/linked-list/linked-list";
+import { type UUID, uuid } from "@core/uuid";
 
 class Chain extends LinkedList<Domain> implements Drawable, Identifiable {
   #id: UUID;

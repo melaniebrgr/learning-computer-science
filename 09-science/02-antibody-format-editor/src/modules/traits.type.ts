@@ -1,4 +1,4 @@
-import type { UUID } from "../core/uuid"
+import type { UUID } from "@core/uuid"
 
 interface Identifiable {
   get id(): UUID

@@ -1,7 +1,7 @@
 import { Graphic } from "./graphic";
 import type { Type } from "./domain.type";
 import type { Drawable, Identifiable, } from "./traits.type";
-import { type UUID, uuid } from "../core/uuid";
+import { type UUID, uuid } from "@core/uuid";
 
 class Domain implements Drawable, Identifiable {
   #id: UUID;
