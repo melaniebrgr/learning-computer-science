@@ -1,4 +1,4 @@
-type UUID = `${string}-${string}-${string}-${string}-${string}`;
+import type { UUID } from "../core/uuid"
 
 interface Identifiable {
   get id(): UUID
@@ -8,4 +8,4 @@ interface Drawable {
   draw(): void
 }
 
-export type { Drawable, Identifiable, UUID }
+export type { Drawable, Identifiable }

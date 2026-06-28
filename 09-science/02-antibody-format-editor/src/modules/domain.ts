@@ -1,6 +1,7 @@
 import { Graphic } from "./graphic";
 import type { Type } from "./domain.type";
-import type { Drawable, Identifiable, UUID } from "./traits.type";
+import type { Drawable, Identifiable, } from "./traits.type";
+import { type UUID, uuid } from "../core/uuid";
 
 class Domain implements Drawable, Identifiable {
   #id: UUID;
@@ -8,7 +9,7 @@ class Domain implements Drawable, Identifiable {
   #graphic: Graphic;
 
   public constructor(type: Type, graphic: Graphic) {
-    this.#id = crypto.randomUUID();
+    this.#id = uuid();
     this.#type = type;
     this.#graphic = graphic;
   }
