@@ -30,7 +30,7 @@ There are different ways to represent graphs:
 
 The simplest way to store a graph concepturally is to add a vertex and edges to a set, or a simple `GraphEdgeSet` class. If you only care about drawing the edges and vertices, not finding neighbours, this is a sufficient data structure. For large and dens graphs, there are more time efficient reprensentations, such as an **adjacency graph** and **adjacency matrix**.
 
-Graphs can be represented in an **adjacency matrix**, a V ⨉ V 2D array were V is the number of vertices. If there is an edge between nodes then the value is 1 at that position. If the graph is weighted then the weights are listed instead of simple binary. Adjacency matrices are good for dense graphs or when you need to check if an edge exists between two nodes. In an **adjacency list**, each list item stores a list of neighbours which is more space effecient and better suited for sparse graphs.
+Graphs can be represented in an **adjacency matrix**, a V ⨉ V 2D array were V is the number of vertices. If there is an edge between nodes then the value is 1 at that position. If the graph is weighted then the weights are listed instead of simple binary. Adjacency matrices are good for dense graphs or when you need to check if an edge exists between two nodes. In an **adjacency list**, each list item stores a list of neighbours which is more space efficient and better suited for sparse graphs.
 
 
 ```

@@ -33,9 +33,5 @@ lightChain.add(vl)
 lightChain.draw()
 
 const bonds = new HeteroGraph();
-bonds.addNode('domain', vh.id);
-bonds.addNode('domain', vl.id);
-
-console.table(bonds)
-console.log(bonds)
-console.debug(bonds)
+bonds.addEdge('domain', 'disulfide', 'domain', vh.id, vl.id)
+bonds.getNeighbors()
