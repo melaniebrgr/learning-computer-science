@@ -1,16 +1,12 @@
 /*
-
-bonds = {
-[disulfide]: [{ id: string, nodes: [idSrc, idTrg] }]
-
-}
-
+  #edges
+    └─ ['vh', 'disulfide', 'vl']  →  { vh.id: [vl.id, vl.id] }
 */
 
-
 class HeteroGraph<TNode, TEdge, TId> {
-  #nodes: Map<TNode, Set<TId>> = new Map();
-  #edges: Map<[TNode, TEdge, TNode], Map<TId, TId[]>> = new Map();
+  #nodes: Map<TNode, Set<TId>> = new Map()
+  #edgeKeyRegistry: Map<string, [TNode, TEdge, TNode]> = new Map()
+  #edges: Map<[TNode, TEdge, TNode], Map<TId, TId[]>> = new Map()
 
   protected addNode(type: TNode, id: TId) {
     // @ts-expect-error: es2025 update
@@ -18,11 +14,17 @@ class HeteroGraph<TNode, TEdge, TId> {
     nodeSet.add(id)
   }
 
+  #registerEdgeKey(typeSrc: TNode, typeEdge: TEdge, typeTgt: TNode) {
+    const id = `${typeSrc}:${typeEdge}:${typeTgt}`;
+    // @ts-expect-error: es2025 update
+    return this.#edgeKeyRegistry.getOrInsert(id, [typeSrc, typeEdge, typeTgt]);
+  }
+
   protected addEdge(typeSrc: TNode, typeEdge: TEdge, typeTgt: TNode, idSrc: TId, idTgt: TId) {
     this.addNode(typeSrc, idSrc);
     this.addNode(typeTgt, idTgt);
 
-    const edgeKey: [TNode, TEdge, TNode] = [typeSrc, typeEdge, typeTgt];
+    const edgeKey = this.#registerEdgeKey(typeSrc, typeEdge, typeTgt)
     // @ts-expect-error: es2025 update
     const edgesMap: Map<TId, Set<TId>> = this.#edges.getOrInsert(edgeKey, new Map());
     // @ts-expect-error: es2025 update
