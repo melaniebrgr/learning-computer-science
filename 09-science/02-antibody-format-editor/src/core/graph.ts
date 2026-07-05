@@ -1,43 +1,45 @@
 /*
+  #nodes
+    └─ 'vh'  →  [vh.id, vh.id]
   #edges
-    └─ ['vh', 'disulfide', 'vl']  →  { vh.id: [vl.id, vl.id] }
+    └─ 'disulfide'  →  [[vl.id, vh.id], [ch.id, ch.id]]
 */
 
 class HeteroGraph<TNode, TEdge, TId> {
   #nodes: Map<TNode, Set<TId>> = new Map()
-  #edgeKeyRegistry: Map<string, [TNode, TEdge, TNode]> = new Map()
-  #edges: Map<[TNode, TEdge, TNode], Map<TId, TId[]>> = new Map()
+  #edges: Map<TEdge, [TId, TId][]> = new Map()
 
+  /**
+   * Insertion method: Adds a node to the graph.
+   */
   protected addNode(type: TNode, id: TId) {
     // @ts-expect-error: es2025 update
     const nodeSet: Set<TId> = this.#nodes.getOrInsert(type, new Set());
     nodeSet.add(id)
   }
 
-  #registerEdgeKey(typeSrc: TNode, typeEdge: TEdge, typeTgt: TNode) {
-    const id = `${typeSrc}:${typeEdge}:${typeTgt}`;
-    // @ts-expect-error: es2025 update
-    return this.#edgeKeyRegistry.getOrInsert(id, [typeSrc, typeEdge, typeTgt]);
-  }
-
+  /**
+   * Insertion method: Adds an edge to the graph.
+   */
   protected addEdge(typeSrc: TNode, typeEdge: TEdge, typeTgt: TNode, idSrc: TId, idTgt: TId) {
     this.addNode(typeSrc, idSrc);
     this.addNode(typeTgt, idTgt);
 
-    const edgeKey = this.#registerEdgeKey(typeSrc, typeEdge, typeTgt)
     // @ts-expect-error: es2025 update
-    const edgesMap: Map<TId, Set<TId>> = this.#edges.getOrInsert(edgeKey, new Map());
-    // @ts-expect-error: es2025 update
-    const nodeAdjList: TId[] = edgesMap.getOrInsert(idSrc, []);
-    nodeAdjList.push(idTgt)
+    const edgesList: [TId, TId][] = this.#edges.getOrInsert(typeEdge, []);
+    edgesList.push([idSrc, idTgt])
   }
 
-  getNeighbors() {
-    // TODO
-    const it = this.#edges.entries()
-    for (const entry of it) {
-      console.log(entry)
-    }
+  /**
+   * Utility method: Gets the hetero graph as a string representation.
+   * @return {string} The hetero graph string.
+   */
+  toString() {
+    const nodesCount = this.#nodes.size
+    const edgesCount = [...this.#edges.values()].flat().length
+    if (nodesCount === 0) return `HeteroGraph (nodes 0, edges 0)`
+    const edgeTypes = [...this.#edges.keys()]
+    return `HeteroGraph (nodes ${nodesCount}, edges ${edgesCount}): ${edgeTypes.join(', ')}`
   }
 }
 

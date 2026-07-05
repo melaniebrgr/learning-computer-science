@@ -34,6 +34,7 @@ lightChain.add(vl)
 lightChain.draw()
 
 const bonds = new Bonds();
+console.log(bonds.toString())
 bonds.add(vh, TYPE_BOND.SS, vl)
 bonds.add(vh, TYPE_BOND.SS, vl)
-bonds.getNeighbors()
+console.log(bonds.toString())
