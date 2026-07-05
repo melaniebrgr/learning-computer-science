@@ -6,6 +6,8 @@ Today, modern antibody designs have highly complex formats with large numbers of
 
 ## Naming
 
+Read: https://pipebio.com/blog/standardizing-antibody-therapeutic-nomenclature-why-it-matters
+
 - Monoclonal antibodies (mAbs)
 - Multispecific antibodies (MsAbs)
 
@@ -17,14 +19,15 @@ Since 2021, non-canonical antibodies (e.g. bispecifics, multispecifics, antibody
 The Hierarchical Editing Language for Macromolecules (HELM) was introduced in 2012 as a general tool for describing biologics (including antibodies) and is promoted by the Pistoia Alliance (8).
 HELM notation and the HELM Antibody Editor (HAbE) are being rolled out throughout Roche’s bio-therapeutics group ("Large Molecule Research").
 
-### AbML
+### AbML (10)
 
-AbML is based on describing antibody domains, arranged in a string and separated by connectors, representing antibody chains from N-terminus to C-terminus.
-Each domain is separated by a ‘-’ character and is numbered sequentially in order of its appearance in the expression. In this respect, hinges and artificial linkers can be considered more like domains as they are numbered and are separated from neighboring domains with a ‘-’ character. Whitespace, including line breaks is ignored in AbML except for comments given in square brackets.
-AbML V1.1 also allows sequence information to be associated with each domain using ASEQ and DSEQ keywords for amino acid and DNA sequences, respectively.
-These are provided after the main AbML annotation.
+AbML was developed between 2020 and 2022 by Maham Ahmad (a Birkbeck Bioinformatics MSc student), James Sweet-Jones and Andrew Martin. 
 
-> In future, porting abYdraw to JavaScript would allow the full graphical user interface to be used via a web page with no need to install software locally.
+> HELM was developed as a notation language for macromolecule drugs, but is both insufficient and too complex for describing MsAbs (10)
+
+> AbML is based on describing antibody domains, arranged in a string and separated by connectors, representing antibody chains from N-terminus to C-terminus. 
+
+> Each domain is separated by a ‘-’ character and is numbered sequentially in order of its appearance in the expression. In this respect, hinges and artificial linkers can be considered more like domains as they are numbered and are separated from neighboring domains with a ‘-’ character. Whitespace, including line breaks is ignored in AbML except for comments given in square brackets.
 
 ### Veritas (7)
 
@@ -192,3 +195,4 @@ Since 1975, Kohler and Milstein have introduced the **hybridoma** technology whi
 7. https://pmc.ncbi.nlm.nih.gov/articles/PMC10173791/
 8. https://www.youtube.com/watch?v=420GK8ibIO4
 9. https://pipebio.com/blog/standardizing-antibody-therapeutic-nomenclature-why-it-matters
+10. http://www.bioinf.org.uk/abs/abml/

@@ -1,14 +1,14 @@
 import { type UUID, uuid } from "@core/uuid";
-import type { Type } from "./entity.type";
+import type { TypeEntity } from "./entity.type";
 import { Graphic } from "./graphic";
 import type { Drawable, Identifiable, } from "./traits.type";
 
 class Entity implements Drawable, Identifiable {
   #id: UUID;
-  #type: Type;
+  #type: TypeEntity;
   #graphic: Graphic;
 
-  public constructor(type: Type, graphic: Graphic) {
+  public constructor(type: TypeEntity, graphic: Graphic) {
     this.#id = uuid();
     this.#type = type;
     this.#graphic = graphic;

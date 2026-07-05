@@ -1,4 +1,4 @@
-const DOMAIN_TYPE = {
+const TYPE_DOMAIN = {
   VH: "vh",
   VL: "vl",
   CH1: "ch1",
@@ -8,24 +8,25 @@ const DOMAIN_TYPE = {
   CL: "cl",
 } as const;
 
-const REGION_TYPE = {
+const TYPE_REGION = {
   HINGE: "hinge",
   LINKER: "linker",
+  HIS: "his-tag",
+  AVI: "avi-tag"
 }
 
-const DECORATOR_TYPE = {
-  HIS: "his-tag",
-  BIOTIN: "biotin",
+const TYPE_DECORATOR = {
   DRUG: "drug",
   GLYCO: "glycan",
+  BIOTIN: "biotin",
 }
 
-const TYPE = {
-  ...DOMAIN_TYPE,
-  ...REGION_TYPE,
-  ...DECORATOR_TYPE,
+const TYPE_ENTITY = {
+  ...TYPE_DOMAIN,
+  ...TYPE_REGION,
+  ...TYPE_DECORATOR,
 }
 
-type Type = typeof TYPE[keyof typeof TYPE];
+type TypeEntity = typeof TYPE_ENTITY[keyof typeof TYPE_ENTITY];
 
-export { TYPE, type Type }
+export { TYPE_ENTITY, type TypeEntity }

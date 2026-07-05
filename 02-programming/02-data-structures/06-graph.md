@@ -22,7 +22,7 @@ There are diferent types of graphs:
 - **homogeneous**: all nodes and edges have the same type
 - **heterogeneous**: nodes and edges can have 2 or more types, e.g. nodes are authors or papers, and edges are citations or likes
 
-There are different ways to represent graphs:
+There are three different ways to represent graphs:
 
 - **adjacency matrix**: The vertices are the columns and rows, if an edge exists, the cell at that coordinate is "filled in".
 - **edge set**: The simplest representation. A set that contains tuples of the verticles indicating each edge in the set.
