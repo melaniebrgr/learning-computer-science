@@ -47,13 +47,7 @@ class LinkedList<TData> {
    * @return {string} The linked list string.
    */
   public toString() {
-    if (this.size === 0) return `LinkedList (${this.size})`;
-    let str = [];
-    const it = this.values()
-    for (const data of it) {
-      str.push(`${data}`);
-    }
-    return `LinkedList (${this.size}): ${str.join(', ')}`;
+    return `LinkedList (${this.size})`;
   }
 
   /**

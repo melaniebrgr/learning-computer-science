@@ -7,6 +7,26 @@ import { Chain } from "./src/modules/chain.js";
 import { Bonds } from "./src/modules/bonds.js";
 import { TYPE_BOND } from "./src/modules/bonds.type.js";
 
+/*
+Goal API:
+
+const ab = new AntibodyBuilder()
+const chain1 = ab.register(new Entity(...))
+// register all the things
+
+ab
+  .addChain(chain1)
+  .addChain(chain2)
+  .chainAppend(chain1, vh1)
+  .chainSplice(chain1, vh1, ch1, linker)
+  .chainPrepend(chain1, ch1)
+  .chainPrepend(chain2, ch2)
+  .decorate(vh2, sugar)
+  .decorate(chain1, drug)
+  .bondMake(vh1, vl2, bond1)
+  .bondBreak(vh1, vl2, bond1)
+*/
+
 const c = canvasCtx2D.getInstance("canvas");
 
 const vh = new Entity(TYPE_ENTITY.VH, new GraphicDomain(c, {
@@ -32,9 +52,11 @@ lightChain.add(vh)
 lightChain.add(linker)
 lightChain.add(vl)
 lightChain.draw()
+console.log(lightChain.toString())
 
 const bonds = new Bonds();
-console.log(bonds.toString())
 bonds.add(vh, TYPE_BOND.SS, vl)
 bonds.add(vh, TYPE_BOND.SS, vl)
 console.log(bonds.toString())
+
+
