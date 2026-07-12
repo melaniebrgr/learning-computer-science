@@ -88,21 +88,21 @@ A bezier curve is more useful for visually connecting nodes.
 
 For Canvas motion (e.g., particle systems, custom 2D scenes), it is common practise to use the requestAnimationFrame method, plus custom tweens or a JS tweening library.
 
+## Interaction
 
+### Drag and drop
+
+The process of making a canvas drag
+
+1. getting a canvas relative point in a pointer event such as mouse down or a touch start
+2. use the relative point to find out if a display object was clicked or not with some kind of collision detection method such as bounding box
+3. If an object has been clicked then a a boolean value for that display object can be set to true
 
 ## Resources
-
-### Canvas
 
 1. [2D Canvas API docs](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)
 2. [HTML Canvas Deep Dive](https://joshondesign.com/p/books/canvasdeepdive/toc.html)
 3. [Canvas API Javascript Tutorial For Beginners](https://www.youtube.com/playlist?list=PLc1g3vwxhg1W7Mqwoji844GadZf34lBzR)
-
-### Building a drawing app
-
-1. [Building a drawing app](https://www.youtube.com/watch?v=6arkndScw7A&list=PLSxgVLtIB0IFmQGuVMSE_wDHPW5rq4Ik7)
-2. tldraw
-
-### Fun
-
-1. https://roughjs.com/
+4. [Building a drawing app](https://www.youtube.com/watch?v=6arkndScw7A&list=PLSxgVLtIB0IFmQGuVMSE_wDHPW5rq4Ik7)
+5. tldraw
+6. https://roughjs.com/

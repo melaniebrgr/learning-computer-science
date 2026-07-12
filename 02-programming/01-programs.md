@@ -8,6 +8,10 @@
 
 There are two kinds of knowledge: declarative and imperative. **Declarative knowledge** is a statement about something that is true, e.g. a chocolate cake is bad for you. While it doesn’t tell you how to do it, it does tell you about how to test correctness. **Imperative knowledge** tells you how to do something, e.g. how to make the chocolate cake. Another example of imperative knowledge is Heron’s method of finding the square root of a number. Heron proposed a formula that could be repeated iteratively until it converged on the value of the square root. Hero is a greek experimenter who lived in Alexandria in 50 AD.
 
+## First-class language citizen
+
+Not sure where else to put this. When something is a first-class citizen in a programming language, it means **it can be treated like any other ordinary value in that language**. It can assigned to variable, passed as a function argument, be returned from a function, be stored on an object, and another data structure does not need to constructed to use it, i.e. in Java to define a function, and object must be defined first.
+
 ## Fixed and stored programs
 
 The initial computers were designed to do very specific things, like computing the square root of a number. These are called **“fixed program computers”**. An example of this is Alan Turing’s enigma code breaker. In a **“stored program computer”** the instructions are the same as data. Once it was possible machines became infinitely flexible. An “interpreter” is a program that can execute any legal set of instructions.

@@ -13,7 +13,6 @@ class HeteroGraph<TNode, TEdge, TId> {
    * Insertion method: Adds a node to the graph.
    */
   protected addNode(type: TNode, id: TId) {
-    // @ts-expect-error: es2025 update
     const nodeSet: Set<TId> = this.#nodes.getOrInsert(type, new Set());
     nodeSet.add(id)
   }
@@ -25,7 +24,6 @@ class HeteroGraph<TNode, TEdge, TId> {
     this.addNode(typeSrc, idSrc);
     this.addNode(typeTgt, idTgt);
 
-    // @ts-expect-error: es2025 update
     const edgesList: [TId, TId][] = this.#edges.getOrInsert(typeEdge, []);
     edgesList.push([idSrc, idTgt])
   }

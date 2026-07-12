@@ -26,8 +26,7 @@ Names: abdraw, AbDraw, ImmunoDraw, AntibodyDraw, IgDraw
 - Editor snapshotting for undo/redo operations ([memento pattern](https://refactoring.guru/design-patterns/memento)) and file save
 - UI elements interact with the editor by actions ([command pattern](https://refactoring.guru/design-patterns/command)):
 	- Common domain palette: VH, CH1, CH2, CH3, CH4, VL, CL, VHH
-	- Switch between Immunoglobulin and T-cell receptor domains(?)
-	- Common format presents, e.g. IgG, scFv, knobs in holes(?)
+	- Common format presents as templates, e.g. IgG, scFv, knobs in holes(?)
 	- Input for AbML, VERITAS nomenclature
 	- Image export
 	- File export
