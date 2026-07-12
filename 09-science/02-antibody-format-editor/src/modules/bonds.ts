@@ -1,4 +1,4 @@
-import { HeteroGraph } from "@core/graph";
+import { HeteroGraph } from "@core/graph-hetero";
 import type { UUID } from "@core/uuid";
 import { Entity } from "./entity";
 import type { TypeEntity } from "./entity.type";
