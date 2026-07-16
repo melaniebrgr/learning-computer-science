@@ -8,6 +8,8 @@ const TYPE_DOMAIN = {
   CL: "cl",
 } as const;
 
+type TypeDomain = typeof TYPE_DOMAIN[keyof typeof TYPE_DOMAIN];
+
 const TYPE_REGION = {
   HINGE: "hinge",
   LINKER: "linker",
@@ -15,18 +17,30 @@ const TYPE_REGION = {
   AVI: "avi-tag"
 }
 
+type TypeRegion = typeof TYPE_REGION[keyof typeof TYPE_REGION];
+
 const TYPE_DECORATOR = {
   DRUG: "drug",
   GLYCO: "glycan",
   BIOTIN: "biotin",
 }
 
+type TypeDecorator = typeof TYPE_DECORATOR[keyof typeof TYPE_DECORATOR];
+
+const TYPE_BOND = {
+  SS: 'disufide',
+  C: 'generic-covalent'
+} as const;
+
+type TypeBond = (typeof TYPE_BOND)[keyof typeof TYPE_BOND];
+
 const TYPE_ENTITY = {
   ...TYPE_DOMAIN,
   ...TYPE_REGION,
   ...TYPE_DECORATOR,
+  ...TYPE_BOND,
 }
 
 type TypeEntity = typeof TYPE_ENTITY[keyof typeof TYPE_ENTITY];
 
-export { TYPE_ENTITY, type TypeEntity }
+export { TYPE_ENTITY, type TypeEntity, type TypeDomain, type TypeRegion, type TypeDecorator, type TypeBond }

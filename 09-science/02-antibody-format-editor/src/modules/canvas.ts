@@ -1,7 +1,7 @@
 import { Singleton } from "@core/singleton";
 
 class CanvasCtx2D extends Singleton<CanvasRenderingContext2D, [canvasElementId: string]> {
-  #instance: CanvasRenderingContext2D | null = null;
+  #instance: CanvasRenderingContext2D;
 
   public constructor() {
     super();
@@ -14,7 +14,7 @@ class CanvasCtx2D extends Singleton<CanvasRenderingContext2D, [canvasElementId: 
     if (!this.#instance) {
       const canvas = document.getElementById(canvasElementId) as HTMLCanvasElement | null;
       if (!canvas) throw new Error(`Canvas element not found: ${canvasElementId}`);
-      const c = canvas.getContext("2d");
+      const c = canvas.getContext("2d") as CanvasRenderingContext2D;
       this.#instance = c;
     }
 

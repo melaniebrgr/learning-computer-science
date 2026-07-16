@@ -8,7 +8,7 @@ class Graphic implements Drawable {
   protected fillColour: string;
   protected lineColour: string;
 
-  public constructor(c, {
+  public constructor(c: CanvasRenderingContext2D, {
     x,
     y,
     fillColour,
@@ -21,7 +21,7 @@ class Graphic implements Drawable {
     this.lineColour = lineColour
   }
 
-  public move(x, y) {
+  public move(x: number, y: number) {
     this.x += x
     this.y += y
   }

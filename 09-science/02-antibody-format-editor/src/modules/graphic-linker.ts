@@ -1,11 +1,11 @@
 import { Graphic } from "./graphic";
-
+import type { GraphicOptions } from "./graphic.type";
 class GraphicLinker extends Graphic {
-  public constructor(c, {
+  public constructor(c: CanvasRenderingContext2D, {
     x,
     y,
     lineColour,
-  }) {
+  }: GraphicOptions) {
     super(c, {
       x,
       y,

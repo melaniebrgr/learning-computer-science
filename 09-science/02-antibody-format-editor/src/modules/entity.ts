@@ -1,5 +1,5 @@
 import { type UUID, uuid } from "@core/uuid";
-import type { TypeEntity } from "./entity.type";
+import type { TypeEntity, TypeDomain, TypeDecorator, TypeRegion, TypeBond } from "./entity.type";
 import { Graphic } from "./graphic";
 import type { Drawable, Identifiable, } from "./traits.type";
 
@@ -27,4 +27,28 @@ class Entity implements Drawable, Identifiable {
   }
 }
 
-export { Entity }
+class EntityDomain extends Entity {
+  public constructor(type: TypeDomain, graphic: Graphic) {
+    super(type, graphic)
+  }
+}
+
+class EntityRegion extends Entity {
+  public constructor(type: TypeRegion, graphic: Graphic) {
+    super(type, graphic)
+  }
+}
+
+class EntityDecorator extends Entity {
+  public constructor(type: TypeDecorator, graphic: Graphic) {
+    super(type, graphic)
+  }
+}
+
+class EntityBond extends Entity {
+  public constructor(type: TypeBond, graphic: Graphic) {
+    super(type, graphic)
+  }
+}
+
+export { Entity, EntityDomain, EntityRegion, EntityDecorator, EntityBond }

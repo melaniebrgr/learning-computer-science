@@ -92,7 +92,7 @@ For Canvas motion (e.g., particle systems, custom 2D scenes), it is common pract
 
 ### Drag and drop
 
-The process of making a canvas drag
+The process of making a canvas drag (7)
 
 1. getting a canvas relative point in a pointer event such as mouse down or a touch start
 2. use the relative point to find out if a display object was clicked or not with some kind of collision detection method such as bounding box
@@ -106,3 +106,4 @@ The process of making a canvas drag
 4. [Building a drawing app](https://www.youtube.com/watch?v=6arkndScw7A&list=PLSxgVLtIB0IFmQGuVMSE_wDHPW5rq4Ik7)
 5. tldraw
 6. https://roughjs.com/
+7. [Canvas drag and drop examples](https://dustinpfister.github.io/2020/03/10/canvas-drag/)

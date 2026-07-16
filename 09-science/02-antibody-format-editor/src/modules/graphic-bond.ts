@@ -1,26 +1,27 @@
 import { Graphic } from "./graphic";
 import type { GraphicOptions } from "./graphic.type";
 
-class GraphicDomain extends Graphic {
+class GraphicBond extends Graphic {
   public constructor(c: CanvasRenderingContext2D, {
     x,
     y,
-    fillColour,
+    lineColour,
   }: GraphicOptions) {
     super(c, {
       x,
       y,
-      fillColour,
+      lineColour,
     })
   }
 
   protected templateDraw() {
     this.c.beginPath();
-    this.c.ellipse(this.x, this.y, 20, 50, 0, 0, 2 * Math.PI);
-    this.c.fillStyle = this.fillColour;
-    this.c.fill();
+    this.c.moveTo(10, 10);
+    this.c.lineTo(20, 10);
+    this.c.strokeStyle = this.lineColour;
+    this.c.stroke();
   }
 }
 
-export { GraphicDomain }
+export { GraphicBond }
 
