@@ -12,10 +12,10 @@ interface AntibodyBuilder {
   // Decorator methods e.g VH-CH1-CH2-ADC
   decoratorAdd<TMeta>(d: EntityDecorator, meta: TMeta): EntityDecorator;
   decoratorRemove(d: EntityDecorator): void;
-  decoratorBondCreate<TMeta>(f: EntityDomain, d: EntityDecorator, t: TypeBond, meta?: TMeta): EntityBond;
+  decoratorBondMake<TMeta>(f: EntityDomain, d: EntityDecorator, t: TypeBond, meta?: TMeta): EntityBond;
   decoratorBondBreak(f: EntityDomain, d: EntityDecorator, b: EntityBond): void;
 
   // Bonding methods e.g. VH-CH1-CH2-SS-VL-CL
-  bondCreate<TMeta>(f1: Entity, f2: Entity, t: TypeBond, meta?: TMeta): EntityBond;
+  bondMake<TMeta>(f1: Entity, f2: Entity, t: TypeBond, meta?: TMeta): EntityBond;
   bondBreak(f1: Entity, f2: Entity, b: EntityBond): void;
 }

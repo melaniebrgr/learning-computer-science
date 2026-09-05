@@ -4,6 +4,25 @@ How does the body detect "foreign invaders"? Pathogens like viruses and bacteria
 
 Today, modern antibody designs have highly complex formats with large numbers of protein domains featuring ADCs, coupled proteins, bi/tri-specifics, cross-Mab technology, and scFv/scFab modules connected to the termini. New formats continue to appear almost every week.
 
+Example sequences
+
+- https://www.genome.jp/dbget-bin/www_bget?D03257+D09980
+
+EVQLVESGGGLVQPGGSLRLSCAASGFNIKDTYIHWVRQAPGKGLEWVARIYPTNGYTRY
+ADSVKGRFTISADTSKNTAYLQMNSLRAEDTAVYYCSRWGGDGFYAMDYWGQGTLVTVSS
+ASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSS
+GLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGG
+PSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYN
+STYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREE
+MTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRW
+QQGNVFSCSVMHEALHNHYTQKSLSLSPG
+
+- QLQLQESGPGLVKPSETLSLTCTVSGDSISSGDYYWGWIRQPPGKGLEWIGHIYYSGATYYNPSLENRVTISVDTSKNQFSLKLSSVTAADTAVYYCTRDDSSNWRSRGQGTLVTVSS
+
+## Databases
+
+- [abYsis database](http://www.abysis.org/abysis/)
+
 ## Naming
 
 Read: https://pipebio.com/blog/standardizing-antibody-therapeutic-nomenclature-why-it-matters
@@ -183,6 +202,46 @@ The library is then subjected to stringent biopanning conditions to weed out wea
 ### Production
 
 Since 1975, Kohler and Milstein have introduced the **hybridoma** technology which enabled a defined specificity of monoclonal antibodies to be produced in consistent quality as well as in large quantities in the laboratory. Since then, monoclonal antibodies (mAbs) have been favored as they can be produced in unlimited quantities to practically bind to any antigen and are more easily standardized
+
+### Common blocked motifs for antibodies 
+
+#### Cysteines
+Antibodies have four conserved cysteines (two in VH, two in VL) forming the structural disulfide bonds.
+Block any additional cysteines outside those canonical positions to avoid mispaired disulfides and stability issues.
+
+For task config: 
+- Find those 4 conserved cysteines. 
+- Block ANY mutation in those 4 positions. 
+- Block mutations to 'C' in any other position. 
+
+#### Oxidation residues (Methionine)
+Methionine (M) is highly prone to oxidation, which can affect potency, aggregation, and shelf life.
+Many pipelines block methionines entirely, unless the position is known to be tolerant.
+
+For task config: 
+- Block mutations to 'M' everywhere.
+
+#### Glycosylation sites
+Avoid creating unintended N-linked glycosylation sites of the form: 'NXT', 'NXS', where X is any AA except P. 
+These motifs can introduce heterogeneous glycoforms and disrupt binding.
+
+For task config: 
+- Block motifs: [f'N{x}{e}' for x in AAs_minus_P for e in ['S', 'T']] everywhere. 
+
+#### Isomerization motifs
+Aspartate can undergo isomerization, especially in flexible loops.
+The high-risk motifs to avoid are: "DD", "DS", "DG"
+
+Whether you apply this only to CDRs or everywhere depends on your design strategy.
+
+For task config: 
+- Block the motifs: "DD", "DS", "DG" (CDR-only or global).
+
+#### Deamidation motif: 
+Asparagine residues can deamidate, especially when followed by small, flexible residues.
+The high-risk motifs to avoid are: "NG", "NS", "NT" 
+
+Whether you apply this only to CDRs or everywhere depends on your design strategy.
 
 ## References
 

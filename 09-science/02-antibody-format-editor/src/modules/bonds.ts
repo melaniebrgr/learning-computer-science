@@ -7,6 +7,7 @@ import { type Drawable } from "./traits.type"
 import { canvasCtx2D } from "./canvas"
 
 const c = canvasCtx2D.getInstance("canvas");
+
 class Bonds extends HeteroGraph<TypeEntity, TypeBond, UUID> implements Drawable {
   #bonds: EntityBond[] = []
 
