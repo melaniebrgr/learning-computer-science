@@ -1,8 +1,8 @@
 # Adapter pattern
 
 Converts one interface to another that the client expects.
-The adapter implements the targe interface and holds an instance of the adaptee, adapting the client interface to its adaptee(s).
-The job of teh adapter is proportional to the size of the interface that is needed to support for the target.
+The adapter holds an instance of the target adaptee, implements the interface the client expects, adapting all method calls, etc, to result in the same outcome by the adaptee.
+The job of the adapter is proportional to the size of the interface that is needed to support the target adaptee.
 
 ## References
 

@@ -1,14 +1,5 @@
 # Testing
 
-## Learning plan
-
-- [] https://github.com/kentcdodds/react-testing-library-course
-- [] QA Wolf
-- [] Vitest
-- [] MSW
-- [] Storybook component testing
-- [] Playwright 
-
 ## Introduction
 
 People don't test because they don't know how, because the codebase hasn't been designed to be testable. If you've made an untestable codebase it is likely so tightly coupled that it is immediately a legacy codebase because you're unwilling to make changes to it. Outcomes of good test coverage:
@@ -124,7 +115,89 @@ A challenge when testing mutations that invalidate queries is that static mock h
 
 ## Testing with Playwright
 
+## Testing with MSW
 
+
+`setupWorker` is fed a single 303-line [.storybook/msw/handlers.ts](@cradlebio/app/.storybook/msw/handlers.ts); stories override it with `worker.use()` and the global `beforeEach` in [.storybook/preview.tsx](@cradlebio/app/.storybook/preview.tsx) calls `worker.resetHandlers()`. Fixture data under `.storybook/msw/data/` is already typed against `@cradlebio/api-schema`. Handlers live in 19 files; endpoint patterns are hand-written regexes with three competing styles and heavy duplication (`table:query` appears 10 times, `task:list` 5).
+
+### 1. Typed `endpoint()` helper
+
+New `.storybook/msw/endpoint.ts`. Takes an OpenAPI path template key and produces the same anchored RegExp the codebase writes by hand today, so matching semantics are unchanged but typos fail typecheck:
+
+```ts
+import type { paths } from "@cradlebio/api-schema/schema"
+
+/** Turns an OpenAPI path template into the URL matcher MSW needs. */
+export function endpoint(path: keyof paths): RegExp {
+  const pattern = path
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    .replace(/\\\{[^}]+\\\}/g, "[^/]+")
+  return new RegExp(`${pattern}(?:\\?.*)?$`)
+}
+```
+
+`http.get(endpoint("/v2/workspace/{workspace}/data/table:query"), ...)` replaces `/\/v2\/workspace\/[^/]+\/data\/table:query/`. Keep RegExp output rather than MSW string patterns: the `resource:verb` URL style collides with MSW's `:param` syntax, which is why the current code escapes colons as `"*/v2/workspace\\:get"`.
+
+### 2. Split handlers by domain
+
+Follow the MSW structuring guidance:
+
+```
+.storybook/msw/handlers/
+  index.ts        # export const handlers = [...userHandlers, ...tableHandlers, ...]
+  users.ts  workspace.ts  projects.ts  rounds.ts  workflows.ts
+  tables.ts  datasets.ts  artifacts.ts  tasks.ts  analyses.ts
+  reports.ts  formats.ts  auth.ts
+```
+
+Each module exports a named array, mirroring the comment sections already in `handlers.ts`. `worker.ts` keeps importing from `./handlers`. Stories that need only one domain can then `worker.use(...tableHandlers)`. The route-local override sets (`rounds/$roundId/$workflowId/-storybook/msw/handlers.ts`, `stage-handlers.ts`) stay where they are — they are scenario overrides, not base network description — but switch to `endpoint()`.
+
+### 3. Convert all call sites in one pass
+
+All 19 files that import from `msw` move to `endpoint()`, including the `"*/users/me"` / `"*/v2/workspace\\:get"` string style and the local `FORMAT_LIST` / `BOTTLENECKS_RUN_URL` constants. Non-API mocks (`/changelog/meta.json`) keep their literal patterns.
+
+### 4. Fail on unhandled API requests
+
+`onUnhandledRequest` in `preview.tsx` currently only logs:
+
+```ts
+onUnhandledRequest: (request, print) => {
+  if (new URL(request.url).pathname.match(/^\/(v2|ui|users)\//)) {
+    print.error()
+  }
+},
+```
+
+Change it to `print.error()` then throw, so a missing handler fails the story instead of surfacing as a timeout. Non-API requests (assets, fonts) still pass through. This is the riskiest step: run the full Storybook test project afterwards and add handlers for anything it uncovers.
+
+### 5. Replace request assertions
+
+Four places wire a `fn()` spy inside a handler and assert on the captured body — the pattern MSW's "avoid request assertions" warns against:
+
+- [CreateTableDialog.tests.stories.tsx](@cradlebio/app/src/routes/_authenticated/$workspaceId/data/-components/CreateTableDialog/CreateTableDialog.tests.stories.tsx) (`tableCreate`)
+- [AssignFormatDialog.tests.stories.tsx](@cradlebio/app/src/routes/_authenticated/$workspaceId/data/-components/AssignFormatDialog.tests.stories.tsx) (`tableUpdate`)
+- [NewRoundDialog.tests.stories.tsx](@cradlebio/app/src/components/dialogs/NewRoundDialog/NewRoundDialog.tests.stories.tsx) (`roundCreateHandler`, `workflowCreateHandler`, `roundListHandler`)
+- [.storybook/msw/dataset-queries.ts](@cradlebio/app/.storybook/msw/dataset-queries.ts) (`datasetCreateHandler`)
+
+Three substitutions, in order of preference:
+
+- **Validate in the handler.** `table:create` and `table:update` return `400` when `column_mapping` names a chain or external ID that isn't in `columns`. A wrong payload then shows an error toast and the test's existing UI assertions fail on their own. This also replaces the `expect(tableUpdate).not.toHaveBeenCalled()` negative assertions.
+- **Assert the UI.** `NewRoundDialog`'s `invocationCallOrder` check (round list refetched after workflow create) becomes an assertion that the new round is visible.
+- **Life-cycle events for the rest.** For payload shapes with no UI signal — the `column_mapping` object in `CreateTableDialog` — add `.storybook/msw/request-log.ts` built on `worker.events.on("request:match", ...)`, returning recorded bodies. Handlers stay pure; the log is opt-in per story and cleared in the global `beforeEach` alongside `worker.resetHandlers()`.
+
+### 6. Type the handlers
+
+No handler uses MSW's generics today, so bodies are cast (`(await request.json()) as AnalysisRunBody`). Use `http.post<never, ReqBody, ResBody>` with the request/response types from `@cradlebio/api-schema/types` on the handlers that read a body, which removes the casts and catches fixture drift when the schema is regenerated.
+
+### 7. Document the conventions
+
+Add an MSW section to [docs/testing.md](docs/testing.md): happy paths in `handlers/<domain>.ts`, per-story overrides via `worker.use()`, always match with `endpoint()`, assert UI not requests, and use the request log only where no UI signal exists.
+
+### Verification
+
+`pnpm --filter=@cradlebio/app typecheck`, `pnpm --filter=@cradlebio/app test:storybook`, and `pnpm check` after each of steps 3, 4 and 5.
+
+[Vitest usage example fro MSW](https://github.com/mswjs/examples/tree/main/examples/with-vitest)
 
 ## References
 
